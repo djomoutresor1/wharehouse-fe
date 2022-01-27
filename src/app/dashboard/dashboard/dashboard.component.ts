@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 
+
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
@@ -8,23 +9,9 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class DashboardComponent extends AppComponent implements OnInit {
 
-  corsie = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'I',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'P',
-  ];
+   alphabet = Array.from(Array(15)).map((e, i) => i + 65);
+   corsie = this.alphabet.map((x) => String.fromCharCode(x));
+
 
   constructor() {
     super();
