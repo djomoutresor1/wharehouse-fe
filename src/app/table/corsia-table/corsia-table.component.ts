@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Models } from 'src/model/populateModel';
 
 @Component({
   selector: 'corsiaTable',
@@ -8,6 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class CorsiaTableComponent implements OnInit {
 
   constructor() { }
+  
+  // 4 ripiani
+  ripiani = Array.from({length: 4}, (_, i) => i + 1);
+  model = new Models();
 
   ngOnInit(): void {
   }
