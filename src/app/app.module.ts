@@ -22,6 +22,8 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { FooterComponent } from './footer/footer/footer.component';
 import { HeaderComponent } from './header/header/header.component';
 import { SingleCorsiaComponent } from './corsia/single-corsia/single-corsia.component';
+import { RackTableComponent } from './table/rack-table/rack-table.component';
+import { CorsiaTableComponent } from './table/corsia-table/corsia-table.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { SingleCorsiaComponent } from './corsia/single-corsia/single-corsia.comp
     FooterComponent,
     HeaderComponent,
     SingleCorsiaComponent
+    RackTableComponent,
+    CorsiaTableComponent
   ],
   imports: [
     BrowserModule,
