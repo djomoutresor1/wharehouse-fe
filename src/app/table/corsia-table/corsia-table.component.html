@@ -5,96 +5,16 @@
             <th colspan="4">Genere d'articoli per Ripiano</th>
         </tr>
         <tr>
-            <th>RIPIANO 1</th>
-            <th>RIPIANO 2</th>
-            <th>RIPIANO 3</th>
-            <th>RIPIANO 4</th>
+            <th *ngFor="let ripiano of ripiani; index as i">RIPIANO {{i+1}}</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td class="table-secondary">1</td>
-            <td>56.2</td>
-            <td>80,000</td>
-            <td>15</td>
-            <td>20</td>
-        </tr>
-        <tr>
-            <td class="table-secondary">2</td>
-            <td>49.2</td>
-            <td>70,000</td>
-            <td>18</td>
-            <td>25</td>
-        </tr>
-        <tr>
-            <td class="table-secondary">3</td>
-            <td>42.2</td>
-            <td>60,000</td>
-            <td>22</td>
-            <td>30</td>
-        </tr>
-              <tr>
-            <td class="table-secondary">4</td>
-            <td>42.2</td>
-            <td>60,000</td>
-            <td>22</td>
-            <td>30</td>
-        </tr>
-              <tr>
-            <td class="table-secondary">5</td>
-            <td>42.2</td>
-            <td>60,000</td>
-            <td>22</td>
-            <td>30</td>
-        </tr>
-              <tr>
-            <td class="table-secondary">6</td>
-            <td>42.2</td>
-            <td>60,000</td>
-            <td>22</td>
-            <td>30</td>
-        </tr>
-              <tr>
-            <td class="table-secondary">7</td>
-            <td>42.2</td>
-            <td>60,000</td>
-            <td>22</td>
-            <td>30</td>
-        </tr>
-              <tr>
-            <td class="table-secondary">8</td>
-            <td>42.2</td>
-            <td>60,000</td>
-            <td>22</td>
-            <td>30</td>
-        </tr>
-              <tr>
-            <td class="table-secondary">9</td>
-            <td>42.2</td>
-            <td>60,000</td>
-            <td>22</td>
-            <td>30</td>
-        </tr>
-              <tr>
-            <td class="table-secondary">10</td>
-            <td>42.2</td>
-            <td>60,000</td>
-            <td>22</td>
-            <td>30</td>
-        </tr>
-              <tr>
-            <td class="table-secondary">11</td>
-            <td>42.2</td>
-            <td>60,000</td>
-            <td>22</td>
-            <td>30</td>
-        </tr>
-              <tr>
-            <td class="table-secondary">12</td>
-            <td>42.2</td>
-            <td>60,000</td>
-            <td>22</td>
-            <td>30</td>
+        <tr *ngFor="let a of model.component.CorsiaTable; index as i">
+            <td class="table-secondary">{{i+1}}</td>
+            <td>{{a.value1}}</td>
+            <td>{{a.value2}}</td>
+            <td>{{a.value3}}</td>
+            <td>{{a.value4}}</td>
         </tr>
     </tbody>
 </table>

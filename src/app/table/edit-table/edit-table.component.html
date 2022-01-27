@@ -6,18 +6,15 @@
                 corsia B, Posizione A</th>
         </tr>
         <tr>
-            <th colspan="1">A</th>
-            <th colspan="1">B</th>
-            <th colspan="1">C</th>
+            <th  *ngFor="let position of positions" colspan="1">{{position}}</th>
         </tr>
-
     </thead>
     <tbody>
-        <tr>
-            <td class="table-secondary">RIPIANO1</td>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
+        <tr *ngFor="let a of model.component.EditTable; index as i">
+            <td class="table-secondary">RIPIANO {{i+1}}</td>
+            <td>{{a.value1}}</td>
+            <td>{{a.value2}}</td>
+            <td>{{a.value3}}</td>
         </tr>
     </tbody>
 </table>
