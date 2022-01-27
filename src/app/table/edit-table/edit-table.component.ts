@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Models } from 'src/model/populateModel';
+import { Models } from '../../../model/populateModel';
 
 @Component({
   selector: 'editTable',
