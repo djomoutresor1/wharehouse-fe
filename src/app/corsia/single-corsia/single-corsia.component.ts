@@ -9,6 +9,7 @@ import { AppComponent } from 'src/app/app.component';
 export class SingleCorsiaComponent extends AppComponent implements OnInit {
 
   @Input() name: string = "";
+  @Input() rows: Array<any> = [];
 
   constructor() { 
     super();
