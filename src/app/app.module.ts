@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -12,7 +12,7 @@ import { CorsiaTableComponent } from './table/corsia-table/corsia-table.componen
 import { SingleCorsiaComponent } from './corsia/single-corsia/single-corsia.component';
 import { RackTableComponent } from './table/rack-table/rack-table.component';
 import { EditTableComponent } from './table/edit-table/edit-table.component';
-
+import { DashboardService } from './services/dashboard.service';
 
 @NgModule({
   declarations: [
@@ -24,14 +24,10 @@ import { EditTableComponent } from './table/edit-table/edit-table.component';
     HeaderComponent,
     CorsiaTableComponent,
     SingleCorsiaComponent,
-    EditTableComponent
-
+    EditTableComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [HttpClientModule, BrowserModule, AppRoutingModule],
+  providers: [DashboardService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
