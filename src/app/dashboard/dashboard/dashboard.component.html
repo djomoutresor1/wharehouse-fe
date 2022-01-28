@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <div *ngFor="let corsia of corsie; index as i" class="column">
-      <app-single-corsia [name]="corsia"></app-single-corsia>
+    <div *ngFor="let corsia of arrayCorsie.lanes" class="column">
+      <app-single-corsia [name]="corsia.name" [rows]="corsia.rows"></app-single-corsia>
     </div>
     <div class="class">
       <corsiaP></corsiaP>

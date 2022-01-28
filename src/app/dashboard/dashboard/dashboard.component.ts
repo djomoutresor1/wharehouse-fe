@@ -11,7 +11,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 export class DashboardComponent extends AppComponent implements OnInit {
 
    alphabet = Array.from(Array(15)).map((e, i) => i + 65);
-   corsie = this.alphabet.map((x) => String.fromCharCode(x));
+   //corsie = this.alphabet.map((x) => String.fromCharCode(x));
 
    arrayCorsie: any = [];
 

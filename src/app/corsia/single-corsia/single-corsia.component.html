@@ -1,17 +1,17 @@
 <div class="single-corsia">
     <div class="box first-box">
         <div class="box-name">{{name}}</div>
-        <div *ngFor="let time of rackOfFirstWay; index as i">
+        <div *ngFor="let row of rows| slice:0:6">
             <button class="btn btn-default size">
-                <i class="bi bi-shop-window">{{i+1}}</i>
+                <i class="bi bi-shop-window">{{row.row}}</i>
             </button>
         </div>
     </div>
     <div class="box second-box">
         <div class="box-name">{{name}}</div>
-        <div *ngFor="let time of rackOfFirstWay; index as i">
+        <div *ngFor="let row of rows| slice:6:12">
             <button class="btn btn-default size">
-                <i class="bi bi-shop-window">{{i+7}}</i>
+                <i class="bi bi-shop-window">{{row.row}}</i>
             </button>
         </div>
     </div>
