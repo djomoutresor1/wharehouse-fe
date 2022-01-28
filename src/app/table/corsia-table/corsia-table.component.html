@@ -1,1 +1,20 @@
-<p>corsia-table works!</p>
+<table id="table-example-1" class="table table-bordered table-hover">
+    <thead class="table-warning">
+        <tr>
+            <th rowspan="2">RACK</th>
+            <th colspan="4">Genere d'articoli per Ripiano</th>
+        </tr>
+        <tr>
+            <th *ngFor="let ripiano of ripiani; index as i">RIPIANO {{i+1}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let a of model.component.CorsiaTable; index as i">
+            <td class="table-secondary">{{i+1}}</td>
+            <td>{{a.value1}}</td>
+            <td>{{a.value2}}</td>
+            <td>{{a.value3}}</td>
+            <td>{{a.value4}}</td>
+        </tr>
+    </tbody>
+</table>

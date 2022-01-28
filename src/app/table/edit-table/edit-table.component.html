@@ -1,0 +1,20 @@
+<table id="table-example-1" class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th rowspan="2">Genere prodotto</th>
+            <th colspan="3">Modificazione Dimenzione Ripiano,
+                corsia B, Posizione A</th>
+        </tr>
+        <tr>
+            <th  *ngFor="let position of positions" colspan="1">{{position}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let a of model.component.EditTable; index as i">
+            <td class="table-secondary">RIPIANO {{i+1}}</td>
+            <td>{{a.value1}}</td>
+            <td>{{a.value2}}</td>
+            <td>{{a.value3}}</td>
+        </tr>
+    </tbody>
+</table>

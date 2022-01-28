@@ -1,29 +1,38 @@
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
+<table id="table-example-1" class="table table-bordered table-hover">
+  <thead class="table-danger">
+    <tr>
+      <th rowspan="3">Genere prodotto</th>
+      <th rowspan="3">Ripiani</th>
+      <th colspan="9">Posizione</th>
+    </tr>
+    <tr>
+      <th *ngFor="let position of positions" colspan="3">{{position}}</th>
+    </tr>
+    <tr>
+      <th colspan="1">Altezza</th>
+      <th colspan="1">Lunghezza</th>
+      <th colspan="1">Profondita</th>
+      <th colspan="1">Altezza</th>
+      <th colspan="1">Lunghezza</th>
+      <th colspan="1">Profondita</th>
+      <th colspan="1">Altezza</th>
+      <th colspan="1">Lunghezza</th>
+      <th colspan="1">Profondita</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let a of model.component.Racktable; index as i">
+      <td class="table-secondary">FOOD {{i+1}}</td>
+      <td>{{i+1}}</td>
+      <td>{{a.value1}}</td>
+      <td>{{a.value2}}</td>
+      <td>{{a.value3}}</td>
+      <td>{{a.value4}}</td>
+      <td>{{a.value5}}</td>
+      <td>{{a.value6}}</td>
+      <td>{{a.value7}}</td>
+      <td>{{a.value8}}</td>
+      <td>{{a.value9}}</td>
+    </tr>
+  </tbody>
+</table>
