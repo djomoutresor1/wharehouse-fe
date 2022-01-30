@@ -1,5 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LanesModel } from 'src/model/corsia/lanes-model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,6 @@ export class DashboardService {
 
   public getDashboard() {
 //    return this.http.get("../assets/mocks/warehouse.json");
-    return this.http.get("../assets/mocks/entireDataMock.json");
+    return this.http.get<LanesModel>("../assets/mocks/entireDataMock.json");
   }
 }

@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
-    <div *ngFor="let corsia of arrayCorsie.lanes" class="column">
-      <app-single-corsia [name]="corsia.name" [rows]="corsia.rows"></app-single-corsia>
+    <div *ngFor="let lane of lanes" class="column">
+      <warehouse-vertical-lane [lane]="lane"></warehouse-vertical-lane>
     </div>
     <div class="class">
-      <corsiaP></corsiaP>
+      <warehouse-horizontal-lane [lane]="lastLane"></warehouse-horizontal-lane>
     </div>
   </div>
 </div>
