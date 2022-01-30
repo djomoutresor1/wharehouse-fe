@@ -18,4 +18,7 @@ export class SingleCorsiaComponent extends AppComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSelecteCorsia(corsia: any) {
+    console.log("corsia: ", corsia);
+  }
 }
