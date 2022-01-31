@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LanesModel } from 'src/model/corsia/lanes-model';
+import { LanesModel } from 'src/model/corsia1/lanes-model';
 
 @Injectable({
   providedIn: 'root'
