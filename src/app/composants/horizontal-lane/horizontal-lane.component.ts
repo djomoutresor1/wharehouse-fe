@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
-import { LaneModel } from 'src/model/corsia1/lane-model';
+import { LaneModel } from 'src/model/corsia/lane-model';
 
 @Component({
   selector: 'warehouse-horizontal-lane',
