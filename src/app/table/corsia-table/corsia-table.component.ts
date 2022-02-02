@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TablesService } from 'src/app/services/tables.service';
 import { Models } from '../../../model/populateModel';
 
 @Component({
@@ -8,13 +9,27 @@ import { Models } from '../../../model/populateModel';
 })
 export class CorsiaTableComponent implements OnInit {
 
-  constructor() { }
-  
-  // 4 ripiani
-  ripiani = Array.from({length: 4}, (_, i) => i + 1);
-  model = new Models();
+ // rowsTable: LaneModel[] = [];
+ lanes: any;
+ corsiaTable: any;
+  rackTable:any;
 
-  ngOnInit(): void {
+
+  constructor(private tablesService: TablesService) {
   }
+
+  ngOnInit() {
+    let a:[]=[];
+    this.tablesService.getDataTable().subscribe((response) => {
+      console.log("response2: ", response);
+      this.lanes = response.lanes[0].rows;
+      this.corsiaTable = this.lanes.forEach((element: any) => {
+        console.log("corsiaTable2: ", element.row);
+      });  
+    });
+
+  }
+
+
 
 }

@@ -25,9 +25,9 @@ export class DashboardComponent extends AppComponent implements OnInit {
   ngOnInit(): void {
     this.dashboardService.getDashboard().subscribe((response) => {
       console.log("response: ", response);
-      this.lanes = response.lanes;
-      this.lastLane = this.lanes.slice(-1)[0];
-      console.log("lastElement: ", this.lanes.slice(-1)[0]);
+      this.lanes = response.lanes.slice(0,14);
+      this.lastLane = response.lanes.slice(-1)[0];
+      console.log("lastElement: ", response.lanes.slice(-1)[0]);
     });
   }
 }
