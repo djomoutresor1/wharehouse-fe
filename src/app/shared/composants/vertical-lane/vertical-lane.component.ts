@@ -6,7 +6,7 @@ import { RowModel } from 'src/model/corsia/row-model';
 @Component({
   selector: 'warehouse-vertical-lane',
   templateUrl: './vertical-lane.component.html',
-  styleUrls: ['./vertical-lane.component.scss', '../../app.component.scss']
+  styleUrls: ['./vertical-lane.component.scss']
 })
 export class VerticalLaneComponent extends AppComponent implements OnInit {
 
