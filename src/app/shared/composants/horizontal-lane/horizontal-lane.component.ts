@@ -5,7 +5,7 @@ import { LaneModel } from 'src/model/corsia/lane-model';
 @Component({
   selector: 'warehouse-horizontal-lane',
   templateUrl: './horizontal-lane.component.html',
-  styleUrls: ['./horizontal-lane.component.scss', '../../app.component.scss'],
+  styleUrls: ['./horizontal-lane.component.scss'],
 })
 export class HorizontalLaneComponent extends AppComponent implements OnInit {
   

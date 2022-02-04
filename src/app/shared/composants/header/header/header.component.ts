@@ -4,7 +4,7 @@ import { AppComponent } from 'src/app/app.component';
 @Component({
   selector: 'header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss','../../app.component.scss']
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent extends AppComponent implements OnInit {
 
