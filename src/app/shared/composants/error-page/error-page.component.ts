@@ -18,6 +18,6 @@ export class ErrorPageComponent implements OnInit {
   }
 
   handleOnBack() {
-    this.router.navigate([`${Pages.WAREHOUSE}`]);
+    this.router.navigate([`/`]);
   }
 }

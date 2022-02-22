@@ -1,8 +1,8 @@
 export enum Pages {
   DASHBOARD = 'dashboard',
   WAREHOUSE = 'warehouse',
-  ISSUE_TYPE = 'issuetypes',
-  CATALOG = 'menu',
+  REGISTER = 'register',
+  LOGIN = 'login',
   ACTIVITY_TYPE = 'activitytypes',
   DASHBOARD_ISSUE_DETAIL = 'dashboardIssueDetail',
   NOTIFICATION = 'notification',

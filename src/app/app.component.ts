@@ -6,8 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Welcome to wareHouse Project!';
-  rackOfFirstWay = Array.from({length: 6}, (_, i) => i + 1);
-  rackPerimeter = Array.from({length: 19}, (_, i) => i + 1);
+  isCollapsed = false;
 }
-

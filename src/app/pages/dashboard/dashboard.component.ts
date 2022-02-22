@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { AppComponent } from 'src/app/app.component';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { LaneModel } from 'src/model/corsia/lane-model';
@@ -25,6 +26,9 @@ export class DashboardComponent extends AppComponent implements OnInit {
       this.lanes = response.lanes.slice(0, 14);
       this.lastLane = response.lanes.slice(-1)[0];
       console.log('lastElement: ', response.lanes.slice(-1)[0]);
+    },
+    (error: HttpErrorResponse) => {
+      console.log("error: ", error)
     });
   }
 }
