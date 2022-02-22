@@ -8,7 +8,7 @@ export class Models {
       CorsiaTable: 
          [
           { value1: "120", value2: "280" ,value3: "430", value4: "480" },
-          { value1: "1270",value2: "270" ,value3: "310", value4: "404" },
+          { value1: "170", value2: "270" ,value3: "310", value4: "404" },
           { value1: "170", value2: "172" ,value3: "310", value4: "410" },
           { value1: "110", value2: "270" ,value3: "340", value4: "400" },
           { value1: "140", value2: "210" ,value3: "300", value4: "405" },
