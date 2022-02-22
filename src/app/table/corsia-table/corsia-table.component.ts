@@ -14,7 +14,6 @@ export class CorsiaTableComponent implements OnInit {
  laanes: any;
  corsiaTable: any;
  rackTable:any;
-  newArray: any;
 
 
   constructor(private tablesService: TablesService) {
