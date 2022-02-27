@@ -12,7 +12,6 @@ export class FooterComponent extends AppComponent implements OnInit {
     super();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

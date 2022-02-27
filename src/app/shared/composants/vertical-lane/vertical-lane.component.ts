@@ -16,8 +16,7 @@ export class VerticalLaneComponent extends AppComponent implements OnInit {
     super();
    }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSelectedLane(lane: RowModel) {
     console.log("Lane: ", lane);

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { Pages } from 'src/app/shared/enums/pages-enums';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +12,10 @@ import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 })
 export class LoginComponent implements OnInit {
   validateForm!: FormGroup;
+  passwordVisible = false;
+  password?: string;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -23,7 +27,6 @@ export class LoginComponent implements OnInit {
 
   submitForm() {
     console.log(this.validateForm.controls['userName'].value);
-    
   }
 
   updateConfirmValidator() {}
@@ -31,4 +34,8 @@ export class LoginComponent implements OnInit {
   getCaptcha() {}
 
   confirmationValidator() {}
+
+  handleOnRegister() {
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER}`]);
+  }
 }
