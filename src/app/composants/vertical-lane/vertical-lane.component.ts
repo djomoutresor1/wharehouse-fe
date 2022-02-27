@@ -20,7 +20,7 @@ export class VerticalLaneComponent extends AppComponent implements OnInit {
   }
 
 
-  onSelectedLane(lane: RowModel) {
-    console.log("Lane: ", lane);
+  onSelectedLane(lane: RowModel, laneName:string) {
+    console.log("Lane: ", laneName,lane);
   }
 }
