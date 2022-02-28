@@ -1,8 +1,11 @@
 <div class="warehouse-horizontal">
     <div class="box-name">{{lane?.name}}</div>
-    <div *ngFor="let rack of lane?.rows">
-        <button class="btn btn-default size block">
-            <i class="bi bi-shop-window">{{rack.row}}</i>
-        </button>
+    <div class="box-racks" *ngIf="lane?.rows">
+        <div *ngFor="let rack of lane?.rows">
+            <button class="btn btn-default size block">
+                <i class="bi bi-shop-window"></i>
+                <span>{{rack.row}}</span>
+            </button>
+        </div>
     </div>
 </div>

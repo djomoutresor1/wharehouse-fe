@@ -1,6 +1,35 @@
-.vertical-lane {
+.warehouse-vertical {
+  padding: 15px;
+  .first-box {
+    .size {
+      width: 50px;
+      height: 50px;
+      background: var(--warehouse-white);
+      margin: 15px 15px 20px 0px;
+      border-radius: var(--warehouse-border-radius-one);
+      box-shadow: var(--warehouse-box-shadow);
+      display: grid;
+      &:hover {
+        box-shadow: none;
+        //transition: var(--warehouse-transition);
+      }
+    }
+  }
   .second-box {
     margin-top: 50px;
+    .size {
+      width: 50px;
+      height: 50px;
+      background: var(--warehouse-white);
+      margin: 15px 15px 20px 0px;
+      border-radius: var(--warehouse-border-radius-one);
+      box-shadow: var(--warehouse-box-shadow);
+      display: grid;
+      &:hover {
+        box-shadow: none;
+        //transition: var(--warehouse-transition);
+      }
+    }
     .box-name {
       margin-left: 2px;
     }
