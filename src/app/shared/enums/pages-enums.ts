@@ -12,5 +12,6 @@ export enum Pages {
   ISSUE = 'issue',
   ACTIVITY = 'activity',
   SMART_TICKET = 'smartticket',
-  ERROR = "error-404"
+  ERROR = "error-404",
+  RACK = "rack"
 }
