@@ -29,7 +29,16 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.validateForm.controls);
+   // console.log(this.validateForm.controls);
+    let formData = {
+      fullName:this.validateForm.controls['fullName'].value,
+      userName:this.validateForm.controls['userName'].value,
+      email:this.validateForm.controls['email'].value,
+      password:this.validateForm.controls['password'].value,
+  }
+  localStorage.setItem('formData', JSON.stringify(formData));
+  this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+  console.log("formData: ", formData);
   }
 
   handleOnLogin() {
