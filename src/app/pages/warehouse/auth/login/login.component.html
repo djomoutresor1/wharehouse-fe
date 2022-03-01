@@ -33,7 +33,7 @@
             </label>
           </div>
           <div nz-col [nzSpan]="12">
-            <a class="login-form-forgot">Forgot password</a>
+            <a class="login-form-forgot" (click)="forgotOnPassword()">Forgot password</a>
           </div>
         </div>
         <button nz-button [disabled]="!validateForm.valid" nzBlock class="login-form-button login-form-margin"

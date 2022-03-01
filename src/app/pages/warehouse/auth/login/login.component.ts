@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,12 +23,27 @@ export class LoginComponent implements OnInit {
     this.validateForm = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      remember: [true]
+      remember: [true],
     });
   }
 
+  dispData() {
+    // console.log(JSON.parse(localStorage.getItem('formData')));
+  }
+
   submitForm() {
-    console.log(this.validateForm.controls['userName'].value);
+    let user = this.validateForm.controls['userName'].value;
+    let passId = this.validateForm.controls['password'].value;
+    // login From Localstorage
+    let data = JSON.parse(localStorage.getItem('formData') || 'null');
+
+    if ((user == data.userName && passId == data.password) || (user === 'admin' && passId === 'Qwerty84.')) {
+      alert('You are logged!');
+      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+    } else {
+      alert('login failed!');
+      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+    }
   }
 
   updateConfirmValidator() {}
@@ -37,5 +54,9 @@ export class LoginComponent implements OnInit {
 
   handleOnRegister() {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER}`]);
+  }
+
+  forgotOnPassword(){
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.FORGOTPASSWORD}`]);
   }
 }
