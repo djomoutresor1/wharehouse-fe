@@ -27,25 +27,7 @@
         (click)="isCollapsed = !isCollapsed"></i>
     </nz-header>
     <nz-content>
-      <nz-breadcrumb>
-        <nz-breadcrumb-item>User</nz-breadcrumb-item>
-        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
-      </nz-breadcrumb>
-      <div class="container-fluid">
-        <div class="row" *ngIf="!!lanes.length">
-          <div class="col d-flex">
-            <div *ngFor="let lane of lanes" class="column">
-              <warehouse-vertical-lane [lane]="lane"></warehouse-vertical-lane>
-            </div>
-          </div>
-        </div>
-        <div class="row" *ngIf="lastLane">
-          <div class="col column">
-            <warehouse-horizontal-lane [lane]="lastLane"></warehouse-horizontal-lane>
-          </div>
-        </div>
-        <router-outlet></router-outlet>
-      </div>
+      <router-outlet></router-outlet>
     </nz-content>
     <nz-divider></nz-divider>
     <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>

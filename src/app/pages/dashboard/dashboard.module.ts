@@ -6,9 +6,11 @@ import { AntDesignComponentsModule } from 'src/app/modules/ant-design-components
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { DashboardRackDetailComponent } from './dashboard-rack-detail/dashboard-rack-detail.component';
+import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, DashboardRackDetailComponent, DashboardHomeComponent],
   imports: [
     HttpClientModule,
     FormsModule,
