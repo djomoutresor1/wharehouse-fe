@@ -12,7 +12,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: `${Pages.DASHBOARD}`,
+    path: `${Pages.WAREHOUSE}/${Pages.DASHBOARD}`,
     loadChildren: () =>
       import('./pages/dashboard/dashboard.module').then(
         ({ DashboardModule }) => DashboardModule

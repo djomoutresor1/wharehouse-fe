@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { LaneModel } from 'src/model/corsia/lane-model';
+import { RowModel } from 'src/model/corsia/row-model';
 
 @Component({
   selector: 'warehouse-horizontal-lane',
@@ -16,4 +17,8 @@ export class HorizontalLaneComponent extends AppComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  onSelectedLane(lane: RowModel, name: string) {
+    console.log("rack: ", name, lane);
+  }
 }

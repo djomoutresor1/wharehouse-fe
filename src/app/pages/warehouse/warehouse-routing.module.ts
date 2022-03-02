@@ -9,12 +9,14 @@ import { WarehouseComponent } from './warehouse.component';
 const routes: Routes = [
   { path: '', component: WarehouseComponent },
   {
-    path: `${Pages.WAREHOUSE}/${Pages.LOGIN}`,
-    component: LoginComponent,
-  },
-  {
-    path: `${Pages.WAREHOUSE}/${Pages.REGISTER}`,
-    component: RegisterComponent,
+    path: `${Pages.WAREHOUSE}`,
+    children: [
+      { path: `${Pages.LOGIN}`, component: LoginComponent },
+      {
+        path: `${Pages.REGISTER}`,
+        component: RegisterComponent,
+      },
+    ],
   },
   {
     path: `${Pages.WAREHOUSE}/${Pages.FORGOTPASSWORD}`,

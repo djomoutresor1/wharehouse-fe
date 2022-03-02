@@ -12,6 +12,8 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
@@ -48,7 +50,8 @@ const icons = [
     NzDividerModule,
     NzTypographyModule,
     NzAlertModule
-    
+    NzBreadCrumbModule,
+    NzBackTopModule
   ],
   exports: [
     NzButtonModule,
@@ -64,6 +67,8 @@ const icons = [
     NzDividerModule,
     NzTypographyModule,
     NzAlertModule
+    NzBreadCrumbModule,
+    NzBackTopModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })

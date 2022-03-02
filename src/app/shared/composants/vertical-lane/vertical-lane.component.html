@@ -1,17 +1,19 @@
-<div class="vertical-lane">
+<div class="warehouse-vertical">
     <div class="box first-box">
         <div class="box-name">{{lane.name}}</div>
         <div *ngFor="let rack of lane.rows.slice(0,6)">
-            <button class="btn btn-default size" (click)="onSelectedLane(rack,lane.name)">
-                <i class="bi bi-shop-window">{{rack.row}}</i>
+            <button class="btn btn-default size" (click)="onSelectedLane(rack, lane.name)">
+                <i class="bi bi-shop-window"></i>
+               <span>{{rack.row}}</span> 
             </button>
         </div>
     </div>
     <div class="box second-box">
         <div class="box-name">{{lane.name}}</div>
         <div *ngFor="let rack of lane.rows.slice(6,12)">
-            <button class="btn btn-default size" (click)="onSelectedLane(rack,lane.name)">
-                <i class="bi bi-shop-window">{{rack.row}}</i>
+            <button class="btn btn-default size" (click)="onSelectedLane(rack, lane.name)">
+                <i class="bi bi-shop-window"></i>
+                <span>{{rack.row}}</span>
             </button>
         </div>
     </div>
