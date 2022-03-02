@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   validateForm!: FormGroup;
   passwordVisible = false;
   password?: string;
+  val: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router) {}
 
@@ -41,10 +42,26 @@ export class LoginComponent implements OnInit {
       alert('You are logged!');
       this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
     } else {
-      alert('login failed!');
+    this.getRegisterOrNot();
       this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
     }
   }
+
+  getRegisterOrNot() {
+    let user = this.validateForm.controls['userName'].value;
+    let passId = this.validateForm.controls['email'].value;
+    let data = JSON.parse(localStorage.getItem('formData') || 'null');
+
+    if (
+      (user == data.userName && passId == data.password) ||
+      (user === 'admin' && passId === 'Qwerty84.')
+    ) {
+      this.val = false;
+    } else {
+      this.val = true;
+    }
+  }
+  
 
   updateConfirmValidator() {}
 

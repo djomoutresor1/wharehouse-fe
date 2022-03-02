@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzButtonSize } from 'ng-zorro-antd/button';
-import { Pages } from '../../enums/pages-enums';
+
 
 @Component({
   selector: 'app-error-page',
