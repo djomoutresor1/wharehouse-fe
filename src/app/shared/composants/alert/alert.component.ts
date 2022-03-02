@@ -8,7 +8,7 @@ import { NzTextEditComponent } from 'ng-zorro-antd/typography';
   styleUrls: ['./alert.component.scss']
 })
 export class AlertComponent implements OnInit {
-  @Input() typeAlert: string = '';
+  @Input() typeAlert: any;
   @Input() MessageTest: string = '';
 
 

@@ -6,6 +6,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AntDesignComponentsModule } from 'src/app/modules/ant-design-components.module';
 import { ForgottenPasswordComponent } from './auth/forgotten-password/forgotten-password.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [WarehouseComponent, LoginComponent, RegisterComponent, ForgottenPasswordComponent],
@@ -13,6 +14,7 @@ import { ForgottenPasswordComponent } from './auth/forgotten-password/forgotten-
     ReactiveFormsModule,
     AntDesignComponentsModule,
     WarehouseRoutingModule,
+    SharedModule
   ],
   exports: [WarehouseComponent, LoginComponent, RegisterComponent],
 })
