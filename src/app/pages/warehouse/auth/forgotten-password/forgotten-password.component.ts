@@ -6,7 +6,7 @@ import { Pages } from 'src/app/shared/enums/pages-enums';
 @Component({
   selector: 'forgottenPassword',
   templateUrl: './forgotten-password.component.html',
-  styleUrls: ['./forgotten-password.component.scss']
+  styleUrls: ['./forgotten-password.component.scss'],
 })
 export class ForgottenPasswordComponent implements OnInit {
   validateForm!: FormGroup;
@@ -15,30 +15,36 @@ export class ForgottenPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      fullName: [null, [Validators.required, Validators.min(5), Validators.max(25)]],
-      userName: [null, [Validators.required, Validators.min(5), Validators.max(15)]],
+      fullName: [
+        null,
+        [Validators.required, Validators.min(5), Validators.max(25)],
+      ],
+      userName: [
+        null,
+        [Validators.required, Validators.min(5), Validators.max(15)],
+      ],
       email: [null, [Validators.required]],
     });
   }
 
-  submitFormModule(){
+  submitFormModule() {
     let user = this.validateForm.controls['userName'].value;
     let passId = this.validateForm.controls['email'].value;
 
-        // data From Localstorage
+    // data From Localstorage
     let data = JSON.parse(localStorage.getItem('formData') || 'null');
 
-        if (user == data.userName && passId == data.email) {
-          console.log("your password is: ", data.password)
-          this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
-        }
-
+    if (user == data.userName && passId == data.email) {
+      console.log('your password is: ', data.password);
+      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+    } else {
+      //  alert('your are not register');
+      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER}`]);
+    }
   }
 
 
-  returnOnLogin(){
+  returnOnLogin() {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
-
-
 }
