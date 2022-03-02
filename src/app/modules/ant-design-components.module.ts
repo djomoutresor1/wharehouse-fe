@@ -49,7 +49,7 @@ const icons = [
     NzCheckboxModule,
     NzDividerModule,
     NzTypographyModule,
-    NzAlertModule
+    NzAlertModule,
     NzBreadCrumbModule,
     NzBackTopModule
   ],
@@ -66,7 +66,7 @@ const icons = [
     NzCheckboxModule,
     NzDividerModule,
     NzTypographyModule,
-    NzAlertModule
+    NzAlertModule,
     NzBreadCrumbModule,
     NzBackTopModule
   ],

@@ -12,6 +12,8 @@ export class AlertComponent implements OnInit {
   @Input() MessageTest: string = '';
 
 
+
+
   constructor() { }
 
   ngOnInit(): void {
