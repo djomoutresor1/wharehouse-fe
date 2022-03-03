@@ -4,7 +4,6 @@ export enum Pages {
   REGISTER = 'register',
   LOGIN = 'login',
   RACK_DETAIL = 'rack/detail',
-  RACK_NAME = 'name',
   HOME = 'home',
   NOTIFICATION = 'notification',
   REPORTING = 'reporting',

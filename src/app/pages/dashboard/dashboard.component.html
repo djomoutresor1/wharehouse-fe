@@ -2,6 +2,10 @@
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item (click)="handleOnNavigate('dashboard')">
+        <i nz-icon nzType="dashboard"></i>
+        <span>Dashboard</span>
+      </li>
       <li nz-submenu nzTitle="User" nzIcon="user">
         <ul>
           <li nz-menu-item>Tom</li>

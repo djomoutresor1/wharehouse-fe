@@ -10,19 +10,16 @@ import { Pages } from '../../enums/pages-enums';
   templateUrl: './vertical-lane.component.html',
   styleUrls: ['./vertical-lane.component.scss'],
 })
-export class VerticalLaneComponent extends AppComponent implements OnInit {
+export class VerticalLaneComponent implements OnInit {
   @Input() lane: LaneModel = { rows: [], name: '' };
 
   constructor(private route: ActivatedRoute, private router: Router) {
-    super();
   }
 
   ngOnInit(): void {}
 
-  onSelectedLane(lane: RowModel, name: string) {
-    console.log('rack: ', name, lane);
-    let rack = { name, lane };
-    this.router.navigate([`${Pages.RACK_DETAIL}/${name.toLocaleLowerCase()}`], {
+  onSelectedLane(rack: RowModel, laneName: string) {
+    this.router.navigate([`${Pages.RACK_DETAIL}/${laneName.toLocaleLowerCase()}`], {
       relativeTo: this.route,
     });
   }
