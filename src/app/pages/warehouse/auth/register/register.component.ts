@@ -15,6 +15,9 @@ export class RegisterComponent implements OnInit {
   password?: string;
   confirmPasswordVisible = false;
   confirmPassword?: string;
+  isAuth: boolean = false;
+  alertType: string = '';
+  messageAlert: string = '';
 
   constructor(private fb: FormBuilder, private router: Router) {}
 
@@ -29,16 +32,23 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm() {
+    debugger
    // console.log(this.validateForm.controls);
     let formData = {
-      fullName:this.validateForm.controls['fullName'].value,
-      userName:this.validateForm.controls['userName'].value,
-      email:this.validateForm.controls['email'].value,
-      password:this.validateForm.controls['password'].value,
+      fullName:this.validateForm.controls['fullName']?.value,
+      userName:this.validateForm.controls['userName']?.value,
+      email:this.validateForm.controls['email']?.value,
+      password:this.validateForm.controls['password']?.value,
   }
   localStorage.setItem('formData', JSON.stringify(formData));
-  this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   console.log("formData: ", formData);
+  this.isAuth = true;
+  this.alertType = 'success';
+  this.messageAlert = 'successful registered!';
+  setTimeout(() => {
+    (this.isAuth = false),
+      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+  }, 2000);
   }
 
   handleOnLogin() {

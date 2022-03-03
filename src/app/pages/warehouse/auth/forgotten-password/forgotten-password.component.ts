@@ -10,39 +10,42 @@ import { Pages } from 'src/app/shared/enums/pages-enums';
 })
 export class ForgottenPasswordComponent implements OnInit {
   validateForm!: FormGroup;
+  isAuth: boolean = false;
+  alertType: string = '';
+  messageAlert: string = '';
 
   constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      fullName: [
-        null,
-        [Validators.required, Validators.min(5), Validators.max(25)],
-      ],
-      userName: [
-        null,
-        [Validators.required, Validators.min(5), Validators.max(15)],
-      ],
       email: [null, [Validators.required]],
     });
   }
 
   submitFormModule() {
-    let user = this.validateForm.controls['userName'].value;
     let passId = this.validateForm.controls['email'].value;
 
     // data From Localstorage
     let data = JSON.parse(localStorage.getItem('formData') || 'null');
 
-    if (user == data.userName && passId == data.email) {
-      console.log('your password is: ', data.password);
-      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+    if (passId == data.email) {
+      this.isAuth = true;
+      this.alertType = 'success';
+      this.messageAlert = 'your password:  ' + data.password;
+      setTimeout(() => {
+        (this.isAuth = false),
+          this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+      }, 5000);
     } else {
-      //  alert('your are not register');
-      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER}`]);
+      this.isAuth = true;
+      this.alertType = 'error';
+      this.messageAlert = 'your are not register yet!';
+      setTimeout(() => {
+        (this.isAuth = false),
+          this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER}`]);
+      }, 2000);
     }
   }
-
 
   returnOnLogin() {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);

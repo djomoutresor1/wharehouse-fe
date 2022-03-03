@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { Pages } from 'src/app/shared/enums/pages-enums';
-
-
 
 @Component({
   selector: 'app-login',
@@ -16,7 +19,9 @@ export class LoginComponent implements OnInit {
   validateForm!: FormGroup;
   passwordVisible = false;
   password?: string;
-  val: boolean = false;
+  isAuth: boolean = false;
+  alertType: string = '';
+  messageAlert: string = '';
 
   constructor(private fb: FormBuilder, private router: Router) {}
 
@@ -28,40 +33,50 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  dispData() {
-    // console.log(JSON.parse(localStorage.getItem('formData')));
-  }
 
   submitForm() {
-    let user = this.validateForm.controls['userName'].value;
-    let passId = this.validateForm.controls['password'].value;
+    let user = this.validateForm.controls['userName']?.value;
+    let passId = this.validateForm.controls['password']?.value;
     // login From Localstorage
     let data = JSON.parse(localStorage.getItem('formData') || 'null');
 
-    if ((user == data.userName && passId == data.password) || (user === 'admin' && passId === 'Qwerty84.')) {
-      alert('You are logged!');
-      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+    if (
+      (user == data?.userName && passId == data?.password) ||
+      (user === 'admin' && passId === 'Qwerty84.')
+    ) {
+      this.isAuth = true;
+      this.getRegisterOrNot();
+      setTimeout(() => {
+        (this.isAuth = false),
+          this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+      }, 1000);
     } else {
-    this.getRegisterOrNot();
+      this.isAuth = true;
+      this.getRegisterOrNot();
+      setTimeout(() => {
+        this.isAuth = false;
+      }, 2000);
       this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
     }
   }
 
   getRegisterOrNot() {
-    let user = this.validateForm.controls['userName'].value;
-    let passId = this.validateForm.controls['email'].value;
+    let user = this.validateForm.controls['userName']?.value;
+    let passId = this.validateForm.controls['password']?.value;
     let data = JSON.parse(localStorage.getItem('formData') || 'null');
 
     if (
-      (user == data.userName && passId == data.password) ||
-      (user === 'admin' && passId === 'Qwerty84.')
+      (user == data?.userName && passId == data?.password) ||
+      (user == 'admin' && passId == 'Qwerty84.')
     ) {
-      this.val = false;
-    } else {
-      this.val = true;
+      (this.alertType = 'success'), (this.messageAlert = 'logged successful!');
+    } else if (
+      (user !== data?.userName && passId !== data?.password) ||
+      (user !== 'admin' && passId !== 'Qwerty84.')
+    ) {
+      (this.alertType = 'error'), (this.messageAlert = 'login failed!');
     }
   }
-  
 
   updateConfirmValidator() {}
 
@@ -73,7 +88,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER}`]);
   }
 
-  forgotOnPassword(){
+  forgotOnPassword() {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.FORGOTPASSWORD}`]);
   }
 }

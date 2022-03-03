@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NzTSType } from 'ng-zorro-antd/core/types';
-import { NzTextEditComponent } from 'ng-zorro-antd/typography';
+
 
 @Component({
   selector: 'alert',
@@ -9,7 +8,7 @@ import { NzTextEditComponent } from 'ng-zorro-antd/typography';
 })
 export class AlertComponent implements OnInit {
   @Input() typeAlert: any;
-  @Input() MessageTest: string = '';
+  @Input() MessageTest: any;
 
 
 

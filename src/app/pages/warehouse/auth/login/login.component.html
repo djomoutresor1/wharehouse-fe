@@ -1,5 +1,4 @@
 <div class="warehouse-auth-wrapper container">
-  <div *ngIf="val"><nz-alert nzType="error" nzMessage="your are not register!"></nz-alert></div>
   <div class="row">
     <div class="col">
       <h2 nz-typography>Login Page</h2>
@@ -7,6 +6,12 @@
   </div>
   <div class="row">
     <div class="col-md-4 offset-md-4">
+      <div class="row">
+        <div class="col" *ngIf="isAuth">
+          <alert [typeAlert]="alertType" [MessageTest]="messageAlert">
+          </alert>
+        </div>
+      </div>
       <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
         <nz-form-item>
           <nz-form-control nzErrorTip="Please input your username!">
@@ -42,7 +47,6 @@
         <nz-divider nzDashed nzText="New User ?"></nz-divider>
         <button nz-button nzType="default" (click)="handleOnRegister()" nzBlock>Register now!</button>
       </form>
-      <alert [typeAlert]="'info'"></alert>
     </div>
   </div>
 </div>
