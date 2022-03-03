@@ -17,7 +17,9 @@ export class DashboardRackDetailComponent implements OnInit {
     console.log('rackName: ', this.rackName);
   }
 
-
-
   ngOnInit(): void {}
+
+  handleOnNavigate(url: String) {
+    this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
+  }
 }
