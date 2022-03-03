@@ -1,6 +1,9 @@
 <nz-breadcrumb>
-    <nz-breadcrumb-item>Dashboard</nz-breadcrumb-item>
+    <nz-breadcrumb-item (click)="handleOnNavigate('dashboard')">
+        <i nz-icon nzType="dashboard"></i>
+        <a>Dashboard</a>
+    </nz-breadcrumb-item>
     <nz-breadcrumb-item>rack</nz-breadcrumb-item>
     <nz-breadcrumb-item>{{rackName}}</nz-breadcrumb-item>
-  </nz-breadcrumb>
+</nz-breadcrumb>
 <p>dashboard-rack-detail works! {{rackName}}</p>
