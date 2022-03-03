@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 
 @Component({
@@ -32,7 +33,6 @@ export class LoginComponent implements OnInit {
       remember: [true],
     });
   }
-
 
   submitForm() {
     let user = this.validateForm.controls['userName']?.value;
@@ -69,12 +69,14 @@ export class LoginComponent implements OnInit {
       (user == data?.userName && passId == data?.password) ||
       (user == 'admin' && passId == 'Qwerty84.')
     ) {
-      (this.alertType = 'success'), (this.messageAlert = 'logged successful!');
+      this.alertType = AlertType.ALERT_SUCCESS;
+      this.messageAlert = 'logged successful!';
     } else if (
       (user !== data?.userName && passId !== data?.password) ||
       (user !== 'admin' && passId !== 'Qwerty84.')
     ) {
-      (this.alertType = 'error'), (this.messageAlert = 'login failed!');
+      this.alertType = AlertType.ALERT_ERROR;
+      this.messageAlert = 'login failed!';
     }
   }
 

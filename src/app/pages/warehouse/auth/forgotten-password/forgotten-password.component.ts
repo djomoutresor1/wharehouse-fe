@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 
 @Component({
@@ -18,7 +19,7 @@ export class ForgottenPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      email: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
     });
   }
 
@@ -30,19 +31,19 @@ export class ForgottenPasswordComponent implements OnInit {
 
     if (passId == data.email) {
       this.isAuth = true;
-      this.alertType = 'success';
+      this.alertType = AlertType.ALERT_SUCCESS;
       this.messageAlert = 'your password:  ' + data.password;
       setTimeout(() => {
-        (this.isAuth = false),
-          this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+        this.isAuth = false;
+        this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
       }, 5000);
     } else {
       this.isAuth = true;
-      this.alertType = 'error';
+      this.alertType = AlertType.ALERT_ERROR;
       this.messageAlert = 'your are not register yet!';
       setTimeout(() => {
-        (this.isAuth = false),
-          this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER}`]);
+        this.isAuth = false;
+        this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER}`]);
       }, 2000);
     }
   }
