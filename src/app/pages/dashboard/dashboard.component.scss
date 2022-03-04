@@ -19,6 +19,13 @@
 nz-header {
   background: var(--warehouse-white);
   padding: 0;
+  display: flex;
+  .dashboard-header-right {
+    display: flex;
+    float: right;
+    right: 30px;
+    position: absolute;
+  }
 }
 
 nz-content {

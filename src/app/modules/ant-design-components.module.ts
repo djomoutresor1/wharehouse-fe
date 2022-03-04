@@ -14,6 +14,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
@@ -51,7 +52,8 @@ const icons = [
     NzTypographyModule,
     NzAlertModule,
     NzBreadCrumbModule,
-    NzBackTopModule
+    NzBackTopModule,
+    NzAvatarModule
   ],
   exports: [
     NzButtonModule,
@@ -68,7 +70,8 @@ const icons = [
     NzTypographyModule,
     NzAlertModule,
     NzBreadCrumbModule,
-    NzBackTopModule
+    NzBackTopModule,
+    NzAvatarModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })

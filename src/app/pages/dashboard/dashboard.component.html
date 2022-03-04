@@ -29,6 +29,27 @@
     <nz-header>
       <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="isCollapsed = !isCollapsed"></i>
+      <div class="dashboard-header-right">
+        <ul nz-menu nzMode="horizontal" class="dashboard-header-menu">
+          <li nz-submenu nzTitle="Test Name" nzIcon="user" class="dashboard-header-icon">
+            <ul class="dashboard-header-menu-items">
+              <li nz-menu-item>
+                <i nz-icon nzType="user"></i>
+                <span>My Profile</span>
+              </li>
+              <li nz-menu-item>
+                <i nz-icon nzType="setting"></i>
+                <span>Preferences</span>
+              </li>
+              <nz-divider class="warehouse-not-margin"></nz-divider>
+              <li nz-menu-item>
+                <i nz-icon nzType="logout" nzTheme="outline"></i>
+                <span>Deconnexion</span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </nz-header>
     <nz-content>
       <router-outlet></router-outlet>

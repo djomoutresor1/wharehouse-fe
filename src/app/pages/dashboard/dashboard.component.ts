@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 
