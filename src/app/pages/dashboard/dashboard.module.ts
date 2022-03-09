@@ -10,6 +10,8 @@ import { DashboardRackDetailComponent } from './dashboard-rack-detail/dashboard-
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { ProfileComponent } from './tabs-content/profile/profile.component';
 import { PreferencesComponent } from './tabs-content/preferences/preferences.component';
+import { RackTableComponent } from 'src/app/table/rack-table/rack-table.component';
+
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { PreferencesComponent } from './tabs-content/preferences/preferences.com
     DashboardHomeComponent,
     ProfileComponent,
     PreferencesComponent,
+    RackTableComponent
+    
   ],
   imports: [
     HttpClientModule,

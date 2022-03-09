@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { RackTableComponent } from 'src/app/table/rack-table/rack-table.component';
 
 @NgModule({
-  declarations: [WarehouseComponent, LoginComponent, RegisterComponent, ForgottenPasswordComponent,RackTableComponent],
+  declarations: [WarehouseComponent, LoginComponent, RegisterComponent, ForgottenPasswordComponent],
   imports: [
     ReactiveFormsModule,
     AntDesignComponentsModule,
@@ -19,6 +19,6 @@ import { RackTableComponent } from 'src/app/table/rack-table/rack-table.componen
     SharedModule,
     CommonModule
   ],
-  exports: [WarehouseComponent, LoginComponent, RegisterComponent,RackTableComponent],
+  exports: [WarehouseComponent, LoginComponent, RegisterComponent],
 })
 export class WarehouseModule {}

@@ -18,7 +18,7 @@ const routes: Routes = [
         component: DashboardHomeComponent,
       },
       {
-        path: `${Pages.RACK_DETAIL}/:${PathParams.RACK_NAME}`,
+        path: `${Pages.RACK_DETAIL}/:${PathParams.RACK_NAME}/:${PathParams.RACK_NUMBER}`,
         component: DashboardRackDetailComponent,
       },
       { path: `${Pages.PROFILE}`, component: ProfileComponent },

@@ -19,8 +19,10 @@ export class VerticalLaneComponent implements OnInit {
   ngOnInit(): void {}
 
   onSelectedLane(rack: RowModel, laneName: string) {
-    this.router.navigate([`${Pages.RACK_DETAIL}/${laneName.toLocaleLowerCase()}`], {
+
+    this.router.navigate([`${Pages.RACK_DETAIL}/${laneName.toLocaleLowerCase()}/${rack.row}`], {
       relativeTo: this.route,
     });
+    console.log('rackNumber: ',rack.row)
   }
 }
