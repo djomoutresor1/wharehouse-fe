@@ -33,11 +33,11 @@
         <ul nz-menu nzMode="horizontal" class="dashboard-header-menu">
           <li nz-submenu nzTitle="Test Name" nzIcon="user" class="dashboard-header-icon">
             <ul class="dashboard-header-menu-items">
-              <li nz-menu-item>
+              <li nz-menu-item (click)="handleOnNavigate('dashboard/my-profile')">
                 <i nz-icon nzType="user"></i>
                 <span>My Profile</span>
               </li>
-              <li nz-menu-item>
+              <li nz-menu-item (click)="handleOnNavigate('dashboard/settings')">
                 <i nz-icon nzType="setting"></i>
                 <span>Preferences</span>
               </li>

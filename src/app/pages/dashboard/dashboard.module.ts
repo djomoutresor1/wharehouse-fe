@@ -8,9 +8,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { DashboardRackDetailComponent } from './dashboard-rack-detail/dashboard-rack-detail.component';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
+import { ProfileComponent } from './tabs-content/profile/profile.component';
+import { PreferencesComponent } from './tabs-content/preferences/preferences.component';
 
 @NgModule({
-  declarations: [DashboardComponent, DashboardRackDetailComponent, DashboardHomeComponent],
+  declarations: [
+    DashboardComponent,
+    DashboardRackDetailComponent,
+    DashboardHomeComponent,
+    ProfileComponent,
+    PreferencesComponent,
+  ],
   imports: [
     HttpClientModule,
     FormsModule,
