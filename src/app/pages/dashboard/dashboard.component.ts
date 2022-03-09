@@ -17,6 +17,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {}
 
   handleOnNavigate(url: String) {
-    this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
+    this.router.navigate([`${Pages.WAREHOUSE}/${url}/`]);
   }
 }

@@ -29,7 +29,7 @@ export class ForgottenPasswordComponent implements OnInit {
     // data From Localstorage
     let data = JSON.parse(localStorage.getItem('formData') || 'null');
 
-    if (passId == data.email) {
+    if (passId == data?.email) {
       this.isAuth = true;
       this.alertType = AlertType.ALERT_SUCCESS;
       this.messageAlert = 'your password:  ' + data.password;
