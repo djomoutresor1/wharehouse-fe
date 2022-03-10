@@ -1,33 +1,3 @@
-.trigger {
-  font-size: 18px;
-  line-height: 64px;
-  padding: 0 24px;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.trigger:hover {
-  color: var(--warehouse-primary);
-}
-
-.logo {
-  height: 32px;
-  background: var(--warehouse-default);
-  margin: 16px;
-}
-
-nz-header {
-  background: var(--warehouse-white);
-  padding: 0;
-  display: flex;
-  .dashboard-header-right {
-    display: flex;
-    float: right;
-    right: 30px;
-    position: absolute;
-  }
-}
-
 nz-content {
   margin: 0 16px;
 }
@@ -44,4 +14,10 @@ nz-breadcrumb {
 
 nz-footer {
   text-align: center;
+}
+
+.logo {
+  height: 32px;
+  background: var(--warehouse-default);
+  margin: 16px;
 }
