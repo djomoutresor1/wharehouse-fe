@@ -23,12 +23,6 @@ export class TableService {
       console.log("dataTable: ", response.lanes);
     });
   }
-  // getDataTables(){
-  //   this.getDataTable().subscribe((response) => {
-  //     console.log("response: ", response);
-  //     this.data = response.lanes;
-  //     console.log("dataTable: ", response.lanes);
-  //   });
-  // }
+
 
 }
