@@ -10,6 +10,8 @@ import { DashboardRackDetailComponent } from './dashboard-rack-detail/dashboard-
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { ProfileComponent } from './tabs-content/profile/profile.component';
 import { PreferencesComponent } from './tabs-content/preferences/preferences.component';
+import { DashboardHeaderComponent } from './utils/dashboard-header/dashboard-header.component';
+import { DashboardSiderComponent } from './utils/dashboard-sider/dashboard-sider.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { PreferencesComponent } from './tabs-content/preferences/preferences.com
     DashboardHomeComponent,
     ProfileComponent,
     PreferencesComponent,
+    DashboardHeaderComponent,
+    DashboardSiderComponent,
   ],
   imports: [
     HttpClientModule,
