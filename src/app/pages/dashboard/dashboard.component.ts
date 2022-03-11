@@ -19,4 +19,8 @@ export class DashboardComponent implements OnInit {
   handleOnNavigate(url: String) {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}/`]);
   }
+
+  handleOnCollapsed(collapsed: boolean) {
+    this.isCollapsed = collapsed;
+  }
 }

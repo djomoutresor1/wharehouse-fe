@@ -1,0 +1,24 @@
+nz-header {
+  background: var(--warehouse-white);
+  padding: 0;
+  display: flex;
+  .dashboard-header-right {
+    display: flex;
+    float: right;
+    right: 30px;
+    position: absolute;
+  }
+}
+
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: var(--warehouse-primary);
+}
+
