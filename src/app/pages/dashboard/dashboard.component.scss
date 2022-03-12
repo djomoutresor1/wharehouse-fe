@@ -21,3 +21,11 @@ nz-footer {
   background: var(--warehouse-default);
   margin: 16px;
 }
+
+.ant-layout-sider-dark {
+  background: var(--warehouse-dark) !important;
+}
+
+.ant-layout-sider-light {
+  background: var(--warehouse-white) !important;
+}
