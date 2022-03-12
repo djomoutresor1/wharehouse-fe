@@ -16,6 +16,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
@@ -55,7 +56,8 @@ const icons = [
     NzBreadCrumbModule,
     NzBackTopModule,
     NzAvatarModule,
-    NzModalModule
+    NzModalModule,
+    NzSwitchModule,
   ],
   exports: [
     NzButtonModule,
@@ -74,7 +76,8 @@ const icons = [
     NzBreadCrumbModule,
     NzBackTopModule,
     NzAvatarModule,
-    NzModalModule
+    NzModalModule,
+    NzSwitchModule,
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })
