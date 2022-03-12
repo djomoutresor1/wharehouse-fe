@@ -7,4 +7,11 @@
     <nz-breadcrumb-item>{{rackName}}</nz-breadcrumb-item>
     <nz-breadcrumb-item>{{rackNumber}}</nz-breadcrumb-item>
 </nz-breadcrumb>
-<p><rackTable></rackTable> rack:{{rackName}}  ,number:{{rackNumber}}</p>
+<p>
+    <rackTable></rackTable> rack:{{rackName}} ,number:{{rackNumber}}
+</p>
+<div>
+    <ul>
+        <li *ngFor="let number of ['205', '424', '323', '719', '355', '821', '386', '819', '363']">{{number}}</li>
+      </ul>
+</div>
