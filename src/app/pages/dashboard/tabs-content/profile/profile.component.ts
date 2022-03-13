@@ -1,37 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfilService } from 'src/app/services/profil.service';
-import { Person} from './../../../../../interfaces/profils'
+import { Person } from './../../../../../interfaces/profils';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  profilData: any;
+  myArray: Person[] = [];
 
-  profilData:any;
-  myArray:Person[]=[];
-
-
-  
-
-
-
-  constructor( public profilService:ProfilService ) { 
-
-  }
+  constructor(public profilService: ProfilService) {}
 
   ngOnInit(): void {
-
-    let   myArray:Person[]=[];
+    //let myArray: Person[] = [];
     this.profilData = this.profilService.getDataProfil();
-    myArray.push(this.profilData);
-    console.log("profilData: ", myArray);
-
+    this.myArray.push(this.profilData);
+    console.log('profilData: ', this.myArray);
   }
-
 }
-
-
-
-

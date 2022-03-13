@@ -1,23 +1,23 @@
 <nz-table #basicTable [nzData]="myArray">
-    <thead>
-      <tr>
-        <th>FullName</th>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Password</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of basicTable.data">
-        <td>{{data.fullName}}</td>
-        <td>{{data.userName}}</td>
-        <td>{{data.email}}</td>
-        <td>{{data.password}}</td>
-        <td>
-          <a>Action 一 {{data.email}}</a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a>Action</a>
-        </td>
-      </tr>
-    </tbody>
-  </nz-table>
+  <thead>
+    <tr>
+      <th>FullName</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Password</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data.fullName}}</td>
+      <td>{{data.userName}}</td>
+      <td>{{data.email}}</td>
+      <td>{{data.password}}</td>
+      <td>
+        <a>Action 一 {{data.email}}</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a>Action</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
