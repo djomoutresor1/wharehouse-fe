@@ -10,7 +10,6 @@ import { DashboardService } from './services/dashboard.service';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RackTableComponent } from './table/rack-table/rack-table.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +24,6 @@ import { RackTableComponent } from './table/rack-table/rack-table.component';
     SharedModule,
   ],
   providers: [DashboardService],
-  bootstrap: [AppComponent,RackTableComponent],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
