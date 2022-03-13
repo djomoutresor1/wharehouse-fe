@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfilService } from 'src/app/services/profil.service';
+import { Person} from './../../../../../interfaces/profils'
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  profilData:any;
+  myArray:Person[]=[];
+
+
+  
+
+
+
+  constructor( public profilService:ProfilService ) { 
+
+  }
 
   ngOnInit(): void {
+
+    let   myArray:Person[]=[];
+    this.profilData = this.profilService.getDataProfil();
+    myArray.push(this.profilData);
+    console.log("profilData: ", myArray);
+
   }
 
 }
+
+
+
+
