@@ -10,7 +10,7 @@ export class ProfilService {
   constructor() { }
 
    getDataProfil(){
-    const person= (localStorage.getItem('formData') || 'null');
+    const person= (localStorage?.getItem('formData') || 'null');
     return JSON.parse(person);
 
    }

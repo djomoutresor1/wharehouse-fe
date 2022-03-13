@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RackModel } from 'src/model/rack/rack-model';
-import { Models } from '../../../model/populateModel';
+
 
 @Component({
   selector: 'rackTable',
@@ -15,7 +15,6 @@ export class RackTableComponent implements OnInit {
 
   //positions des palettes dans les diverse ripiani
   positions = ['A', 'B', 'C'];
-  model = new Models();
 
   ngOnInit(): void {
     console.log('racks: ', this.racks);
