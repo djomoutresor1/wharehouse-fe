@@ -7,7 +7,7 @@ import { LaneModel } from 'src/model/corsia/lane-model';
 import { RowModel } from 'src/model/corsia/row-model';
 import { TableService } from 'src/app/services/table.service';
 import { PositionModel } from 'src/model/corsia/position-model';
-import { ShelfModel } from 'src/model/corsia/shelf-model';
+import { RackModel } from 'src/model/rack/rack-model';
 
 @Component({
   selector: 'app-dashboard-rack-detail',
@@ -17,73 +17,99 @@ import { ShelfModel } from 'src/model/corsia/shelf-model';
 export class DashboardRackDetailComponent implements OnInit {
   rackName: any;
   rackNumber: any;
-  lanes: LaneModel[] = [];
-  resultRackName: any;
-  s: any;
+  racks: RackModel[] = [];
+  rackDetailOne: RackModel = {};
+  rackDetailTwo: RackModel = {};
+  rackDetailThree: RackModel = {};
+  resultRackName: RowModel[] = [];
+  shelves: any;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private tableService: TableService
   ) {
-    console.log('router: ', this.router);
     this.rackName = this.route.snapshot.paramMap.get(PathParams.RACK_NAME);
-    console.log('rackName: ', this.rackName);
+    this.rackNumber = this.route.snapshot.paramMap.get(PathParams.RACK_NUMBER);
   }
 
   ngOnInit(): void {
-
-    this.rackName = this.route.snapshot.paramMap.get(PathParams.RACK_NAME);
-    this.rackNumber = this.route.snapshot.paramMap.get(PathParams.RACK_NUMBER);
-
     this.tableService.getDataTable().subscribe((response) => {
       console.log('response2: ', response.lanes);
-      response.lanes.map((x) => {
-        if (x.name === this.rackName.toLocaleUpperCase()) {
-          this.resultRackName = x.rows.filter(
-            (y) => y.row.toString() === this.rackNumber
+      response.lanes.map((lane: LaneModel) => {
+        if (lane.name === this.rackName.toLocaleUpperCase()) {
+          this.resultRackName = lane.rows.filter(
+            (shelf) => shelf.row.toString() === this.rackNumber
           );
         }
       });
-      let b = this.resultRackName[0].shelves;
-      let a0 = b[0].positions;
-      let a1 = b[1].positions;
-      let a2 = b[2].positions;
-      let a3 = b[3].positions;
+      console.log(this.resultRackName);
 
-      console.log('a0: ', a0);
-      console.log('a1: ', a1);
-      console.log('a2: ', a2);
-      console.log('a3: ', a3);
+      this.shelves = this.resultRackName[0]?.shelves;
+      let position0 = this.shelves[0]?.positions;
+      let position1 = this.shelves[1]?.positions;
+      let position2 = this.shelves[2]?.positions;
+      let position3 = this.shelves[3]?.positions;
 
-      const result0: any = [];
-      a0.forEach((x0: any) => {
-        result0.push(x0.dimensions.length);
-        result0.push(x0.dimensions.width);
-        result0.push(x0.dimensions.depth);
+      console.log('position0: ', position0);
+      console.log('position1: ', position1);
+      console.log('position2: ', position2);
+      console.log('position3: ', position3);
+
+      position0.map((position: PositionModel, index: any) => {
+        this.rackSegmentation(position, index);
       });
 
-      const result1: any = [];
-      a1.forEach((x1: any) => {
-        result1.push(x1.dimensions.length);
-        result1.push(x1.dimensions.width);
-        result1.push(x1.dimensions.depth);
+      position1.map((position: PositionModel, index: any) => {
+        this.rackSegmentation(position, index);
       });
 
-      const result2: any = [];
-      a2.forEach((x2: any) => {
-        result2.push(x2.dimensions.length);
-        result2.push(x2.dimensions.width);
-        result2.push(x2.dimensions.depth);
+      position2.map((position: PositionModel, index: any) => {
+        this.rackSegmentation(position, index);
       });
 
-      const result3: any = [];
-      a3.forEach((x3: any) => {
-        result3.push(x3.dimensions.length);
-        result3.push(x3.dimensions.width);
-        result3.push(x3.dimensions.depth);
+      position3.map((position: PositionModel, index: any) => {
+        this.rackSegmentation(position, index);
       });
     });
+  }
+
+  rackSegmentation(position: PositionModel, index: any) {
+    this.rackDetailOne, this.rackDetailTwo, (this.rackDetailThree = {});
+    if (index + 1 == 1) {
+      this.rackDetailOne = {
+        rackOne: position.dimensions.length,
+        rackTwo: position.dimensions.width,
+        rackThree: position.dimensions.depth,
+      };
+    }
+    if (index + 1 == 2) {
+      this.rackDetailTwo = {
+        rackFour: position.dimensions.length,
+        rackFive: position.dimensions.width,
+        rackSix: position.dimensions.depth,
+      };
+    }
+    if (index + 1 == 3) {
+      this.rackDetailThree = {
+        rackSeven: position.dimensions.length,
+        rackEight: position.dimensions.width,
+        rackNine: position.dimensions.depth,
+      };
+    }
+    if (
+      !!Object.values(this.rackDetailOne).length &&
+      !!Object.values(this.rackDetailTwo).length &&
+      !!Object.values(this.rackDetailThree).length
+    ) {
+      this.racks.push(
+        Object.assign(
+          this.rackDetailOne,
+          this.rackDetailTwo,
+          this.rackDetailThree
+        )
+      );
+    }
   }
 
   handleOnNavigate(url: String) {
