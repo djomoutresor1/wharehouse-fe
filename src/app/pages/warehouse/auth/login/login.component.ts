@@ -11,6 +11,15 @@ import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 
+
+const fakeProfil =   
+{
+  fullName: 'Mario Rossi',
+  userName: 'admin',
+  email: 'mario.rossi@hotmail.fr',
+  password: 'Qwerty84.'
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,6 +32,7 @@ export class LoginComponent implements OnInit {
   isAuth: boolean = false;
   alertType: string = '';
   messageAlert: string = '';
+  
 
   constructor(private fb: FormBuilder, private router: Router) {}
 
@@ -40,17 +50,24 @@ export class LoginComponent implements OnInit {
     // login From Localstorage
     let data = JSON.parse(localStorage.getItem('formData') || 'null');
 
-    if (
-      (user == data?.userName && passId == data?.password) ||
-      (user === 'admin' && passId === 'Qwerty84.')
-    ) {
+    if ((user == data?.userName && passId == data?.password)) {
       this.isAuth = true;
       this.getRegisterOrNot();
       setTimeout(() => {
         (this.isAuth = false),
           this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
       }, 1000);
-    } else {
+    } else 
+    if((user === 'admin' && passId === 'Qwerty84.')){
+      this.isAuth = true;
+      localStorage.setItem('formData', JSON.stringify(fakeProfil));
+      this.getRegisterOrNot();
+      setTimeout(() => {
+        (this.isAuth = false),
+          this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+      }, 1000);
+    }
+    else {
       this.isAuth = true;
       this.getRegisterOrNot();
       setTimeout(() => {
@@ -79,6 +96,7 @@ export class LoginComponent implements OnInit {
       this.messageAlert = 'login failed!';
     }
   }
+
 
   updateConfirmValidator() {}
 
