@@ -14,9 +14,14 @@ export class ProfileComponent implements OnInit {
   constructor(public profilService: ProfilService) {}
 
   ngOnInit(): void {
-    //let myArray: Person[] = [];
+
     this.profilData = this.profilService.getDataProfil();
     this.myArray.push(this.profilData);
     console.log('profilData: ', this.myArray);
+  }
+
+
+  hashPassword(password: string){
+    return "*".repeat(password.length)
   }
 }

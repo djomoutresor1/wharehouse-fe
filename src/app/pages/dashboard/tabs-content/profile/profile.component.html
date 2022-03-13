@@ -12,10 +12,8 @@
       <td>{{data.fullName}}</td>
       <td>{{data.userName}}</td>
       <td>{{data.email}}</td>
-      <td>{{data.password}}</td>
+      <td>{{hashPassword(data.password)}}</td>
       <td>
-        <a>Action 一 {{data.email}}</a>
-        <nz-divider nzType="vertical"></nz-divider>
         <a>Action</a>
       </td>
     </tr>
