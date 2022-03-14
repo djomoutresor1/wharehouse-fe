@@ -4,9 +4,10 @@
         <a>Dashboard</a>
     </nz-breadcrumb-item>
     <nz-breadcrumb-item>rack</nz-breadcrumb-item>
-    <nz-breadcrumb-item>{{rackName}}</nz-breadcrumb-item>
+    <nz-breadcrumb-item class="onPointer" nz-button nz-popover nzType="primary" nzPopoverPlacement="top" nzPopoverContent={{message}}{{rackName.toLocaleUpperCase()}}  (click)="handleOnRack(rackName)">{{rackName}}</nz-breadcrumb-item>
     <nz-breadcrumb-item>{{rackNumber}}</nz-breadcrumb-item>
 </nz-breadcrumb>
 <p>
     <rackTable *ngIf="!!racks.length" [racks]="racks"></rackTable> rack:{{rackName}} ,number:{{rackNumber}}
 </p>
+

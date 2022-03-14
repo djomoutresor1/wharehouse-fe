@@ -18,6 +18,8 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
@@ -59,7 +61,9 @@ const icons = [
     NzAvatarModule,
     NzModalModule,
     NzSwitchModule,
-    NzTableModule
+    NzTableModule,
+    NzPopconfirmModule ,
+    NzPopoverModule
   ],
   exports: [
     NzButtonModule,
@@ -80,7 +84,9 @@ const icons = [
     NzAvatarModule,
     NzModalModule,
     NzSwitchModule,
-    NzTableModule
+    NzTableModule,
+    NzPopconfirmModule ,
+    NzPopoverModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })

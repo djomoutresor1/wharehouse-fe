@@ -13,6 +13,10 @@ import { Pages } from '../../enums/pages-enums';
 export class VerticalLaneComponent implements OnInit {
   @Input() lane: LaneModel = { rows: [], name: '' };
 
+  goToLane:string ='click and go to Lane(Corsia)  ';
+  number:string ='  rack number  '
+  
+
   constructor(private route: ActivatedRoute, private router: Router) {
   }
 
@@ -24,5 +28,12 @@ export class VerticalLaneComponent implements OnInit {
       relativeTo: this.route,
     });
     console.log('rackNumber: ',rack.row)
+  }
+
+  onSelectedLaneName(laneName: string){
+    
+    this.router.navigate([`${Pages.GLOBAL_RACK}/${laneName.toLocaleUpperCase()}`], {
+      relativeTo: this.route,
+    });
   }
 }

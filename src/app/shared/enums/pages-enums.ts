@@ -9,5 +9,6 @@ export enum Pages {
   SETTINGS = 'settings',
   ERROR = "error-404",
   RACK = "rack",
+  GLOBAL_RACK = "corsia",
   FORGOTPASSWORD = "forgottenPassword"
 }
