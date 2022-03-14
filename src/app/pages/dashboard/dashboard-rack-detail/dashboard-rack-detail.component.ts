@@ -23,6 +23,7 @@ export class DashboardRackDetailComponent implements OnInit {
   rackDetailThree: RackModel = {};
   resultRackName: RowModel[] = [];
   shelves: any;
+  message:string ='by clicking wou will go to Lane(corsia)  '
 
   constructor(
     private router: Router,
@@ -115,4 +116,10 @@ export class DashboardRackDetailComponent implements OnInit {
   handleOnNavigate(url: String) {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
   }
+
+
+  handleOnRack(url: String) {
+    this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
+  }
+
 }

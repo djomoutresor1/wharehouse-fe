@@ -14,6 +14,9 @@ export class HorizontalLaneComponent implements OnInit {
   
   @Input() lane: LaneModel = { rows: [], name: '' };
 
+  goToLane:string ='click and go to Lane(Corsia)  ';
+  number:string ='  rack number  '
+
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {}

@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
     this.nzModalService.confirm({
       nzTitle: '<h4>Confirmation Cancel Profil</h4>',
       nzContent:
-        '<p>cancelled you will turn back to login page...are you sure to cancel?</p>',
+        '<p>cancelling you will turn back to login page...are you sure to cancel?</p>',
       nzCancelText: 'Back',
       nzOkText: 'Cancel definitively',
       nzOnOk: () => {
