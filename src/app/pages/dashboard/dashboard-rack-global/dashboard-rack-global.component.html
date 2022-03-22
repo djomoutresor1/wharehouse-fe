@@ -15,16 +15,18 @@
             <th colspan="4">Genere d'articoli per Ripiano</th>
         </tr>
         <tr>
-            <th *ngFor="let ripiano of rackTable">RIPIANO {{ripiano.shelf}}</th>
+            <th *ngFor="let ripiano of resultCategorie">RIPIANO {{ripiano}}</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let a of corsiaTable">
-            <td class="table-secondary">{{a.row}}</td>
-            <td>{{a.rows.shelves.shelf}}</td>
-            <td>{{a.rows.shelves.shelf}}</td>
-            <td>{{a.rows.shelves.shelf}}</td>
-            <td>{{a.rows.shelves.shelf}}</td>
+        <tr *ngFor="let a of resultCategories ; index as i">
+            <td class="table-secondary">{{i+1}}</td>
+            <td>{{a.shelf[0].tipologie}}</td>
+            <td>{{a.shelf[0].tipologie}}</td>
+            <td>{{a.shelf[0].tipologie}}</td>
+            <td>{{a.shelf[0].tipologie}}</td>
         </tr>
     </tbody>
 </table>
+
+

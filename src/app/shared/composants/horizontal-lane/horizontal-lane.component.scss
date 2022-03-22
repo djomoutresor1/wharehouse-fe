@@ -1,5 +1,8 @@
 .warehouse-horizontal {
   margin-top: 20px;
+  .box-name{
+    .laneName{
+    cursor: pointer;}}
   .box-racks {
     display: flex;
     .size {
@@ -10,6 +13,7 @@
       border-radius: var(--warehouse-border-radius-one);
       box-shadow: var(--warehouse-box-shadow);
       display: grid;
+      cursor: pointer;
       &:hover {
         box-shadow: none;
         //transition: var(--warehouse-transition);
