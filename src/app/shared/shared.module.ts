@@ -6,6 +6,7 @@ import { AlertComponent } from './composants/alert/alert.component';
 import { ErrorPageComponent } from './composants/error-page/error-page.component';
 import { HorizontalLaneComponent } from './composants/horizontal-lane/horizontal-lane.component';
 import { VerticalLaneComponent } from './composants/vertical-lane/vertical-lane.component';
+import { IconsComponent } from './composants/icons/icons.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { VerticalLaneComponent } from './composants/vertical-lane/vertical-lane.
     HorizontalLaneComponent,
     ErrorPageComponent,
     AlertComponent,
+ //   IconsComponent,
   ],
   imports: [
     CommonModule,

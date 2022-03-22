@@ -44,7 +44,7 @@ export class DashboardRackDetailComponent implements OnInit {
           );
         }
       });
-      console.log(this.resultRackName);
+      console.log("resultRackName: ",this.resultRackName);
 
       this.shelves = this.resultRackName[0]?.shelves;
       let position0 = this.shelves[0]?.positions;
@@ -119,7 +119,7 @@ export class DashboardRackDetailComponent implements OnInit {
 
 
   handleOnRack(url: String) {
-    this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.GLOBAL_RACK}/${url.toLocaleUpperCase()}`]);
   }
 
 }
