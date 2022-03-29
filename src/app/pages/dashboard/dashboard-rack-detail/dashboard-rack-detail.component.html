@@ -8,6 +8,6 @@
     <nz-breadcrumb-item>{{rackNumber}}</nz-breadcrumb-item>
 </nz-breadcrumb>
 <p>
-    <rackTable *ngIf="!!racks.length" [racks]="racks"></rackTable> rack:{{rackName}} ,number:{{rackNumber}}
+    <rackTable *ngIf="!!racks.length" [racks]="racks"></rackTable> rack:{{rackName.toLocaleUpperCase()}} ,number:{{rackNumber}}
 </p>
 
