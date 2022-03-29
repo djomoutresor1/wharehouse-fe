@@ -6,7 +6,9 @@ import { AlertComponent } from './composants/alert/alert.component';
 import { ErrorPageComponent } from './composants/error-page/error-page.component';
 import { HorizontalLaneComponent } from './composants/horizontal-lane/horizontal-lane.component';
 import { VerticalLaneComponent } from './composants/vertical-lane/vertical-lane.component';
-import { IconsComponent } from './composants/icons/icons.component';
+import {FontAwesomeModule,FaIconComponent, FaDuotoneIconComponent,} from '@fortawesome/angular-fontawesome';
+import { FontawesomeComponent } from './composants/fontawesome/fontawesome.component';
+
 
 
 @NgModule({
@@ -15,14 +17,17 @@ import { IconsComponent } from './composants/icons/icons.component';
     HorizontalLaneComponent,
     ErrorPageComponent,
     AlertComponent,
- //   IconsComponent,
+    FontawesomeComponent
   ],
   imports: [
     CommonModule,
     AntDesignComponentsModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule
+
   ],
-  exports: [VerticalLaneComponent, HorizontalLaneComponent, ErrorPageComponent,AlertComponent],
+  entryComponents: [FaIconComponent,FaDuotoneIconComponent],
+  exports: [VerticalLaneComponent, HorizontalLaneComponent, ErrorPageComponent,AlertComponent,FontawesomeComponent,FaIconComponent,FaDuotoneIconComponent],
 })
 export class SharedModule {}
