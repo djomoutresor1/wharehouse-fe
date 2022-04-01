@@ -7,7 +7,8 @@
     <nz-breadcrumb-item class="onPointer" nz-button nz-popover nzType="primary" nzPopoverPlacement="top" nzPopoverContent={{message}}{{rackName.toLocaleUpperCase()}}  (click)="handleOnRack(rackName)">{{rackName.toLocaleUpperCase()}}</nz-breadcrumb-item>
     <nz-breadcrumb-item>{{rackNumber}}</nz-breadcrumb-item>
 </nz-breadcrumb>
+<p *ngIf="!racks.length"><loading [typeLoad]="'info'"></loading></p>
 <p>
-    <rackTable *ngIf="!!racks.length" [racks]="racks"></rackTable> rack:{{rackName.toLocaleUpperCase()}} ,number:{{rackNumber}}
+    <rackTable *ngIf="!!racks.length" [racks]="racks" [typeProduct]="categorieFinale"></rackTable> rack:{{rackName.toLocaleUpperCase()}} ,number:{{rackNumber}}
 </p>
 

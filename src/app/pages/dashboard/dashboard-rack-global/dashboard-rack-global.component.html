@@ -6,8 +6,7 @@
     <nz-breadcrumb-item>Global rack</nz-breadcrumb-item>
     <nz-breadcrumb-item>{{rackName}}</nz-breadcrumb-item>
 </nz-breadcrumb>
-
-
+<p *ngIf="!resultCategorie.length"><loading [typeLoad]="'info'"></loading></p>
 <table id="table-example-1" class="table table-bordered table-hover">
     <thead class="table-warning">
         <tr>

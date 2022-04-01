@@ -8,6 +8,7 @@ import { HorizontalLaneComponent } from './composants/horizontal-lane/horizontal
 import { VerticalLaneComponent } from './composants/vertical-lane/vertical-lane.component';
 import {FontAwesomeModule,FaIconComponent, FaDuotoneIconComponent,} from '@fortawesome/angular-fontawesome';
 import { FontawesomeComponent } from './composants/fontawesome/fontawesome.component';
+import { LoadingComponent } from './composants/loading/loading.component';
 
 
 
@@ -17,7 +18,8 @@ import { FontawesomeComponent } from './composants/fontawesome/fontawesome.compo
     HorizontalLaneComponent,
     ErrorPageComponent,
     AlertComponent,
-    FontawesomeComponent
+    FontawesomeComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,6 @@ import { FontawesomeComponent } from './composants/fontawesome/fontawesome.compo
 
   ],
   entryComponents: [FaIconComponent,FaDuotoneIconComponent],
-  exports: [VerticalLaneComponent, HorizontalLaneComponent, ErrorPageComponent,AlertComponent,FontawesomeComponent,FaIconComponent,FaDuotoneIconComponent],
+  exports: [VerticalLaneComponent, HorizontalLaneComponent, ErrorPageComponent,AlertComponent,FontawesomeComponent,FaIconComponent,FaDuotoneIconComponent,LoadingComponent],
 })
 export class SharedModule {}

@@ -9,6 +9,7 @@ import { RackModel } from 'src/model/rack/rack-model';
 })
 export class RackTableComponent implements OnInit {
   @Input() racks: RackModel[] = [];
+  @Input() typeProduct: String = " ";
 
   rackFormat: RackModel[] = [];
   constructor() {}
