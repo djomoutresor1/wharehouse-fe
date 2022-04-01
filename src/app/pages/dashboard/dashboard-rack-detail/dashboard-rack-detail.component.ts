@@ -8,6 +8,10 @@ import { RowModel } from 'src/model/corsia/row-model';
 import { TableService } from 'src/app/services/table.service';
 import { PositionModel } from 'src/model/corsia/position-model';
 import { RackModel } from 'src/model/rack/rack-model';
+import { CategoriesService } from 'src/app/services/categories.service';
+import { CategorieModel } from 'src/model/categories/categorie-model';
+import { RowCategoriesModel } from 'src/model/categories/rowCategories-model';
+
 
 @Component({
   selector: 'app-dashboard-rack-detail',
@@ -18,23 +22,53 @@ export class DashboardRackDetailComponent implements OnInit {
   rackName: any;
   rackNumber: any;
   racks: RackModel[] = [];
+  typeProduct:String=" ";
   rackDetailOne: RackModel = {};
   rackDetailTwo: RackModel = {};
   rackDetailThree: RackModel = {};
   resultRackName: RowModel[] = [];
   shelves: any;
-  message:string ='by clicking wou will go to Lane(corsia)  '
+  categories: any;
+  resultCategorie = ['1','2','3','4'];
+  resultCategories: any;
+  categorieFinale:any;
+  message:string ='by clicking wou will go to Lane(corsia)  ';
+  info: String='info';
+  messageType: any;
+  description:any;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private tableService: TableService
+    private tableService: TableService,
+    private categoriesService:CategoriesService
   ) {
     this.rackName = this.route.snapshot.paramMap.get(PathParams.RACK_NAME);
     this.rackNumber = this.route.snapshot.paramMap.get(PathParams.RACK_NUMBER);
   }
 
   ngOnInit(): void {
+
+    this.categoriesService.getDataGlobalTable().subscribe((response) => {
+      console.log('categoriesclothers: ', response.categories);
+      response.categories.map((categories: CategorieModel) => {
+        if (categories.name === this.rackName.toLocaleUpperCase()) {
+          this.resultCategories = categories.rows.filter(
+            (row) => row.shelf.toString());
+          console.log('resultCategoriesclothers: ', this.resultCategories);
+          this.categories = this.resultCategories.map((element:RowCategoriesModel) => {
+            console.log("element finale clothers: ",element.shelf[0].tipologie)
+            if(this.rackNumber=== this.categories.row){
+              this.categorieFinale = element.shelf[0].tipologie
+            }
+
+          });
+        }
+
+      })
+
+    })
+
     this.tableService.getDataTable().subscribe((response) => {
       console.log('response2: ', response.lanes);
       response.lanes.map((lane: LaneModel) => {
@@ -73,6 +107,7 @@ export class DashboardRackDetailComponent implements OnInit {
         this.rackSegmentation(position, index);
       });
     });
+    
   }
 
   rackSegmentation(position: PositionModel, index: any) {

@@ -24,6 +24,7 @@ export class DashboardRackGlobalComponent implements OnInit {
   faBroom:any;
 
 
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
