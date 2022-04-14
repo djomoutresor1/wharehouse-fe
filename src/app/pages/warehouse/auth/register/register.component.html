@@ -35,6 +35,13 @@
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
+                    <nz-form-control nzErrorTip="Please input your role!">
+                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a role" formControlName="role" [(ngModel)]="selectedValue" (ngModelChange)="roleChoice($event)">
+                            <nz-option *ngFor="let roles of rolesList" [nzValue]="roles" [nzLabel]="roles.label"></nz-option>
+                          </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
                     <nz-form-control nzErrorTip="Please input your Password!">
                         <nz-input-group nzPrefixIcon="lock" [nzSuffix]="passwordTemplate">
                             <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password"

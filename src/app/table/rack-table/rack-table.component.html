@@ -22,7 +22,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let rack of racks; index as i">
-      <td class="table-secondary">{{typeProduct}} {{i+1}}</td>
+      <td class="table-secondary">{{typeProduct}}</td>
       <td>{{i+1}}</td>
       <td>{{rack.rackOne}}</td>
       <td>{{rack.rackTwo}}</td>
@@ -36,3 +36,5 @@
     </tr>
   </tbody>
 </table>
+
+<fontawesome [iconType]="iconValues('{{typeProduct}}')"></fontawesome>

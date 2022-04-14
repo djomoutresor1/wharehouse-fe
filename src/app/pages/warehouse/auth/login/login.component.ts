@@ -98,8 +98,6 @@ export class LoginComponent implements OnInit {
   }
 
 
-  updateConfirmValidator() {}
-
   getCaptcha() {}
 
   confirmationValidator() {}

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppComponent } from 'src/app/app.component';
+import { DashboardHomeComponent } from 'src/app/pages/dashboard/dashboard-home/dashboard-home.component';
+import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { LaneModel } from 'src/model/corsia/lane-model';
 import { RowModel } from 'src/model/corsia/row-model';
 import { Pages } from '../../enums/pages-enums';
@@ -14,13 +16,17 @@ export class VerticalLaneComponent implements OnInit {
   @Input() lane: LaneModel = { rows: [], name: '' };
 
   goToLane:string ='click and go to Lane(Corsia)  ';
-  number:string ='  rack number  '
-  
+  number:string ='  rack number  ';
+  empty:boolean=false;
+  myCompOneObj:any
+
 
   constructor(private route: ActivatedRoute, private router: Router) {
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
 
   onSelectedLane(rack: RowModel, laneName: string) {
 
@@ -36,4 +42,5 @@ export class VerticalLaneComponent implements OnInit {
       relativeTo: this.route,
     });
   }
+
 }

@@ -12,18 +12,39 @@ import { LaneModel } from 'src/model/corsia/lane-model';
 export class DashboardHomeComponent implements OnInit {
   lanes: LaneModel[] = [];
   lastLane: any;
+  
+  
 
   constructor(private dashboardService: DashboardService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     this.dashboardService.getDashboard().subscribe(
       (response) => {
         this.lanes = response.lanes.slice(0, 14);
         this.lastLane = response.lanes.slice(-1)[0];
+        this.remapLanes(response)
       },
       (error: HttpErrorResponse) => {
         console.log('error: ', error);
       }
-    );
+    );    
   }
+
+  remapLanes(response: { lanes: { rows: any[]; }[]; }){
+      const newLanes =response.lanes.map((lane: { rows: any[]; }) =>{
+        return{...lane,rows:lane.rows.map((row)=>{
+            const isEditable = row.shelves.some((shelve: { positions: any[]; })=>{
+                return shelve.positions.some((value:any) =>
+                  !value.dimensions ||
+                  !value.dimensions.length||
+                  !value.dimensions.depth||
+                  !value.dimensions.width);
+            });
+            return { ...row, isEditable};
+          })
+        }
+      })
+  }
+
+
 }
