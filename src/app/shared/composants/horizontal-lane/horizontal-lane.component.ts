@@ -13,6 +13,8 @@ import { Pages } from '../../enums/pages-enums';
 export class HorizontalLaneComponent implements OnInit {
   
   @Input() lane: LaneModel = { rows: [], name: '' };
+  @Input() freeBox: boolean = false;
+
 
   goToLane:string ='click and go to Lane(Corsia)  ';
   number:string ='  rack number  '

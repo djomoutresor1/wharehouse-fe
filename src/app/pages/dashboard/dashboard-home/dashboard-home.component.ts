@@ -30,7 +30,12 @@ export class DashboardHomeComponent implements OnInit {
     );    
   }
 
+  checkAdult(age:any) {
+    return age > 18;
+  }
+
   remapLanes(response: { lanes: { rows: any[]; }[]; }){
+    debugger
       const newLanes =response.lanes.map((lane: { rows: any[]; }) =>{
         return{...lane,rows:lane.rows.map((row)=>{
             const isEditable = row.shelves.some((shelve: { positions: any[]; })=>{
@@ -40,11 +45,14 @@ export class DashboardHomeComponent implements OnInit {
                   !value.dimensions.depth||
                   !value.dimensions.width);
             });
-            return { ...row, isEditable};
+            return { ...row.shelves, isEditable};
           })
-        }
+        } 
       })
   }
+
+
+
 
 
 }
