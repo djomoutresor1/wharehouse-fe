@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProfilService } from 'src/app/services/profil.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 
@@ -18,8 +19,16 @@ export class RegisterComponent implements OnInit {
   isAuth: boolean = false;
   alertType: string = '';
   messageAlert: string = '';
+  role:string = ''
+  rolesList = [
+    { label: 'Admin', value: ['admin']},
+    { label: 'User', value: ['user']},
+    { label: 'Moderator', value: ['moderator']}
+  ];
+  selectedValue = { label: 'User', value: 'user'}
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+
+  constructor(private fb: FormBuilder, private router: Router,private profilService:ProfilService) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -28,7 +37,13 @@ export class RegisterComponent implements OnInit {
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required]],
       confirmPassword: [null, [Validators.required]],
+      role: [null, [Validators.required]],
     });
+  }
+
+  roleChoice(event:any): void {
+  this.role = event?.value; 
+  console.log("eventttt: ", this.role)
   }
 
   submitForm() {
@@ -38,7 +53,9 @@ export class RegisterComponent implements OnInit {
       userName: this.validateForm.controls['userName']?.value,
       email: this.validateForm.controls['email']?.value,
       password: this.validateForm.controls['password']?.value,
+      role: this.validateForm.controls['role']?.value.value,
     };
+  //  this.profilService.register(formData);
     localStorage.setItem('formData', JSON.stringify(formData));
     console.log('formData: ', formData);
     this.isAuth = true;

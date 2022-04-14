@@ -20,6 +20,6 @@ export class TableService {
       console.log('response: ', response);
       this.data = response.lanes;
       console.log('dataTable: ', response.lanes);
-    });
+    },(err)=>{ console.log("erunable to get data from urk " + err)});
   }
 }

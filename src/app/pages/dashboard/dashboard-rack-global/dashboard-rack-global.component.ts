@@ -7,6 +7,9 @@ import { CategorieModel } from 'src/model/categories/categorie-model';
 import { RowCategoriesModel } from 'src/model/categories/rowCategories-model';
 import { faAppleWhole, faBowlFood, faBroom, faCarBattery, faCat, faChildDress, faGamepad, faGift, faHouse, faPerson,faPlateWheat, faPumpSoap, faShirt, faShoePrints, faWineGlass } from '@fortawesome/free-solid-svg-icons';
 import {faEnvira, faWindows } from '@fortawesome/free-brands-svg-icons';
+import { FontawesomeComponent } from 'src/app/shared/composants/fontawesome/fontawesome.component';
+
+
 
 @Component({
   selector: 'app-dashboard-rack-global',
@@ -22,6 +25,7 @@ export class DashboardRackGlobalComponent implements OnInit {
   resultCategorie = ['1','2','3','4'];
   categorieFinale:any;
   faBroom:any;
+  b:any;
 
 
 

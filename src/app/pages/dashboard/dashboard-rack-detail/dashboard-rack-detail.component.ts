@@ -48,7 +48,6 @@ export class DashboardRackDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.categoriesService.getDataGlobalTable().subscribe((response) => {
       console.log('categoriesclothers: ', response.categories);
       response.categories.map((categories: CategorieModel) => {
@@ -61,7 +60,6 @@ export class DashboardRackDetailComponent implements OnInit {
             if(this.rackNumber=== this.categories.row){
               this.categorieFinale = element.shelf[0].tipologie
             }
-
           });
         }
 

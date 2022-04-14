@@ -31,6 +31,7 @@ import {
   MailOutline,
 } from '@ant-design/icons-angular/icons';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 const icons = [
   MenuFoldOutline,
@@ -65,7 +66,8 @@ const icons = [
     NzTableModule,
     NzPopconfirmModule ,
     NzPopoverModule,
-    NzSpinModule
+    NzSpinModule,
+    NzSelectModule
   ],
   exports: [
     NzButtonModule,
@@ -89,7 +91,8 @@ const icons = [
     NzTableModule,
     NzPopconfirmModule ,
     NzPopoverModule,
-    NzSpinModule
+    NzSpinModule,
+    NzSelectModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })
