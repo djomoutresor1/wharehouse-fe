@@ -2,9 +2,11 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { Utils } from "src/app/shared/enums/utils-enums";
+
 export const environment = {
   production: false,
-  apiBaseUrl: "http://localhost:9195"
+  apiBaseUrl: `http://localhost:9195${Utils.WAREHOUSE_ROOT_ENDPOINT}`
 };
 
 /*
