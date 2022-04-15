@@ -1,12 +1,12 @@
 <div class="warehouse-auth-wrapper container">
     <div class="row">
-        <div class="col">
+        <div class="col text-center">
             <h2 nz-typography>Register Page</h2>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4 offset-md-4">
-            <div class="row">
+            <div class="row text-center">
                 <div class="col" *ngIf="isAuth">
                     <alert [typeAlert]="alertType" [MessageTest]="messageAlert">
                     </alert>
@@ -14,38 +14,53 @@
             </div>
             <form nz-form [formGroup]="validateForm" class="register-form" (ngSubmit)="submitForm()">
                 <nz-form-item>
-                    <nz-form-control nzErrorTip="Please input your fullname!">
+                    <nz-form-control nzErrorTip="Your fullname is required">
                         <nz-input-group nzPrefixIcon="user">
-                            <input type="text" nz-input formControlName="fullName" placeholder="First and last name" />
+                            <input type="text" nz-input formControlName="fullName" placeholder="First and last name"
+                                (click)="handleOnChangeInput()" />
                         </nz-input-group>
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
-                    <nz-form-control nzErrorTip="Please input your username!">
+                    <nz-form-control nzErrorTip="Your userName is required">
                         <nz-input-group nzPrefixIcon="user">
-                            <input type="text" nz-input formControlName="userName" placeholder="Username" />
+                            <input type="text" nz-input formControlName="userName" placeholder="Username"
+                                (click)="handleOnChangeInput()" />
                         </nz-input-group>
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
-                    <nz-form-control nzErrorTip="Please input your email!">
+                    <nz-form-control nzErrorTip="Your email is required">
                         <nz-input-group nzPrefixIcon="mail">
-                            <input type="email" nz-input formControlName="email" placeholder="Email" />
+                            <input type="email" nz-input formControlName="email" placeholder="Email"
+                                (click)="handleOnChangeInput()" />
                         </nz-input-group>
                     </nz-form-control>
                 </nz-form-item>
-                <nz-form-item>
-                    <nz-form-control nzErrorTip="Please input your role!">
-                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a role" formControlName="role" [(ngModel)]="selectedValue" (ngModelChange)="roleChoice($event)">
-                            <nz-option *ngFor="let roles of rolesList" [nzValue]="roles" [nzLabel]="roles.label"></nz-option>
-                          </nz-select>
+                <nz-form-item *ngIf="!!rolesList?.length">
+                    <nz-form-control nzErrorTip="Please select your role">
+                        <!-- <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a role" formControlName="role"
+                            [(ngModel)]="selectedValue" (ngModelChange)="roleChoice($event)">
+                            <nz-option *ngFor="let role of rolesList" [nzValue]="role" [nzLabel]="role.label">
+                            </nz-option>
+                        </nz-select> -->
+                        <nz-select nzAllowClear nzPlaceHolder="Select a role" nzMode="multiple" formControlName="role"
+                            [nzCustomTemplate]="multipleTemplate">
+                            <nz-option *ngFor="let role of rolesList" [nzValue]="role.value" [nzLabel]="role.label">
+                            </nz-option>
+                        </nz-select>
+                        <ng-template #multipleTemplate let-selected>
+                            <div class="ant-select-selection-item-content">
+                                {{ selected.nzLabel }}
+                            </div>
+                        </ng-template>
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
-                    <nz-form-control nzErrorTip="Please input your Password!">
+                    <nz-form-control nzErrorTip="Your password is required">
                         <nz-input-group nzPrefixIcon="lock" [nzSuffix]="passwordTemplate">
                             <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password"
-                                placeholder="Password" />
+                                placeholder="Password" (click)="handleOnChangeInput()" />
                         </nz-input-group>
                         <ng-template #passwordTemplate>
                             <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
@@ -54,10 +69,11 @@
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
-                    <nz-form-control nzErrorTip="Please input your Confirm Password!">
+                    <nz-form-control nzErrorTip="Please confirm your password">
                         <nz-input-group nzPrefixIcon="lock" [nzSuffix]="confirmPasswordTemplate">
                             <input [type]="confirmPasswordVisible ? 'text' : 'password'" nz-input
-                                formControlName="confirmPassword" placeholder="Confirm password" />
+                                formControlName="confirmPassword" placeholder="Confirm password"
+                                (click)="handleOnChangeInput()" />
                         </nz-input-group>
                         <ng-template #confirmPasswordTemplate>
                             <i nz-icon [nzType]="confirmPasswordVisible ? 'eye-invisible' : 'eye'"

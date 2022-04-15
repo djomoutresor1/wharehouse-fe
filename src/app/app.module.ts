@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CommonInterceptor } from './services/common.interceptor';
 import { ProfilService } from './services/profil.service';
+import { AuthentificationService } from './services/authentification.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,13 +26,16 @@ import { ProfilService } from './services/profil.service';
     AntDesignComponentsModule,
     SharedModule,
   ],
-  providers: [DashboardService,
-    ProfilService, 
+  providers: [
+    AuthentificationService,
+    DashboardService,
+    ProfilService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CommonInterceptor,
-      multi: true
-    }],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
