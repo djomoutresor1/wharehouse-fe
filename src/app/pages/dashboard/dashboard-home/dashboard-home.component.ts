@@ -30,22 +30,25 @@ export class DashboardHomeComponent implements OnInit {
     );    
   }
 
-  checkAdult(age:any) {
-    return age > 18;
+  checkAdult(value:number) {
+   if(value){
+     return true
+   }
+   return false
   }
 
+
+  //pour controller s'il existe au moins une valeur null dans le tableau
   remapLanes(response: { lanes: { rows: any[]; }[]; }){
-    debugger
       const newLanes =response.lanes.map((lane: { rows: any[]; }) =>{
         return{...lane,rows:lane.rows.map((row)=>{
-            const isEditable = row.shelves.some((shelve: { positions: any[]; })=>{
-                return shelve.positions.some((value:any) =>
-                  !value.dimensions ||
-                  !value.dimensions.length||
-                  !value.dimensions.depth||
-                  !value.dimensions.width);
-            });
-            return { ...row.shelves, isEditable};
+            const isEditable = row.shelves.find((shelve: { positions: any[]; })=>{
+                return shelve.positions.some((values:any) =>
+                  (values.dimensions)>0 ||
+                  (values.dimensions.length)>0||
+                  (values.dimensions.depth)>0||
+                  (values.dimensions.width)>0)
+            });            return  this.checkAdult(isEditable.shelf);
           })
         } 
       })
