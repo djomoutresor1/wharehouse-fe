@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProfilService } from 'src/app/services/profil.service';
+import { AuthentificationService } from 'src/app/services/authentification.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 
@@ -19,21 +19,30 @@ export class RegisterComponent implements OnInit {
   isAuth: boolean = false;
   alertType: string = '';
   messageAlert: string = '';
-  role:string = ''
+  role: string = '';
   rolesList = [
-    { label: 'Admin', value: ['admin']},
-    { label: 'User', value: ['user']},
-    { label: 'Moderator', value: ['moderator']}
+    { label: 'Admin', value: 'admin' },
+    { label: 'User', value: 'user' },
+    { label: 'Moderator', value: 'moderator' },
   ];
-  selectedValue = { label: 'User', value: 'user'}
+  selectedValue = { label: 'User', value: 'user' };
 
-
-  constructor(private fb: FormBuilder, private router: Router,private profilService:ProfilService) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authentificationService: AuthentificationService
+  ) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      fullName: [null, [Validators.required, Validators.min(5), Validators.max(25)]],
-      userName: [null, [Validators.required, Validators.min(5), Validators.max(15)]],
+      fullName: [
+        null,
+        [Validators.required, Validators.min(5), Validators.max(25)],
+      ],
+      userName: [
+        null,
+        [Validators.required, Validators.min(5), Validators.max(15)],
+      ],
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required]],
       confirmPassword: [null, [Validators.required]],
@@ -41,26 +50,48 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  roleChoice(event:any): void {
-  this.role = event?.value; 
-  console.log("eventttt: ", this.role)
+  roleChoice(event: any): void {
+    this.role = event?.value;
+    console.log('eventttt: ', this.role);
   }
 
   submitForm() {
     // console.log(this.validateForm.controls);
-    let formData = {
-      fullName: this.validateForm.controls['fullName']?.value,
-      userName: this.validateForm.controls['userName']?.value,
-      email: this.validateForm.controls['email']?.value,
-      password: this.validateForm.controls['password']?.value,
-      role: this.validateForm.controls['role']?.value.value,
-    };
-  //  this.profilService.register(formData);
-    localStorage.setItem('formData', JSON.stringify(formData));
-    console.log('formData: ', formData);
+    // Verify the password and confirm password
+    let password = this.validateForm.controls['password']?.value;
+    let confirmPassword = this.validateForm.controls['confirmPassword']?.value;
+    if (confirmPassword !== password) {
+      let message = "Password and confirm password don't match. Try again.";
+      this.errorAlertType(message);
+    } else {
+      let formData = {
+        fullname: this.validateForm.controls['fullName']?.value,
+        username: this.validateForm.controls['userName']?.value,
+        email: this.validateForm.controls['email']?.value,
+        password: this.validateForm.controls['password']?.value,
+        role: this.validateForm.controls['role']?.value, // this.role is string, convert to array of string
+      };
+      this.authentificationService.userRegister(formData).subscribe(
+        (response) => {
+          this.successAlertType(response?.message);
+        },
+        (error) => {
+          this.errorAlertType(error.error.message);
+        }
+      );
+    }
+  }
+
+  errorAlertType(message: string): void {
+    this.isAuth = true;
+    this.alertType = AlertType.ALERT_ERROR;
+    this.messageAlert = message;
+  }
+
+  successAlertType(message: string): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
-    this.messageAlert = 'successful registered!';
+    this.messageAlert = message;
     setTimeout(() => {
       this.isAuth = false;
       this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
@@ -69,5 +100,13 @@ export class RegisterComponent implements OnInit {
 
   handleOnLogin() {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+  }
+
+  handleOnChangeInput() {
+    // If the alert incorrect password is opened,
+    // when the user point the password/confirm password, the alert disappear.
+    if (this.isAuth) {
+      this.isAuth = !this.isAuth;
+    }
   }
 }
