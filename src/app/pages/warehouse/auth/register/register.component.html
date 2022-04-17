@@ -6,10 +6,10 @@
     </div>
     <div class="row">
         <div class="col-md-4 offset-md-4">
-            <div class="row text-center">
+            <div class="row">
                 <div class="col" *ngIf="isAuth">
-                    <alert [typeAlert]="alertType" [MessageTest]="messageAlert">
-                    </alert>
+                    <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
+                    </warehouse-alert>
                 </div>
             </div>
             <form nz-form [formGroup]="validateForm" class="register-form" (ngSubmit)="submitForm()">

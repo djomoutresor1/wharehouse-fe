@@ -10,9 +10,11 @@ import { DashboardService } from './services/dashboard.service';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CommonInterceptor } from './services/common.interceptor';
+import { CommonInterceptor } from './shared/interceptors/common.interceptor';
 import { ProfilService } from './services/profil.service';
-import { AuthentificationService } from './services/authentification.service';
+import { AuthentificationService } from './services/auth/authentification.service';
+import { WarehouseLocalStorage } from './utils/warehouse-local-storage';
+import { AuthorizationService } from './services/auth/authorization.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +30,8 @@ import { AuthentificationService } from './services/authentification.service';
   ],
   providers: [
     AuthentificationService,
+    AuthorizationService,
+    WarehouseLocalStorage,
     DashboardService,
     ProfilService,
     {

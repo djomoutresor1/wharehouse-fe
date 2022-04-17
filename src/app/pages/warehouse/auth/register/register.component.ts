@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthentificationService } from 'src/app/services/authentification.service';
+import { AuthentificationService } from 'src/app/services/auth/authentification.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
+import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
 
 @Component({
   selector: 'app-register',
@@ -64,15 +65,15 @@ export class RegisterComponent implements OnInit {
       let message = "Password and confirm password don't match. Try again.";
       this.errorAlertType(message);
     } else {
-      let formData = {
+      let userData = {
         fullname: this.validateForm.controls['fullName']?.value,
         username: this.validateForm.controls['userName']?.value,
         email: this.validateForm.controls['email']?.value,
         password: this.validateForm.controls['password']?.value,
-        role: this.validateForm.controls['role']?.value, // this.role is string, convert to array of string
+        role: this.validateForm.controls['role']?.value,
       };
-      this.authentificationService.userRegister(formData).subscribe(
-        (response) => {
+      this.authentificationService.userRegister(userData).subscribe(
+        (response: ResponseRegisterModel) => {
           this.successAlertType(response?.message);
         },
         (error) => {
