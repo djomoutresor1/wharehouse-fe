@@ -14,3 +14,10 @@
 .ant-layout-sider {
   //background: inherit !important;
 }
+
+.ant-input-prefix,
+.ant-input-suffix {
+  justify-content: center !important;
+  align-items: flex-end !important;
+  display: flex !important;
+}

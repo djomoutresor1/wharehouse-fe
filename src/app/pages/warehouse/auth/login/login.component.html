@@ -1,6 +1,6 @@
 <div class="warehouse-auth-wrapper container">
   <div class="row">
-    <div class="col">
+    <div class="col text-center">
       <h2 nz-typography>Login Page</h2>
     </div>
   </div>
@@ -8,23 +8,24 @@
     <div class="col-md-4 offset-md-4">
       <div class="row">
         <div class="col" *ngIf="isAuth">
-          <alert [typeAlert]="alertType" [MessageTest]="messageAlert">
-          </alert>
+          <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
+          </warehouse-alert>
         </div>
       </div>
       <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
         <nz-form-item>
-          <nz-form-control nzErrorTip="Please input your username!">
+          <nz-form-control nzErrorTip="Your username/email is required">
             <nz-input-group nzPrefixIcon="user">
-              <input type="text" nz-input formControlName="userName" placeholder="Username" />
+              <input type="text" nz-input formControlName="userName" placeholder="Username or Email"
+                (click)="handleOnChangeInput()" />
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-control nzErrorTip="Please input your Password!">
+          <nz-form-control nzErrorTip="Your password required">
             <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate">
               <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password"
-                placeholder="Password" />
+                placeholder="Password" (click)="handleOnChangeInput()" />
             </nz-input-group>
             <ng-template #suffixTemplate>
               <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
@@ -39,7 +40,7 @@
             </label>
           </div>
           <div nz-col [nzSpan]="12">
-            <a class="login-form-forgot" (click)="forgotOnPassword()">Forgot password</a>
+            <a class="login-form-forgot" (click)="handleOnForgotPassword()">Forgot password</a>
           </div>
         </div>
         <button nz-button [disabled]="!validateForm.valid" nzBlock class="login-form-button login-form-margin"
@@ -47,6 +48,13 @@
         <nz-divider nzDashed nzText="New User ?"></nz-divider>
         <button nz-button nzType="default" (click)="handleOnRegister()" nzBlock>Register now!</button>
       </form>
+    </div>
+  </div>
+  <div class="row" *ngIf="isLogged">
+    <div class="col">
+      <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert"
+        [descriptionNotification]="descriptionAlert">
+      </warehouse-notification>
     </div>
   </div>
 </div>
