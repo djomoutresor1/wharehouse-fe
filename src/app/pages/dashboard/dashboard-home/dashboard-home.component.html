@@ -1,0 +1,22 @@
+<nz-breadcrumb>
+    <nz-breadcrumb-item>
+        <i nz-icon nzType="dashboard"></i>
+        <span>Dashboard</span>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+</nz-breadcrumb>
+<div class="container-fluid dashboard-home-wrapper">
+    <p *ngIf="!lanes.length"><loading [typeLoad]="'info'"></loading><p>
+    <div class="row" *ngIf="!!lanes.length">
+        <div class="col d-flex">
+            <div *ngFor="let lane of lanes" class="column">
+                <warehouse-vertical-lane [freeBox]="false" [lane]="lane"></warehouse-vertical-lane>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="lastLane">
+        <div class="col column">
+            <warehouse-horizontal-lane [freeBox]="false" [lane]="lastLane"></warehouse-horizontal-lane>
+        </div>
+    </div>
+</div>

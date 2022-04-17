@@ -1,15 +1,41 @@
-<div class="container">
-  <div class="row">
-    <div *ngFor="let lane of lanes" class="column">
-      <warehouse-vertical-lane [lane]="lane"></warehouse-vertical-lane>
-    </div>
-    <div class="class">
-      <warehouse-horizontal-lane [lane]="lastLane"></warehouse-horizontal-lane>
-    </div>
-  </div>
-</div>
-<!-- solo per visione -->
-<!-- <rackTable></rackTable>
-<corsiaTable></corsiaTable>
-<editTable></editTable> -->
-<router-outlet></router-outlet>
+<nz-layout>
+  <!-- <app-dashboard-sider [isCollapsed]="isCollapsed" (handleOnNotifyNavigation)="handleOnNavigate($event)">
+  </app-dashboard-sider> -->
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null"
+    [ngClass]="theme ? 'ant-layout-sider-dark' : 'ant-layout-sider-light'">
+    <div class="logo"></div>
+    <ul nz-menu [nzTheme]="theme ? 'dark' : 'light'" [nzMode]="mode ? 'vertical' : 'inline'">
+      <li nz-menu-item (click)="handleOnNavigate('dashboard')">
+        <i nz-icon nzType="dashboard"></i>
+        <span>Dashboard</span>
+      </li>
+      <li nz-submenu nzTitle="User" nzIcon="user">
+        <ul>
+          <li nz-menu-item>Tom</li>
+          <li nz-menu-item>Bill</li>
+          <li nz-menu-item>Alex</li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Team" nzIcon="team">
+        <ul>
+          <li nz-menu-item>Team 1</li>
+          <li nz-menu-item>Team 2</li>
+        </ul>
+      </li>
+      <li nz-menu-item>
+        <i nz-icon nzType="file"></i>
+        <span>File</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <app-dashboard-header [isCollapsed]="isCollapsed" (handleOnNotifyNavigation)="handleOnNavigate($event)"
+      (handleOnNotifyCollapsed)="handleOnCollapsed($event)">
+    </app-dashboard-header>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+    <nz-divider class="warehouse-background-sliver"></nz-divider>
+    <nz-footer>Warehouse ©2020 Implement By Angular</nz-footer>
+  </nz-layout>
+</nz-layout>

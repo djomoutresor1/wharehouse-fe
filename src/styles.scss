@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+@import "~assets/scss/warehouse"; /* Import all customize styles */
 @import "~ng-zorro-antd/style/index.min.css"; /* Import base styles */
+@import "~ng-zorro-antd/ng-zorro-antd.min.css";
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
+// body {
+//   height: 100%;
+//   width: 100%;
+//   background-image: url("/assets/images/warehouse.jpg");
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   background-position: center;
+// }

@@ -1,0 +1,23 @@
+<nz-breadcrumb>
+    <nz-breadcrumb-item (click)="handleOnNavigate('dashboard')">
+        <i nz-icon nzType="dashboard"></i>
+        <a>Dashboard</a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>Settings</nz-breadcrumb-item>
+</nz-breadcrumb>
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <h4>Change theme</h4>
+            <nz-divider class="warehouse-background-sliver"></nz-divider>
+            <nz-switch [(ngModel)]="theme" nzCheckedChildren="Dark" nzUnCheckedChildren="Light"
+                (ngModelChange)="handleOnChangeTheme($event)"></nz-switch>
+        </div>
+        <div class="col-md-6">
+            <h4>Change mode</h4>
+            <nz-divider class="warehouse-background-sliver"></nz-divider>
+            <nz-switch [(ngModel)]="mode" nzCheckedChildren="Vertical" nzUnCheckedChildren="Inline"
+                (ngModelChange)="handleOnChangeMode($event)"></nz-switch>
+        </div>
+    </div>
+</div>

@@ -6,13 +6,10 @@ import { AppComponent } from 'src/app/app.component';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent extends AppComponent implements OnInit {
+export class HeaderComponent implements OnInit {
 
-  constructor() {
-    super();
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

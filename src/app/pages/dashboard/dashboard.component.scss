@@ -1,0 +1,31 @@
+nz-content {
+  margin: 0 16px;
+}
+
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+.inner-content {
+  padding: 24px;
+  background: var(--warehouse-white);
+  min-height: 360px;
+}
+
+nz-footer {
+  text-align: center;
+}
+
+.logo {
+  height: 32px;
+  background: var(--warehouse-default);
+  margin: 16px;
+}
+
+.ant-layout-sider-dark {
+  background: var(--warehouse-dark) !important;
+}
+
+.ant-layout-sider-light {
+  background: var(--warehouse-white) !important;
+}

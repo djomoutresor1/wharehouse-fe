@@ -12,9 +12,9 @@
                 {
                   "position": "A",
                   "dimensions": {
-                    "length": "355",
-                    "width": "562",
-                    "depth": "327"
+                    "length": "0",
+                    "width": "0",
+                    "depth": "0"
                   }
                 },
                 {
@@ -1477,9 +1477,9 @@
                 {
                   "position": "B",
                   "dimensions": {
-                    "length": "504",
-                    "width": "955",
-                    "depth": "990"
+                    "length": "0",
+                    "width": "0",
+                    "depth": "0"
                   }
                 },
                 {
@@ -21991,7 +21991,7 @@
                 {
                   "position": "B",
                   "dimensions": {
-                    "length": "048",
+                    "length": "248",
                     "width": "852",
                     "depth": "149"
                   }

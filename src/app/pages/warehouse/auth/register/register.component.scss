@@ -1,0 +1,31 @@
+.warehouse-auth-wrapper {
+  text-align: inherit;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  .register-form {
+    //max-width: 300px;
+    i {
+      cursor: pointer;
+    }
+  }
+
+  .register-form-margin {
+    margin-bottom: 16px;
+  }
+
+  .register-form-remember {
+    left: 0;
+    float: left;
+  }
+  .register-form-forgot {
+    right: 0;
+    float: right;
+  }
+
+  .register-form-button {
+    width: 100%;
+  }
+}

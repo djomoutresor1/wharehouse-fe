@@ -1,0 +1,60 @@
+<div class="warehouse-auth-wrapper container">
+  <div class="row">
+    <div class="col text-center">
+      <h2 nz-typography>Login Page</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="row">
+        <div class="col" *ngIf="isAuth">
+          <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
+          </warehouse-alert>
+        </div>
+      </div>
+      <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Your username/email is required">
+            <nz-input-group nzPrefixIcon="user">
+              <input type="text" nz-input formControlName="userName" placeholder="Username or Email"
+                (click)="handleOnChangeInput()" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Your password required">
+            <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate">
+              <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password"
+                placeholder="Password" (click)="handleOnChangeInput()" />
+            </nz-input-group>
+            <ng-template #suffixTemplate>
+              <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                (click)="passwordVisible = !passwordVisible"></i>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <div nz-row class="login-form-margin">
+          <div nz-col [nzSpan]="12">
+            <label nz-checkbox formControlName="remember" class="login-form-remember">
+              <span>Remember me</span>
+            </label>
+          </div>
+          <div nz-col [nzSpan]="12">
+            <a class="login-form-forgot" (click)="handleOnForgotPassword()">Forgot password</a>
+          </div>
+        </div>
+        <button nz-button [disabled]="!validateForm.valid" nzBlock class="login-form-button login-form-margin"
+          [nzType]="'primary'">Log in</button>
+        <nz-divider nzDashed nzText="New User ?"></nz-divider>
+        <button nz-button nzType="default" (click)="handleOnRegister()" nzBlock>Register now!</button>
+      </form>
+    </div>
+  </div>
+  <div class="row" *ngIf="isLogged">
+    <div class="col">
+      <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert"
+        [descriptionNotification]="descriptionAlert">
+      </warehouse-notification>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+.warehouse-horizontal {
+  margin-top: 20px;
+  .box-name{
+    .laneName{
+    cursor: pointer;}}
+  .box-racks {
+    display: flex;
+    .size {
+      width: 50px;
+      height: 50px;
+      background: var(--warehouse-white);
+      margin: 15px 30px 7px 0px;
+      border-radius: var(--warehouse-border-radius-one);
+      box-shadow: var(--warehouse-box-shadow);
+      display: grid;
+      cursor: pointer;
+      &:hover {
+        box-shadow: none;
+        //transition: var(--warehouse-transition);
+      }
+    }
+  }
+
+  .empty{
+    background-color:lightgreen;
+   }
+   .noEmpty{
+    background-color: darksalmon;
+   }
+}
+
+

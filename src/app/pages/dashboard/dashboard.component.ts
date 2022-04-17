@@ -1,30 +1,66 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { DashboardService } from 'src/app/services/dashboard.service';
-import { LaneModel } from 'src/model/corsia/lane-model';
+import { Pages } from 'src/app/shared/enums/pages-enums';
 
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent extends AppComponent implements OnInit {
-  alphabet = Array.from(Array(15)).map((e, i) => i + 65);
-  //corsie = this.alphabet.map((x) => String.fromCharCode(x));
+export class DashboardComponent implements OnInit {
+  theme: any = false;
+  mode: any = false;
+  isCollapsed = false;
 
-  lanes: LaneModel[] = [];
-  lastLane: any;
-
-  constructor(private dashboardService: DashboardService) {
-    super();
+  @HostListener('document:click', ['$event'])
+  clickout() {
+    console.log(
+      "localStorage.getItem('theme'): ",
+      localStorage.getItem('theme')
+    );
+    if (localStorage.getItem('theme')) {
+      this.dashboardService.userTheme.subscribe((theme) => {
+        this.theme = theme;
+      });
+    }
+    if (localStorage.getItem('mode')) {
+      this.dashboardService.userMode.subscribe((mode) => {
+        this.mode = mode;
+      });
+    }
   }
 
-  ngOnInit(): void {
-    this.dashboardService.getDashboard().subscribe((response) => {
-      console.log('response: ', response);
-      this.lanes = response.lanes.slice(0, 14);
-      this.lastLane = response.lanes.slice(-1)[0];
-      console.log('lastElement: ', response.lanes.slice(-1)[0]);
-    });
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private dashboardService: DashboardService
+  ) {
+    console.log(
+      "localStorage.getItem('theme'): ",
+      localStorage.getItem('theme')
+    );
+
+    if (localStorage.getItem('theme')) {
+      this.dashboardService.userTheme.subscribe((theme) => {
+        this.theme = theme;
+      });
+    }
+    if (localStorage.getItem('mode')) {
+      this.dashboardService.userTheme.subscribe((mode) => {
+        this.mode = mode;
+      });
+    }
+  }
+
+  ngOnInit(): void {}
+
+  handleOnNavigate(url: String) {
+    this.router.navigate([`${Pages.WAREHOUSE}/${url}/`]);
+  }
+
+  handleOnCollapsed(collapsed: boolean) {
+    this.isCollapsed = collapsed;
   }
 }

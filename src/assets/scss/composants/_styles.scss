@@ -1,0 +1,65 @@
+// Colors
+.warehouse-primary {
+  color: var(--warehouse-primary) !important;
+  &:hover {
+    color: var(--warehouse-secondary) !important;
+  }
+}
+.warehouse-secondary {
+  color: var(--warehouse-secondary) !important;
+}
+.warehouse-danger {
+  color: var(--warehouse-danger) !important;
+}
+.warehouse-tomato {
+  color: var(--warehouse-tomato) !important;
+}
+.warehouse-success {
+  color: var(--warehouse-success) !important;
+}
+.warehouse-sliver {
+  color: var(--warehouse-sliver) !important;
+}
+.warehouse-white {
+  color: var(--warehouse-white) !important;
+}
+
+// Backgournd
+.warehouse-background-primary {
+  background-color: var(--warehouse-primary) !important;
+}
+.warehouse-background-secondary {
+  background-color: var(--warehouse-secondary) !important;
+}
+.warehouse-background-danger {
+  background-color: var(--warehouse-danger) !important;
+}
+.warehouse-background-tomato {
+  background-color: var(--warehouse-tomato) !important;
+}
+.warehouse-background-success {
+  background-color: var(--warehouse-success) !important;
+}
+.warehouse-background-sliver {
+  background-color: var(--warehouse-sliver) !important;
+}
+.warehouse-background-white {
+  background-color: var(--warehouse-white) !important;
+}
+
+// Borders
+.warehouse-border-primary {
+  border: 1px solid var(--warehouse-primary) !important;
+}
+.warehouse-dashed-border-primary {
+  border: 1px dashed var(--warehouse-primary) !important;
+}
+.warehouse-border-top-primary {
+  border-top-color: var(--warehouse-primary) !important;
+}
+.warehouse-border-top-secondary {
+  border-top-color: var(--warehouse-secondary) !important;
+}
+.warehouse-border-top-sliver {
+  border-top-color: var(--warehouse-sliver) !important;
+}

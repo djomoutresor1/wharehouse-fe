@@ -1,0 +1,23 @@
+.ant-form {
+  margin: 20px !important;
+  padding: 35px !important;
+  border-radius: var(--warehouse-border-radius-one);
+  box-shadow: var(--warehouse-box-shadow);
+  background: var(--warehouse-white);
+}
+
+.anticon {
+  top: -4px;
+  position: relative;
+}
+
+.ant-layout-sider {
+  //background: inherit !important;
+}
+
+.ant-input-prefix,
+.ant-input-suffix {
+  justify-content: center !important;
+  align-items: flex-end !important;
+  display: flex !important;
+}

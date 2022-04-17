@@ -1,0 +1,4116 @@
+{
+    "categories": [
+        {
+            "name": "A",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "B",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO UOMO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO UOMO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO UOMO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO UOMO"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FIORI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FIORI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FIORI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FIORI"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "SCARPE UOMO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "SCARPE UOMO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "SCARPE UOMO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "SCARPE UOMO"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "SUCCO DI FRUTTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "SUCCO DI FRUTTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "SUCCO DI FRUTTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "SUCCO DI FRUTTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ELETTRONICA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ELETTRONICA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ELETTRONICA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ELETTRONICA"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "CASA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "CASA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "CASA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "CASA"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "C",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "D",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "E",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "F",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "G",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "H",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "I",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "J",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "K",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "L",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "M",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "N",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "O",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "P",
+            "rows": [
+                {
+                    "row": 1,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FOOD"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FOOD"
+                        }
+                    ]
+                },
+                {
+                    "row": 2,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "TEXTILE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "TEXTILE"
+                        }
+                    ]
+                },
+                {
+                    "row": 3,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "UTENSILERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "UTENSILERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 4,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIARDINAGGIO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIARDINAGGIO"
+                        }
+                    ]
+                },
+                {
+                    "row": 5,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "BAZAR"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "BAZAR"
+                        }
+                    ]
+                },
+                {
+                    "row": 6,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "INTIMO DONNA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "INTIMO DONNA"
+                        }
+                    ]
+                },
+                {
+                    "row": 7,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "DETERGENTE"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "DETERGENTE"
+                        }
+                    ]
+                },
+                {
+                    "row": 8,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "ANIMALERIA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "ANIMALERIA"
+                        }
+                    ]
+                },
+                {
+                    "row": 9,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "GIOCATOLI"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "GIOCATOLI"
+                        }
+                    ]
+                },
+                {
+                    "row": 10,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "FERAMENTA"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "FERAMENTA"
+                        }
+                    ]
+                },
+                {
+                    "row": 11,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VINO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VINO"
+                        }
+                    ]
+                },
+                {
+                    "row": 12,
+                    "shelf": [
+                        {
+                            "shelve": 1,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 2,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 3,
+                            "tipologie": "VESTITO"
+                        },
+                        {
+                            "shelve": 4,
+                            "tipologie": "VESTITO"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
