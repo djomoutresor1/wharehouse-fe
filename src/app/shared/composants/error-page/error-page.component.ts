@@ -4,7 +4,7 @@ import { NzButtonSize } from 'ng-zorro-antd/button';
 
 
 @Component({
-  selector: 'app-error-page',
+  selector: 'warehouse-error-page',
   templateUrl: './error-page.component.html',
   styleUrls: ['./error-page.component.scss']
 })

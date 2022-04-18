@@ -12,7 +12,7 @@ import { FontawesomeComponent } from 'src/app/shared/composants/fontawesome/font
 
 
 @Component({
-  selector: 'app-dashboard-rack-global',
+  selector: 'warehouse-dashboard-rack-global',
   templateUrl: './dashboard-rack-global.component.html',
   styleUrls: ['./dashboard-rack-global.component.scss']
 })

@@ -5,13 +5,13 @@
             <th colspan="4">Genere d'articoli per Ripiano</th>
         </tr>
         <tr>
-            <th *ngFor="let ripiano of rackTable">RIPIANO {{ripiano.shelf}}</th>
+            <th *ngFor="let ripiano of this.laanes">RIPIANO {{ripiano.shelf}}</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let a of corsiaTable">
-            <td class="table-secondary">{{a.row}}</td>
-            <td>{{a.rows.shelves.shelf}}</td>
+        <tr *ngFor="let a of this.lanes">
+            <td class="table-secondary">{{a.rows}}</td>
+            <td>{{a.rows[0].shelves[0].shelf}}</td>
             <td>{{a.rows.shelves.shelf}}</td>
             <td>{{a.rows.shelves.shelf}}</td>
             <td>{{a.rows.shelves.shelf}}</td>

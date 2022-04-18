@@ -7,7 +7,7 @@ import { Pages } from 'src/app/shared/enums/pages-enums';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'warehouse-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })

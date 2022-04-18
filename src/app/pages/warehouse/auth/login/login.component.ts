@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -21,7 +22,7 @@ const fakeProfil = {
 };
 
 @Component({
-  selector: 'app-login',
+  selector: 'warehouse-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
@@ -40,7 +41,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authentificationService: AuthentificationService,
     private warehouseLocalStorage: WarehouseLocalStorage
-  ) {}
+  ) {
+    this.checkIfUserIsAlreadyLogged();
+  }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -53,11 +56,19 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  checkIfUserIsAlreadyLogged() {
+    let user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
+    if (user?.token) {
+      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+    }
+  }
+
   submitForm() {
     let userData = {
-      username: this.validateForm.controls['userName']?.value,
+      username: this.validateForm.controls['userName']?.value.toLowerCase(),
       password: this.validateForm.controls['password']?.value,
     };
+
     this.authentificationService.userLogin(userData).subscribe(
       (response: ResponseLoginModel) => {
         console.log('response: ', response);

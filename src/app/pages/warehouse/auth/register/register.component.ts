@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthentificationService } from 'src/app/services/auth/authentification.service';
+import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
 
 @Component({
-  selector: 'app-register',
+  selector: 'warehouse-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
@@ -27,12 +28,17 @@ export class RegisterComponent implements OnInit {
     { label: 'Moderator', value: 'moderator' },
   ];
   selectedValue = { label: 'User', value: 'user' };
+  steps: string[] = ["User Informations", "Verification Email", "Registration User"];
+  currentStep: number = 0;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authentificationService: AuthentificationService
-  ) {}
+    private authentificationService: AuthentificationService,
+    private warehouseLocalStorage: WarehouseLocalStorage
+  ) {
+    this.checkIfUserIsAlreadyLogged();
+  }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -51,6 +57,13 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  checkIfUserIsAlreadyLogged() {
+    let user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
+    if (user?.token) {
+      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+    }
+  }
+
   roleChoice(event: any): void {
     this.role = event?.value;
     console.log('eventttt: ', this.role);
@@ -67,7 +80,7 @@ export class RegisterComponent implements OnInit {
     } else {
       let userData = {
         fullname: this.validateForm.controls['fullName']?.value,
-        username: this.validateForm.controls['userName']?.value,
+        username: this.validateForm.controls['userName']?.value.toLowerCase(),
         email: this.validateForm.controls['email']?.value,
         password: this.validateForm.controls['password']?.value,
         role: this.validateForm.controls['role']?.value,

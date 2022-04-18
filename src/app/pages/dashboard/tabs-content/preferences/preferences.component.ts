@@ -4,7 +4,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 
 @Component({
-  selector: 'app-preferences',
+  selector: 'warehouse-preferences',
   templateUrl: './preferences.component.html',
   styleUrls: ['./preferences.component.scss'],
 })
