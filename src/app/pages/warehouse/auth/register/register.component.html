@@ -5,6 +5,13 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <nz-steps [nzCurrent]="currentStep" nzSize="small">
+                <nz-step *ngFor="let step of steps" [nzTitle]="step"></nz-step>
+            </nz-steps>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-4 offset-md-4">
             <div class="row">
                 <div class="col" *ngIf="isAuth">
@@ -82,10 +89,10 @@
                     </nz-form-control>
                 </nz-form-item>
                 <button nz-button [disabled]="!validateForm.valid" nzBlock
-                    class="register-form-button register-form-margin" [nzType]="'primary'">Sign
-                    Up</button>
+                    class="register-form-button register-form-margin" [nzType]="'primary'">Verify my email</button>
                 <nz-divider nzDashed nzText="Already have an account?"></nz-divider>
-                <button nz-button nzType="default" (click)="handleOnLogin()" nzBlock>Log in</button>
+                <button nz-button nzType="primary" (click)="handleOnLogin()" nzBlock>
+                    <i nz-icon nzType="left" nzTheme="outline"></i>Log in</button>
             </form>
         </div>
     </div>
