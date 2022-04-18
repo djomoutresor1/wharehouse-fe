@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 
 @Component({
@@ -13,6 +14,10 @@ export class DashboardComponent implements OnInit {
   theme: any = false;
   mode: any = false;
   isCollapsed = false;
+  isLogout: boolean = false;
+  alertType: string = '';
+  messageAlert: string = '';
+  descriptionAlert: string = '';
 
   @HostListener('document:click', ['$event'])
   clickout() {
@@ -57,6 +62,13 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {}
 
   handleOnNavigate(url: String) {
+    console.log("handleOnNavigate: ", url);
+    if(url === "logout") {
+      this.isLogout = true;
+      this.alertType = AlertType.ALERT_SUCCESS;
+      this.messageAlert = `Good bye`;
+      this.descriptionAlert = "Hope to see your soon in our system.";
+    }
     this.router.navigate([`${Pages.WAREHOUSE}/${url}/`]);
   }
 

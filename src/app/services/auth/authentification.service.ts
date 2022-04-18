@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { environment } from 'src/environments/environment';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
@@ -14,7 +15,10 @@ import { Auth } from '../../shared/enums/auth-enums';
 export class AuthentificationService {
   private apiServerUrl = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private warehouseLocalStorage: WarehouseLocalStorage
+  ) {}
 
   public userRegister(
     user: UserRegisterModel
@@ -25,12 +29,17 @@ export class AuthentificationService {
     );
   }
 
-  public userLogin(
-    user: UserLoginModel
-  ): Observable<ResponseLoginModel> {
+  public userLogin(user: UserLoginModel): Observable<ResponseLoginModel> {
     return this.http.post<ResponseLoginModel>(
       `${this.apiServerUrl}${Auth.WAREHOUSE_LOGIN_USER}`,
       user
+    );
+  }
+
+  public userLogout(userId: string): Observable<any> {
+    return this.http.put<any>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_LOGOUT_USER}`,
+      userId
     );
   }
 }

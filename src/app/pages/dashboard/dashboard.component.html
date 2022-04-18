@@ -39,3 +39,10 @@
     <nz-footer>Warehouse ©2020 Implement By Angular</nz-footer>
   </nz-layout>
 </nz-layout>
+<div class="row" *ngIf="isLogout">
+  <div class="col">
+      <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert"
+          [descriptionNotification]="descriptionAlert">
+      </warehouse-notification>
+  </div>
+</div>

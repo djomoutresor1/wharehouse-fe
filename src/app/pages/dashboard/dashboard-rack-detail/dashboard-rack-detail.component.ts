@@ -14,7 +14,7 @@ import { RowCategoriesModel } from 'src/model/categories/rowCategories-model';
 
 
 @Component({
-  selector: 'app-dashboard-rack-detail',
+  selector: 'warehouse-dashboard-rack-detail',
   templateUrl: './dashboard-rack-detail.component.html',
   styleUrls: ['./dashboard-rack-detail.component.scss'],
 })

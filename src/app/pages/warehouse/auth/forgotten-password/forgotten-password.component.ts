@@ -3,24 +3,39 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
+import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 
 @Component({
-  selector: 'forgottenPassword',
+  selector: 'warehouse-forgottenPassword',
   templateUrl: './forgotten-password.component.html',
   styleUrls: ['./forgotten-password.component.scss'],
 })
 export class ForgottenPasswordComponent implements OnInit {
   validateForm!: FormGroup;
   isAuth: boolean = false;
+  isMailSent: boolean = false;
   alertType: string = '';
   messageAlert: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private warehouseLocalStorage: WarehouseLocalStorage
+  ) {
+    this.checkIfUserIsAlreadyLogged();
+  }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
     });
+  }
+
+  checkIfUserIsAlreadyLogged() {
+    let user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
+    if (user?.token) {
+      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+    }
   }
 
   submitFormModule() {

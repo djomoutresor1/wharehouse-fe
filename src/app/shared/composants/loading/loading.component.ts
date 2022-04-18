@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types/size';
 
 @Component({
-  selector: 'loading',
+  selector: 'warehouse-loading',
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss']
 })

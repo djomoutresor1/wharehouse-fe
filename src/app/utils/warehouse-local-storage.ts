@@ -40,8 +40,8 @@ export class WarehouseLocalStorage {
       );
       if (user && user?.token) {
         return {
-          Authorization: user?.type + user?.token,
-          REMOTE_USER: 'AF48760', // Pass the userId or matricule generated in register fase for earch user in BE, TODO in BE
+          Authorization: `Bearer ${user?.token}`,
+          REMOTE_USER: user?.userId, // Pass the userId or matricule generated in register fase for earch user in BE, TODO in BE
           refreshToken: user?.refreshToken,
           ROLES: user?.roles?.join(','), // Array of roles, want like this -> ROLE_USER,ROLE_ADMIN,ROLE_MODERATOR
         };

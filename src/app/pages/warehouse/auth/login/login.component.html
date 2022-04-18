@@ -40,13 +40,14 @@
             </label>
           </div>
           <div nz-col [nzSpan]="12">
-            <a class="login-form-forgot" (click)="handleOnForgotPassword()">Forgot password</a>
+            <a class="login-form-forgot" (click)="handleOnForgotPassword()">Forgot password ?</a>
           </div>
         </div>
         <button nz-button [disabled]="!validateForm.valid" nzBlock class="login-form-button login-form-margin"
           [nzType]="'primary'">Log in</button>
         <nz-divider nzDashed nzText="New User ?"></nz-divider>
-        <button nz-button nzType="default" (click)="handleOnRegister()" nzBlock>Register now!</button>
+        <button nz-button nzType="primary" (click)="handleOnRegister()" nzBlock>Register Now ! 
+          <i nz-icon nzType="right" nzTheme="outline"></i></button>
       </form>
     </div>
   </div>
