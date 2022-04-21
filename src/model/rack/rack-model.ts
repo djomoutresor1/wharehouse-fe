@@ -1,11 +1,11 @@
 export interface RackModel {
-  rackOne?: string;
-  rackTwo?: string;
-  rackThree?: string;
-  rackFour?: string;
-  rackFive?: string;
-  rackSix?: string;
-  rackSeven?: string;
-  rackEight?: string;
-  rackNine?: string;
+  rackOne?: number;
+  rackTwo?: number;
+  rackThree?: number;
+  rackFour?: number;
+  rackFive?: number;
+  rackSix?: number;
+  rackSeven?: number;
+  rackEight?: number;
+  rackNine?: number;
 }

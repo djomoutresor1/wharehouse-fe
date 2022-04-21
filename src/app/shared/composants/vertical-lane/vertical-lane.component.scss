@@ -50,19 +50,19 @@
       margin-left: 2px;
       cursor: pointer;
       .empty{
-        background-color:lightgreen;
+        background-color:lightgreen !important;
        }
        .noEmpty{
-        background-color: darksalmon;
+        background-color: darksalmon !important;
        }
     }
   }
 
   .empty{
-    background-color:lightgreen;
+    background-color:lightgreen !important;
    }
    .noEmpty{
-    background-color: darksalmon;
+    background-color: darksalmon !important;
    }
 }
 

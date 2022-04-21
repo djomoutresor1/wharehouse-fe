@@ -4,7 +4,10 @@ import { DashboardHomeComponent } from 'src/app/pages/dashboard/dashboard-home/d
 import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { LaneModel } from 'src/model/corsia/lane-model';
+import { PositionModel } from 'src/model/corsia/position-model';
 import { RowModel } from 'src/model/corsia/row-model';
+import { ShelfModel } from 'src/model/corsia/shelf-model';
+import { RackModel } from 'src/model/rack/rack-model';
 import { Pages } from '../../enums/pages-enums';
 
 @Component({
@@ -16,32 +19,65 @@ export class VerticalLaneComponent implements OnInit {
   @Input() lane: LaneModel = { rows: [], name: '' };
   @Input() freeBox: boolean = false;
 
-  goToLane:string ='click and go to Lane(Corsia)  ';
-  number:string ='  rack number  ';
-  empty:boolean=false;
-  myCompOneObj:any
+  goToLane: string = 'click and go to Lane(Corsia)  ';
+  number: string = '  rack number  ';
+  empty: boolean = false;
+  myCompOneObj: any;
 
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-  }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   onSelectedLane(rack: RowModel, laneName: string) {
-
-    this.router.navigate([`${Pages.RACK_DETAIL}/${laneName.toLocaleLowerCase()}/${rack.row}`], {
-      relativeTo: this.route,
-    });
-    console.log('rackNumber: ',rack.row)
+    this.router.navigate(
+      [`${Pages.RACK_DETAIL}/${laneName.toLocaleLowerCase()}/${rack.row}`],
+      {
+        relativeTo: this.route,
+      }
+    );
+    console.log('rackNumber: ', rack.row);
   }
 
-  onSelectedLaneName(laneName: string){
-    
-    this.router.navigate([`${Pages.GLOBAL_RACK}/${laneName.toLocaleUpperCase()}`], {
-      relativeTo: this.route,
-    });
+  onSelectedLaneName(laneName: string) {
+    this.router.navigate(
+      [`${Pages.GLOBAL_RACK}/${laneName.toLocaleUpperCase()}`],
+      {
+        relativeTo: this.route,
+      }
+    );
   }
 
+  isFreeBoxFirst(rack: RowModel, index: number): boolean {
+    let positionFound;
+    if (rack.row === index + 1) {
+      positionFound = rack.shelves.find((shelf: ShelfModel) =>
+        shelf?.positions.find(
+          (position: PositionModel) =>
+            position.dimensions.length === 0 ||
+            position.dimensions.depth === 0 ||
+            position.dimensions.width === 0
+        )
+      );
+      return positionFound ? false : true;
+    } else {
+      return true;
+    }
+  }
+
+  isFreeBoxSecond(rack: RowModel, index: number): boolean {
+    let positionFound;
+    if (rack.row === index + 1 + 6) { // 6 because slice(6,12)
+      positionFound = rack.shelves.find((shelf: ShelfModel) =>
+        shelf?.positions.find(
+          (position: PositionModel) =>
+            position.dimensions.length === 0 ||
+            position.dimensions.depth === 0 ||
+            position.dimensions.width === 0
+        )
+      );
+      return positionFound ? false : true;
+    } else {
+      return true;
+    }
+  }
 }

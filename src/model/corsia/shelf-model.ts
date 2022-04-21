@@ -1,6 +1,6 @@
 import { PositionModel } from './position-model';
 
 export interface ShelfModel {
-  shelf: string;
+  shelf: number;
   positions: PositionModel[];
 }

@@ -1,5 +1,5 @@
 export interface DimensionModel {
-  length: string;
-  width: string;
-  depth: string;
+  length: number;
+  width: number;
+  depth: number;
 }

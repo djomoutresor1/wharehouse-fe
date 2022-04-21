@@ -15,7 +15,7 @@ export class DashboardService {
   constructor(private http: HttpClient) {}
 
   public getDashboard() {
-    return this.http.get<LanesModel>('../assets/mocks/entireDataMock.json');
+    return this.http.get<LanesModel>('../assets/mocks/warehouse.json');
   }
 
   public handleOnChangeTheme(selectedTheme: any): void {
