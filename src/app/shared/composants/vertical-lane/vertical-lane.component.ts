@@ -14,9 +14,8 @@ import { Pages } from '../../enums/pages-enums';
 export class VerticalLaneComponent implements OnInit {
   @Input() lane: LaneModel = { rows: [], name: '' };
 
-  goToLane: string = 'click and go to Lane(Corsia)  ';
-  number: string = '  rack number  ';
-  free: string = '  with free shelf =  ';
+  goToLane: string = 'Lane(Corsia)  ';
+  free: string = '  free shelf =  ';
   empty: boolean = false;
   numberFreebox: any;
 
@@ -67,9 +66,20 @@ export class VerticalLaneComponent implements OnInit {
     }
   }
 
-  isNumberOfPlace(rack: RowModel, index: number) {
+  isNumberOfPlaceFirst(rack: RowModel, index: number) {
     
     if (rack.row === index + 1) {
+   return     rack.shelves.filter((place:ShelfModel) =>(place.freePlaces > 0 && place.freePlaces <= 3)).length ;
+    }else{
+      return
+    }
+   
+  }
+
+  
+  isNumberOfPlaceSecond(rack: RowModel, index: number) {
+    
+    if (rack.row === index + 1 +6) {
    return     rack.shelves.filter((place:ShelfModel) =>(place.freePlaces > 0 && place.freePlaces <= 3)).length ;
     }else{
       return
