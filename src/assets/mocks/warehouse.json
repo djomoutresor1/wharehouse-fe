@@ -38,7 +38,7 @@
             },
             {
               "shelf": 2,
-              "freePlaces": 0,
+              "freePlaces": 1,
               "positions": [
                 {
                   "position": "A",
@@ -68,7 +68,7 @@
             },
             {
               "shelf": 3,
-              "freePlaces": 0,
+              "freePlaces": 1,
               "positions": [
                 {
                   "position": "A",
@@ -133,7 +133,7 @@
           "shelves": [
             {
               "shelf": 1,
-              "freePlaces": 0,
+              "freePlaces": 1,
               "positions": [
                 {
                   "position": "A",
@@ -193,7 +193,7 @@
             },
             {
               "shelf": 3,
-              "freePlaces": 0,
+              "freePlaces": 1,
               "positions": [
                 {
                   "position": "A",
@@ -223,7 +223,7 @@
             },
             {
               "shelf": 4,
-              "freePlaces": 0,
+              "freePlaces": 1,
               "positions": [
                 {
                   "position": "A",
@@ -4523,7 +4523,7 @@
           "shelves": [
             {
               "shelf": 1,
-              "freePlaces": 0,
+              "freePlaces": 1,
               "positions": [
                 {
                   "position": "A",
@@ -9128,7 +9128,7 @@
             },
             {
               "shelf": 4,
-              "freePlaces": 0,
+              "freePlaces": 1,
               "positions": [
                 {
                   "position": "A",
@@ -19603,7 +19603,7 @@
             },
             {
               "shelf": 2,
-              "freePlaces": 0,
+              "freePlaces": 1,
               "positions": [
                 {
                   "position": "A",
@@ -20945,6 +20945,506 @@
         },
         {
           "row": 12,
+          "shelves": [
+            {
+              "shelf": 1,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            },
+            {
+              "shelf": 2,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            },
+            {
+              "shelf": 3,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            },
+            {
+              "shelf": 4,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 13,
+          "shelves": [
+            {
+              "shelf": 1,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            },
+            {
+              "shelf": 2,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            },
+            {
+              "shelf": 3,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            },
+            {
+              "shelf": 4,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 14,
+          "shelves": [
+            {
+              "shelf": 1,
+              "freePlaces": 1,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            },
+            {
+              "shelf": 2,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            },
+            {
+              "shelf": 3,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            },
+            {
+              "shelf": 4,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 15,
+          "shelves": [
+            {
+              "shelf": 1,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            },
+            {
+              "shelf": 2,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            },
+            {
+              "shelf": 3,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            },
+            {
+              "shelf": 4,
+              "freePlaces": 0,
+              "positions": [
+                {
+                  "position": "A",
+                  "dimensions": {
+                    "length": 145,
+                    "width": 458,
+                    "depth": 45
+                  }
+                },
+                {
+                  "position": "B",
+                  "dimensions": {
+                    "length": 245,
+                    "width": 458,
+                    "depth": 75
+                  }
+                },
+                {
+                  "position": "C",
+                  "dimensions": {
+                    "length": 225,
+                    "width": 485,
+                    "depth": 23
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 16,
           "shelves": [
             {
               "shelf": 1,

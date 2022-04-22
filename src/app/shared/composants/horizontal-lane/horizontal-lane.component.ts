@@ -17,7 +17,8 @@ export class HorizontalLaneComponent implements OnInit {
 
 
   goToLane:string ='click and go to Lane(Corsia)  ';
-  number:string ='  rack number  '
+  number:string ='  rack number  ';
+  free: string = '  with free shelf=  ';
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
@@ -31,7 +32,7 @@ export class HorizontalLaneComponent implements OnInit {
 
   isFreeHorizontal(rack: RowModel, index: number):boolean {
     let checkFreeBox;
-    if (rack.row === index + 1+6) {
+    if (rack.row === index + 1) {
       checkFreeBox = rack.shelves.find((place: ShelfModel) =>
          (place.freePlaces > 0 && place.freePlaces <= 3)
         )
@@ -39,5 +40,15 @@ export class HorizontalLaneComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  isNumberOfPlace(rack: RowModel, index: number) {
+    
+    if (rack.row === index + 1) {
+   return     rack.shelves.filter((place:ShelfModel) =>(place.freePlaces > 0 && place.freePlaces <= 3)).length ;
+    }else{
+      return
+    }
+   
   }
 }
