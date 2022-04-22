@@ -1,13 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DashboardHomeComponent } from 'src/app/pages/dashboard/dashboard-home/dashboard-home.component';
-import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
-import { DashboardService } from 'src/app/services/dashboard.service';
 import { LaneModel } from 'src/model/corsia/lane-model';
 import { PositionModel } from 'src/model/corsia/position-model';
 import { RowModel } from 'src/model/corsia/row-model';
 import { ShelfModel } from 'src/model/corsia/shelf-model';
-import { RackModel } from 'src/model/rack/rack-model';
 import { Pages } from '../../enums/pages-enums';
 
 @Component({
@@ -18,11 +14,11 @@ import { Pages } from '../../enums/pages-enums';
 export class VerticalLaneComponent implements OnInit {
   @Input() lane: LaneModel = { rows: [], name: '' };
 
-
   goToLane: string = 'click and go to Lane(Corsia)  ';
   number: string = '  rack number  ';
+  free: string = '  with free shelf =  ';
   empty: boolean = false;
-  myCompOneObj: any;
+  numberFreebox: any;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -47,48 +43,41 @@ export class VerticalLaneComponent implements OnInit {
     );
   }
 
-  isFreeBoxFirst(rack: RowModel, index: number):boolean {
+  isFreeBoxFirst(rack: RowModel, index: number): boolean {
     let checkFreeBox;
     if (rack.row === index + 1) {
-      checkFreeBox = rack.shelves.find((place: ShelfModel) =>
-         (place.freePlaces > 0 && place.freePlaces <= 3)
-        )
-      return checkFreeBox ? true : false;
-    } else {
-      return false;
-    }
-  }
-
-  isFreeBoxSecond(rack: RowModel, index: number):boolean {
-    let checkFreeBox;
-    if (rack.row === index + 1+6) {
-      checkFreeBox = rack.shelves.find((place: ShelfModel) =>
-         (place.freePlaces > 0 && place.freePlaces <= 3)
-        )
-      return checkFreeBox ? true : false;
-    } else {
-      return false;
-    }
-  }
-
-/*  isFreeBoxFirst(rack: RowModel, index: number): boolean {
-    let positionFound;
-    if (rack.row === index + 1) {
-      positionFound = rack.shelves.find((shelf: ShelfModel) =>
-        shelf?.positions.find(
-          (position: PositionModel) =>
-            position.dimensions.length === 0 ||
-            position.dimensions.depth === 0 ||
-            position.dimensions.width === 0
-        )
+      checkFreeBox = rack.shelves.find(
+        (place: ShelfModel) => (place.freePlaces > 0 && place.freePlaces <= 3)
       );
-      return positionFound ? false : true;
+      return checkFreeBox ? true : false;
     } else {
-      return true;
+      return false;
     }
   }
 
   isFreeBoxSecond(rack: RowModel, index: number): boolean {
+    let checkFreeBox;
+    if (rack.row === index + 1 + 6) {
+      checkFreeBox = rack.shelves.find(
+        (place: ShelfModel) => (place.freePlaces > 0 && place.freePlaces <= 3)
+      );
+      return checkFreeBox ? true : false;
+    } else {
+      return false;
+    }
+  }
+
+  isNumberOfPlace(rack: RowModel, index: number) {
+    
+    if (rack.row === index + 1) {
+   return     rack.shelves.filter((place:ShelfModel) =>(place.freePlaces > 0 && place.freePlaces <= 3)).length ;
+    }else{
+      return
+    }
+   
+  }
+
+  /* isFreeBoxSecond(rack: RowModel, index: number): boolean {
     let positionFound;
     if (rack.row === index + 1 + 6) { // 6 because slice(6,12)
       positionFound = rack.shelves.find((shelf: ShelfModel) =>
