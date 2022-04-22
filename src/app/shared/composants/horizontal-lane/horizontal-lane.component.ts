@@ -16,9 +16,8 @@ export class HorizontalLaneComponent implements OnInit {
   @Input() lane: LaneModel = { rows: [], name: '' };
 
 
-  goToLane:string ='click and go to Lane(Corsia)  ';
-  number:string ='  rack number  ';
-  free: string = '  with free shelf=  ';
+  goToLane:string ='Lane(Corsia)  ';
+  free: string = '  free shelf=  ';
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
