@@ -10,13 +10,13 @@
     <div class="row" *ngIf="!!lanes.length">
         <div class="col d-flex">
             <div *ngFor="let lane of lanes" class="column">
-                <warehouse-vertical-lane [freeBox]="false" [lane]="lane"></warehouse-vertical-lane>
+                <warehouse-vertical-lane  [lane]="lane"></warehouse-vertical-lane>
             </div>
         </div>
     </div>
     <div class="row" *ngIf="lastLane">
         <div class="col column">
-            <warehouse-horizontal-lane [freeBox]="false" [lane]="lastLane"></warehouse-horizontal-lane>
+            <warehouse-horizontal-lane [lane]="lastLane"></warehouse-horizontal-lane>
         </div>
     </div>
 </div>
