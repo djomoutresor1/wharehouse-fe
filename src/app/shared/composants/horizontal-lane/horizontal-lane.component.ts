@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { LaneModel } from 'src/model/corsia/lane-model';
 import { RowModel } from 'src/model/corsia/row-model';
+import { ShelfModel } from 'src/model/corsia/shelf-model';
 import { Pages } from '../../enums/pages-enums';
 
 @Component({
@@ -27,5 +28,20 @@ export class HorizontalLaneComponent implements OnInit {
     this.router.navigate([`${Pages.RACK_DETAIL}/${laneName.toLocaleLowerCase()}`], {
       relativeTo: this.route,
     });
+  }
+
+  isFreeBox(rack: RowModel, index: number) {
+    let shelfFound = rack.shelves.find(
+      (shelf: ShelfModel) => shelf.shelf === index + 1
+    );
+
+    let positionFound = shelfFound?.positions.find(
+      (position) =>
+        position.dimensions.length === 0 ||
+        position.dimensions.depth === 0 ||
+        position.dimensions.width === 0
+    );
+
+    return positionFound ? false : true;
   }
 }

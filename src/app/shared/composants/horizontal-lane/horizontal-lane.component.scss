@@ -20,13 +20,12 @@
       }
     }
   }
-
-  .empty{
-    background-color:lightgreen;
-   }
-   .noEmpty{
-    background-color: darksalmon;
-   }
+  .noEmpty {
+    background-color: lightgreen !important;
+  }
+  .empty {
+    background-color: darksalmon !important;
+  }
 }
 
 

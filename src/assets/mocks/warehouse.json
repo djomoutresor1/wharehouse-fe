@@ -12,25 +12,25 @@
                 {
                   "position": "A",
                   "dimensions": {
-                    "length": 145,
-                    "width": 458,
-                    "depth": 45
+                    "length": 0,
+                    "width": 0,
+                    "depth": 0
                   }
                 },
                 {
                   "position": "B",
                   "dimensions": {
-                    "length": 245,
-                    "width": 458,
-                    "depth": 75
+                    "length": 789,
+                    "width": 410,
+                    "depth": 458
                   }
                 },
                 {
                   "position": "C",
                   "dimensions": {
-                    "length": 225,
-                    "width": 485,
-                    "depth": 23
+                    "length": 789,
+                    "width": 453,
+                    "depth": 420
                   }
                 }
               ]
@@ -115,9 +115,9 @@
                 {
                   "position": "C",
                   "dimensions": {
-                    "length": 225,
-                    "width": 485,
-                    "depth": 23
+                    "length": 0,
+                    "width": 0,
+                    "depth": 0
                   }
                 }
               ]
@@ -133,9 +133,9 @@
                 {
                   "position": "A",
                   "dimensions": {
-                    "length": 145,
-                    "width": 458,
-                    "depth": 45
+                    "length": 0,
+                    "width": 0,
+                    "depth": 0
                   }
                 },
                 {
@@ -1535,9 +1535,9 @@
                 {
                   "position": "B",
                   "dimensions": {
-                    "length": 83,
-                    "width": 65,
-                    "depth": 86
+                    "length": 0,
+                    "width": 0,
+                    "depth": 0
                   }
                 },
                 {
@@ -6290,9 +6290,9 @@
                 {
                   "position": "A",
                   "dimensions": {
-                    "length": 145,
-                    "width": 458,
-                    "depth": 45
+                    "length": 0,
+                    "width": 0,
+                    "depth": 0
                   }
                 },
                 {
@@ -13312,9 +13312,9 @@
                 {
                   "position": "B",
                   "dimensions": {
-                    "length": 245,
-                    "width": 458,
-                    "depth": 75
+                    "length": 0,
+                    "width": 0,
+                    "depth": 0
                   }
                 },
                 {
@@ -20387,9 +20387,9 @@
                 {
                   "position": "C",
                   "dimensions": {
-                    "length": 225,
-                    "width": 485,
-                    "depth": 23
+                    "length": 0,
+                    "width": 0,
+                    "depth": 0
                   }
                 }
               ]

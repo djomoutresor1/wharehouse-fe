@@ -1,16 +1,11 @@
 .warehouse-vertical {
   padding: 15px;
-  .box-name{
-    .laneName{
-      cursor: pointer;}
-}
+  .box-name {
+    .laneName {
+      cursor: pointer;
+    }
+  }
   .first-box {
-    .empty{
-      background-color:lightgreen;
-     }
-     .noEmpty{
-      background-color: darksalmon;
-     }
     .size {
       width: 50px;
       height: 50px;
@@ -21,18 +16,11 @@
       display: grid;
       &:hover {
         box-shadow: none;
-        //transition: var(--warehouse-transition);
       }
     }
   }
   .second-box {
     margin-top: 50px;
-    .empty{
-      background-color:lightgreen;
-     }
-     .noEmpty{
-      background-color: darksalmon;
-     }
     .size {
       width: 50px;
       height: 50px;
@@ -43,31 +31,17 @@
       display: grid;
       &:hover {
         box-shadow: none;
-        //transition: var(--warehouse-transition);
       }
     }
     .box-name {
       margin-left: 2px;
       cursor: pointer;
-      .empty{
-        background-color:lightgreen;
-       }
-       .noEmpty{
-        background-color: darksalmon;
-       }
     }
   }
-
-  .empty{
-    background-color:lightgreen;
-   }
-   .noEmpty{
-    background-color: darksalmon;
-   }
+  .noEmpty {
+    background-color: lightgreen !important;
+  }
+  .empty {
+    background-color: darksalmon !important;
+  }
 }
-
-
-
-
-
-
