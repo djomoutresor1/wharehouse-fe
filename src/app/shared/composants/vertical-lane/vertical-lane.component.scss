@@ -5,12 +5,6 @@
       cursor: pointer;}
 }
   .first-box {
-    .empty{
-      background-color:lightgreen;
-     }
-     .noEmpty{
-      background-color: darksalmon;
-     }
     .size {
       width: 50px;
       height: 50px;
@@ -21,18 +15,17 @@
       display: grid;
       &:hover {
         box-shadow: none;
-        //transition: var(--warehouse-transition);
       }
     }
+    .empty{
+      background-color: darksalmon;
+     }
+    .noEmpty{
+      background-color:lightgreen;
+     }
   }
   .second-box {
     margin-top: 50px;
-    .empty{
-      background-color:lightgreen;
-     }
-     .noEmpty{
-      background-color: darksalmon;
-     }
     .size {
       width: 50px;
       height: 50px;
@@ -49,21 +42,14 @@
     .box-name {
       margin-left: 2px;
       cursor: pointer;
-      .empty{
-        background-color:lightgreen !important;
-       }
-       .noEmpty{
-        background-color: darksalmon !important;
-       }
     }
+    .empty{
+      background-color: darksalmon;
+     }
+    .noEmpty{
+      background-color:lightgreen;
+     }
   }
-
-  .empty{
-    background-color:lightgreen !important;
-   }
-   .noEmpty{
-    background-color: darksalmon !important;
-   }
 }
 
 

@@ -19,14 +19,13 @@
         //transition: var(--warehouse-transition);
       }
     }
+    .empty{
+      background-color: darksalmon;
+     }
+    .noEmpty{
+      background-color:lightgreen;
+     }
   }
-
-  .empty{
-    background-color:lightgreen;
-   }
-   .noEmpty{
-    background-color: darksalmon;
-   }
 }
 
 

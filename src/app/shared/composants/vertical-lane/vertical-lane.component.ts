@@ -17,7 +17,7 @@ import { Pages } from '../../enums/pages-enums';
 })
 export class VerticalLaneComponent implements OnInit {
   @Input() lane: LaneModel = { rows: [], name: '' };
-  @Input() freeBox: boolean = false;
+
 
   goToLane: string = 'click and go to Lane(Corsia)  ';
   number: string = '  rack number  ';
@@ -47,7 +47,31 @@ export class VerticalLaneComponent implements OnInit {
     );
   }
 
-  isFreeBoxFirst(rack: RowModel, index: number): boolean {
+  isFreeBoxFirst(rack: RowModel, index: number):boolean {
+    let checkFreeBox;
+    if (rack.row === index + 1) {
+      checkFreeBox = rack.shelves.find((place: ShelfModel) =>
+         (place.freePlaces > 0 && place.freePlaces <= 3)
+        )
+      return checkFreeBox ? true : false;
+    } else {
+      return false;
+    }
+  }
+
+  isFreeBoxSecond(rack: RowModel, index: number):boolean {
+    let checkFreeBox;
+    if (rack.row === index + 1+6) {
+      checkFreeBox = rack.shelves.find((place: ShelfModel) =>
+         (place.freePlaces > 0 && place.freePlaces <= 3)
+        )
+      return checkFreeBox ? true : false;
+    } else {
+      return false;
+    }
+  }
+
+/*  isFreeBoxFirst(rack: RowModel, index: number): boolean {
     let positionFound;
     if (rack.row === index + 1) {
       positionFound = rack.shelves.find((shelf: ShelfModel) =>
@@ -79,5 +103,5 @@ export class VerticalLaneComponent implements OnInit {
     } else {
       return true;
     }
-  }
+  }*/
 }
