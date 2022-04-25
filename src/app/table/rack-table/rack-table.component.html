@@ -24,17 +24,16 @@
     <tr *ngFor="let rack of racks; index as i">
       <td class="table-secondary">{{typeProduct}}</td>
       <td>{{i+1}}</td>
-      <td>{{rack.rackOne}}</td>
-      <td>{{rack.rackTwo}}</td>
-      <td>{{rack.rackThree}}</td>
-      <td>{{rack.rackFour}}</td>
-      <td>{{rack.rackFive}}</td>
-      <td>{{rack.rackSix}}</td>
-      <td>{{rack.rackSeven}}</td>
-      <td>{{rack.rackEight}}</td>
-      <td>{{rack.rackNine}}</td>
-    </tr>
-  </tbody>
+      <td [ngClass]="getBackgroundColorOne(rack)">{{rack.rackOne}}</td>
+      <td [ngClass]="getBackgroundColorOne(rack)">{{rack.rackTwo}}</td>
+      <td [ngClass]="getBackgroundColorOne(rack)">{{rack.rackThree}}</td>
+      <td [ngClass]="getBackgroundColorTwo(rack)">{{rack.rackFour}}</td>
+      <td [ngClass]="getBackgroundColorTwo(rack)">{{rack.rackFive}}</td>
+      <td [ngClass]="getBackgroundColorTwo(rack)">{{rack.rackSix}}</td>
+      <td [ngClass]="getBackgroundColorThree(rack)">{{rack.rackSeven}}</td>
+      <td [ngClass]="getBackgroundColorThree(rack)">{{rack.rackEight}}</td>
+      <td [ngClass]="getBackgroundColorThree(rack)">{{rack.rackNine}}</td>
+    </tr>  </tbody>
 </table>
 
 <fontawesome [iconType]="iconValues('{{typeProduct}}')"></fontawesome>
