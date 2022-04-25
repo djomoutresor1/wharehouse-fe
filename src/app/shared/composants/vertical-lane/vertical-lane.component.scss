@@ -17,12 +17,6 @@
         box-shadow: none;
       }
     }
-    .empty{
-      background-color: darksalmon;
-     }
-    .noEmpty{
-      background-color:lightgreen;
-     }
   }
   .second-box {
     margin-top: 50px;
@@ -43,13 +37,23 @@
       margin-left: 2px;
       cursor: pointer;
     }
-    .empty{
-      background-color: darksalmon;
-     }
-    .noEmpty{
-      background-color:lightgreen;
-     }
   }
+}
+
+.fullRack {
+  background-color: darksalmon!important;
+}
+.threePositionFree {
+  background-color:#0eb306!important;
+}
+.onePositionFree {
+  background-color:#c1eac1!important;
+}
+.twoPositionFree {
+  background-color:lightgreen!important;
+}
+.moreThanthreePositionFree {
+  background-color:#e6e649!important;
 }
 
 

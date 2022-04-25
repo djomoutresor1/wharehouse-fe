@@ -51,6 +51,27 @@ ngOnInit(): void {
       'CASA': faHouse,
     }[type];
   }
+  getBackgroundColorOne(rack:RackModel): any{
+       if(rack.rackThree===0){
+         return 'backgroundFreePlace'
+       }else
+      return ''
+  }
+
+  getBackgroundColorTwo(rack:RackModel): any{
+    if(rack.rackSix===0){
+      return 'backgroundFreePlace'
+    }else
+   return ''
+}
+
+getBackgroundColorThree(rack:RackModel): any{
+  if(rack.rackNine===0){
+    return 'backgroundFreePlace'
+  }else
+ return ''
+}
+
 
 
 }
