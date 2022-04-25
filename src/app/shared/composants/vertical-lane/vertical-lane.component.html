@@ -2,16 +2,17 @@
     <div class="box first-box">
         <div class="box-name"  nz-button nz-popover nzType="primary" nzPopoverPlacement="top" nzPopoverContent={{goToLane}}{{lane.name.toLocaleUpperCase()}} (click)="onSelectedLaneName(lane.name)"><p class="laneName">{{lane?.name}}</p></div>
         <div *ngFor="let rack of lane.rows.slice(0,6); index as i">
-            <button [ngClass]="isFreeBoxFirst(rack, i)? 'noEmpty' : 'empty'" class="btn btn-default size" nz-button nz-popover nzType="primary" nzPopoverPlacement="top" nzPopoverContent={{lane.name.toLocaleUpperCase()}}{{rack.row}}{{free}}{{isNumberOfPlaceFirst(rack,i)}}  (click)="onSelectedLane(rack, lane.name)">
+            <button class="btn btn-default size" nz-button nz-popover nzType="primary" nzPopoverPlacement="top" nzPopoverContent={{lane.name.toLocaleUpperCase()}}{{rack.row}}{{free}}  (click)="onSelectedLane(rack, lane.name)">
                 <i class="bi bi-shop-window"></i>
                <span>{{rack.row}}</span>
             </button>
+            {{isFreeBoxFirst(rack, i)}}
         </div>
     </div>
     <div class="box second-box">
         <div  class="box-name"  nz-button nz-popover nzType="primary" nzPopoverPlacement="top" nzPopoverContent={{goToLane}}{{lane.name.toLocaleUpperCase()}} (click)="onSelectedLaneName(lane.name)"><p class="laneName">{{lane?.name}}</p></div>
         <div *ngFor="let rack of lane.rows.slice(6,12); index as j">
-            <button [ngClass]="isFreeBoxSecond(rack, j)? 'noEmpty' : 'empty'" class="btn btn-default size" nz-button nz-popover nzType="primary" nzPopoverPlacement="top" nzPopoverContent={{lane.name.toLocaleUpperCase()}}{{rack.row}}{{free}}{{isNumberOfPlaceSecond(rack,j)}}  (click)="onSelectedLane(rack, lane.name)">
+            <button  class="btn btn-default size" nz-button nz-popover nzType="primary" nzPopoverPlacement="top" nzPopoverContent={{lane.name.toLocaleUpperCase()}}{{rack.row}}{{free}}  (click)="onSelectedLane(rack, lane.name)">
                 <i class="bi bi-shop-window"></i>
                 <span>{{rack.row}}</span>
             </button>

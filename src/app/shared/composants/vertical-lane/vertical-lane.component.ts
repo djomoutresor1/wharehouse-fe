@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DimensionModel } from 'src/model/corsia/dimension-model';
 import { LaneModel } from 'src/model/corsia/lane-model';
 import { PositionModel } from 'src/model/corsia/position-model';
 import { RowModel } from 'src/model/corsia/row-model';
@@ -42,27 +43,62 @@ export class VerticalLaneComponent implements OnInit {
     );
   }
 
-  isFreeBoxFirst(rack: RowModel, index: number): boolean {
-    let checkFreeBox;
+  /*isFreeBoxFirst(rack: RowModel, index: number): any {
     if (rack.row === index + 1) {
-      checkFreeBox = rack.shelves.find(
-        (place: ShelfModel) => (place.freePlaces > 0 && place.freePlaces <= 3)
+      return rack?.shelves.filter((shelf: ShelfModel) => {
+        return Object.keys(shelf?.positions.filter(
+          (position: PositionModel) => {
+            return Object.keys(position.dimensions.depth === 0).length
+          }
+          )).length
+      })
+    }else{
+      return
+    }
+  }*/
+  isFreeBoxFirst(rack: RowModel, index: number): any {
+    let positionsFound;
+    if (rack.row === index + 1) { // 6 because slice(6,12)
+      positionsFound = rack.shelves.find((shelf: ShelfModel) =>
+        shelf?.positions.find(
+          (position: PositionModel) =>
+         //   position.dimensions.length === 0 ||
+            position.dimensions.depth === 0 
+       //     position.dimensions.width === 0
+        )
       );
-      return checkFreeBox ? true : false;
+      return positionsFound?.positions?.length;
     } else {
-      return false;
+      return 0;
     }
   }
 
-  isFreeBoxSecond(rack: RowModel, index: number): boolean {
-    let checkFreeBox;
+  isFreeBoxSecond(rack: RowModel, index: number) {
+    let positionFound;
     if (rack.row === index + 1 + 6) {
-      checkFreeBox = rack.shelves.find(
-        (place: ShelfModel) => (place.freePlaces > 0 && place.freePlaces <= 3)
+      // 6 because slice(6,12)
+      positionFound = rack.shelves.find((shelf: ShelfModel) =>
+        shelf?.positions.find(
+          (position: PositionModel) =>
+            Object.keys(position.dimensions.depth === 0).length
+        )
       );
-      return checkFreeBox ? true : false;
+    }else{
+      return
+    }
+  }
+  /* isFreeBoxSecond(rack: RowModel, index: number): boolean {
+    let positionFound;
+    if (rack.row === index + 1+6) { // 6 because slice(6,12)
+      positionFound = rack.shelves.find((shelf: ShelfModel) =>
+        shelf?.positions.find(
+          (position: PositionModel) =>
+            position.dimensions.width === 0
+        )
+      );
+      return positionFound ? false : true;
     } else {
-      return false;
+      return true;
     }
   }
 
@@ -76,25 +112,13 @@ export class VerticalLaneComponent implements OnInit {
    
   }
 
-  
-  isNumberOfPlaceSecond(rack: RowModel, index: number) {
-    
-    if (rack.row === index + 1 +6) {
-   return     rack.shelves.filter((place:ShelfModel) =>(place.freePlaces > 0 && place.freePlaces <= 3)).length ;
-    }else{
-      return
-    }
-   
-  }
 
-  /* isFreeBoxSecond(rack: RowModel, index: number): boolean {
+   isFreeBoxSecond(rack: RowModel, index: number): boolean {
     let positionFound;
     if (rack.row === index + 1 + 6) { // 6 because slice(6,12)
       positionFound = rack.shelves.find((shelf: ShelfModel) =>
         shelf?.positions.find(
           (position: PositionModel) =>
-            position.dimensions.length === 0 ||
-            position.dimensions.depth === 0 ||
             position.dimensions.width === 0
         )
       );

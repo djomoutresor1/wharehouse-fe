@@ -12,7 +12,7 @@ export class TablesService {
   constructor(private http: HttpClient) { }
 
   public getDataTable() {
-    return this.http.get<any>("../assets/mocks/warehouse.json");
+    return this.http.get<any>("../assets/mocks/dashboard.json");
   }
 
   

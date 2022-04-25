@@ -12,7 +12,7 @@ export class TableService {
   constructor(private http: HttpClient) {}
 
   public getDataTable() {
-    return this.http.get<LanesModel>('../assets/mocks/warehouse.json');
+    return this.http.get<LanesModel>('../assets/mocks/dashboard.json');
   }
 
   ngOnInit(): void {
