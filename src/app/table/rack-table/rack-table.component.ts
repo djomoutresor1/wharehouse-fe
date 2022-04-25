@@ -15,6 +15,9 @@ export class RackTableComponent implements OnInit {
   @Input() typeProduct: String = " ";
 
 
+  id:any
+
+
   
 
   rackFormat: RackModel[] = [];
@@ -72,6 +75,8 @@ getBackgroundColorThree(rack:RackModel): any{
  return ''
 }
 
-
+myFunction(){
+  alert("my gfgchvjbk")
+}
 
 }
