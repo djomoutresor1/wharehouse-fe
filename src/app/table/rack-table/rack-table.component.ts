@@ -28,6 +28,12 @@ export class RackTableComponent implements OnInit {
   @Input() racks: RackModel[] = [];
   @Input() typeProduct: String = ' ';
 
+
+  id:any
+
+
+  
+
   rackFormat: RackModel[] = [];
   constructor() {}
 
@@ -66,15 +72,23 @@ export class RackTableComponent implements OnInit {
     } else return '';
   }
 
-  getBackgroundColorTwo(rack: RackModel): any {
-    if (rack.rackSix === 0) {
-      return 'backgroundFreePlace';
-    } else return '';
-  }
 
-  getBackgroundColorThree(rack: RackModel): any {
-    if (rack.rackNine === 0) {
-      return 'backgroundFreePlace';
-    } else return '';
-  }
+  getBackgroundColorTwo(rack:RackModel): any{
+    if(rack.rackSix===0){
+      return 'backgroundFreePlace'
+    }else
+   return ''
+}
+
+getBackgroundColorThree(rack:RackModel): any{
+  if(rack.rackNine===0){
+    return 'backgroundFreePlace'
+  }else
+ return ''
+}
+
+myFunction(){
+  alert("my gfgchvjbk")
+}
+
 }
