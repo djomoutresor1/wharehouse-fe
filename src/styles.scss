@@ -13,3 +13,9 @@
 //   background-repeat: no-repeat;
 //   background-position: center;
 // }
+
+body {
+  .cdk-overlay-container & {
+    overflow: hidden !important;
+  }
+}

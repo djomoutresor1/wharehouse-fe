@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -75,7 +76,7 @@ export class LoginComponent implements OnInit {
         this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
         this.successNotificationType(response);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.log('error: ', error);
         this.errorAlertType(error.error);
       }

@@ -12,12 +12,14 @@ import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { Router } from '@angular/router';
 import { Pages } from '../enums/pages-enums';
+import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 
 @Injectable()
 export class CommonInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
-    private warehouseLocalStorage: WarehouseLocalStorage
+    private warehouseLocalStorage: WarehouseLocalStorage,
+    private authorizationService: AuthorizationService
   ) {}
 
   intercept(

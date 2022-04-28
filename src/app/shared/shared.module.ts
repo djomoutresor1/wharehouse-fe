@@ -15,6 +15,7 @@ import { FontawesomeComponent } from './composants/fontawesome/fontawesome.compo
 import { LoadingComponent } from './composants/loading/loading.component';
 import { NotificationComponent } from './composants/notification/notification.component';
 import { CapitalizeFirstLetterPipe } from './pipes/capitalize-first-letter.pipe';
+import { ModalComponent } from './composants/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CapitalizeFirstLetterPipe } from './pipes/capitalize-first-letter.pipe'
     LoadingComponent,
     NotificationComponent,
     CapitalizeFirstLetterPipe,
+    ModalComponent,
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { CapitalizeFirstLetterPipe } from './pipes/capitalize-first-letter.pipe'
     FaDuotoneIconComponent,
     LoadingComponent,
     NotificationComponent,
-    CapitalizeFirstLetterPipe
+    CapitalizeFirstLetterPipe,
+    ModalComponent
   ],
 })
 export class SharedModule {}

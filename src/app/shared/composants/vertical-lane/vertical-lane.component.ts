@@ -45,47 +45,46 @@ export class VerticalLaneComponent implements OnInit {
 
   isFreeBoxFirst(rack: RowModel, index: number): any {
     if (rack.row === index + 1) {
-      return this.getColor(rack?.shelves.map((shelf: ShelfModel) => {
-        return (shelf?.positions.filter(
-          (position: PositionModel) => {
-            return position?.dimensions.depth === 0
-          }
-          ).length)
-      }).reduce((a,b) => a + b, 0))
-    }else{
-      return
+      return this.getColor(
+        rack?.shelves
+          .map((shelf: ShelfModel) => {
+            return shelf?.positions.filter((position: PositionModel) => {
+              return position?.dimensions.depth === 0;
+            }).length;
+          })
+          .reduce((a, b) => a + b, 0)
+      );
+    } else {
+      return;
     }
   }
-
 
   isFreeBoxSecond(rack: RowModel, index: number): any {
     if (rack.row === index + 1 + 6) {
-      return this.getColor(rack?.shelves.map((shelf: ShelfModel) => {
-        return (shelf?.positions.filter(
-          (position: PositionModel) => {
-            return position?.dimensions.depth === 0
-          }
-          ).length)
-      }).reduce((a,b) => a + b, 0))
-    }else{
-      return
+      return this.getColor(
+        rack?.shelves
+          .map((shelf: ShelfModel) => {
+            return shelf?.positions.filter((position: PositionModel) => {
+              return position?.dimensions.depth === 0;
+            }).length;
+          })
+          .reduce((a, b) => a + b, 0)
+      );
+    } else {
+      return;
     }
   }
 
-  getColor(freePlace:number) { 
-      if(freePlace ===1){
-        return 'onePositionFree';
-      } else 
-      if(freePlace ===2){
-        return 'twoPositionFree';
-      } else 
-      if(freePlace ===3){
-        return 'threePositionFree';
-      } else 
-      if(freePlace >3){
-        return 'moreThanthreePositionFree';
-      } else
-      return 'fullRack'
+  getColor(freePlace: number) {
+    if (freePlace === 1) {
+      return 'onePositionFree';
+    } else if (freePlace === 2) {
+      return 'twoPositionFree';
+    } else if (freePlace === 3) {
+      return 'threePositionFree';
+    } else if (freePlace > 3) {
+      return 'moreThanthreePositionFree';
+    } else return 'fullRack';
   }
   /* isFreeBoxSecond(rack: RowModel, index: number): boolean {
     let positionFound;

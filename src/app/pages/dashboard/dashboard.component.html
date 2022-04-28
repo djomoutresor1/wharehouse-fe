@@ -9,11 +9,11 @@
         <i nz-icon nzType="dashboard"></i>
         <span>Dashboard</span>
       </li>
-      <li nz-submenu nzTitle="User" nzIcon="user">
+      <li nz-submenu nzTitle="Users" nzIcon="user">
         <ul>
-          <li nz-menu-item>Tom</li>
-          <li nz-menu-item>Bill</li>
-          <li nz-menu-item>Alex</li>
+          <li nz-menu-item>All users</li>
+          <li nz-menu-item>Add new user</li>
+          <!-- <li nz-menu-item>Alex</li> -->
         </ul>
       </li>
       <li nz-submenu nzTitle="Team" nzIcon="team">
@@ -41,8 +41,14 @@
 </nz-layout>
 <div class="row" *ngIf="isLogout">
   <div class="col">
-      <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert"
-          [descriptionNotification]="descriptionAlert">
-      </warehouse-notification>
+    <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert"
+      [descriptionNotification]="descriptionAlert">
+    </warehouse-notification>
+  </div>
+</div>
+<div class="row" *ngIf="isValidToken">
+  <div class="col">
+    <warehouse-modal [typeModal]="alertType" [messageModal]="messageAlert" [descriptionModal]="descriptionAlert"
+      (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
   </div>
 </div>

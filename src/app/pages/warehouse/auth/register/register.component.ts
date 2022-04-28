@@ -6,6 +6,7 @@ import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'warehouse-register',
@@ -89,7 +90,7 @@ export class RegisterComponent implements OnInit {
         (response: ResponseRegisterModel) => {
           this.successAlertType(response?.message);
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           this.errorAlertType(error.error.message);
         }
       );
