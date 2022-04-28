@@ -1,15 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { AppComponent } from 'src/app/app.component';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
-import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
-import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
 
 @Component({
   selector: 'dashboard',
@@ -26,6 +23,7 @@ export class DashboardComponent implements OnInit {
   alertType: string = '';
   messageAlert: string = '';
   descriptionAlert: string = '';
+  okText: string = '';
 
   @HostListener('document:click', ['$event'])
   clickout() {
@@ -87,8 +85,9 @@ export class DashboardComponent implements OnInit {
         console.log('error: ', error);
         if (error?.status === 403) {
           this.alertType = AlertType.ALERT_WARNING;
-          this.messageAlert = `Timeout Session`;
-          this.descriptionAlert = error?.error?.message;
+          this.okText = 'Login again';
+          this.messageAlert = `Authorization failed`;
+          this.descriptionAlert = `Sorry, you authorization in the Warehouse System isn't allowed.`;
           this.isValidToken = true;
         }
       }
@@ -113,6 +112,7 @@ export class DashboardComponent implements OnInit {
   handleOnOkModal(event: string) {
     if (event === Utils.WAREHOUSE_TIMEOUT_TOKEN) {
       this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
+      window.location.reload();
       this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
     }
   }

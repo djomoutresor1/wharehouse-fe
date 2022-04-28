@@ -12,6 +12,7 @@ export class ModalComponent implements OnInit {
   @Input() typeModal: any;
   @Input() messageModal: string = '';
   @Input() descriptionModal: string = '';
+  @Input() okTextModal: string = '';
 
   @Output() handleOnOkModal: EventEmitter<any> = new EventEmitter<any>();
 
@@ -23,7 +24,8 @@ export class ModalComponent implements OnInit {
         nzTitle: this.messageModal,
         nzContent: this.descriptionModal,
         nzClosable: false,
-        nzOkText: 'Login again',
+        nzOkText: this.okTextModal,
+        nzCentered: false,
         nzOnOk: () => this.handleOnOkModal.emit(Utils.WAREHOUSE_TIMEOUT_TOKEN),
       });
     }
