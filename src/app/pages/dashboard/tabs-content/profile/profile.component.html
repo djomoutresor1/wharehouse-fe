@@ -1,42 +1,34 @@
 <div class="warehouse-auth-wrapper container">
   <div class="row">
     <div class="col-md-4 offset-md-4">
-      <div class="col" *ngIf="isAuth">
-        <warehouse-alert [typeAlert]="alertType" [messageAlert]="messageAlert">
-        </warehouse-alert>
-      </div>
     </div>
   </div>
   <div class="row">
-    <nz-table #editRowTable nzBordered [nzData]="myArray" nzTableLayout="fixed">
+    <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="allUsers"
+      (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
       <thead>
         <tr>
-          <th nzWidth="25%">FullName</th>
-          <th nzWidth="22%">Username</th>
-          <th nzWidth="22%">Email</th>
-          <th nzWidth="20%">Password</th>
-          <th>Action</th>
+          <th [nzSelections]="listOfSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
+            (nzCheckedChange)="onAllChecked($event)"></th>
+          <th>Id user</th>
+          <th>Username</th>
+          <th>FullName</th>
+          <th>Email</th>
+          <th>Roles</th>
+          <th>Date of birth</th>
+          <th>Last Login</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of editRowTable.data">
-          <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
-            <td>{{ data.fullName }}</td>
-            <td>{{ data.userName }}</td>
-            <td>{{ data.email }}</td>
-            <td>{{hashPassword(data.password)}}</td>
-            <td><a (click)="startEdit(data.id)">Edit</a></td>
-          </ng-container>
-          <ng-template #editTemplate>
-            <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.fullName" /></td>
-            <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.userName" /></td>
-            <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.email" /></td>
-            <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.password" /></td>
-            <td>
-              <a (click)="saveEdit(data.id)" class="save">Save</a>
-              <a nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(data.id)">Cancel</a>
-            </td>
-          </ng-template>
+        <tr *ngFor="let data of rowSelectionTable.data">
+          <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
+          <td>{{ data.userId }}</td>
+          <td>{{ data.username }}</td>
+          <td>{{ data.fullname }}</td>
+          <td>{{ data.email }}</td>
+          <td>{{ rolesUser(data.roles[0].name) }}</td>
+          <td>{{ data.dateOfBirth }}</td>
+          <td>{{ data.lastLogin }}</td>
         </tr>
       </tbody>
     </nz-table>

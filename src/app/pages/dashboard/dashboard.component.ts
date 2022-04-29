@@ -4,12 +4,13 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { ProfilService } from 'src/app/services/profil.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
-import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
-import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
+import { responseProfil } from 'src/interfaces/responses';
+
 
 @Component({
   selector: 'dashboard',
@@ -26,6 +27,7 @@ export class DashboardComponent implements OnInit {
   alertType: string = '';
   messageAlert: string = '';
   descriptionAlert: string = '';
+  checkRole: any;
 
   @HostListener('document:click', ['$event'])
   clickout() {
@@ -50,7 +52,8 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private dashboardService: DashboardService,
     private warehouseLocalStorage: WarehouseLocalStorage,
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
+    private profilService :ProfilService
   ) {
     console.log(
       "localStorage.getItem('theme'): ",
@@ -75,6 +78,13 @@ export class DashboardComponent implements OnInit {
     if (this.warehouseUser?.token) {
       this.handleOnVerifyToken(this.warehouseUser?.token);
     }
+    this.profilService.retrieveUser().subscribe((user:any)=>{
+      user.map((role:any)=>{
+        this.checkRole = role?.roles[0].name;
+        console.log('role of Logged: ', this.checkRole);
+      })
+    
+    })
   }
 
   handleOnVerifyToken(token: string) {
