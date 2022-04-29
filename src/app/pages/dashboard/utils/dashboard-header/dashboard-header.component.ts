@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -78,7 +79,7 @@ export class DashboardHeaderComponent implements OnInit {
             console.log('response: ', response);
             this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
           },
-          (error) => {
+          (error: HttpErrorResponse) => {
             console.log('error: ', error);
           }
         );
