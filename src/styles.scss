@@ -14,8 +14,6 @@
 //   background-position: center;
 // }
 
-body {
-  .cdk-overlay-container & {
-    overflow: hidden !important;
-  }
+.overlay-container {
+  overflow: hidden;
 }

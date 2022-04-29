@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { AppComponent } from 'src/app/app.component';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { ProfilService } from 'src/app/services/profil.service';
@@ -28,6 +27,7 @@ export class DashboardComponent implements OnInit {
   messageAlert: string = '';
   descriptionAlert: string = '';
   checkRole: any;
+  okText: string = '';
 
   @HostListener('document:click', ['$event'])
   clickout() {
@@ -97,8 +97,9 @@ export class DashboardComponent implements OnInit {
         console.log('error: ', error);
         if (error?.status === 403) {
           this.alertType = AlertType.ALERT_WARNING;
-          this.messageAlert = `Timeout Session`;
-          this.descriptionAlert = error?.error?.message;
+          this.okText = 'Login again';
+          this.messageAlert = `Authorization failed`;
+          this.descriptionAlert = `Sorry, you authorization in the Warehouse System isn't allowed.`;
           this.isValidToken = true;
         }
       }
@@ -123,6 +124,7 @@ export class DashboardComponent implements OnInit {
   handleOnOkModal(event: string) {
     if (event === Utils.WAREHOUSE_TIMEOUT_TOKEN) {
       this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
+      window.location.reload();
       this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
     }
   }
