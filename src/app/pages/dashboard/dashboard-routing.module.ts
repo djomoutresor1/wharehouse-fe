@@ -6,6 +6,7 @@ import { DashboardHomeComponent } from './dashboard-home/dashboard-home.componen
 import { DashboardRackDetailComponent } from './dashboard-rack-detail/dashboard-rack-detail.component';
 import { DashboardRackGlobalComponent } from './dashboard-rack-global/dashboard-rack-global.component';
 import { DashboardComponent } from './dashboard.component';
+import { AllUsersComponent } from './tabs-content/all-users/all-users.component';
 import { PreferencesComponent } from './tabs-content/preferences/preferences.component';
 import { ProfileComponent } from './tabs-content/profile/profile.component';
 
@@ -28,6 +29,7 @@ const routes: Routes = [
       },
       { path: `${Pages.PROFILE}`, component: ProfileComponent },
       { path: `${Pages.SETTINGS}`, component: PreferencesComponent },
+      { path: `${Pages.USERS}`, component: AllUsersComponent },
     ],
   },
 ];

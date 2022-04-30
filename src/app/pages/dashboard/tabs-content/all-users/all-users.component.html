@@ -1,0 +1,32 @@
+<div class="warehouse-auth-wrapper container">
+    <div class="row">
+      <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="allUsers"
+        (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+        <thead>
+          <tr>
+            <th [nzSelections]="listOfSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
+              (nzCheckedChange)="onAllChecked($event)"></th>
+            <th>Id user</th>
+            <th>Username</th>
+            <th>FullName</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Date of birth</th>
+            <th>Last Login</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of rowSelectionTable.data">
+            <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
+            <td>{{ data.userId }}</td>
+            <td>{{ data.username }}</td>
+            <td>{{ data.fullname }}</td>
+            <td>{{ data.email }}</td>
+            <td>{{ rolesUser(data.roles[0].name) }}</td>
+            <td>{{ data.dateOfBirth }}</td>
+            <td>{{ data.lastLogin }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>

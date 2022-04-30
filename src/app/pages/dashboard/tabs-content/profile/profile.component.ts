@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfilService } from 'src/app/services/profil.service';
-import { responseProfil } from 'src/interfaces/responses';
+import { Utils } from 'src/app/shared/enums/utils-enums';
+import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 
-
-interface ItemData {
-  id: number;
-  name: string;
-  age: number;
-  address: string;
-}
 
 @Component({
   selector: 'warehouse-profile',
@@ -16,89 +9,30 @@ interface ItemData {
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  listOfSelection = [
-    {
-      text: 'Select All Row',
-      onSelect: () => {
-        this.onAllChecked(true);
-      }
-    },
-    {
-      text: 'Select Odd Row',
-      onSelect: () => {
-        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.id, index % 2 !== 0));
-        this.refreshCheckedStatus();
-      }
-    },
-    {
-      text: 'Select Even Row',
-      onSelect: () => {
-        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.id, index % 2 === 0));
-        this.refreshCheckedStatus();
-      }
-    }
-  ];
-  checked = false;
-  indeterminate = false;
-  listOfCurrentPageData: readonly ItemData[] = [];
-  setOfCheckedId = new Set<number>();
-  allUsers: any;
+  user:any;
 
 
-
-  constructor(private profilService: ProfilService) {}
+  constructor( private warehouseLocalStorage: WarehouseLocalStorage) {}
 
   ngOnInit(): void {
-    this.profilService.retrieveUser().subscribe((data:responseProfil)=>{
-      this.allUsers= data;
-      console.log('allUser: ', data);
-    })
-
+    this.user = Array.of(this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage());
   }
 
   rolesUser(role:String){
     switch (role) {
-    case 'ROLE_USER':  
-         return 'User'
+    case Utils.ROLE_ADMIN :
+         return Utils.ADMINS
         break;
-    case 'ROLE_MODERATOR': 
-         return 'Moderator'
+    case Utils.ROLE_MODERATOR: 
+         return Utils.MODERATOR
         break;
-    case 'ROLE_ADMIN': 
-         return 'Admin'
+    case Utils.ROLE_USER: 
+         return Utils.USER
         break;
     default: 
-         return 'User'
+         return Utils.USER
         break
     }
-
 }
 
-  updateCheckedSet(id: number, checked: boolean): void {
-    if (checked) {
-      this.setOfCheckedId.add(id);
-    } else {
-      this.setOfCheckedId.delete(id);
-    }
-  }
-
-  onItemChecked(id: number, checked: boolean): void {
-    this.updateCheckedSet(id, checked);
-    this.refreshCheckedStatus();
-  }
-
-  onAllChecked(value: boolean): void {
-    this.listOfCurrentPageData.forEach(item => this.updateCheckedSet(item.id, value));
-    this.refreshCheckedStatus();
-  }
-
-  onCurrentPageDataChange($event: readonly ItemData[]): void {
-    this.listOfCurrentPageData = $event;
-    this.refreshCheckedStatus();
-  }
-
-  refreshCheckedStatus(): void {
-    this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.id));
-    this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.id)) && !this.checked;
-  }
 }

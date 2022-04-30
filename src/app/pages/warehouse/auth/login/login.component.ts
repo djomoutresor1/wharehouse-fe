@@ -86,6 +86,7 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm() {
+    debugger
     let userData = {
       username: this.validateForm.controls['username']?.value.toLowerCase(),
       password: this.validateForm.controls['password']?.value,
