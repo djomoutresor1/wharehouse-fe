@@ -22,6 +22,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
@@ -71,7 +72,8 @@ const icons = [
     NzSpinModule,
     NzSelectModule,
     NzNotificationModule,
-    NzStepsModule
+    NzStepsModule,
+    NzCardModule
   ],
   exports: [
     NzButtonModule,
@@ -98,7 +100,8 @@ const icons = [
     NzSpinModule,
     NzSelectModule,
     NzNotificationModule,
-    NzStepsModule
+    NzStepsModule,
+    NzCardModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })

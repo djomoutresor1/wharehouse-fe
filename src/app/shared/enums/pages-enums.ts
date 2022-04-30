@@ -10,5 +10,6 @@ export enum Pages {
   ERROR = "error-404",
   RACK = "rack",
   GLOBAL_RACK = "corsia",
-  FORGOTPASSWORD = "forgottenPassword"
+  FORGOTPASSWORD = "forgottenPassword",
+  USERS = "users"
 }

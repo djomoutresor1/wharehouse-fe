@@ -1,36 +1,32 @@
-<div class="warehouse-auth-wrapper container">
-  <div class="row">
-    <div class="col-md-4 offset-md-4">
-    </div>
-  </div>
-  <div class="row">
-    <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="allUsers"
-      (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
-      <thead>
-        <tr>
-          <th [nzSelections]="listOfSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
-            (nzCheckedChange)="onAllChecked($event)"></th>
-          <th>Id user</th>
-          <th>Username</th>
-          <th>FullName</th>
-          <th>Email</th>
-          <th>Roles</th>
-          <th>Date of birth</th>
-          <th>Last Login</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of rowSelectionTable.data">
-          <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
-          <td>{{ data.userId }}</td>
-          <td>{{ data.username }}</td>
-          <td>{{ data.fullname }}</td>
-          <td>{{ data.email }}</td>
-          <td>{{ rolesUser(data.roles[0].name) }}</td>
-          <td>{{ data.dateOfBirth }}</td>
-          <td>{{ data.lastLogin }}</td>
-        </tr>
-      </tbody>
-    </nz-table>
+<div class="card-profile">
+  <div class="row" *ngFor="let data of this.user">
+    <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+      <nz-card-meta nzTitle="{{data.fullname}},{{ rolesUser(data.roles) }}" [nzDescription]="description" [nzAvatar]="avatarTemplate">
+      </nz-card-meta>
+    </nz-card>
+    <ng-template #description>
+      <div class="row">
+        <div><a class="descript">User id: </a>{{ data.userId }}</div>
+        <div><a class="descript">Username:</a>{{ data.username }}</div>
+        <div><a class="descript">Email:</a>{{ data.email }}</div>
+        <div><a class="descript">Date of birth:</a> {{ data.dateOfBirth }}</div>
+        <div><a class="descript">Last Login:</a> {{ data.lastLogin }}</div>
+      </div>
+    </ng-template>
+    <ng-template #avatarTemplate>
+      <nz-avatar nzSrc="../../../../../assets/images/avatar.jpg"></nz-avatar>
+    </ng-template>
+    <ng-template #coverTemplate>
+      <img alt="example" src="../../../../../assets/images/The-welcome-Warehouse.jpg" />
+    </ng-template>
+    <ng-template #actionSetting>
+      <i nz-icon nzType="setting"></i>
+    </ng-template>
+    <ng-template #actionEdit>
+      <i nz-icon nzType="edit"></i>
+    </ng-template>
+    <ng-template #actionEllipsis>
+      <i nz-icon nzType="ellipsis"></i>
+    </ng-template>
   </div>
 </div>

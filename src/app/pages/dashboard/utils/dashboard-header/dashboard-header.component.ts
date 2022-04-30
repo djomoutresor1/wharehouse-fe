@@ -3,8 +3,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AuthentificationService } from 'src/app/services/auth/authentification.service';
-import { ProfilService } from 'src/app/services/profil.service';
-import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 
@@ -28,27 +26,14 @@ export class DashboardHeaderComponent implements OnInit {
     private router: Router,
     private authentificationService: AuthentificationService,
     private warehouseLocalStorage: WarehouseLocalStorage,
-    private profilService :ProfilService
   ) {}
 
   ngOnInit(): void {
-    this.profilService.retrieveUser().subscribe((user:any)=>{
-      user.map((role:any)=>{
-        this.checkRole = role?.roles[0].name;
-        console.log('role of Logged: ', this.checkRole);
-      })
-    
-    })
   }
 
 // da implementare avec un alert ng-zorro
   handleOnNavigate(url: string) {
-    if(this.checkRole ==='ROLE_ADMIN'){
       this.handleOnNotifyNavigation.emit(url);
-    }else{
-      alert("you don't have ability to access to profile!");
-    }
-
   }
 
   handleOnCollapsed(collapsed: boolean) {
