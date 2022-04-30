@@ -78,13 +78,7 @@ export class DashboardComponent implements OnInit {
     if (this.warehouseUser?.token) {
       this.handleOnVerifyToken(this.warehouseUser?.token);
     }
-    this.profilService.retrieveUser().subscribe((user:any)=>{
-      user.map((role:any)=>{
-        this.checkRole = role?.roles[0].name;
-        console.log('role of Logged: ', this.checkRole);
-      })
-    
-    })
+    this.checkRole = this.warehouseUser.roles[0]
   }
 
   handleOnVerifyToken(token: string) {

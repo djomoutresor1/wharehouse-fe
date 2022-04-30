@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = Array.of(this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage());
+    console.log(" userss; ",this.user)
   }
 
   rolesUser(role:String){
