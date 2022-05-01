@@ -4,4 +4,5 @@ export enum Auth {
   WAREHOUSE_REGISTER_USER = '/register',
   WAREHOUSE_REFRESH_TOKEN = '/refreshtoken',
   WAREHOUSE_VERIFY_TOKEN = '/verifytoken',
+  WAREHOUSE_UPLOAD_IMAGE = '/upload',
 }

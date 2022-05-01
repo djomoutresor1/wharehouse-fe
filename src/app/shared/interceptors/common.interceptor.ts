@@ -36,7 +36,8 @@ export class CommonInterceptor implements HttpInterceptor {
 
     if (
       !request.url.endsWith(Auth.WAREHOUSE_LOGIN_USER) &&
-      !request.url.endsWith(Auth.WAREHOUSE_REGISTER_USER)
+      !request.url.endsWith(Auth.WAREHOUSE_REGISTER_USER)&&
+      !request.url.endsWith(Auth.WAREHOUSE_UPLOAD_IMAGE)
     ) {
       if (user?.token) {
         request = request.clone({

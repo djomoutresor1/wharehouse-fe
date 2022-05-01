@@ -6,7 +6,9 @@ import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { ImageService } from 'src/app/services/image.service';
+
 
 @Component({
   selector: 'warehouse-register',
@@ -29,14 +31,27 @@ export class RegisterComponent implements OnInit {
     { label: 'Moderator', value: 'moderator' },
   ];
   selectedValue = { label: 'User', value: 'user' };
-  steps: string[] = ["User Informations", "Verification Email", "Registration User"];
+  steps: string[] = [
+    'User Informations',
+    'Verification Email',
+    'Registration User',
+  ];
   currentStep: number = 0;
+  selectedFile: any;
+  event1: any;
+  imgURL: any;
+  receivedImageData: any;
+  base64Data: any;
+  convertedImage: any;
+  showbuttonUpload:boolean = true;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authentificationService: AuthentificationService,
-    private warehouseLocalStorage: WarehouseLocalStorage
+    private warehouseLocalStorage: WarehouseLocalStorage,
+    private http: HttpClient,
+    private imageService: ImageService
   ) {
     this.checkIfUserIsAlreadyLogged();
   }
@@ -55,6 +70,7 @@ export class RegisterComponent implements OnInit {
       password: [null, [Validators.required]],
       confirmPassword: [null, [Validators.required]],
       role: [null, [Validators.required]],
+      image:[null, [Validators.required]],
     });
   }
 
@@ -86,6 +102,7 @@ export class RegisterComponent implements OnInit {
         password: this.validateForm.controls['password']?.value,
         role: this.validateForm.controls['role']?.value,
       };
+      this.onUploadFotoProfile();
       this.authentificationService.userRegister(userData).subscribe(
         (response: ResponseRegisterModel) => {
           this.successAlertType(response?.message);
@@ -123,5 +140,29 @@ export class RegisterComponent implements OnInit {
     if (this.isAuth) {
       this.isAuth = !this.isAuth;
     }
+  }
+
+  onUploadFotoProfile() {
+    const uploadData = new FormData();
+    uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
+    this.imageService.getUploadImageProfil().subscribe(
+        (res: any) => {
+          console.log(res);
+          this.receivedImageData = res;
+          this.base64Data = this.receivedImageData.pic;
+          this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data;
+        },
+        (err: string) => console.log('Error Occured duringng saving: ' + err)
+      );
+  }
+
+  onFileChanged(event: any) {
+    this.showbuttonUpload = false
+    this.selectedFile = event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(this.selectedFile);
+    reader.onload = (event2) => {
+      this.imgURL = reader.result;
+    };
   }
 }
