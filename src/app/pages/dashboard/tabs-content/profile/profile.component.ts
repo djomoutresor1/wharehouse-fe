@@ -37,10 +37,8 @@ export class ProfileComponent implements OnInit {
   }
 
   rolesUser(data: any) {
-    return data
-      .map((currElement: any) => {
+    return data.map((currElement: any) => {
         return this.nameUser(currElement);
-      })
-      .join(',');
+      }).join(' & ');
   }
 }
