@@ -8,6 +8,8 @@ import { Pages } from 'src/app/shared/enums/pages-enums';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ImageService } from 'src/app/services/image.service';
+import { environment } from 'src/environments/environment';
+import { Auth } from 'src/app/shared/enums/auth-enums';
 
 
 @Component({
@@ -43,7 +45,10 @@ export class RegisterComponent implements OnInit {
   receivedImageData: any;
   base64Data: any;
   convertedImage: any;
-  showbuttonUpload:boolean = true;
+  showbuttonUpload:boolean = false;
+  showInputUpload:boolean = true;
+
+  private apiServerUrl = environment.apiBaseUrl;
 
   constructor(
     private fb: FormBuilder,
@@ -70,7 +75,7 @@ export class RegisterComponent implements OnInit {
       password: [null, [Validators.required]],
       confirmPassword: [null, [Validators.required]],
       role: [null, [Validators.required]],
-      image:[null, [Validators.required]],
+      image:null,
     });
   }
 
@@ -102,7 +107,7 @@ export class RegisterComponent implements OnInit {
         password: this.validateForm.controls['password']?.value,
         role: this.validateForm.controls['role']?.value,
       };
-      this.onUploadFotoProfile();
+   //   this.onUploadFotoProfile();
       this.authentificationService.userRegister(userData).subscribe(
         (response: ResponseRegisterModel) => {
           this.successAlertType(response?.message);
@@ -143,21 +148,42 @@ export class RegisterComponent implements OnInit {
   }
 
   onUploadFotoProfile() {
+
     const uploadData = new FormData();
-    uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
-    this.imageService.getUploadImageProfil().subscribe(
-        (res: any) => {
-          console.log(res);
-          this.receivedImageData = res;
-          this.base64Data = this.receivedImageData.pic;
-          this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data;
-        },
-        (err: string) => console.log('Error Occured duringng saving: ' + err)
-      );
+    this.showbuttonUpload = false;
+    this.showInputUpload = false;
+    uploadData.append('myFile', this.selectedFile, this.selectedFile?.name);
+  
+    this.http.post(`${this.apiServerUrl}${Auth.WAREHOUSE_UPLOAD_IMAGE}`,uploadData).subscribe(
+                 res => {console.log(res);
+                         this.receivedImageData = res;
+                         this.base64Data = this.receivedImageData.pic;
+                         this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data; },
+                 err => console.log('Error Occured duringng saving: ' + err)
+              );
   }
+  
+ /* onUploadFotoProfile() {
+
+    const uploadData = new FormData();
+   // uploadData.append('myFile', this.selectedFile, this.selectedFile?.name);
+  
+  
+    this.imageService.getUploadImageProfil().subscribe(
+                 res => {console.log(res);
+                         this.receivedImageData = res;
+                         this.base64Data = this.receivedImageData.pic;
+                         this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data; },
+                 err => console.log('Error Occured duringng saving: ' + err)
+              );
+  }*/
+
+  
 
   onFileChanged(event: any) {
-    this.showbuttonUpload = false
+ //   this.onUploadFotoProfile();
+    this.showbuttonUpload = true
+    this.showInputUpload = false
     this.selectedFile = event.target.files[0];
     let reader = new FileReader();
     reader.readAsDataURL(this.selectedFile);

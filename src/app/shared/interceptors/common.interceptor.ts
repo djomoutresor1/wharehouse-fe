@@ -33,7 +33,7 @@ export class CommonInterceptor implements HttpInterceptor {
     const isApiUrl = request.url.startsWith(environment.apiBaseUrl);
 
     console.log('token: ', user?.token);
-
+// image will be save in localstorage and get it
     if (
       !request.url.endsWith(Auth.WAREHOUSE_LOGIN_USER) &&
       !request.url.endsWith(Auth.WAREHOUSE_REGISTER_USER)&&
