@@ -78,7 +78,8 @@ export class DashboardComponent implements OnInit {
     if (this.warehouseUser?.token) {
       this.handleOnVerifyToken(this.warehouseUser?.token);
     }
-    this.checkRole = this.warehouseUser.roles[0]
+    this.checkRole = this.warehouseUser.roles.find((role:any) => role === "ROLE_ADMIN");
+    console.log("checkRole: ",this.checkRole)
   }
 
   handleOnVerifyToken(token: string) {

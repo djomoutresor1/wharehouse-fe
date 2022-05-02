@@ -9,7 +9,7 @@
         <i nz-icon nzType="dashboard"></i>
         <span>Dashboard</span>
       </li>
-      <li *ngIf="this.checkRole ==='ROLE_ADMIN'? true:false" nz-submenu nzTitle="Users" nzIcon="user">
+      <li *ngIf="this.checkRole === undefined? false:true" nz-submenu nzTitle="Users" nzIcon="user">
         <ul>
           <li nz-menu-item (click)="handleOnUser('dashboard/users')">All users</li>
           <li nz-menu-item>Add new user</li>

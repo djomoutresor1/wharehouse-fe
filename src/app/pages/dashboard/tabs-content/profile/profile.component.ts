@@ -19,21 +19,28 @@ export class ProfileComponent implements OnInit {
     console.log(" userss; ",this.user)
   }
 
-  rolesUser(role:String){
+  nameUser(role: string) {
     switch (role) {
-    case Utils.ROLE_ADMIN :
-         return Utils.ADMINS
+      case Utils.ROLE_ADMIN:
+        return Utils.ADMINS;
         break;
-    case Utils.ROLE_MODERATOR: 
-         return Utils.MODERATOR
+      case Utils.ROLE_MODERATOR:
+        return Utils.MODERATOR;
         break;
-    case Utils.ROLE_USER: 
-         return Utils.USER
+      case Utils.ROLE_USER:
+        return Utils.USER;
         break;
-    default: 
-         return Utils.USER
-        break
+      default:
+        return Utils.USER;
+        break;
     }
-}
+  }
 
+  rolesUser(data: any) {
+    return data
+      .map((currElement: any) => {
+        return this.nameUser(currElement);
+      })
+      .join(',');
+  }
 }
