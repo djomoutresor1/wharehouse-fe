@@ -36,6 +36,23 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  choseTheme(role: string) {
+    switch (role) {
+      case 'User':
+        return 'magenta';
+        break;
+      case 'Moderator':
+        return 'orange';
+        break;
+      case 'Admin':
+        return 'green';
+        break;
+      default:
+        return 'magenta';
+        break;
+    }
+  }
+
   rolesUser(data: any) {
     return data.map((currElement: any) => {
         return this.nameUser(currElement);
