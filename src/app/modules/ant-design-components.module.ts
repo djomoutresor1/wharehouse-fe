@@ -37,6 +37,7 @@ import {
 } from '@ant-design/icons-angular/icons';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { TranslateModule } from '@ngx-translate/core';
 
 const icons = [
   MenuFoldOutline,
@@ -76,7 +77,8 @@ const icons = [
     NzNotificationModule,
     NzStepsModule,
     NzCardModule,
-    NzTagModule 
+    NzTagModule,
+    TranslateModule
   ],
   exports: [
     NzButtonModule,
@@ -105,7 +107,8 @@ const icons = [
     NzNotificationModule,
     NzStepsModule,
     NzCardModule,
-    NzTagModule 
+    NzTagModule,
+    TranslateModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })

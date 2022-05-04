@@ -11,12 +11,15 @@ import { LaneModel } from 'src/model/corsia/lane-model';
 export class DashboardHomeComponent implements OnInit {
   lanes: LaneModel[] = [];
   lastLane: any;
-  
-  
+  name = '';
+  language: string = 'en';
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+  ) {
+  }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.dashboardService.getDashboard().subscribe(
       (response) => {
         this.lanes = response.lanes.slice(0, 14);
@@ -25,6 +28,6 @@ export class DashboardHomeComponent implements OnInit {
       (error: HttpErrorResponse) => {
         console.log('error: ', error);
       }
-    );    
+    );
   }
 }
