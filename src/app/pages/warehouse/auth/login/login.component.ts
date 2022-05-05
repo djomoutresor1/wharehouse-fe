@@ -47,6 +47,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm() {
     this.validateForm = this.fb.group({
       username: [
         this.username,
@@ -146,7 +150,7 @@ export class LoginComponent implements OnInit {
   }
 
   handleOnForgotPassword() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.FORGOTPASSWORD}`]);
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.FORGOT_PASSWORD}`]);
   }
 
   handleOnRememberMe() {

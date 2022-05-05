@@ -4,4 +4,8 @@ export interface UserRegisterModel {
   email: string;
   password?: string;
   role: string[];
+  active?: boolean;
+  dateOfBirth?: string;
+  lastLogin?: string;
+  userId?: string;
 }

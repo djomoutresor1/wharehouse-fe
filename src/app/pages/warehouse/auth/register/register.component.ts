@@ -62,6 +62,10 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm() {
     this.validateForm = this.fb.group({
       fullName: [
         null,
