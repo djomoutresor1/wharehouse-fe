@@ -6,6 +6,7 @@ import { AuthorizationService } from 'src/app/services/auth/authorization.servic
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
+import { Utils } from 'src/app/shared/enums/utils-enums';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
 
@@ -130,6 +131,7 @@ export class ResetPasswordComponent implements OnInit {
         .userResetPassword(this.user?.user?.email, password)
         .subscribe(
           (response: ResponseModel) => {
+            localStorage.removeItem(Utils.WAREHOUSE_REMEMBER_ME);
             this.successNotificationType(response);
           },
           (error: HttpErrorResponse) => {
