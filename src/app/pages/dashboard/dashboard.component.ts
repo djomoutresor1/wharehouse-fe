@@ -8,7 +8,6 @@ import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
-import { responseProfil } from 'src/interfaces/responses';
 
 
 @Component({
@@ -78,7 +77,8 @@ export class DashboardComponent implements OnInit {
     if (this.warehouseUser?.token) {
       this.handleOnVerifyToken(this.warehouseUser?.token);
     }
-    this.checkRole = this.warehouseUser.roles[0]
+    this.checkRole = this.warehouseUser.roles.find((role:any) => role === "ROLE_ADMIN");
+    console.log("checkRole: ",this.checkRole)
   }
 
   handleOnVerifyToken(token: string) {

@@ -9,7 +9,7 @@ interface ItemData{
 @Component({
   selector: 'warehouse-all-users',
   templateUrl: './all-users.component.html',
-  styleUrls: ['./all-users.component.scss']
+  styleUrls: ['./all-users.component.scss'],
 })
 export class AllUsersComponent implements OnInit {
   listOfSelection = [
@@ -17,22 +17,26 @@ export class AllUsersComponent implements OnInit {
       text: 'Select All Row',
       onSelect: () => {
         this.onAllChecked(true);
-      }
+      },
     },
     {
       text: 'Select Odd Row',
       onSelect: () => {
-        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.id, index % 2 !== 0));
+        this.listOfCurrentPageData.forEach((data, index) =>
+          this.updateCheckedSet(data.id, index % 2 !== 0)
+        );
         this.refreshCheckedStatus();
-      }
+      },
     },
     {
       text: 'Select Even Row',
       onSelect: () => {
-        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.id, index % 2 === 0));
+        this.listOfCurrentPageData.forEach((data, index) =>
+          this.updateCheckedSet(data.id, index % 2 === 0)
+        );
         this.refreshCheckedStatus();
-      }
-    }
+      },
+    },
   ];
   checked = false;
   indeterminate = false;
@@ -40,34 +44,37 @@ export class AllUsersComponent implements OnInit {
   setOfCheckedId = new Set<number>();
   allUsers: any;
 
-
-
   constructor(private profilService: ProfilService) {}
 
   ngOnInit(): void {
-    this.profilService.retrieveUser().subscribe((data:any)=>{
-      this.allUsers= data;
+    this.profilService.retrieveUser().subscribe((data: any) => {
+      this.allUsers = data;
       console.log('allUser: ', data);
-    })
-
+    });
   }
 
-  rolesUser(role:String){
+  nameUser(role: string) {
     switch (role) {
-    case Utils.ROLE_ADMIN :
-         return Utils.ADMINS
+      case Utils.ROLE_ADMIN:
+        return Utils.ADMINS;
         break;
-    case Utils.ROLE_MODERATOR: 
-         return Utils.MODERATOR
+      case Utils.ROLE_MODERATOR:
+        return Utils.MODERATOR;
         break;
-    case Utils.ROLE_USER: 
-         return Utils.USER
+      case Utils.ROLE_USER:
+        return Utils.USER;
         break;
-    default: 
-         return Utils.USER
-        break
+      default:
+        return Utils.USER;
+        break;
     }
-}
+  }
+
+  rolesUser(data: any) {
+    return data.map((currElement: any) => {
+        return this.nameUser(currElement.name);
+      }).join(',');
+  }
 
   updateCheckedSet(id: number, checked: boolean): void {
     if (checked) {
@@ -83,7 +90,9 @@ export class AllUsersComponent implements OnInit {
   }
 
   onAllChecked(value: boolean): void {
-    this.listOfCurrentPageData.forEach(item => this.updateCheckedSet(item.id, value));
+    this.listOfCurrentPageData.forEach((item) =>
+      this.updateCheckedSet(item.id, value)
+    );
     this.refreshCheckedStatus();
   }
 
@@ -93,10 +102,14 @@ export class AllUsersComponent implements OnInit {
   }
 
   refreshCheckedStatus(): void {
-    this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.id));
-    this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.id)) && !this.checked;
+    this.checked = this.listOfCurrentPageData.every((item) =>
+      this.setOfCheckedId.has(item.id)
+    );
+    this.indeterminate =
+      this.listOfCurrentPageData.some((item) =>
+        this.setOfCheckedId.has(item.id)
+      ) && !this.checked;
   }
-
 }
 
 

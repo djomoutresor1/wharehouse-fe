@@ -23,6 +23,8 @@ import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
@@ -35,6 +37,7 @@ import {
 } from '@ant-design/icons-angular/icons';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { TranslateModule } from '@ngx-translate/core';
 
 const icons = [
   MenuFoldOutline,
@@ -73,7 +76,9 @@ const icons = [
     NzSelectModule,
     NzNotificationModule,
     NzStepsModule,
-    NzCardModule
+    NzCardModule,
+    NzTagModule,
+    TranslateModule
   ],
   exports: [
     NzButtonModule,
@@ -101,7 +106,9 @@ const icons = [
     NzSelectModule,
     NzNotificationModule,
     NzStepsModule,
-    NzCardModule
+    NzCardModule,
+    NzTagModule,
+    TranslateModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })

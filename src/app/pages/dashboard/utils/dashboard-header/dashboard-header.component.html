@@ -3,23 +3,36 @@
         (click)="handleOnCollapsed(!isCollapsed)"></i>
     <div class="dashboard-header-right">
         <ul nz-menu nzMode="horizontal" class="dashboard-header-menu">
-            <li nz-submenu nzTitle="Test Name" nzIcon="user" class="dashboard-header-icon">
-                <ul class="dashboard-header-menu-items">
-                    <li nz-menu-item (click)="handleOnNavigate('dashboard/my-profile')">
-                        <i nz-icon nzType="user"></i>
-                        <span>My Profile</span>
+            <div class="row">
+                <div class="col">
+                    <li nz-submenu nzTitle="Test Name" nzIcon="user" class="dashboard-header-icon">
+                        <ul class="dashboard-header-menu-items">
+                            <li nz-menu-item (click)="handleOnNavigate('dashboard/my-profile')">
+                                <i nz-icon nzType="user"></i>
+                                <span>My Profile</span>
+                            </li>
+                            <li nz-menu-item (click)="handleOnNavigate('dashboard/settings')">
+                                <i nz-icon nzType="setting"></i>
+                                <span>Preferences</span>
+                            </li>
+                            <nz-divider class="warehouse-not-margin"></nz-divider>
+                            <li nz-menu-item (click)="handleOnLogout()">
+                                <i nz-icon nzType="logout" nzTheme="outline"></i>
+                                <span>Deconnexion</span>
+                            </li>
+                        </ul>
                     </li>
-                    <li nz-menu-item (click)="handleOnNavigate('dashboard/settings')">
-                        <i nz-icon nzType="setting"></i>
-                        <span>Preferences</span>
-                    </li>
-                    <nz-divider class="warehouse-not-margin"></nz-divider>
-                    <li nz-menu-item (click)="handleOnLogout()">
-                        <i nz-icon nzType="logout" nzTheme="outline"></i>
-                        <span>Deconnexion</span>
-                    </li>
-                </ul>
-            </li>
+                </div>
+                <div class="col">
+                    <select class="form-control choose" [(ngModel)]="language" name="country" id="country"
+                        (change)="change()">
+                        <option class="flag-icon flag-icon-{{country.code}} flag-icon-squared" *ngFor="let country of countries"
+                            [value]="country.code">{{country.name}}<span class="flag-icon flag-icon-{{country.code}}
+                            flag-icon-squared"></span>
+                        </option>
+                    </select>
+                </div>
+            </div>
         </ul>
     </div>
 </nz-header>

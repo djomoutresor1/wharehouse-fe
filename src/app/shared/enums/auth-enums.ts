@@ -7,4 +7,5 @@ export enum Auth {
   WAREHOUSE_FORGOT_PASSWORD = '/forgot/password',
   WAREHOUSE_VERIFY_LINK = '/verify/link',
   WAREHOUSE_RESET_PASSWORD = '/reset/password',
+  WAREHOUSE_UPLOAD_IMAGE = '/upload',
 }

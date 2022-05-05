@@ -1,11 +1,14 @@
 <div class="card-profile">
   <div class="row" *ngFor="let data of this.user">
     <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
-      <nz-card-meta nzTitle="{{data.fullname}},{{ rolesUser(data.roles[0]) }}" [nzDescription]="description" [nzAvatar]="avatarTemplate">
+      <nz-card-meta nzTitle="{{data.fullname}}" [nzDescription]="description" [nzAvatar]="avatarTemplate">
       </nz-card-meta>
     </nz-card>
     <ng-template #description>
       <div class="row">
+        <div>
+          <nz-tag [nzColor]="choseTheme(rolesUser(data.roles))">{{ rolesUser(data.roles)}}</nz-tag>
+        </div>
         <div><a class="descript">User id: </a>{{ data.userId }}</div>
         <div><a class="descript">Username:</a>{{ data.username }}</div>
         <div><a class="descript">Email:</a>{{ data.email }}</div>
