@@ -24,9 +24,9 @@ export class DashboardHeaderComponent implements OnInit {
   language: string = 'en';
 
   countries: any [] = [
-    {countryCode:"826", code: "en",name: "English"},
-    {countryCode:"380", code: "it",name: "Italy"},
-    {countryCode:"250", code: "fr",name: "French"},];
+    {img:"../../../../../assets/countrie-flags/gb.png", code: "en",name: "English"},
+    {img:"../../../../../assets/countrie-flags/it.png", code: "it",name: "Italian"},
+    {img:"../../../../../assets/countrie-flags/fr.png", code: "fr",name: "French"},];
 
     
 
