@@ -106,6 +106,7 @@ export class RegisterComponent implements OnInit {
         email: this.validateForm.controls['email']?.value,
         password: this.validateForm.controls['password']?.value,
         role: this.validateForm.controls['role']?.value,
+
       };
    //   this.onUploadFotoProfile();
       this.authentificationService.userRegister(userData).subscribe(
