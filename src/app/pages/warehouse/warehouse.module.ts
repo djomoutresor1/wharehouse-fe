@@ -8,10 +8,11 @@ import { AntDesignComponentsModule } from 'src/app/modules/ant-design-components
 import { ForgottenPasswordComponent } from './auth/forgotten-password/forgotten-password.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CommonModule } from '@angular/common';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 
 @NgModule({
-  declarations: [WarehouseComponent, LoginComponent, RegisterComponent, ForgottenPasswordComponent],
+  declarations: [WarehouseComponent, LoginComponent, RegisterComponent, ForgottenPasswordComponent, ResetPasswordComponent],
   imports: [
     ReactiveFormsModule,
     AntDesignComponentsModule,

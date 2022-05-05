@@ -29,7 +29,11 @@ export class RegisterComponent implements OnInit {
     { label: 'Moderator', value: 'moderator' },
   ];
   selectedValue = { label: 'User', value: 'user' };
-  steps: string[] = ["User Informations", "Verification Email", "Registration User"];
+  steps: string[] = [
+    'User Informations',
+    'Verification Email',
+    'Registration User',
+  ];
   currentStep: number = 0;
 
   constructor(
@@ -42,6 +46,10 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm() {
     this.validateForm = this.fb.group({
       fullName: [
         null,

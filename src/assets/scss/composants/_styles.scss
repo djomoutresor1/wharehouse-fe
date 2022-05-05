@@ -1,9 +1,6 @@
 // Colors
 .warehouse-primary {
   color: var(--warehouse-primary) !important;
-  &:hover {
-    color: var(--warehouse-secondary) !important;
-  }
 }
 .warehouse-secondary {
   color: var(--warehouse-secondary) !important;
@@ -62,4 +59,14 @@
 }
 .warehouse-border-top-sliver {
   border-top-color: var(--warehouse-sliver) !important;
+}
+
+
+// Utils
+.warehouse-not-padding {
+  padding: 0 !important;
+}
+
+.warehouse-not-margin {
+  margin: 0 !important;
 }
