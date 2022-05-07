@@ -24,13 +24,11 @@
                     </li>
                 </div>
                 <div class="col">
-                    <select class="form-control choose" [(ngModel)]="language" name="country" id="country"
-                        (change)="change()">
-                        <option class="flag-icon flag-icon-{{country.code}} flag-icon-squared" *ngFor="let country of countries"
-                            [value]="country.code">{{country.name}}<span class="flag-icon flag-icon-{{country.code}}
-                            flag-icon-squared"></span>
-                        </option>
-                    </select>
+
+                    <nz-select class="choose" [(ngModel)]="language" (ngModelChange)="change()">
+                        <nz-option *ngFor="let country of countries" nzValue="{{country.code}}"
+                            nzLabel="{{country.name}}"><img width="17" height="13" src='{{country.img}}'></nz-option>
+                    </nz-select>
                 </div>
             </div>
         </ul>
