@@ -13,18 +13,10 @@ private apiServerUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) { }
 
-   getDataProfil(){
-    const person= (localStorage?.getItem('formData') || 'null');
-    return JSON.parse(person);
 
-   }
-
- /*   public register(person:Persons):Observable<Persons>{
-      return this.http.post<Persons>(`${this.apiServerUrl}/v1/warehouse/register`, person)
-    }*/
-
-   getAuthToken():string {
-    return localStorage.getItem('token') || 'null'
+    public retrieveUser():Observable<Persons>{
+      return this.http.get<Persons>(`${this.apiServerUrl}/users`)
     }
+
 
 }

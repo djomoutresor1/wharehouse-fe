@@ -1,22 +1,18 @@
-import { ThisReceiver } from '@angular/compiler';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthentificationService } from 'src/app/services/auth/authentification.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
+import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 
 const fakeProfil = {
   fullName: 'Mario Rossi',
-  userName: 'admin',
+  username: 'admin',
   email: 'mario.rossi@hotmail.fr',
   password: 'Qwerty84.',
 };
@@ -28,13 +24,17 @@ const fakeProfil = {
 })
 export class LoginComponent implements OnInit {
   validateForm!: FormGroup;
+  username?: string;
   passwordVisible = false;
   password?: string;
+  remember: boolean = false;
   isAuth: boolean = false;
   isLogged: boolean = false;
   alertType: string = '';
   messageAlert: string = '';
   descriptionAlert: string = '';
+  WAREHOUSE_AFTER_7_DAYS = 7 * 24 * 60 * 60 * 1000;
+  expiredRemember: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -43,16 +43,21 @@ export class LoginComponent implements OnInit {
     private warehouseLocalStorage: WarehouseLocalStorage
   ) {
     this.checkIfUserIsAlreadyLogged();
+    this.checkIfUserIsRemember();
   }
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm() {
     this.validateForm = this.fb.group({
-      userName: [
-        null,
+      username: [
+        this.username,
         [Validators.required, Validators.min(5), Validators.max(15)],
       ],
-      password: [null, [Validators.required]],
-      remember: [false],
+      password: [this.password, [Validators.required]],
+      remember: [this.remember],
     });
   }
 
@@ -63,64 +68,58 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  checkIfUserIsRemember() {
+    if (localStorage.getItem(Utils.WAREHOUSE_REMEMBER_ME)) {
+      this.expiredRemember = JSON.parse(
+        localStorage.getItem(Utils.WAREHOUSE_REMEMBER_ME) as string
+      )?.expiredAt;
+      console.log('expiredRemember: ', this.expiredRemember);
+
+      if (this.expiredRemember > new Date().getTime()) {
+        this.remember = true;
+        this.username = JSON.parse(
+          localStorage.getItem(Utils.WAREHOUSE_REMEMBER_ME) as string
+        )?.username;
+        this.password = JSON.parse(
+          localStorage.getItem(Utils.WAREHOUSE_REMEMBER_ME) as string
+        )?.password;
+      } else {
+        localStorage.removeItem(Utils.WAREHOUSE_REMEMBER_ME);
+      }
+    }
+  }
+
   submitForm() {
     let userData = {
-      username: this.validateForm.controls['userName']?.value.toLowerCase(),
+      username: this.validateForm.controls['username']?.value.toLowerCase(),
       password: this.validateForm.controls['password']?.value,
     };
 
     this.authentificationService.userLogin(userData).subscribe(
       (response: ResponseLoginModel) => {
-        console.log('response: ', response);
         this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
+        this.handleOnRememberMe();
         this.successNotificationType(response);
       },
-      (error) => {
-        console.log('error: ', error);
+      (error: HttpErrorResponse) => {
         this.errorAlertType(error.error);
       }
     );
-    // login From Localstorage
-    // let data = JSON.parse(localStorage.getItem('formData') || 'null');
-
-    // if (user == data?.userName && passId == data?.password) {
-    //   this.isAuth = true;
-    //   this.getRegisterOrNot();
-    //   setTimeout(() => {
-    //     (this.isAuth = false),
-    //       this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
-    //   }, 1000);
-    // } else if (user === 'admin' && passId === 'Qwerty84.') {
-    //   this.isAuth = true;
-    //   localStorage.setItem('formData', JSON.stringify(fakeProfil));
-    //   this.getRegisterOrNot();
-    //   setTimeout(() => {
-    //     (this.isAuth = false),
-    //       this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
-    //   }, 1000);
-    // } else {
-    //   this.isAuth = true;
-    //   this.getRegisterOrNot();
-    //   setTimeout(() => {
-    //     this.isAuth = false;
-    //   }, 2000);
-    //   this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
-    // }
   }
 
   getRegisterOrNot() {
-    let user = this.validateForm.controls['userName']?.value;
+    let user = this.validateForm.controls['username']?.value;
     let passId = this.validateForm.controls['password']?.value;
     let data = JSON.parse(localStorage.getItem('formData') || 'null');
 
     if (
-      (user == data?.userName && passId == data?.password) ||
+      (user == data?.username && passId == data?.password) ||
       (user == 'admin' && passId == 'Qwerty84.')
     ) {
       this.alertType = AlertType.ALERT_SUCCESS;
       this.messageAlert = 'logged successful!';
     } else if (
-      (user !== data?.userName && passId !== data?.password) ||
+      (user !== data?.username && passId !== data?.password) ||
       (user !== 'admin' && passId !== 'Qwerty84.')
     ) {
       this.alertType = AlertType.ALERT_ERROR;
@@ -151,7 +150,22 @@ export class LoginComponent implements OnInit {
   }
 
   handleOnForgotPassword() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.FORGOTPASSWORD}`]);
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.FORGOT_PASSWORD}`]);
+  }
+
+  handleOnRememberMe() {
+    if (this.validateForm.controls['remember']?.value) {
+      localStorage.setItem(
+        Utils.WAREHOUSE_REMEMBER_ME,
+        JSON.stringify({
+          expiredAt: new Date().getTime() + this.WAREHOUSE_AFTER_7_DAYS, // Add expiration time
+          username: this.validateForm.controls['username']?.value.toLowerCase(),
+          password: this.validateForm.controls['password']?.value,
+        })
+      );
+    } else {
+      localStorage.removeItem(Utils.WAREHOUSE_REMEMBER_ME);
+    }
   }
 
   handleOnChangeInput() {

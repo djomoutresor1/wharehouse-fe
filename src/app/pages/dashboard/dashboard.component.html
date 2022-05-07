@@ -1,6 +1,6 @@
 <nz-layout>
-  <!-- <app-dashboard-sider [isCollapsed]="isCollapsed" (handleOnNotifyNavigation)="handleOnNavigate($event)">
-  </app-dashboard-sider> -->
+  <!-- <warehouse-dashboard-sider [isCollapsed]="isCollapsed" (handleOnNotifyNavigation)="handleOnNavigate($event)">
+  </warehouse-dashboard-sider> -->
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null"
     [ngClass]="theme ? 'ant-layout-sider-dark' : 'ant-layout-sider-light'">
     <div class="logo"></div>
@@ -9,17 +9,17 @@
         <i nz-icon nzType="dashboard"></i>
         <span>Dashboard</span>
       </li>
-      <li nz-submenu nzTitle="User" nzIcon="user">
+      <li *ngIf="this.checkRole === undefined? false:true" nz-submenu nzTitle="{{'Users' | translate}}" nzIcon="user">
         <ul>
-          <li nz-menu-item>Tom</li>
-          <li nz-menu-item>Bill</li>
-          <li nz-menu-item>Alex</li>
+          <li nz-menu-item (click)="handleOnUser('dashboard/users')">{{'All users'| translate}}</li>
+          <li nz-menu-item>{{'Add new user' | translate}}</li>
+          <!-- <li nz-menu-item>Alex</li> -->
         </ul>
       </li>
-      <li nz-submenu nzTitle="Team" nzIcon="team">
+      <li nz-submenu nzTitle="{{'Team'| translate}}" nzIcon="team">
         <ul>
-          <li nz-menu-item>Team 1</li>
-          <li nz-menu-item>Team 2</li>
+          <li nz-menu-item>{{'Team 1'| translate}}</li>
+          <li nz-menu-item>{{'Team 2'| translate}}</li>
         </ul>
       </li>
       <li nz-menu-item>
@@ -29,9 +29,9 @@
     </ul>
   </nz-sider>
   <nz-layout>
-    <app-dashboard-header [isCollapsed]="isCollapsed" (handleOnNotifyNavigation)="handleOnNavigate($event)"
+    <warehouse-dashboard-header [isCollapsed]="isCollapsed" (handleOnNotifyNavigation)="handleOnNavigate($event)"
       (handleOnNotifyCollapsed)="handleOnCollapsed($event)">
-    </app-dashboard-header>
+    </warehouse-dashboard-header>
     <nz-content>
       <router-outlet></router-outlet>
     </nz-content>
@@ -41,8 +41,14 @@
 </nz-layout>
 <div class="row" *ngIf="isLogout">
   <div class="col">
-      <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert"
-          [descriptionNotification]="descriptionAlert">
-      </warehouse-notification>
+    <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert"
+      [descriptionNotification]="descriptionAlert">
+    </warehouse-notification>
+  </div>
+</div>
+<div class="row" *ngIf="isValidToken">
+  <div class="col">
+    <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert" [descriptionModal]="descriptionAlert"
+      (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
   </div>
 </div>

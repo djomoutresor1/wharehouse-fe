@@ -5,6 +5,7 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
+
 // body {
 //   height: 100%;
 //   width: 100%;
@@ -13,3 +14,17 @@
 //   background-repeat: no-repeat;
 //   background-position: center;
 // }
+
+nz-breadcrumb {
+  margin: 16px 0 !important;
+  nz-breadcrumb-item {
+    i {
+      top: -4px;
+      position: relative;
+    }
+  }
+}
+
+.overlay-container {
+  overflow: hidden;
+}

@@ -21,6 +21,15 @@
             </div>
             <form nz-form [formGroup]="validateForm" class="register-form" (ngSubmit)="submitForm()">
                 <nz-form-item>
+                    <nz-form-control nzErrorTip="upload your foto profile">
+                        <nz-input-group>
+                            <input *ngIf="showInputUpload" type="file" (change)="onFileChanged($event)" nz-input formControlName="image" placeholder="upload your foto profile"/>
+                            <img [src]="imgURL" height="100" width="100" *ngIf="imgURL">
+                            <input *ngIf="showbuttonUpload "type="button" (click)="onUploadFotoProfile()" value="upload">
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
                     <nz-form-control nzErrorTip="Your fullname is required">
                         <nz-input-group nzPrefixIcon="user">
                             <input type="text" nz-input formControlName="fullName" placeholder="First and last name"
@@ -46,11 +55,6 @@
                 </nz-form-item>
                 <nz-form-item *ngIf="!!rolesList?.length">
                     <nz-form-control nzErrorTip="Please select your role">
-                        <!-- <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a role" formControlName="role"
-                            [(ngModel)]="selectedValue" (ngModelChange)="roleChoice($event)">
-                            <nz-option *ngFor="let role of rolesList" [nzValue]="role" [nzLabel]="role.label">
-                            </nz-option>
-                        </nz-select> -->
                         <nz-select nzAllowClear nzPlaceHolder="Select a role" nzMode="multiple" formControlName="role"
                             [nzCustomTemplate]="multipleTemplate">
                             <nz-option *ngFor="let role of rolesList" [nzValue]="role.value" [nzLabel]="role.label">

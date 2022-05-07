@@ -1,13 +1,14 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AuthentificationService } from 'src/app/services/auth/authentification.service';
-import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 
 @Component({
-  selector: 'app-dashboard-header',
+  selector: 'warehouse-dashboard-header',
   templateUrl: './dashboard-header.component.html',
   styleUrls: ['./dashboard-header.component.scss'],
 })
@@ -18,17 +19,35 @@ export class DashboardHeaderComponent implements OnInit {
   @Output() handleOnNotifyCollapsed: EventEmitter<boolean> =
     new EventEmitter<boolean>();
 
+  checkRole: any;
+  name = '';
+  language: string = 'en';
+
+  countries: any [] = [
+    {img:"../../../../../assets/countrie-flags/gb.png", code: "en",name: "English"},
+    {img:"../../../../../assets/countrie-flags/it.png", code: "it",name: "Italian"},
+    {img:"../../../../../assets/countrie-flags/fr.png", code: "fr",name: "French"},];
+
+    
+
   constructor(
     private nzModalService: NzModalService,
     private router: Router,
     private authentificationService: AuthentificationService,
-    private warehouseLocalStorage: WarehouseLocalStorage
-  ) {}
+    private warehouseLocalStorage: WarehouseLocalStorage,
+    private translate: TranslateService
+    ) {
+      translate.setDefaultLang('en');
+      translate.use('en');
+    }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.translateText();
+  }
 
+// da implementare avec un alert ng-zorro
   handleOnNavigate(url: string) {
-    this.handleOnNotifyNavigation.emit(url);
+      this.handleOnNotifyNavigation.emit(url);
   }
 
   handleOnCollapsed(collapsed: boolean) {
@@ -36,17 +55,6 @@ export class DashboardHeaderComponent implements OnInit {
   }
 
   handleOnLogout() {
-    //this.handleOnNotifyNavigation.emit('logout');
-    // this.authentificationService.userLogout('KA37647').subscribe(
-    //   (response: string) => {
-    //     console.log('response: ', response);
-    //     this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
-    //     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
-    //   },
-    //   (error) => {
-    //     console.log('error: ', error);
-    //   }
-    // );
     this.nzModalService.confirm({
       nzTitle: '<h4>Confirmation Logout</h4>',
       nzContent: '<p>Are you sure you want to logout?</p>',
@@ -59,7 +67,7 @@ export class DashboardHeaderComponent implements OnInit {
             console.log('response: ', response);
             this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
           },
-          (error) => {
+          (error: HttpErrorResponse) => {
             console.log('error: ', error);
           }
         );
@@ -67,4 +75,19 @@ export class DashboardHeaderComponent implements OnInit {
     });
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
+
+  
+  translateText() {
+    this.translate
+      .get('angular')
+      .subscribe((text: string) => (this.name = text));
+  }
+
+  change() {
+    const language = this.language || 'en';
+    this.translate.setDefaultLang(language);
+    this.translate.use(language);
+    this.translateText();
+  }
+  
 }

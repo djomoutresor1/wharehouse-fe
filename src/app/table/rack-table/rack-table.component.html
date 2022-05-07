@@ -24,17 +24,16 @@
     <tr *ngFor="let rack of racks; index as i">
       <td class="table-secondary">{{typeProduct}}</td>
       <td>{{i+1}}</td>
-      <td>{{rack.rackOne}}</td>
-      <td>{{rack.rackTwo}}</td>
-      <td>{{rack.rackThree}}</td>
-      <td>{{rack.rackFour}}</td>
-      <td>{{rack.rackFive}}</td>
-      <td>{{rack.rackSix}}</td>
-      <td>{{rack.rackSeven}}</td>
-      <td>{{rack.rackEight}}</td>
-      <td>{{rack.rackNine}}</td>
-    </tr>
-  </tbody>
+      <td contenteditable='true'id ="fname"  [ngClass]="getBackgroundColorOne(rack)" (onFocus)="myFunction()">{{rack.rackOne}}</td>
+      <td contenteditable='true'id ="fname"  [ngClass]="getBackgroundColorOne(rack)" (onFocus)="myFunction()">{{rack.rackTwo}}</td>
+      <td contenteditable='true'id ="fname"  [ngClass]="getBackgroundColorOne(rack)" (onFocus)="myFunction()">{{rack.rackThree}}</td>
+      <td contenteditable='true'id ="fname"  [ngClass]="getBackgroundColorTwo(rack)" (onFocus)="myFunction()">{{rack.rackFour}}</td>
+      <td contenteditable='true'id ="fname"  [ngClass]="getBackgroundColorTwo(rack)" (onFocus)="myFunction()">{{rack.rackFive}}</td>
+      <td contenteditable='true'id ="fname"  [ngClass]="getBackgroundColorTwo(rack)" (onFocus)="myFunction()">{{rack.rackSix}}</td>
+      <td contenteditable='true'id ="fname"  [ngClass]="getBackgroundColorThree(rack)" (onFocus)="myFunction()">{{rack.rackSeven}}</td>
+      <td contenteditable='true'id ="fname"  [ngClass]="getBackgroundColorThree(rack)" (onFocus)="myFunction()">{{rack.rackEight}}</td>
+      <td contenteditable='true'id ="fname"  [ngClass]="getBackgroundColorThree(rack)" (onFocus)="myFunction()">{{rack.rackNine}}</td>
+    </tr>  </tbody>
 </table>
 
 <fontawesome [iconType]="iconValues('{{typeProduct}}')"></fontawesome>

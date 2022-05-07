@@ -7,6 +7,13 @@
 </nz-breadcrumb>
 <div class="container-fluid dashboard-home-wrapper">
     <p *ngIf="!lanes.length"><warehouse-loading [typeLoad]="'info'"></warehouse-loading><p>
+    <div class="row">
+        <div class="col">{{'one position free' | translate}}<p class="onePositionFree"></p></div>
+        <div class="col">{{'two position free' | translate}}<p class="twoPositionFree"></p></div>
+        <div class="col">{{'three position free' | translate}}<p class="threePositionFree"></p></div>
+        <div class="col">{{'more than three position free'| translate}}<p class="moreThanthreePositionFree"></p></div>
+        <div class="col">{{'Full Rack' | translate}}<p class="fullRack"></p></div>
+    </div>
     <div class="row" *ngIf="!!lanes.length">
         <div class="col d-flex">
             <div *ngFor="let lane of lanes" class="column">

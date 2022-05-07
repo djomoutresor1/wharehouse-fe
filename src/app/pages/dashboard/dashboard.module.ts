@@ -15,6 +15,7 @@ import { RackTableComponent } from 'src/app/table/rack-table/rack-table.componen
 import { DashboardHeaderComponent } from './utils/dashboard-header/dashboard-header.component';
 import { DashboardSiderComponent } from './utils/dashboard-sider/dashboard-sider.component';
 import { DashboardRackGlobalComponent } from './dashboard-rack-global/dashboard-rack-global.component';
+import { AllUsersComponent } from './tabs-content/all-users/all-users.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DashboardRackGlobalComponent } from './dashboard-rack-global/dashboard-
     RackTableComponent,
     DashboardHeaderComponent,
     DashboardSiderComponent,
-    DashboardRackGlobalComponent
+    DashboardRackGlobalComponent,
+    AllUsersComponent
   ],
   imports: [
     HttpClientModule,

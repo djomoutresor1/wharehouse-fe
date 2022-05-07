@@ -6,6 +6,11 @@ import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { ImageService } from 'src/app/services/image.service';
+import { environment } from 'src/environments/environment';
+import { Auth } from 'src/app/shared/enums/auth-enums';
+
 
 @Component({
   selector: 'warehouse-register',
@@ -28,19 +33,39 @@ export class RegisterComponent implements OnInit {
     { label: 'Moderator', value: 'moderator' },
   ];
   selectedValue = { label: 'User', value: 'user' };
-  steps: string[] = ["User Informations", "Verification Email", "Registration User"];
+  steps: string[] = [
+    'User Informations',
+    'Verification Email',
+    'Registration User',
+  ];
   currentStep: number = 0;
+  selectedFile: any;
+  event1: any;
+  imgURL: any;
+  receivedImageData: any;
+  base64Data: any;
+  convertedImage: any;
+  showbuttonUpload:boolean = false;
+  showInputUpload:boolean = true;
+
+  private apiServerUrl = environment.apiBaseUrl;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authentificationService: AuthentificationService,
-    private warehouseLocalStorage: WarehouseLocalStorage
+    private warehouseLocalStorage: WarehouseLocalStorage,
+    private http: HttpClient,
+    private imageService: ImageService
   ) {
     this.checkIfUserIsAlreadyLogged();
   }
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm() {
     this.validateForm = this.fb.group({
       fullName: [
         null,
@@ -54,6 +79,7 @@ export class RegisterComponent implements OnInit {
       password: [null, [Validators.required]],
       confirmPassword: [null, [Validators.required]],
       role: [null, [Validators.required]],
+      image:null,
     });
   }
 
@@ -85,11 +111,12 @@ export class RegisterComponent implements OnInit {
         password: this.validateForm.controls['password']?.value,
         role: this.validateForm.controls['role']?.value,
       };
+   //   this.onUploadFotoProfile();
       this.authentificationService.userRegister(userData).subscribe(
         (response: ResponseRegisterModel) => {
           this.successAlertType(response?.message);
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           this.errorAlertType(error.error.message);
         }
       );
@@ -122,5 +149,50 @@ export class RegisterComponent implements OnInit {
     if (this.isAuth) {
       this.isAuth = !this.isAuth;
     }
+  }
+
+  onUploadFotoProfile() {
+
+    const uploadData = new FormData();
+    this.showbuttonUpload = false;
+    this.showInputUpload = false;
+    uploadData.append('myFile', this.selectedFile, this.selectedFile?.name);
+  
+    this.http.post(`${this.apiServerUrl}${Auth.WAREHOUSE_UPLOAD_IMAGE}`,uploadData).subscribe(
+                 res => {console.log(res);
+                         this.receivedImageData = res;
+                         this.base64Data = this.receivedImageData.pic;
+                         this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data; },
+                 err => console.log('Error Occured duringng saving: ' + err)
+              );
+  }
+  
+ /* onUploadFotoProfile() {
+
+    const uploadData = new FormData();
+   // uploadData.append('myFile', this.selectedFile, this.selectedFile?.name);
+  
+  
+    this.imageService.getUploadImageProfil().subscribe(
+                 res => {console.log(res);
+                         this.receivedImageData = res;
+                         this.base64Data = this.receivedImageData.pic;
+                         this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data; },
+                 err => console.log('Error Occured duringng saving: ' + err)
+              );
+  }*/
+
+  
+
+  onFileChanged(event: any) {
+ //   this.onUploadFotoProfile();
+    this.showbuttonUpload = true
+    this.showInputUpload = false
+    this.selectedFile = event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(this.selectedFile);
+    reader.onload = (event2) => {
+      this.imgURL = reader.result;
+    };
   }
 }

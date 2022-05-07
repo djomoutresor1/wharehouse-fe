@@ -25,16 +25,6 @@ nz-content {
   margin: 0 16px;
 }
 
-nz-breadcrumb {
-  margin: 16px 0;
-  nz-breadcrumb-item {
-    i {
-      top: -4px;
-      position: relative;
-    }
-  }
-}
-
 .inner-content {
   padding: 24px;
   background: var(--warehouse-white);
@@ -51,3 +41,28 @@ nz-footer {
   display: inline-grid;
 }
 
+.fullRack {
+  height: 50px;
+  width: 100px;
+  background-color: darksalmon;
+}
+.threePositionFree {
+  height: 50px;
+  width: 100px;
+  background-color:#0eb306;
+}
+.onePositionFree {
+  height: 50px;
+  width: 100px;
+  background-color:#c1eac1
+}
+.twoPositionFree {
+  height: 50px;
+  width: 100px;
+  background-color:lightgreen;
+}
+.moreThanthreePositionFree {
+  height: 50px;
+  width: 100px;
+  background-color:#e6e649;
+}
