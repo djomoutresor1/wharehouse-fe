@@ -1,6 +1,6 @@
 <nz-layout>
-  <!-- <app-dashboard-sider [isCollapsed]="isCollapsed" (handleOnNotifyNavigation)="handleOnNavigate($event)">
-  </app-dashboard-sider> -->
+  <!-- <warehouse-dashboard-sider [isCollapsed]="isCollapsed" (handleOnNotifyNavigation)="handleOnNavigate($event)">
+  </warehouse-dashboard-sider> -->
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null"
     [ngClass]="theme ? 'ant-layout-sider-dark' : 'ant-layout-sider-light'">
     <div class="logo"></div>
@@ -29,9 +29,9 @@
     </ul>
   </nz-sider>
   <nz-layout>
-    <app-dashboard-header [isCollapsed]="isCollapsed" (handleOnNotifyNavigation)="handleOnNavigate($event)"
+    <warehouse-dashboard-header [isCollapsed]="isCollapsed" (handleOnNotifyNavigation)="handleOnNavigate($event)"
       (handleOnNotifyCollapsed)="handleOnCollapsed($event)">
-    </app-dashboard-header>
+    </warehouse-dashboard-header>
     <nz-content>
       <router-outlet></router-outlet>
     </nz-content>

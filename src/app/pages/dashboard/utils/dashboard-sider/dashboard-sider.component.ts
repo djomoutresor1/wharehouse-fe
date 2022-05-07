@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-dashboard-sider',
+  selector: 'warehouse-dashboard-sider',
   templateUrl: './dashboard-sider.component.html',
   styleUrls: ['./dashboard-sider.component.scss'],
 })

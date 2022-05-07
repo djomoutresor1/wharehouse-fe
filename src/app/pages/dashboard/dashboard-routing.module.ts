@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
+import { ChangePasswordComponent } from '../warehouse/auth/password/change-password/change-password.component';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { DashboardRackDetailComponent } from './dashboard-rack-detail/dashboard-rack-detail.component';
 import { DashboardRackGlobalComponent } from './dashboard-rack-global/dashboard-rack-global.component';
@@ -27,7 +28,14 @@ const routes: Routes = [
         path: `${Pages.RACK_DETAIL}/:${PathParams.RACK_NAME}/:${PathParams.RACK_NUMBER}`,
         component: DashboardRackDetailComponent,
       },
-      { path: `${Pages.PROFILE}`, component: ProfileComponent },
+      {
+        path: `${Pages.PROFILE}`,
+        component: ProfileComponent
+      },
+      {
+        path: `${Pages.CHANGE_PASSWORD}`,
+        component: ChangePasswordComponent,
+      },
       { path: `${Pages.SETTINGS}`, component: PreferencesComponent },
       { path: `${Pages.USERS}`, component: AllUsersComponent },
     ],

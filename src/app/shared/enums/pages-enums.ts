@@ -12,5 +12,6 @@ export enum Pages {
   GLOBAL_RACK = "corsia",
   FORGOT_PASSWORD = "forgotten/password",
   USERS = "users",
-  RESET_PASSWORD = "noAuth/resetPassword"
+  RESET_PASSWORD = "noAuth/resetPassword",
+  CHANGE_PASSWORD = "change/password"
 }

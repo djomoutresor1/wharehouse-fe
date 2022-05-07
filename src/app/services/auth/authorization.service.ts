@@ -50,6 +50,14 @@ export class AuthorizationService {
     );
   }
 
+  public userChangePassword(userId: string, oldPassword: string, newPassword: string): Observable<ResponseModel> {
+    return this.http.put<ResponseModel>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_CHANGE_PASSWORD}`, {
+        userId, oldPassword, newPassword
+      }
+    );
+  }
+
   // TODO: The user want to refresh the token, because it is expired
   public userRefreshToken() {}
 }

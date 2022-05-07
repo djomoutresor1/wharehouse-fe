@@ -29,5 +29,15 @@ export class ModalComponent implements OnInit {
         nzOnOk: () => this.handleOnOkModal.emit(Utils.WAREHOUSE_TIMEOUT_TOKEN),
       });
     }
+    if (this.typeModal == AlertType.ALERT_SUCCESS) {
+      this.nzModalService.success({
+        nzTitle: this.messageModal,
+        nzContent: this.descriptionModal,
+        nzClosable: false,
+        nzOkText: this.okTextModal,
+        nzCentered: false,
+        nzOnOk: () => this.handleOnOkModal.emit(Utils.WAREHOUSE_TIMEOUT_TOKEN),
+      });
+    }
   }
 }

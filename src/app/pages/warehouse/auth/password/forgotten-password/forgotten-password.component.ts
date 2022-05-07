@@ -54,7 +54,7 @@ export class ForgottenPasswordComponent implements OnInit {
         this.isMailSent = true;
       },
       (error: HttpErrorResponse) => {
-        if (error.status === 404) {
+        if (error?.status === 404) {
           this.isMailSent = false;
           this.errorAlertType(error?.error?.message);
         }

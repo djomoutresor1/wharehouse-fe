@@ -8,7 +8,7 @@ import { Pages } from 'src/app/shared/enums/pages-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 
 @Component({
-  selector: 'app-dashboard-header',
+  selector: 'warehouse-dashboard-header',
   templateUrl: './dashboard-header.component.html',
   styleUrls: ['./dashboard-header.component.scss'],
 })

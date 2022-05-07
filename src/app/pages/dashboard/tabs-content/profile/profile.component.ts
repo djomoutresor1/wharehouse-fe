@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
-
 
 @Component({
   selector: 'warehouse-profile',
@@ -9,14 +10,19 @@ import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  user:any;
+  user: any;
 
-
-  constructor( private warehouseLocalStorage: WarehouseLocalStorage) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private warehouseLocalStorage: WarehouseLocalStorage
+  ) {}
 
   ngOnInit(): void {
-    this.user = Array.of(this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage());
-    console.log(" userss; ",this.user)
+    this.user = Array.of(
+      this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage()
+    );
+    console.log(' userss; ', this.user);
   }
 
   nameUser(role: string) {
@@ -54,8 +60,18 @@ export class ProfileComponent implements OnInit {
   }
 
   rolesUser(data: any) {
-    return data.map((currElement: any) => {
+    return data
+      .map((currElement: any) => {
         return this.nameUser(currElement);
-      }).join(' & ');
+      })
+      .join(' & ');
+  }
+
+  handleOnNavigate(url: String) {
+    this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
+  }
+  
+  handleOnChangePassword() {
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.CHANGE_PASSWORD}`]);
   }
 }
