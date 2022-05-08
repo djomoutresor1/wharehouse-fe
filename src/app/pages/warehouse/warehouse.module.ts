@@ -10,6 +10,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ResetPasswordComponent } from './auth/password/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './auth/password/change-password/change-password.component';
+import { SecurePasswordComponent } from './auth/password/components/secure-password/secure-password.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ChangePasswordComponent } from './auth/password/change-password/change-
     ForgottenPasswordComponent,
     ResetPasswordComponent,
     ChangePasswordComponent,
+    SecurePasswordComponent,
   ],
   imports: [
     ReactiveFormsModule,
