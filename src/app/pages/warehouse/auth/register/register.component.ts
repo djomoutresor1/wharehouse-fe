@@ -9,7 +9,7 @@ import { ResponseRegisterModel } from 'src/model/auth/response/response-register
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ImageService } from 'src/app/services/image.service';
 import { environment } from 'src/environments/environment';
-import { Auth } from 'src/app/shared/enums/auth-enums';
+import { Auth, Img } from 'src/app/shared/enums/auth-enums';
 
 
 @Component({
@@ -110,6 +110,7 @@ export class RegisterComponent implements OnInit {
         email: this.validateForm.controls['email']?.value,
         password: this.validateForm.controls['password']?.value,
         role: this.validateForm.controls['role']?.value,
+        profil: this.validateForm.controls['file']?.value,
 
       };
    //   this.onUploadFotoProfile();
@@ -159,7 +160,7 @@ export class RegisterComponent implements OnInit {
     this.showInputUpload = false;
     uploadData.append('myFile', this.selectedFile, this.selectedFile?.name);
   
-    this.http.post(`${this.apiServerUrl}${Auth.WAREHOUSE_UPLOAD_IMAGE}`,uploadData).subscribe(
+    this.http.post(`${this.apiServerUrl}${Img.WAREHOUSE_UPLOAD_IMAGE}`,uploadData).subscribe(
                  res => {console.log(res);
                          this.receivedImageData = res;
                          this.base64Data = this.receivedImageData.pic;

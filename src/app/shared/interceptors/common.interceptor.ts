@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Auth } from '../enums/auth-enums';
+import { Auth, Img } from '../enums/auth-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { Router } from '@angular/router';
@@ -40,7 +40,7 @@ export class CommonInterceptor implements HttpInterceptor {
       !request.url.includes(Auth.WAREHOUSE_FORGOT_PASSWORD) && 
       !request.url.includes(Auth.WAREHOUSE_VERIFY_LINK) &&
       !request.url.includes(Auth.WAREHOUSE_RESET_PASSWORD) &&
-      !request.url.endsWith(Auth.WAREHOUSE_UPLOAD_IMAGE)
+      !request.url.endsWith(Img.WAREHOUSE_UPLOAD_IMAGE)
     ) {
       if (user?.token) {
         request = request.clone({
