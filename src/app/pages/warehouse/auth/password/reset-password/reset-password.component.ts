@@ -20,13 +20,14 @@ export class ResetPasswordComponent implements OnInit {
   isAuth: boolean = false;
   isResetPassword: boolean = false;
   passwordVisible = false;
-  password?: string;
+  password: string = "";
   confirmPasswordVisible = false;
   confirmPassword?: string;
   alertType: string = '';
   messageAlert: string = '';
   descriptionAlert: string = '';
   user!: ResponseResetModel;
+  isSecurePassword: boolean = false;
 
   idLinkResetPassword: any;
   expirationLink: any;
@@ -171,5 +172,13 @@ export class ResetPasswordComponent implements OnInit {
     if (this.isAuth) {
       this.isAuth = !this.isAuth;
     }
+  }
+
+  handleOnNotifyPassword(event: boolean) {
+    this.isSecurePassword = event;
+  }
+
+  handleOnChangePassword() {
+    this.password = this.validateForm.controls['password']?.value;
   }
 }

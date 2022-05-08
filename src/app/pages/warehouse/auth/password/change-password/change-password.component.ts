@@ -18,7 +18,7 @@ export class ChangePasswordComponent implements OnInit {
   oldPasswordVisible = false;
   oldPassword?: string;
   passwordVisible = false;
-  password?: string;
+  password: string = "";
   confirmPasswordVisible = false;
   confirmPassword?: string;
   isError: boolean = false;
@@ -27,6 +27,7 @@ export class ChangePasswordComponent implements OnInit {
   messageAlert: string = '';
   okText: string = '';
   descriptionAlert: string = '';
+  isSecurePassword: boolean = false;
 
   constructor(
     private router: Router,
@@ -45,6 +46,10 @@ export class ChangePasswordComponent implements OnInit {
       password: [null, [Validators.required]],
       confirmPassword: [null, [Validators.required]],
     });
+  }
+
+  handleOnChangePassword() {
+    this.password = this.validateForm.controls['password']?.value;
   }
 
   submitForm() {
@@ -119,5 +124,9 @@ export class ChangePasswordComponent implements OnInit {
     this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
     window.location.reload();
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+  }
+
+  handleOnNotifyPassword(event: boolean) {
+    this.isSecurePassword = event;
   }
 }

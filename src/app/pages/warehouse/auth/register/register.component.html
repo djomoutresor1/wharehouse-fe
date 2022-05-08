@@ -68,14 +68,18 @@
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
-                    <nz-form-control nzErrorTip="Your password is required">
+                    <nz-form-control nzErrorTip="Your password is required" nz-popover nzPopoverTitle="Password security"
+                    [nzPopoverContent]="securityTemplate" nzPopoverPlacement="right">
                         <nz-input-group nzPrefixIcon="lock" [nzSuffix]="passwordTemplate">
                             <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password"
-                                placeholder="Password" (click)="handleOnChangeInput()" />
+                                placeholder="Password" (ngModelChange)="handleOnChangePassword()" (click)="handleOnChangeInput()" />
                         </nz-input-group>
                         <ng-template #passwordTemplate>
                             <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
                                 (click)="passwordVisible = !passwordVisible"></i>
+                        </ng-template>
+                        <ng-template #securityTemplate>
+                            <warehouse-secure-password [password]="password" (notifyOnPassword)="handleOnNotifyPassword($event)"></warehouse-secure-password>
                         </ng-template>
                     </nz-form-control>
                 </nz-form-item>
@@ -92,7 +96,7 @@
                         </ng-template>
                     </nz-form-control>
                 </nz-form-item>
-                <button nz-button [disabled]="!validateForm.valid" nzBlock
+                <button nz-button [disabled]="!validateForm.valid || !isSecurePassword" nzBlock
                     class="register-form-button register-form-margin" [nzType]="'primary'">Verify my email</button>
                 <nz-divider nzDashed nzText="Already have an account?"></nz-divider>
                 <button nz-button nzType="primary" (click)="handleOnLogin()" nzBlock>

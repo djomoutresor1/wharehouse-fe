@@ -10,6 +10,6 @@ export enum Utils {
   ROLE_ADMIN = 'ROLE_ADMIN',
   USER = 'User',
   MODERATOR = 'Moderator',
-  ADMINS = 'Admin'
-
+  ADMINS = 'Admin',
+  WAREHOUSE_RANDOM_NUMBERS = "0123456789"
 }

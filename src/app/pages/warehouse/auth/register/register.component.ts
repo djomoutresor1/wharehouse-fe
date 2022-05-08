@@ -20,7 +20,7 @@ import { Auth } from 'src/app/shared/enums/auth-enums';
 export class RegisterComponent implements OnInit {
   validateForm!: FormGroup;
   passwordVisible = false;
-  password?: string;
+  password: string = "";
   confirmPasswordVisible = false;
   confirmPassword?: string;
   isAuth: boolean = false;
@@ -47,6 +47,7 @@ export class RegisterComponent implements OnInit {
   convertedImage: any;
   showbuttonUpload:boolean = false;
   showInputUpload:boolean = true;
+  isSecurePassword: boolean = false;
 
   private apiServerUrl = environment.apiBaseUrl;
 
@@ -194,5 +195,13 @@ export class RegisterComponent implements OnInit {
     reader.onload = (event2) => {
       this.imgURL = reader.result;
     };
+  }
+
+  handleOnChangePassword() {
+    this.password = this.validateForm.controls['password']?.value;
+  }
+  
+  handleOnNotifyPassword(event: boolean) {
+    this.isSecurePassword = event;
   }
 }
