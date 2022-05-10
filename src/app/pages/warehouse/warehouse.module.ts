@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { ResetPasswordComponent } from './auth/password/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './auth/password/change-password/change-password.component';
 import { SecurePasswordComponent } from './auth/password/components/secure-password/secure-password.component';
+import { RegisterStepTwoComponent } from './auth/register/register-step-two/register-step-two.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SecurePasswordComponent } from './auth/password/components/secure-passw
     ResetPasswordComponent,
     ChangePasswordComponent,
     SecurePasswordComponent,
+    RegisterStepTwoComponent,
   ],
   imports: [
     ReactiveFormsModule,

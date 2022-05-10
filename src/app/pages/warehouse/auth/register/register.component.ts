@@ -7,9 +7,7 @@ import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ImageService } from 'src/app/services/image.service';
 import { environment } from 'src/environments/environment';
-import { Auth } from 'src/app/shared/enums/auth-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 
 
@@ -21,7 +19,7 @@ import { Utils } from 'src/app/shared/enums/utils-enums';
 export class RegisterComponent implements OnInit {
   validateForm!: FormGroup;
   passwordVisible = false;
-  password: string = "";
+  password: string = '';
   confirmPasswordVisible = false;
   confirmPassword?: string;
   isAuth: boolean = false;
@@ -42,23 +40,16 @@ export class RegisterComponent implements OnInit {
   currentStep: number = 0;
   selectedFile: any;
   event1: any;
-  imgURL: any;
-  receivedImageData: any;
-  base64Data: any;
-  convertedImage: any;
-  showbuttonUpload:boolean = false;
-  showInputUpload:boolean = true;
   isSecurePassword: boolean = false;
 
-  private apiServerUrl = environment.apiBaseUrl;
+  public apiServerUrl = environment.apiBaseUrl;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authentificationService: AuthentificationService,
     private warehouseLocalStorage: WarehouseLocalStorage,
-    private http: HttpClient,
-    private imageService: ImageService
+    public http: HttpClient
   ) {
     this.checkIfUserIsAlreadyLogged();
   }
@@ -81,7 +72,6 @@ export class RegisterComponent implements OnInit {
       password: [null, [Validators.required]],
       confirmPassword: [null, [Validators.required]],
       role: [null, [Validators.required]],
-      image:null,
     });
   }
 
@@ -94,7 +84,6 @@ export class RegisterComponent implements OnInit {
 
   roleChoice(event: any): void {
     this.role = event?.value;
-    console.log('eventttt: ', this.role);
   }
 
   submitForm() {
@@ -153,50 +142,6 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  onUploadFotoProfile() {
-
-    const uploadData = new FormData();
-    this.showbuttonUpload = false;
-    this.showInputUpload = false;
-    uploadData.append('myFile', this.selectedFile, this.selectedFile?.name);
-  
-    this.http.post(`${this.apiServerUrl}${Auth.WAREHOUSE_UPLOAD_IMAGE}`,uploadData).subscribe(
-                 res => {console.log(res);
-                         this.receivedImageData = res;
-                         this.base64Data = this.receivedImageData.pic;
-                         this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data; },
-                 err => console.log('Error Occured duringng saving: ' + err)
-              );
-  }
-  
- /* onUploadFotoProfile() {
-
-    const uploadData = new FormData();
-   // uploadData.append('myFile', this.selectedFile, this.selectedFile?.name);
-  
-  
-    this.imageService.getUploadImageProfil().subscribe(
-                 res => {console.log(res);
-                         this.receivedImageData = res;
-                         this.base64Data = this.receivedImageData.pic;
-                         this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data; },
-                 err => console.log('Error Occured duringng saving: ' + err)
-              );
-  }*/
-
-  
-
-  onFileChanged(event: any) {
- //   this.onUploadFotoProfile();
-    this.showbuttonUpload = true
-    this.showInputUpload = false
-    this.selectedFile = event.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(this.selectedFile);
-    reader.onload = (event2) => {
-      this.imgURL = reader.result;
-    };
-  }
 
   handleOnChangePassword() {
     this.password = this.validateForm.controls['password']?.value;
