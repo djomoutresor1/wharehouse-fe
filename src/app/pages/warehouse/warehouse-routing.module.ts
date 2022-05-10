@@ -19,7 +19,7 @@ const routes: Routes = [
         component: RegisterComponent,
       },
       {
-        path: `${Pages.RESET_PASSWORD}`, //?idLinkResetPassword=:idLinkResetPassword&expirationLink=:expirationLink&verifyType=:verifyType
+        path: `${Pages.RESET_PASSWORD}`, //http://localhost:4201/warehouse/noAuth/resetPassword?idLinkResetPassword=:idLinkResetPassword&expirationLink=:expirationLink&verifyType=:verifyType
         component: ResetPasswordComponent,
       },
       {

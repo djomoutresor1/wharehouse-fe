@@ -7,7 +7,6 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { ProgressType } from 'src/app/shared/enums/progress-type-enums';
-import { Utils } from 'src/app/shared/enums/utils-enums';
 
 @Component({
   selector: 'warehouse-secure-password',

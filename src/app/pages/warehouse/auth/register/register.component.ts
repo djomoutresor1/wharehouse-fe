@@ -10,6 +10,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ImageService } from 'src/app/services/image.service';
 import { environment } from 'src/environments/environment';
 import { Auth } from 'src/app/shared/enums/auth-enums';
+import { Utils } from 'src/app/shared/enums/utils-enums';
 
 
 @Component({
@@ -113,7 +114,7 @@ export class RegisterComponent implements OnInit {
         role: this.validateForm.controls['role']?.value,
       };
    //   this.onUploadFotoProfile();
-      this.authentificationService.userRegister(userData).subscribe(
+      this.authentificationService.userRegisterStepOne(userData, Utils.WAREHOUSE_STEP_ONE).subscribe(
         (response: ResponseRegisterModel) => {
           this.successAlertType(response?.message);
         },
@@ -200,7 +201,7 @@ export class RegisterComponent implements OnInit {
   handleOnChangePassword() {
     this.password = this.validateForm.controls['password']?.value;
   }
-  
+
   handleOnNotifyPassword(event: boolean) {
     this.isSecurePassword = event;
   }

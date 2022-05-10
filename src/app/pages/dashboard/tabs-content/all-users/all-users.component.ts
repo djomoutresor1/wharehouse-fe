@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProfilService } from 'src/app/services/profil.service';
+import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 
 interface ItemData{
@@ -44,7 +46,7 @@ export class AllUsersComponent implements OnInit {
   setOfCheckedId = new Set<number>();
   allUsers: any;
 
-  constructor(private profilService: ProfilService) {}
+  constructor(private router: Router, private profilService: ProfilService) {}
 
   ngOnInit(): void {
     this.profilService.retrieveUser().subscribe((data: any) => {
@@ -109,6 +111,10 @@ export class AllUsersComponent implements OnInit {
       this.listOfCurrentPageData.some((item) =>
         this.setOfCheckedId.has(item.id)
       ) && !this.checked;
+  }
+
+  handleOnNavigate(url: String) {
+    this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
   }
 }
 
