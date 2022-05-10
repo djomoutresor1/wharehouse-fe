@@ -1,4 +1,13 @@
-<div class="warehouse-auth-wrapper container">
+<nz-breadcrumb>
+  <nz-breadcrumb-item (click)="handleOnNavigate('dashboard')">
+      <i nz-icon nzType="dashboard"></i>
+      <a>Dashboard</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+      <a>All users</a>
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+<div class="warehouse-users-wrapper container-fluid">
     <div class="row">
       <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="allUsers"
         (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">

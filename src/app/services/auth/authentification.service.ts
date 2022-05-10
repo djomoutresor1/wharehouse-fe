@@ -20,12 +20,18 @@ export class AuthentificationService {
     private warehouseLocalStorage: WarehouseLocalStorage
   ) {}
 
-  public userRegister(
-    user: UserRegisterModel
+  public userRegisterStepOne(
+    user: UserRegisterModel,
+    step: number
   ): Observable<ResponseRegisterModel> {
     return this.http.post<ResponseRegisterModel>(
       `${this.apiServerUrl}${Auth.WAREHOUSE_REGISTER_USER}`,
-      user
+      user,
+      {
+        params: {
+          step,
+        },
+      }
     );
   }
 
