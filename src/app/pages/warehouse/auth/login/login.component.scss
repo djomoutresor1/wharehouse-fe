@@ -1,3 +1,9 @@
+warehouse-multilanguage {
+  right: 0;
+  margin: 25px;
+  position: absolute;
+}
+
 .warehouse-auth-wrapper {
   text-align: inherit;
   position: fixed;
@@ -33,6 +39,14 @@
 .warehouse-remember-wrapper {
   width: 300px;
   p {
+    text-align: justify;
+  }
+}
+
+.warehouse-user-wrapper {
+  width: 250px;
+  p {
+    margin: 0 !important;
     text-align: justify;
   }
 }

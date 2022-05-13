@@ -1,0 +1,11 @@
+<nz-select class="multilanguage-wrapper" [nzCustomTemplate]="defaultTemplate" [(ngModel)]="language"
+    (ngModelChange)="handleOnChangeLanguage()">
+    <nz-option nzCustomContent *ngFor="let country of countries" nzValue="{{country.code}}" nzLabel="{{country.name}}">
+        <img class="multilanguage-img" [alt]="country.name" [src]="country.img" />
+        {{country.name}}
+    </nz-option>
+</nz-select>
+<ng-template #defaultTemplate let-selected>
+    <img class="multilanguage-img" [alt]="selected.nzLabel" [src]="handleOnFlagSelected(selected)" />
+    {{ selected.nzLabel }}
+</ng-template>
