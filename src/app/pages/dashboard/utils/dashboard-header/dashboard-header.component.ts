@@ -21,6 +21,7 @@ export class DashboardHeaderComponent implements OnInit {
 
   checkRole: any;
   name = '';
+  user: any;
 
   constructor(
     private nzModalService: NzModalService,
@@ -44,6 +45,8 @@ export class DashboardHeaderComponent implements OnInit {
   }
 
   handleOnLogout() {
+    this.user = Array.of(this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage());
+
     this.nzModalService.confirm({
       nzTitle: '<h4>Confirmation Logout</h4>',
       nzContent: '<p>Are you sure you want to logout?</p>',
@@ -51,10 +54,11 @@ export class DashboardHeaderComponent implements OnInit {
       nzOkText: 'Logout',
       nzOnOk: () => {
         // TODO: implement the logic to logout
-        this.authentificationService.userLogout('KA37647').subscribe(
+        this.authentificationService.userLogout(JSON.stringify(this.user[0]?.userId)).subscribe(
           (response: any) => {
             console.log('response: ', response);
             this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
+            this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
           },
           (error: HttpErrorResponse) => {
             console.log('error: ', error);
