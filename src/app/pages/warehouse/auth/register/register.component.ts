@@ -12,7 +12,6 @@ import { environment } from 'src/environments/environment';
 import { Auth } from 'src/app/shared/enums/auth-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 
-
 @Component({
   selector: 'warehouse-register',
   templateUrl: './register.component.html',
@@ -21,7 +20,7 @@ import { Utils } from 'src/app/shared/enums/utils-enums';
 export class RegisterComponent implements OnInit {
   validateForm!: FormGroup;
   passwordVisible = false;
-  password: string = "";
+  password: string = '';
   confirmPasswordVisible = false;
   confirmPassword?: string;
   isAuth: boolean = false;
@@ -46,8 +45,8 @@ export class RegisterComponent implements OnInit {
   receivedImageData: any;
   base64Data: any;
   convertedImage: any;
-  showbuttonUpload:boolean = false;
-  showInputUpload:boolean = true;
+  showbuttonUpload: boolean = false;
+  showInputUpload: boolean = true;
   isSecurePassword: boolean = false;
 
   private apiServerUrl = environment.apiBaseUrl;
@@ -81,7 +80,7 @@ export class RegisterComponent implements OnInit {
       password: [null, [Validators.required]],
       confirmPassword: [null, [Validators.required]],
       role: [null, [Validators.required]],
-      image:null,
+      image: null,
     });
   }
 
@@ -98,30 +97,52 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm() {
+    let userData = {
+      fullname: this.validateForm.controls['fullName']?.value,
+      username: this.validateForm.controls['userName']?.value.toLowerCase(),
+      email: this.validateForm.controls['email']?.value,
+      password: this.validateForm.controls['password']?.value,
+      confirmPassword: this.validateForm.controls['confirmPassword']?.value,
+      role: this.validateForm.controls['role']?.value,
+    };
     // console.log(this.validateForm.controls);
-    // Verify the password and confirm password
-    let password = this.validateForm.controls['password']?.value;
-    let confirmPassword = this.validateForm.controls['confirmPassword']?.value;
-    if (confirmPassword !== password) {
-      let message = "Password and confirm password don't match. Try again.";
+    // Verify the password and confirm password and username criteria
+    let message = this.handleOnCheckValidation(
+      userData.username,
+      userData.password,
+      userData.confirmPassword
+    );
+    if (!!message?.length) {
       this.errorAlertType(message);
     } else {
-      let userData = {
-        fullname: this.validateForm.controls['fullName']?.value,
-        username: this.validateForm.controls['userName']?.value.toLowerCase(),
-        email: this.validateForm.controls['email']?.value,
-        password: this.validateForm.controls['password']?.value,
-        role: this.validateForm.controls['role']?.value,
-      };
-   //   this.onUploadFotoProfile();
-      this.authentificationService.userRegisterStepOne(userData, Utils.WAREHOUSE_STEP_ONE).subscribe(
-        (response: ResponseRegisterModel) => {
-          this.successAlertType(response?.message);
-        },
-        (error: HttpErrorResponse) => {
-          this.errorAlertType(error.error.message);
-        }
-      );
+      //   this.onUploadFotoProfile();
+      this.authentificationService
+        .userRegisterStepOne(userData, Utils.WAREHOUSE_STEP_ONE)
+        .subscribe(
+          (response: ResponseRegisterModel) => {
+            this.successAlertType(response?.message);
+          },
+          (error: HttpErrorResponse) => {
+            this.errorAlertType(error.error.message);
+          }
+        );
+    }
+  }
+
+  handleOnCheckValidation(
+    username: string,
+    password: string,
+    confirmPassword: string
+  ): string {
+    let message = '';
+    if (confirmPassword !== password) {
+      message = "Password and confirm password don't match. Try again.";
+      return message;
+    } else if (username?.length <= 7) {
+      message = 'Username will be more than 7 characters. Try again.';
+      return message;
+    } else {
+      return message;
     }
   }
 
@@ -154,22 +175,25 @@ export class RegisterComponent implements OnInit {
   }
 
   onUploadFotoProfile() {
-
     const uploadData = new FormData();
     this.showbuttonUpload = false;
     this.showInputUpload = false;
     uploadData.append('myFile', this.selectedFile, this.selectedFile?.name);
-  
-    this.http.post(`${this.apiServerUrl}${Auth.WAREHOUSE_UPLOAD_IMAGE}`,uploadData).subscribe(
-                 res => {console.log(res);
-                         this.receivedImageData = res;
-                         this.base64Data = this.receivedImageData.pic;
-                         this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data; },
-                 err => console.log('Error Occured duringng saving: ' + err)
-              );
+
+    this.http
+      .post(`${this.apiServerUrl}${Auth.WAREHOUSE_UPLOAD_IMAGE}`, uploadData)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.receivedImageData = res;
+          this.base64Data = this.receivedImageData.pic;
+          this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data;
+        },
+        (err) => console.log('Error Occured duringng saving: ' + err)
+      );
   }
-  
- /* onUploadFotoProfile() {
+
+  /* onUploadFotoProfile() {
 
     const uploadData = new FormData();
    // uploadData.append('myFile', this.selectedFile, this.selectedFile?.name);
@@ -184,12 +208,10 @@ export class RegisterComponent implements OnInit {
               );
   }*/
 
-  
-
   onFileChanged(event: any) {
- //   this.onUploadFotoProfile();
-    this.showbuttonUpload = true
-    this.showInputUpload = false
+    //   this.onUploadFotoProfile();
+    this.showbuttonUpload = true;
+    this.showInputUpload = false;
     this.selectedFile = event.target.files[0];
     let reader = new FileReader();
     reader.readAsDataURL(this.selectedFile);
