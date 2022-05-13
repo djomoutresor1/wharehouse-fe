@@ -29,6 +29,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { TranslateModule } from '@ngx-translate/core';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
@@ -82,7 +83,8 @@ const icons = [
     NzTagModule,
     TranslateModule,
     NzProgressModule,
-    NzImageModule
+    NzImageModule,
+    NzRadioModule
   ],
   exports: [
     NzButtonModule,
@@ -114,7 +116,8 @@ const icons = [
     NzTagModule,
     TranslateModule,
     NzProgressModule,
-    NzImageModule
+    NzImageModule,
+    NzRadioModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })

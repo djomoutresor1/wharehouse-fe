@@ -22,15 +22,6 @@
             </div>
             <form nz-form [formGroup]="validateForm" class="register-form" (ngSubmit)="submitForm()">
                 <nz-form-item>
-                    <nz-form-control nzErrorTip="upload your foto profile">
-                        <nz-input-group>
-                            <input *ngIf="showInputUpload" type="file" (change)="onFileChanged($event)" nz-input formControlName="image" placeholder="upload your foto profile"/>
-                            <img [src]="imgURL" height="100" width="100" *ngIf="imgURL">
-                            <input *ngIf="showbuttonUpload "type="button" (click)="onUploadFotoProfile()" value="upload">
-                        </nz-input-group>
-                    </nz-form-control>
-                </nz-form-item>
-                <nz-form-item>
                     <nz-form-control nzErrorTip="Your fullname is required">
                         <nz-input-group nzPrefixIcon="user">
                             <input type="text" nz-input formControlName="fullName" placeholder="First and last name"
@@ -44,6 +35,15 @@
                             <input type="text" nz-input formControlName="userName" placeholder="Username"
                                 (click)="handleOnChangeInput()" />
                         </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Your gender is required">
+                        <nz-radio-group (ngModel)="radioValue" nzName="radiogroup"
+                            (ngModelChange)="handleOnChangeInput()">
+                            <label nz-radio nzValue="Male">Male</label>
+                            <label nz-radio nzValue="Female">Female</label>
+                        </nz-radio-group>
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
@@ -69,18 +69,21 @@
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
-                    <nz-form-control nzErrorTip="Your password is required" nz-popover nzPopoverTitle="Password security"
-                    [nzPopoverContent]="securityTemplate" nzPopoverPlacement="right">
+                    <nz-form-control nzErrorTip="Your password is required" nz-popover
+                        nzPopoverTitle="Password security" [nzPopoverContent]="securityTemplate"
+                        nzPopoverPlacement="right">
                         <nz-input-group nzPrefixIcon="lock" [nzSuffix]="passwordTemplate">
                             <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password"
-                                placeholder="Password" (ngModelChange)="handleOnChangePassword()" (click)="handleOnChangeInput()" />
+                                placeholder="Password" (ngModelChange)="handleOnChangePassword()"
+                                (click)="handleOnChangeInput()" />
                         </nz-input-group>
                         <ng-template #passwordTemplate>
                             <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
                                 (click)="passwordVisible = !passwordVisible"></i>
                         </ng-template>
                         <ng-template #securityTemplate>
-                            <warehouse-secure-password [password]="password" (notifyOnPassword)="handleOnNotifyPassword($event)"></warehouse-secure-password>
+                            <warehouse-secure-password [password]="password"
+                                (notifyOnPassword)="handleOnNotifyPassword($event)"></warehouse-secure-password>
                         </ng-template>
                     </nz-form-control>
                 </nz-form-item>

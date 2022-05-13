@@ -13,6 +13,8 @@ export interface responseProfil {
   roles?: role[];
   userId?: string;
   username?: string;
+  gender?:string;
+  phoneNumber?:number
 }
 
 export interface role {

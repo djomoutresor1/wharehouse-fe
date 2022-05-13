@@ -5,31 +5,26 @@ import { AuthentificationService } from 'src/app/services/auth/authentification.
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
-import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
+import { ResponseRegisterModel, ResponseRegisterModelTwo } from 'src/model/auth/response/response-register-model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Auth } from 'src/app/shared/enums/auth-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { UserRegisterModelStepTwo } from 'src/model/auth/resquest/user-register-model';
 
 @Component({
-  selector: 'warehouse-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'warehouse-register-step-two',
+  templateUrl: './register-step-two.component.html',
+  styleUrls: ['./register-step-two.component.scss','../register/register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+
+export class RegisterStepTwoComponent implements OnInit {
   validateForm!: FormGroup;
-  passwordVisible = false;
-  password: string = '';
-  confirmPasswordVisible = false;
-  confirmPassword?: string;
   isAuth: boolean = false;
   alertType: string = '';
   messageAlert: string = '';
-  role: string = '';
-  rolesList = [
-    { label: 'Admin', value: 'admin' },
-    { label: 'User', value: 'user' },
-    { label: 'Moderator', value: 'moderator' },
-  ];
+  countries:any;
+
   selectedValue = { label: 'User', value: 'user' };
   steps: string[] = [
     'User Informations',
@@ -39,8 +34,13 @@ export class RegisterComponent implements OnInit {
   currentStep: number = 0;
   selectedFile: any;
   event1: any;
-  radioValue:any
-  isSecurePassword: boolean = false;
+  imgURL: any;
+  receivedImageData: any;
+  base64Data: any;
+  convertedImage: any;
+  showbuttonUpload: boolean = false;
+  showInputUpload: boolean = true;
+
 
   private apiServerUrl = environment.apiBaseUrl;
 
@@ -82,37 +82,17 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  roleChoice(event: any): void {
-    this.role = event?.value;
-    console.log('eventttt: ', this.role);
-  }
 
   submitForm() {
-    debugger
     let userData = {
-      fullname: this.validateForm.controls['fullName']?.value,
-      username: this.validateForm.controls['userName']?.value.toLowerCase(),
-      email: this.validateForm.controls['email']?.value,
-      password: this.validateForm.controls['password']?.value,
-      confirmPassword: this.validateForm.controls['confirmPassword']?.value,
-      role: this.validateForm.controls['role']?.value,
-    //  gender: this.radioValue.value,
+      dateOfBirth: this.validateForm.controls['dateOfBirth']?.value,
+      phoneNumber: this.validateForm.controls['phoneNumber']?.value,
+      country: this.validateForm.controls['country']?.value,
     };
-    // console.log(this.validateForm.controls);
-    // Verify the password and confirm password and username criteria
-    let message = this.handleOnCheckValidation(
-      userData.username,
-      userData.password,
-      userData.confirmPassword
-    );
-    if (!!message?.length) {
-      this.errorAlertType(message);
-    } else {
-      //   this.onUploadFotoProfile();
       this.authentificationService
-        .userRegisterStepOne(userData, Utils.WAREHOUSE_STEP_ONE)
+        .userRegisterStepTwo(userData, Utils.WAREHOUSE_STEP_TWO)
         .subscribe(
-          (response: ResponseRegisterModel) => {
+          (response: any) => {
             this.successAlertType(response?.message);
           },
           (error: HttpErrorResponse) => {
@@ -120,24 +100,9 @@ export class RegisterComponent implements OnInit {
           }
         );
     }
-  }
+  
 
-  handleOnCheckValidation(
-    username: string,
-    password: string,
-    confirmPassword: string
-  ): string {
-    let message = '';
-    if (confirmPassword !== password) {
-      message = "Password and confirm password don't match. Try again.";
-      return message;
-    } else if (username?.length <= 7) {
-      message = 'Username will be more than 7 characters. Try again.';
-      return message;
-    } else {
-      return message;
-    }
-  }
+
 
   errorAlertType(message: string): void {
     this.isAuth = true;
@@ -167,11 +132,36 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  handleOnChangePassword() {
-    this.password = this.validateForm.controls['password']?.value;
+  onUploadFotoProfile() {
+    const uploadData = new FormData();
+    this.showbuttonUpload = false;
+    this.showInputUpload = false;
+    uploadData.append('myFile', this.selectedFile, this.selectedFile?.name);
+
+    this.http
+      .post(`${this.apiServerUrl}${Auth.WAREHOUSE_UPLOAD_IMAGE}`, uploadData)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.receivedImageData = res;
+          this.base64Data = this.receivedImageData.pic;
+          this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data;
+        },
+        (err) => console.log('Error Occured duringng saving: ' + err)
+      );
   }
 
-  handleOnNotifyPassword(event: boolean) {
-    this.isSecurePassword = event;
+
+  onFileChanged(event: any) {
+    //   this.onUploadFotoProfile();
+    this.showbuttonUpload = true;
+    this.showInputUpload = false;
+    this.selectedFile = event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(this.selectedFile);
+    reader.onload = (event2) => {
+      this.imgURL = reader.result;
+    };
   }
+
 }

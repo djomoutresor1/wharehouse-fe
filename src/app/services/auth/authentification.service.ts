@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
 import { UserLoginModel } from 'src/model/auth/resquest/user-login-model';
-import { UserRegisterModel } from 'src/model/auth/resquest/user-register-model';
+import { UserRegisterModel, UserRegisterModelStepTwo } from 'src/model/auth/resquest/user-register-model';
 import { Auth } from '../../shared/enums/auth-enums';
 
 @Injectable({
@@ -25,6 +25,21 @@ export class AuthentificationService {
     step: number
   ): Observable<ResponseRegisterModel> {
     return this.http.post<ResponseRegisterModel>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_REGISTER_USER}`,
+      user,
+      {
+        params: {
+          step,
+        },
+      }
+    );
+  }
+
+  public userRegisterStepTwo(
+    user: UserRegisterModelStepTwo,
+    step: number
+  ): Observable<UserRegisterModelStepTwo> {
+    return this.http.post<UserRegisterModelStepTwo>(
       `${this.apiServerUrl}${Auth.WAREHOUSE_REGISTER_USER}`,
       user,
       {
