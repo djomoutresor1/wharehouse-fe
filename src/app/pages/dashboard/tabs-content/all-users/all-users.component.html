@@ -17,6 +17,7 @@
               (nzCheckedChange)="onAllChecked($event)"></th>
             <th>Id user</th>
             <th>Username</th>
+            <th>Sex</th>
             <th>FullName</th>
             <th>Email</th>
             <th>Roles</th>
@@ -29,6 +30,7 @@
             <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
             <td>{{ data.userId }}</td>
             <td>{{ data.username }}</td>
+            <td>{{ data.gender }}</td>
             <td>{{ data.fullname }}</td>
             <td>{{ data.email }}</td>
             <td>{{ rolesUser(data.roles) }}</td>
