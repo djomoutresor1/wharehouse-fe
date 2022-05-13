@@ -2,6 +2,7 @@ import { ResponseLoginModel } from 'src/model/auth/response/response-login-model
 import { Utils } from '../shared/enums/utils-enums';
 
 export class WarehouseLocalStorage {
+  user:any;
   WarehouseGetTokenLocalStorage() {
     if (localStorage.getItem(Utils.WAREHOUSE_JWT_TOKEN)) {
       if (
@@ -17,16 +18,20 @@ export class WarehouseLocalStorage {
     }
   }
 
-  WarehouseSetTokenLocalStorage(resposne: ResponseLoginModel) {
-    localStorage.setItem(Utils.WAREHOUSE_JWT_TOKEN, JSON.stringify(resposne));
+  WarehouseSetTokenLocalStorage(response: ResponseLoginModel) {
+    localStorage.setItem(Utils.WAREHOUSE_JWT_TOKEN, JSON.stringify(response));
   }
 
   WarehouseRemoveTokenLocalStorage() {
+    this.user = Array.of(this.WarehouseGetTokenLocalStorage());
+    console.log("this userd: ", this.user)
+
     if (
       typeof localStorage.getItem(Utils.WAREHOUSE_JWT_TOKEN) !== 'undefined' &&
       localStorage.getItem(Utils.WAREHOUSE_JWT_TOKEN)
     ) {
-      localStorage.removeItem(Utils.WAREHOUSE_JWT_TOKEN);
+      localStorage.removeItem(this.user);
+      localStorage.clear();  
     }
   }
 
