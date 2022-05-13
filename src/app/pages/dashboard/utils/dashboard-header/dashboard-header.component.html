@@ -5,6 +5,9 @@
         <ul nz-menu nzMode="horizontal" class="dashboard-header-menu">
             <div class="row">
                 <div class="col">
+                    <warehouse-multilanguage></warehouse-multilanguage>
+                </div>
+                <div class="col">
                     <li nz-submenu nzTitle="Test Name" nzIcon="user" class="dashboard-header-icon">
                         <ul class="dashboard-header-menu-items">
                             <li nz-menu-item (click)="handleOnNavigate('dashboard/my-profile')">
@@ -22,13 +25,6 @@
                             </li>
                         </ul>
                     </li>
-                </div>
-                <div class="col">
-
-                    <nz-select class="choose" [(ngModel)]="language" (ngModelChange)="change()">
-                        <nz-option *ngFor="let country of countries" nzValue="{{country.code}}"
-                            nzLabel="{{country.name}}"><img width="17" height="13" src='{{country.img}}'></nz-option>
-                    </nz-select>
                 </div>
             </div>
         </ul>

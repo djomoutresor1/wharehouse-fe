@@ -21,14 +21,6 @@ export class DashboardHeaderComponent implements OnInit {
 
   checkRole: any;
   name = '';
-  language: string = 'en';
-
-  countries: any [] = [
-    {img:"../../../../../assets/countrie-flags/gb.png", code: "en",name: "English"},
-    {img:"../../../../../assets/countrie-flags/it.png", code: "it",name: "Italian"},
-    {img:"../../../../../assets/countrie-flags/fr.png", code: "fr",name: "French"},];
-
-    
 
   constructor(
     private nzModalService: NzModalService,
@@ -36,18 +28,15 @@ export class DashboardHeaderComponent implements OnInit {
     private authentificationService: AuthentificationService,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private translate: TranslateService
-    ) {
-      translate.setDefaultLang('en');
-      translate.use('en');
-    }
+  ) {}
 
   ngOnInit(): void {
     this.translateText();
   }
 
-// da implementare avec un alert ng-zorro
+  // da implementare avec un alert ng-zorro
   handleOnNavigate(url: string) {
-      this.handleOnNotifyNavigation.emit(url);
+    this.handleOnNotifyNavigation.emit(url);
   }
 
   handleOnCollapsed(collapsed: boolean) {
@@ -76,18 +65,9 @@ export class DashboardHeaderComponent implements OnInit {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
 
-  
   translateText() {
     this.translate
       .get('angular')
       .subscribe((text: string) => (this.name = text));
   }
-
-  change() {
-    const language = this.language || 'en';
-    this.translate.setDefaultLang(language);
-    this.translate.use(language);
-    this.translateText();
-  }
-  
 }

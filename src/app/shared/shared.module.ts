@@ -16,6 +16,7 @@ import { LoadingComponent } from './composants/loading/loading.component';
 import { NotificationComponent } from './composants/notification/notification.component';
 import { CapitalizeFirstLetterPipe } from './pipes/capitalize-first-letter.pipe';
 import { ModalComponent } from './composants/modal/modal.component';
+import { MultilanguageComponent } from './composants/multilanguage/multilanguage.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ModalComponent } from './composants/modal/modal.component';
     NotificationComponent,
     CapitalizeFirstLetterPipe,
     ModalComponent,
+    MultilanguageComponent,
   ],
   imports: [
     CommonModule,
@@ -48,7 +50,8 @@ import { ModalComponent } from './composants/modal/modal.component';
     LoadingComponent,
     NotificationComponent,
     CapitalizeFirstLetterPipe,
-    ModalComponent
+    ModalComponent,
+    MultilanguageComponent,
   ],
 })
 export class SharedModule {}
