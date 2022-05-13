@@ -41,6 +41,7 @@ export class RegisterComponent implements OnInit {
   event1: any;
   radioValue:any
   isSecurePassword: boolean = false;
+  info:any
 
   private apiServerUrl = environment.apiBaseUrl;
 
@@ -72,6 +73,7 @@ export class RegisterComponent implements OnInit {
       password: [null, [Validators.required]],
       confirmPassword: [null, [Validators.required]],
       role: [null, [Validators.required]],
+      gender: [null, [Validators.required]],
     });
   }
 
@@ -88,7 +90,6 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm() {
-    debugger
     let userData = {
       fullname: this.validateForm.controls['fullName']?.value,
       username: this.validateForm.controls['userName']?.value.toLowerCase(),
@@ -96,7 +97,7 @@ export class RegisterComponent implements OnInit {
       password: this.validateForm.controls['password']?.value,
       confirmPassword: this.validateForm.controls['confirmPassword']?.value,
       role: this.validateForm.controls['role']?.value,
-    //  gender: this.radioValue.value,
+      gender: this.validateForm.controls['gender']?.value,
     };
     // console.log(this.validateForm.controls);
     // Verify the password and confirm password and username criteria
@@ -174,4 +175,5 @@ export class RegisterComponent implements OnInit {
   handleOnNotifyPassword(event: boolean) {
     this.isSecurePassword = event;
   }
+  
 }

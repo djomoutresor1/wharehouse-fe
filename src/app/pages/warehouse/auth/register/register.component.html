@@ -39,10 +39,10 @@
                 </nz-form-item>
                 <nz-form-item>
                     <nz-form-control nzErrorTip="Your gender is required">
-                        <nz-radio-group (ngModel)="radioValue" nzName="radiogroup"
-                            (ngModelChange)="handleOnChangeInput()">
-                            <label nz-radio nzValue="Male">Male</label>
-                            <label nz-radio nzValue="Female">Female</label>
+                        <p>Gender:</p>
+                        <nz-radio-group  nzName="radiogroup" (ngModelChange)="handleOnChangeInput()" formControlName="gender">
+                            <label  nz-radio  nzValue="Male">Male</label>
+                            <label  nz-radio  nzValue="Female">Female</label>
                         </nz-radio-group>
                     </nz-form-control>
                 </nz-form-item>
