@@ -5,7 +5,14 @@ export interface UserRegisterModel {
   password?: string;
   role: string[];
   active?: boolean;
-  dateOfBirth?: string;
   lastLogin?: string;
   userId?: string;
+}
+
+
+
+export interface UserRegisterModelStepTwo {
+  dateOfBirth?: string;
+  phoneNumber?:number;
+  country?:string
 }
