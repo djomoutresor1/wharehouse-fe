@@ -9,7 +9,10 @@ import { ResponseRegisterModel } from 'src/model/auth/response/response-register
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { AuthorizationService } from 'src/app/services/auth/authorization.service';
+import { ResponseModel } from 'src/model/auth/response/response-model';
 import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'warehouse-register',
   templateUrl: './register.component.html',
@@ -42,8 +45,8 @@ export class RegisterComponent implements OnInit {
   radioValue:any
   isSecurePassword: boolean = false;
   info:any
-
-  private apiServerUrl = environment.apiBaseUrl;
+  isMailSent: boolean = false;
+  email: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -51,6 +54,7 @@ export class RegisterComponent implements OnInit {
     private authentificationService: AuthentificationService,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private http: HttpClient,
+    private authorizationService: AuthorizationService
     private translate: TranslateService
   ) {
     this.checkIfUserIsAlreadyLogged();
@@ -102,10 +106,22 @@ export class RegisterComponent implements OnInit {
       userData.password,
       userData.confirmPassword
     );
-    if (!!message?.length) {
+    this.email = this.validateForm.controls['email'].value;
+
+    this.authorizationService.userVerificationEmail(this.email).subscribe(
+      (response: ResponseModel) => {
+        this.isMailSent = true;
+      },
+      (error: HttpErrorResponse) => {
+        if (error?.status === 404) {
+          this.isMailSent = false;
+          this.errorAlertType(error?.error?.message);
+        }
+      }
+    );
+  /*  if (!!message?.length) {
       this.errorAlertType(message);
     } else {
-      //   this.onUploadFotoProfile();
       this.authentificationService
         .userRegisterStepOne(userData, Utils.WAREHOUSE_STEP_ONE)
         .subscribe(
@@ -116,8 +132,9 @@ export class RegisterComponent implements OnInit {
             this.errorAlertType(error.error.message);
           }
         );
-    }
+    }*/
   }
+
 
   handleOnCheckValidation(
     username: string,

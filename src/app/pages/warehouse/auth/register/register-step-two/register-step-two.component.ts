@@ -15,7 +15,7 @@ import { UserRegisterModelStepTwo } from 'src/model/auth/resquest/user-register-
 @Component({
   selector: 'warehouse-register-step-two',
   templateUrl: './register-step-two.component.html',
-  styleUrls: ['./register-step-two.component.scss','../register/register.component.scss']
+  styleUrls: ['./register-step-two.component.scss','../register.component.scss']
 })
 
 export class RegisterStepTwoComponent implements OnInit {
