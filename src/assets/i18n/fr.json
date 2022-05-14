@@ -1,13 +1,130 @@
 {
-    "All Users": "tous les utilisateurs",
-    "Users": "Utilisateurs",
-    "Add new user":"ajoutez un nouveau utilisateur",
-    "one position free":"une position libre",
-    "two position free":"deux position libre",
-    "three position free":"trois position libre",
-    "more than three position free":"plus de trois position libre",
-    "Full Rack":"rack plein",
-    "Team":"Equipes",
-    "Team 1":"Equipe 1",
-    "Team 2":"Equipe 2"
+  "warehouse": {
+    "name": "Warehouse System"
+  },
+  "validations": {
+    "confirm": {
+      "password": "Le mot de passe et le mot de passe de confirmation ne correspondent pas. Réessayer."
+    },
+    "username": "Le nom d'utilisateur doit comporter plus de 7 caractères. Réessayer."
+  },
+  "login": {
+    "title": "Page de Login",
+    "cta": {
+      "login": "Connexion",
+      "register": "S'inscrire maintenant !"
+    },
+    "username": {
+      "required": "Pseudo/email/userID est obbligatoire",
+      "placeholder": "Pseudo ou email ou userID",
+      "popover": {
+        "title": "Login Informations",
+        "subtitle": "Sur WareHouse System, il est possibile de se connecter avec :",
+        "contentOne": "- Son courrier électronique",
+        "contentTwo": "- Son User ID",
+        "contentThree": "- Son Pseudo"
+      }
+    },
+    "password": {
+      "title": "Mot de passe oublié ?",
+      "required": "Mot de passe est obbligatoire",
+      "placeholder": "Mot de passe",
+      "popover": {
+        "title": "Sécurité du mot de passe"
+      }
+    },
+    "remember": {
+      "title": "Mémoriser",
+      "popover": {
+        "title": "La case à cocher « Mémoriser »",
+        "contentOne": "Choisir « Mémoriser » réduit le nombre de fois qu'il vous sera demandé de vous connecter sur cet appareil.",
+        "contentTwo": "Pour protéger votre compte, utilisez cette option uniquement sur vos appareils.",
+        "contentThree": "En choisissant cette option, le système conserve vos identifiants de connexion pendant 7 jours."
+      }
+    },
+    "divider": {
+      "title": "Nouveau utilisateur ?"
+    }
+  },
+  "register": {
+    "title": "Page d'Enregistrement",
+    "step": {
+      "information": "Informations Utilisateur",
+      "verification": "Vérification Email",
+      "registration": "Inscription Utilisateur"
+    },
+    "cta": {
+      "stepOne": "Vérifier mon Email"
+    },
+    "fullname": {
+      "placeholder": "Nom et Prénom",
+      "required": "Nom et Prénom sont obbligatoires"
+    },
+    "username": {
+      "required": "Pseudo est obbligatoire",
+      "placeholder": "Pseudo"
+    },
+    "gender": {
+      "required": "Le sex est obbligatoire",
+      "placeholder": "Sex",
+      "male": "Homme",
+      "female": "Femme"
+    },
+    "email": {
+      "required": "Courrier électronique est obbligatoire",
+      "placeholder": "Courrier électronique"
+    },
+    "role": {
+      "required": "Rôle est obbligatoire",
+      "placeholder": "Selectioner un rôle"
+    },
+    "confirmPassword": {
+      "required": "Veuillez confirmer votre mot de passe",
+      "placeholder": "Confirmation mot de passe"
+    },
+    "divider": {
+      "title": "Vous avez déjà un compte ?"
+    }
+  },
+  "securePassword": {
+    "title": "Pour la sécurité de votre mot de passe, utilisez un mot de passe qui contient au moins :",
+    "lowercase": "1 lettre minuscule",
+    "uppercase": "1 lettre majuscule",
+    "number": "1 nombre",
+    "character": "1 caractère spécial",
+    "length": "Entre 8 et 30 caractères"
+  },
+  "forgotPassword": {
+    "title": "Page Mot de Passe Oublié",
+    "content": {
+      "title": "Saisissez l'adresse mail associée à votre compte",
+      "subtitle": "Nous allons envoyer à cette adresse un lien vous permettant de réinitialiser facilement votre mot de passe."
+    },
+    "cta": {
+      "send": "Envoyer le lien de réinitialisation",
+      "login": "Retour connexion"
+    },
+    "divider": {
+      "title": "Rappelez-vous de vos identifiants ?"
+    },
+    "success": {
+      "title": "Nous venons de vous envoyer un email à: ",
+      "content": {
+        "one": "Celui-ci contient un lien permettant de réinitialiser votre mot de passe",
+        "two": "Vous n'avez pas récu de mail dans votre courrier électronique ?",
+        "three": "Vérifiez bien l'orthographe de l'adresse saisie, ou que le mail n'est pas dans vos courriers indésirables."
+      }
+    }
+  },
+  "All Users": "tous les utilisateurs",
+  "Users": "Utilisateurs",
+  "Add new user": "ajoutez un nouveau utilisateur",
+  "one position free": "une position libre",
+  "two position free": "deux position libre",
+  "three position free": "trois position libre",
+  "more than three position free": "plus de trois position libre",
+  "Full Rack": "rack plein",
+  "Team": "Equipes",
+  "Team 1": "Equipe 1",
+  "Team 2": "Equipe 2"
 }
