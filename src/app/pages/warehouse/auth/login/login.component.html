@@ -2,7 +2,7 @@
 <div class="warehouse-auth-wrapper container">
   <div class="row">
     <div class="col text-center">
-      <h2 nz-typography>Login Page</h2>
+      <h2 nz-typography>{{ 'login.title' | translate }}</h2>
     </div>
   </div>
   <div class="row">
@@ -15,31 +15,31 @@
       </div>
       <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
         <nz-form-item>
-          <nz-form-control nzErrorTip="Your username/email is required">
+          <nz-form-control [nzErrorTip]="'login.username.required' | translate">
             <nz-input-group nzPrefixIcon="user" [nzSuffix]="userTemplate">
-              <input type="text" nz-input formControlName="username" placeholder="Username or Email"
+              <input type="text" nz-input formControlName="username" [placeholder]="'login.username.placeholder' | translate"
                 (click)="handleOnChangeInput()" />
             </nz-input-group>
             <ng-template #userTemplate>
-              <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover nzPopoverTitle="Login Informations"
+              <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover [nzPopoverTitle]="'login.username.popover.title' | translate"
                 [nzPopoverContent]="userContentTemplate" nzPopoverPlacement="right"></i>
             </ng-template>
             <ng-template #userContentTemplate>
               <div class="warehouse-user-wrapper">
-                <p>In WareHouse System. it is possibile to login with:
+                <p>{{'login.username.popover.subtitle' | translate }}
                 </p>
-                <p><b>- Your Email address</b></p>
-                <p><b>- Your User ID</b></p>
-                <p><b>- Your Username</b></p>
+                <p><b>{{'login.username.popover.contentOne' | translate }}</b></p>
+                <p><b>{{'login.username.popover.contentTwo' | translate }}</b></p>
+                <p><b>{{'login.username.popover.contentThree' | translate }}</b></p>
               </div>
             </ng-template>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-control nzErrorTip="Your password required">
+          <nz-form-control [nzErrorTip]="'login.password.required' | translate">
             <nz-input-group nzPrefixIcon="lock" [nzSuffix]="passwordTemplate">
               <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password"
-                placeholder="Password" (click)="handleOnChangeInput()" />
+              [placeholder]="'login.password.placeholder' | translate" (click)="handleOnChangeInput()" />
             </nz-input-group>
             <ng-template #passwordTemplate>
               <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
@@ -51,28 +51,28 @@
           <div nz-col [nzSpan]="12">
             <label nz-checkbox (ngModelChange)="handleOnRememberMe()" formControlName="remember"
               class="login-form-remember">
-              <span>Remember</span>
+              <span>{{'login.remember.title' | translate }}</span>
             </label>
-            <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover nzPopoverTitle="Checkbox « Remember »"
+            <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover [nzPopoverTitle]="'login.remember.popover.title' | translate"
               [nzPopoverContent]="rememberContentTemplate" nzPopoverPlacement="right"></i>
             <ng-template #rememberContentTemplate>
               <div class="warehouse-remember-wrapper">
-                <p>Choosing "Remember" reduces the number of times you'll be asked to sign in on this device.
+                <p>{{'login.remember.popover.contentOne' | translate }}
                 </p>
-                <p>To keep your account safe, use this option only on your devices.</p>
-                <p><b>Choosing this option, the system keep your credentials login for 7 days.</b></p>
+                <p>{{'login.remember.popover.contentTwo' | translate }}</p>
+                <p><b>{{'login.remember.popover.contentThree' | translate }}</b></p>
               </div>
             </ng-template>
           </div>
           <div nz-col [nzSpan]="12">
-            <a class="login-form-forgot" (click)="handleOnForgotPassword()">Forget password ?</a>
+            <a class="login-form-forgot" (click)="handleOnForgotPassword()">{{'login.password.title' | translate }}</a>
           </div>
         </div>
         <br />
         <button nz-button [disabled]="!validateForm.valid" nzBlock class="login-form-button login-form-margin"
-          [nzType]="'primary'">Log in</button>
-        <nz-divider nzDashed nzText="New User ?"></nz-divider>
-        <button nz-button nzType="primary" (click)="handleOnRegister()" nzBlock>Register Now !
+          [nzType]="'primary'">{{'login.cta.login' | translate }}</button>
+        <nz-divider nzDashed [nzText]="'login.divider.title' | translate"></nz-divider>
+        <button nz-button nzType="primary" (click)="handleOnRegister()" nzBlock>{{'login.cta.register' | translate }}
           <i nz-icon nzType="right" nzTheme="outline"></i></button>
       </form>
     </div>

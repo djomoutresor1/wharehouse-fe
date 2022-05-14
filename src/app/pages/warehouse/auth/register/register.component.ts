@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { ResponseModel } from 'src/model/auth/response/response-model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'warehouse-register',
@@ -34,9 +35,9 @@ export class RegisterComponent implements OnInit {
   ];
   selectedValue = { label: 'User', value: 'user' };
   steps: string[] = [
-    'User Informations',
-    'Verification Email',
-    'Registration User',
+    'register.step.information',
+    'register.step.verification',
+    'register.step.registration',
   ];
   currentStep: number = 0;
   selectedFile: any;
@@ -54,6 +55,7 @@ export class RegisterComponent implements OnInit {
     private warehouseLocalStorage: WarehouseLocalStorage,
     private http: HttpClient,
     private authorizationService: AuthorizationService
+    private translate: TranslateService
   ) {
     this.checkIfUserIsAlreadyLogged();
   }
@@ -68,7 +70,7 @@ export class RegisterComponent implements OnInit {
         null,
         [Validators.required, Validators.min(5), Validators.max(25)],
       ],
-      userName: [
+      username: [
         null,
         [Validators.required, Validators.min(5), Validators.max(15)],
       ],
@@ -87,15 +89,10 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  roleChoice(event: any): void {
-    this.role = event?.value;
-    console.log('eventttt: ', this.role);
-  }
-
   submitForm() {
     let userData = {
       fullname: this.validateForm.controls['fullName']?.value,
-      username: this.validateForm.controls['userName']?.value.toLowerCase(),
+      username: this.validateForm.controls['username']?.value.toLowerCase(),
       email: this.validateForm.controls['email']?.value,
       password: this.validateForm.controls['password']?.value,
       confirmPassword: this.validateForm.controls['confirmPassword']?.value,
@@ -146,10 +143,10 @@ export class RegisterComponent implements OnInit {
   ): string {
     let message = '';
     if (confirmPassword !== password) {
-      message = "Password and confirm password don't match. Try again.";
+      message = this.translate.instant('validations.confirm.password');
       return message;
     } else if (username?.length <= 7) {
-      message = 'Username will be more than 7 characters. Try again.';
+      message = this.translate.instant('validations.username');
       return message;
     } else {
       return message;
