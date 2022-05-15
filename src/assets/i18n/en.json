@@ -1,4 +1,7 @@
 {
+  "dashboard": {
+    "title": "Dashboard"
+  },
   "warehouse": {
     "name": "Warehouse System"
   },
@@ -115,6 +118,17 @@
         "three": "Check the spelling of the address entered, or that the email is not in your spam folder."
       }
     }
+  },
+  "changePassword": {
+    "title": "Change password",
+    "oldPassword": {
+      "required": "Your current password is required",
+      "placeholder": "Old password"
+    },
+    "cta": "Change password"
+  },
+  "profile": {
+    "title": "My Profile"
   },
   "All Users": "All Users",
   "Users": "Users",

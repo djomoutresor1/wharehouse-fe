@@ -1,4 +1,7 @@
 {
+  "dashboard": {
+    "title": "Tableau de bord"
+  },
   "warehouse": {
     "name": "Warehouse System"
   },
@@ -115,6 +118,17 @@
         "three": "Vérifiez bien l'orthographe de l'adresse saisie, ou que le mail n'est pas dans vos courriers indésirables."
       }
     }
+  },
+  "changePassword": {
+    "title": "Changer mot de passe",
+    "oldPassword": {
+      "required": "Votre mot de passe actuel est obbligatoire",
+      "placeholder": "Ancien mot de passe"
+    },
+    "cta": "Changer mon mot de passe"
+  },
+  "profile": {
+    "title": "Mon Profil"
   },
   "All Users": "tous les utilisateurs",
   "Users": "Utilisateurs",
