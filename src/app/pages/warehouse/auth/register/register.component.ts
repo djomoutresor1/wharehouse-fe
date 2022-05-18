@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthentificationService } from 'src/app/services/auth/authentification.service';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { ResponseModel } from 'src/model/auth/response/response-model';
+import { PathParams } from 'src/app/shared/enums/path-params-enums';
+import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
 
 @Component({
   selector: 'warehouse-register',
@@ -46,16 +48,33 @@ export class RegisterComponent implements OnInit {
   info:any
   isMailSent: boolean = false;
   email: string = '';
+  idLinkResetPassword: any;
+  expirationLink: any;
+  verifyType: any;
+  isExpiredLink: boolean = false;
+  user!: ResponseResetModel;
+  isResetPassword: boolean = false;
+
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     private authentificationService: AuthentificationService,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private http: HttpClient,
     private authorizationService: AuthorizationService
   ) {
     this.checkIfUserIsAlreadyLogged();
+    this.idLinkResetPassword = this.route.snapshot.queryParamMap.get(
+      PathParams.ID_LINK_RESET_VERIFICATION_EMAIL
+    );
+    this.expirationLink = this.route.snapshot.queryParamMap.get(
+      PathParams.EXPIRATION_LINK
+    );
+    this.verifyType = this.route.snapshot.queryParamMap.get(
+      PathParams.VERIFY_TYPE
+    );
   }
 
   ngOnInit(): void {
@@ -110,19 +129,7 @@ export class RegisterComponent implements OnInit {
       userData.confirmPassword
     );
     this.email = this.validateForm.controls['email'].value;
-
-    this.authorizationService.userVerificationEmail(this.email).subscribe(
-      (response: ResponseModel) => {
-        this.isMailSent = true;
-      },
-      (error: HttpErrorResponse) => {
-        if (error?.status === 404) {
-          this.isMailSent = false;
-          this.errorAlertType(error?.error?.message);
-        }
-      }
-    );
-  /*  if (!!message?.length) {
+    if (!!message?.length) {
       this.errorAlertType(message);
     } else {
       this.authentificationService
@@ -135,7 +142,23 @@ export class RegisterComponent implements OnInit {
             this.errorAlertType(error.error.message);
           }
         );
-    }*/
+    }
+// verification email
+setTimeout(() => {
+  this.authorizationService.userVerificationEmail(this.email).subscribe(
+    (response: ResponseModel) => {
+      this.checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects();
+      this.isMailSent = true;
+      this.successAlertType(response?.message);
+    },
+    (error: HttpErrorResponse) => {
+      if (error?.status === 404) {
+        this.isMailSent = false;
+        this.errorAlertType(error?.error?.message);
+      }
+    }
+  );
+}, 2000);
   }
 
 
@@ -165,15 +188,17 @@ export class RegisterComponent implements OnInit {
   successAlertType(message: string): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
-    this.messageAlert = message;
+  //  this.messageAlert = message;
     setTimeout(() => {
       this.isAuth = false;
-      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
-    }, 2000);
+    //  after the first step,it proceed to verify email on step2
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP2}`]);
+    }, 1000);
   }
 
   handleOnLogin() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+  //  this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP2}`]);
   }
 
   handleOnChangeInput() {
@@ -191,5 +216,66 @@ export class RegisterComponent implements OnInit {
   handleOnNotifyPassword(event: boolean) {
     this.isSecurePassword = event;
   }
+
+  // implementation of verification link email 
+
+
+  checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects() {
+    this.authorizationService
+      .userVerifyLink(this.idLinkResetPassword, this.verifyType)
+      .subscribe(
+        (response: ResponseResetModel) => {
+          this.user = response;
+          this.checkIfExpirationLinkIsCorrect();
+        },
+        (error: HttpErrorResponse) => {
+          if (error.status === 404) {
+            this.isResetPassword = true;
+            this.errorAlertType(error?.error.message);
+          }
+        }
+      );
+  }
+
+  checkIfExpirationLinkIsCorrect() {
+    let now = new Date().getTime();
+    let expiredLinkUrl = new Date(this.expirationLink).getTime();
+    let expiredLinkUser = new Date(this.user?.expiryDate).getTime();
+    // First verify if the expired date in url is same with expired date user's in db
+    if (this.verifyTheCorrectDate(expiredLinkUrl, expiredLinkUser)) {
+      // Compare the expired date with the current date
+      if (expiredLinkUrl > now) {
+        this.isExpiredLink = false;
+      } else {
+        this.isExpiredLink = true;
+        this.errorAlertType(
+          'The link to reset your password is expired. Try resend the new link to complete the operation.'
+        );
+      }
+    } else {
+      this.isExpiredLink = true;
+      this.errorAlertType(
+        'The expired date that you are providing to reset your password is not correct. Try resend the new link to complete the operation.'
+      );
+    }
+  }
+
+  verifyTheCorrectDate(
+    expiredLinkUrl: number,
+    expiredLinkUser: number
+  ): boolean {
+    // We have the precision lost before the last fourth numbers
+    // Then, first, i will remove the last fourth numbers in both dates
+    let correctExpiredLinkUrl = expiredLinkUrl
+      .toString()
+      .slice(0, expiredLinkUrl.toString().length - 4);
+    let correctExpiredLinkUser = expiredLinkUser
+      .toString()
+      .slice(0, expiredLinkUser.toString().length - 4);
+
+    return correctExpiredLinkUrl === correctExpiredLinkUser ? true : false;
+  }
   
 }
+
+

@@ -1,4 +1,4 @@
-<p>register-step-two wo<warehouse-multilanguage></warehouse-multilanguage>
+<warehouse-multilanguage></warehouse-multilanguage>
     <div class="warehouse-auth-wrapper container">
         <div class="row">
             <div class="col text-center">
@@ -14,56 +14,22 @@
         </div>
         <div class="row">
             <div class="col-md-4 offset-md-4">
-                <div class="row">
-                    <div class="col" *ngIf="isAuth">
-                        <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
-                        </warehouse-alert>
-                    </div>
-                </div>
-                <form nz-form [formGroup]="validateForm" class="register-form" (ngSubmit)="submitForm()">
-                    <nz-form-item>
-                        <nz-form-control nzErrorTip="upload your foto profile">
-                            <nz-input-group>
-                                <input *ngIf="showInputUpload" type="file" (change)="onFileChanged($event)" nz-input formControlName="image" placeholder="upload your foto profile"/>
-                                <img [src]="imgURL" height="100" width="100" *ngIf="imgURL">
-                                <input *ngIf="showbuttonUpload "type="button" (click)="onUploadFotoProfile()" value="upload">
-                            </nz-input-group>
-                        </nz-form-control>
-                    </nz-form-item>
-                    <nz-form-item>
-                        <nz-form-control>
-                            <nz-input-group nzPrefixIcon="user">
-                                <input type="date" nz-input formControlName="dateOfBirth" placeholder="Date Of Birth"
-                                    (click)="handleOnChangeInput()" />
-                            </nz-input-group>
-                        </nz-form-control>
-                    </nz-form-item>
-                    <nz-form-item>
-                        <nz-form-control nzErrorTip="Your phone number is required">
-                            <nz-input-group nzPrefixIcon="user">
-                                <input type="number" nz-input formControlName="phoneNumber" placeholder="Phone Number"
-                                    (click)="handleOnChangeInput()" />
-                            </nz-input-group>
-                        </nz-form-control>
-                    </nz-form-item>
-                    <nz-form-item>
-                        <nz-form-control nzErrorTip="Your phone country is required">
-                            <nz-select nzAllowClear nzPlaceHolder="Select a country" formControlName="country"
-                            [nzCustomTemplate]="multipleTemplate">
-                            <nz-option *ngFor="let country of countries" [nzValue]="country.value" [nzLabel]="country.label">
-                            </nz-option>
-                        </nz-select>
-                        <ng-template #multipleTemplate let-selected>
-                            <div class="ant-select-selection-item-content">
-                                {{ selected.nzLabel }}
+                <nz-result NzResultIconType="success" nzTitle="CONFIRMATION VERIFICATION EMAIL" [nzSubTitle]="'Hello your email has been verified, please click and complete the registration'">
+                    <div nz-result-extra>
+                        <ng-template #confirmMessage>
+                            <div class="class" *ngFor="let data of onRetrieveUser()">
+                                Hello {{data.name}} your email has been verified, please click and complete the registration
                             </div>
                         </ng-template>
-                        </nz-form-control>
-                    </nz-form-item>
-                    <nz-divider nzDashed nzText="Already have an account?"></nz-divider>
-                    <button nz-button nzType="primary" (click)="handleOnLogin()" nzBlock>
-                        <i nz-icon nzType="left" nzTheme="outline"></i>Log in</button>
-                </form>
+                        <nz-button-group [nzSize]="size">
+                            <button nz-button nzType="primary" (click)="onGoToStepThree()">
+                                <i nz-icon nzType="right"></i>
+                                Go to step three
+                            </button>
+                        </nz-button-group>
+                    </div>
+                </nz-result>
             </div>
         </div>
     </div>
+    <router-outlet></router-outlet>

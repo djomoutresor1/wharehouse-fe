@@ -30,6 +30,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
@@ -84,7 +85,8 @@ const icons = [
     TranslateModule,
     NzProgressModule,
     NzImageModule,
-    NzRadioModule
+    NzRadioModule,
+    NzDatePickerModule
   ],
   exports: [
     NzButtonModule,
@@ -117,7 +119,8 @@ const icons = [
     TranslateModule,
     NzProgressModule,
     NzImageModule,
-    NzRadioModule
+    NzRadioModule,
+    NzDatePickerModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })

@@ -2,6 +2,8 @@ export enum Pages {
   DASHBOARD = 'dashboard',
   WAREHOUSE = 'warehouse',
   REGISTER = 'register',
+  REGISTERSTEP2 = 'register/step-two',
+  REGISTERSTEP3 = 'register/step-three',
   LOGIN = 'login',
   RACK_DETAIL = 'rack/detail',
   HOME = 'home',

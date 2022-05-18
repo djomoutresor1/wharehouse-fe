@@ -12,6 +12,7 @@ import { ResetPasswordComponent } from './auth/password/reset-password/reset-pas
 import { ChangePasswordComponent } from './auth/password/change-password/change-password.component';
 import { SecurePasswordComponent } from './auth/password/components/secure-password/secure-password.component';
 import { RegisterStepTwoComponent } from './auth/register/register-step-two/register-step-two.component';
+import { RegisterStepThreeComponent } from './auth/register/register-step-three/register-step-three.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { RegisterStepTwoComponent } from './auth/register/register-step-two/regi
     ChangePasswordComponent,
     SecurePasswordComponent,
     RegisterStepTwoComponent,
+    RegisterStepThreeComponent,
   ],
   imports: [
     ReactiveFormsModule,
