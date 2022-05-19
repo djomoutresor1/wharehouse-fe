@@ -1,13 +1,130 @@
 {
-    "All Users": "All Users",
-    "Users": "Users",
-    "Add new user":"Add new user",
-    "one position free":"one position free",
-    "two position free":"two position free",
-    "three position free":"three position free",
-    "more than three position free":"more than three position free",
-    "Full Rack":"Full Rack",
-    "Team":"Team",
-    "Team 1":"Team 1",
-    "Team 2":"Team 2"
+  "warehouse": {
+    "name": "Warehouse System"
+  },
+  "validations": {
+    "confirm": {
+      "password": "Password and confirm password don't match. Try again."
+    },
+    "username": "Username must be more than 7 characters. Try again."
+  },
+  "login": {
+    "title": "Login Page",
+    "cta": {
+      "login": "Log In",
+      "register": "Register Now !"
+    },
+    "username": {
+      "required": "Username/email is required",
+      "placeholder": "Username or email or userID",
+      "popover": {
+        "title": "Login Informations",
+        "subtitle": "In WareHouse System, it is possibile to login with :",
+        "contentOne": "- Your Email address",
+        "contentTwo": "- Your User ID",
+        "contentThree": "- Your Username"
+      }
+    },
+    "password": {
+      "title": "Forget Password ?",
+      "required": "Password is required",
+      "placeholder": "Password",
+      "popover": {
+        "title": "Password security"
+      }
+    },
+    "remember": {
+      "title": "Remember",
+      "popover": {
+        "title": "Checkbox « Remember »",
+        "contentOne": "Choosing « Remember » reduces the number of times you'll be asked to sign in on this device.",
+        "contentTwo": "To keep your account safe, use this option only on your devices.",
+        "contentThree": "Choosing this option, the system keeps your credentials login for 7 days."
+      }
+    },
+    "divider": {
+      "title": "New User ?"
+    }
+  },
+  "register": {
+    "title": "Register Page",
+    "step": {
+      "information": "User Informations",
+      "verification": "Verification Email",
+      "registration": "Registration User"
+    },
+    "cta": {
+      "stepOne": "Verify my email"
+    },
+    "fullname": {
+      "placeholder": "First and Last name",
+      "required": "Your fullname is required"
+    },
+    "username": {
+      "required": "Username is required",
+      "placeholder": "Username"
+    },
+    "gender": {
+      "required": "Gender is required",
+      "placeholder": "Gender",
+      "male": "Man",
+      "female": "Woman"
+    },
+    "email": {
+      "required": "Email is required",
+      "placeholder": "Email"
+    },
+    "role": {
+      "required": "Role is required",
+      "placeholder": "Select the role"
+    },
+    "confirmPassword": {
+      "required": "Please confirm your password",
+      "placeholder": "Confirm password"
+    },
+    "divider": {
+      "title": "Already have an account ?"
+    }
+  },
+  "securePassword": {
+    "title": "For your password security, use one password that content a least:",
+    "lowercase": "1 lowercase letter",
+    "uppercase": "1 uppercase letter",
+    "number": "1 number",
+    "character": "1 special character",
+    "length": "Between 8 and 30 characters"
+  },
+  "forgotPassword": {
+    "title": "Forget Password page",
+    "content": {
+      "title": "Enter the email address associated with your account",
+      "subtitle": "We will send a link to this address allowing you to easily reset your password."
+    },
+    "cta": {
+      "send": "Send Reset Link",
+      "login": "Back to Log In"
+    },
+    "divider": {
+      "title": "Remember your credentials ?"
+    },
+    "success": {
+      "title": "We just sent you an email at: ",
+      "content": {
+        "one": "This contains a link to reset your password.",
+        "two": "Didn't receive an email ?",
+        "three": "Check the spelling of the address entered, or that the email is not in your spam folder."
+      }
+    }
+  },
+  "All Users": "All Users",
+  "Users": "Users",
+  "Add new user": "Add new user",
+  "one position free": "one position free",
+  "two position free": "two position free",
+  "three position free": "three position free",
+  "more than three position free": "more than three position free",
+  "Full Rack": "Full Rack",
+  "Team": "Team",
+  "Team 1": "Team 1",
+  "Team 2": "Team 2"
 }

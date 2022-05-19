@@ -3,6 +3,7 @@ export enum Utils {
   WAREHOUSE_JWT_TOKEN = "warehouse-jwt-token",
   WAREHOUSE_TIMEOUT_TOKEN = "timeout-token",
   WAREHOUSE_REMEMBER_ME = "warehouse-remember-me",
+  WAREHOUSE_USER_LANGUAGE = "warehouse-user-language",
   ADMIN = 'admin',
   PASSWORD = 'Qwerty84.',
   ROLE_USER = 'ROLE_USER',

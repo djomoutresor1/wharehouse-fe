@@ -2,7 +2,7 @@ import { ResponseLoginModel } from 'src/model/auth/response/response-login-model
 import { Utils } from '../shared/enums/utils-enums';
 
 export class WarehouseLocalStorage {
-  user:any;
+  user: any;
   WarehouseGetTokenLocalStorage() {
     if (localStorage.getItem(Utils.WAREHOUSE_JWT_TOKEN)) {
       if (
@@ -24,14 +24,14 @@ export class WarehouseLocalStorage {
 
   WarehouseRemoveTokenLocalStorage() {
     this.user = Array.of(this.WarehouseGetTokenLocalStorage());
-    console.log("this userd: ", this.user)
+    console.log('this userd: ', this.user);
 
     if (
       typeof localStorage.getItem(Utils.WAREHOUSE_JWT_TOKEN) !== 'undefined' &&
       localStorage.getItem(Utils.WAREHOUSE_JWT_TOKEN)
     ) {
       localStorage.removeItem(this.user);
-      localStorage.clear();  
+      localStorage.clear();
     }
   }
 
@@ -55,6 +55,21 @@ export class WarehouseLocalStorage {
       }
     } else {
       return {};
+    }
+  }
+
+  WarehouseGetLanguageLocalStorage() {
+    if (localStorage.getItem(Utils.WAREHOUSE_USER_LANGUAGE)) {
+      if (
+        typeof localStorage.getItem(Utils.WAREHOUSE_USER_LANGUAGE) !==
+        'undefined'
+      ) {
+        return localStorage.getItem(Utils.WAREHOUSE_USER_LANGUAGE);
+      } else {
+        return;
+      }
+    } else {
+      return;
     }
   }
 }
