@@ -1,6 +1,16 @@
 {
   "dashboard": {
-    "title": "Pannello"
+    "title": "Pannello",
+    "cta": {
+      "logout": "Disconnettersi",
+      "back": "Indietro"
+    },
+    "modal": {
+      "logout": {
+        "title": "Conferma Logout",
+        "subtitle": "Sei sicuro di voler uscire ?"
+      }
+    }
   },
   "warehouse": {
     "name": "Warehouse System"

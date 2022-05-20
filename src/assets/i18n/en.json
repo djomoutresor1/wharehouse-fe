@@ -1,6 +1,16 @@
 {
   "dashboard": {
-    "title": "Dashboard"
+    "title": "Dashboard",
+    "cta": {
+      "logout": "Logout",
+      "back": "Back"
+    },
+    "modal": {
+      "logout": {
+        "title": "Confirmation Logout",
+        "subtitle": "Are you sure you want to logout ?"
+      }
+    }
   },
   "warehouse": {
     "name": "Warehouse System"

@@ -21,7 +21,7 @@ export class DashboardHeaderComponent implements OnInit {
 
   checkRole: any;
   name = '';
-  user: any;
+  userLocalStorage: any;
 
   constructor(
     private nzModalService: NzModalService,
@@ -31,47 +31,42 @@ export class DashboardHeaderComponent implements OnInit {
     private translate: TranslateService
   ) {}
 
-  ngOnInit(): void {
-    this.translateText();
-  }
+  ngOnInit(): void {}
 
   // da implementare avec un alert ng-zorro
   handleOnNavigate(url: string) {
     this.handleOnNotifyNavigation.emit(url);
-  }
+}
 
   handleOnCollapsed(collapsed: boolean) {
     this.handleOnNotifyCollapsed.emit(collapsed);
   }
 
   handleOnLogout() {
-    this.user = Array.of(this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage());
+    this.userLocalStorage =
+      this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
 
     this.nzModalService.confirm({
-      nzTitle: '<h4>Confirmation Logout</h4>',
-      nzContent: '<p>Are you sure you want to logout?</p>',
-      nzCancelText: 'Back',
-      nzOkText: 'Logout',
+      nzTitle: '<h4>' + this.translate.instant('dashboard.modal.logout.title') + '</h4>',
+      nzContent: '<p>' + this.translate.instant('dashboard.modal.logout.subtitle') + '</p>',
+      nzCancelText: this.translate.instant('dashboard.cta.back'),
+      nzOkText: this.translate.instant('dashboard.cta.logout'),
       nzOnOk: () => {
         // TODO: implement the logic to logout
-        this.authentificationService.userLogout(JSON.stringify(this.user[0]?.userId)).subscribe(
-          (response: any) => {
-            console.log('response: ', response);
-            this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
-            this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
-          },
-          (error: HttpErrorResponse) => {
-            console.log('error: ', error);
-          }
-        );
+        this.authentificationService
+          .userLogout(JSON.stringify(this.userLocalStorage?.userId))
+          .subscribe(
+            (response: any) => {
+              console.log('response: ', response);
+              this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
+              this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+            },
+            (error: HttpErrorResponse) => {
+              console.log('error: ', error);
+            }
+          );
       },
     });
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
-  }
-
-  translateText() {
-    this.translate
-      .get('angular')
-      .subscribe((text: string) => (this.name = text));
   }
 }

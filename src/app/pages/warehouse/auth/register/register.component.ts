@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
     private authentificationService: AuthentificationService,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private http: HttpClient,
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
     private translate: TranslateService
   ) {
     this.checkIfUserIsAlreadyLogged();
@@ -108,7 +108,7 @@ export class RegisterComponent implements OnInit {
     );
     this.email = this.validateForm.controls['email'].value;
 
-    this.authorizationService.userVerificationEmail(this.email).subscribe(
+    /*this.authorizationService.userVerificationEmail(this.email).subscribe(
       (response: ResponseModel) => {
         this.isMailSent = true;
       },
@@ -118,8 +118,8 @@ export class RegisterComponent implements OnInit {
           this.errorAlertType(error?.error?.message);
         }
       }
-    );
-  /*  if (!!message?.length) {
+    );*/
+  if (!!message?.length) {
       this.errorAlertType(message);
     } else {
       this.authentificationService
@@ -132,7 +132,7 @@ export class RegisterComponent implements OnInit {
             this.errorAlertType(error.error.message);
           }
         );
-    }*/
+    }
   }
 
 

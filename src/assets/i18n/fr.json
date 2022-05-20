@@ -1,6 +1,16 @@
 {
   "dashboard": {
-    "title": "Tableau de bord"
+    "title": "Tableau de bord",
+    "cta": {
+      "logout": "Se déconnecter",
+      "back": "Retour"
+    },
+    "modal": {
+      "logout": {
+        "title": "Confirmation Déconnexion",
+        "subtitle": "Êtes-vous sûr de vouloir vous déconnecter ?"
+      }
+    }
   },
   "warehouse": {
     "name": "Warehouse System"
