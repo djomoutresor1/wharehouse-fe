@@ -23,15 +23,11 @@ export class WarehouseLocalStorage {
   }
 
   WarehouseRemoveTokenLocalStorage() {
-    this.user = Array.of(this.WarehouseGetTokenLocalStorage());
-    console.log('this userd: ', this.user);
-
     if (
       typeof localStorage.getItem(Utils.WAREHOUSE_JWT_TOKEN) !== 'undefined' &&
       localStorage.getItem(Utils.WAREHOUSE_JWT_TOKEN)
     ) {
-      localStorage.removeItem(this.user);
-      localStorage.clear();
+      localStorage.removeItem(Utils.WAREHOUSE_JWT_TOKEN);
     }
   }
 

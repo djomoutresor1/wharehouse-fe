@@ -60,4 +60,10 @@ export class AuthorizationService {
 
   // TODO: The user want to refresh the token, because it is expired
   public userRefreshToken() {}
+
+  public userVerificationEmail(email: string): Observable<ResponseModel> {
+    return this.http.get<ResponseModel>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_VERIFICATION_EMAIL}/${email}`
+    );
+  }
 }

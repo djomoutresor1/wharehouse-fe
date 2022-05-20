@@ -1,4 +1,17 @@
 {
+  "dashboard": {
+    "title": "Pannello",
+    "cta": {
+      "logout": "Disconnettersi",
+      "back": "Indietro"
+    },
+    "modal": {
+      "logout": {
+        "title": "Conferma Logout",
+        "subtitle": "Sei sicuro di voler uscire ?"
+      }
+    }
+  },
   "warehouse": {
     "name": "Warehouse System"
   },
@@ -115,6 +128,17 @@
         "three": "Controlla l'ortografia dell'indirizzo inserito o che l'e-mail non sia nella posta indesiderata."
       }
     }
+  },
+  "changePassword": {
+    "title": "Cambia mia password",
+    "oldPassword": {
+      "required": "La tua password attuale è richiesta",
+      "placeholder": "Vecchia password"
+    },
+    "cta": "Cambia la mia password"
+  },
+  "profile": {
+    "title": "Mio Profilo"
   },
   "All Users": "tutti gli utenti",
   "Users": "Utenti",
