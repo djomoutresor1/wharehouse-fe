@@ -138,7 +138,27 @@
     "cta": "Cambia la mia password"
   },
   "profile": {
-    "title": "Mio Profilo"
+    "title": "Mio Profilo",
+    "empty": "--- Non Specificato ---",
+    "role": "Hai i roli", 
+    "lastLogin": "Hai effettuato il tuo ultimo accesso il",
+    "personalData": {
+      "title": "Dati Anagrafici",
+      "fullname": "Nome e Cognome",
+      "dateOfBorn": "Data di Nascita",
+      "userId": "Matricola",
+      "country": "Paese",
+      "city": "Città",
+      "address": "Indirizzo",
+      "zip": "Codice Postale"
+    },
+    "personalContact": {
+      "title": "Contatti Personali",
+      "personalEmail": "Indirizzo E-mail Personale",
+      "otherPersonalEmail": "Indirizzo PEC Personale",
+      "mobilePhone": "Cellulare",
+      "landlinePhone": "Telefono Fisso"
+    }
   },
   "All Users": "tutti gli utenti",
   "Users": "Utenti",

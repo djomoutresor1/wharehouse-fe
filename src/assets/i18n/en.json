@@ -138,7 +138,27 @@
     "cta": "Change password"
   },
   "profile": {
-    "title": "My Profile"
+    "title": "My Profile",
+    "empty": "--- Not specified ---",
+    "role": "You are", 
+    "lastLogin": "You were last logged in on",
+    "personalData": {
+      "title": "Personal Data",
+      "fullname": "First and Last name",
+      "dateOfBorn": "Date of Born",
+      "userId": "Matricule",
+      "country": "Country",
+      "city": "City",
+      "address": "Address",
+      "zip": "Zip Code"
+    },
+    "personalContact": {
+      "title": "Personal Contacts",
+      "personalEmail": "Personal Email Address",
+      "otherPersonalEmail": "Personal PEC Address",
+      "mobilePhone": "Mobile Phone",
+      "landlinePhone": "Landine Phone"
+    }
   },
   "All Users": "All Users",
   "Users": "Users",

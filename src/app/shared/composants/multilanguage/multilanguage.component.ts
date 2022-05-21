@@ -30,6 +30,11 @@ export class MultilanguageComponent implements OnInit {
       code: Internationalizations.FRENCH,
       name: Languages.FRENCH,
     },
+    {
+      img: '../../../../../assets/countrie-flags/es.png',
+      code: Internationalizations.SPAIN,
+      name: Languages.SPAIN,
+    },
   ];
 
   constructor(
@@ -57,6 +62,7 @@ export class MultilanguageComponent implements OnInit {
       { name: Languages.ENGLISH, code: Internationalizations.ENGLISH },
       { name: Languages.FRENCH, code: Internationalizations.FRENCH },
       { name: Languages.ITALIAN, code: Internationalizations.ITALIAN },
+      { name: Languages.SPAIN, code: Internationalizations.SPAIN },
     ];
 
     const langs = this.dropDownLanguage?.map((language) => language?.code);
@@ -78,6 +84,10 @@ export class MultilanguageComponent implements OnInit {
         case 'fr':
           this.translate.use(Internationalizations.FRENCH);
           this.selectedLanguage = Internationalizations.FRENCH;
+          break;
+        case 'es':
+          this.translate.use(Internationalizations.SPAIN);
+          this.selectedLanguage = Internationalizations.SPAIN;
           break;
         case 'en':
         default:

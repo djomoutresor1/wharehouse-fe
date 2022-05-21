@@ -1,44 +1,174 @@
 <nz-breadcrumb>
   <nz-breadcrumb-item (click)="handleOnNavigate('dashboard')">
-      <i nz-icon nzType="dashboard"></i>
-      <a>Dashboard</a>
+    <i nz-icon nzType="dashboard"></i>
+    <a>Dashboard</a>
   </nz-breadcrumb-item>
   <nz-breadcrumb-item>
-      <a>My Profile</a>
+    <a>My Profile</a>
   </nz-breadcrumb-item>
 </nz-breadcrumb>
-<div class="card-profile">
-  <div class="row" *ngFor="let data of this.user">
-    <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
-      <nz-card-meta nzTitle="{{data.fullname}}" [nzDescription]="description" [nzAvatar]="avatarTemplate">
-      </nz-card-meta>
-    </nz-card>
-    <ng-template #description>
-      <div class="row">
-        <div>
-          <nz-tag [nzColor]="choseTheme(rolesUser(data.roles))">{{ rolesUser(data.roles)}}</nz-tag>
-        </div>
-        <div><a class="descript">User id: </a>{{ data.userId }}</div>
-        <div><a class="descript">Username:</a>{{ data.username }}</div>
-        <div><a class="descript">Email:</a>{{ data.email }}</div>
-        <div><a class="descript">Date of birth:</a> {{ data.dateOfBirth }}</div>
-        <div><a class="descript">Last Login:</a> {{ data.lastLogin }}</div>
-      </div>
-    </ng-template>
-    <ng-template #avatarTemplate>
-      <nz-avatar nzSrc="../../../../../assets/images/avatar.jpg"></nz-avatar>
-    </ng-template>
-    <ng-template #coverTemplate>
-      <img alt="example" src="../../../../../assets/images/The-welcome-Warehouse.jpg" />
-    </ng-template>
-    <ng-template #actionSetting>
-      <i nz-icon nzType="setting" (click)="handleOnChangePassword()"></i>
-    </ng-template>
-    <ng-template #actionEdit>
-      <i nz-icon nzType="edit"></i>
-    </ng-template>
-    <ng-template #actionEllipsis>
-      <i nz-icon nzType="ellipsis"></i>
-    </ng-template>
+<div class="profile-wrapper">
+  <div class="row">
+    <div class="col-md-12">
+      <img alt="Warehouse Background Cover" class="profile-background-cover"
+        src="../../../../../assets/images/The-welcome-Warehouse.jpg" />
+    </div>
   </div>
-</div>
+  <div class="row">
+    <div class="col-md-2">
+      <nz-avatar class="profile-avatar" nzSrc="../../../../../assets/images/avatar.jpg"></nz-avatar>
+    </div>
+    <div class="col-md-10">
+      <div class="row mt-3 profile-user">
+        <div class="col-md-3">
+          <p class="profile-title" nz-typography>{{ "register.username.placeholder" | translate }}</p>
+          <h3 class="profile-title" nz-typography>{{ userLocalStorage.username }}</h3>
+        </div>
+        <div class="col-md-3">
+          <p class="profile-title" nz-typography>{{ "profile.personalData.userId" | translate }}</p>
+          <h3 class="profile-title" nz-typography>{{ userLocalStorage.userId }}</h3>
+        </div>
+        <div class="col-md-4">
+          <p class="profile-title" nz-typography>{{"profile.role" | translate}}</p>
+          <h3 class="profile-title" nz-typography>
+            <nz-tag *ngFor="let role of userLocalStorage.roles" [nzColor]="getUserColorRole(role)">
+              <i nz-icon [nzType]="getRoleIcon(role)"></i>
+              {{ getRoleName(role)}}
+            </nz-tag>
+          </h3>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md-12">
+          <span nz-typography><strong>{{"profile.lastLogin" | translate}} {{ userLocalStorage.lastLogin
+              }}</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row profile-content">
+    <div class="col-md-12 profile-personal-data">
+      <h2 class="profile-title" nz-typography>{{"profile.personalData.title" | translate}}</h2>
+      <nz-divider class="warehouse-background-primary warehouse-not-padding warehouse-not-margin"></nz-divider>
+      <div class="row mb-4">
+        <div class="col-md-4 mt-3">
+          <label class="mb-2">{{"register.gender.placeholder" | translate }}</label><br />
+          <nz-switch [ngModel]="userLocalStorage.gender === 'Male' ? 1 : 0" [disabled]="true"
+            [nzCheckedChildren]="'register.gender.male' | translate"
+            [nzUnCheckedChildren]="'register.gender.female' | translate"></nz-switch>
+        </div>
+        <div class="col-md-4 mt-3">
+          <label class="mb-2">{{"profile.personalData.fullname" | translate }}</label>
+          <input nz-input [value]="userLocalStorage.fullname ? userLocalStorage.fullname : 'profile.empty' | translate"
+            [disabled]="true" />
+        </div>
+        <div class="col-md-4 mt-3">
+          <label class="mb-2">{{ "profile.personalData.userId" | translate }}</label>
+          <input nz-input [value]="userLocalStorage.userId  ? userLocalStorage.userId : 'profile.empty' | translate"
+            [disabled]="true" />
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-md-3 mt-3">
+          <label class="mb-2">{{"profile.personalData.dateOfBorn" | translate }}</label>
+          <input nz-input
+            [value]="userLocalStorage.dateOfBorn ? userLocalStorage.dateOfBorn : 'profile.empty' | translate"
+            [disabled]="true" />
+        </div>
+        <div class="col-md-3 mt-3">
+          <label class="mb-2">{{"profile.personalData.dateOfBorn" | translate }}</label>
+          <input nz-input
+            [value]="userLocalStorage.dateOfBorn ? userLocalStorage.dateOfBorn : 'profile.empty' | translate"
+            [disabled]="true" />
+        </div>
+        <div class="col-md-3 mt-3">
+          <label class="mb-2">{{"profile.personalData.country" | translate }}</label>
+          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+        </div>
+        <div class="col-md-3 mt-3">
+          <label class="mb-2">{{"profile.personalData.city" | translate }}</label>
+          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-md-2 mt-3">
+          <label class="mb-2">{{"profile.personalData.zip" | translate }}</label>
+          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+        </div>
+        <div class="col-md-8 mt-3">
+          <label class="mb-2">{{"profile.personalData.address" | translate }}</label>
+          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 profile-personal-contact">
+      <h2 class="profile-title" nz-typography>{{"profile.personalContact.title" | translate}}</h2>
+      <nz-divider class="warehouse-background-primary warehouse-not-padding warehouse-not-margin"></nz-divider>
+      <div class="row mb-4">
+        <div class="col-md-6 mt-3">
+          <label class="mb-2">{{"profile.personalContact.personalEmail" | translate }}</label>
+          <input nz-input [value]="userLocalStorage.email ? userLocalStorage.email : 'profile.empty' | translate"
+            [disabled]="true" />
+        </div>
+        <div class="col-md-6 mt-3">
+          <label class="mb-2">{{"profile.personalContact.otherPersonalEmail" | translate }}</label>
+          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-md-6 mt-3">
+          <label class="mb-2">{{"profile.personalContact.mobilePhone" | translate }}</label>
+          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+        </div>
+        <div class="col-md-6 mt-3">
+          <label class="mb-2">{{"profile.personalContact.landlinePhone" | translate }}</label>
+          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <nz-divider class="warehouse-background-sliver"></nz-divider>
+  <div class="row mb-4">
+    <div class="col-md-12 mt-3">
+      <button nz-button (click)="handleOnBack()" class="profile-back" nzType="default" nzDanger>
+        <i nz-icon nzType="left" nzTheme="outline"></i>{{'dashboard.cta.back' | translate}}</button>
+      <button nz-button (click)="handleOnChangePassword()" class="profile-change-password" [nzType]="'primary'">
+        <i nz-icon nzType="lock" nzTheme="outline"></i>{{'changePassword.cta' | translate}}</button>
+    </div>
+  </div>
+  <!-- <div class="card-profile">
+    <div class="row">
+      <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+        <nz-card-meta nzTitle="{{userLocalStorage.fullname}}" [nzDescription]="description" [nzAvatar]="avatarTemplate">
+        </nz-card-meta>
+      </nz-card>
+      <ng-template #description>
+        <div class="row">
+          <div>
+            <nz-tag [nzColor]="choseTheme(rolesUser(userLocalStorage.roles))">{{ rolesUser(userLocalStorage.roles)}}
+            </nz-tag>
+          </div>
+          <div><a class="descript">User id: </a>{{ userLocalStorage.userId }}</div>
+          <div><a class="descript">Username:</a>{{ userLocalStorage.username }}</div>
+          <div><a class="descript">Email:</a>{{ userLocalStorage.email }}</div>
+          <div><a class="descript">Date of birth:</a> {{ userLocalStorage.dateOfBirth }}</div>
+          <div><a class="descript">Last Login:</a> {{ userLocalStorage.lastLogin }}</div>
+        </div>
+      </ng-template>
+      <ng-template #avatarTemplate>
+        <nz-avatar nzSrc="../../../../../assets/images/avatar.jpg"></nz-avatar>
+      </ng-template>
+      <ng-template #coverTemplate>
+        <img alt="example" src="../../../../../assets/images/The-welcome-Warehouse.jpg" />
+      </ng-template>
+      <ng-template #actionSetting>
+        <i nz-icon nzType="setting" (click)="handleOnChangePassword()"></i>
+      </ng-template>
+      <ng-template #actionEdit>
+        <i nz-icon nzType="edit"></i>
+      </ng-template>
+      <ng-template #actionEllipsis>
+        <i nz-icon nzType="ellipsis"></i>
+      </ng-template>
+    </div>
+  </div> -->
