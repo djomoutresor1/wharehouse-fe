@@ -10,7 +10,7 @@ import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  user: any;
+  userLocalStorage: any;
 
   constructor(
     private router: Router,
@@ -19,13 +19,11 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = Array.of(
-      this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage()
-    );
-    console.log(' userss; ', this.user);
+    this.userLocalStorage =
+      this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
   }
 
-  nameUser(role: string) {
+  getRoleName(role: string) {
     switch (role) {
       case Utils.ROLE_ADMIN:
         return Utils.ADMINS;
@@ -42,36 +40,59 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  choseTheme(role: string) {
+  getUserColorRole(role: string) {
     switch (role) {
-      case 'User':
-        return 'magenta';
+      case Utils.ROLE_USER:
+        return '#0096c8';
         break;
-      case 'Moderator':
-        return 'orange';
+      case Utils.ROLE_MODERATOR:
+        return '#ffc107';
         break;
-      case 'Admin':
-        return 'green';
+      case Utils.ROLE_ADMIN:
+        return '#2a7a39';
         break;
       default:
-        return 'magenta';
+        return '#0096c8';
         break;
     }
   }
 
-  rolesUser(data: any) {
-    return data
-      .map((currElement: any) => {
-        return this.nameUser(currElement);
-      })
-      .join(' & ');
+  getRoleIcon(role: string) {
+    switch (role) {
+      case Utils.ROLE_USER:
+        return 'user';
+        break;
+      case Utils.ROLE_MODERATOR:
+        return 'user-switch';
+        break;
+      case Utils.ROLE_ADMIN:
+        return 'team';
+        break;
+      default:
+        return 'user';
+        break;
+    }
   }
+
+  // rolesUser(data: any) {
+  //   return data
+  //     .map((currElement: any) => {
+  //       return this.nameUser(currElement);
+  //     })
+  //     .join(' & ');
+  // }
 
   handleOnNavigate(url: String) {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
   }
-  
+
+  handleOnBack() {
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+  }
+
   handleOnChangePassword() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.CHANGE_PASSWORD}`]);
+    this.router.navigate([
+      `${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.CHANGE_PASSWORD}`,
+    ]);
   }
 }

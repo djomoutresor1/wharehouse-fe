@@ -117,7 +117,7 @@ export class RegisterComponent implements OnInit {
           this.isMailSent = false;
           this.errorAlertType(error?.error?.message);
         }
-      }
+      }te
     );*/
   if (!!message?.length) {
       this.errorAlertType(message);

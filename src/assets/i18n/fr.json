@@ -138,7 +138,27 @@
     "cta": "Changer mon mot de passe"
   },
   "profile": {
-    "title": "Mon Profil"
+    "title": "Mon Profil",
+    "empty": "--- Non Précisé ---",
+    "role": "You have the roles", 
+    "lastLogin": "Vous étiez connecté pour la dernière fois le",
+    "personalData": {
+      "title": "Données Personnelles",
+      "fullname": "Nom et Prénom",
+      "dateOfBorn": "Date de Naissance",
+      "userId": "Numéro Identifiant",
+      "country": "Pays",
+      "city": "Cité",
+      "address": "Adresse",
+      "zip": "Code Postal"
+    },
+    "personalContact": {
+      "title": "Contacts Personnels",
+      "personalEmail": "Adresse E-mail Personnelle",
+      "otherPersonalEmail": "Adresse PEC Personnelle",
+      "mobilePhone": "Téléphone Portable",
+      "landlinePhone": "Téléphone fixe"
+    }
   },
   "All Users": "tous les utilisateurs",
   "Users": "Utilisateurs",
