@@ -1,0 +1,28 @@
+<nz-breadcrumb>
+    <nz-breadcrumb-item (click)="handleOnNavigate('dashboard')">
+        <i nz-icon nzType="dashboard"></i>
+        <a>{{ "dashboard.title" | translate }}</a>
+    </nz-breadcrumb-item>
+    <ng-container *ngIf="items?.parent?.url; else parentWithoutUrl">
+        <nz-breadcrumb-item (click)="handleOnNavigate(items?.parent?.url)">
+            <a>{{ getBreadcrumbParentTitle(items?.parent?.title) }}</a>
+        </nz-breadcrumb-item>
+    </ng-container>
+    <ng-template #parentWithoutUrl>
+        <nz-breadcrumb-item>
+            <a>{{ items?.parent?.title }}</a>
+        </nz-breadcrumb-item>
+    </ng-template>
+    <ng-container *ngIf="items?.children">
+        <ng-container *ngFor="let item of items?.children; index as i">
+            <nz-breadcrumb-item *ngIf="item?.url; else childWithoutUrl" (click)="handleOnNavigate(item?.url)">
+                <a>{{ item?.title }}</a>
+            </nz-breadcrumb-item>
+            <ng-template #childWithoutUrl>
+                <nz-breadcrumb-item>
+                    <a>{{ getBreadcrumbChildTitle(i) }}</a>
+                </nz-breadcrumb-item>
+            </ng-template>
+        </ng-container>
+    </ng-container>
+</nz-breadcrumb>

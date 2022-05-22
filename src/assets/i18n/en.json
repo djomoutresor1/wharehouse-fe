@@ -1,6 +1,7 @@
 {
   "dashboard": {
     "title": "Dashboard",
+    "home": "Home page",
     "cta": {
       "logout": "Logout",
       "back": "Back"
@@ -9,6 +10,14 @@
       "logout": {
         "title": "Confirmation Logout",
         "subtitle": "Are you sure you want to logout ?"
+      }
+    },
+    "dataTable": {
+      "options" : {
+        "title": "Select",
+        "edit": "Edit",
+        "show": "Show",
+        "delete": "Delete"
       }
     }
   },
@@ -141,10 +150,12 @@
     "title": "My Profile",
     "empty": "--- Not specified ---",
     "role": "You are", 
-    "lastLogin": "You were last logged in on",
+    "roles": "Roles",
+    "lastLogin": "Last Login",
+    "lastLoginMessage": "You were last logged in on",
     "personalData": {
       "title": "Personal Data",
-      "fullname": "First and Last name",
+      "fullname": "First and Last Name",
       "dateOfBorn": "Date of Born",
       "userId": "Matricule",
       "country": "Country",

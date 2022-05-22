@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { ProfilService } from 'src/app/services/profil.service';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 
-interface ItemData{
-  id:45
+interface ItemData {
+  id: 45;
 }
 
 @Component({
@@ -73,9 +74,11 @@ export class AllUsersComponent implements OnInit {
   }
 
   rolesUser(data: any) {
-    return data.map((currElement: any) => {
+    return data
+      .map((currElement: any) => {
         return this.nameUser(currElement.name);
-      }).join(',');
+      })
+      .join(',');
   }
 
   updateCheckedSet(id: number, checked: boolean): void {
@@ -116,12 +119,67 @@ export class AllUsersComponent implements OnInit {
   handleOnNavigate(url: String) {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
   }
+
+  getRoleName(role: any) {
+    switch (role?.name) {
+      case Utils.ROLE_ADMIN:
+        return Utils.ADMINS;
+        break;
+      case Utils.ROLE_MODERATOR:
+        return Utils.MODERATOR;
+        break;
+      case Utils.ROLE_USER:
+        return Utils.USER;
+        break;
+      default:
+        return Utils.USER;
+        break;
+    }
+  }
+
+  getUserColorRole(role: any) {
+    switch (role?.name) {
+      case Utils.ROLE_USER:
+        return '#0096c8';
+        break;
+      case Utils.ROLE_MODERATOR:
+        return '#ffc107';
+        break;
+      case Utils.ROLE_ADMIN:
+        return '#2a7a39';
+        break;
+      default:
+        return '#0096c8';
+        break;
+    }
+  }
+
+  getRoleIcon(role: any) {
+    switch (role?.name) {
+      case Utils.ROLE_USER:
+        return 'user';
+        break;
+      case Utils.ROLE_MODERATOR:
+        return 'user-switch';
+        break;
+      case Utils.ROLE_ADMIN:
+        return 'team';
+        break;
+      default:
+        return 'user';
+        break;
+    }
+  }
+
+  handleOnShow(user: ResponseLoginModel) {
+    console.log("user - handleOnShow: ", user);
+  }
+
+  handleOnEdit(user: ResponseLoginModel) {
+    console.log("user - handleOnEdit: ", user);
+  }
+
+  handleOnDelete(user: ResponseLoginModel) {
+    console.log("user - handleOnDelete: ", user);
+  }
 }
-
-
-
-
-
-
-
-
