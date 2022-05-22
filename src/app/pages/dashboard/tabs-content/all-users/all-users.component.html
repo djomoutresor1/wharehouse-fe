@@ -1,43 +1,64 @@
 <nz-breadcrumb>
   <nz-breadcrumb-item (click)="handleOnNavigate('dashboard')">
-      <i nz-icon nzType="dashboard"></i>
-      <a>Dashboard</a>
+    <i nz-icon nzType="dashboard"></i>
+    <a>Dashboard</a>
   </nz-breadcrumb-item>
   <nz-breadcrumb-item>
-      <a>All users</a>
+    <a>All users</a>
   </nz-breadcrumb-item>
 </nz-breadcrumb>
 <div class="warehouse-users-wrapper container-fluid">
-    <div class="row">
-      <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="allUsers"
-        (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
-        <thead>
-          <tr>
-            <th [nzSelections]="listOfSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
-              (nzCheckedChange)="onAllChecked($event)"></th>
-            <th>Id user</th>
-            <th>Username</th>
-            <th>Sex</th>
-            <th>FullName</th>
-            <th>Email</th>
-            <th>Roles</th>
-            <th>Date of birth</th>
-            <th>Last Login</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let data of rowSelectionTable.data">
-            <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
-            <td>{{ data.userId }}</td>
-            <td>{{ data.username }}</td>
-            <td>{{ data.gender }}</td>
-            <td>{{ data.fullname }}</td>
-            <td>{{ data.email }}</td>
-            <td>{{ rolesUser(data.roles) }}</td>
-            <td>{{ data.dateOfBirth }}</td>
-            <td>{{ data.lastLogin }}</td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </div>
+  <div class="row">
+    <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="allUsers"
+      (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+      <thead>
+        <tr>
+          <!-- <th [nzSelections]="listOfSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
+            (nzCheckedChange)="onAllChecked($event)"></th> -->
+          <th>{{ "profile.personalData.userId" | translate }}</th>
+          <th>{{ "register.username.placeholder" | translate }}</th>
+          <th>{{ "register.gender.placeholder" | translate }}</th>
+          <th>{{ "profile.personalData.fullname" | translate }}</th>
+          <th>{{ "register.email.placeholder" | translate }}</th>
+          <th>{{ "profile.roles" | translate }}</th>
+          <th>{{ "profile.personalData.dateOfBorn" | translate }}</th>
+          <th>{{ "profile.lastLogin" | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of rowSelectionTable.data">
+          <!-- <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td> -->
+          <td>{{ data.userId }}</td>
+          <td>{{ data.username }}</td>
+          <td>{{ data.gender }}</td>
+          <td>{{ data.fullname }}</td>
+          <td>{{ data.email }}</td>
+          <td>
+            <nz-tag *ngFor="let role of data.roles" [nzColor]="getUserColorRole(role)">
+              <i nz-icon [nzType]="getRoleIcon(role)"></i>
+              {{ getRoleName(role)}}
+            </nz-tag>
+          </td>
+          <td>{{ data.dateOfBirth }}</td>
+          <td>{{ data.lastLogin }}</td>
+          <td>
+            <button nz-button nz-dropdown [nzDropdownMenu]="options" nzType="primary">
+              {{ "dashboard.dataTable.options.title" | translate }}
+              <i nz-icon nzType="down"></i>
+            </button>
+            <nz-dropdown-menu #options="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item (click)="handleOnShow(data)"><i nz-icon nzType="eye" nzTheme="twotone"></i> {{ "dashboard.dataTable.options.show" |
+                  translate }}</li>
+                <li nz-menu-item (click)="handleOnEdit(data)"><i nz-icon nzType="edit" nzTheme="twotone"></i> {{ "dashboard.dataTable.options.edit" |
+                  translate }}</li>
+                <li nz-menu-item (click)="handleOnDelete(data)"><i nz-icon nzType="delete" nzTheme="twotone"></i> {{
+                  "dashboard.dataTable.options.delete" | translate }}</li>
+              </ul>
+            </nz-dropdown-menu>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
   </div>
+</div>

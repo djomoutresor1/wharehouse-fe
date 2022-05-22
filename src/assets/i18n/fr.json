@@ -1,6 +1,7 @@
 {
   "dashboard": {
     "title": "Tableau de bord",
+    "home": "Page d'accueil",
     "cta": {
       "logout": "Se déconnecter",
       "back": "Retour"
@@ -9,6 +10,15 @@
       "logout": {
         "title": "Confirmation Déconnexion",
         "subtitle": "Êtes-vous sûr de vouloir vous déconnecter ?"
+      }
+    },
+    "dataTable": {
+      "options" : 
+      {
+        "title": "Selectionez",
+        "edit": "Modifier",
+        "show": "Voir",
+        "delete": "Effacer"
       }
     }
   },
@@ -140,8 +150,10 @@
   "profile": {
     "title": "Mon Profil",
     "empty": "--- Non Précisé ---",
-    "role": "You have the roles", 
-    "lastLogin": "Vous étiez connecté pour la dernière fois le",
+    "role": "Vous avez les rôles", 
+    "roles": "Rôles",
+    "lastLogin": "Dernière Connexion",
+    "lastLoginMessage": "Vous étiez connecté pour la dernière fois le",
     "personalData": {
       "title": "Données Personnelles",
       "fullname": "Nom et Prénom",

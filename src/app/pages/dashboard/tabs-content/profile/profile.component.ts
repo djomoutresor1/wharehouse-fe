@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
+import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 
 @Component({
   selector: 'warehouse-profile',
@@ -11,16 +13,32 @@ import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 })
 export class ProfileComponent implements OnInit {
   userLocalStorage: any;
+  breadcrumbItems!: BreadcrumbItemsModel;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
+    private translate: TranslateService,
     private warehouseLocalStorage: WarehouseLocalStorage
   ) {}
 
   ngOnInit(): void {
+    this.initComponent();
     this.userLocalStorage =
       this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
+  }
+
+  initComponent() {
+    let currentLang = null;
+    currentLang = this.translate.currentLang;
+    if(currentLang === undefined) {
+      currentLang = this.warehouseLocalStorage.WarehouseGetLanguageLocalStorage()
+    }
+    this.translate.use(currentLang as string);
+    this.breadcrumbItems = {
+      parent: {
+        title: this.translate.instant("profile.title")
+      }
+    }
   }
 
   getRoleName(role: string) {

@@ -61,12 +61,22 @@
   border-top-color: var(--warehouse-sliver) !important;
 }
 
-
 // Utils
 .warehouse-not-padding {
   padding: 0 !important;
 }
-
+.warehouse-not-padding-top {
+  padding-top: 0 !important;
+}
+.warehouse-not-padding-bottom {
+  padding-bottom: 0 !important;
+}
 .warehouse-not-margin {
   margin: 0 !important;
+}
+.warehouse-not-margin-bottom {
+  margin-bottom: 0 !important;
+}
+.warehouse-not-margin-top {
+  margin-top: 0 !important;
 }

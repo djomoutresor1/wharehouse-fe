@@ -1,6 +1,7 @@
 {
   "dashboard": {
     "title": "Pannello",
+    "home": "Pagina iniziale",
     "cta": {
       "logout": "Disconnettersi",
       "back": "Indietro"
@@ -9,6 +10,14 @@
       "logout": {
         "title": "Conferma Logout",
         "subtitle": "Sei sicuro di voler uscire ?"
+      }
+    },
+    "dataTable": {
+      "options" : {
+        "title": "Seleziona",
+        "edit": "Modifica",
+        "show": "Vedi",
+        "delete": "Cancella"
       }
     }
   },
@@ -85,7 +94,7 @@
     },
     "email": {
       "required": "Posta elettronica è richiesta",
-      "placeholder": "Posta elettronica"
+      "placeholder": "Posta Elettronica"
     },
     "role": {
       "required": "Ruolo è richiesto",
@@ -141,7 +150,9 @@
     "title": "Mio Profilo",
     "empty": "--- Non Specificato ---",
     "role": "Hai i roli", 
-    "lastLogin": "Hai effettuato il tuo ultimo accesso il",
+    "roles": "Roli",
+    "lastLogin": "Ultimo Accesso",
+    "lastLoginMessage": "Hai effettuato il tuo ultimo accesso il",
     "personalData": {
       "title": "Dati Anagrafici",
       "fullname": "Nome e Cognome",

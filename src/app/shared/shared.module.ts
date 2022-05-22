@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AntDesignComponentsModule } from '../modules/ant-design-components.module';
 import { AlertComponent } from './composants/alert/alert.component';
@@ -17,6 +17,7 @@ import { NotificationComponent } from './composants/notification/notification.co
 import { CapitalizeFirstLetterPipe } from './pipes/capitalize-first-letter.pipe';
 import { ModalComponent } from './composants/modal/modal.component';
 import { MultilanguageComponent } from './composants/multilanguage/multilanguage.component';
+import { BreadcrumbComponent } from './composants/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { MultilanguageComponent } from './composants/multilanguage/multilanguage
     CapitalizeFirstLetterPipe,
     ModalComponent,
     MultilanguageComponent,
+    BreadcrumbComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +41,7 @@ import { MultilanguageComponent } from './composants/multilanguage/multilanguage
     FontAwesomeModule,
   ],
   entryComponents: [FaIconComponent, FaDuotoneIconComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
     VerticalLaneComponent,
     HorizontalLaneComponent,
@@ -52,6 +55,7 @@ import { MultilanguageComponent } from './composants/multilanguage/multilanguage
     CapitalizeFirstLetterPipe,
     ModalComponent,
     MultilanguageComponent,
+    BreadcrumbComponent
   ],
 })
 export class SharedModule {}

@@ -1,4 +1,4 @@
-<nz-breadcrumb>
+<!-- <nz-breadcrumb>
   <nz-breadcrumb-item (click)="handleOnNavigate('dashboard')">
     <i nz-icon nzType="dashboard"></i>
     <a>Dashboard</a>
@@ -6,7 +6,8 @@
   <nz-breadcrumb-item>
     <a>My Profile</a>
   </nz-breadcrumb-item>
-</nz-breadcrumb>
+</nz-breadcrumb> -->
+<warehouse-breadcrumb [items]="breadcrumbItems"></warehouse-breadcrumb>
 <div class="profile-wrapper">
   <div class="row">
     <div class="col-md-12">
@@ -40,7 +41,7 @@
       </div>
       <div class="row mt-4">
         <div class="col-md-12">
-          <span nz-typography><strong>{{"profile.lastLogin" | translate}} {{ userLocalStorage.lastLogin
+          <span nz-typography><strong>{{"profile.lastLoginMessage" | translate}} {{ userLocalStorage.lastLogin
               }}</strong></span>
         </div>
       </div>
@@ -130,7 +131,7 @@
   <nz-divider class="warehouse-background-sliver"></nz-divider>
   <div class="row mb-4">
     <div class="col-md-12 mt-3">
-      <button nz-button (click)="handleOnBack()" class="profile-back" nzType="default" nzDanger>
+      <button nz-button (click)="handleOnBack()" class="profile-back" nzType="primary" nzDanger>
         <i nz-icon nzType="left" nzTheme="outline"></i>{{'dashboard.cta.back' | translate}}</button>
       <button nz-button (click)="handleOnChangePassword()" class="profile-change-password" [nzType]="'primary'">
         <i nz-icon nzType="lock" nzTheme="outline"></i>{{'changePassword.cta' | translate}}</button>
