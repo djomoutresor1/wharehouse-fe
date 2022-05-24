@@ -126,13 +126,14 @@ export class RegisterComponent implements OnInit {
       userData.confirmPassword
     );
     this.email = this.validateForm.controls['email'].value;
-    if (!!message?.length) {
+    if (message?.length) {
       this.errorAlertType(message);
     } else {
       this.authentificationService
         .userRegisterStepOne(userData, Utils.WAREHOUSE_STEP_ONE)
         .subscribe(
           (response: ResponseRegisterModel) => {
+            this.isMailSent = true;
             this.successAlertType(response?.message);
           },
           (error: HttpErrorResponse) => {
@@ -145,7 +146,6 @@ setTimeout(() => {
   this.authorizationService.userVerificationEmail(this.email).subscribe(
     (response: ResponseModel) => {
       this.checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects();
-      this.isMailSent = true;
       this.successAlertType(response?.message);
     },
     (error: HttpErrorResponse) => {
@@ -155,7 +155,7 @@ setTimeout(() => {
       }
     }
   );
-}, 2000);
+}, 10000);
   }
 
 
@@ -189,13 +189,12 @@ setTimeout(() => {
     setTimeout(() => {
       this.isAuth = false;
     //  after the first step,it proceed to verify email on step2
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP2}`]);
+   // this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP2}`]);
     }, 1000);
   }
 
   handleOnLogin() {
-  //  this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP2}`]);
+ this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
 
   handleOnChangeInput() {

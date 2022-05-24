@@ -116,6 +116,24 @@
       }
     }
   },
+  "verifyEmail": {
+    "title": "Verification Email",
+    "cta": {
+      "send": "Envoyer le lien de réinitialisation",
+      "login": "Retour connexion"
+    },
+    "divider": {
+      "title": "Rappelez-vous de vos identifiants ?"
+    },
+    "success": {
+      "title": "Nous venons de vous envoyer un email à: ",
+      "content": {
+        "one": "Celui-ci contient un lien permettant de verifier votre email",
+        "two": "Vous n'avez pas récu de mail dans votre courrier électronique ?",
+        "three": "Vérifiez bien l'orthographe de l'adresse saisie, ou que le mail n'est pas dans vos courriers indésirables."
+      }
+    }
+  },
   "All Users": "tous les utilisateurs",
   "Users": "Utilisateurs",
   "Add new user": "ajoutez un nouveau utilisateur",
