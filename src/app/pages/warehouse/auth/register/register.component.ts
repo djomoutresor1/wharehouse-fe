@@ -126,7 +126,7 @@ export class RegisterComponent implements OnInit {
       userData.confirmPassword
     );
     this.email = this.validateForm.controls['email'].value;
-    if (message?.length) {
+    if (!!message?.length) {
       this.errorAlertType(message);
     } else {
       this.authentificationService
@@ -134,29 +134,14 @@ export class RegisterComponent implements OnInit {
         .subscribe(
           (response: ResponseRegisterModel) => {
             this.isMailSent = true;
-            this.successAlertType(response?.message);
+            this.currentStep = 1;
           },
           (error: HttpErrorResponse) => {
             this.errorAlertType(error.error.message);
           }
         );
-    }
-// verification email
-setTimeout(() => {
-  this.authorizationService.userVerificationEmail(this.email).subscribe(
-    (response: ResponseModel) => {
-      this.checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects();
-      this.successAlertType(response?.message);
-    },
-    (error: HttpErrorResponse) => {
-      if (error?.status === 404) {
-        this.isMailSent = false;
-        this.errorAlertType(error?.error?.message);
-      }
-    }
-  );
-}, 10000);
   }
+}
 
 
   handleOnCheckValidation(
@@ -176,6 +161,22 @@ setTimeout(() => {
     }
   }
 
+  onVerifyEMail(){
+    setTimeout(() => {
+      this.authorizationService.userVerificationEmail(this.email).subscribe(
+        (response: ResponseModel) => {
+          this.checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects();
+        },
+        (error: HttpErrorResponse) => {
+          if (error?.status === 404) {
+            this.isMailSent = false;
+            this.errorAlertType(error?.error?.message);
+          }
+        }
+      );
+    }, 10000);
+  }
+
   errorAlertType(message: string): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_ERROR;
@@ -183,7 +184,6 @@ setTimeout(() => {
   }
 
   successAlertType(message: string): void {
-    this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
   //  this.messageAlert = message;
     setTimeout(() => {
