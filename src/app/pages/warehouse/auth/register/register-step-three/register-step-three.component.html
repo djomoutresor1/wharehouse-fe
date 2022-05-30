@@ -33,30 +33,28 @@
                     <nz-form-item>
                         <nz-form-control>
                             <p>Date of Birth:</p>          
-                            <nz-date-picker [nzFormat]="dateFormat" formControlName="dateOfBirth" (ngModelChange)="handleOnChangeInput()"></nz-date-picker>
+                            <nz-date-picker nzAllowClear="true"  [nzFormat]="dateFormat" [(ngModel)]="dateSelected" formControlName="dateOfBirth" (ngModelChange)="handleOnChangeDate($event)"></nz-date-picker>
                         </nz-form-control>
                     </nz-form-item>
                     <nz-form-item>
                         <nz-form-control nzErrorTip="Your phone country is required">
-                            <p>Select your country:</p> 
-                            <nz-select  class="multilanguage-wrapper" formControlName="country"
-                            (ngModelChange)="onSelect($event)" [(ngModel)]="countrySelected">
-                            <nz-option nzCustomContent *ngFor="let country of countryAndFlagData" nzValue="{{country.name}}" nzLabel="{{country.name}}">
-                                <img class="multilanguage-img" [alt]="country.name" [src]="country.flag" />
-                                {{country.name}}
+                            <nz-select nzShowSearch nzPlaceHolder="Select a country" class="multilanguage-wrapper" formControlName="country"
+                            (ngModelChange)="handleonSelectCountry($event)" [(ngModel)]="countrySelected">
+                            <nz-option nzCustomContent *ngFor="let country of countryAndFlagData" nzValue="{{country?.name}}" nzLabel="{{country?.name}}">
+                                <img class="multilanguage-img" [alt]="country?.name" [src]="country?.flag" />
+                                {{country?.name}}
                             </nz-option>
                         </nz-select>
                         </nz-form-control>
                     </nz-form-item>
-                    <nz-form-item>
+                    <nz-form-item *ngIf="!!countrySelected?.length">
                         <nz-form-control nzErrorTip="Your phone number is required">
-                            <nz-input-group nzPrefixIcon="user">
+                            <nz-input-group>
                                 <div class="row">
-                                    <div class="col"><img class="multilanguage" [src]="handleOnFlagSelected('flag')"/>+ {{countryDialCode}}</div>
-                                    <div class="col"><input type="number"  nz-input formControlName="phoneNumber" placeholder="Phone Number"
+                                    <div class="col-md-5"><img class="multilanguage" [src]="handleOnFlagSelected()"/>+ {{countryDialCode}}</div>
+                                    <div class="col-md-7"><input type="number" nz-input formControlName="phoneNumber" placeholder="Phone Number"
                                         (click)="handleOnChangeInput()" /></div>
                                 </div>
-
                             </nz-input-group>
                         </nz-form-control>
                     </nz-form-item>

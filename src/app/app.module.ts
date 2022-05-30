@@ -22,6 +22,7 @@ import { AuthorizationService } from './services/auth/authorization.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import { FlagService } from './services/flag.service';
+import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new MultiTranslateHttpLoader(http, [
@@ -61,6 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       useClass: CommonInterceptor,
       multi: true,
     },
+    { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent],
 })

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import en from '@angular/common/locales/zh';
+import { registerLocaleData } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +11,7 @@ export class AppComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    registerLocaleData(en)
+  }
 }
