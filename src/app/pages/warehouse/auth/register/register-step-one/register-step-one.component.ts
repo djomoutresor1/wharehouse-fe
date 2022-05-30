@@ -7,20 +7,17 @@ import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { Utils } from 'src/app/shared/enums/utils-enums';
-import { AuthorizationService } from 'src/app/services/auth/authorization.service';
-import { ResponseModel } from 'src/model/auth/response/response-model';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'warehouse-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'warehouse-register-step-one',
+  templateUrl: './register-step-one.component.html',
+  styleUrls: ['./register-step-one.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterStepOneComponent implements OnInit {
   validateForm!: FormGroup;
   passwordVisible = false;
   password: string = '';
@@ -58,25 +55,13 @@ export class RegisterComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder,
+    public fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private authentificationService: AuthentificationService,
     private warehouseLocalStorage: WarehouseLocalStorage,
-    private http: HttpClient,
-    private authorizationService: AuthorizationService,
     private translate: TranslateService
   ) {
-    this.checkIfUserIsAlreadyLogged();
-    this.idLinkResetPassword = this.route.snapshot.queryParamMap.get(
-      PathParams.ID_LINK_RESET_VERIFICATION_EMAIL
-    );
-    this.expirationLink = this.route.snapshot.queryParamMap.get(
-      PathParams.EXPIRATION_LINK
-    );
-    this.verifyType = this.route.snapshot.queryParamMap.get(
-      PathParams.VERIFY_TYPE
-    );
   }
 
   ngOnInit(): void {
@@ -118,7 +103,6 @@ export class RegisterComponent implements OnInit {
       role: this.validateForm.controls['role']?.value,
       gender: this.validateForm.controls['gender']?.value,
     };
-    // console.log(this.validateForm.controls);
     // Verify the password and confirm password and username criteria
     let message = this.handleOnCheckValidation(
       userData.username,
@@ -161,21 +145,6 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  onVerifyEMail(){
-    setTimeout(() => {
-      this.authorizationService.userVerificationEmail(this.email).subscribe(
-        (response: ResponseModel) => {
-          this.checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects();
-        },
-        (error: HttpErrorResponse) => {
-          if (error?.status === 404) {
-            this.isMailSent = false;
-            this.errorAlertType(error?.error?.message);
-          }
-        }
-      );
-    }, 10000);
-  }
 
   errorAlertType(message: string): void {
     this.isAuth = true;
@@ -188,13 +157,12 @@ export class RegisterComponent implements OnInit {
   //  this.messageAlert = message;
     setTimeout(() => {
       this.isAuth = false;
-    //  after the first step,it proceed to verify email on step2
-   // this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP2}`]);
     }, 1000);
   }
 
   handleOnLogin() {
- this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+// this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+ this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP3}`]);
   }
 
   handleOnChangeInput() {
@@ -212,66 +180,7 @@ export class RegisterComponent implements OnInit {
   handleOnNotifyPassword(event: boolean) {
     this.isSecurePassword = event;
   }
-
-  // implementation of verification link email 
-
-
-  checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects() {
-    this.authorizationService
-      .userVerifyLink(this.idLinkResetPassword, this.verifyType)
-      .subscribe(
-        (response: ResponseResetModel) => {
-          this.user = response;
-          this.checkIfExpirationLinkIsCorrect();
-        },
-        (error: HttpErrorResponse) => {
-          if (error.status === 404) {
-            this.isResetPassword = true;
-            this.errorAlertType(error?.error.message);
-          }
-        }
-      );
-  }
-
-  checkIfExpirationLinkIsCorrect() {
-    let now = new Date().getTime();
-    let expiredLinkUrl = new Date(this.expirationLink).getTime();
-    let expiredLinkUser = new Date(this.user?.expiryDate).getTime();
-    // First verify if the expired date in url is same with expired date user's in db
-    if (this.verifyTheCorrectDate(expiredLinkUrl, expiredLinkUser)) {
-      // Compare the expired date with the current date
-      if (expiredLinkUrl > now) {
-        this.isExpiredLink = false;
-      } else {
-        this.isExpiredLink = true;
-        this.errorAlertType(
-          'The link to reset your password is expired. Try resend the new link to complete the operation.'
-        );
-      }
-    } else {
-      this.isExpiredLink = true;
-      this.errorAlertType(
-        'The expired date that you are providing to reset your password is not correct. Try resend the new link to complete the operation.'
-      );
-    }
-  }
-
-  verifyTheCorrectDate(
-    expiredLinkUrl: number,
-    expiredLinkUser: number
-  ): boolean {
-    // We have the precision lost before the last fourth numbers
-    // Then, first, i will remove the last fourth numbers in both dates
-    let correctExpiredLinkUrl = expiredLinkUrl
-      .toString()
-      .slice(0, expiredLinkUrl.toString().length - 4);
-    let correctExpiredLinkUser = expiredLinkUser
-      .toString()
-      .slice(0, expiredLinkUser.toString().length - 4);
-
-    return correctExpiredLinkUrl === correctExpiredLinkUser ? true : false;
-  }
-  
+ 
 }
 
 

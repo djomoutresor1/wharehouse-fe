@@ -5,6 +5,23 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none; 
 }
 
-nz-date-picker {
-    margin: 0 8px 12px 0;
-  }
+nz-date-picker,
+nz-range-picker {
+  margin: 0 8px 12px 0;
+}
+
+.multilanguage-img {
+  width: 17px;
+  height: 13px;
+  top: -2px;
+  position: relative;
+}
+
+.multilanguage{
+  width: 52px;
+  height: 31px;
+}
+
+.ant-input-prefix, .ant-input-suffix {
+  display: none !important;}
+

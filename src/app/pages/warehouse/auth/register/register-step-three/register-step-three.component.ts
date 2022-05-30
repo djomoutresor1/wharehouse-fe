@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthentificationService } from 'src/app/services/auth/authentification.service';
+import { FlagService } from 'src/app/services/flag.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Auth } from 'src/app/shared/enums/auth-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
@@ -10,17 +11,19 @@ import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { environment } from 'src/environments/environment';
 
+
 @Component({
   selector: 'warehouse-register-step-three',
   templateUrl: './register-step-three.component.html',
-  styleUrls: ['./register-step-three.component.scss','../register.component.scss']
+  styleUrls: ['./register-step-three.component.scss','../register-step-one/register-step-one.component.scss']
 })
 export class RegisterStepThreeComponent implements OnInit {
   validateForm!: FormGroup;
   isAuth: boolean = false;
   alertType: string = '';
   messageAlert: string = '';
-  countries:any;
+  countryAndFlagData: any;
+  dateFormat = 'dd//MM/YYYY';
 
   selectedValue = { label: 'User', value: 'user' };
   steps: string[] = [
@@ -38,9 +41,15 @@ export class RegisterStepThreeComponent implements OnInit {
   showbuttonUpload: boolean = false;
   showInputUpload: boolean = true;
   date = 'dd/MM/yyyy';
+  code=32
+  modelPaese:any;
+  countrySelected:String ='';
+  countryDialCode:String =''
+  
 
 
   private apiServerUrl = environment.apiBaseUrl;
+
 
   constructor(
     private fb: FormBuilder,
@@ -48,16 +57,23 @@ export class RegisterStepThreeComponent implements OnInit {
     private authentificationService: AuthentificationService,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private http: HttpClient,
+    private flagService:FlagService
   ) {
     this.checkIfUserIsAlreadyLogged();
   }
 
   ngOnInit(): void {
     this.initForm();
+    this.flagService.getDialCodeAndCountryFlag().subscribe((response: { data: any; })=>{
+      this.countryAndFlagData = response.data;
+      console.log('response: ', this.countryAndFlagData);
+    },(err: string)=>{ console.log("enable to retrieve data country and flag " + err)});
+  
   }
 
   initForm() {
     this.validateForm = this.fb.group({
+      image: null,
       dateOfBirth: null,
       phoneNumber: [null,[Validators.required, Validators.min(10), Validators.max(14)],],
       country: [null, [Validators.required]],
@@ -151,6 +167,27 @@ export class RegisterStepThreeComponent implements OnInit {
     reader.onload = (event2) => {
       this.imgURL = reader.result;
     };
+  }
+
+
+  handleOnFlagSelected(flag: any){
+    let data = this?.onSelect(event)
+    let country = this.countryAndFlagData?.find(
+      (countryFlag:any) => countryFlag?.name === data
+    );
+  
+ 
+  }
+
+  onSelect(event:any){
+  // this.countrySelected = event;
+  if(!!this.countryAndFlagData.length){
+    let country = this.countryAndFlagData?.find(
+      (countryFlag:any) => countryFlag?.name === event
+    );
+      this.countryDialCode = country?.dialCode;
+  }
+
   }
 
 }

@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { ForgottenPasswordComponent } from './auth/password/forgotten-password/forgotten-password.component';
 import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
+import { RegisterStepOneComponent } from './auth/register/register-step-one/register-step-one.component';
 import { ResetPasswordComponent } from './auth/password/reset-password/reset-password.component';
 import { WarehouseComponent } from './warehouse.component';
-import { RegisterStepTwoComponent } from './auth/register/register-step-two/register-step-two.component';
 import { RegisterStepThreeComponent } from './auth/register/register-step-three/register-step-three.component';
+import { RegisterStepTwoComponent } from './auth/register/register-step-two/register-step-two.component';
 
 const routes: Routes = [
   { path: '', component: WarehouseComponent },
@@ -15,7 +15,7 @@ const routes: Routes = [
     path: `${Pages.WAREHOUSE}`,
     children: [
       { path: `${Pages.LOGIN}`, component: LoginComponent },
-      { path: `${Pages.REGISTER}`,component: RegisterComponent  },
+      { path: `${Pages.REGISTER}`,component: RegisterStepOneComponent  },
       { path: `${Pages.REGISTERSTEP2}`, component: RegisterStepTwoComponent},
       { path: `${Pages.REGISTERSTEP3}`, component: RegisterStepThreeComponent},
 

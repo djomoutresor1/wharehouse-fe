@@ -33,29 +33,31 @@
                     <nz-form-item>
                         <nz-form-control>
                             <p>Date of Birth:</p>          
-                            <nz-date-picker [(ngModel)]="date" formControlName="dateOfBirth" (ngModelChange)="handleOnChangeInput()"></nz-date-picker>
+                            <nz-date-picker [nzFormat]="dateFormat" formControlName="dateOfBirth" (ngModelChange)="handleOnChangeInput()"></nz-date-picker>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-control nzErrorTip="Your phone country is required">
+                            <p>Select your country:</p> 
+                            <nz-select  class="multilanguage-wrapper" formControlName="country"
+                            (ngModelChange)="onSelect($event)" [(ngModel)]="countrySelected">
+                            <nz-option nzCustomContent *ngFor="let country of countryAndFlagData" nzValue="{{country.name}}" nzLabel="{{country.name}}">
+                                <img class="multilanguage-img" [alt]="country.name" [src]="country.flag" />
+                                {{country.name}}
+                            </nz-option>
+                        </nz-select>
                         </nz-form-control>
                     </nz-form-item>
                     <nz-form-item>
                         <nz-form-control nzErrorTip="Your phone number is required">
                             <nz-input-group nzPrefixIcon="user">
-                                <input type="number"  nz-input formControlName="phoneNumber" placeholder="Phone Number"
-                                    (click)="handleOnChangeInput()" />
+                                <div class="row">
+                                    <div class="col"><img class="multilanguage" [src]="handleOnFlagSelected('flag')"/>+ {{countryDialCode}}</div>
+                                    <div class="col"><input type="number"  nz-input formControlName="phoneNumber" placeholder="Phone Number"
+                                        (click)="handleOnChangeInput()" /></div>
+                                </div>
+
                             </nz-input-group>
-                        </nz-form-control>
-                    </nz-form-item>
-                    <nz-form-item>
-                        <nz-form-control nzErrorTip="Your phone country is required">
-                            <nz-select nzAllowClear nzPlaceHolder="Select a country" formControlName="country"
-                            [nzCustomTemplate]="multipleTemplate">
-                            <nz-option *ngFor="let country of countries" [nzValue]="country.value" [nzLabel]="country.label">
-                            </nz-option>
-                        </nz-select>
-                        <ng-template #multipleTemplate let-selected>
-                            <div class="ant-select-selection-item-content">
-                                {{ selected.nzLabel }}
-                            </div>
-                        </ng-template>
                         </nz-form-control>
                     </nz-form-item>
                     <button nz-button [disabled]="!validateForm.valid" nzBlock
