@@ -2,7 +2,7 @@
     <div class="warehouse-auth-wrapper container">
         <div class="row">
             <div class="col text-center">
-                <h2 nz-typography>Register Page</h2>
+                <h2 nz-typography>{{"register.title" | translate}}</h2>
             </div>
         </div>
         <div class="row">
@@ -22,7 +22,7 @@
                 </div>
                 <form nz-form [formGroup]="validateForm" class="register-form" (ngSubmit)="submitForm()">
                     <nz-form-item>
-                        <nz-form-control nzErrorTip="upload your foto profile">
+                        <nz-form-control>
                             <nz-input-group>
                                 <input *ngIf="showInputUpload" type="file" (change)="onFileChanged($event)" nz-input formControlName="image" placeholder="upload your foto profile"/>
                                 <img [src]="imgURL" height="100" width="100" *ngIf="imgURL">
@@ -31,14 +31,13 @@
                         </nz-form-control>
                     </nz-form-item>
                     <nz-form-item>
-                        <nz-form-control>
-                            <p>Date of Birth:</p>          
+                        <nz-form-control>         
                             <nz-date-picker nzAllowClear="true"  [nzFormat]="dateFormat" [(ngModel)]="dateSelected" formControlName="dateOfBirth" (ngModelChange)="handleOnChangeDate($event)"></nz-date-picker>
                         </nz-form-control>
                     </nz-form-item>
                     <nz-form-item>
-                        <nz-form-control nzErrorTip="Your phone country is required">
-                            <nz-select nzShowSearch nzPlaceHolder="Select a country" class="multilanguage-wrapper" formControlName="country"
+                        <nz-form-control [nzErrorTip]="'register.country.required'| translate">
+                            <nz-select nzShowSearch [nzPlaceHolder]="'register.country.placeholder'| translate" class="multilanguage-wrapper" formControlName="country"
                             (ngModelChange)="handleonSelectCountry($event)" [(ngModel)]="countrySelected">
                             <nz-option nzCustomContent *ngFor="let country of countryAndFlagData" nzValue="{{country?.name}}" nzLabel="{{country?.name}}">
                                 <img class="multilanguage-img" [alt]="country?.name" [src]="country?.flag" />
@@ -48,18 +47,18 @@
                         </nz-form-control>
                     </nz-form-item>
                     <nz-form-item *ngIf="!!countrySelected?.length">
-                        <nz-form-control nzErrorTip="Your phone number is required">
+                        <nz-form-control [nzErrorTip]="'register.phone.required'| translate">
                             <nz-input-group>
                                 <div class="row">
                                     <div class="col-md-5"><img class="multilanguage" [src]="handleOnFlagSelected()"/>+ {{countryDialCode}}</div>
-                                    <div class="col-md-7"><input type="number" nz-input formControlName="phoneNumber" placeholder="Phone Number"
-                                        (click)="handleOnChangeInput()" /></div>
+                                    <div class="col-md-7"><input type="tel" minlength="10" maxlength="10" nz-input formControlName="phoneNumber" [placeholder]="'register.phone.placeholder'| translate"
+                                         (click)="handleOnChangeInput()"  (keypress)="keyPress($event)"/></div>
                                 </div>
                             </nz-input-group>
                         </nz-form-control>
                     </nz-form-item>
                     <button nz-button [disabled]="!validateForm.valid" nzBlock
-                    class="register-form-button register-form-margin" [nzType]="'primary'">Save</button>
+                    class="register-form-button register-form-margin" [nzType]="'primary'">{{"button.save" | translate}}</button>
                 </form>
             </div>
         </div>

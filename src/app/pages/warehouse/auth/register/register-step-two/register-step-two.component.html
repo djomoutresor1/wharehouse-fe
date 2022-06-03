@@ -2,7 +2,7 @@
     <div class="warehouse-auth-wrapper container">
         <div class="row">
             <div class="col text-center">
-                <h2 nz-typography>Register Page</h2>
+                <h2 nz-typography>{{"register.title" | translate}}</h2>
             </div>
         </div>
         <div class="row">
@@ -18,13 +18,13 @@
                     <div nz-result-extra>
                         <ng-template #confirmMessage>
                             <div class="class" *ngFor="let data of onRetrieveUser()">
-                                Hello {{data.name}} your email has been verified, please click and complete the registration
+                                {{"register.verification.hello" | translate}} {{data.name}} {{"register.verification.message" | translate}}
                             </div>
                         </ng-template>
                         <nz-button-group [nzSize]="size">
                             <button nz-button nzType="primary" (click)="onGoToStepThree()">
                                 <i nz-icon nzType="right"></i>
-                                Go to step three
+                                {{"button.goToSTepThree" | translate}}
                             </button>
                         </nz-button-group>
                     </div>

@@ -1,6 +1,11 @@
 {
   "warehouse": {
-    "name": "Warehouse System"
+    "name": "Warehouse System",
+    "save": "Salva"
+  },
+  "button":{
+    "save": "Salva",
+    "goToSTepThree":"Vai allo step 3"
   },
   "validations": {
     "confirm": {
@@ -50,7 +55,12 @@
     "title": "Pagina di Registrazione",
     "step": {
       "information": "Informazioni Utente",
-      "verification": "Verifica Posta Elettronica",
+      "verification":{
+        "do":"Verifica posta elettronica",
+        "confirmation":"CONFIRMAZIONE VERIFICA POSTA ELETTRONICA",
+        "hello":"Salve",
+        "message":" la vostra email è stata verificata corretamente,vi preghiamo di cliccare e completare la registrazione"
+      },
       "registration": "Registrazione Utente"
     },
     "cta": {
@@ -73,6 +83,18 @@
     "email": {
       "required": "Posta elettronica è richiesta",
       "placeholder": "Posta elettronica"
+    },
+    "country": {
+      "required": "Vostro paese è obbligatorio",
+      "placeholder": "Seleziona il paese"
+    },
+    "date": {
+      "required": "la data di nascità è obbligatoria",
+      "placeholder": "Seleziona la data"
+    },
+    "phone": {
+      "required": "il vostro numero di telefono è obbligatorio",
+      "placeholder": "numero di telefono"
     },
     "role": {
       "required": "Ruolo è richiesto",

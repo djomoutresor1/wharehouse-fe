@@ -8,7 +8,6 @@ import { Pages } from 'src/app/shared/enums/pages-enums';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Utils } from 'src/app/shared/enums/utils-enums';
-import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -161,8 +160,8 @@ export class RegisterStepOneComponent implements OnInit {
   }
 
   handleOnLogin() {
-// this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
- this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP3}`]);
+ this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+// this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP3}`]);
   }
 
   handleOnChangeInput() {

@@ -42,6 +42,7 @@ export class CommonInterceptor implements HttpInterceptor {
       !request.url.includes(Auth.WAREHOUSE_RESET_PASSWORD) &&
       !request.url.endsWith(Auth.WAREHOUSE_UPLOAD_IMAGE)&&
       !request.url.endsWith(Auth.WAREHOUSE_VERIFICATION_EMAIL)&&
+      !request.url.endsWith(Auth.WAREHOUSE_ACTIVATE_DESATTIVATE_USER)&&
       !request.url.endsWith(Pages.REGISTERSTEP2)&&
       !request.url.endsWith(Pages.REGISTERSTEP3) &&
       !request.url.includes("../assets/i18n/")&&

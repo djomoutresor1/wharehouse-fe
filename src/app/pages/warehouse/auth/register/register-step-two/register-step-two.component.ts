@@ -62,6 +62,7 @@ export class RegisterStepTwoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects()
   }
 
   onGoToStepThree(){
@@ -74,11 +75,13 @@ export class RegisterStepTwoComponent implements OnInit {
 
   
   checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects() {
+    debugger
     this.authorizationService
       .userVerifyLink(this.idLinkResetPassword, this.verifyType)
       .subscribe(
         (response: ResponseResetModel) => {
           this.user = response;
+          console.log('responsestepTwo: ', response);
           this.checkIfExpirationLinkIsCorrect();
         },
         (error: HttpErrorResponse) => {
@@ -136,5 +139,4 @@ export class RegisterStepTwoComponent implements OnInit {
   }
 
 }
-
 

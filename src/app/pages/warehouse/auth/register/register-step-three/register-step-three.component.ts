@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthentificationService } from 'src/app/services/auth/authentification.service';
 import { FlagService } from 'src/app/services/flag.service';
+import { ProfilService } from 'src/app/services/profil.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Auth } from 'src/app/shared/enums/auth-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
@@ -47,6 +48,7 @@ export class RegisterStepThreeComponent implements OnInit {
   modelPaese: any;
   countrySelected: string = '';
   countryDialCode: string = '';
+  userId: string = '';
 
   private apiServerUrl = environment.apiBaseUrl;
 
@@ -56,12 +58,18 @@ export class RegisterStepThreeComponent implements OnInit {
     private authentificationService: AuthentificationService,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private http: HttpClient,
-    private flagService: FlagService
+    private flagService: FlagService,
+    private profilService: ProfilService
   ) {
     this.checkIfUserIsAlreadyLogged();
   }
 
   ngOnInit(): void {
+    debugger
+    let user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
+    this.profilService.onActivateUser(user?.userId).subscribe((response:any)=>{
+      console.log('responseOnActivate: ', response);
+    })
     this.initForm();
     this.flagService.getDialCodeAndCountryFlag().subscribe(
       (response: { data: any }) => {
@@ -74,15 +82,20 @@ export class RegisterStepThreeComponent implements OnInit {
     );
   }
 
+  keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+
   initForm() {
     this.validateForm = this.fb.group({
-      image: null,
-      dateOfBirth: null,
-      phoneNumber: [
-        null,
-        [Validators.required, Validators.min(10), Validators.max(14)],
-      ],
-      country: [null, [Validators.required]],
+      image: '',
+      dateOfBirth: '',
+      phoneNumber: ['', [ Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(10), Validators.maxLength(10)]],
+      country: ['', [Validators.required]],
     });
   }
 
@@ -184,6 +197,7 @@ export class RegisterStepThreeComponent implements OnInit {
   }
 
   handleonSelectCountry(selectedCountry: string) {
+    console.log("handleOnChangeCountry: ", selectedCountry);
     this.countrySelected = selectedCountry;
     if (!!this.countryAndFlagData?.length) {
       let country = this.countryAndFlagData?.find(
