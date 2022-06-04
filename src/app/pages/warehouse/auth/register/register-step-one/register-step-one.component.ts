@@ -94,6 +94,7 @@ export class RegisterStepOneComponent implements OnInit {
   }
 
   submitForm() {
+    debugger
     let userData = {
       fullname: this.validateForm.controls['fullName']?.value,
       username: this.validateForm.controls['username']?.value.toLowerCase(),
@@ -110,7 +111,6 @@ export class RegisterStepOneComponent implements OnInit {
       userData.confirmPassword
     );
     this.email = this.validateForm.controls['email'].value;
-    if (!!message?.length) {
 
   if (!!message?.length) {
       this.errorAlertType(message);
@@ -127,7 +127,6 @@ export class RegisterStepOneComponent implements OnInit {
           }
         );
     }
-  }
 }
 
 
