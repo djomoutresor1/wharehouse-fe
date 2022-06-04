@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { NzButtonSize } from 'ng-zorro-antd/button';
 import { Observable } from 'rxjs';
-import { selectUsers} from './../../../../../reducers/action/user.selectors';
+
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
@@ -44,7 +44,7 @@ export class RegisterStepTwoComponent implements OnInit {
   isExpiredLink: boolean = false;
   user!: ResponseResetModel;
   isResetPassword: boolean = false;
-  users : Observable<any[]>;
+
 
   constructor(
     private fb: FormBuilder,
@@ -63,8 +63,6 @@ export class RegisterStepTwoComponent implements OnInit {
     this.verifyType = this.route.snapshot.queryParamMap.get(
       PathParams.VERIFY_TYPE
     );
-    this.users = this.store.pipe(select(selectUsers));
-    this.users.subscribe(res => console.log(res));
   }
 
   ngOnInit(): void {
