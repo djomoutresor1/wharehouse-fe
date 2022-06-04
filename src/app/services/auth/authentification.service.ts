@@ -37,10 +37,11 @@ export class AuthentificationService {
 
   public userRegisterStepThree(
     user: UserRegisterModelStepThree,
-    step: number
+    step: number,
+    userName:String
   ): Observable<UserRegisterModelStepThree> {
-    return this.http.post<UserRegisterModelStepThree>(
-      `${this.apiServerUrl}${Auth.WAREHOUSE_REGISTER_USER}`,
+    return this.http.patch<UserRegisterModelStepThree>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_REGISTER_USER_STEP_THREE}/${userName}`,
       user,
       {
         params: {

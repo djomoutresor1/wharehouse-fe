@@ -2,8 +2,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { NzButtonSize } from 'ng-zorro-antd/button';
-import { AuthentificationService } from 'src/app/services/auth/authentification.service';
+import { Observable } from 'rxjs';
+import { selectUsers} from './../../../../../reducers/action/user.selectors';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
@@ -42,6 +44,7 @@ export class RegisterStepTwoComponent implements OnInit {
   isExpiredLink: boolean = false;
   user!: ResponseResetModel;
   isResetPassword: boolean = false;
+  users : Observable<any[]>;
 
   constructor(
     private fb: FormBuilder,
@@ -49,6 +52,7 @@ export class RegisterStepTwoComponent implements OnInit {
     private route: ActivatedRoute,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private authorizationService: AuthorizationService,
+    private store:Store<ResponseResetModel>
   ) {
     this.idLinkResetPassword = this.route.snapshot.queryParamMap.get(
       PathParams.ID_LINK_RESET_VERIFICATION_EMAIL
@@ -59,6 +63,8 @@ export class RegisterStepTwoComponent implements OnInit {
     this.verifyType = this.route.snapshot.queryParamMap.get(
       PathParams.VERIFY_TYPE
     );
+    this.users = this.store.pipe(select(selectUsers));
+    this.users.subscribe(res => console.log(res));
   }
 
   ngOnInit(): void {
@@ -75,13 +81,12 @@ export class RegisterStepTwoComponent implements OnInit {
 
   
   checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects() {
-    debugger
     this.authorizationService
       .userVerifyLink(this.idLinkResetPassword, this.verifyType)
       .subscribe(
         (response: ResponseResetModel) => {
           this.user = response;
-          console.log('responsestepTwo: ', response);
+          localStorage.setItem('response', JSON.stringify(response));
           this.checkIfExpirationLinkIsCorrect();
         },
         (error: HttpErrorResponse) => {

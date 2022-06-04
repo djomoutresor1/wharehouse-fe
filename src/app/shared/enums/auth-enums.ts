@@ -2,6 +2,7 @@ export enum Auth {
   WAREHOUSE_LOGIN_USER = '/login',
   WAREHOUSE_LOGOUT_USER = '/logout',
   WAREHOUSE_REGISTER_USER = '/register',
+  WAREHOUSE_REGISTER_USER_STEP_THREE = '/register/stepThree',
   WAREHOUSE_ACTIVATE_DESATTIVATE_USER = '/change/status',
   WAREHOUSE_REFRESH_TOKEN = '/refreshtoken',
   WAREHOUSE_VERIFY_TOKEN = '/verifytoken',

@@ -44,7 +44,6 @@ export class RegisterStepThreeComponent implements OnInit {
   showbuttonUpload: boolean = false;
   showInputUpload: boolean = true;
   dateSelected: string = "";
-  code = 32;
   modelPaese: any;
   countrySelected: string = '';
   countryDialCode: string = '';
@@ -65,10 +64,16 @@ export class RegisterStepThreeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger
-    let user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
-    this.profilService.onActivateUser(user?.userId).subscribe((response:any)=>{
-      console.log('responseOnActivate: ', response);
+    let data = localStorage.getItem('response');
+    let dataUserId = JSON.parse(data as string).user.userId;
+
+    console.log('responseLocalGett: ',JSON.parse(data as string).user.userId);
+    this.profilService.onActivateUser(dataUserId).subscribe((response:any)=>{
+      console.log('responseOnActivate: ', response),
+      this.successAlertTypeActivate(response?.message);
+      (error: HttpErrorResponse) => {
+        this.errorAlertType(error.error.message);
+      }
     })
     this.initForm();
     this.flagService.getDialCodeAndCountryFlag().subscribe(
@@ -81,6 +86,7 @@ export class RegisterStepThreeComponent implements OnInit {
       }
     );
   }
+  
 
   keyPress(event: any) {
     const pattern = /[0-9\+\-\ ]/;
@@ -107,13 +113,15 @@ export class RegisterStepThreeComponent implements OnInit {
   }
 
   submitForm() {
+    let data = localStorage.getItem('response');
+    let userNameData = JSON.parse(data as string).user.username;
     let userData = {
       dateOfBirth: this.validateForm.controls['dateOfBirth']?.value,
-      phoneNumber: this.validateForm.controls['phoneNumber']?.value,
+      phoneNumber: ('+'+ this.countryDialCode + this.validateForm.controls['phoneNumber']?.value),
       country: this.validateForm.controls['country']?.value,
     };
     this.authentificationService
-      .userRegisterStepThree(userData, Utils.WAREHOUSE_STEP_THREE)
+      .userRegisterStepThree(userData, Utils.WAREHOUSE_STEP_THREE,userNameData)
       .subscribe(
         (response: any) => {
           this.successAlertType(response?.message);
@@ -130,6 +138,14 @@ export class RegisterStepThreeComponent implements OnInit {
     this.messageAlert = message;
   }
 
+  successAlertTypeActivate(message: string): void {
+    this.isAuth = true;
+    this.alertType = AlertType.ALERT_SUCCESS;
+    this.messageAlert = message;
+    setTimeout(() => {
+      this.isAuth = false;
+    }, 2000);
+  }
   successAlertType(message: string): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
@@ -139,6 +155,7 @@ export class RegisterStepThreeComponent implements OnInit {
       this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
     }, 2000);
   }
+  
 
   handleOnLogin() {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);

@@ -22,7 +22,7 @@ private apiServerUrl = environment.apiBaseUrl;
 
     public onActivateUser(userId: string):Observable<Persons>{
       return this.http.put<any>(
-        `${this.apiServerUrl}${Auth.WAREHOUSE_ACTIVATE_DESATTIVATE_USER}`,
+        `${this.apiServerUrl}${Auth.WAREHOUSE_ACTIVATE_DESATTIVATE_USER}/${userId}`,
         userId
       );    }
 
