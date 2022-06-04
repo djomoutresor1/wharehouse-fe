@@ -1,108 +1,125 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthentificationService } from 'src/app/services/auth/authentification.service';
-import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { NzButtonSize } from 'ng-zorro-antd/button';
+import { Observable } from 'rxjs';
+import { selectUsers} from './../../../../../reducers/action/user.selectors';
+import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
-import { ResponseRegisterModel, ResponseRegisterModelTwo } from 'src/model/auth/response/response-register-model';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { Auth } from 'src/app/shared/enums/auth-enums';
-import { Utils } from 'src/app/shared/enums/utils-enums';
-import { UserRegisterModelStepTwo } from 'src/model/auth/resquest/user-register-model';
+import { PathParams } from 'src/app/shared/enums/path-params-enums';
+import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
+import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
 
 @Component({
   selector: 'warehouse-register-step-two',
   templateUrl: './register-step-two.component.html',
-  styleUrls: ['./register-step-two.component.scss','../register.component.scss']
+  styleUrls: ['./register-step-two.component.scss','../register-step-one/register-step-one.component.scss']
 })
-
 export class RegisterStepTwoComponent implements OnInit {
-  validateForm!: FormGroup;
+
+
+  currentStep: number = 1;
+  size: NzButtonSize = 'large';
   isAuth: boolean = false;
   alertType: string = '';
   messageAlert: string = '';
-  countries:any;
-
-  selectedValue = { label: 'User', value: 'user' };
-  steps: string[] = [
-    'User Informations',
-    'Verification Email',
-    'Registration User',
+  role: string = '';
+  rolesList = [
+    { label: 'Admin', value: 'admin' },
+    { label: 'User', value: 'user' },
+    { label: 'Moderator', value: 'moderator' },
   ];
-  currentStep: number = 0;
-  selectedFile: any;
-  event1: any;
-  imgURL: any;
-  receivedImageData: any;
-  base64Data: any;
-  convertedImage: any;
-  showbuttonUpload: boolean = false;
-  showInputUpload: boolean = true;
+  steps: string[] = [
+    'register.step.information',
+    'register.step.verification',
+    'register.step.registration',
+  ];
 
-
-  private apiServerUrl = environment.apiBaseUrl;
+  idLinkResetPassword: any;
+  expirationLink: any;
+  verifyType: any;
+  isExpiredLink: boolean = false;
+  user!: ResponseResetModel;
+  isResetPassword: boolean = false;
+  users : Observable<any[]>;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authentificationService: AuthentificationService,
+    private route: ActivatedRoute,
     private warehouseLocalStorage: WarehouseLocalStorage,
-    private http: HttpClient,
+    private authorizationService: AuthorizationService,
+    private store:Store<ResponseResetModel>
   ) {
-    this.checkIfUserIsAlreadyLogged();
+    this.idLinkResetPassword = this.route.snapshot.queryParamMap.get(
+      PathParams.ID_LINK_RESET_VERIFICATION_EMAIL
+    );
+    this.expirationLink = this.route.snapshot.queryParamMap.get(
+      PathParams.EXPIRATION_LINK
+    );
+    this.verifyType = this.route.snapshot.queryParamMap.get(
+      PathParams.VERIFY_TYPE
+    );
+    this.users = this.store.pipe(select(selectUsers));
+    this.users.subscribe(res => console.log(res));
   }
 
   ngOnInit(): void {
-    this.initForm();
+    this.checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects()
   }
 
-  initForm() {
-    this.validateForm = this.fb.group({
-      fullName: [
-        null,
-        [Validators.required, Validators.min(5), Validators.max(25)],
-      ],
-      userName: [
-        null,
-        [Validators.required, Validators.min(5), Validators.max(15)],
-      ],
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required]],
-      confirmPassword: [null, [Validators.required]],
-      role: [null, [Validators.required]],
-    });
+  onGoToStepThree(){
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP3}`]);
   }
 
-  checkIfUserIsAlreadyLogged() {
-    let user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
-    if (user?.token) {
-      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
-    }
+  onRetrieveUser(){
+    return this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
   }
 
-
-  submitForm() {
-    let userData = {
-      dateOfBirth: this.validateForm.controls['dateOfBirth']?.value,
-      phoneNumber: this.validateForm.controls['phoneNumber']?.value,
-      country: this.validateForm.controls['country']?.value,
-    };
-      this.authentificationService
-        .userRegisterStepTwo(userData, Utils.WAREHOUSE_STEP_TWO)
-        .subscribe(
-          (response: any) => {
-            this.successAlertType(response?.message);
-          },
-          (error: HttpErrorResponse) => {
-            this.errorAlertType(error.error.message);
-          }
-        );
-    }
   
+  checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects() {
+    this.authorizationService
+      .userVerifyLink(this.idLinkResetPassword, this.verifyType)
+      .subscribe(
+        (response: ResponseResetModel) => {
+          this.user = response;
+          localStorage.setItem('response', JSON.stringify(response));
+          this.checkIfExpirationLinkIsCorrect();
+        },
+        (error: HttpErrorResponse) => {
+          if (error.status === 404) {
+            this.isResetPassword = true;
+            this.errorAlertType(error?.error.message);
+          }
+        }
+      );
+  }
 
-
+  checkIfExpirationLinkIsCorrect() {
+    let now = new Date().getTime();
+    let expiredLinkUrl = new Date(this.expirationLink).getTime();
+    let expiredLinkUser = new Date(this.user?.expiryDate).getTime();
+    // First verify if the expired date in url is same with expired date user's in db
+    if (this.verifyTheCorrectDate(expiredLinkUrl, expiredLinkUser)) {
+      // Compare the expired date with the current date
+      if (expiredLinkUrl > now) {
+        this.isExpiredLink = false;
+      } else {
+        this.isExpiredLink = true;
+        this.errorAlertType(
+          'The link to reset your password is expired. Try resend the new link to complete the operation.'
+        );
+      }
+    } else {
+      this.isExpiredLink = true;
+      this.errorAlertType(
+        'The expired date that you are providing to reset your password is not correct. Try resend the new link to complete the operation.'
+      );
+    }
+  }
 
   errorAlertType(message: string): void {
     this.isAuth = true;
@@ -110,58 +127,21 @@ export class RegisterStepTwoComponent implements OnInit {
     this.messageAlert = message;
   }
 
-  successAlertType(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_SUCCESS;
-    this.messageAlert = message;
-    setTimeout(() => {
-      this.isAuth = false;
-      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
-    }, 2000);
-  }
+  verifyTheCorrectDate(
+    expiredLinkUrl: number,
+    expiredLinkUser: number
+  ): boolean {
+    // We have the precision lost before the last fourth numbers
+    // Then, first, i will remove the last fourth numbers in both dates
+    let correctExpiredLinkUrl = expiredLinkUrl
+      .toString()
+      .slice(0, expiredLinkUrl.toString().length - 4);
+    let correctExpiredLinkUser = expiredLinkUser
+      .toString()
+      .slice(0, expiredLinkUser.toString().length - 4);
 
-  handleOnLogin() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
-  }
-
-  handleOnChangeInput() {
-    // If the alert incorrect password is opened,
-    // when the user point the password/confirm password, the alert disappear.
-    if (this.isAuth) {
-      this.isAuth = !this.isAuth;
-    }
-  }
-
-  onUploadFotoProfile() {
-    const uploadData = new FormData();
-    this.showbuttonUpload = false;
-    this.showInputUpload = false;
-    uploadData.append('myFile', this.selectedFile, this.selectedFile?.name);
-
-    this.http
-      .post(`${this.apiServerUrl}${Auth.WAREHOUSE_UPLOAD_IMAGE}`, uploadData)
-      .subscribe(
-        (res) => {
-          console.log(res);
-          this.receivedImageData = res;
-          this.base64Data = this.receivedImageData.pic;
-          this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data;
-        },
-        (err) => console.log('Error Occured duringng saving: ' + err)
-      );
-  }
-
-
-  onFileChanged(event: any) {
-    //   this.onUploadFotoProfile();
-    this.showbuttonUpload = true;
-    this.showInputUpload = false;
-    this.selectedFile = event.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(this.selectedFile);
-    reader.onload = (event2) => {
-      this.imgURL = reader.result;
-    };
+    return correctExpiredLinkUrl === correctExpiredLinkUser ? true : false;
   }
 
 }
+

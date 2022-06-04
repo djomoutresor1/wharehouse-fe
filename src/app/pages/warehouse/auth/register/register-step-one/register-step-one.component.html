@@ -12,7 +12,7 @@
             </nz-steps>
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="!isMailSent">
         <div class="col-md-6 offset-md-3">
             <div class="row mt-5">
                 <div class="col" *ngIf="isAuth">
@@ -136,6 +136,21 @@
                 <button nz-button nzType="primary" (click)="handleOnLogin()" nzBlock>
                     <i nz-icon nzType="left" nzTheme="outline"></i>{{'login.cta.login' | translate}}</button>
             </form>
+        </div>
+    </div>
+    <div class="row forgot-password-mail-sent" *ngIf="isMailSent">
+        <div class="col-md-4 offset-md-4">
+            <div class="forgot-password-mail-sent-content">
+                <i nz-icon nzType="mail" nzTheme="twotone" class="forgot-password-mail-sent-icon text-center"></i>
+                <h4 nz-typography class="text-center"><b>Nous venons de vous envoyer un email à: </b></h4>
+                <p nz-typography class="warehouse-success text-center">{{email}}</p>
+                <p nz-typography>{{'verifyEmail.success.content.one' | translate}}</p>
+                <h5 nz-typography><b>{{'verifyEmail.success.content.two' | translate}}</b></h5>
+                <p nz-typography>{{'verifyEmail.success.content.three' | translate}}</p>
+                <br />
+                <button nz-button nzType="primary" (click)="handleOnLogin()" nzBlock>
+                    <i nz-icon nzType="left" nzTheme="outline"></i>{{'verifyEmail.cta.login' | translate}}</button>
+            </div>
         </div>
     </div>
 </div>

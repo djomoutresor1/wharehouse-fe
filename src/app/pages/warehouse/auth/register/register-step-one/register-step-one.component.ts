@@ -1,24 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthentificationService } from 'src/app/services/auth/authentification.service';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { Utils } from 'src/app/shared/enums/utils-enums';
-import { AuthorizationService } from 'src/app/services/auth/authorization.service';
-import { ResponseModel } from 'src/model/auth/response/response-model';
+import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'warehouse-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'warehouse-register-step-one',
+  templateUrl: './register-step-one.component.html',
+  styleUrls: ['./register-step-one.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterStepOneComponent implements OnInit {
   validateForm!: FormGroup;
   passwordVisible = false;
   password: string = '';
@@ -47,17 +45,23 @@ export class RegisterComponent implements OnInit {
   info:any
   isMailSent: boolean = false;
   email: string = '';
+  idLinkResetPassword: any;
+  expirationLink: any;
+  verifyType: any;
+  isExpiredLink: boolean = false;
+  user!: ResponseResetModel;
+  isResetPassword: boolean = false;
+
 
   constructor(
-    private fb: FormBuilder,
+    public fb: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     private authentificationService: AuthentificationService,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private http: HttpClient,
-    private authorizationService: AuthorizationService,
     private translate: TranslateService
   ) {
-    this.checkIfUserIsAlreadyLogged();
   }
 
   ngOnInit(): void {
@@ -99,7 +103,6 @@ export class RegisterComponent implements OnInit {
       role: this.validateForm.controls['role']?.value,
       gender: this.validateForm.controls['gender']?.value,
     };
-    // console.log(this.validateForm.controls);
     // Verify the password and confirm password and username criteria
     let message = this.handleOnCheckValidation(
       userData.username,
@@ -107,18 +110,8 @@ export class RegisterComponent implements OnInit {
       userData.confirmPassword
     );
     this.email = this.validateForm.controls['email'].value;
+    if (!!message?.length) {
 
-    /*this.authorizationService.userVerificationEmail(this.email).subscribe(
-      (response: ResponseModel) => {
-        this.isMailSent = true;
-      },
-      (error: HttpErrorResponse) => {
-        if (error?.status === 404) {
-          this.isMailSent = false;
-          this.errorAlertType(error?.error?.message);
-        }
-      }te
-    );*/
   if (!!message?.length) {
       this.errorAlertType(message);
     } else {
@@ -126,7 +119,8 @@ export class RegisterComponent implements OnInit {
         .userRegisterStepOne(userData, Utils.WAREHOUSE_STEP_ONE)
         .subscribe(
           (response: ResponseRegisterModel) => {
-            this.successAlertType(response?.message);
+            this.isMailSent = true;
+            this.currentStep = 1;
           },
           (error: HttpErrorResponse) => {
             this.errorAlertType(error.error.message);
@@ -134,6 +128,7 @@ export class RegisterComponent implements OnInit {
         );
     }
   }
+}
 
 
   handleOnCheckValidation(
@@ -153,6 +148,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+
   errorAlertType(message: string): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_ERROR;
@@ -160,17 +156,16 @@ export class RegisterComponent implements OnInit {
   }
 
   successAlertType(message: string): void {
-    this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
-    this.messageAlert = message;
+  //  this.messageAlert = message;
     setTimeout(() => {
       this.isAuth = false;
-      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
-    }, 2000);
+    }, 1000);
   }
 
   handleOnLogin() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+ this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+// this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP3}`]);
   }
 
   handleOnChangeInput() {
@@ -188,5 +183,7 @@ export class RegisterComponent implements OnInit {
   handleOnNotifyPassword(event: boolean) {
     this.isSecurePassword = event;
   }
-  
+ 
 }
+
+
