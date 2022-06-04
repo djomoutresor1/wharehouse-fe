@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types/size';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'warehouse-loading',
@@ -14,7 +15,7 @@ export class LoadingComponent implements OnInit {
   size: NzSizeLDSType = 'default';
 
 
-  constructor() { }
+  constructor(public loadingService: LoadingService) { }
 
   ngOnInit(): void {
   }

@@ -17,12 +17,13 @@
         <nz-form-item>
           <nz-form-control [nzErrorTip]="'login.username.required' | translate">
             <nz-input-group nzPrefixIcon="user" [nzSuffix]="userTemplate">
-              <input type="text" nz-input formControlName="username" [placeholder]="'login.username.placeholder' | translate"
-                (click)="handleOnChangeInput()" />
+              <input type="text" nz-input formControlName="username"
+                [placeholder]="'login.username.placeholder' | translate" (click)="handleOnChangeInput()" />
             </nz-input-group>
             <ng-template #userTemplate>
-              <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover [nzPopoverTitle]="'login.username.popover.title' | translate"
-                [nzPopoverContent]="userContentTemplate" nzPopoverPlacement="right"></i>
+              <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover
+                [nzPopoverTitle]="'login.username.popover.title' | translate" [nzPopoverContent]="userContentTemplate"
+                nzPopoverPlacement="right"></i>
             </ng-template>
             <ng-template #userContentTemplate>
               <div class="warehouse-user-wrapper">
@@ -39,7 +40,7 @@
           <nz-form-control [nzErrorTip]="'login.password.required' | translate">
             <nz-input-group nzPrefixIcon="lock" [nzSuffix]="passwordTemplate">
               <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password"
-              [placeholder]="'login.password.placeholder' | translate" (click)="handleOnChangeInput()" />
+                [placeholder]="'login.password.placeholder' | translate" (click)="handleOnChangeInput()" />
             </nz-input-group>
             <ng-template #passwordTemplate>
               <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
@@ -53,8 +54,9 @@
               class="login-form-remember">
               <span>{{'login.remember.title' | translate }}</span>
             </label>
-            <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover [nzPopoverTitle]="'login.remember.popover.title' | translate"
-              [nzPopoverContent]="rememberContentTemplate" nzPopoverPlacement="right"></i>
+            <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover
+              [nzPopoverTitle]="'login.remember.popover.title' | translate" [nzPopoverContent]="rememberContentTemplate"
+              nzPopoverPlacement="right"></i>
             <ng-template #rememberContentTemplate>
               <div class="warehouse-remember-wrapper">
                 <p>{{'login.remember.popover.contentOne' | translate }}
@@ -70,7 +72,8 @@
         </div>
         <br />
         <button nz-button [disabled]="!validateForm.valid" nzBlock class="login-form-button login-form-margin"
-          [nzType]="'primary'">{{'login.cta.login' | translate }}</button>
+          [nzType]="'primary'"><i nz-icon nzType="check-circle" nzTheme="outline"></i> {{'login.cta.login' | translate
+          }}</button>
         <nz-divider nzDashed [nzText]="'login.divider.title' | translate"></nz-divider>
         <button nz-button nzType="primary" (click)="handleOnRegister()" nzBlock>{{'login.cta.register' | translate }}
           <i nz-icon nzType="right" nzTheme="outline"></i></button>

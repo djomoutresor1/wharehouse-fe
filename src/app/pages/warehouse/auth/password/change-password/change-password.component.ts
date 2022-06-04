@@ -2,11 +2,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseModel } from 'src/model/auth/response/response-model';
+import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 
 @Component({
   selector: 'warehouse-change-password',
@@ -29,15 +31,38 @@ export class ChangePasswordComponent implements OnInit {
   descriptionAlert: string = '';
   isSecurePassword: boolean = false;
 
+  breadcrumbItems!: BreadcrumbItemsModel;
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private authorizationService: AuthorizationService,
-    private warehouseLocalStorage: WarehouseLocalStorage
+    private warehouseLocalStorage: WarehouseLocalStorage,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
+    this.initComponent();
     this.initForm();
+  }
+
+  initComponent() {
+    console.log("currentLang: ", this.translate.currentLang);
+    let currentLang = null;
+    currentLang = this.translate.currentLang;
+    if(currentLang === undefined) {
+      currentLang = this.warehouseLocalStorage.WarehouseGetLanguageLocalStorage()
+    }
+    this.translate.use(currentLang as string);
+    this.breadcrumbItems = {
+      parent: {
+        title: this.translate.instant("profile.title"),
+        url: "dashboard/my-profile"
+      },
+      children: [{
+        title: this.translate.instant("changePassword.title")
+      }]
+    }
   }
 
   initForm() {
@@ -128,5 +153,9 @@ export class ChangePasswordComponent implements OnInit {
 
   handleOnNotifyPassword(event: boolean) {
     this.isSecurePassword = event;
+  }
+
+  handleOnBack() {
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.PROFILE}`]);
   }
 }

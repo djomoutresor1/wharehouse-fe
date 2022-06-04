@@ -59,6 +59,7 @@ export class RegisterStepOneComponent implements OnInit {
     private route: ActivatedRoute,
     private authentificationService: AuthentificationService,
     private warehouseLocalStorage: WarehouseLocalStorage,
+    private http: HttpClient,
     private translate: TranslateService
   ) {
   }
@@ -110,6 +111,8 @@ export class RegisterStepOneComponent implements OnInit {
     );
     this.email = this.validateForm.controls['email'].value;
     if (!!message?.length) {
+
+  if (!!message?.length) {
       this.errorAlertType(message);
     } else {
       this.authentificationService
@@ -123,6 +126,7 @@ export class RegisterStepOneComponent implements OnInit {
             this.errorAlertType(error.error.message);
           }
         );
+    }
   }
 }
 

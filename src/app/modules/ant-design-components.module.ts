@@ -31,6 +31,7 @@ import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
@@ -86,7 +87,8 @@ const icons = [
     NzProgressModule,
     NzImageModule,
     NzRadioModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzDropDownModule
   ],
   exports: [
     NzButtonModule,
@@ -120,7 +122,8 @@ const icons = [
     NzProgressModule,
     NzImageModule,
     NzRadioModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzDropDownModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })

@@ -1,0 +1,186 @@
+{
+    "dashboard": {
+      "title": "Pannello",
+      "home": "Pagina iniziale",
+      "cta": {
+        "logout": "Disconnettersi",
+        "back": "Indietro"
+      },
+      "modal": {
+        "logout": {
+          "title": "Conferma Logout",
+          "subtitle": "Sei sicuro di voler uscire ?"
+        }
+      },
+      "dataTable": {
+        "options" : {
+          "title": "Seleziona",
+          "edit": "Modifica",
+          "show": "Vedi",
+          "delete": "Cancella"
+        }
+      }
+    },
+    "warehouse": {
+      "name": "Warehouse System"
+    },
+    "validations": {
+      "confirm": {
+        "password": "Password e conferma password non corrispondono. Riprova."
+      },
+      "username": "Il nome utente deve contenere più di 7 caratteri. Riprova."
+    },
+    "login": {
+      "title": "Pagina di Login",
+      "cta": {
+        "login": "Accesso",
+        "register": "Registrati Ora !"
+      },
+      "username": {
+        "required": "Nome utente/posta è richiesto",
+        "placeholder": "Nome utente o posta o userID",
+        "popover": {
+          "title": "Login Informazioni",
+          "subtitle": "In WareHouse System, è possibile connectersi con :",
+          "contentOne": "- Sua posta elettronica",
+          "contentTwo": "- Suo User ID",
+          "contentThree": "- Suo Nome utente"
+        }
+      },
+      "password": {
+        "title": "Password dimenticato ?",
+        "required": "Password è richiesto",
+        "placeholder": "Password",
+        "popover": {
+          "title": "Sicurezza della password"
+        }
+      },
+      "remember": {
+        "title": "Ricordarsi",
+        "popover": {
+          "title": "Casella « Ricordarsi »",
+          "contentOne": "Scegliendo « Ricordarsi » si riduce il numero di volte in cui ti verrà chiesto di accedere su questo dispositivo.",
+          "contentTwo": "Per mantenere il tuo account al sicuro, usa questa opzione solo sui tuoi dispositivi.",
+          "contentThree": "Scegliendo questa opzione, il sistema conserva le tue credenziali di accesso per 7 giorni."
+        }
+      },
+      "divider": {
+        "title": "Nuovo Utente ?"
+      }
+    },
+    "register": {
+      "title": "Pagina di Registrazione",
+      "step": {
+        "information": "Informazioni Utente",
+        "verification": "Verifica Posta Elettronica",
+        "registration": "Registrazione Utente"
+      },
+      "cta": {
+        "stepOne": "Verify my email"
+      },
+      "fullname": {
+        "placeholder": "Nome e Cognome",
+        "required": "Nome e Cognome sono richiesto"
+      },
+      "username": {
+        "required": "Nome utente è richiesto",
+        "placeholder": "Nome utente"
+      },
+      "gender": {
+        "required": "Sesso è richiesto",
+        "placeholder": "Sesso",
+        "male": "Uomo",
+        "female": "Donna"
+      },
+      "email": {
+        "required": "Posta elettronica è richiesta",
+        "placeholder": "Posta Elettronica"
+      },
+      "role": {
+        "required": "Ruolo è richiesto",
+        "placeholder": "Seleziona un ruolo"
+      },
+      "confirmPassword": {
+        "required": "Si prega di confermare la password",
+        "placeholder": "Conferma password"
+      },
+      "divider": {
+        "title": "Already have an account ?"
+      }
+    },
+    "securePassword": {
+      "title": "Per la sicurezza della tua password, usa una password che contenga almeno : ",
+      "lowercase": "1 lettera minuscola",
+      "uppercase": "1 lettera maiuscola",
+      "number": "1 numero",
+      "character": "1 carattere speciale",
+      "length": "Tra 8 e 30 caratteri"
+    },
+    "forgotPassword": {
+      "title": "Pagina Password Dimenticata",
+      "content": {
+        "title": "Inserisci l'indirizzo email associato al tuo account",
+        "subtitle": "Ti invieremo un link a questo indirizzo che ti consentirà di reimpostare facilmente la tua password."
+      },
+      "cta": {
+        "send": "Invia collegamento di ripristino",
+        "login": "Torna al login"
+      },
+      "divider": {
+        "title": "Ricordi le tue credenziali ?"
+      },
+      "success": {
+        "title": "Ti abbiamo appena inviato un'e-mail all'indirizzo: ",
+        "content": {
+          "one": "Questo contiene un collegamento per reimpostare la tua password.",
+          "two": "Non hai ricevuto un'e-mail nella tua posta elettronica ?",
+          "three": "Controlla l'ortografia dell'indirizzo inserito o che l'e-mail non sia nella posta indesiderata."
+        }
+      }
+    },
+    "changePassword": {
+      "title": "Cambia mia password",
+      "oldPassword": {
+        "required": "La tua password attuale è richiesta",
+        "placeholder": "Vecchia password"
+      },
+      "cta": "Cambia la mia password"
+    },
+    "profile": {
+      "title": "Mio Profilo",
+      "empty": "--- Non Specificato ---",
+      "role": "Hai i roli", 
+      "roles": "Roli",
+      "lastLogin": "Ultimo Accesso",
+      "lastLoginMessage": "Hai effettuato il tuo ultimo accesso il",
+      "personalData": {
+        "title": "Dati Anagrafici",
+        "fullname": "Nome e Cognome",
+        "dateOfBorn": "Data di Nascita",
+        "userId": "Matricola",
+        "country": "Paese",
+        "city": "Città",
+        "address": "Indirizzo",
+        "zip": "Codice Postale"
+      },
+      "personalContact": {
+        "title": "Contatti Personali",
+        "personalEmail": "Indirizzo E-mail Personale",
+        "otherPersonalEmail": "Indirizzo PEC Personale",
+        "mobilePhone": "Cellulare",
+        "landlinePhone": "Telefono Fisso"
+      }
+    },
+    "All Users": "tutti gli utenti",
+    "Users": "Utenti",
+    "Add new user": "Aggiungi nuovo utento",
+    "one position free": "una posizione libera",
+    "two position free": "due posizione libere",
+    "three position free": "tre positione libere",
+    "more than three position free": "piu di tre posizione libere",
+    "Full Rack": "rack pieno",
+    "Team": "Squadre",
+    "Team 1": "Squadra 1",
+    "Team 2": "Squadra 2"
+  }
+  

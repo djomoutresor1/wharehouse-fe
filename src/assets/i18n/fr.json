@@ -1,11 +1,33 @@
 {
+  "dashboard": {
+    "title": "Tableau de bord",
+    "home": "Page d'accueil",
+    "cta": {
+      "logout": "Se déconnecter",
+      "back": "Retour"
+    },
+    "modal": {
+      "logout": {
+        "title": "Confirmation Déconnexion",
+        "subtitle": "Êtes-vous sûr de vouloir vous déconnecter ?"
+      }
+    },
+    "dataTable": {
+      "options": {
+        "title": "Selectionez",
+        "edit": "Modifier",
+        "show": "Voir",
+        "delete": "Effacer"
+      }
+    }
+  },
   "warehouse": {
     "name": "Warehouse System",
     "save": "Sauvegarder"
   },
-  "button":{
+  "button": {
     "save": "Sauvegarder",
-    "goToSTepThree":"Allez a l'etape 3"
+    "goToSTepThree": "Allez a l'etape 3"
   },
   "validations": {
     "confirm": {
@@ -55,11 +77,11 @@
     "title": "Page d'Enregistrement",
     "step": {
       "information": "Informations Utilisateur",
-      "verification":{
-        "do":"Verification Email",
-        "confirmation":"CONFIRMATION VERIFICATION EMAIL",
-        "hello":"Salut",
-        "message":"votre email à étè correctement verifié, s'il vous plait clicquez et completer la registration"
+      "verification": {
+        "do": "Verification Email",
+        "confirmation": "CONFIRMATION VERIFICATION EMAIL",
+        "hello": "Salut",
+        "message": "votre email à étè correctement verifié, s'il vous plait clicquez et completer la registration"
       },
       "registration": "Inscription Utilisateur"
     },
@@ -153,18 +175,51 @@
         "one": "Celui-ci contient un lien permettant de verifier votre email",
         "two": "Vous n'avez pas récu de mail dans votre courrier électronique ?",
         "three": "Vérifiez bien l'orthographe de l'adresse saisie, ou que le mail n'est pas dans vos courriers indésirables."
-      }
+      },
+      "changePassword": {
+        "title": "Changer mot de passe",
+        "oldPassword": {
+          "required": "Votre mot de passe actuel est obbligatoire",
+          "placeholder": "Ancien mot de passe"
+        },
+        "cta": "Changer mon mot de passe"
+      },
+      "profile": {
+        "title": "Mon Profil",
+        "empty": "--- Non Précisé ---",
+        "role": "Vous avez les rôles",
+        "roles": "Rôles",
+        "lastLogin": "Dernière Connexion",
+        "lastLoginMessage": "Vous étiez connecté pour la dernière fois le",
+        "personalData": {
+          "title": "Données Personnelles",
+          "fullname": "Nom et Prénom",
+          "dateOfBorn": "Date de Naissance",
+          "userId": "Numéro Identifiant",
+          "country": "Pays",
+          "city": "Cité",
+          "address": "Adresse",
+          "zip": "Code Postal"
+        },
+        "personalContact": {
+          "title": "Contacts Personnels",
+          "personalEmail": "Adresse E-mail Personnelle",
+          "otherPersonalEmail": "Adresse PEC Personnelle",
+          "mobilePhone": "Téléphone Portable",
+          "landlinePhone": "Téléphone fixe"
+        }
+      },
+      "All Users": "tous les utilisateurs",
+      "Users": "Utilisateurs",
+      "Add new user": "ajoutez un nouveau utilisateur",
+      "one position free": "une position libre",
+      "two position free": "deux position libre",
+      "three position free": "trois position libre",
+      "more than three position free": "plus de trois position libre",
+      "Full Rack": "rack plein",
+      "Team": "Equipes",
+      "Team 1": "Equipe 1",
+      "Team 2": "Equipe 2"
     }
-  },
-  "All Users": "tous les utilisateurs",
-  "Users": "Utilisateurs",
-  "Add new user": "ajoutez un nouveau utilisateur",
-  "one position free": "une position libre",
-  "two position free": "deux position libre",
-  "three position free": "trois position libre",
-  "more than three position free": "plus de trois position libre",
-  "Full Rack": "rack plein",
-  "Team": "Equipes",
-  "Team 1": "Equipe 1",
-  "Team 2": "Equipe 2"
+  }
 }

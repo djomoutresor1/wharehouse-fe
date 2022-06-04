@@ -36,6 +36,7 @@
     "moment": "^2.29.3",
     "ng-zorro-antd": "^13.0.1",
     "ngx-translate-multi-http-loader": "^7.0.5",
+    "node-sass": "^6.0.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

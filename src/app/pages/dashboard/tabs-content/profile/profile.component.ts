@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
+import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 
 @Component({
   selector: 'warehouse-profile',
@@ -10,22 +12,36 @@ import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  user: any;
+  userLocalStorage: any;
+  breadcrumbItems!: BreadcrumbItemsModel;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
+    private translate: TranslateService,
     private warehouseLocalStorage: WarehouseLocalStorage
   ) {}
 
   ngOnInit(): void {
-    this.user = Array.of(
-      this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage()
-    );
-    console.log(' userss; ', this.user);
+    this.initComponent();
+    this.userLocalStorage =
+      this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
   }
 
-  nameUser(role: string) {
+  initComponent() {
+    let currentLang = null;
+    currentLang = this.translate.currentLang;
+    if(currentLang === undefined) {
+      currentLang = this.warehouseLocalStorage.WarehouseGetLanguageLocalStorage()
+    }
+    this.translate.use(currentLang as string);
+    this.breadcrumbItems = {
+      parent: {
+        title: this.translate.instant("profile.title")
+      }
+    }
+  }
+
+  getRoleName(role: string) {
     switch (role) {
       case Utils.ROLE_ADMIN:
         return Utils.ADMINS;
@@ -42,36 +58,59 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  choseTheme(role: string) {
+  getUserColorRole(role: string) {
     switch (role) {
-      case 'User':
-        return 'magenta';
+      case Utils.ROLE_USER:
+        return '#0096c8';
         break;
-      case 'Moderator':
-        return 'orange';
+      case Utils.ROLE_MODERATOR:
+        return '#ffc107';
         break;
-      case 'Admin':
-        return 'green';
+      case Utils.ROLE_ADMIN:
+        return '#2a7a39';
         break;
       default:
-        return 'magenta';
+        return '#0096c8';
         break;
     }
   }
 
-  rolesUser(data: any) {
-    return data
-      .map((currElement: any) => {
-        return this.nameUser(currElement);
-      })
-      .join(' & ');
+  getRoleIcon(role: string) {
+    switch (role) {
+      case Utils.ROLE_USER:
+        return 'user';
+        break;
+      case Utils.ROLE_MODERATOR:
+        return 'user-switch';
+        break;
+      case Utils.ROLE_ADMIN:
+        return 'team';
+        break;
+      default:
+        return 'user';
+        break;
+    }
   }
+
+  // rolesUser(data: any) {
+  //   return data
+  //     .map((currElement: any) => {
+  //       return this.nameUser(currElement);
+  //     })
+  //     .join(' & ');
+  // }
 
   handleOnNavigate(url: String) {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
   }
-  
+
+  handleOnBack() {
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+  }
+
   handleOnChangePassword() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.CHANGE_PASSWORD}`]);
+    this.router.navigate([
+      `${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.CHANGE_PASSWORD}`,
+    ]);
   }
 }

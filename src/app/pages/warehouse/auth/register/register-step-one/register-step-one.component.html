@@ -14,7 +14,7 @@
     </div>
     <div class="row" *ngIf="!isMailSent">
         <div class="col-md-6 offset-md-3">
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col" *ngIf="isAuth">
                     <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
                     </warehouse-alert>
@@ -129,7 +129,8 @@
                     </div>
                 </div>
                 <button nz-button [disabled]="!validateForm.valid || !isSecurePassword" nzBlock
-                    class="register-form-button register-form-margin" [nzType]="'primary'">{{'register.cta.stepOne' |
+                    class="register-form-button register-form-margin" [nzType]="'primary'"><i nz-icon nzType="mail"
+                        nzTheme="outline"></i> {{'register.cta.stepOne' |
                     translate}}</button>
                 <nz-divider nzDashed [nzText]="'register.divider.title' | translate"></nz-divider>
                 <button nz-button nzType="primary" (click)="handleOnLogin()" nzBlock>
