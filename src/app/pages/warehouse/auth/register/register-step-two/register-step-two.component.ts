@@ -2,9 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
 import { NzButtonSize } from 'ng-zorro-antd/button';
-import { Observable } from 'rxjs';
 
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
@@ -52,7 +50,6 @@ export class RegisterStepTwoComponent implements OnInit {
     private route: ActivatedRoute,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private authorizationService: AuthorizationService,
-    private store:Store<ResponseResetModel>
   ) {
     this.idLinkResetPassword = this.route.snapshot.queryParamMap.get(
       PathParams.ID_LINK_RESET_VERIFICATION_EMAIL
