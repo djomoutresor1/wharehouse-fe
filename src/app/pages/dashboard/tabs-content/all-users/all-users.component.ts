@@ -46,6 +46,7 @@ export class AllUsersComponent implements OnInit {
   listOfCurrentPageData: readonly ItemData[] = [];
   setOfCheckedId = new Set<number>();
   allUsers: any;
+  user:any;
 
   constructor(private router: Router, private profilService: ProfilService) {}
 
@@ -181,5 +182,8 @@ export class AllUsersComponent implements OnInit {
 
   handleOnDelete(user: ResponseLoginModel) {
     console.log("user - handleOnDelete: ", user);
+    this.profilService.onDeleteUser(this.user).subscribe((response:any)=>{
+              console.log("onResponseDelete: ", response)
+    })
   }
 }
