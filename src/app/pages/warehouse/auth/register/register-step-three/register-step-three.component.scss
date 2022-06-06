@@ -1,0 +1,29 @@
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; 
+}
+
+nz-date-picker,
+nz-range-picker {
+  margin: 0 8px 12px 0;
+  width: 296px !important;
+}
+
+.multilanguage-img {
+  width: 17px;
+  height: 13px;
+  top: -2px;
+  position: relative;
+}
+
+.multilanguage{
+  width: 52px;
+  height: 31px;
+}
+
+.ant-input-prefix, .ant-input-suffix {
+  display: none !important;}
+
+

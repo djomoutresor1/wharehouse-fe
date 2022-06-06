@@ -11,8 +11,8 @@ export interface UserRegisterModel {
 
 
 
-export interface UserRegisterModelStepTwo {
-  dateOfBirth?: string;
-  phoneNumber?:number;
-  country?:string
+export interface UserRegisterModelStepThree {
+  dateOfBirth: string;
+  phoneNumber:any;
+  country:string
 }

@@ -34,4 +34,21 @@ warehouse-multilanguage {
   .register-form-button {
     width: 100%;
   }
+  .forgot-password-mail-sent {
+    .forgot-password-mail-sent-content {
+      text-align: justify;
+      margin: 20px !important;
+      padding: 35px !important;
+      border-radius: var(--warehouse-border-radius-one);
+      box-shadow: var(--warehouse-box-shadow);
+      background: var(--warehouse-white);
+      .forgot-password-mail-sent-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 45px;
+        padding-bottom: 15px;
+      }
+    }
+  }
 }

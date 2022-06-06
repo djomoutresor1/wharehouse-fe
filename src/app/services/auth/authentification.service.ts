@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
 import { UserLoginModel } from 'src/model/auth/resquest/user-login-model';
-import { UserRegisterModel, UserRegisterModelStepTwo } from 'src/model/auth/resquest/user-register-model';
+import { UserRegisterModel, UserRegisterModelStepThree } from 'src/model/auth/resquest/user-register-model';
 import { Auth } from '../../shared/enums/auth-enums';
 
 @Injectable({
@@ -35,12 +35,13 @@ export class AuthentificationService {
     );
   }
 
-  public userRegisterStepTwo(
-    user: UserRegisterModelStepTwo,
-    step: number
-  ): Observable<UserRegisterModelStepTwo> {
-    return this.http.post<UserRegisterModelStepTwo>(
-      `${this.apiServerUrl}${Auth.WAREHOUSE_REGISTER_USER}`,
+  public userRegisterStepThree(
+    user: UserRegisterModelStepThree,
+    step: number,
+    userName:String
+  ): Observable<UserRegisterModelStepThree> {
+    return this.http.patch<UserRegisterModelStepThree>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_REGISTER_USER_STEP_THREE}/${userName}`,
       user,
       {
         params: {

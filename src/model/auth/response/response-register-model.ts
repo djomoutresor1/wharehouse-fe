@@ -1,4 +1,4 @@
-import { UserRegisterModel, UserRegisterModelStepTwo } from '../resquest/user-register-model';
+import { UserRegisterModel, UserRegisterModelStepThree } from '../resquest/user-register-model';
 
 export interface ResponseRegisterModel {
   message: string;
@@ -7,7 +7,7 @@ export interface ResponseRegisterModel {
 
 export interface ResponseRegisterModelTwo {
   message: string;
-  objectTwo: UserRegisterModelStepTwo;
+  objectTwo: UserRegisterModelStepThree;
 }
 
 

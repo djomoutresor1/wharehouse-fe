@@ -24,6 +24,10 @@
   "warehouse": {
     "name": "Warehouse System"
   },
+  "button":{
+    "save": "Save",
+    "goToSTepThree":"Go to step three"
+  },
   "validations": {
     "confirm": {
       "password": "Password and confirm password don't match. Try again."
@@ -72,7 +76,12 @@
     "title": "Register Page",
     "step": {
       "information": "User Informations",
-      "verification": "Verification Email",
+      "verification":{
+        "do":"Verification Email",
+        "confirmation":"CONFIRMATION VERIFICATION EMAIL",
+        "hello":"Hello",
+        "message":"your email has been verified, please click and complete the registration"
+      },
       "registration": "Registration User"
     },
     "cta": {
@@ -103,6 +112,18 @@
     "confirmPassword": {
       "required": "Please confirm your password",
       "placeholder": "Confirm password"
+    },
+    "country": {
+      "required": "your country is required",
+      "placeholder": "Select a country"
+    },
+    "date": {
+      "required": "date is required",
+      "placeholder": "Select the date"
+    },
+    "phone": {
+      "required": "your phone number is required",
+      "placeholder": "phone number"
     },
     "divider": {
       "title": "Already have an account ?"
