@@ -38,7 +38,6 @@ export class CommonInterceptor implements HttpInterceptor {
       !request.url.endsWith(Auth.WAREHOUSE_LOGIN_USER) &&
       !request.url.endsWith(Auth.WAREHOUSE_REGISTER_USER) &&
       !request.url.includes(Auth.WAREHOUSE_DELETE_USER) &&
-      !request.url.includes(Pages.USERS) &&
       !request.url.includes(Auth.WAREHOUSE_FORGOT_PASSWORD) && 
       !request.url.includes(Auth.WAREHOUSE_VERIFY_LINK) &&
       !request.url.includes(Auth.WAREHOUSE_RESET_PASSWORD) &&
@@ -47,8 +46,7 @@ export class CommonInterceptor implements HttpInterceptor {
       !request.url.endsWith(Auth.WAREHOUSE_ACTIVATE_DESATTIVATE_USER)&&
       !request.url.endsWith(Pages.REGISTERSTEP2)&&
       !request.url.includes(Pages.REGISTERSTEP3)&&
-      !request.url.includes("../assets/i18n/")&&
-      !('https://countriesnow.space/api/v0.1/countries/flag/images')
+      !request.url.includes("../assets/i18n/")
     ) {
       if (user?.token) {
         request = request.clone({
