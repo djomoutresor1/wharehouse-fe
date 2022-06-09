@@ -38,7 +38,7 @@
                     <nz-form-item>
                         <nz-form-control [nzErrorTip]="'register.country.required'| translate">
                             <nz-select nzShowSearch [nzPlaceHolder]="'register.country.placeholder'| translate" class="multilanguage-wrapper" formControlName="country"
-                            (ngModelChange)="handleonSelectCountry($event)" [(ngModel)]="countrySelected">
+                            (ngModelChange)="handleOnSelectCountry($event)" [(ngModel)]="countrySelected">
                             <nz-option nzCustomContent *ngFor="let country of countryAndFlagData" nzValue="{{country?.name}}" nzLabel="{{country?.name}}">
                                 <img class="multilanguage-img" [alt]="country?.name" [src]="country?.flag" />
                                 {{country?.name}}

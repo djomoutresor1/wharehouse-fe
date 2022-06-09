@@ -13,6 +13,7 @@ import { ResponseLoginModel } from 'src/model/auth/response/response-login-model
 import { Router } from '@angular/router';
 import { Pages } from '../enums/pages-enums';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
+import { ExternalApi } from '../enums/external-api-enums';
 
 @Injectable()
 export class CommonInterceptor implements HttpInterceptor {
@@ -33,20 +34,21 @@ export class CommonInterceptor implements HttpInterceptor {
     const isApiUrl = request.url.startsWith(environment.apiBaseUrl);
 
     console.log('token: ', user?.token);
-// image will be save in localstorage and get it
+    // image will be save in localstorage and get it
     if (
       !request.url.endsWith(Auth.WAREHOUSE_LOGIN_USER) &&
       !request.url.endsWith(Auth.WAREHOUSE_REGISTER_USER) &&
       !request.url.includes(Auth.WAREHOUSE_DELETE_USER) &&
-      !request.url.includes(Auth.WAREHOUSE_FORGOT_PASSWORD) && 
+      !request.url.includes(Auth.WAREHOUSE_FORGOT_PASSWORD) &&
       !request.url.includes(Auth.WAREHOUSE_VERIFY_LINK) &&
       !request.url.includes(Auth.WAREHOUSE_RESET_PASSWORD) &&
-      !request.url.endsWith(Auth.WAREHOUSE_UPLOAD_IMAGE)&&
-      !request.url.endsWith(Auth.WAREHOUSE_VERIFICATION_EMAIL)&&
-      !request.url.endsWith(Auth.WAREHOUSE_ACTIVATE_DESATTIVATE_USER)&&
-      !request.url.endsWith(Pages.REGISTERSTEP2)&&
-      !request.url.includes(Pages.REGISTERSTEP3)&&
-      !request.url.includes("../assets/i18n/")
+      !request.url.endsWith(Auth.WAREHOUSE_UPLOAD_IMAGE) &&
+      !request.url.endsWith(Auth.WAREHOUSE_VERIFICATION_EMAIL) &&
+      !request.url.includes(Auth.WAREHOUSE_ACTIVATE_DESATTIVATE_USER) &&
+      !request.url.endsWith(Pages.REGISTER_STEP_2) &&
+      !request.url.includes(Pages.REGISTER_STEP_3) &&
+      !request.url.includes(ExternalApi.WAREHOUSE_WORLD_COUNTRIES) &&
+      !request.url.includes('../assets/i18n/')
     ) {
       if (user?.token) {
         request = request.clone({

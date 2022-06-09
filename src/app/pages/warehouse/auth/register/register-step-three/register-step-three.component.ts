@@ -43,7 +43,7 @@ export class RegisterStepThreeComponent implements OnInit {
   convertedImage: any;
   showbuttonUpload: boolean = false;
   showInputUpload: boolean = true;
-  dateSelected: string = "";
+  dateSelected: string = '';
   modelPaese: any;
   countrySelected: string = '';
   countryDialCode: string = '';
@@ -64,17 +64,17 @@ export class RegisterStepThreeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let data = localStorage.getItem('response');
-    let dataUserId = JSON.parse(data as string).user.userId;
+    // let data = localStorage.getItem('response');
+    // let dataUserId = JSON.parse(data as string).user.userId;
 
-    console.log('responseLocalGett: ',JSON.parse(data as string).user.userId);
-    this.profilService.onActivateUser(dataUserId).subscribe((response:any)=>{
-      console.log('responseOnActivate: ', response),
-      this.successAlertTypeActivate(response?.message);
-      (error: HttpErrorResponse) => {
-        this.errorAlertType(error.error.message);
-      }
-    })
+    // console.log('responseLocalGett: ',JSON.parse(data as string).user.userId);
+    // this.profilService.onActivateUser(dataUserId).subscribe((response:any)=>{
+    //   console.log('responseOnActivate: ', response),
+    //   this.successAlertTypeActivate(response?.message);
+    //   (error: HttpErrorResponse) => {
+    //     this.errorAlertType(error.error.message);
+    //   }
+    // })
     this.initForm();
     this.flagService.getDialCodeAndCountryFlag().subscribe(
       (response: { data: any }) => {
@@ -86,7 +86,6 @@ export class RegisterStepThreeComponent implements OnInit {
       }
     );
   }
-  
 
   keyPress(event: any) {
     const pattern = /[0-9\+\-\ ]/;
@@ -99,8 +98,16 @@ export class RegisterStepThreeComponent implements OnInit {
   initForm() {
     this.validateForm = this.fb.group({
       image: '',
-      dateOfBirth: '',
-      phoneNumber: ['', [ Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(10), Validators.maxLength(10)]],
+      dateOfBirth: ['', [Validators.required]],
+      phoneNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[0-9]*$'),
+          Validators.minLength(10),
+          Validators.maxLength(10),
+        ],
+      ],
       country: ['', [Validators.required]],
     });
   }
@@ -113,15 +120,26 @@ export class RegisterStepThreeComponent implements OnInit {
   }
 
   submitForm() {
-    let data = localStorage.getItem('response');
-    let userNameData = JSON.parse(data as string).user.username;
+    let user = JSON.parse(
+      localStorage.getItem(Utils.WAREHOUSE_JWT_TOKEN) as string
+    );
+    // let data = localStorage.getItem('response');
+    // let userNameData = JSON.parse(data as string).user.username;
+
     let userData = {
       dateOfBirth: this.validateForm.controls['dateOfBirth']?.value,
-      phoneNumber: ('+'+ this.countryDialCode + this.validateForm.controls['phoneNumber']?.value),
+      phoneNumber:
+        '+' +
+        this.countryDialCode +
+        this.validateForm.controls['phoneNumber']?.value,
       country: this.validateForm.controls['country']?.value,
     };
     this.authentificationService
-      .userRegisterStepThree(userData, Utils.WAREHOUSE_STEP_THREE,userNameData)
+      .userRegisterStepThree(
+        userData,
+        Utils.WAREHOUSE_STEP_THREE,
+        user?.user?.username
+      )
       .subscribe(
         (response: any) => {
           this.successAlertType(response?.message);
@@ -138,14 +156,15 @@ export class RegisterStepThreeComponent implements OnInit {
     this.messageAlert = message;
   }
 
-  successAlertTypeActivate(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_SUCCESS;
-    this.messageAlert = message;
-    setTimeout(() => {
-      this.isAuth = false;
-    }, 2000);
-  }
+  // successAlertTypeActivate(message: string): void {
+  //   this.isAuth = true;
+  //   this.alertType = AlertType.ALERT_SUCCESS;
+  //   this.messageAlert = message;
+  //   setTimeout(() => {
+  //     this.isAuth = false;
+  //   }, 2000);
+  // }
+
   successAlertType(message: string): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
@@ -155,7 +174,6 @@ export class RegisterStepThreeComponent implements OnInit {
       this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
     }, 2000);
   }
-  
 
   handleOnLogin() {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
@@ -201,7 +219,7 @@ export class RegisterStepThreeComponent implements OnInit {
   }
 
   handleOnChangeDate(date: any) {
-    console.log("handleOnChangeDate: ", date);
+    console.log('handleOnChangeDate: ', date);
   }
 
   handleOnFlagSelected() {
@@ -213,8 +231,8 @@ export class RegisterStepThreeComponent implements OnInit {
     }
   }
 
-  handleonSelectCountry(selectedCountry: string) {
-    console.log("handleOnChangeCountry: ", selectedCountry);
+  handleOnSelectCountry(selectedCountry: string) {
+    console.log('handleOnChangeCountry: ', selectedCountry);
     this.countrySelected = selectedCountry;
     if (!!this.countryAndFlagData?.length) {
       let country = this.countryAndFlagData?.find(

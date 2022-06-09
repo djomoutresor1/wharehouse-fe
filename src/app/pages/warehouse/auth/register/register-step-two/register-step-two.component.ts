@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NzButtonSize } from 'ng-zorro-antd/button';
 
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
+import { ProfilService } from 'src/app/services/profil.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
@@ -14,11 +15,12 @@ import { ResponseResetModel } from 'src/model/auth/response/response-reset-model
 @Component({
   selector: 'warehouse-register-step-two',
   templateUrl: './register-step-two.component.html',
-  styleUrls: ['./register-step-two.component.scss','../register-step-one/register-step-one.component.scss']
+  styleUrls: [
+    './register-step-two.component.scss',
+    '../register-step-one/register-step-one.component.scss',
+  ],
 })
 export class RegisterStepTwoComponent implements OnInit {
-
-
   currentStep: number = 1;
   size: NzButtonSize = 'large';
   isAuth: boolean = false;
@@ -36,13 +38,12 @@ export class RegisterStepTwoComponent implements OnInit {
     'register.step.registration',
   ];
 
-  idLinkResetPassword: any;
+  idLinkVerifyEmail: any;
   expirationLink: any;
   verifyType: any;
   isExpiredLink: boolean = false;
   user!: ResponseResetModel;
-  isResetPassword: boolean = false;
-
+  isVerifyEmail: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -50,9 +51,10 @@ export class RegisterStepTwoComponent implements OnInit {
     private route: ActivatedRoute,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private authorizationService: AuthorizationService,
+    private profilService: ProfilService
   ) {
-    this.idLinkResetPassword = this.route.snapshot.queryParamMap.get(
-      PathParams.ID_LINK_RESET_VERIFICATION_EMAIL
+    this.idLinkVerifyEmail = this.route.snapshot.queryParamMap.get(
+      PathParams.ID_LINK_VERIFICATION_EMAIL
     );
     this.expirationLink = this.route.snapshot.queryParamMap.get(
       PathParams.EXPIRATION_LINK
@@ -63,34 +65,57 @@ export class RegisterStepTwoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects()
+    this.checkIfIdLinkVerifyEmailAndVerifyTypeAreCorrects();
   }
 
-  onGoToStepThree(){
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP3}`]);
+  handleOnGoToStepThree() {
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER_STEP_3}`]);
   }
 
-  onRetrieveUser(){
+  onRetrieveUser() {
     return this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
   }
 
-  
-  checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects() {
+  checkIfIdLinkVerifyEmailAndVerifyTypeAreCorrects() {
     this.authorizationService
-      .userVerifyLink(this.idLinkResetPassword, this.verifyType)
+      .userVerifyLink(this.idLinkVerifyEmail, this.verifyType)
       .subscribe(
         (response: ResponseResetModel) => {
+          this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
           this.user = response;
-          localStorage.setItem('response', JSON.stringify(response));
           this.checkIfExpirationLinkIsCorrect();
+          if (!this.isExpiredLink && !this.isVerifyEmail) {
+            this.activateStatusUser();
+          }
         },
         (error: HttpErrorResponse) => {
           if (error.status === 404) {
-            this.isResetPassword = true;
+            this.isVerifyEmail = true;
             this.errorAlertType(error?.error.message);
           }
         }
       );
+  }
+
+  activateStatusUser() {
+    this.profilService
+      .onActivateUser(this.user?.user?.userId as string)
+      .subscribe((response: any) => {
+        this.successAlertType(response?.message);
+        (error: HttpErrorResponse) => {
+          console.log('Error: ', error);
+          this.errorAlertType(error.error.message);
+        };
+      });
+  }
+
+  successAlertType(message: string): void {
+    this.isAuth = true;
+    this.alertType = AlertType.ALERT_SUCCESS;
+    this.messageAlert = message;
+    setTimeout(() => {
+      this.handleOnGoToStepThree();
+    }, 2000);
   }
 
   checkIfExpirationLinkIsCorrect() {
@@ -138,5 +163,5 @@ export class RegisterStepTwoComponent implements OnInit {
     return correctExpiredLinkUrl === correctExpiredLinkUser ? true : false;
   }
 
+  handleOnSendLink() {}
 }
-

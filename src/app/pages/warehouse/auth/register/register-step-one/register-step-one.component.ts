@@ -94,7 +94,6 @@ export class RegisterStepOneComponent implements OnInit {
   }
 
   submitForm() {
-    debugger
     let userData = {
       fullname: this.validateForm.controls['fullName']?.value,
       username: this.validateForm.controls['username']?.value.toLowerCase(),
