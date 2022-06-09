@@ -38,7 +38,6 @@ export class CommonInterceptor implements HttpInterceptor {
     if (
       !request.url.endsWith(Auth.WAREHOUSE_LOGIN_USER) &&
       !request.url.endsWith(Auth.WAREHOUSE_REGISTER_USER) &&
-      !request.url.includes(Auth.WAREHOUSE_DELETE_USER) &&
       !request.url.includes(Auth.WAREHOUSE_FORGOT_PASSWORD) &&
       !request.url.includes(Auth.WAREHOUSE_VERIFY_LINK) &&
       !request.url.includes(Auth.WAREHOUSE_RESET_PASSWORD) &&
