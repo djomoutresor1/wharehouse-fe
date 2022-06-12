@@ -4,16 +4,18 @@
     "home": "Home page",
     "cta": {
       "logout": "Logout",
-      "back": "Back"
+      "back": "Back",
+      "yes": "Yes",
+      "no": "Not"
     },
     "modal": {
       "logout": {
         "title": "Confirmation Logout",
         "subtitle": "Are you sure you want to logout ?"
       },
-      "cancel": {
-        "title": "Confirmation Cancel",
-        "subtitle": "Are you sure you want to cancel this profil ?"
+      "deleteUser": {
+        "title": "Confirmation Cancellation",
+        "subtitle": "Are you sure you want to delete this user ?"
       }
     },
     "dataTable": {

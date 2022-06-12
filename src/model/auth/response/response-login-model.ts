@@ -7,8 +7,8 @@ export interface ResponseLoginModel {
   username: string;
   email: string;
   roles: string[];
-  gender:string;
-  dateOfBirth:Date;
-  phoneNumber:number;
-  country:string
+  gender: string;
+  dateOfBirth: Date;
+  phoneNumber: number;
+  country: string;
 }

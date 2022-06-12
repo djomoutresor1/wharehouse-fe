@@ -8,6 +8,12 @@
   </nz-breadcrumb-item>
 </nz-breadcrumb>
 <div class="warehouse-users-wrapper container-fluid">
+  <div class="row" *ngIf="isAuth">
+    <div class="col">
+        <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert">
+        </warehouse-notification>
+    </div>
+   </div> 
   <div class="row">
     <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="allUsers"
       (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">

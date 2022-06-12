@@ -53,7 +53,6 @@ export class CommonInterceptor implements HttpInterceptor {
         request = request.clone({
           setHeaders: {
             Authorization: `Bearer ${user?.token}`,
-            'Content-Type': Auth.WAREHOUSE_APPLICATION_JSON,
             REMOTE_USER: user?.userId, // Pass the userId or matricule generated in register fase for earch user in BE, TODO in BE
             refreshToken: user?.refreshToken,
             ROLES: user?.roles?.join(','), // Array of roles, want like this -> ROLE_USER,ROLE_ADMIN,ROLE_MODERATOR
