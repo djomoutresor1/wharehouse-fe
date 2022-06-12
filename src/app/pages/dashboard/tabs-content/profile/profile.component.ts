@@ -1,6 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ProfilService } from 'src/app/services/profil.service';
+import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
@@ -14,31 +18,53 @@ import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 export class ProfileComponent implements OnInit {
   userLocalStorage: any;
   breadcrumbItems!: BreadcrumbItemsModel;
+  isAuth: boolean = false;
+  alertType: string = '';
+  messageAlert: string = '';
+  profileURL: any;
 
   constructor(
     private router: Router,
     private translate: TranslateService,
-    private warehouseLocalStorage: WarehouseLocalStorage
+    private warehouseLocalStorage: WarehouseLocalStorage,
+    private profilService: ProfilService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
     this.initComponent();
     this.userLocalStorage =
       this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
+    this.getInfosUser();
   }
 
   initComponent() {
     let currentLang = null;
     currentLang = this.translate.currentLang;
-    if(currentLang === undefined) {
-      currentLang = this.warehouseLocalStorage.WarehouseGetLanguageLocalStorage()
+    if (currentLang === undefined) {
+      currentLang =
+        this.warehouseLocalStorage.WarehouseGetLanguageLocalStorage();
     }
     this.translate.use(currentLang as string);
     this.breadcrumbItems = {
       parent: {
-        title: this.translate.instant("profile.title")
+        title: this.translate.instant('profile.title'),
+      },
+    };
+  }
+
+  getInfosUser() {
+    this.profilService.getImageUser(this.userLocalStorage?.userId).subscribe(
+      (response) => {
+        console.log('imageService: ', response);
+        let objectURL = 'data:image/jpeg;base64,' + response?.object?.data;
+        this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      },
+      (error: HttpErrorResponse) => {
+        console.log('Error Occured duringng downloading: ', error);
+        this.errorAlertType(error?.error.message);
       }
-    }
+    );
   }
 
   getRoleName(role: string) {
@@ -92,14 +118,6 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  // rolesUser(data: any) {
-  //   return data
-  //     .map((currElement: any) => {
-  //       return this.nameUser(currElement);
-  //     })
-  //     .join(' & ');
-  // }
-
   handleOnNavigate(url: String) {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
   }
@@ -112,5 +130,11 @@ export class ProfileComponent implements OnInit {
     this.router.navigate([
       `${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.CHANGE_PASSWORD}`,
     ]);
+  }
+
+  errorAlertType(message: string): void {
+    this.isAuth = true;
+    this.alertType = AlertType.ALERT_ERROR;
+    this.messageAlert = message;
   }
 }

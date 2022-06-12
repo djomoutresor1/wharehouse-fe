@@ -2,8 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { NzButtonSize } from 'ng-zorro-antd/button';
-
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { ProfilService } from 'src/app/services/profil.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
@@ -46,12 +46,12 @@ export class RegisterStepTwoComponent implements OnInit {
   isVerifyEmail: boolean = false;
 
   constructor(
-    private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private authorizationService: AuthorizationService,
-    private profilService: ProfilService
+    private profilService: ProfilService,
+    private translate: TranslateService
   ) {
     this.idLinkVerifyEmail = this.route.snapshot.queryParamMap.get(
       PathParams.ID_LINK_VERIFICATION_EMAIL
@@ -65,7 +65,18 @@ export class RegisterStepTwoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initComponent();
     this.checkIfIdLinkVerifyEmailAndVerifyTypeAreCorrects();
+  }
+
+  initComponent() {
+    let currentLang = null;
+    currentLang = this.translate.currentLang;
+    if (currentLang === undefined) {
+      currentLang =
+        this.warehouseLocalStorage.WarehouseGetLanguageLocalStorage();
+    }
+    this.translate.use(currentLang as string);
   }
 
   handleOnGoToStepThree() {
@@ -129,15 +140,11 @@ export class RegisterStepTwoComponent implements OnInit {
         this.isExpiredLink = false;
       } else {
         this.isExpiredLink = true;
-        this.errorAlertType(
-          'The link to reset your password is expired. Try resend the new link to complete the operation.'
-        );
+        this.errorAlertType(this.translate.instant('validations.link.expiration'));
       }
     } else {
       this.isExpiredLink = true;
-      this.errorAlertType(
-        'The expired date that you are providing to reset your password is not correct. Try resend the new link to complete the operation.'
-      );
+      this.errorAlertType(this.translate.instant('validations.link.date'));
     }
   }
 

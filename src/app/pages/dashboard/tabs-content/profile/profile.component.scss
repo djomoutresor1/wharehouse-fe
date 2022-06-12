@@ -10,6 +10,9 @@
     height: 150px;
     float: right;
     top: -70px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     border: 5px solid var(--warehouse-white);
   }
