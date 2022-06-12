@@ -10,6 +10,10 @@
       "logout": {
         "title": "Confirmation Logout",
         "subtitle": "Are you sure you want to logout ?"
+      },
+      "cancel": {
+        "title": "Confirmation Cancel",
+        "subtitle": "Are you sure you want to cancel this profil ?"
       }
     },
     "dataTable": {

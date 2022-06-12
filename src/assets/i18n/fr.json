@@ -10,7 +10,11 @@
       "logout": {
         "title": "Confirmation Déconnexion",
         "subtitle": "Êtes-vous sûr de vouloir vous déconnecter ?"
-      }
+      },
+      "cancel": {
+      "title": "Confirmation de Supression",
+      "subtitle": "Êtes-vous sûr de vouloir supprimer ce profil ?"
+    }
     },
     "dataTable": {
       "options": {
