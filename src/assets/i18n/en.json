@@ -6,16 +6,26 @@
       "logout": "Logout",
       "back": "Back",
       "yes": "Yes",
-      "no": "Not"
+      "no": "Not",
+      "verification": "Check email"
     },
     "modal": {
       "logout": {
         "title": "Confirmation Logout",
         "subtitle": "Are you sure you want to logout ?"
       },
-      "deleteUser": {
-        "title": "Confirmation Cancellation",
-        "subtitle": "Are you sure you want to delete this user ?"
+        "check": {
+          "title": "Verification Email",
+          "subtitle": "your account hasn't been verified,please go to your email and verify it"
+        },
+        "deleteUser": {
+          "title": "Confirmation Cancellation",
+          "subtitle": "Are you sure you want to delete this user ?",
+          "cancel": {
+            "title": "Confirmation Cancel",
+            "subtitle": "Are you sure you want to cancel this profil ?"
+          }
+        }
       }
     },
     "dataTable": {
@@ -25,8 +35,7 @@
         "show": "Show",
         "delete": "Delete"
       }
-    }
-  },
+    },
   "warehouse": {
     "name": "Warehouse System"
   },

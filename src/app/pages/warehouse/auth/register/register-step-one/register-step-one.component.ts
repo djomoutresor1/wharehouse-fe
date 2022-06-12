@@ -116,6 +116,13 @@ export class RegisterStepOneComponent implements OnInit {
           (response: ResponseRegisterModel) => {
             this.isMailSent = true;
             this.currentStep = 1;
+           localStorage.setItem('responseRegistrationStepOne',  JSON.stringify({
+              email: response.object.email,
+              active: response.object.active,
+            }));
+
+            console.log("dataresponse: ",   localStorage.getItem('responseRegistrationStepOne'))
+
           },
           (error: HttpErrorResponse) => {
             this.errorAlertType(error.error.message);

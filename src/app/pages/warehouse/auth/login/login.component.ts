@@ -2,8 +2,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AnyFn } from '@ngrx/store/src/selector';
+import { TranslateService } from '@ngx-translate/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 import { AuthentificationService } from 'src/app/services/auth/authentification.service';
+import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
@@ -39,8 +43,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private translate: TranslateService,
+    private nzModalService: NzModalService,
     private authentificationService: AuthentificationService,
-    private warehouseLocalStorage: WarehouseLocalStorage
+    private warehouseLocalStorage: WarehouseLocalStorage,
+    private authorizationService: AuthorizationService
   ) {
     this.checkIfUserIsAlreadyLogged();
     this.checkIfUserIsRemember();
@@ -89,19 +96,37 @@ export class LoginComponent implements OnInit {
     }
   }
 
+
   submitForm() {
-    let data = localStorage.getItem('response');
-    let dataUserId = JSON.parse(data as string).user.active;
+    // manca il control dell'email guisto
+    let data = JSON.parse(localStorage.getItem('responseRegistrationStepOne') as string);
+    let dataUserActive = data.active.toString();
+    let dataEmail = data.email;
 
-    if(dataUserId === 'false'){
+    if(dataUserActive === "false"){
       // you have to verify your email implementation
-      this.isAuth = true;
-      this.alertType = AlertType.ALERT_WARNING;
-      this.messageAlert = "your account hasn't been verified,please go to your email and verify it";
-
-
+        this.nzModalService.confirm({
+          nzTitle: '<h4>' + this.translate.instant('dashboard.modal.check.title') + '</h4>',
+          nzContent: '<p>' + this.translate.instant('dashboard.modal.check.subtitle') + '</p>',
+          nzCancelText: this.translate.instant('dashboard.cta.back'),
+          nzOkText: this.translate.instant('dashboard.cta.verification'),
+          nzOnOk: () => {
+            this.authorizationService.userVerificationEmail(dataEmail).subscribe(
+              (response:any)=>{
+                this.successNotificationVerification();
+                setTimeout(() => {
+                  this.isAuth = false;
+                }, 3000);
+                this.validateForm.reset()
+              },
+              (error: HttpErrorResponse) => {
+                this.errorAlertType(error.error);
+              })
+            }
+     })
+      
     }else{
-  
+
     let userData = {
       username: this.validateForm.controls['username']?.value.toLowerCase(),
       password: this.validateForm.controls['password']?.value,
@@ -118,7 +143,7 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-  }
+}
   getRegisterOrNot() {
     let user = this.validateForm.controls['username']?.value;
     let passId = this.validateForm.controls['password']?.value;
@@ -151,6 +176,13 @@ export class LoginComponent implements OnInit {
     this.messageAlert = `Welcome to warehouse ${userInfo?.username}`;
     this.descriptionAlert = userInfo?.message;
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+  }
+
+  successNotificationVerification(){
+      this.isAuth = true;
+      this.alertType = AlertType.ALERT_INFO;
+      this.messageAlert = 'send verification has been seen in your email, please check your email';
+  //  this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
   }
 
   getCaptcha() {}

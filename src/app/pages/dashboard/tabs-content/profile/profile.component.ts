@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
         this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
       },
       (error: HttpErrorResponse) => {
-        console.log('Error Occured duringng downloading: ', error);
+        console.log('Error Occured during downloading: ', error);
         this.errorAlertType(error?.error.message);
       }
     );

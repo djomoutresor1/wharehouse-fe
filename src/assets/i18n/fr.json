@@ -6,7 +6,8 @@
       "logout": "Se déconnecter",
       "back": "Retour",
       "yes": "Oui",
-      "no": "Non"
+      "no": "Non",
+      "verification": "Verifier l'email"
     },
     "modal": {
       "logout": {
@@ -15,7 +16,15 @@
       },
       "deleteUser": {
         "title": "Confirmation Annulation",
-        "subtitle": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?"
+        "subtitle": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+        "cancel": {
+          "title": "Confirmation de Supression",
+          "subtitle": "Êtes-vous sûr de vouloir supprimer ce profil ?"
+        }
+      },
+      "check": {
+        "title": "Verification Email",
+        "subtitle": "votre compte n'a pas été vérifié, accédez à votre e-mail et vérifiez-le"
       }
     },
     "dataTable": {
