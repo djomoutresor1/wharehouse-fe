@@ -4,17 +4,19 @@
     "home": "Pagina iniziale",
     "cta": {
       "logout": "Disconnettersi",
-      "back": "Indietro"
+      "back": "Indietro",
+      "yes": "Sì",
+      "no": "No"
     },
     "modal": {
       "logout": {
         "title": "Conferma Logout",
         "subtitle": "Sei sicuro di voler uscire ?"
       },
-      "cancel": {
-      "title": "Conferma Cancellazione",
-      "subtitle": "Sei sicuro di voler cancellare questo profilo ?"
-    }
+      "deleteUser": {
+        "title": "Conferma Cancelazzione",
+        "subtitle": "Sei sicuro di voler eliminare questo utente ?"
+      }
     },
     "dataTable": {
       "options" : {

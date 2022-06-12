@@ -200,7 +200,7 @@ export class RegisterStepThreeComponent implements OnInit {
     uploadData.append('file', this.selectedFile);
 
     this.imageService.uploadImageProfile(uploadData, userId).subscribe(
-      (response) => {
+      (response: any) => {
         this.successNotificationType(response?.message);
       },
       (error: HttpErrorResponse) => {

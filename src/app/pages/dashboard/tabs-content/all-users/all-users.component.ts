@@ -1,10 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ProfilService } from 'src/app/services/profil.service';
+import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 
 interface ItemData {
@@ -48,17 +51,33 @@ export class AllUsersComponent implements OnInit {
   listOfCurrentPageData: readonly ItemData[] = [];
   setOfCheckedId = new Set<number>();
   allUsers: any;
-  user:any;
+  user!: ResponseLoginModel;
+  messageAlert: string = "";
+  alertType: string = "";
+  isAuth: boolean = false;
 
-  constructor(private router: Router, 
+  constructor(
+    private router: Router,
     private profilService: ProfilService,
+    private warehouseLocalStorage: WarehouseLocalStorage,
     private nzModalService: NzModalService,
-    private translate: TranslateService) {}
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
-    this.profilService.retrieveUser().subscribe((data: any) => {
-      this.allUsers = data;
-      console.log('allUser: ', data);
+    this.user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
+    this.getAllWarehousUsers();
+  }
+
+  getAllWarehousUsers() {
+    this.profilService
+    .getAllUsers()
+    .subscribe((users: ResponseLoginModel[]) => {
+      // Take all users and remove the current user connected
+      this.allUsers = users?.filter(
+        (user) => user.userId !== this.user?.userId
+      );
+      console.log('allUsers: ', users);
     });
   }
 
@@ -178,26 +197,42 @@ export class AllUsersComponent implements OnInit {
   }
 
   handleOnShow(user: ResponseLoginModel) {
-    console.log("user - handleOnShow: ", user);
+    console.log('user - handleOnShow: ', user);
   }
 
   handleOnEdit(user: ResponseLoginModel) {
-    console.log("user - handleOnEdit: ", user);
+    console.log('user - handleOnEdit: ', user);
   }
 
   handleOnDelete(user: ResponseLoginModel) {
-    console.log("user - handleOnDelete: ", user);
+    console.log('user - handleOnDelete: ', user);
     this.nzModalService.confirm({
-      nzTitle: '<h4>' + this.translate.instant('dashboard.modal.cancel.title') + '</h4>',
-      nzContent: '<p>' + this.translate.instant('dashboard.modal.cancel.subtitle') + '</p>',
-      nzCancelText: this.translate.instant('dashboard.cta.back'),
-      nzOkText: this.translate.instant('dashboard.cta.logout'),
+      nzTitle: '<h4>' + this.translate.instant('dashboard.modal.deleteUser.title') + '</h4>',
+      nzContent: '<p>' + this.translate.instant('dashboard.modal.deleteUser.subtitle') + '</p>',
+      nzCancelText: this.translate.instant('dashboard.cta.no'),
+      nzOkText: this.translate.instant('dashboard.cta.yes'),
       nzOnOk: () => {
-        this.profilService.onDeleteUser(user?.userId).subscribe((response:any)=>{
-          console.log("onResponseDelete: ", response)
-})
+        this.profilService.onDeleteUser(user?.userId).subscribe((response: any) => {
+          console.log('onResponseDelete: ', response);
+          this.successAlertType(response?.message);
+          this.getAllWarehousUsers();
+        }, (error: HttpErrorResponse) => {
+          console.log("error: ", error);
+          this.errorAlertType(error?.error.message || error?.message);
+        });
       },
     });
+  }
 
+  errorAlertType(message: string): void {
+    this.isAuth = true;
+    this.alertType = AlertType.ALERT_ERROR;
+    this.messageAlert = message;
+  }
+
+  successAlertType(message: string): void {
+    this.isAuth = true;
+    this.alertType = AlertType.ALERT_SUCCESS;
+    this.messageAlert = message;
   }
 }

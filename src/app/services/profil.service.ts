@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Persons } from 'src/interfaces/profils';
+import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { Auth } from '../shared/enums/auth-enums';
+import { WarehouseLocalStorage } from '../utils/warehouse-local-storage';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +13,13 @@ import { Auth } from '../shared/enums/auth-enums';
 export class ProfilService {
   private apiServerUrl = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private warehouseLocalStorage: WarehouseLocalStorage
+  ) {}
 
-  public retrieveUser(): Observable<Persons> {
-    return this.http.get<Persons>(`${this.apiServerUrl}/users`);
+  public getAllUsers(): Observable<ResponseLoginModel[]> {
+    return this.http.get<ResponseLoginModel[]>(`${this.apiServerUrl}/users`);
   }
 
   public onActivateUser(userId: string): Observable<Persons> {
@@ -24,11 +29,15 @@ export class ProfilService {
     );
   }
 
-  public onDeleteUser(userId: string): Observable<Persons> {
-    return this.http.delete<any>(`${this.apiServerUrl}${Auth.WAREHOUSE_DELETE_USER}/${userId}`);
+  public onDeleteUser(userId: string): Observable<any> {
+    return this.http.delete<any>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_DELETE_USER}/${userId}`
+    );
   }
 
   public getImageUser(userImage: string): Observable<any> {
-    return this.http.get<any>(`${this.apiServerUrl}${Auth.WAREHOUSE_DOWNLOAD_IMAGE}/${userImage}`);
+    return this.http.get<any>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_DOWNLOAD_IMAGE}/${userImage}`
+    );
   }
 }
