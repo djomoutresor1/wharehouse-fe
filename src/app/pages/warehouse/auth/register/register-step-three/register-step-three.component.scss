@@ -1,8 +1,18 @@
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none; 
+.warehouse-auth-wrapper {
+  .register-form {
+    .register-step-three-default-avatar {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 nz-date-picker,
@@ -18,12 +28,17 @@ nz-range-picker {
   position: relative;
 }
 
-.multilanguage{
+.multilanguage {
   width: 52px;
   height: 31px;
 }
 
-.ant-input-prefix, .ant-input-suffix {
-  display: none !important;}
+.ant-input-prefix,
+.ant-input-suffix {
+  display: none !important;
+}
 
-
+.anticon-calendar {
+  top: 0 !important;
+  position: relative;
+}

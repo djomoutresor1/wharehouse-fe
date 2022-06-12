@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { ProfilService } from 'src/app/services/profil.service';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
@@ -48,7 +50,10 @@ export class AllUsersComponent implements OnInit {
   allUsers: any;
   user:any;
 
-  constructor(private router: Router, private profilService: ProfilService) {}
+  constructor(private router: Router, 
+    private profilService: ProfilService,
+    private nzModalService: NzModalService,
+    private translate: TranslateService) {}
 
   ngOnInit(): void {
     this.profilService.retrieveUser().subscribe((data: any) => {
@@ -182,8 +187,17 @@ export class AllUsersComponent implements OnInit {
 
   handleOnDelete(user: ResponseLoginModel) {
     console.log("user - handleOnDelete: ", user);
-    this.profilService.onDeleteUser(this.user).subscribe((response:any)=>{
-              console.log("onResponseDelete: ", response)
-    })
+    this.nzModalService.confirm({
+      nzTitle: '<h4>' + this.translate.instant('dashboard.modal.cancel.title') + '</h4>',
+      nzContent: '<p>' + this.translate.instant('dashboard.modal.cancel.subtitle') + '</p>',
+      nzCancelText: this.translate.instant('dashboard.cta.back'),
+      nzOkText: this.translate.instant('dashboard.cta.logout'),
+      nzOnOk: () => {
+        this.profilService.onDeleteUser(user?.userId).subscribe((response:any)=>{
+          console.log("onResponseDelete: ", response)
+})
+      },
+    });
+
   }
 }

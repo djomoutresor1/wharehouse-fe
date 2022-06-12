@@ -10,7 +10,11 @@
       "logout": {
         "title": "Confirmation Déconnexion",
         "subtitle": "Êtes-vous sûr de vouloir vous déconnecter ?"
-      }
+      },
+      "cancel": {
+      "title": "Confirmation de Supression",
+      "subtitle": "Êtes-vous sûr de vouloir supprimer ce profil ?"
+    }
     },
     "dataTable": {
       "options": {
@@ -33,7 +37,15 @@
     "confirm": {
       "password": "Le mot de passe et le mot de passe de confirmation ne correspondent pas. Réessayer."
     },
-    "username": "Le nom d'utilisateur doit comporter plus de 7 caractères. Réessayer."
+    "username": "Le nom d'utilisateur doit comporter plus de 7 caractères. Réessayer.",
+    "upload": {
+      "extensions": "Les extensions de fichier autorisées sont : .jpg, .jpeg, .png, .gif, .tif, .tiff, .bmp, .webp. Essayez un autre fichier.",
+      "size": "La taille maximale du fichier de téléchargement sera de 5 Mo. Essayez un autre fichier."
+    },
+    "link": {
+      "expiration": "Le lien pour réinitialiser votre mot de passe a expiré. Essayez de renvoyer le nouveau lien pour terminer l'opération.",
+      "date": "La date d'expiration que vous fournissez pour réinitialiser votre mot de passe n'est pas correcte. Essayez de renvoyer le nouveau lien pour terminer l'opération."
+    }
   },
   "login": {
     "title": "Page de Login",
@@ -77,16 +89,12 @@
     "title": "Page d'Enregistrement",
     "step": {
       "information": "Informations Utilisateur",
-      "verification": {
-        "do": "Verification Email",
-        "confirmation": "CONFIRMATION VERIFICATION EMAIL",
-        "hello": "Salut",
-        "message": "votre email à étè correctement verifié, s'il vous plait clicquez et completer la registration"
-      },
+      "verification": "Verification Email",
       "registration": "Inscription Utilisateur"
     },
     "cta": {
-      "stepOne": "Vérifier mon Email"
+      "stepOne": "Vérifier mon email",
+      "stepThree": "Compléter enregistrement"
     },
     "fullname": {
       "placeholder": "Nom et Prénom",
@@ -115,12 +123,12 @@
       "placeholder": "Selectioner votre pays"
     },
     "date": {
-      "required": "la date de naissance est obbligatoire",
-      "placeholder": "Selectione la date de naissance"
+      "required": "La date de naissance est obbligatoire",
+      "placeholder": "Selectioner la date de naissance"
     },
     "phone": {
       "required": "Votre numero di telephone est obbligatoire",
-      "placeholder": "numero de telephone"
+      "placeholder": "Numero de telephone"
     },
     "confirmPassword": {
       "required": "Veuillez confirmer votre mot de passe",
@@ -163,28 +171,28 @@
   "verifyEmail": {
     "title": "Verification Email",
     "cta": {
-      "send": "Envoyer le lien de réinitialisation",
+      "send": "Envoyer l'email de vérification",
       "login": "Retour connexion"
     },
     "divider": {
-      "title": "Rappelez-vous de vos identifiants ?"
+      "title": "Rappelez-vous de vos identifiants ?"
     },
     "success": {
       "title": "Nous venons de vous envoyer un email à: ",
       "content": {
-        "one": "Celui-ci contient un lien permettant de verifier votre email",
+        "one": "Celui-ci contient un lien permettant de vérifier votre email",
         "two": "Vous n'avez pas récu de mail dans votre courrier électronique ?",
         "three": "Vérifiez bien l'orthographe de l'adresse saisie, ou que le mail n'est pas dans vos courriers indésirables."
-      },
-      "changePassword": {
-        "title": "Changer mot de passe",
-        "oldPassword": {
-          "required": "Votre mot de passe actuel est obbligatoire",
-          "placeholder": "Ancien mot de passe"
-        },
-        "cta": "Changer mon mot de passe"
       }
     }
+  },
+  "changePassword": {
+    "title": "Changer mot de passe",
+    "oldPassword": {
+      "required": "Votre mot de passe actuel est obbligatoire",
+      "placeholder": "Ancien mot de passe"
+    },
+    "cta": "Changer mon mot de passe"
   },
   "profile": {
     "title": "Mon Profil",

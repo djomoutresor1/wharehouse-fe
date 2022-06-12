@@ -1,65 +1,108 @@
 <warehouse-multilanguage></warehouse-multilanguage>
-    <div class="warehouse-auth-wrapper container">
-        <div class="row">
-            <div class="col text-center">
-                <h2 nz-typography>{{"register.title" | translate}}</h2>
-            </div>
+<div class="warehouse-auth-wrapper container">
+    <div class="row">
+        <div class="col text-center">
+            <h2 nz-typography>{{"register.title" | translate}}</h2>
         </div>
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <nz-steps [nzCurrent]="currentStep" nzSize="small">
-                    <nz-step *ngFor="let step of steps" [nzTitle]="step"></nz-step>
-                </nz-steps>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <nz-steps [nzCurrent]="currentStep" nzSize="small">
+                <nz-step *ngFor="let step of steps" [nzTitle]="step"></nz-step>
+            </nz-steps>
         </div>
-        <div class="row">
-            <div class="col-md-4 offset-md-4">
-                <div class="row">
-                    <div class="col" *ngIf="isAuth">
-                        <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
-                        </warehouse-alert>
-                    </div>
+    </div>
+    <div class="row" *ngIf="!isAuth">
+        <div class="col-md-4 offset-md-4">
+            <div class="row">
+                <div class="col" *ngIf="isNoAuth">
+                    <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
+                    </warehouse-alert>
                 </div>
-                <form nz-form [formGroup]="validateForm" class="register-form" (ngSubmit)="submitForm()">
-                    <nz-form-item>
-                        <nz-form-control>
-                            <nz-input-group>
-                                <input *ngIf="showInputUpload" type="file" (change)="onFileChanged($event)" nz-input formControlName="image" placeholder="upload your foto profile"/>
-                                <img [src]="imgURL" height="100" width="100" *ngIf="imgURL">
-                                <input *ngIf="showbuttonUpload "type="button" (click)="onUploadFotoProfile()" value="upload">
-                            </nz-input-group>
-                        </nz-form-control>
-                    </nz-form-item>
-                    <nz-form-item>
-                        <nz-form-control>         
-                            <nz-date-picker nzAllowClear="true"  [nzFormat]="dateFormat" [(ngModel)]="dateSelected" formControlName="dateOfBirth" (ngModelChange)="handleOnChangeDate($event)"></nz-date-picker>
-                        </nz-form-control>
-                    </nz-form-item>
-                    <nz-form-item>
-                        <nz-form-control [nzErrorTip]="'register.country.required'| translate">
-                            <nz-select nzShowSearch [nzPlaceHolder]="'register.country.placeholder'| translate" class="multilanguage-wrapper" formControlName="country"
-                            (ngModelChange)="handleonSelectCountry($event)" [(ngModel)]="countrySelected">
-                            <nz-option nzCustomContent *ngFor="let country of countryAndFlagData" nzValue="{{country?.name}}" nzLabel="{{country?.name}}">
+            </div>
+            <form nz-form [formGroup]="validateForm" class="register-form">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-input-group class="text-center">
+                            <nz-avatar *ngIf="!imgURL" class="register-step-three-default-avatar mb-3" [nzSize]="100"
+                                nzIcon="user">
+                            </nz-avatar>
+                            <nz-avatar *ngIf="imgURL" class="register-step-three-default-avatar mb-3" [nzSize]="100"
+                                [nzSrc]="imgURL">
+                            </nz-avatar>
+                            <div class="register-step-three-upload-image">
+                                <label class="ant-btn ant-btn-primary">
+                                    <i nz-icon nzType="file-image" nzTheme="fill"></i>
+                                    <span>{{showbuttonUpload ? "Change" : "Upload"}}</span>
+                                    <input type="file" hidden accept="image/*" (change)="handleOnFileChanged($event)"
+                                        nz-input formControlName="image" placeholder="upload your foto profile" />
+                                </label>
+                                <button *ngIf="showbuttonUpload" class="m-3" nz-button nzType="primary" nzDanger
+                                    (click)="handleOnRemoneImage()">
+                                    <i nz-icon nzType="delete" nzTheme="fill"></i>
+                                    Remove
+                                </button>
+                            </div>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-date-picker nzAllowClear="true" [nzFormat]="dateFormat" [(ngModel)]="dateSelected"
+                            formControlName="dateOfBirth" (click)="handleOnChangeInput()" (ngModelChange)="handleOnChangeDate($event)"></nz-date-picker>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control [nzErrorTip]="'register.country.required'| translate">
+                        <nz-select nzShowSearch [nzPlaceHolder]="'register.country.placeholder'| translate"
+                            class="multilanguage-wrapper" formControlName="country" (click)="handleOnChangeInput()"
+                            (ngModelChange)="handleOnSelectCountry($event)" [(ngModel)]="countrySelected">
+                            <nz-option nzCustomContent *ngFor="let country of countryAndFlagData"
+                                nzValue="{{country?.name}}" nzLabel="{{country?.name}}">
                                 <img class="multilanguage-img" [alt]="country?.name" [src]="country?.flag" />
                                 {{country?.name}}
                             </nz-option>
                         </nz-select>
-                        </nz-form-control>
-                    </nz-form-item>
-                    <nz-form-item *ngIf="!!countrySelected?.length">
-                        <nz-form-control [nzErrorTip]="'register.phone.required'| translate">
-                            <nz-input-group>
-                                <div class="row">
-                                    <div class="col-md-5"><img class="multilanguage" [src]="handleOnFlagSelected()"/>+ {{countryDialCode}}</div>
-                                    <div class="col-md-7"><input type="tel" minlength="10" maxlength="10" nz-input formControlName="phoneNumber" [placeholder]="'register.phone.placeholder'| translate"
-                                         (click)="handleOnChangeInput()"  (keypress)="keyPress($event)"/></div>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item *ngIf="!!countrySelected?.length">
+                    <nz-form-control [nzErrorTip]="'register.phone.required'| translate">
+                        <nz-input-group>
+                            <div class="row">
+                                <div class="col-md-5"><img class="multilanguage" [src]="handleOnFlagSelected()" />
+                                    {{getCountryDialCode()}}</div>
+                                <div class="col-md-7">
+                                    <input type="tel" minlength="10" maxlength="10" nz-input
+                                        formControlName="phoneNumber"
+                                        [placeholder]="'register.phone.placeholder'| translate"
+                                        (click)="handleOnChangeInput()" (keypress)="keyPress($event)" />
                                 </div>
-                            </nz-input-group>
-                        </nz-form-control>
-                    </nz-form-item>
-                    <button nz-button [disabled]="!validateForm.valid" nzBlock
-                    class="register-form-button register-form-margin" [nzType]="'primary'">{{"button.save" | translate}}</button>
-                </form>
-            </div>
+                            </div>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <button nz-button [disabled]="!validateForm.valid" nzBlock (click)="submitForm()"
+                    class="register-form-button register-form-margin" [nzType]="'primary'">
+                    <i nz-icon nzType="check" nzTheme="outline"></i>
+                    {{'register.cta.stepThree' | translate}}</button>
+            </form>
         </div>
     </div>
+    <div class="row" *ngIf="isAuth && !!messageNotification?.length">
+        <div class="col">
+            <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageNotification">
+            </warehouse-notification>
+        </div>
+    </div>
+    <div class="row" *ngIf="isAuth">
+        <div class="col-md-4 offset-md-4">
+            <nz-result nzStatus="success" [nzTitle]="messageAlert"
+                nzSubTitle="Welocome to wareHouse System. Now, it is possible to enjoy your journey in our system.">
+                <div nz-result-extra>
+                    <button nz-button nzType="primary" (click)="handleOnLogin()" nzBlock>
+                        <i nz-icon nzType="left" nzTheme="outline"></i>{{'login.cta.login' | translate}}</button>
+                </div>
+            </nz-result>
+        </div>
+    </div>
+</div>
