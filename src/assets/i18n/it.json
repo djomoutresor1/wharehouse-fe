@@ -37,7 +37,15 @@
     "confirm": {
       "password": "Password e conferma password non corrispondono. Riprova."
     },
-    "username": "Il nome utente deve contenere più di 7 caratteri. Riprova."
+    "username": "Il nome utente deve contenere più di 7 caratteri. Riprova.",
+    "upload": {
+      "extensions": "Le estensioni di file consentite sono: .jpg, .jpeg, .png, .gif, .tif, .tiff, .bmp, .webp. Prova con un altro file.",
+      "size": "La dimensione massima del file di caricamento sarà di 5 Mb. Prova con un altro file."
+    },
+    "link": {
+      "expiration": "Il link per reimpostare la password è scaduto. Prova a inviare nuovamente il nuovo link per completare l'operazione.",
+      "date": "La data scaduta che stai fornendo per reimpostare la password non è corretta. Prova a inviare nuovamente il nuovo link per completare l'operazione."
+    }
   },
   "login": {
     "title": "Pagina di Login",
@@ -81,16 +89,12 @@
     "title": "Pagina di Registrazione",
     "step": {
       "information": "Informazioni Utente",
-      "verification":{
-        "do":"Verifica posta elettronica",
-        "confirmation":"CONFIRMAZIONE VERIFICA POSTA ELETTRONICA",
-        "hello":"Salve",
-        "message":" la vostra email è stata verificata corretamente,vi preghiamo di cliccare e completare la registrazione"
-      },
+      "verification": "Verifica Posta Elettronica",
       "registration": "Registrazione Utente"
     },
     "cta": {
-      "stepOne": "Verify my email"
+      "stepOne": "Verifica posta elettronica",
+      "stepThree": "Completa registrazione"
     },
     "fullname": {
       "placeholder": "Nome e Cognome",
@@ -120,7 +124,7 @@
     },
     "phone": {
       "required": "il vostro numero di telefono è obbligatorio",
-      "placeholder": "numero di telefono"
+      "placeholder": "Numero di telefono"
     },
     "role": {
       "required": "Ruolo è richiesto",
@@ -159,6 +163,24 @@
       "title": "Ti abbiamo appena inviato un'e-mail all'indirizzo: ",
       "content": {
         "one": "Questo contiene un collegamento per reimpostare la tua password.",
+        "two": "Non hai ricevuto un'e-mail nella tua posta elettronica ?",
+        "three": "Controlla l'ortografia dell'indirizzo inserito o che l'e-mail non sia nella posta indesiderata."
+      }
+    }
+  },
+  "verifyEmail": {
+    "title": "Verifica Posta Elettronica",
+    "cta": {
+      "send": "Invia collegamento di ripristino",
+      "login": "Torna al login"
+    },
+    "divider": {
+      "title": "Ricordi le tue credenziali ?"
+    },
+    "success": {
+      "title": "Ti abbiamo appena inviato un'e-mail all'indirizzo: ",
+      "content": {
+        "one": "Questo contiene un collegamento per verificare la tua posta elettronica.",
         "two": "Non hai ricevuto un'e-mail nella tua posta elettronica ?",
         "three": "Controlla l'ortografia dell'indirizzo inserito o che l'e-mail non sia nella posta indesiderata."
       }

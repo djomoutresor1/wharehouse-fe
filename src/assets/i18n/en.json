@@ -17,7 +17,7 @@
       }
     },
     "dataTable": {
-      "options" : {
+      "options": {
         "title": "Select",
         "edit": "Edit",
         "show": "Show",
@@ -28,15 +28,23 @@
   "warehouse": {
     "name": "Warehouse System"
   },
-  "button":{
+  "button": {
     "save": "Save",
-    "goToSTepThree":"Go to step three"
+    "goToSTepThree": "Go to step three"
   },
   "validations": {
     "confirm": {
       "password": "Password and confirm password don't match. Try again."
     },
-    "username": "Username must be more than 7 characters. Try again."
+    "username": "Username must be more than 7 characters. Try again.",
+    "upload": {
+      "extensions": "The extensions file allowed are: .jpg, .jpeg, .png, .gif, .tif, .tiff, .bmp, .webp. Try another file.",
+      "size": "The maximum uploading file size will be 5Mb. Try another file."
+    },
+    "link": {
+      "expiration": "The link to reset your password is expired. Try to resend the new link to complete the operation.",
+      "date": "The expired date that you are providing to reset your password is not correct. Try to resend the new link to complete the operation."
+    }
   },
   "login": {
     "title": "Login Page",
@@ -80,16 +88,12 @@
     "title": "Register Page",
     "step": {
       "information": "User Informations",
-      "verification":{
-        "do":"Verification Email",
-        "confirmation":"CONFIRMATION VERIFICATION EMAIL",
-        "hello":"Hello",
-        "message":"your email has been verified, please click and complete the registration"
-      },
-      "registration": "Registration User"
+      "verification": "Email Verification",
+      "registration": "User Registration"
     },
     "cta": {
-      "stepOne": "Verify my email"
+      "stepOne": "Verify my email",
+      "stepThree": "Completed registration"
     },
     "fullname": {
       "placeholder": "First and Last name",
@@ -118,16 +122,16 @@
       "placeholder": "Confirm password"
     },
     "country": {
-      "required": "your country is required",
+      "required": "Your country is required",
       "placeholder": "Select a country"
     },
     "date": {
-      "required": "date is required",
+      "required": "Date is required",
       "placeholder": "Select the date"
     },
     "phone": {
-      "required": "your phone number is required",
-      "placeholder": "phone number"
+      "required": "Your phone number is required",
+      "placeholder": "Phone number"
     },
     "divider": {
       "title": "Already have an account ?"
@@ -163,6 +167,24 @@
       }
     }
   },
+  "verifyEmail": {
+    "title": "Email Verification",
+    "cta": {
+      "send": "Send the mail verification",
+      "login": "Back to Log In"
+    },
+    "divider": {
+      "title": "Remember your credentials ?"
+    },
+    "success": {
+      "title": "We just sent you an email at: ",
+      "content": {
+        "one": "This contains a link to verify your mail.",
+        "two": "Didn't receive an email ?",
+        "three": "Check the spelling of the address entered, or that the email is not in your spam folder."
+      }
+    }
+  },
   "changePassword": {
     "title": "Change password",
     "oldPassword": {
@@ -174,7 +196,7 @@
   "profile": {
     "title": "My Profile",
     "empty": "--- Not specified ---",
-    "role": "You are", 
+    "role": "You are",
     "roles": "Roles",
     "lastLogin": "Last Login",
     "lastLoginMessage": "You were last logged in on",
