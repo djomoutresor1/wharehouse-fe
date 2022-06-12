@@ -10,7 +10,11 @@
       "logout": {
         "title": "Conferma Logout",
         "subtitle": "Sei sicuro di voler uscire ?"
-      }
+      },
+      "cancel": {
+      "title": "Conferma Cancellazione",
+      "subtitle": "Sei sicuro di voler cancellare questo profilo ?"
+    }
     },
     "dataTable": {
       "options" : {
