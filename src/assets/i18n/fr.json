@@ -4,7 +4,8 @@
     "home": "Page d'accueil",
     "cta": {
       "logout": "Se déconnecter",
-      "back": "Retour"
+      "back": "Retour",
+      "verification":"Verifier l'email"
     },
     "modal": {
       "logout": {
@@ -14,6 +15,10 @@
       "cancel": {
       "title": "Confirmation de Supression",
       "subtitle": "Êtes-vous sûr de vouloir supprimer ce profil ?"
+    },
+    "check": {
+      "title": "Verification Email",
+      "subtitle": "votre compte n'a pas été vérifié, accédez à votre e-mail et vérifiez-le"
     }
     },
     "dataTable": {

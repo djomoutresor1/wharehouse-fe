@@ -4,7 +4,8 @@
     "home": "Home page",
     "cta": {
       "logout": "Logout",
-      "back": "Back"
+      "back": "Back",
+      "verification":"Check email"
     },
     "modal": {
       "logout": {
@@ -14,6 +15,10 @@
       "cancel": {
         "title": "Confirmation Cancel",
         "subtitle": "Are you sure you want to cancel this profil ?"
+      },
+      "check": {
+        "title": "Verification Email",
+        "subtitle": "your account hasn't been verified,please go to your email and verify it"
       }
     },
     "dataTable": {
