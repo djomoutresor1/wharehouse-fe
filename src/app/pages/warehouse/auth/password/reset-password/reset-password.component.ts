@@ -2,11 +2,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
 
@@ -20,7 +22,7 @@ export class ResetPasswordComponent implements OnInit {
   isAuth: boolean = false;
   isResetPassword: boolean = false;
   passwordVisible = false;
-  password: string = "";
+  password: string = '';
   confirmPasswordVisible = false;
   confirmPassword?: string;
   alertType: string = '';
@@ -39,7 +41,9 @@ export class ResetPasswordComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
+    private translate: TranslateService,
+    private warehouseLocalStorage: WarehouseLocalStorage
   ) {
     this.idLinkResetPassword = this.route.snapshot.queryParamMap.get(
       PathParams.ID_LINK_RESET_PASSWORD
@@ -53,8 +57,19 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initComponent();
     this.initForm();
     this.checkIfIdLinkResetPasswordAndVerifyTypeAreCorrects();
+  }
+
+  initComponent() {
+    let currentLang = null;
+    currentLang = this.translate.currentLang;
+    if (currentLang === undefined) {
+      currentLang =
+        this.warehouseLocalStorage.WarehouseGetLanguageLocalStorage();
+    }
+    this.translate.use(currentLang as string);
   }
 
   initForm() {
@@ -93,14 +108,12 @@ export class ResetPasswordComponent implements OnInit {
       } else {
         this.isExpiredLink = true;
         this.errorAlertType(
-          'The link to reset your password is expired. Try resend the new link to complete the operation.'
+          this.translate.instant('validations.link.expiration')
         );
       }
     } else {
       this.isExpiredLink = true;
-      this.errorAlertType(
-        'The expired date that you are providing to reset your password is not correct. Try resend the new link to complete the operation.'
-      );
+      this.errorAlertType(this.translate.instant('validations.link.date'));
     }
   }
 

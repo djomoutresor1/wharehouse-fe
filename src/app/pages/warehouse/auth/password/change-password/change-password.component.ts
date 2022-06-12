@@ -1,9 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
+import { ProfilService } from 'src/app/services/profil.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
@@ -20,7 +22,7 @@ export class ChangePasswordComponent implements OnInit {
   oldPasswordVisible = false;
   oldPassword?: string;
   passwordVisible = false;
-  password: string = "";
+  password: string = '';
   confirmPasswordVisible = false;
   confirmPassword?: string;
   isError: boolean = false;
@@ -29,40 +31,62 @@ export class ChangePasswordComponent implements OnInit {
   messageAlert: string = '';
   okText: string = '';
   descriptionAlert: string = '';
+  user: any;
   isSecurePassword: boolean = false;
 
   breadcrumbItems!: BreadcrumbItemsModel;
+  profileURL: any;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private authorizationService: AuthorizationService,
     private warehouseLocalStorage: WarehouseLocalStorage,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private profilService: ProfilService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
     this.initComponent();
     this.initForm();
+    this.getInfosUser();
   }
 
   initComponent() {
-    console.log("currentLang: ", this.translate.currentLang);
+    this.user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
+    console.log('currentLang: ', this.translate.currentLang);
     let currentLang = null;
     currentLang = this.translate.currentLang;
-    if(currentLang === undefined) {
-      currentLang = this.warehouseLocalStorage.WarehouseGetLanguageLocalStorage()
+    if (currentLang === undefined) {
+      currentLang =
+        this.warehouseLocalStorage.WarehouseGetLanguageLocalStorage();
     }
     this.translate.use(currentLang as string);
     this.breadcrumbItems = {
       parent: {
-        title: this.translate.instant("profile.title"),
-        url: "dashboard/my-profile"
+        title: this.translate.instant('profile.title'),
+        url: 'dashboard/my-profile',
       },
-      children: [{
-        title: this.translate.instant("changePassword.title")
-      }]
-    }
+      children: [
+        {
+          title: this.translate.instant('changePassword.title'),
+        },
+      ],
+    };
+  }
+
+  getInfosUser() {
+    this.profilService.getImageUser(this.user?.userId).subscribe(
+      (response) => {
+        let objectURL = 'data:image/jpeg;base64,' + response?.object?.data;
+        this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      },
+      (error: HttpErrorResponse) => {
+        console.log('Error Occured duringng downloading: ', error);
+        this.errorAlertType(error?.error.message);
+      }
+    );
   }
 
   initForm() {
@@ -82,9 +106,8 @@ export class ChangePasswordComponent implements OnInit {
     let password = this.validateForm.controls['password']?.value;
     let confirmPassword = this.validateForm.controls['confirmPassword']?.value;
     if (this.checkValidationsPassword(oldPassword, password, confirmPassword)) {
-      let user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
       this.authorizationService
-        .userChangePassword(user?.userId, oldPassword, password)
+        .userChangePassword(this.user?.userId, oldPassword, password)
         .subscribe(
           (response: ResponseModel) => {
             this.successAlertType(response?.message);
@@ -156,6 +179,8 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   handleOnBack() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.PROFILE}`]);
+    this.router.navigate([
+      `${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.PROFILE}`,
+    ]);
   }
 }

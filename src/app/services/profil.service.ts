@@ -24,8 +24,11 @@ export class ProfilService {
     );
   }
 
-
   public onDeleteUser(userId: string): Observable<Persons> {
     return this.http.delete<any>(`${this.apiServerUrl}${Auth.WAREHOUSE_DELETE_USER}/${userId}`);
+  }
+
+  public getImageUser(userImage: string): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}${Auth.WAREHOUSE_DOWNLOAD_IMAGE}/${userImage}`);
   }
 }

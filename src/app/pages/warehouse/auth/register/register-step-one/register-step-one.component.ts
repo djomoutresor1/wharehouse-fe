@@ -40,9 +40,9 @@ export class RegisterStepOneComponent implements OnInit {
   currentStep: number = 0;
   selectedFile: any;
   event1: any;
-  radioValue:any
+  radioValue: any;
   isSecurePassword: boolean = false;
-  info:any
+  info: any;
   isMailSent: boolean = false;
   email: string = '';
   idLinkResetPassword: any;
@@ -52,17 +52,13 @@ export class RegisterStepOneComponent implements OnInit {
   user!: ResponseResetModel;
   isResetPassword: boolean = false;
 
-
   constructor(
     public fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
     private authentificationService: AuthentificationService,
     private warehouseLocalStorage: WarehouseLocalStorage,
-    private http: HttpClient,
     private translate: TranslateService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -111,7 +107,7 @@ export class RegisterStepOneComponent implements OnInit {
     );
     this.email = this.validateForm.controls['email'].value;
 
-  if (!!message?.length) {
+    if (!!message?.length) {
       this.errorAlertType(message);
     } else {
       this.authentificationService
@@ -126,8 +122,7 @@ export class RegisterStepOneComponent implements OnInit {
           }
         );
     }
-}
-
+  }
 
   handleOnCheckValidation(
     username: string,
@@ -146,7 +141,6 @@ export class RegisterStepOneComponent implements OnInit {
     }
   }
 
-
   errorAlertType(message: string): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_ERROR;
@@ -155,15 +149,15 @@ export class RegisterStepOneComponent implements OnInit {
 
   successAlertType(message: string): void {
     this.alertType = AlertType.ALERT_SUCCESS;
-  //  this.messageAlert = message;
+    //  this.messageAlert = message;
     setTimeout(() => {
       this.isAuth = false;
     }, 1000);
   }
 
   handleOnLogin() {
- this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
-// this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP3}`]);
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+    // this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP3}`]);
   }
 
   handleOnChangeInput() {
@@ -181,7 +175,4 @@ export class RegisterStepOneComponent implements OnInit {
   handleOnNotifyPassword(event: boolean) {
     this.isSecurePassword = event;
   }
- 
 }
-
-
