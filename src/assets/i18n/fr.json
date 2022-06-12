@@ -4,12 +4,18 @@
     "home": "Page d'accueil",
     "cta": {
       "logout": "Se déconnecter",
-      "back": "Retour"
+      "back": "Retour",
+      "yes": "Oui",
+      "no": "Non"
     },
     "modal": {
       "logout": {
         "title": "Confirmation Déconnexion",
         "subtitle": "Êtes-vous sûr de vouloir vous déconnecter ?"
+      },
+      "deleteUser": {
+        "title": "Confirmation Annulation",
+        "subtitle": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?"
       }
     },
     "dataTable": {

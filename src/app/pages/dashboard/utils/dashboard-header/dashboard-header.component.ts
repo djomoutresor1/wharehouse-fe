@@ -67,6 +67,5 @@ export class DashboardHeaderComponent implements OnInit {
           );
       },
     });
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
 }

@@ -90,6 +90,18 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm() {
+    let data = localStorage.getItem('response');
+    let dataUserId = JSON.parse(data as string).user.active;
+
+    if(dataUserId === 'false'){
+      // you have to verify your email implementation
+      this.isAuth = true;
+      this.alertType = AlertType.ALERT_WARNING;
+      this.messageAlert = "your account hasn't been verified,please go to your email and verify it";
+
+
+    }else{
+  
     let userData = {
       username: this.validateForm.controls['username']?.value.toLowerCase(),
       password: this.validateForm.controls['password']?.value,
@@ -106,7 +118,7 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
+  }
   getRegisterOrNot() {
     let user = this.validateForm.controls['username']?.value;
     let passId = this.validateForm.controls['password']?.value;

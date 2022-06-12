@@ -1,5 +1,6 @@
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
+import { Auth } from '../shared/enums/auth-enums';
 import { Utils } from '../shared/enums/utils-enums';
 
 export class WarehouseLocalStorage {
@@ -43,6 +44,9 @@ export class WarehouseLocalStorage {
       if (user && user?.token) {
         return {
           Authorization: `Bearer ${user?.token}`,
+          'Content-Type': Auth.WAREHOUSE_APPLICATION_JSON,
+          'Access-Control-Allow-Origin': "*",
+          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
           REMOTE_USER: user?.userId, // Pass the userId or matricule generated in register fase for earch user in BE, TODO in BE
           refreshToken: user?.refreshToken,
           ROLES: user?.roles?.join(','), // Array of roles, want like this -> ROLE_USER,ROLE_ADMIN,ROLE_MODERATOR

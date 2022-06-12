@@ -4,23 +4,29 @@
     "home": "Pagina iniziale",
     "cta": {
       "logout": "Disconnettersi",
-      "back": "Indietro"
+      "back": "Indietro",
+      "yes": "Sì",
+      "no": "No"
     },
     "modal": {
       "logout": {
         "title": "Conferma Logout",
         "subtitle": "Sei sicuro di voler uscire ?"
+      },
+      "deleteUser": {
+        "title": "Conferma Cancelazzione",
+        "subtitle": "Sei sicuro di voler eliminare questo utente ?"
+      }
+      },
+      "dataTable": {
+        "options" : {
+          "title": "Seleziona",
+          "edit": "Modifica",
+          "show": "Vedi",
+          "delete": "Cancella"
+        }
       }
     },
-    "dataTable": {
-      "options" : {
-        "title": "Seleziona",
-        "edit": "Modifica",
-        "show": "Vedi",
-        "delete": "Cancella"
-      }
-    }
-  },
   "warehouse": {
     "name": "Warehouse System",
     "save": "Salva"
