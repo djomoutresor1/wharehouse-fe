@@ -16,9 +16,8 @@ const routes: Routes = [
     children: [
       { path: `${Pages.LOGIN}`, component: LoginComponent },
       { path: `${Pages.REGISTER}`,component: RegisterStepOneComponent  },
-      { path: `${Pages.REGISTERSTEP2}`, component: RegisterStepTwoComponent},
-      { path: `${Pages.REGISTERSTEP3}`, component: RegisterStepThreeComponent},
-
+      { path: `${Pages.REGISTER_STEP_2}`, component: RegisterStepTwoComponent},
+      { path: `${Pages.REGISTER_STEP_3}`, component: RegisterStepThreeComponent},
       {
         path: `${Pages.RESET_PASSWORD}`, //http://localhost:4201/warehouse/noAuth/resetPassword?idLinkResetPassword=:idLinkResetPassword&expirationLink=:expirationLink&verifyType=:verifyType
         component: ResetPasswordComponent,

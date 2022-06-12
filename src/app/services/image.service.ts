@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Auth } from '../shared/enums/auth-enums';
 
@@ -12,12 +13,24 @@ export class ImageService {
 
   constructor(private http: HttpClient) {}
 
-  getUploadImageProfil() {
+  getUploadImageProfile() {
     const uploadData = new FormData();
     uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
     return this.http.post(
       `${this.apiServerUrl}${Auth.WAREHOUSE_UPLOAD_IMAGE}`,
       uploadData
+    );
+  }
+
+  uploadImageProfile(file: FormData, userId: string): Observable<any> {
+    return this.http.post(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_UPLOAD_IMAGE}`,
+      file,
+      {
+        params: {
+          userId,
+        },
+      }
     );
   }
 }

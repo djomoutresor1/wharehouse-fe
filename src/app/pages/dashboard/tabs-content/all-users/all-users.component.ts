@@ -182,7 +182,7 @@ export class AllUsersComponent implements OnInit {
 
   handleOnDelete(user: ResponseLoginModel) {
     console.log("user - handleOnDelete: ", user);
-    this.profilService.onDeleteUser(this.user).subscribe((response:any)=>{
+    this.profilService.onDeleteUser(user?.userId).subscribe((response:any)=>{
               console.log("onResponseDelete: ", response)
     })
   }
