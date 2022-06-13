@@ -56,12 +56,11 @@ export class ProfileComponent implements OnInit {
   getInfosUser() {
     this.profilService.getImageUser(this.userLocalStorage?.userId).subscribe(
       (response) => {
-        console.log('imageService: ', response);
         let objectURL = 'data:image/jpeg;base64,' + response?.object?.data;
         this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
       },
       (error: HttpErrorResponse) => {
-        console.log('Error Occured duringng downloading: ', error);
+        console.log('Error Occured during downloading: ', error);
         this.errorAlertType(error?.error.message);
       }
     );
@@ -121,6 +120,8 @@ export class ProfileComponent implements OnInit {
   handleOnNavigate(url: String) {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
   }
+
+  handleOnEdit() {}
 
   handleOnBack() {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);

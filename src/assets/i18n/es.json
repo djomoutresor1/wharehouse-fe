@@ -6,7 +6,9 @@
       "logout": "Disconnettersi",
       "back": "Indietro",
       "yes": "Sì",
-      "no": "No"
+      "no": "No",
+      "verification": "Verifica email",
+      "edit": "Modifica"
     },
     "modal": {
       "logout": {
@@ -15,25 +17,33 @@
       },
       "deleteUser": {
         "title": "Conferma Cancelazzione",
-        "subtitle": "Sei sicuro di voler eliminare questo utente ?"
-      }
-      },
-      "dataTable": {
-        "options" : {
-          "title": "Seleziona",
-          "edit": "Modifica",
-          "show": "Vedi",
-          "delete": "Cancella"
+        "subtitle": "Sei sicuro di voler eliminare questo utente ?",
+        "cancel": {
+          "title": "Conferma Cancellazione",
+          "subtitle": "Sei sicuro di voler cancellare questo profilo ?"
         }
+      },
+      "check": {
+        "title": "Verifica Email",
+        "subtitle": "il tuo account non è stato verificato, vai alla tua email e verificalo"
       }
     },
+    "dataTable": {
+      "options": {
+        "title": "Seleziona",
+        "edit": "Modifica",
+        "show": "Vedi",
+        "delete": "Cancella"
+      }
+    }
+  },
   "warehouse": {
     "name": "Warehouse System",
     "save": "Salva"
   },
-  "button":{
+  "button": {
     "save": "Salva",
-    "goToSTepThree":"Vai allo step 3"
+    "goToSTepThree": "Vai allo step 3"
   },
   "validations": {
     "confirm": {
@@ -199,10 +209,12 @@
   "profile": {
     "title": "Mio Profilo",
     "empty": "--- Non Specificato ---",
-    "role": "Hai i roli", 
+    "role": "Hai i roli",
     "roles": "Roli",
     "lastLogin": "Ultimo Accesso",
     "lastLoginMessage": "Hai effettuato il tuo ultimo accesso il",
+    "verified": "Verificato",
+    "notVerified": "Non verificato",
     "personalData": {
       "title": "Dati Anagrafici",
       "fullname": "Nome e Cognome",

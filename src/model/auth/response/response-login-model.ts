@@ -1,5 +1,6 @@
 export interface ResponseLoginModel {
   userId: string;
+  active:boolean;
   message: string;
   type?: string;
   token: string;
