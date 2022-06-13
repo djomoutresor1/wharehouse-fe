@@ -82,7 +82,7 @@
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.dateOfBorn" | translate }}</label>
           <input nz-input
-            [value]="userLocalStorage.dateOfBorn ? userLocalStorage.dateOfBorn : 'profile.empty' | translate"
+            [value]="userLocalStorage.dateOfBirth ? userLocalStorage.dateOfBirth : 'profile.empty' | translate"
             [disabled]="true" />
         </div>
         <div class="col-md-3 mt-3">
@@ -93,11 +93,11 @@
         </div>
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.country" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+          <input nz-input [value]="userLocalStorage.country ? userLocalStorage.country : 'profile.empty' | translate" [disabled]="true" />
         </div>
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.city" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+          <input nz-input [value]="userLocalStorage.city ? userLocalStorage.city : 'profile.empty' | translate" [disabled]="true" />
         </div>
       </div>
       <div class="row mb-4">
@@ -130,7 +130,7 @@
       <div class="row mb-4">
         <div class="col-md-6 mt-3">
           <label class="mb-2">{{"profile.personalContact.mobilePhone" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+          <input nz-input [value]="userLocalStorage.phoneNumber ? getMobilePhoneUser(userLocalStorage.phonePrefix, userLocalStorage.phoneNumber ): 'profile.empty' | translate" [disabled]="true" />
         </div>
         <div class="col-md-6 mt-3">
           <label class="mb-2">{{"profile.personalContact.landlinePhone" | translate }}</label>

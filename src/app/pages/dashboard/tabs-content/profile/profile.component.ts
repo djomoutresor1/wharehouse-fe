@@ -138,4 +138,8 @@ export class ProfileComponent implements OnInit {
     this.alertType = AlertType.ALERT_ERROR;
     this.messageAlert = message;
   }
+
+  getMobilePhoneUser( phonePrefix: string, phoneNumber: string): string {
+    return phonePrefix + ' ' + phoneNumber;
+  }
 }
