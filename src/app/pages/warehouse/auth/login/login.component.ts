@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
   remember: boolean = false;
   isAuth: boolean = false;
   isLogged: boolean = false;
+  dataUserActive:boolean = false;
   alertType: string = '';
   messageAlert: string = '';
   descriptionAlert: string = '';
@@ -98,34 +99,6 @@ export class LoginComponent implements OnInit {
 
 
   submitForm() {
-    // manca il control dell'email guisto
-    let data = JSON.parse(localStorage.getItem('responseRegistrationStepOne') as string);
-    let dataUserActive = data.active.toString();
-    let dataEmail = data.email;
-
-    if(dataUserActive === "false"){
-      // you have to verify your email implementation
-        this.nzModalService.confirm({
-          nzTitle: '<h4>' + this.translate.instant('dashboard.modal.check.title') + '</h4>',
-          nzContent: '<p>' + this.translate.instant('dashboard.modal.check.subtitle') + '</p>',
-          nzCancelText: this.translate.instant('dashboard.cta.back'),
-          nzOkText: this.translate.instant('dashboard.cta.verification'),
-          nzOnOk: () => {
-            this.authorizationService.userVerificationEmail(dataEmail).subscribe(
-              (response:any)=>{
-                this.successNotificationVerification();
-                setTimeout(() => {
-                  this.isAuth = false;
-                }, 3000);
-                this.validateForm.reset()
-              },
-              (error: HttpErrorResponse) => {
-                this.errorAlertType(error.error);
-              })
-            }
-     })
-      
-    }else{
 
     let userData = {
       username: this.validateForm.controls['username']?.value.toLowerCase(),
@@ -136,13 +109,39 @@ export class LoginComponent implements OnInit {
       (response: ResponseLoginModel) => {
         this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
         this.handleOnRememberMe();
+        console.log(" responseData: ",response);
+        this.dataUserActive = response.active;
+    
+        if(!this.dataUserActive){
+          // you have to verify your correct email
+            this.nzModalService.confirm({
+              nzTitle: '<h4>' + this.translate.instant('dashboard.modal.check.title') + '</h4>',
+              nzContent: '<p>' + this.translate.instant('dashboard.modal.check.subtitle') + '</p>',
+              nzCancelText: this.translate.instant('dashboard.cta.back'),
+              nzOkText: this.translate.instant('dashboard.cta.verification'),
+              nzOnOk: () => {
+                this.authorizationService.userVerificationEmail(response?.email).subscribe(
+                  (response:any)=>{
+                    this.successNotificationVerification();
+                    setTimeout(() => {
+                      this.isAuth = false;
+                    }, 3000);
+                    this.validateForm.reset()
+                  },
+                  (error: HttpErrorResponse) => {
+                    this.errorAlertType(error.error);
+                  })
+                }
+         })
+      }else{
         this.successNotificationType(response);
-      },
+      }
+    },
       (error: HttpErrorResponse) => {
         this.errorAlertType(error.error);
       }
     );
-  }
+  
 }
   getRegisterOrNot() {
     let user = this.validateForm.controls['username']?.value;

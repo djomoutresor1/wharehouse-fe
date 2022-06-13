@@ -156,7 +156,6 @@ export class RegisterStepThreeComponent implements OnInit {
           this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
           // Remove the remember, if it was present in the past
           localStorage.removeItem(Utils.WAREHOUSE_REMEMBER_ME);
-          localStorage?.removeItem('responseRegistrationStepOne');
         },
         (error: HttpErrorResponse) => {
           this.errorAlertType(error.error.message);
