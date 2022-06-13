@@ -7,11 +7,16 @@
   </div>
   <div class="row">
     <div class="col-md-4 offset-md-4">
-      <div class="row">
-        <div class="col" *ngIf="isAuth">
+      <div class="row mt-5">
+        <div class="col-md-12" *ngIf="isAuth">
           <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
           </warehouse-alert>
         </div>
+        <div class="col-md-12" *ngIf="!dataUserActive">
+          <warehouse-modal [okTextModal]="okText" [typeModal]="alertTypeModal" [messageModal]="messageAlertModal"
+              [descriptionModal]="descriptionAlertModal" (handleOnOkModal)="handleOnOkModal($event)">
+          </warehouse-modal>
+      </div>
       </div>
       <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
         <nz-form-item>

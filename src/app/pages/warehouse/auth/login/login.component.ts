@@ -34,10 +34,15 @@ export class LoginComponent implements OnInit {
   remember: boolean = false;
   isAuth: boolean = false;
   isLogged: boolean = false;
-  dataUserActive:boolean = false;
+  dataUserActive:boolean = true;
   alertType: string = '';
   messageAlert: string = '';
   descriptionAlert: string = '';
+  alertTypeModal: string = '';
+  messageAlertModal: string = '';
+  descriptionAlertModal: string = '';
+  okText: string = '';
+  dataUserEmail: string = '';
   WAREHOUSE_AFTER_7_DAYS = 7 * 24 * 60 * 60 * 1000;
   expiredRemember: number = 0;
 
@@ -97,6 +102,21 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  handleOnOkModal(event: any) {
+      this.authorizationService.userVerificationEmail(this.dataUserEmail).subscribe(
+        (response:any)=>{
+          this.successNotificationVerification();
+          setTimeout(() => {
+            this.isAuth = false;
+          }, 4000);
+          this.validateForm.reset()
+        },
+        (error: HttpErrorResponse) => {
+          this.errorAlertType(error.error);
+        })
+    
+  }
+
 
   submitForm() {
 
@@ -109,30 +129,11 @@ export class LoginComponent implements OnInit {
       (response: ResponseLoginModel) => {
         this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
         this.handleOnRememberMe();
-        console.log(" responseData: ",response);
         this.dataUserActive = response.active;
-    
+        this.dataUserEmail = response.email;
+
         if(!this.dataUserActive){
-          // you have to verify your correct email
-            this.nzModalService.confirm({
-              nzTitle: '<h4>' + this.translate.instant('dashboard.modal.check.title') + '</h4>',
-              nzContent: '<p>' + this.translate.instant('dashboard.modal.check.subtitle') + '</p>',
-              nzCancelText: this.translate.instant('dashboard.cta.back'),
-              nzOkText: this.translate.instant('dashboard.cta.verification'),
-              nzOnOk: () => {
-                this.authorizationService.userVerificationEmail(response?.email).subscribe(
-                  (response:any)=>{
-                    this.successNotificationVerification();
-                    setTimeout(() => {
-                      this.isAuth = false;
-                    }, 3000);
-                    this.validateForm.reset()
-                  },
-                  (error: HttpErrorResponse) => {
-                    this.errorAlertType(error.error);
-                  })
-                }
-         })
+          this.alertModalActive()
       }else{
         this.successNotificationType(response);
       }
@@ -179,9 +180,15 @@ export class LoginComponent implements OnInit {
 
   successNotificationVerification(){
       this.isAuth = true;
-      this.alertType = AlertType.ALERT_INFO;
-      this.messageAlert = 'send verification has been seen in your email, please check your email';
-  //  this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+      this.alertType = AlertType.ALERT_SUCCESS;
+      this.messageAlert = 'Verification profil has been seen in your email, please check your email';
+  }
+
+  alertModalActive(){
+    this.alertTypeModal = AlertType.ALERT_WARNING;
+    this.messageAlertModal = "Verification Email";
+    this.okText = 'Verify Email';
+    this.descriptionAlertModal = "your account hasn't been verified";
   }
 
   getCaptcha() {}
