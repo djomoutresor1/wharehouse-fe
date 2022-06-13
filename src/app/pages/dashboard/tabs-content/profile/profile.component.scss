@@ -29,10 +29,17 @@
     .profile-personal-data,
     .profile-personal-contact {
       margin-bottom: 50px;
+      .profile-verified {
+        font-weight: 600;
+      }
     }
   }
+  .profile-edit,
   .profile-change-password {
     float: right;
+  }
+  .profile-change-password {
+    right: 20px;
   }
 }
 

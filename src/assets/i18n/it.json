@@ -7,7 +7,8 @@
       "back": "Indietro",
       "yes": "Sì",
       "no": "No",
-      "verification": "Verifica email"
+      "verification": "Verifica email",
+      "edit": "Modifica"
     },
     "modal": {
       "logout": {
@@ -212,6 +213,8 @@
     "roles": "Roli",
     "lastLogin": "Ultimo Accesso",
     "lastLoginMessage": "Hai effettuato il tuo ultimo accesso il",
+    "verified": "Verificato",
+    "notVerified": "Non verificato",
     "personalData": {
       "title": "Dati Anagrafici",
       "fullname": "Nome e Cognome",

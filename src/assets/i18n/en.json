@@ -7,7 +7,8 @@
       "back": "Back",
       "yes": "Yes",
       "no": "Not",
-      "verification": "Check email"
+      "verification": "Check email",
+      "edit": "Edit"
     },
     "modal": {
       "logout": {
@@ -211,6 +212,8 @@
     "roles": "Roles",
     "lastLogin": "Last Login",
     "lastLoginMessage": "You were last logged in on",
+    "verified": "Verified",
+    "notVerified": "Not verified",
     "personalData": {
       "title": "Personal Data",
       "fullname": "First and Last Name",

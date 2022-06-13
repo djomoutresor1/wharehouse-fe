@@ -6,16 +6,14 @@
       "logout": "Disconnettersi",
       "back": "Indietro",
       "yes": "Sì",
-      "no": "No"
+      "no": "No",
+      "verification": "Verifica email",
+      "edit": "Modifica"
     },
     "modal": {
       "logout": {
         "title": "Conferma Logout",
         "subtitle": "Sei sicuro di voler uscire ?"
-      },
-      "check": {
-        "title": "Verifica Email",
-        "subtitle": "il tuo account non è stato verificato, vai alla tua email e verificalo"
       },
       "deleteUser": {
         "title": "Conferma Cancelazzione",
@@ -24,6 +22,10 @@
           "title": "Conferma Cancellazione",
           "subtitle": "Sei sicuro di voler cancellare questo profilo ?"
         }
+      },
+      "check": {
+        "title": "Verifica Email",
+        "subtitle": "il tuo account non è stato verificato, vai alla tua email e verificalo"
       }
     },
     "dataTable": {
@@ -211,6 +213,8 @@
     "roles": "Roli",
     "lastLogin": "Ultimo Accesso",
     "lastLoginMessage": "Hai effettuato il tuo ultimo accesso il",
+    "verified": "Verificato",
+    "notVerified": "Non verificato",
     "personalData": {
       "title": "Dati Anagrafici",
       "fullname": "Nome e Cognome",

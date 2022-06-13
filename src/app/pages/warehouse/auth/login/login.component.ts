@@ -2,10 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AnyFn } from '@ngrx/store/src/selector';
 import { TranslateService } from '@ngx-translate/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
-
 import { AuthentificationService } from 'src/app/services/auth/authentification.service';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
@@ -13,6 +11,7 @@ import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
+import { ResponseModel } from 'src/model/auth/response/response-model';
 
 const fakeProfil = {
   fullName: 'Mario Rossi',
@@ -34,7 +33,7 @@ export class LoginComponent implements OnInit {
   remember: boolean = false;
   isAuth: boolean = false;
   isLogged: boolean = false;
-  dataUserActive:boolean = true;
+  dataUserActive: boolean = true;
   alertType: string = '';
   messageAlert: string = '';
   descriptionAlert: string = '';
@@ -86,7 +85,6 @@ export class LoginComponent implements OnInit {
       this.expiredRemember = JSON.parse(
         localStorage.getItem(Utils.WAREHOUSE_REMEMBER_ME) as string
       )?.expiredAt;
-      console.log('expiredRemember: ', this.expiredRemember);
 
       if (this.expiredRemember > new Date().getTime()) {
         this.remember = true;
@@ -103,23 +101,23 @@ export class LoginComponent implements OnInit {
   }
 
   handleOnOkModal(event: any) {
-      this.authorizationService.userVerificationEmail(this.dataUserEmail).subscribe(
-        (response:any)=>{
+    this.authorizationService
+      .userVerificationEmail(this.dataUserEmail)
+      .subscribe(
+        (response: ResponseModel) => {
           this.successNotificationVerification();
           setTimeout(() => {
             this.isAuth = false;
           }, 4000);
-          this.validateForm.reset()
+          this.validateForm.reset();
         },
         (error: HttpErrorResponse) => {
           this.errorAlertType(error.error);
-        })
-    
+        }
+      );
   }
 
-
   submitForm() {
-
     let userData = {
       username: this.validateForm.controls['username']?.value.toLowerCase(),
       password: this.validateForm.controls['password']?.value,
@@ -127,41 +125,21 @@ export class LoginComponent implements OnInit {
 
     this.authentificationService.userLogin(userData).subscribe(
       (response: ResponseLoginModel) => {
-        this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
         this.handleOnRememberMe();
         this.dataUserActive = response.active;
         this.dataUserEmail = response.email;
 
-        if(!this.dataUserActive){
-          this.alertModalActive()
-      }else{
-        this.successNotificationType(response);
-      }
-    },
+        if (!this.dataUserActive) {
+          this.alertModalActive();
+        } else {
+          this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
+          this.successNotificationType(response);
+        }
+      },
       (error: HttpErrorResponse) => {
         this.errorAlertType(error.error);
       }
     );
-  
-}
-  getRegisterOrNot() {
-    let user = this.validateForm.controls['username']?.value;
-    let passId = this.validateForm.controls['password']?.value;
-    let data = JSON.parse(localStorage.getItem('formData') || 'null');
-
-    if (
-      (user == data?.username && passId == data?.password) ||
-      (user == 'admin' && passId == 'Qwerty84.')
-    ) {
-      this.alertType = AlertType.ALERT_SUCCESS;
-      this.messageAlert = 'logged successful!';
-    } else if (
-      (user !== data?.username && passId !== data?.password) ||
-      (user !== 'admin' && passId !== 'Qwerty84.')
-    ) {
-      this.alertType = AlertType.ALERT_ERROR;
-      this.messageAlert = 'login failed!';
-    }
   }
 
   errorAlertType(message: string): void {
@@ -178,22 +156,19 @@ export class LoginComponent implements OnInit {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
   }
 
-  successNotificationVerification(){
-      this.isAuth = true;
-      this.alertType = AlertType.ALERT_SUCCESS;
-      this.messageAlert = 'Verification profil has been seen in your email, please check your email';
+  successNotificationVerification() {
+    this.isAuth = true;
+    this.alertType = AlertType.ALERT_SUCCESS;
+    this.messageAlert =
+      'Verification profil has been seen in your email, please check your email';
   }
 
-  alertModalActive(){
+  alertModalActive() {
     this.alertTypeModal = AlertType.ALERT_WARNING;
-    this.messageAlertModal = "Verification Email";
+    this.messageAlertModal = 'Verification Email';
     this.okText = 'Verify Email';
     this.descriptionAlertModal = "your account hasn't been verified";
   }
-
-  getCaptcha() {}
-
-  confirmationValidator() {}
 
   handleOnRegister() {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER}`]);
