@@ -18,7 +18,7 @@
   <div class="row">
     <div class="col-md-12">
       <img alt="Warehouse Background Cover" class="profile-background-cover"
-        src="../../../../../assets/images/The-welcome-Warehouse.jpg" />
+        src="../../../../../assets/images/image_placeholder.jpg" />
     </div>
   </div>
   <div class="row">
@@ -148,5 +148,11 @@
         <i nz-icon nzType="edit" nzTheme="outline"></i>{{'dashboard.cta.edit' | translate}}</button>
       <button nz-button (click)="handleOnChangePassword()" class="profile-change-password" [nzType]="'default'">
           <i nz-icon nzType="lock" nzTheme="outline"></i>{{'changePassword.cta' | translate}}</button>
+    </div>
+  </div>
+  <div class="row" *ngIf="isExpiredToken">
+    <div class="col">
+      <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert" [descriptionModal]="descriptionAlert"
+        (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
     </div>
   </div>

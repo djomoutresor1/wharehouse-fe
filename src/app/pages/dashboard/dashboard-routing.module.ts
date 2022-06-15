@@ -6,6 +6,7 @@ import { ChangePasswordComponent } from '../warehouse/auth/password/change-passw
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { DashboardRackDetailComponent } from './dashboard-rack-detail/dashboard-rack-detail.component';
 import { DashboardRackGlobalComponent } from './dashboard-rack-global/dashboard-rack-global.component';
+import { DashboardUserAddComponent } from './dashboard-user/dashboard-user-add/dashboard-user-add.component';
 import { DashboardComponent } from './dashboard.component';
 import { AllUsersComponent } from './tabs-content/all-users/all-users.component';
 import { PreferencesComponent } from './tabs-content/preferences/preferences.component';
@@ -19,6 +20,14 @@ const routes: Routes = [
       {
         path: '',
         component: DashboardHomeComponent,
+      },
+      {
+        path: `${Pages.USER}/${Pages.CREATE}`,
+        component: DashboardUserAddComponent,
+      },
+      {
+        path: `${Pages.GLOBAL_RACK}/:${PathParams.RACK_NAME}`,
+        component: DashboardRackGlobalComponent,
       },
       {
         path: `${Pages.GLOBAL_RACK}/:${PathParams.RACK_NAME}`,

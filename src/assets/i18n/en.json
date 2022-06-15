@@ -8,7 +8,14 @@
       "yes": "Yes",
       "no": "Not",
       "verification": "Check email",
-      "edit": "Edit"
+      "edit": "Edit",
+      "create.user": "Create user",
+      "file": {
+        "placeholder": "Upload your picture profile",
+        "upload": "Upload",
+        "change": "Change",
+        "remove": "Remove"
+      }
     },
     "modal": {
       "logout": {
@@ -108,12 +115,14 @@
       "stepThree": "Completed registration"
     },
     "fullname": {
-      "placeholder": "First and Last name",
+      "title": "First and Last name",
+      "placeholder": "insert first and last name",
       "required": "Your fullname is required"
     },
     "username": {
+      "title": "Username",
       "required": "Username is required",
-      "placeholder": "Username"
+      "placeholder": "Insert username"
     },
     "gender": {
       "required": "Gender is required",
@@ -122,10 +131,17 @@
       "female": "Woman"
     },
     "email": {
+      "title": "Email Address",
       "required": "Email is required",
       "placeholder": "Email"
     },
+    "secondEmail": {
+      "title": "PEC Email Address",
+      "required": "PEC Email is required",
+      "placeholder": "PEC Email"
+    },
     "role": {
+      "title": "Role",
       "required": "Role is required",
       "placeholder": "Select the role"
     },
@@ -134,16 +150,39 @@
       "placeholder": "Confirm password"
     },
     "country": {
+      "title": "Country",
       "required": "Your country is required",
       "placeholder": "Select a country"
     },
+    "state": {
+      "title": "State",
+      "required": "Your state is required",
+      "placeholder": "Select a state"
+    },
     "date": {
+      "title": "Date of Born",
       "required": "Date is required",
       "placeholder": "Select the date"
     },
     "phone": {
+      "title": "Phone number",
       "required": "Your phone number is required",
-      "placeholder": "Phone number"
+      "placeholder": "Insert phone number"
+    },
+    "landline": {
+      "title": "Secondary phone number",
+      "required": "Your secondary phone number is required",
+      "placeholder": "Insert secondary phone number"
+    },
+    "zipCode": {
+      "title": "Postal Code",
+      "required": "Your postal Code is required",
+      "placeholder": "Insert the postal code"
+    },
+    "address": {
+      "title": "Location address",
+      "required": "Location address is required",
+      "placeholder": "Insert location address"
     },
     "divider": {
       "title": "Already have an account ?"

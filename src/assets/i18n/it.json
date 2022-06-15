@@ -8,7 +8,14 @@
       "yes": "Sì",
       "no": "No",
       "verification": "Verifica email",
-      "edit": "Modifica"
+      "edit": "Modifica",
+      "create.user": "Crea utente",
+      "file": {
+        "placeholder": "Carica la tua immagine di profilo",
+        "upload": "Sciegli",
+        "change": "Cambia",
+        "remove": "Elimina"
+      }
     },
     "modal": {
       "logout": {
@@ -109,12 +116,14 @@
       "stepThree": "Completa registrazione"
     },
     "fullname": {
-      "placeholder": "Nome e Cognome",
+      "title": "Nome e Cognome",
+      "placeholder": "Inserisci nome e cognome",
       "required": "Nome e Cognome sono richiesto"
     },
     "username": {
+      "title": "Nome Utente",
       "required": "Nome utente è richiesto",
-      "placeholder": "Nome utente"
+      "placeholder": "Inserisci nome utente"
     },
     "gender": {
       "required": "Sesso è richiesto",
@@ -123,28 +132,58 @@
       "female": "Donna"
     },
     "email": {
+      "title": "Posta elettronica",
       "required": "Posta elettronica è richiesta",
       "placeholder": "Posta Elettronica"
     },
+    "secondEmail": {
+      "title": "PEC Posta elettronica",
+      "required": "PEC posta elettronica è richiesta",
+      "placeholder": "PEC posta Elettronica"
+    },
     "country": {
+      "title": "Paese",
       "required": "Vostro paese è obbligatorio",
       "placeholder": "Seleziona il paese"
     },
+    "state": {
+      "title": "Stato",
+      "required": "Vostro stato è obbligatorio",
+      "placeholder": "Seleziona lo stato"
+    },
     "date": {
+      "title": "Data di nascità",
       "required": "la data di nascità è obbligatoria",
       "placeholder": "Seleziona la data"
     },
     "phone": {
+      "title": "Numero di telefono",
       "required": "il vostro numero di telefono è obbligatorio",
       "placeholder": "Numero di telefono"
     },
+    "landline": {
+      "title": "Numero di telefono secondario",
+      "required": "il vostro numero di telefono secondario è obbligatorio",
+      "placeholder": "Numero di telefono secondario"
+    },
     "role": {
+      "title": "Ruolo",
       "required": "Ruolo è richiesto",
       "placeholder": "Seleziona un ruolo"
     },
     "confirmPassword": {
       "required": "Si prega di confermare la password",
       "placeholder": "Conferma password"
+    },
+    "zipCode": {
+      "title": "Codice Postale",
+      "required": "Codice postale è obbligatorio",
+      "placeholder": "Inserisci codice postale"
+    },
+    "address": {
+      "title": "Indirizzo",
+      "required": "Indirizzo è obbligatorio",
+      "placeholder": "Inserisci indirizzo"
     },
     "divider": {
       "title": "Already have an account ?"
@@ -231,6 +270,9 @@
       "otherPersonalEmail": "Indirizzo PEC Personale",
       "mobilePhone": "Cellulare",
       "landlinePhone": "Telefono Fisso"
+    },
+    "add": {
+      "title": "Nuovo utente"
     }
   },
   "All Users": "tutti gli utenti",

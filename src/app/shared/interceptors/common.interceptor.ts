@@ -66,8 +66,10 @@ export class CommonInterceptor implements HttpInterceptor {
     } else {
       // If user is already connected, and want to go to Login/Register page
       // Redirect to dashboard page.
-      if (user?.token) {
-        this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+      if(!request.url.includes(ExternalApi.WAREHOUSE_WORLD_COUNTRIES)) {
+        if (user?.token) {
+          this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+        }
       }
     }
 
