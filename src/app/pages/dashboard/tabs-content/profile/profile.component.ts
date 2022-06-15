@@ -22,6 +22,9 @@ export class ProfileComponent implements OnInit {
   alertType: string = '';
   messageAlert: string = '';
   profileURL: any;
+  okText: string = '';
+  descriptionAlert: string = '';
+  isExpiredToken: boolean = false;
 
   constructor(
     private router: Router,
@@ -60,8 +63,17 @@ export class ProfileComponent implements OnInit {
         this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
       },
       (error: HttpErrorResponse) => {
-        console.log('Error Occured during downloading: ', error);
-        this.errorAlertType(error?.error.message);
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = 'Go to login';
+          this.messageAlert = `Session timeout expiration`;
+          this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
+          this.isExpiredToken = true;
+        } else {
+          console.log('Error Occured during downloading: ', error);
+          this.errorAlertType(error?.error.message);
+        }
       }
     );
   }
@@ -139,7 +151,13 @@ export class ProfileComponent implements OnInit {
     this.messageAlert = message;
   }
 
-  getMobilePhoneUser( phonePrefix: string, phoneNumber: string): string {
+  getMobilePhoneUser(phonePrefix: string, phoneNumber: string): string {
     return phonePrefix + ' ' + phoneNumber;
+  }
+
+  handleOnOkModal(event: string) {
+    this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
+    window.location.reload();
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
 }

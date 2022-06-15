@@ -9,7 +9,6 @@ import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 
-
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
@@ -20,6 +19,7 @@ export class DashboardComponent implements OnInit {
   theme: any = false;
   mode: any = false;
   isCollapsed = false;
+  isAuth: boolean = false;
   isLogout: boolean = false;
   isValidToken: boolean = false;
   alertType: string = '';
@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
     private dashboardService: DashboardService,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private authorizationService: AuthorizationService,
-    private profilService :ProfilService
+    private profilService: ProfilService
   ) {
     console.log(
       "localStorage.getItem('theme'): ",
@@ -77,8 +77,10 @@ export class DashboardComponent implements OnInit {
     if (this.warehouseUser?.token) {
       this.handleOnVerifyToken(this.warehouseUser?.token);
     }
-    this.checkRole = this.warehouseUser.roles.find((role:any) => role === "ROLE_ADMIN");
-    console.log("checkRole: ",this.checkRole)
+    this.checkRole = this.warehouseUser?.roles.find(
+      (role: any) => role === 'ROLE_ADMIN'
+    );
+    console.log('checkRole: ', this.checkRole);
   }
 
   handleOnVerifyToken(token: string) {
@@ -90,14 +92,23 @@ export class DashboardComponent implements OnInit {
       (error: HttpErrorResponse) => {
         console.log('error: ', error);
         if (error?.status === 403) {
+          // Expiration token
           this.alertType = AlertType.ALERT_WARNING;
-          this.okText = 'Login again';
-          this.messageAlert = `Authorization failed`;
-          this.descriptionAlert = `Sorry, you authorization in the Warehouse System isn't allowed.`;
+          this.okText = 'Go to login';
+          this.messageAlert = `Session timeout expiration`;
+          this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
           this.isValidToken = true;
+        } else {
+          this.errorAlertType(error?.error.message);
         }
       }
     );
+  }
+
+  errorAlertType(message: string): void {
+    this.isAuth = true;
+    this.alertType = AlertType.ALERT_ERROR;
+    this.messageAlert = message;
   }
 
   handleOnNavigate(url: String) {
@@ -115,8 +126,6 @@ export class DashboardComponent implements OnInit {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}/`]);
   }
 
-  
-
   handleOnCollapsed(collapsed: boolean) {
     this.isCollapsed = collapsed;
   }
@@ -127,5 +136,11 @@ export class DashboardComponent implements OnInit {
       window.location.reload();
       this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
     }
+  }
+
+  handleOnAddUser() {
+    this.router.navigate([`${Pages.USER}/${Pages.CREATE}`], {
+      relativeTo: this.route,
+    });
   }
 }

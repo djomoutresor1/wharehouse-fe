@@ -8,7 +8,14 @@
       "yes": "Oui",
       "no": "Non",
       "verification": "Verifier l'email",
-      "edit": "Modifier"
+      "edit": "Modifier",
+      "create.user": "Créer l'utilisateur",
+      "file": {
+        "placeholder": "Selectioner votre photo de profil",
+        "upload": "Selectioner",
+        "change": "Echanger",
+        "remove": "Supprimer"
+      }
     },
     "modal": {
       "logout": {
@@ -113,6 +120,7 @@
       "required": "Nom et Prénom sont obbligatoires"
     },
     "username": {
+      "title": "Courrier électronique",
       "required": "Pseudo est obbligatoire",
       "placeholder": "Pseudo"
     },
@@ -123,28 +131,58 @@
       "female": "Femme"
     },
     "email": {
+      "title": "Courrier électronique",
       "required": "Courrier électronique est obbligatoire",
       "placeholder": "Courrier électronique"
     },
+    "secondEmail": {
+      "title": "Courrier électronique PEC",
+      "required": "Courrier électronique PEC est obbligatoire",
+      "placeholder": "Courrier électronique PEC"
+    },
     "role": {
+      "title": "Rôle",
       "required": "Rôle est obbligatoire",
       "placeholder": "Selectioner un rôle"
     },
     "country": {
+      "title": "Pays",
       "required": "Votre pays est obbligatoire",
       "placeholder": "Selectioner votre pays"
     },
+    "state": {
+      "title": "Ville",
+      "required": "Votre ville est obbligatoire",
+      "placeholder": "Selectioner votre ville"
+    },
     "date": {
+      "title": "Date de naissance",
       "required": "La date de naissance est obbligatoire",
       "placeholder": "Selectioner la date de naissance"
     },
     "phone": {
-      "required": "Votre numero di telephone est obbligatoire",
-      "placeholder": "Numero de telephone"
+      "title": "Numéro de téléphone",
+      "required": "Votre numéro di téléphone est obbligatoire",
+      "placeholder": "Insérez votre numéro de téléphone"
+    },
+    "landline": {
+      "title": "Numéro de téléphone secondaire",
+      "required": "Votre numéro di téléphone secondaire est obbligatoire",
+      "placeholder": "Insérez votre numéro de téléphone secondaire"
     },
     "confirmPassword": {
       "required": "Veuillez confirmer votre mot de passe",
       "placeholder": "Confirmation mot de passe"
+    },
+    "zipCode": {
+      "title": "Code Postal",
+      "required": "Votre code postale est obligatoire",
+      "placeholder": "Insérez votre code postale"
+    },
+    "address": {
+      "title": "Adresse de localisation",
+      "required": "L'adresse de localisation est obligatoire",
+      "placeholder": "Insérez l'adresse de localisation"
     },
     "divider": {
       "title": "Vous avez déjà un compte ?"
