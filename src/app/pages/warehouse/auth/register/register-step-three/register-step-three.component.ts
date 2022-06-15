@@ -48,15 +48,8 @@ export class RegisterStepThreeComponent implements OnInit {
   ];
   currentStep: number = 2;
   selectedFile: any;
-  event1: any;
   imgURL: any;
-  receivedImageData: any;
-  base64Data: any;
-  convertedImage: any;
   showbuttonUpload: boolean = false;
-  showInputUpload: boolean = true;
-  dateSelected: string = '';
-  modelPaese: any;
   countrySelected: string = '';
   countryDialCode: string = '';
   userId: string = '';
@@ -89,7 +82,7 @@ export class RegisterStepThreeComponent implements OnInit {
     );
   }
 
-  keyPress(event: any) {
+  handleOnKeyPress(event: any) {
     const pattern = /[0-9\+\-\ ]/;
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
@@ -106,7 +99,7 @@ export class RegisterStepThreeComponent implements OnInit {
         [
           Validators.required,
           Validators.pattern('^[0-9]*$'),
-          Validators.minLength(10),
+          Validators.minLength(6),
           Validators.maxLength(10),
         ],
       ],

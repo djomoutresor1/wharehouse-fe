@@ -12,7 +12,7 @@
       <li *ngIf="this.checkRole === undefined? false:true" nz-submenu nzTitle="{{'Users' | translate}}" nzIcon="user">
         <ul>
           <li nz-menu-item (click)="handleOnUser('dashboard/users')">{{'All users'| translate}}</li>
-          <li nz-menu-item>{{'Add new user' | translate}}</li>
+          <li nz-menu-item (click)="handleOnAddUser()">{{'Add new user' | translate}}</li>
           <!-- <li nz-menu-item>Alex</li> -->
         </ul>
       </li>
@@ -44,6 +44,12 @@
     <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert"
       [descriptionNotification]="descriptionAlert">
     </warehouse-notification>
+  </div>
+</div>
+<div class="row" *ngIf="isAuth">
+  <div class="col">
+      <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
+      </warehouse-alert>
   </div>
 </div>
 <div class="row" *ngIf="isValidToken">

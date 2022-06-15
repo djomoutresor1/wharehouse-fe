@@ -33,14 +33,16 @@
                             <div class="register-step-three-upload-image">
                                 <label class="ant-btn ant-btn-primary">
                                     <i nz-icon nzType="file-image" nzTheme="fill"></i>
-                                    <span>{{showbuttonUpload ? "Change" : "Upload"}}</span>
+                                    <span>{{showbuttonUpload ? "dashboard.cta.file.change" : "dashboard.cta.file.upload"
+                                        | translate }}</span>
                                     <input type="file" hidden accept="image/*" (change)="handleOnFileChanged($event)"
-                                        nz-input formControlName="image" placeholder="upload your foto profile" />
+                                        nz-input formControlName="image"
+                                        [placeholder]="'dashboard.cta.file.placeholder' | translate" />
                                 </label>
                                 <button *ngIf="showbuttonUpload" class="m-3" nz-button nzType="primary" nzDanger
                                     (click)="handleOnRemoneImage()">
                                     <i nz-icon nzType="delete" nzTheme="fill"></i>
-                                    Remove
+                                    {{ "dashboard.cta.file.remove" | translate }}
                                 </button>
                             </div>
                         </nz-input-group>
@@ -48,8 +50,9 @@
                 </nz-form-item>
                 <nz-form-item>
                     <nz-form-control>
-                        <nz-date-picker nzAllowClear="true" [nzFormat]="dateFormat" [(ngModel)]="dateSelected"
-                            formControlName="dateOfBirth" (click)="handleOnChangeInput()" (ngModelChange)="handleOnChangeDate($event)"></nz-date-picker>
+                        <nz-date-picker nzAllowClear="true" [nzFormat]="dateFormat" formControlName="dateOfBirth"
+                            (click)="handleOnChangeInput()" (ngModelChange)="handleOnChangeDate($event)">
+                        </nz-date-picker>
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
@@ -67,18 +70,18 @@
                 </nz-form-item>
                 <nz-form-item *ngIf="!!countrySelected?.length">
                     <nz-form-control [nzErrorTip]="'register.phone.required'| translate">
-                        <nz-input-group>
-                            <div class="row">
-                                <div class="col-md-5"><img class="multilanguage" [src]="handleOnFlagSelected()" />
-                                    {{getCountryDialCode()}}</div>
-                                <div class="col-md-7">
-                                    <input type="tel" minlength="10" maxlength="10" nz-input
+                        <div class="row">
+                            <div class="col-md-5"><img class="multilanguage" [src]="handleOnFlagSelected()" />
+                                {{getCountryDialCode()}}</div>
+                            <div class="col-md-7">
+                                <nz-input-group nzPrefixIcon="phone">
+                                    <input type="tel" nz-input
                                         formControlName="phoneNumber"
                                         [placeholder]="'register.phone.placeholder'| translate"
-                                        (click)="handleOnChangeInput()" (keypress)="keyPress($event)" />
-                                </div>
+                                        (click)="handleOnChangeInput()" (keypress)="handleOnKeyPress($event)" />
+                                </nz-input-group>
                             </div>
-                        </nz-input-group>
+                        </div>
                     </nz-form-control>
                 </nz-form-item>
                 <button nz-button [disabled]="!validateForm.valid" nzBlock (click)="submitForm()"
