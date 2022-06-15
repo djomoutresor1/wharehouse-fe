@@ -63,19 +63,19 @@
       <div class="row mb-4">
         <div class="col-md-4 mt-3">
           <label class="mb-2">{{"register.gender.placeholder" | translate }}</label><br />
-          <nz-switch [ngModel]="userLocalStorage.gender === 'Male' ? 1 : 0" [disabled]="true"
+          <nz-switch [ngModel]="userLocalStorage.gender === 'Male' ? 1 : 0" [disabled]="enableEdit"
             [nzCheckedChildren]="'register.gender.male' | translate"
             [nzUnCheckedChildren]="'register.gender.female' | translate"></nz-switch>
         </div>
         <div class="col-md-4 mt-3">
           <label class="mb-2">{{"profile.personalData.fullname" | translate }}</label>
           <input nz-input [value]="userLocalStorage.fullname ? userLocalStorage.fullname : 'profile.empty' | translate"
-            [disabled]="true" />
+            [disabled]="enableEdit" />
         </div>
         <div class="col-md-4 mt-3">
           <label class="mb-2">{{ "profile.personalData.userId" | translate }}</label>
           <input nz-input [value]="userLocalStorage.userId  ? userLocalStorage.userId : 'profile.empty' | translate"
-            [disabled]="true" />
+            [disabled]="enableEdit" />
         </div>
       </div>
       <div class="row mb-4">
@@ -83,31 +83,31 @@
           <label class="mb-2">{{"profile.personalData.dateOfBorn" | translate }}</label>
           <input nz-input
             [value]="userLocalStorage.dateOfBirth ? userLocalStorage.dateOfBirth : 'profile.empty' | translate"
-            [disabled]="true" />
+            [disabled]="enableEdit" />
         </div>
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.dateOfBorn" | translate }}</label>
           <input nz-input
             [value]="userLocalStorage.dateOfBorn ? userLocalStorage.dateOfBorn : 'profile.empty' | translate"
-            [disabled]="true" />
+            [disabled]="enableEdit" />
         </div>
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.country" | translate }}</label>
-          <input nz-input [value]="userLocalStorage.country ? userLocalStorage.country : 'profile.empty' | translate" [disabled]="true" />
+          <input nz-input [value]="userLocalStorage.country ? userLocalStorage.country : 'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.city" | translate }}</label>
-          <input nz-input [value]="userLocalStorage.city ? userLocalStorage.city : 'profile.empty' | translate" [disabled]="true" />
+          <input nz-input [value]="userLocalStorage.city ? userLocalStorage.city : 'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
       </div>
       <div class="row mb-4">
         <div class="col-md-2 mt-3">
           <label class="mb-2">{{"profile.personalData.zip" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+          <input nz-input [value]="'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
         <div class="col-md-8 mt-3">
           <label class="mb-2">{{"profile.personalData.address" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+          <input nz-input [value]="'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
       </div>
     </div>
@@ -120,21 +120,21 @@
               [ngClass]="userLocalStorage.active ? 'warehouse-success' : 'warehouse-tomato'">{{(userLocalStorage.active ?
               "profile.verified" : "profile.notVerified") | translate}}</span>)</label>
           <input nz-input [value]="userLocalStorage.email ? userLocalStorage.email : 'profile.empty' | translate"
-            [disabled]="true" />
+            [disabled]="enableEdit" />
         </div>
         <div class="col-md-6 mt-3">
           <label class="mb-2">{{"profile.personalContact.otherPersonalEmail" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+          <input nz-input [value]="'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
       </div>
       <div class="row mb-4">
         <div class="col-md-6 mt-3">
           <label class="mb-2">{{"profile.personalContact.mobilePhone" | translate }}</label>
-          <input nz-input [value]="userLocalStorage.phoneNumber ? getMobilePhoneUser(userLocalStorage.phonePrefix, userLocalStorage.phoneNumber ): 'profile.empty' | translate" [disabled]="true" />
+          <input nz-input [value]="userLocalStorage.phoneNumber ? getMobilePhoneUser(userLocalStorage.phonePrefix, userLocalStorage.phoneNumber ): 'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
         <div class="col-md-6 mt-3">
           <label class="mb-2">{{"profile.personalContact.landlinePhone" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+          <input nz-input [value]="'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
       </div>
     </div>
@@ -144,8 +144,10 @@
     <div class="col-md-12 mt-3">
       <button nz-button (click)="handleOnBack()" class="profile-back" nzType="primary" nzDanger>
         <i nz-icon nzType="left" nzTheme="outline"></i>{{'dashboard.cta.back' | translate}}</button>
-      <button nz-button (click)="handleOnEdit()" class="profile-edit" [nzType]="'primary'">
+      <button *ngIf="enableEdit" nz-button (click)="handleOnEdit()" class="profile-edit" [nzType]="'primary'">
         <i nz-icon nzType="edit" nzTheme="outline"></i>{{'dashboard.cta.edit' | translate}}</button>
+      <button *ngIf="!enableEdit" nz-button (click)="handleOnSave()" class="profile-edit" [nzType]="'primary'">
+          {{'button.save' | translate}}</button>
       <button nz-button (click)="handleOnChangePassword()" class="profile-change-password" [nzType]="'default'">
           <i nz-icon nzType="lock" nzTheme="outline"></i>{{'changePassword.cta' | translate}}</button>
     </div>
