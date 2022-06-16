@@ -120,7 +120,7 @@
       "required": "Nom et Prénom sont obbligatoires"
     },
     "username": {
-      "title": "Courrier électronique",
+      "title": "Pseudo",
       "required": "Pseudo est obbligatoire",
       "placeholder": "Pseudo"
     },
