@@ -25,6 +25,8 @@ export class ProfileComponent implements OnInit {
   okText: string = '';
   descriptionAlert: string = '';
   isExpiredToken: boolean = false;
+  enableEdit: boolean = true;
+  
 
   constructor(
     private router: Router,
@@ -133,7 +135,13 @@ export class ProfileComponent implements OnInit {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
   }
 
-  handleOnEdit() {}
+  handleOnEdit() {
+    this.enableEdit = false
+  }
+
+  handleOnSave(){
+    this.enableEdit = true
+  }
 
   handleOnBack() {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
