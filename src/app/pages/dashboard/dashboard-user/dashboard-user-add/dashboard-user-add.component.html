@@ -137,16 +137,17 @@
                         </nz-form-item>
                     </div>
                     <div class="col-md-3">
-                        <nz-form-label nzFor="country">{{"register.state.title" | translate }}<span
+                        <nz-form-label nzFor="state">{{"register.state.title" | translate }}<span
                                 class="warehouse-required"> *</span></nz-form-label>
                         <nz-form-item>
                             <nz-form-control [nzErrorTip]="'register.state.required'| translate">
-                                <nz-select nzShowSearch [nzPlaceHolder]="'register.state.placeholder'| translate"
-                                    class="multilanguage-wrapper" formControlName="state"
+                                <nz-select [nzDisabled]="!!countryStatesData?.length ? false : true" nzShowSearch
+                                    [nzPlaceHolder]="'register.state.placeholder'| translate" formControlName="state"
                                     (click)="handleOnChangeInput()" (ngModelChange)="handleOnSelectState($event)"
-                                    [(ngModel)]="countrySelected">
+                                    [(ngModel)]="stateSelected">
                                     <nz-option nzCustomContent *ngFor="let state of countryStatesData"
-                                        nzValue="{{state?.name}}" nzLabel="{{state?.name}}">
+                                        [nzValue]="state?.name" [nzLabel]="state?.name">
+                                        {{state?.name}}
                                     </nz-option>
                                 </nz-select>
                             </nz-form-control>
@@ -167,7 +168,8 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-6">
-                        <nz-form-label nzFor="address">{{"register.address.title" | translate }}</nz-form-label>
+                        <nz-form-label nzFor="address">{{"register.address.title" | translate }} <span
+                                class="warehouse-required"> *</span></nz-form-label>
                         <nz-form-item>
                             <nz-form-control [nzErrorTip]="'register.address.required' | translate">
                                 <nz-input-group nzPrefixIcon="environment">
@@ -181,7 +183,8 @@
                 </div>
             </div>
             <div class="col-md-12 dashboard-user-personal-contact">
-                <h2 class="dashboard-user-profile-title" nz-typography>{{"profile.personalContact.title" | translate}}</h2>
+                <h2 class="dashboard-user-profile-title" nz-typography>{{"profile.personalContact.title" | translate}}
+                </h2>
                 <nz-divider class="warehouse-background-primary warehouse-not-padding warehouse-not-margin">
                 </nz-divider>
                 <div class="row mt-4">
@@ -218,9 +221,10 @@
                         <nz-form-item *ngIf="!!countrySelected?.length">
                             <nz-form-control [nzErrorTip]="'register.phone.required'| translate">
                                 <div class="row">
-                                    <div class="col-md-3"><img class="multilanguage"
-                                            [src]="handleOnCountrySelected()" />
-                                        {{getCountryDialCode()}}</div>
+                                    <div class="col-md-3">
+                                        <img class="multilanguage" [src]="handleOnCountrySelected()" />
+                                        {{getPhonePrefixNumber()}}
+                                    </div>
                                     <div class="col-md-6">
                                         <nz-input-group nzPrefixIcon="phone">
                                             <input type="tel" nz-input formControlName="phoneNumber"
@@ -232,15 +236,32 @@
                             </nz-form-control>
                         </nz-form-item>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-5" *ngIf="!!this.prefixPhoneData?.length">
                         <nz-form-label nzFor="landlineNumber">{{"register.landline.title" | translate }}</nz-form-label>
                         <nz-form-item>
                             <nz-form-control [nzErrorTip]="'register.landline.required' | translate">
-                                <nz-input-group nzPrefixIcon="mobile">
-                                    <input type="tel" nz-input formControlName="landlineNumber"
-                                        [placeholder]="'register.landline.placeholder'| translate"
-                                        (click)="handleOnChangeInput()" (keypress)="handleOnKeyPress($event)" />
-                                </nz-input-group>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <nz-select nzShowSearch
+                                            [nzPlaceHolder]="'register.state.placeholder'| translate"
+                                            formControlName="landlinePrefix" (click)="handleOnChangeInput()"
+                                            (ngModelChange)="handleOnSelectLandlinePrefix($event)"
+                                            [(ngModel)]="landlinePrefixSelected">
+                                            <nz-option nzCustomContent *ngFor="let landlinePrefix of prefixPhoneData"
+                                                [nzValue]="landlinePrefix?.dialCode"
+                                                [nzLabel]="landlinePrefix?.dialCode">
+                                                {{landlinePrefix?.dialCode}}
+                                            </nz-option>
+                                        </nz-select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <nz-input-group nzPrefixIcon="mobile">
+                                            <input type="tel" nz-input formControlName="landlineNumber"
+                                                [placeholder]="'register.landline.placeholder'| translate"
+                                                (click)="handleOnChangeInput()" (keypress)="handleOnKeyPress($event)" />
+                                        </nz-input-group>
+                                    </div>
+                                </div>
                             </nz-form-control>
                         </nz-form-item>
                     </div>
@@ -252,7 +273,8 @@
             <div class="col-md-12 mt-3">
                 <button nz-button (click)="handleOnBack()" class="profile-back" nzType="primary" nzDanger>
                     <i nz-icon nzType="left" nzTheme="outline"></i>{{'dashboard.cta.back' | translate}}</button>
-                <button nz-button (click)="handleOnInsertUser()" class="dashboard-user-cta-create" [nzType]="'primary'">
+                <button [disabled]="!validateForm.valid" nz-button (click)="handleOnInsertUser()"
+                    class="dashboard-user-cta-create" [nzType]="'primary'">
                     <i nz-icon nzType="user" nzTheme="outline"></i>{{'dashboard.cta.create.user' | translate}}</button>
             </div>
         </div>
