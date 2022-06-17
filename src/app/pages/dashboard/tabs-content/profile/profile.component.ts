@@ -137,6 +137,9 @@ export class ProfileComponent implements OnInit {
 
   handleOnEdit() {
     this.enableEdit = false
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.USER}/${Pages.CREATE}`])
+   //update user informations
+   // this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.USER}/${Pages.EDIT}`])
   }
 
   handleOnSave(){
