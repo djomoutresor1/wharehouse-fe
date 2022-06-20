@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
   descriptionAlert: string = '';
   isExpiredToken: boolean = false;
   enableEdit: boolean = true;
+  dataUser:any;
   
 
   constructor(
@@ -63,6 +64,7 @@ export class ProfileComponent implements OnInit {
       (response) => {
         let objectURL = 'data:image/jpeg;base64,' + response?.object?.data;
         this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        this.dataUser = response?.object?.user;
       },
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
@@ -137,10 +139,11 @@ export class ProfileComponent implements OnInit {
 
   handleOnEdit() {
     this.enableEdit = false
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.USER}/${Pages.CREATE}`])
+  //  this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.USER}/${Pages.CREATE}`])
    //update user informations
-   // this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.USER}/${Pages.EDIT}`])
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.USER}/${Pages.EDIT}`])
   }
+  
 
   handleOnSave(){
     this.enableEdit = true

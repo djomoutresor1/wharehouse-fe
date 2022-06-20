@@ -32,11 +32,11 @@
       <div class="row mt-3 profile-user">
         <div class="col-md-3">
           <p class="profile-title" nz-typography>{{ "register.username.placeholder" | translate }}</p>
-          <h3 class="profile-title" nz-typography>{{ userLocalStorage.username }}</h3>
+          <h3 class="profile-title" nz-typography>{{ dataUser?.username }}</h3>
         </div>
         <div class="col-md-3">
           <p class="profile-title" nz-typography>{{ "profile.personalData.userId" | translate }}</p>
-          <h3 class="profile-title" nz-typography>{{ userLocalStorage.userId }}</h3>
+          <h3 class="profile-title" nz-typography>{{ dataUser?.userId }}</h3>
         </div>
         <div class="col-md-4">
           <p class="profile-title" nz-typography>{{"profile.role" | translate}}</p>
@@ -50,7 +50,7 @@
       </div>
       <div class="row mt-3">
         <div class="col-md-12">
-          <span nz-typography><strong>{{"profile.lastLoginMessage" | translate}} {{ userLocalStorage.lastLogin
+          <span nz-typography><strong>{{"profile.lastLoginMessage" | translate}} {{ dataUser?.lastLogin
               }}</strong></span>
         </div>
       </div>
@@ -63,41 +63,41 @@
       <div class="row mb-4">
         <div class="col-md-4 mt-3">
           <label class="mb-2">{{"register.gender.placeholder" | translate }}</label><br />
-          <nz-switch [ngModel]="userLocalStorage.gender === 'Male' ? 1 : 0" [disabled]="enableEdit"
+          <nz-switch [ngModel]="dataUser?.gender === 'Male' ? 1 : 0" [disabled]="enableEdit"
             [nzCheckedChildren]="'register.gender.male' | translate"
             [nzUnCheckedChildren]="'register.gender.female' | translate"></nz-switch>
         </div>
         <div class="col-md-4 mt-3">
           <label class="mb-2">{{"profile.personalData.fullname" | translate }}</label>
-          <input nz-input [value]="userLocalStorage.fullname ? userLocalStorage.fullname : 'profile.empty' | translate"
+          <input nz-input [value]="dataUser?.fullname ? dataUser?.fullname : 'profile.empty' | translate"
             [disabled]="enableEdit" />
         </div>
         <div class="col-md-4 mt-3">
           <label class="mb-2">{{ "profile.personalData.userId" | translate }}</label>
-          <input nz-input [value]="userLocalStorage.userId  ? userLocalStorage.userId : 'profile.empty' | translate"
+          <input nz-input [value]="dataUser?.userId  ? dataUser?.userId : 'profile.empty' | translate"
             [disabled]="enableEdit" />
         </div>
-      </div>
+      </div> 
       <div class="row mb-4">
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.dateOfBorn" | translate }}</label>
           <input nz-input
-            [value]="userLocalStorage.dateOfBirth ? userLocalStorage.dateOfBirth : 'profile.empty' | translate"
+            [value]="dataUser?.dateOfBirth ? dataUser?.dateOfBirth : 'profile.empty' | translate"
             [disabled]="enableEdit" />
         </div>
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.dateOfBorn" | translate }}</label>
           <input nz-input
-            [value]="userLocalStorage.dateOfBorn ? userLocalStorage.dateOfBorn : 'profile.empty' | translate"
+            [value]="dataUser?.dateOfBorn ? dataUser?.dateOfBorn : 'profile.empty' | translate"
             [disabled]="enableEdit" />
         </div>
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.country" | translate }}</label>
-          <input nz-input [value]="userLocalStorage.country ? userLocalStorage.country : 'profile.empty' | translate" [disabled]="enableEdit" />
+          <input nz-input [value]="dataUser?.country ? dataUser?.country : 'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.city" | translate }}</label>
-          <input nz-input [value]="userLocalStorage.city ? userLocalStorage.city : 'profile.empty' | translate" [disabled]="enableEdit" />
+          <input nz-input [value]="dataUser?.city ? dataUser?.city : 'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
       </div>
       <div class="row mb-4">
@@ -117,9 +117,9 @@
       <div class="row mb-4">
         <div class="col-md-6 mt-3">
           <label class="mb-2">{{"profile.personalContact.personalEmail" | translate }} (<span class="profile-verified"
-              [ngClass]="userLocalStorage.active ? 'warehouse-success' : 'warehouse-tomato'">{{(userLocalStorage.active ?
+              [ngClass]="dataUser?.active ? 'warehouse-success' : 'warehouse-tomato'">{{(dataUser?.active ?
               "profile.verified" : "profile.notVerified") | translate}}</span>)</label>
-          <input nz-input [value]="userLocalStorage.email ? userLocalStorage.email : 'profile.empty' | translate"
+          <input nz-input [value]="dataUser?.email ? dataUser?.email : 'profile.empty' | translate"
             [disabled]="enableEdit" />
         </div>
         <div class="col-md-6 mt-3">
@@ -130,7 +130,7 @@
       <div class="row mb-4">
         <div class="col-md-6 mt-3">
           <label class="mb-2">{{"profile.personalContact.mobilePhone" | translate }}</label>
-          <input nz-input [value]="userLocalStorage.phoneNumber ? getMobilePhoneUser(userLocalStorage.phonePrefix, userLocalStorage.phoneNumber ): 'profile.empty' | translate" [disabled]="enableEdit" />
+          <input nz-input [value]="dataUser?.phoneNumber ? getMobilePhoneUser(dataUser?.phonePrefix, dataUser?.phoneNumber ): 'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
         <div class="col-md-6 mt-3">
           <label class="mb-2">{{"profile.personalContact.landlinePhone" | translate }}</label>
