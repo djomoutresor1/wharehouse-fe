@@ -98,7 +98,10 @@ export class DashboardUserEditComponent implements OnInit {
       ],
       email: [null, [Validators.required, Validators.email]],
       secondEmail: [null, [Validators.email]],
-      role: [null, [Validators.required]],
+      role: [         {
+        value: this.rolesList.find(c => c.label === this.datas.roles.name) || null,
+        disabled: false
+      }, [Validators.required]],
       gender: [null, [Validators.required]],
       image: '',
       dateOfBirth: ['', [Validators.required]],
@@ -133,6 +136,10 @@ export class DashboardUserEditComponent implements OnInit {
       address: ['', [Validators.required]],
     });
   }
+
+  datas = {
+    roles: { id: 2636, name: "Luxembourg", iso2: "LU" }
+  };
 
   initComponent() {
     this.user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
@@ -174,7 +181,6 @@ export class DashboardUserEditComponent implements OnInit {
   }
 
   handleOnFileChanged(event: any) {
-    debugger
     this.handleOnChangeInput();
     if (event.target.files && event.target.files.length > 0) {
       this.selectedFile = event.target.files[0];
@@ -325,7 +331,7 @@ export class DashboardUserEditComponent implements OnInit {
   }
 
   handleOnBack() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.PROFILE}`]);
   }
 
   getInfosUser() {

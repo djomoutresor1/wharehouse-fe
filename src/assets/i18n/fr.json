@@ -10,6 +10,7 @@
       "verification": "Verifier l'email",
       "edit": "Modifier",
       "create.user": "Créer l'utilisateur",
+      "update.user": "Ajourne l'utilisateur",
       "file": {
         "placeholder": "Selectioner votre photo de profil",
         "upload": "Selectioner",
@@ -116,7 +117,8 @@
       "stepThree": "Compléter enregistrement"
     },
     "fullname": {
-      "placeholder": "Nom et Prénom",
+      "title": "Nom et Prénom",
+      "placeholder": "Insert Nom et Prénom",
       "required": "Nom et Prénom sont obbligatoires"
     },
     "username": {
