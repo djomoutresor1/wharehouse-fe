@@ -4,12 +4,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FlagService } from 'src/app/services/flag.service';
-import { ProfilService } from 'src/app/services/profil.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 import * as _ from 'lodash';
+import { DashboardService } from 'src/app/services/dashboard.service';
+import { ResponseUserInsertModel } from 'src/model/dashboard/response/response-user-insert-model';
+import { UserInsertModel } from 'src/model/dashboard/request/user-insert-model';
+import { UserContactModel } from 'src/model/dashboard/request/user-contact-model';
+import { UserAddressModel } from 'src/model/dashboard/request/user-address-model';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'warehouse-dashboard-user-add',
@@ -59,8 +64,9 @@ export class DashboardUserAddComponent implements OnInit {
     private router: Router,
     private translate: TranslateService,
     private warehouseLocalStorage: WarehouseLocalStorage,
-    private profilService: ProfilService,
-    private flagService: FlagService
+    private dashboardService: DashboardService,
+    private flagService: FlagService,
+    private imageService: ImageService,
   ) {}
 
   ngOnInit(): void {
@@ -189,11 +195,21 @@ export class DashboardUserAddComponent implements OnInit {
     }
   }
 
+  successAlertType(message: string): void {
+    this.isAuth = true;
+    this.alertType = AlertType.ALERT_SUCCESS;
+    this.messageAlert = message;
+    this.descriptionAlert = this.translate.instant(
+      'operation.confirmation.insert.user'
+    );
+  }
+
   errorAlertType(message: string): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_ERROR;
     this.messageAlert = message;
   }
+
   handleOnRemoneImage() {
     this.imgURL = '';
     this.showbuttonUpload = false;
@@ -277,29 +293,76 @@ export class DashboardUserAddComponent implements OnInit {
   }
 
   handleOnSelectState(selectedState: string) {
-    console.log('handleOnSelectState: ', selectedState);
     this.stateSelected = selectedState;
   }
 
   handleOnInsertUser() {
-    let userData = {
+    let userContact: UserContactModel = {
+      landlinePrefix: this.landlinePrefixSelected,
+      phoneNumber: this.validateForm.controls['phoneNumber']?.value,
+      landlineNumber: this.validateForm.controls['landlineNumber']?.value,
+      phonePrefix: this.getPhonePrefixNumber(),
+    };
+
+    let userAddress: UserAddressModel = {
+      country: this.validateForm.controls['country']?.value,
+      state: this.validateForm.controls['state']?.value,
+      addressLine: this.validateForm.controls['address']?.value,
+      zipCode: this.validateForm.controls['zipCode']?.value,
+    };
+
+    let userData: UserInsertModel = {
       fullname: this.validateForm.controls['fullName']?.value,
       username: this.validateForm.controls['username']?.value.toLowerCase(),
       email: this.validateForm.controls['email']?.value,
       secondEmail: this.validateForm.controls['secondEmail']?.value,
       dateOfBirth: this.validateForm.controls['dateOfBirth']?.value,
-      country: this.validateForm.controls['country']?.value,
-      state: this.validateForm.controls['state']?.value,
-      address: this.validateForm.controls['address']?.value,
-      zipCode: this.validateForm.controls['zipCode']?.value,
-      phonePrefix: this.getPhonePrefixNumber(),
-      phoneNumber: this.validateForm.controls['phoneNumber']?.value,
-      landlineNumber: this.validateForm.controls['landlineNumber']?.value,
+      contact: userContact,
+      address: userAddress,
       role: this.validateForm.controls['role']?.value,
       gender: this.validateForm.controls['gender']?.value,
     };
 
     console.log('userData: ', userData);
+
+    this.dashboardService
+      .adminInsertUser(userData)
+      .subscribe((response: ResponseUserInsertModel) => {
+        console.log('response: ', response);
+        this.handleOnUploadImageProfile(response?.object?.userId as string);
+        this.successAlertType(response?.message);
+        this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+      }),
+      (error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = 'Go to login';
+          this.messageAlert = `Session timeout expiration`;
+          this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
+          this.isExpiredToken = true;
+        } else {
+          console.log('Error Occured during downloading: ', error);
+          this.errorAlertType(error?.error.message);
+        }
+      };
+  }
+
+  handleOnUploadImageProfile(userId: string) {
+    // Instantiate a FormData to store form fields and encode the file
+    let uploadData = new FormData();
+    // Add file content to prepare the request
+    uploadData.append('file', this.selectedFile);
+
+    this.imageService.uploadImageProfile(uploadData, userId).subscribe(
+      (response: any) => {
+        this.successAlertType(response?.message);
+      },
+      (error: HttpErrorResponse) => {
+        console.log('Error Occured duringng saving: ', error);
+        this.errorAlertType(error?.message || error?.error?.message);
+      }
+    );
   }
 
   handleOnSelectLandlinePrefix(landlinePrefix: string) {
@@ -308,5 +371,10 @@ export class DashboardUserAddComponent implements OnInit {
 
   handleOnBack() {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+  }
+
+  // Add + at first of the prefix
+  handleOnFormatPrefix(prefix: string): string {
+    return prefix?.startsWith('+') ? prefix : '+' + prefix;
   }
 }

@@ -5,8 +5,8 @@ import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { environment } from 'src/environments/environment';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
-import { UserLoginModel } from 'src/model/auth/resquest/user-login-model';
-import { UserRegisterModel, UserRegisterModelStepThree } from 'src/model/auth/resquest/user-register-model';
+import { UserLoginModel } from 'src/model/auth/request/user-login-model';
+import { UserRegisterModel, UserRegisterModelStepThree } from 'src/model/auth/request/user-register-model';
 import { Auth } from '../../shared/enums/auth-enums';
 
 @Injectable({

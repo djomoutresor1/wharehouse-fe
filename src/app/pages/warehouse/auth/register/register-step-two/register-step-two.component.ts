@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NzButtonSize } from 'ng-zorro-antd/button';
@@ -10,7 +9,10 @@ import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
+import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
+import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
+import { ResponseStatusActivationModel } from 'src/model/auth/response/response-status-activation-model';
 
 @Component({
   selector: 'warehouse-register-step-two',
@@ -83,6 +85,10 @@ export class RegisterStepTwoComponent implements OnInit {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER_STEP_3}`]);
   }
 
+  handleOnGoToLogin() {
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+  }
+
   onRetrieveUser() {
     return this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
   }
@@ -92,40 +98,78 @@ export class RegisterStepTwoComponent implements OnInit {
       .userVerifyLink(this.idLinkVerifyEmail, this.verifyType)
       .subscribe(
         (response: ResponseResetModel) => {
-          this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
-          this.user = response;
-          this.checkIfExpirationLinkIsCorrect();
-          if (!this.isExpiredLink && !this.isVerifyEmail) {
-            this.activateStatusUser();
+          console.log('response', response);
+          // Case where the user is added by the admin and not yet present the in users table, but in the users_tmp table
+          if (response?.user == null) {
+            this.handleOnFindUser(response?.userId);
+          } else {
+            this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
+            this.user = response;
+            this.checkIfExpirationLinkIsCorrect();
+            if (!this.isExpiredLink && !this.isVerifyEmail) {
+              this.handleOnActivateStatusUser();
+            }
           }
         },
         (error: HttpErrorResponse) => {
           if (error.status === 404) {
-            this.isVerifyEmail = true;
             this.errorAlertType(error?.error.message);
           }
         }
       );
   }
 
-  activateStatusUser() {
-    this.profilService
-      .onActivateUser(this.user?.user?.userId as string)
-      .subscribe((response: any) => {
-        this.successAlertType(response?.message);
-        (error: HttpErrorResponse) => {
-          console.log('Error: ', error);
-          this.errorAlertType(error.error.message);
+  handleOnFindUser(userId: string) {
+    this.authorizationService
+      .userFindByUserId(userId)
+      .subscribe((response: ResponseModel) => {
+        this.user = {
+          link: this.idLinkVerifyEmail,
+          expiryDate: this.expirationLink,
+          verifyType: this.verifyType,
+          userId: userId,
+          user: {
+            fullname: response?.object?.fullname,
+            email: response?.object?.email,
+            role: response?.object?.roles,
+            username: response?.object?.username,
+            active: response?.object?.active,
+            lastLogin: response?.object?.lastLogin,
+            userId: userId,
+          },
         };
-      });
+        this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(this.user);
+        this.checkIfExpirationLinkIsCorrect();
+        if (!this.isExpiredLink && !this.isVerifyEmail) {
+          this.handleOnActivateStatusUser();
+        }
+      }),
+      (error: HttpErrorResponse) => {
+        if (error.status === 404) {
+          this.errorAlertType(error?.error.message);
+        }
+      };
   }
 
-  successAlertType(message: string): void {
+  handleOnActivateStatusUser() {
+    this.profilService
+      .onActivateUser(this.user?.user?.userId as string)
+      .subscribe((response: ResponseStatusActivationModel) => {
+        this.successAlertType(response?.message, response?.isAdminUser);
+      }),
+      (error: HttpErrorResponse) => {
+        console.log('Error: ', error);
+        this.isVerifyEmail = true;
+        this.errorAlertType(error?.error?.message);
+      };
+  }
+
+  successAlertType(message: string, userType: boolean): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
     this.messageAlert = message;
     setTimeout(() => {
-      this.handleOnGoToStepThree();
+      userType ? this.handleOnGoToLogin() : this.handleOnGoToStepThree();
     }, 2000);
   }
 
@@ -140,7 +184,9 @@ export class RegisterStepTwoComponent implements OnInit {
         this.isExpiredLink = false;
       } else {
         this.isExpiredLink = true;
-        this.errorAlertType(this.translate.instant('validations.link.expiration'));
+        this.errorAlertType(
+          this.translate.instant('validations.link.expiration')
+        );
       }
     } else {
       this.isExpiredLink = true;

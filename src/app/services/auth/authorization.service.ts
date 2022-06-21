@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Auth } from 'src/app/shared/enums/auth-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { environment } from 'src/environments/environment';
+import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
@@ -28,6 +29,12 @@ export class AuthorizationService {
   public userForgotPassword(email: string): Observable<ResponseModel> {
     return this.http.get<ResponseModel>(
       `${this.apiServerUrl}${Auth.WAREHOUSE_FORGOT_PASSWORD}/${email}`
+    );
+  }
+
+  public userFindByUserId(userId: string): Observable<ResponseModel> {
+    return this.http.get<ResponseModel>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_FIND_USER}/${userId}`
     );
   }
 

@@ -1,4 +1,5 @@
 export interface ResponseLoginModel {
+  fullname: string;
   userId: string;
   active:boolean;
   message: string;
@@ -12,4 +13,6 @@ export interface ResponseLoginModel {
   dateOfBirth: Date;
   phoneNumber: number;
   country: string;
+  lastLogin: string;
+  createdAt: string;
 }

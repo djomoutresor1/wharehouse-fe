@@ -22,36 +22,40 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3 profile-avatar-container">
       <nz-avatar *ngIf="!profileURL" class="profile-avatar mb-3" nzIcon="user">
       </nz-avatar>
       <nz-avatar *ngIf="profileURL" class="profile-avatar mb-3" [nzSrc]="profileURL">
       </nz-avatar>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9">
       <div class="row mt-3 profile-user">
         <div class="col-md-3">
-          <p class="profile-title" nz-typography>{{ "register.username.placeholder" | translate }}</p>
+          <p class="profile-title" nz-typography>{{ "register.username.title" | translate }}</p>
           <h3 class="profile-title" nz-typography>{{ userLocalStorage.username }}</h3>
         </div>
         <div class="col-md-3">
           <p class="profile-title" nz-typography>{{ "profile.personalData.userId" | translate }}</p>
           <h3 class="profile-title" nz-typography>{{ userLocalStorage.userId }}</h3>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
+          <p class="profile-title" nz-typography>{{ "profile.personalData.createdAt" | translate }}</p>
+          <h3 class="profile-title" nz-typography>{{ getUserDateCreation(userLocalStorage?.createdAt) }}</h3>
+        </div>
+        <div class="col-md-3">
           <p class="profile-title" nz-typography>{{"profile.role" | translate}}</p>
           <h3 class="profile-title" nz-typography>
             <nz-tag *ngFor="let role of userLocalStorage.roles" [nzColor]="getUserColorRole(role)">
               <i nz-icon [nzType]="getRoleIcon(role)"></i>
-              {{ getRoleName(role)}}
+              {{ getRoleName(role) }}
             </nz-tag>
           </h3>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-md-12">
-          <span nz-typography><strong>{{"profile.lastLoginMessage" | translate}} {{ userLocalStorage.lastLogin
-              }}</strong></span>
+          <nz-alert nzType="info" nzMessage="{{'profile.lastLoginMessage' | translate}} {{ userLocalStorage.lastLogin
+          }}"></nz-alert>
         </div>
       </div>
     </div>
@@ -60,81 +64,153 @@
     <div class="col-md-12 profile-personal-data">
       <h2 class="profile-title" nz-typography>{{"profile.personalData.title" | translate}}</h2>
       <nz-divider class="warehouse-background-primary warehouse-not-padding warehouse-not-margin"></nz-divider>
-      <div class="row mb-4">
-        <div class="col-md-4 mt-3">
+      <div class="row mb-2">
+        <div class="col-md-3 mt-3">
           <label class="mb-2">{{"register.gender.placeholder" | translate }}</label><br />
           <nz-switch [ngModel]="userLocalStorage.gender === 'Male' ? 1 : 0" [disabled]="true"
-            [nzCheckedChildren]="'register.gender.male' | translate"
-            [nzUnCheckedChildren]="'register.gender.female' | translate"></nz-switch>
+            [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate">
+          </nz-switch>
+          <ng-template #checkedTemplate><i class="m-1" nz-icon nzType="man"
+              nzTheme="outline"></i>{{'register.gender.male' |
+            translate}}</ng-template>
+          <ng-template #unCheckedTemplate><i class="m-1" nz-icon nzType="woman"
+              nzTheme="outline"></i>{{'register.gender.female' |
+            translate}}</ng-template>
         </div>
         <div class="col-md-4 mt-3">
           <label class="mb-2">{{"profile.personalData.fullname" | translate }}</label>
-          <input nz-input [value]="userLocalStorage.fullname ? userLocalStorage.fullname : 'profile.empty' | translate"
-            [disabled]="true" />
+          <nz-input-group nzPrefixIcon="user">
+            <input nz-input
+              [value]="userLocalStorage?.fullname ? userLocalStorage?.fullname : 'profile.empty' | translate"
+              [disabled]="true" />
+          </nz-input-group>
         </div>
         <div class="col-md-4 mt-3">
           <label class="mb-2">{{ "profile.personalData.userId" | translate }}</label>
-          <input nz-input [value]="userLocalStorage.userId  ? userLocalStorage.userId : 'profile.empty' | translate"
-            [disabled]="true" />
+          <nz-input-group nzPrefixIcon="user">
+            <input nz-input [value]="userLocalStorage?.userId  ? userLocalStorage?.userId : 'profile.empty' | translate"
+              [disabled]="true" />
+          </nz-input-group>
         </div>
       </div>
-      <div class="row mb-4">
+      <div class="row mb-2">
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.dateOfBorn" | translate }}</label>
-          <input nz-input
-            [value]="userLocalStorage.dateOfBirth ? userLocalStorage.dateOfBirth : 'profile.empty' | translate"
-            [disabled]="true" />
+          <nz-input-group nzPrefixIcon="calendar">
+            <input nz-input
+              [value]="userLocalStorage?.dateOfBirth ? getFormatDateOfBirth(userLocalStorage?.dateOfBirth) : 'profile.empty' | translate"
+              [disabled]="true" />
+          </nz-input-group>
         </div>
-        <div class="col-md-3 mt-3">
-          <label class="mb-2">{{"profile.personalData.dateOfBorn" | translate }}</label>
-          <input nz-input
-            [value]="userLocalStorage.dateOfBorn ? userLocalStorage.dateOfBorn : 'profile.empty' | translate"
-            [disabled]="true" />
-        </div>
-        <div class="col-md-3 mt-3">
-          <label class="mb-2">{{"profile.personalData.country" | translate }}</label>
-          <input nz-input [value]="userLocalStorage.country ? userLocalStorage.country : 'profile.empty' | translate" [disabled]="true" />
+        <div class="col-md-4 mt-3">
+          <div class="row">
+            <div class="col-md-2 profile-flag-country">
+              <label class="mb-2"></label>
+              <img class="multilanguage" [src]="handleOnCountryFlagSelected(userLocalStorage?.address?.country)" />
+            </div>
+            <div class="col-md-10">
+              <label class="mb-2">{{"profile.personalData.country" | translate }}</label>
+              <nz-input-group nzPrefixIcon="flag">
+                <input nz-input
+                  [value]="userLocalStorage?.address?.country ? userLocalStorage?.address?.country : 'profile.empty' | translate"
+                  [disabled]="true" />
+              </nz-input-group>
+            </div>
+          </div>
         </div>
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.city" | translate }}</label>
-          <input nz-input [value]="userLocalStorage.city ? userLocalStorage.city : 'profile.empty' | translate" [disabled]="true" />
+          <nz-input-group nzPrefixIcon="home">
+            <input nz-input
+              [value]="userLocalStorage?.address?.state ? userLocalStorage?.address?.state : 'profile.empty' | translate"
+              [disabled]="true" />
+          </nz-input-group>
         </div>
-      </div>
-      <div class="row mb-4">
         <div class="col-md-2 mt-3">
           <label class="mb-2">{{"profile.personalData.zip" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+          <nz-input-group nzPrefixIcon="field-number">
+            <input nz-input
+              [value]="userLocalStorage?.address?.zipCode ? userLocalStorage?.address?.zipCode : 'profile.empty' | translate"
+              [disabled]="true" />
+          </nz-input-group>
         </div>
+      </div>
+      <div class="row mb-2">
         <div class="col-md-8 mt-3">
           <label class="mb-2">{{"profile.personalData.address" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+          <nz-input-group nzPrefixIcon="environment">
+            <input nz-input
+              [value]="userLocalStorage?.address?.addressLine ? userLocalStorage?.address?.addressLine : 'profile.empty' | translate"
+              [disabled]="true" />
+          </nz-input-group>
         </div>
       </div>
     </div>
     <div class="col-md-12 profile-personal-contact">
       <h2 class="profile-title" nz-typography>{{"profile.personalContact.title" | translate}}</h2>
       <nz-divider class="warehouse-background-primary warehouse-not-padding warehouse-not-margin"></nz-divider>
-      <div class="row mb-4">
+      <div class="row mb-2">
         <div class="col-md-6 mt-3">
           <label class="mb-2">{{"profile.personalContact.personalEmail" | translate }} (<span class="profile-verified"
-              [ngClass]="userLocalStorage.active ? 'warehouse-success' : 'warehouse-tomato'">{{(userLocalStorage.active ?
+              [ngClass]="userLocalStorage?.active ? 'warehouse-success' : 'warehouse-tomato'">{{(userLocalStorage?.active
+              ?
               "profile.verified" : "profile.notVerified") | translate}}</span>)</label>
-          <input nz-input [value]="userLocalStorage.email ? userLocalStorage.email : 'profile.empty' | translate"
-            [disabled]="true" />
+          <nz-input-group nzPrefixIcon="mail">
+            <input nz-input [value]="userLocalStorage.email ? userLocalStorage.email : 'profile.empty' | translate"
+              [disabled]="true" />
+          </nz-input-group>
         </div>
         <div class="col-md-6 mt-3">
-          <label class="mb-2">{{"profile.personalContact.otherPersonalEmail" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+          <label class="mb-2">{{"profile.personalContact.otherPersonalEmail" | translate }}
+            <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover class="warehouse-cursor-pointer"
+              [nzPopoverTitle]="'profile.personalContact.popover.title' | translate"
+              [nzPopoverContent]="emailContentTemplate" nzPopoverPlacement="right"></i>
+            <ng-template #emailContentTemplate>
+              <div class="warehouse-popover-wrapper">
+                <p>{{'profile.personalContact.popover.contentOne' | translate }}</p>
+                <p><b>{{'profile.personalContact.popover.contentTwo' | translate }}</b></p>
+              </div>
+            </ng-template>
+          </label>
+          <nz-input-group nzPrefixIcon="mail">
+            <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+          </nz-input-group>
         </div>
       </div>
       <div class="row mb-4">
         <div class="col-md-6 mt-3">
-          <label class="mb-2">{{"profile.personalContact.mobilePhone" | translate }}</label>
-          <input nz-input [value]="userLocalStorage.phoneNumber ? getMobilePhoneUser(userLocalStorage.phonePrefix, userLocalStorage.phoneNumber ): 'profile.empty' | translate" [disabled]="true" />
+          <div class="row">
+            <div class="col-md-2 profile-flag-country">
+              <label class="mb-2"></label>
+              <img class="multilanguage" [src]="handleOnCountryFlagSelected(userLocalStorage?.address?.country)" />
+              <span class="profile-flag-phone-prefix">{{userLocalStorage?.contact?.phonePrefix}}</span>
+            </div>
+            <div class="col-md-10">
+              <label class="mb-2">{{"profile.personalContact.mobilePhone" | translate }}</label>
+              <nz-input-group nzPrefixIcon="mobile">
+                <input nz-input
+                  [value]="userLocalStorage?.contact?.phoneNumber ? userLocalStorage?.contact?.phoneNumber : 'profile.empty' | translate"
+                  [disabled]="true" />
+              </nz-input-group>
+            </div>
+          </div>
         </div>
         <div class="col-md-6 mt-3">
-          <label class="mb-2">{{"profile.personalContact.landlinePhone" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+          <div class="row">
+            <div class="col-md-2 profile-flag-country" *ngIf="userLocalStorage?.contact?.landlinePrefix">
+              <label class="mb-2"></label>
+              <img class="multilanguage" [src]="handleOnFlagByPrefixCode(userLocalStorage?.contact?.landlinePrefix)" />
+              <span class="profile-flag-phone-prefix">{{userLocalStorage?.contact?.landlinePrefix}}</span>
+            </div>
+            <div [ngClass]="userLocalStorage?.contact?.landlinePrefix ? 'col-md-10' : 'col-md-12'">
+              <label class="mb-2">{{"profile.personalContact.landlinePhone" | translate }}</label>
+              <nz-input-group nzPrefixIcon="phone">
+                <input nz-input
+                  [value]="userLocalStorage?.contact?.landlineNumber ? userLocalStorage?.contact?.landlineNumber : 'profile.empty' | translate"
+                  [disabled]="true" />
+              </nz-input-group>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -147,12 +223,12 @@
       <button nz-button (click)="handleOnEdit()" class="profile-edit" [nzType]="'primary'">
         <i nz-icon nzType="edit" nzTheme="outline"></i>{{'dashboard.cta.edit' | translate}}</button>
       <button nz-button (click)="handleOnChangePassword()" class="profile-change-password" [nzType]="'default'">
-          <i nz-icon nzType="lock" nzTheme="outline"></i>{{'changePassword.cta' | translate}}</button>
+        <i nz-icon nzType="lock" nzTheme="outline"></i>{{'changePassword.cta' | translate}}</button>
     </div>
   </div>
   <div class="row" *ngIf="isExpiredToken">
     <div class="col">
-      <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert" [descriptionModal]="descriptionAlert"
-        (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
+      <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert"
+        [descriptionModal]="descriptionAlert" (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
     </div>
   </div>

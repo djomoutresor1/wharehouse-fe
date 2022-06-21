@@ -248,9 +248,9 @@
                                             (ngModelChange)="handleOnSelectLandlinePrefix($event)"
                                             [(ngModel)]="landlinePrefixSelected">
                                             <nz-option nzCustomContent *ngFor="let landlinePrefix of prefixPhoneData"
-                                                [nzValue]="landlinePrefix?.dialCode"
-                                                [nzLabel]="landlinePrefix?.dialCode">
-                                                {{landlinePrefix?.dialCode}}
+                                                [nzValue]="handleOnFormatPrefix(landlinePrefix?.dialCode)"
+                                                [nzLabel]="handleOnFormatPrefix(landlinePrefix?.dialCode)">
+                                                {{handleOnFormatPrefix(landlinePrefix?.dialCode)}}
                                             </nz-option>
                                         </nz-select>
                                     </div>

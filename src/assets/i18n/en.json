@@ -1,4 +1,21 @@
 {
+  "message": {
+    "welcome": "Welcome to WareHouse System ",
+    "verification": {
+      "email": {
+        "title": "Verification Email",
+        "description": "It looks like your account hasn't passed the verification criteria.",
+        "cta": "Send link"
+      }
+    }
+  },
+  "operation": {
+    "confirmation": {
+      "insert": {
+        "user": "Confirmation insert new user"
+      }
+    }
+  },
   "dashboard": {
     "title": "Dashboard",
     "home": "Home page",
@@ -22,28 +39,28 @@
         "title": "Confirmation Logout",
         "subtitle": "Are you sure you want to logout ?"
       },
-        "check": {
-          "title": "Verification Email",
-          "subtitle": "your account hasn't been verified,please go to your email and verify it"
-        },
-        "deleteUser": {
-          "title": "Confirmation Cancellation",
-          "subtitle": "Are you sure you want to delete this user ?",
-          "cancel": {
-            "title": "Confirmation Cancel",
-            "subtitle": "Are you sure you want to cancel this profil ?"
-          }
+      "check": {
+        "title": "Verification Email",
+        "subtitle": "your account hasn't been verified,please go to your email and verify it"
+      },
+      "deleteUser": {
+        "title": "Confirmation Cancellation",
+        "subtitle": "Are you sure you want to delete this user ?",
+        "cancel": {
+          "title": "Confirmation Cancel",
+          "subtitle": "Are you sure you want to cancel this profil ?"
         }
       }
-    },
-    "dataTable": {
-      "options": {
-        "title": "Select",
-        "edit": "Edit",
-        "show": "Show",
-        "delete": "Delete"
-      }
-    },
+    }
+  },
+  "dataTable": {
+    "options": {
+      "title": "Select",
+      "edit": "Edit",
+      "show": "Show",
+      "delete": "Delete"
+    }
+  },
   "warehouse": {
     "name": "Warehouse System"
   },
@@ -116,7 +133,7 @@
     },
     "fullname": {
       "title": "First and Last name",
-      "placeholder": "insert first and last name",
+      "placeholder": "Insert first and last name",
       "required": "Your fullname is required"
     },
     "username": {
@@ -250,7 +267,7 @@
     "role": "You are",
     "roles": "Roles",
     "lastLogin": "Last Login",
-    "lastLoginMessage": "You were last logged in on",
+    "lastLoginMessage": "You were last logged in WareHouse System on",
     "verified": "Verified",
     "notVerified": "Not verified",
     "personalData": {
@@ -261,14 +278,20 @@
       "country": "Country",
       "city": "City",
       "address": "Address",
-      "zip": "Zip Code"
+      "zip": "Zip Code",
+      "createdAt": "Member from"
     },
     "personalContact": {
       "title": "Personal Contacts",
       "personalEmail": "Personal Email Address",
       "otherPersonalEmail": "Personal PEC Address",
       "mobilePhone": "Mobile Phone",
-      "landlinePhone": "Landine Phone"
+      "landlinePhone": "Landine Phone",
+      "popover": {
+        "title": "What is the Personal PEC Address",
+        "contentOne": "It is a secondary e-mail address, which can be used in case of need, together with the personal e-mail address.",
+        "contentTwo": "To be used, it must be certified (verified by the person)."
+      }
     }
   },
   "All Users": "All Users",

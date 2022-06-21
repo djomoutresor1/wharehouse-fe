@@ -9,8 +9,6 @@ export interface UserRegisterModel {
   userId?: string;
 }
 
-
-
 export interface UserRegisterModelStepThree {
   dateOfBirth: string;
   phoneNumber:any;

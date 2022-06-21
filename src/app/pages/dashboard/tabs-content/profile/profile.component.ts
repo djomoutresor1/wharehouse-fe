@@ -9,7 +9,9 @@ import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
-
+import * as moment from 'moment';
+import * as _ from 'lodash';
+import { FlagService } from 'src/app/services/flag.service';
 @Component({
   selector: 'warehouse-profile',
   templateUrl: './profile.component.html',
@@ -25,19 +27,23 @@ export class ProfileComponent implements OnInit {
   okText: string = '';
   descriptionAlert: string = '';
   isExpiredToken: boolean = false;
+  countryAndFlagData: any[] = [];
+  prefixPhoneData: any[] = [];
 
   constructor(
     private router: Router,
     private translate: TranslateService,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private profilService: ProfilService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private flagService: FlagService
   ) {}
 
   ngOnInit(): void {
     this.initComponent();
     this.userLocalStorage =
       this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
+    this.getCountriesAndPrefixPhoneWorld();
     this.getInfosUser();
   }
 
@@ -76,6 +82,35 @@ export class ProfileComponent implements OnInit {
         }
       }
     );
+  }
+
+  getUserDateCreation(createdAt: string): string {
+    return moment(createdAt).fromNow().toLocaleLowerCase();
+  }
+
+  getCountriesAndPrefixPhoneWorld() {
+    this.flagService.getDialCodeAndCountryFlag().subscribe(
+      (response: { data: any }) => {
+        this.countryAndFlagData = response.data;
+        this.prefixPhoneData = response.data?.filter((prefix: any) => {
+          return prefix?.dialCode !== undefined && prefix?.dialCode !== ' ';
+        });
+        // Only take the unique prefix phone
+        this.prefixPhoneData = _.uniqWith(this.prefixPhoneData, _.isEqual);
+      },
+      (error: HttpErrorResponse) => {
+        console.log('enable to retrieve data country and flag ' + error);
+      }
+    );
+  }
+
+  handleOnCountryFlagSelected(country: string) {
+    if (!!this.countryAndFlagData?.length) {
+      let countryFlag = this.countryAndFlagData?.find(
+        (countryFlag: any) => countryFlag?.name === country
+      );
+      return countryFlag?.flag;
+    }
   }
 
   getRoleName(role: string) {
@@ -151,8 +186,17 @@ export class ProfileComponent implements OnInit {
     this.messageAlert = message;
   }
 
-  getMobilePhoneUser(phonePrefix: string, phoneNumber: string): string {
-    return phonePrefix + ' ' + phoneNumber;
+  getFormatDateOfBirth(dateOfBirth: string): string {
+    return moment(dateOfBirth).format('L');
+  }
+
+  handleOnFlagByPrefixCode(prefix: string) {
+    if (!!this.countryAndFlagData?.length) {
+      let countryFlag = this.countryAndFlagData?.find(
+        (countryFlag: any) => "+" + countryFlag?.dialCode === prefix
+      );
+      return countryFlag?.flag;
+    }
   }
 
   handleOnOkModal(event: string) {

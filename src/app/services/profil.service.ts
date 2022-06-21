@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Persons } from 'src/interfaces/profils';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
+import { ResponseStatusActivationModel } from 'src/model/auth/response/response-status-activation-model';
 import { Auth } from '../shared/enums/auth-enums';
 import { WarehouseLocalStorage } from '../utils/warehouse-local-storage';
 
@@ -22,8 +23,8 @@ export class ProfilService {
     return this.http.get<ResponseLoginModel[]>(`${this.apiServerUrl}/users`);
   }
 
-  public onActivateUser(userId: string): Observable<Persons> {
-    return this.http.put<any>(
+  public onActivateUser(userId: string): Observable<ResponseStatusActivationModel> {
+    return this.http.put<ResponseStatusActivationModel>(
       `${this.apiServerUrl}${Auth.WAREHOUSE_ACTIVATE_DESATTIVATE_USER}/${userId}`,
       userId
     );
