@@ -1,6 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FlagService } from 'src/app/services/flag.service';
@@ -80,7 +85,7 @@ export class DashboardUserEditComponent implements OnInit {
     this.getCountriesAndPrefixPhoneWorld();
     this.userLocalStorage =
       this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
-      this.getInfosUser();
+    this.getInfosUser();
   }
 
   initForm() {
@@ -98,10 +103,15 @@ export class DashboardUserEditComponent implements OnInit {
       ],
       email: [null, [Validators.required, Validators.email]],
       secondEmail: [null, [Validators.email]],
-      role: [         {
-        value: this.rolesList.find(c => c.label === this.datas.roles.name) || null,
-        disabled: false
-      }, [Validators.required]],
+      role: [
+        {
+          value:
+            this.rolesList.find((c) => c.label === this.datas.roles.name) ||
+            null,
+          disabled: false,
+        },
+        [Validators.required],
+      ],
       gender: [null, [Validators.required]],
       image: '',
       dateOfBirth: ['', [Validators.required]],
@@ -138,7 +148,7 @@ export class DashboardUserEditComponent implements OnInit {
   }
 
   datas = {
-    roles: { id: 2636, name: "Luxembourg", iso2: "LU" }
+    roles: { id: 2636, name: 'Luxembourg', iso2: 'LU' },
   };
 
   initComponent() {
@@ -331,7 +341,9 @@ export class DashboardUserEditComponent implements OnInit {
   }
 
   handleOnBack() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.PROFILE}`]);
+    this.router.navigate([
+      `${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.PROFILE}`,
+    ]);
   }
 
   getInfosUser() {
@@ -364,25 +376,25 @@ export class DashboardUserEditComponent implements OnInit {
   setDefaults() {
     // to set default value retrieved from BE
     this.validateForm.patchValue({
-      fullName:this.dataUser?.fullname,
-      username:this.dataUser?.username,
-      email:this.dataUser?.email,
-      secondEmail:this.dataUser?.secondEmail,
-      role:'jhhjhhk',
-      gender:this.dataUser?.gender,
-      image:this.dataUser?.image,
-      dateOfBirth:this.dataUser?.dateOfBirth,
-      phoneNumber:this.dataUser?.phoneNumber,
-      landlinePrefix:this.dataUser?.landlinePrefix,
-      landlineNumber:this.dataUser?.landlineNumber,
-      country:this.dataUser?.country,
-      state:this.dataUser?.state,
-      zipCode:this.dataUser?.zipCode,
-      address:this.dataUser?.address,
+      fullName: this.dataUser?.fullname,
+      username: this.dataUser?.username,
+      email: this.dataUser?.email,
+      secondEmail: this.dataUser?.secondEmail,
+      role: this.getDefaultRolesUser(this.dataUser?.roles),
+      gender: this.dataUser?.gender,
+      image: this.dataUser?.image,
+      dateOfBirth: this.dataUser?.dateOfBirth,
+      phoneNumber: this.dataUser?.phoneNumber,
+      landlinePrefix: this.dataUser?.landlinePrefix,
+      landlineNumber: this.dataUser?.landlineNumber,
+      country: this.dataUser?.country,
+      state: this.dataUser?.state,
+      zipCode: this.dataUser?.zipCode,
+      address: this.dataUser?.address,
     });
   }
 
-  nameUser(role: string) {
+  userRoleName(role: string) {
     switch (role) {
       case Utils.ROLE_ADMIN:
         return Utils.ADMINS;
@@ -398,11 +410,10 @@ export class DashboardUserEditComponent implements OnInit {
         break;
     }
   }
-  rolesUser(data: any) {
-    return data
-      .map((currElement: any) => {
-        return this.nameUser(currElement.name);
-      })
-      .join(',');
+
+  getDefaultRolesUser(roles: any[]) {
+    return roles?.map((role: any) => {
+      return this.userRoleName(role?.name).toLowerCase();
+    });
   }
 }
