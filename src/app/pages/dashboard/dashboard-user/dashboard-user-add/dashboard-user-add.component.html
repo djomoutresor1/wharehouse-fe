@@ -20,7 +20,8 @@
                 <nz-avatar *ngIf="imgURL" class="dashboard-user-profile-avatar mb-3" [nzSize]="100" [nzSrc]="imgURL">
                 </nz-avatar>
             </div>
-            <div class="col-md-8 mt-4 dashboard-user-upload-image-container">
+            <!-- It isn't necessary to admin user to upload avatar/cover image to the new user -->
+            <!-- <div class="col-md-8 mt-4 dashboard-user-upload-image-container">
                 <label class="ant-btn ant-btn-primary">
                     <i nz-icon nzType="file-image" nzTheme="fill"></i>
                     <span>{{(showbuttonUpload ? "dashboard.cta.file.change" : "dashboard.cta.file.upload") | translate
@@ -33,7 +34,7 @@
                     <i nz-icon nzType="delete" nzTheme="fill"></i>
                     {{ "dashboard.cta.file.remove" | translate }}
                 </button>
-            </div>
+            </div> -->
         </div>
         <div class="row dashboard-user-content">
             <div class="col-md-12 dashboard-user-personal-data">
@@ -48,8 +49,10 @@
                             <nz-form-control [nzErrorTip]="'register.gender.required' | translate">
                                 <nz-radio-group nzName="radiogroup" (ngModelChange)="handleOnChangeInput()"
                                     formControlName="gender">
-                                    <label nz-radio nzValue="Male">{{ 'register.gender.male' | translate }}</label>
-                                    <label nz-radio nzValue="Female">{{ 'register.gender.female' | translate }}</label>
+                                    <label nz-radio nzValue="Male">{{ 'register.gender.male' | translate }}<i
+                                            class="m-1" nz-icon nzType="man" nzTheme="outline"></i></label>
+                                    <label nz-radio nzValue="Female">{{ 'register.gender.female' | translate }}<i
+                                            class="m-1" nz-icon nzType="woman" nzTheme="outline"></i></label>
                                 </nz-radio-group>
                             </nz-form-control>
                         </nz-form-item>

@@ -9,11 +9,9 @@ import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
-import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
 import { ResponseStatusActivationModel } from 'src/model/auth/response/response-status-activation-model';
-
 @Component({
   selector: 'warehouse-register-step-two',
   templateUrl: './register-step-two.component.html',
@@ -46,6 +44,7 @@ export class RegisterStepTwoComponent implements OnInit {
   isExpiredLink: boolean = false;
   user!: ResponseResetModel;
   isVerifyEmail: boolean = false;
+  userActivateStatusType: boolean = false;
 
   constructor(
     private router: Router,
@@ -120,9 +119,8 @@ export class RegisterStepTwoComponent implements OnInit {
   }
 
   handleOnFindUser(userId: string) {
-    this.authorizationService
-      .userFindByUserId(userId)
-      .subscribe((response: ResponseModel) => {
+    this.authorizationService.userFindByUserId(userId).subscribe(
+      (response: ResponseModel) => {
         this.user = {
           link: this.idLinkVerifyEmail,
           expiryDate: this.expirationLink,
@@ -143,33 +141,41 @@ export class RegisterStepTwoComponent implements OnInit {
         if (!this.isExpiredLink && !this.isVerifyEmail) {
           this.handleOnActivateStatusUser();
         }
-      }),
+      },
       (error: HttpErrorResponse) => {
         if (error.status === 404) {
           this.errorAlertType(error?.error.message);
         }
-      };
+      }
+    );
   }
 
   handleOnActivateStatusUser() {
-    this.profilService
-      .onActivateUser(this.user?.user?.userId as string)
-      .subscribe((response: ResponseStatusActivationModel) => {
-        this.successAlertType(response?.message, response?.isAdminUser);
-      }),
+    this.profilService.onActivateUser(this.user?.userId).subscribe(
+      (response: ResponseStatusActivationModel) => {
+        console.log('response: ', response);
+        console.log('response: ', response?.adminUser);
+        this.userActivateStatusType = response?.adminUser;
+        if(this.userActivateStatusType) {
+
+        } else {
+          this.successAlertType(response?.message);
+        }
+      },
       (error: HttpErrorResponse) => {
         console.log('Error: ', error);
         this.isVerifyEmail = true;
         this.errorAlertType(error?.error?.message);
-      };
+      }
+    );
   }
 
-  successAlertType(message: string, userType: boolean): void {
+  successAlertType(message: string): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
     this.messageAlert = message;
     setTimeout(() => {
-      userType ? this.handleOnGoToLogin() : this.handleOnGoToStepThree();
+      this.handleOnGoToStepThree();
     }, 2000);
   }
 

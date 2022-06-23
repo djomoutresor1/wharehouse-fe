@@ -1,5 +1,5 @@
 export interface ResponseStatusActivationModel {
-  isAdminUser: boolean;
+  adminUser: boolean;
   message: string;
   object: any;
 }

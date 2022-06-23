@@ -1,5 +1,5 @@
 <warehouse-multilanguage></warehouse-multilanguage>
-    <div class="warehouse-auth-wrapper container">
+    <div *ngIf="!userActivateStatusType" class="warehouse-auth-wrapper container">
         <div class="row">
             <div class="col text-center">
                 <h2 nz-typography>{{"register.title" | translate}}</h2>
@@ -49,4 +49,10 @@
             </div> -->
         </div>
     </div>
-    <!-- <router-outlet></router-outlet> -->
+    <div *ngIf="userActivateStatusType" class="warehouse-auth-wrapper container">
+        <div class="row">
+            <div class="col text-center">
+                <h2 nz-typography>{{"register.title" | translate}}</h2>
+            </div>
+        </div>
+    </div>

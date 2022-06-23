@@ -25,6 +25,8 @@
   justify-content: center !important;
   align-items: flex-end !important;
   display: flex !important;
+  top: -2px;
+  position: relative;
 }
 
 .ant-form-item-label>label::after {
@@ -47,4 +49,11 @@
 
 .ant-picker {
   width: 100% !important;
+}
+
+.ant-input-disabled,
+.ant-input[disabled] {
+  font-size: 15px  !important;
+  font-weight: 400  !important;
+  color: var(--warehouse-primary) !important;
 }

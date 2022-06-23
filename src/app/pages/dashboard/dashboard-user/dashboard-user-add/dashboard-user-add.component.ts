@@ -66,7 +66,7 @@ export class DashboardUserAddComponent implements OnInit {
     private warehouseLocalStorage: WarehouseLocalStorage,
     private dashboardService: DashboardService,
     private flagService: FlagService,
-    private imageService: ImageService,
+    private imageService: ImageService
   ) {}
 
   ngOnInit(): void {
@@ -157,7 +157,7 @@ export class DashboardUserAddComponent implements OnInit {
         this.prefixPhoneData = _.uniqWith(this.prefixPhoneData, _.isEqual);
       },
       (error: HttpErrorResponse) => {
-        console.log('enable to retrieve data country and flag ' + error);
+        console.log('Unenable to retrieve data country and flag ' + error);
       }
     );
   }
@@ -272,11 +272,10 @@ export class DashboardUserAddComponent implements OnInit {
 
   handleOnGetStatesByCountry() {
     this.stateSelected = '';
-    this.flagService
-      .getStatesByCountry(this.countrySelected)
-      .subscribe((states) => {
+    this.flagService.getStatesByCountry(this.countrySelected).subscribe(
+      (states) => {
         this.countryStatesData = states.data?.states;
-      }),
+      },
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
@@ -286,10 +285,10 @@ export class DashboardUserAddComponent implements OnInit {
           this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
           this.isExpiredToken = true;
         } else {
-          console.log('Error Occured during downloading: ', error);
           this.errorAlertType(error?.error.message);
         }
-      };
+      }
+    );
   }
 
   handleOnSelectState(selectedState: string) {
@@ -297,6 +296,7 @@ export class DashboardUserAddComponent implements OnInit {
   }
 
   handleOnInsertUser() {
+    this.isAuth = false;
     let userContact: UserContactModel = {
       landlinePrefix: this.landlinePrefixSelected,
       phoneNumber: this.validateForm.controls['phoneNumber']?.value,
@@ -325,14 +325,13 @@ export class DashboardUserAddComponent implements OnInit {
 
     console.log('userData: ', userData);
 
-    this.dashboardService
-      .adminInsertUser(userData)
-      .subscribe((response: ResponseUserInsertModel) => {
+    this.dashboardService.adminInsertUser(userData).subscribe(
+      (response: ResponseUserInsertModel) => {
         console.log('response: ', response);
-        this.handleOnUploadImageProfile(response?.object?.userId as string);
+        //this.handleOnUploadImageProfile(response?.object?.userId as string);
         this.successAlertType(response?.message);
         this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
-      }),
+      },
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
@@ -342,10 +341,10 @@ export class DashboardUserAddComponent implements OnInit {
           this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
           this.isExpiredToken = true;
         } else {
-          console.log('Error Occured during downloading: ', error);
-          this.errorAlertType(error?.error.message);
+          this.errorAlertType(error?.error.message || error?.message);
         }
-      };
+      }
+    );
   }
 
   handleOnUploadImageProfile(userId: string) {
@@ -359,7 +358,7 @@ export class DashboardUserAddComponent implements OnInit {
         this.successAlertType(response?.message);
       },
       (error: HttpErrorResponse) => {
-        console.log('Error Occured duringng saving: ', error);
+        console.log('Error Occured duringng uploading file: ', error);
         this.errorAlertType(error?.message || error?.error?.message);
       }
     );
