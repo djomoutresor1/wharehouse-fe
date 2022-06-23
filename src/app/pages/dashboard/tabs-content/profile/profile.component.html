@@ -88,7 +88,7 @@
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.dateOfBorn" | translate }}</label>
           <input nz-input
-            [value]="dataUser?.dateOfBorn ? dataUser?.dateOfBorn : 'profile.empty' | translate"
+            [value]="dataUser?.dateOfBirth ? dataUser?.dateOfBirth : 'profile.empty' | translate"
             [disabled]="enableEdit" />
         </div>
         <div class="col-md-3 mt-3">
@@ -97,17 +97,17 @@
         </div>
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.city" | translate }}</label>
-          <input nz-input [value]="dataUser?.city ? dataUser?.city : 'profile.empty' | translate" [disabled]="enableEdit" />
+          <input nz-input [value]="dataUser?.state ? dataUser?.state : 'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
       </div>
       <div class="row mb-4">
         <div class="col-md-2 mt-3">
           <label class="mb-2">{{"profile.personalData.zip" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="enableEdit" />
+          <input nz-input [value]="dataUser?.zipCode ? dataUser?.zipCode :'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
         <div class="col-md-8 mt-3">
           <label class="mb-2">{{"profile.personalData.address" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="enableEdit" />
+          <input nz-input [value]="dataUser?.address ? dataUser?.address :'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
       </div>
     </div>
@@ -124,7 +124,7 @@
         </div>
         <div class="col-md-6 mt-3">
           <label class="mb-2">{{"profile.personalContact.otherPersonalEmail" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="enableEdit" />
+          <input nz-input [value]="dataUser?.emailPec ? dataUser?.emailPec :'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
       </div>
       <div class="row mb-4">
@@ -134,7 +134,7 @@
         </div>
         <div class="col-md-6 mt-3">
           <label class="mb-2">{{"profile.personalContact.landlinePhone" | translate }}</label>
-          <input nz-input [value]="'profile.empty' | translate" [disabled]="enableEdit" />
+          <input nz-input [value]="dataUser?.landlineNumber ? dataUser?.landlineNumber :'profile.empty' | translate" [disabled]="enableEdit" />
         </div>
       </div>
     </div>

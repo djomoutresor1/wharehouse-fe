@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Persons } from 'src/interfaces/profils';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
+import { UserUpdateModel } from 'src/model/auth/resquest/user-register-model';
 import { Auth } from '../shared/enums/auth-enums';
 import { WarehouseLocalStorage } from '../utils/warehouse-local-storage';
 
@@ -38,6 +39,12 @@ export class ProfilService {
   public getImageUser(userImage: string): Observable<any> {
     return this.http.get<any>(
       `${this.apiServerUrl}${Auth.WAREHOUSE_DOWNLOAD_IMAGE}/${userImage}`
+    );
+  }
+
+  public onUpdateUser(user: UserUpdateModel,userId:string): Observable<any> {
+    return this.http.put<any>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_UPDATE_USER}/${userId}`,user
     );
   }
 }
