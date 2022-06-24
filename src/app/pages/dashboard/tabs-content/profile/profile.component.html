@@ -41,9 +41,9 @@
         <div class="col-md-4">
           <p class="profile-title" nz-typography>{{"profile.role" | translate}}</p>
           <h3 class="profile-title" nz-typography>
-            <nz-tag *ngFor="let role of userLocalStorage.roles" [nzColor]="getUserColorRole(role)">
+            <nz-tag *ngFor="let role of dataRoles" [nzColor]="getUserColorRole(role)">
               <i nz-icon [nzType]="getRoleIcon(role)"></i>
-              {{ getRoleName(role)}}
+              {{ role}}
             </nz-tag>
           </h3>
         </div>

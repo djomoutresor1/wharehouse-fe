@@ -328,13 +328,13 @@ export class DashboardUserEditComponent implements OnInit {
       landlinePrefix: this.getPhonePrefixNumber(),
       phoneNumber: this.validateForm.controls['phoneNumber']?.value,
       landlineNumber: this.validateForm.controls['landlineNumber']?.value,
-      role: this.validateForm.controls['roles']?.value,
+      role: this.validateForm.controls['role']?.value,
       gender: this.validateForm.controls['gender']?.value,
     };
     console.log('userUpdateData: ', userUpdateData);
    this.profilService.onUpdateUser(userUpdateData,this.dataUser?.userId).subscribe((response:any)=>{
     this.successNotificationType(response?.message);
-      console.log('updateResponse: ', response.message);
+      console.log('updateResponse: ', response);
     }),
     (error: HttpErrorResponse) => {
       if (error.status === 403) {
