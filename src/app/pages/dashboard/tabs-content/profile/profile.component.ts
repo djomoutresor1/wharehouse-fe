@@ -27,6 +27,8 @@ export class ProfileComponent implements OnInit {
   isExpiredToken: boolean = false;
   enableEdit: boolean = true;
   dataUser:any;
+  teste:any
+  dataRoles: any[]=[];
   
 
   constructor(
@@ -65,6 +67,8 @@ export class ProfileComponent implements OnInit {
         let objectURL = 'data:image/jpeg;base64,' + response?.object?.data;
         this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
         this.dataUser = response?.object?.user;
+        this.dataRoles.push(this.rolesUser(this.dataUser?.roles));
+
       },
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
@@ -80,6 +84,13 @@ export class ProfileComponent implements OnInit {
         }
       }
     );
+  }
+
+  rolesUser(data: any) {
+    return data?.map((currElement: any) => {
+        return this.getRoleName(currElement.name);
+      })
+      .join(',');
   }
 
   getRoleName(role: string) {

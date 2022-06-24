@@ -212,7 +212,7 @@
                         <nz-form-item>
                             <nz-form-control [nzErrorTip]="'register.email.required' | translate">
                                 <nz-input-group nzPrefixIcon="mail">
-                                    <input type="email" nz-input formControlName="email"
+                                    <input type="email" nz-input [value]="dataUser?.email"
                                         [placeholder]="'register.email.placeholder' | translate"
                                         (click)="handleOnChangeInput()" [disabled]="true"/>
                                 </nz-input-group>
