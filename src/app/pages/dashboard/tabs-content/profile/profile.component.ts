@@ -30,6 +30,10 @@ export class ProfileComponent implements OnInit {
   countryAndFlagData: any[] = [];
   prefixPhoneData: any[] = [];
   dateFormat = 'DD/MM/YYYY HH:mm:ss';
+  enableEdit: boolean = true;
+  dataUser: any;
+  teste: any;
+  dataRoles: any[] = [];
 
   constructor(
     private router: Router,
@@ -68,6 +72,8 @@ export class ProfileComponent implements OnInit {
       (response) => {
         let objectURL = 'data:image/jpeg;base64,' + response?.object?.data;
         this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        this.dataUser = response?.object?.user;
+        this.dataRoles.push(this.rolesUser(this.dataUser?.roles));
       },
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
@@ -83,6 +89,14 @@ export class ProfileComponent implements OnInit {
         }
       }
     );
+  }
+
+  rolesUser(data: any) {
+    return data
+      ?.map((currElement: any) => {
+        return this.getRoleName(currElement.name);
+      })
+      .join(',');
   }
 
   getUserDateCreation(createdAt: string): string {
@@ -169,7 +183,18 @@ export class ProfileComponent implements OnInit {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
   }
 
-  handleOnEdit() {}
+  handleOnEdit() {
+    this.enableEdit = false;
+    //  this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.USER}/${Pages.CREATE}`])
+    //update user informations
+    this.router.navigate([
+      `${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.USER}/${Pages.EDIT}`,
+    ]);
+  }
+
+  handleOnSave() {
+    this.enableEdit = true;
+  }
 
   handleOnBack() {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
@@ -202,7 +227,7 @@ export class ProfileComponent implements OnInit {
   handleOnFlagByPrefixCode(prefix: string) {
     if (!!this.countryAndFlagData?.length) {
       let countryFlag = this.countryAndFlagData?.find(
-        (countryFlag: any) => "+" + countryFlag?.dialCode === prefix
+        (countryFlag: any) => '+' + countryFlag?.dialCode === prefix
       );
       return countryFlag?.flag;
     }

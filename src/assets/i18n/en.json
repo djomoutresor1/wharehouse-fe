@@ -27,6 +27,7 @@
       "verification": "Check email",
       "edit": "Edit",
       "create.user": "Create user",
+      "update.user": "Update user",
       "file": {
         "placeholder": "Upload your picture profile",
         "upload": "Upload",

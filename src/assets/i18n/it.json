@@ -27,6 +27,7 @@
       "verification": "Verifica email",
       "edit": "Modifica",
       "create.user": "Crea utente",
+      "update.user": "Aggiorna utente",
       "file": {
         "placeholder": "Carica la tua immagine di profilo",
         "upload": "Sciegli",

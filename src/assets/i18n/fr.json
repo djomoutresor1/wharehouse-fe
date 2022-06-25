@@ -27,6 +27,7 @@
       "verification": "Verifier l'email",
       "edit": "Modifier",
       "create.user": "Créer l'utilisateur",
+      "update.user": "Ajourne l'utilisateur",
       "file": {
         "placeholder": "Selectioner votre photo de profil",
         "upload": "Selectioner",
