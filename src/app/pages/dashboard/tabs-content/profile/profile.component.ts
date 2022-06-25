@@ -29,6 +29,7 @@ export class ProfileComponent implements OnInit {
   isExpiredToken: boolean = false;
   countryAndFlagData: any[] = [];
   prefixPhoneData: any[] = [];
+  dateFormat = 'DD/MM/YYYY HH:mm:ss';
 
   constructor(
     private router: Router,
@@ -188,6 +189,14 @@ export class ProfileComponent implements OnInit {
 
   getFormatDateOfBirth(dateOfBirth: string): string {
     return moment(dateOfBirth).format('L');
+  }
+
+  getFormatUserLastLogin(lastLogin: string): string {
+    return moment(lastLogin).format(this.dateFormat);
+  }
+
+  getCapitalizeUsername(username: string): string {
+    return username?.charAt(0).toUpperCase() + username?.slice(1);
   }
 
   handleOnFlagByPrefixCode(prefix: string) {

@@ -32,11 +32,11 @@
       <div class="row mt-3 profile-user">
         <div class="col-md-3">
           <p class="profile-title" nz-typography>{{ "register.username.title" | translate }}</p>
-          <h3 class="profile-title" nz-typography>{{ userLocalStorage.username }}</h3>
+          <h3 class="profile-title" nz-typography>{{ getCapitalizeUsername(userLocalStorage?.username) }}</h3>
         </div>
         <div class="col-md-3">
           <p class="profile-title" nz-typography>{{ "profile.personalData.userId" | translate }}</p>
-          <h3 class="profile-title" nz-typography>{{ userLocalStorage.userId }}</h3>
+          <h3 class="profile-title" nz-typography>{{ userLocalStorage?.userId }}</h3>
         </div>
         <div class="col-md-3">
           <p class="profile-title" nz-typography>{{ "profile.personalData.createdAt" | translate }}</p>
@@ -45,7 +45,7 @@
         <div class="col-md-3">
           <p class="profile-title" nz-typography>{{"profile.role" | translate}}</p>
           <h3 class="profile-title" nz-typography>
-            <nz-tag *ngFor="let role of userLocalStorage.roles" [nzColor]="getUserColorRole(role)">
+            <nz-tag *ngFor="let role of userLocalStorage?.roles" [nzColor]="getUserColorRole(role)">
               <i nz-icon [nzType]="getRoleIcon(role)"></i>
               {{ getRoleName(role) }}
             </nz-tag>
@@ -54,7 +54,7 @@
       </div>
       <div class="row mt-3">
         <div class="col-md-12">
-          <nz-alert nzType="info" nzMessage="{{'profile.lastLoginMessage' | translate}} {{ userLocalStorage.lastLogin
+          <nz-alert nzType="info" nzMessage="{{'profile.lastLoginMessage' | translate}} {{ getFormatUserLastLogin(userLocalStorage?.lastLogin)
           }}"></nz-alert>
         </div>
       </div>
@@ -67,7 +67,7 @@
       <div class="row mb-2">
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"register.gender.placeholder" | translate }}</label><br />
-          <nz-switch [ngModel]="userLocalStorage.gender === 'Male' ? 1 : 0" [disabled]="true"
+          <nz-switch [ngModel]="userLocalStorage?.gender === 'Male' ? 1 : 0" [disabled]="true"
             [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate">
           </nz-switch>
           <ng-template #checkedTemplate><i class="m-1" nz-icon nzType="man"
@@ -87,7 +87,7 @@
         </div>
         <div class="col-md-4 mt-3">
           <label class="mb-2">{{ "profile.personalData.userId" | translate }}</label>
-          <nz-input-group nzPrefixIcon="user">
+          <nz-input-group nzPrefixIcon="safety">
             <input nz-input [value]="userLocalStorage?.userId  ? userLocalStorage?.userId : 'profile.empty' | translate"
               [disabled]="true" />
           </nz-input-group>
@@ -156,7 +156,7 @@
               ?
               "profile.verified" : "profile.notVerified") | translate}}</span>)</label>
           <nz-input-group nzPrefixIcon="mail">
-            <input nz-input [value]="userLocalStorage.email ? userLocalStorage.email : 'profile.empty' | translate"
+            <input nz-input [value]="userLocalStorage?.email ? userLocalStorage?.email : 'profile.empty' | translate"
               [disabled]="true" />
           </nz-input-group>
         </div>
@@ -180,12 +180,12 @@
       <div class="row mb-4">
         <div class="col-md-6 mt-3">
           <div class="row">
-            <div class="col-md-2 profile-flag-country">
+            <div class="col-md-3 profile-flag-country">
               <label class="mb-2"></label>
               <img class="multilanguage" [src]="handleOnCountryFlagSelected(userLocalStorage?.address?.country)" />
               <span class="profile-flag-phone-prefix">{{userLocalStorage?.contact?.phonePrefix}}</span>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-9">
               <label class="mb-2">{{"profile.personalContact.mobilePhone" | translate }}</label>
               <nz-input-group nzPrefixIcon="mobile">
                 <input nz-input
@@ -197,12 +197,12 @@
         </div>
         <div class="col-md-6 mt-3">
           <div class="row">
-            <div class="col-md-2 profile-flag-country" *ngIf="userLocalStorage?.contact?.landlinePrefix">
+            <div class="col-md-3 profile-flag-country" *ngIf="userLocalStorage?.contact?.landlinePrefix">
               <label class="mb-2"></label>
               <img class="multilanguage" [src]="handleOnFlagByPrefixCode(userLocalStorage?.contact?.landlinePrefix)" />
               <span class="profile-flag-phone-prefix">{{userLocalStorage?.contact?.landlinePrefix}}</span>
             </div>
-            <div [ngClass]="userLocalStorage?.contact?.landlinePrefix ? 'col-md-10' : 'col-md-12'">
+            <div [ngClass]="userLocalStorage?.contact?.landlinePrefix ? 'col-md-9' : 'col-md-12'">
               <label class="mb-2">{{"profile.personalContact.landlinePhone" | translate }}</label>
               <nz-input-group nzPrefixIcon="phone">
                 <input nz-input

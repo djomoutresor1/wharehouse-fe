@@ -1,4 +1,4 @@
-export interface ResponseAddressModel {
+export interface ResponseContactModel {
   userId: string;
   phonePrefix: string;
   phoneNumber: string;

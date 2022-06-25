@@ -15,6 +15,7 @@ import { UserInsertModel } from 'src/model/dashboard/request/user-insert-model';
 import { UserContactModel } from 'src/model/dashboard/request/user-contact-model';
 import { UserAddressModel } from 'src/model/dashboard/request/user-address-model';
 import { ImageService } from 'src/app/services/image.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'warehouse-dashboard-user-add',
@@ -202,6 +203,7 @@ export class DashboardUserAddComponent implements OnInit {
     this.descriptionAlert = this.translate.instant(
       'operation.confirmation.insert.user'
     );
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
   }
 
   errorAlertType(message: string): void {
@@ -316,7 +318,9 @@ export class DashboardUserAddComponent implements OnInit {
       username: this.validateForm.controls['username']?.value.toLowerCase(),
       email: this.validateForm.controls['email']?.value,
       secondEmail: this.validateForm.controls['secondEmail']?.value,
-      dateOfBirth: this.validateForm.controls['dateOfBirth']?.value,
+      dateOfBirth: moment(
+        this.validateForm.controls['dateOfBirth']?.value
+      ).format('L'),
       contact: userContact,
       address: userAddress,
       role: this.validateForm.controls['role']?.value,
@@ -330,7 +334,6 @@ export class DashboardUserAddComponent implements OnInit {
         console.log('response: ', response);
         //this.handleOnUploadImageProfile(response?.object?.userId as string);
         this.successAlertType(response?.message);
-        this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
       },
       (error: HttpErrorResponse) => {
         if (error.status === 403) {

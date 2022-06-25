@@ -49,6 +49,17 @@ export class AuthorizationService {
     );
   }
 
+  public userFindByUserIdAndVerifyLinkAndVerifyType(userId: string, link: string, verifyType: string): Observable<ResponseResetModel> {
+    return this.http.get<ResponseResetModel>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_FIND_USER}/${userId}`, {
+        params: {
+          link,
+          verifyType
+        }
+      }
+    );
+  }
+
   public userResetPassword(email: string, password: string): Observable<ResponseModel> {
     return this.http.post<ResponseModel>(
       `${this.apiServerUrl}${Auth.WAREHOUSE_RESET_PASSWORD}`, {

@@ -206,6 +206,15 @@
                     </div>
                     <div class="col-md-5">
                         <nz-form-label nzFor="secondEmail">{{"register.secondEmail.title" | translate }}</nz-form-label>
+                        <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover class="m-2 warehouse-cursor-pointer"
+                            [nzPopoverTitle]="'profile.personalContact.popover.title' | translate"
+                            [nzPopoverContent]="emailContentTemplate" nzPopoverPlacement="right"></i>
+                        <ng-template #emailContentTemplate>
+                            <div class="warehouse-popover-wrapper">
+                                <p>{{'profile.personalContact.popover.contentOne' | translate }}</p>
+                                <p><b>{{'profile.personalContact.popover.contentTwo' | translate }}</b></p>
+                            </div>
+                        </ng-template>
                         <nz-form-item>
                             <nz-form-control [nzErrorTip]="'register.secondEmail.required' | translate">
                                 <nz-input-group nzPrefixIcon="mail">

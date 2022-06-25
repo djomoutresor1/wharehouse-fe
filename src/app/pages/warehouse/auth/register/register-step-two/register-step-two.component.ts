@@ -11,7 +11,6 @@ import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
-import { ResponseStatusActivationModel } from 'src/model/auth/response/response-status-activation-model';
 @Component({
   selector: 'warehouse-register-step-two',
   templateUrl: './register-step-two.component.html',
@@ -85,6 +84,7 @@ export class RegisterStepTwoComponent implements OnInit {
   }
 
   handleOnGoToLogin() {
+    this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
 
@@ -98,16 +98,14 @@ export class RegisterStepTwoComponent implements OnInit {
       .subscribe(
         (response: ResponseResetModel) => {
           console.log('response', response);
-          // Case where the user is added by the admin and not yet present the in users table, but in the users_tmp table
-          if (response?.user == null) {
-            this.handleOnFindUser(response?.userId);
-          } else {
-            this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
-            this.user = response;
-            this.checkIfExpirationLinkIsCorrect();
-            if (!this.isExpiredLink && !this.isVerifyEmail) {
-              this.handleOnActivateStatusUser();
-            }
+          this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
+          this.user = response;
+          this.checkIfExpirationLinkIsCorrect();
+          if (!this.isExpiredLink && !this.isVerifyEmail) {
+            this.handleOnActivateStatusUser();
+            setTimeout(() => {
+              this.handleOnGetUserInfos(this.user?.userId);
+            }, 2000);
           }
         },
         (error: HttpErrorResponse) => {
@@ -118,49 +116,11 @@ export class RegisterStepTwoComponent implements OnInit {
       );
   }
 
-  handleOnFindUser(userId: string) {
-    this.authorizationService.userFindByUserId(userId).subscribe(
-      (response: ResponseModel) => {
-        this.user = {
-          link: this.idLinkVerifyEmail,
-          expiryDate: this.expirationLink,
-          verifyType: this.verifyType,
-          userId: userId,
-          user: {
-            fullname: response?.object?.fullname,
-            email: response?.object?.email,
-            role: response?.object?.roles,
-            username: response?.object?.username,
-            active: response?.object?.active,
-            lastLogin: response?.object?.lastLogin,
-            userId: userId,
-          },
-        };
-        this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(this.user);
-        this.checkIfExpirationLinkIsCorrect();
-        if (!this.isExpiredLink && !this.isVerifyEmail) {
-          this.handleOnActivateStatusUser();
-        }
-      },
-      (error: HttpErrorResponse) => {
-        if (error.status === 404) {
-          this.errorAlertType(error?.error.message);
-        }
-      }
-    );
-  }
-
   handleOnActivateStatusUser() {
     this.profilService.onActivateUser(this.user?.userId).subscribe(
-      (response: ResponseStatusActivationModel) => {
+      (response: ResponseModel) => {
         console.log('response: ', response);
-        console.log('response: ', response?.adminUser);
-        this.userActivateStatusType = response?.adminUser;
-        if(this.userActivateStatusType) {
-
-        } else {
-          this.successAlertType(response?.message);
-        }
+        this.successAlertType(response?.message);
       },
       (error: HttpErrorResponse) => {
         console.log('Error: ', error);
@@ -170,13 +130,26 @@ export class RegisterStepTwoComponent implements OnInit {
     );
   }
 
+  handleOnGetUserInfos(userId: string) {
+    this.profilService.getUserInfos(userId).subscribe(
+      (response: ResponseModel) => {
+        console.log('response: ', response);
+        this.userActivateStatusType = response.object?.adminUser;
+        if (!this.userActivateStatusType) {
+          this.handleOnGoToStepThree();
+        }
+      },
+      (error: HttpErrorResponse) => {
+        console.log('Error: ', error);
+        this.errorAlertType(error?.error?.message);
+      }
+    );
+  }
+
   successAlertType(message: string): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
     this.messageAlert = message;
-    setTimeout(() => {
-      this.handleOnGoToStepThree();
-    }, 2000);
   }
 
   checkIfExpirationLinkIsCorrect() {

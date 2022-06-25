@@ -1,3 +1,6 @@
+import { ResponseAddressModel } from "./response-address-model";
+import { ResponseContactModel } from "./response-contact-model";
+
 export interface ResponseLoginModel {
   fullname: string;
   userId: string;
@@ -15,4 +18,6 @@ export interface ResponseLoginModel {
   country: string;
   lastLogin: string;
   createdAt: string;
+  address: ResponseAddressModel;
+  contact: ResponseContactModel;
 }

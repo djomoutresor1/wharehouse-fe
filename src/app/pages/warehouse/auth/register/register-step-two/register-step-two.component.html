@@ -1,36 +1,36 @@
 <warehouse-multilanguage></warehouse-multilanguage>
-    <div *ngIf="!userActivateStatusType" class="warehouse-auth-wrapper container">
-        <div class="row">
-            <div class="col text-center">
-                <h2 nz-typography>{{"register.title" | translate}}</h2>
-            </div>
+<div *ngIf="!userActivateStatusType" class="warehouse-auth-wrapper container">
+    <div class="row">
+        <div class="col text-center">
+            <h2 nz-typography>{{"register.title" | translate}}</h2>
         </div>
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <nz-steps [nzCurrent]="currentStep" nzSize="small">
-                    <nz-step *ngFor="let step of steps" [nzTitle]="step"></nz-step>
-                </nz-steps>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <nz-steps [nzCurrent]="currentStep" nzSize="small">
+                <nz-step *ngFor="let step of steps" [nzTitle]="step"></nz-step>
+            </nz-steps>
         </div>
-        <div class="row" *ngIf="isExpiredLink || isVerifyEmail">
-            <div class="col-md-4 mt-5 offset-md-4">
-                <div class="row">
-                    <div class="col" *ngIf="isAuth">
-                        <warehouse-alert [typeAlert]="alertType" [messageAlert]="messageAlert">
-                        </warehouse-alert>
-                        <nz-divider nzDashed nzText="Resend again the link?"></nz-divider>
-                        <button nz-button nzType="primary" (click)="handleOnSendLink()" nzBlock>
-                            <i nz-icon nzType="left" nzTheme="outline"></i>Send new link</button>
-                    </div>
+    </div>
+    <div class="row" *ngIf="isExpiredLink || isVerifyEmail">
+        <div class="col-md-4 mt-5 offset-md-4">
+            <div class="row">
+                <div class="col" *ngIf="isAuth">
+                    <warehouse-alert [typeAlert]="alertType" [messageAlert]="messageAlert">
+                    </warehouse-alert>
+                    <nz-divider nzDashed nzText="Resend again the link?"></nz-divider>
+                    <button nz-button nzType="primary" (click)="handleOnSendLink()" nzBlock>
+                        <i nz-icon nzType="left" nzTheme="outline"></i>Send new link</button>
                 </div>
             </div>
         </div>
-        <div class="row" *ngIf="!isExpiredLink && !isVerifyEmail">
-            <div class="col" *ngIf="isAuth">
-                <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert">
-                </warehouse-notification>
-            </div>
-            <!-- <div class="col-md-4 offset-md-4">
+    </div>
+    <div class="row" *ngIf="!isExpiredLink && !isVerifyEmail">
+        <div class="col" *ngIf="isAuth">
+            <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert">
+            </warehouse-notification>
+        </div>
+        <!-- <div class="col-md-4 offset-md-4">
                 <nz-result NzResultIconType="success" nzTitle="CONFIRMATION VERIFICATION EMAIL" [nzSubTitle]="'Hello your email has been verified, please click and complete the registration'">
                     <div nz-result-extra>
                         <ng-template #confirmMessage>
@@ -47,12 +47,18 @@
                     </div>
                 </nz-result>
             </div> -->
+    </div>
+</div>
+<div *ngIf="userActivateStatusType" class="warehouse-auth-wrapper container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <nz-result nzStatus="success" [nzTitle]="messageAlert"
+                nzSubTitle="Welocome to wareHouse System. Now, it is possible to enjoy your journey in our system.">
+                <div nz-result-extra>
+                    <button nz-button nzType="primary" (click)="handleOnGoToLogin()" nzBlock>
+                        <i nz-icon nzType="left" nzTheme="outline"></i>{{'login.cta.login' | translate}}</button>
+                </div>
+            </nz-result>
         </div>
     </div>
-    <div *ngIf="userActivateStatusType" class="warehouse-auth-wrapper container">
-        <div class="row">
-            <div class="col text-center">
-                <h2 nz-typography>{{"register.title" | translate}}</h2>
-            </div>
-        </div>
-    </div>
+</div>
