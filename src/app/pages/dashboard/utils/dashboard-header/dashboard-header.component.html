@@ -1,14 +1,27 @@
-<nz-header>
+<nz-header class="dashboard-header-wrapper">
     <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="handleOnCollapsed(!isCollapsed)"></i>
     <div class="dashboard-header-right">
         <ul nz-menu nzMode="horizontal" class="dashboard-header-menu">
+            <div class="row" *ngIf="isAuth">
+                <div class="col">
+                    <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert">
+                    </warehouse-notification>
+                </div>
+            </div>
             <div class="row">
                 <div class="col">
                     <warehouse-multilanguage></warehouse-multilanguage>
                 </div>
-                <div class="col">
-                    <li nz-submenu nzTitle="Test Name" nzIcon="user" class="dashboard-header-icon">
+                <div class="col dashboard-user-profile-container">
+                    <li nz-menu-item class="dashboard-user-profile-row">
+                        <nz-avatar *ngIf="!imgURL" class="dashboard-user-profile-avatar" [nzSize]="50" nzIcon="user">
+                        </nz-avatar>
+                        <nz-avatar *ngIf="imgURL" class="dashboard-user-profile-avatar" [nzSize]="50"
+                            [nzSrc]="imgURL">
+                        </nz-avatar>
+                      </li>
+                    <li nz-submenu nzTitle="{{dataUser?.username}}" class="dashboard-header-icon">
                         <ul class="dashboard-header-menu-items">
                             <li nz-menu-item (click)="handleOnNavigate('dashboard/my-profile')">
                                 <i nz-icon nzType="user"></i>

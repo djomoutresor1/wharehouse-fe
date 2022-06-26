@@ -27,8 +27,10 @@
                             <nz-form-control [nzErrorTip]="'register.gender.required' | translate">
                                 <nz-radio-group nzName="radiogroup" (ngModelChange)="handleOnChangeInput()"
                                     formControlName="gender">
-                                    <label nz-radio nzValue="Male">{{ 'register.gender.male' | translate }}</label>
-                                    <label nz-radio nzValue="Female">{{ 'register.gender.female' | translate }}</label>
+                                    <label nz-radio nzValue="Male">{{ 'register.gender.male' | translate }}<i
+                                            class="m-1" nz-icon nzType="man" nzTheme="outline"></i></label>
+                                    <label nz-radio nzValue="Female">{{ 'register.gender.female' | translate }}<i
+                                            class="m-1" nz-icon nzType="woman" nzTheme="outline"></i></label>
                                 </nz-radio-group>
                             </nz-form-control>
                         </nz-form-item>

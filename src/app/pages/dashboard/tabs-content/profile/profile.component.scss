@@ -1,20 +1,26 @@
 .profile-wrapper {
-  padding: 50px 0 0;
+  padding: 20px 0 0;
   position: relative;
   .profile-background-cover {
     width: 100%;
     height: 300px;
   }
-  .profile-avatar {
-    width: 150px;
-    height: 150px;
-    float: right;
-    top: -70px;
-    display: inline-flex;
+  .profile-avatar-container {
+    display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    border: 5px solid var(--warehouse-white);
+    .profile-avatar {
+      width: 150px;
+      height: 150px;
+      float: right;
+      top: -70px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      border: 5px solid var(--warehouse-white);
+      font-size: 50px;
+    }
   }
   .profile-user {
     .profile-title {
@@ -32,6 +38,16 @@
       .profile-verified {
         font-weight: 600;
       }
+      .profile-flag-country {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        .profile-flag-phone-prefix {
+          top: 15px;
+          position: relative;
+          left: 5px;
+        }
+      }
     }
   }
   .profile-edit,
@@ -43,16 +59,26 @@
   }
 }
 
-.ant-input-disabled,
-.ant-input[disabled] {
-  font-size: 18px;
-  font-weight: 500;
-}
-
 .card-profile {
   .descript {
     font-weight: 700;
     text-decoration: none !important;
     color: var(--warehouse-black);
+  }
+}
+
+.multilanguage {
+  width: 52px;
+  height: 31px;
+  top: 15px;
+  position: relative;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.warehouse-popover-wrapper {
+  width: 250px;
+  p {
+    text-align: justify;
   }
 }

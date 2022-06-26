@@ -1,4 +1,30 @@
 {
+  "message": {
+    "welcome": "Benvenuto in WareHouse System ",
+    "verification": {
+      "email": {
+        "title": "Verifica Posta Elettronica",
+        "description": "Sembra che il tuo account non abbia superato i criteri di verifica.",
+        "cta": "Invio link",
+        "confirmation": "Un'e-mail di verifica è stata inviata alla tua posta elettronica. Controlla i tuoi messaggi per continuare a certificare la tua posta elettronica."
+      }
+    },
+    "changePassword": {
+      "success": {
+        "title": "Accedi con la tua nuova password",
+        "description": "È necessario disconnettersi per continuare nel WareHouse System."
+      },
+      "newPassword": "La vecchia password e la nuova password non possono essere la stessa cosa. Riprova.",
+      "confirmPassword": "Password e conferma password non corrispondono. Riprova."
+    }
+  },
+  "operation": {
+    "confirmation": {
+      "insert": {
+        "user": "Conferma inserimento nuono utente"
+      }
+    }
+  },
   "dashboard": {
     "title": "Pannello",
     "home": "Pagina iniziale",
@@ -10,6 +36,7 @@
       "verification": "Verifica email",
       "edit": "Modifica",
       "create.user": "Crea utente",
+      "update.user": "Aggiorna utente",
       "file": {
         "placeholder": "Carica la tua immagine di profilo",
         "upload": "Sciegli",
@@ -136,7 +163,7 @@
       "required": "Posta elettronica è richiesta",
       "placeholder": "Posta Elettronica"
     },
-    "secondEmail": {
+    "emailPec": {
       "title": "PEC Posta elettronica",
       "required": "PEC posta elettronica è richiesta",
       "placeholder": "PEC posta Elettronica"
@@ -251,7 +278,7 @@
     "role": "Hai i roli",
     "roles": "Roli",
     "lastLogin": "Ultimo Accesso",
-    "lastLoginMessage": "Hai effettuato il tuo ultimo accesso il",
+    "lastLoginMessage": "Hai effettuato il tuo ultimo accesso in WareHouse System il ",
     "verified": "Verificato",
     "notVerified": "Non verificato",
     "personalData": {
@@ -262,14 +289,20 @@
       "country": "Paese",
       "city": "Città",
       "address": "Indirizzo",
-      "zip": "Codice Postale"
+      "zip": "Codice Postale",
+      "createdAt": "Membro da"
     },
     "personalContact": {
       "title": "Contatti Personali",
       "personalEmail": "Indirizzo E-mail Personale",
       "otherPersonalEmail": "Indirizzo PEC Personale",
       "mobilePhone": "Cellulare",
-      "landlinePhone": "Telefono Fisso"
+      "landlinePhone": "Telefono Fisso",
+      "popover": {
+        "title": "Che cos'è l'Indirizzo PEC Personale",
+        "contentOne": "E' un indirizzo di posta elettronica secondaria, che può essere utilizato in caso di necessità, insieme con l'indirizzo di posta personale.",
+        "contentTwo": "Per essere utilizzato, deve essere certificato (verificato dalla persona)."
+      }
     },
     "add": {
       "title": "Nuovo utente"

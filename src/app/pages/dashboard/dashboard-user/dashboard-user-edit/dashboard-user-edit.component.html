@@ -1,1 +1,295 @@
-<p>dashboard-user-edit works!</p>
+<warehouse-breadcrumb [items]="breadcrumbItems"></warehouse-breadcrumb>
+<div class="dashboard-user-add-wrapper container-fluid">
+    <div class="row" *ngIf="isAuth">
+        <div class="col">
+            <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert">
+            </warehouse-notification>
+        </div>
+    </div>
+    <form nz-form [formGroup]="validateForm" class="dashboard-user-form">
+        <div class="row">
+            <div class="col-md-12">
+                <img alt="Warehouse Background Cover" class="dashboard-user-background-cover"
+                    src="../../../../../assets/images/image_placeholder.jpg" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <nz-avatar *ngIf="!imgURL" class="dashboard-user-profile-avatar mb-3" [nzSize]="100" nzIcon="user">
+                </nz-avatar>
+                <nz-avatar *ngIf="imgURL" class="dashboard-user-profile-avatar mb-3" [nzSize]="100"
+                    [nzSrc]="imgURL">
+                </nz-avatar>
+            </div>
+            <div class="col-md-8 mt-4 dashboard-user-upload-image-container">
+                <label class="ant-btn ant-btn-primary">
+                    <i nz-icon nzType="file-image" nzTheme="fill"></i>
+                    <span>{{(showbuttonUpload ? "dashboard.cta.file.change" : "dashboard.cta.file.upload") | translate
+                        }}</span>
+                    <input type="file" hidden accept="image/*" (change)="handleOnFileChanged($event)" nz-input
+                        formControlName="image" [placeholder]="'dashboard.cta.file.placeholder' | translate" />
+                </label>
+                <button *ngIf="showbuttonUpload" class="cta-upload-image-remove" nz-button nzType="primary" nzDanger
+                    (click)="handleOnRemoneImage()">
+                    <i nz-icon nzType="delete" nzTheme="fill"></i>
+                    {{ "dashboard.cta.file.remove" | translate }}
+                </button>
+            </div>
+        </div>
+        <div class="row dashboard-user-content">
+            <div class="col-md-12 dashboard-user-personal-data">
+                <h2 class="dashboard-user-profile-title" nz-typography>{{"profile.personalData.title" | translate}}</h2>
+                <nz-divider class="warehouse-background-primary warehouse-not-padding warehouse-not-margin">
+                </nz-divider>
+                <div class="row mt-4">
+                    <div class="col-md-2">
+                        <nz-form-label nzFor="gender">{{"register.gender.placeholder" | translate }}<span
+                                class="warehouse-required"> *</span></nz-form-label>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="'register.gender.required' | translate">
+                                <nz-radio-group nzName="radiogroup" (ngModelChange)="handleOnChangeInput()"
+                                    formControlName="gender">
+                                    <label nz-radio nzValue="Male">{{ 'register.gender.male' | translate }}<i
+                                            class="m-1" nz-icon nzType="man" nzTheme="outline"></i></label>
+                                    <label nz-radio nzValue="Female">{{ 'register.gender.female' | translate }}<i
+                                            class="m-1" nz-icon nzType="woman" nzTheme="outline"></i></label>
+                                </nz-radio-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div class="col-md-3">
+                        <nz-form-label nzFor="fullName">{{"register.fullname.title" | translate }}<span
+                                class="warehouse-required"> *</span></nz-form-label>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="'register.fullname.required' | translate">
+                                <nz-input-group nzPrefixIcon="user">
+                                    <input type="text" nz-input formControlName="fullName"
+                                        [placeholder]="'register.fullname.placeholder' | translate"
+                                        (click)="handleOnChangeInput()" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div class="col-md-3">
+                        <nz-form-label nzFor="username">{{"register.username.title" | translate }}<span
+                                class="warehouse-required"> *</span></nz-form-label>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="'register.username.required' | translate">
+                                <nz-input-group nzPrefixIcon="user">
+                                    <input type="text" nz-input formControlName="username"
+                                        [placeholder]="'register.username.placeholder' | translate"
+                                        (click)="handleOnChangeInput()" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div class="col-md-3">
+                        <nz-form-label nzFor="role">{{"register.role.title" | translate }}<span
+                                class="warehouse-required"> *</span></nz-form-label>
+                        <nz-form-item *ngIf="!!rolesList?.length">
+                            <nz-form-control [nzErrorTip]="'register.role.required' | translate">
+                                <nz-select [nzDisabled]="checkIfUserHasAdminRole()" nzAllowClear [nzPlaceHolder]="'register.role.placeholder' | translate"
+                                    nzMode="multiple" formControlName="role" [nzCustomTemplate]="multipleTemplate">
+                                    <nz-option *ngFor="let role of rolesList" [nzValue]="role.value"
+                                        [nzLabel]="role.label">
+                                    </nz-option>
+                                </nz-select>
+                                <ng-template #multipleTemplate let-selected>
+                                    <div class="ant-select-selection-item-content">
+                                        {{ selected.nzLabel }}
+                                    </div>
+                                </ng-template>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-2">
+                        <nz-form-label nzFor="dateOfBirth">{{"register.date.title" | translate }}<span
+                                class="warehouse-required"> *</span></nz-form-label>
+                        <nz-form-item>
+                            <nz-form-control>
+                                <nz-date-picker nzAllowClear="true" [nzFormat]="dateFormat"
+                                    formControlName="dateOfBirth" (click)="handleOnChangeInput()"
+                                    (ngModelChange)="handleOnChangeDate($event)">
+                                </nz-date-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div class="col-md-4">
+                        <nz-form-label nzFor="country">{{"register.country.title" | translate }}<span
+                                class="warehouse-required"> *</span></nz-form-label>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="'register.country.required'| translate">
+                                <nz-select nzShowSearch [nzPlaceHolder]="'register.country.placeholder'| translate"
+                                    [nzCustomTemplate]="defaultTemplate" class="multilanguage-wrapper"
+                                    formControlName="country" (click)="handleOnChangeInput()"
+                                    (ngModelChange)="handleOnSelectCountry($event)" [(ngModel)]="countrySelected">
+                                    <nz-option nzCustomContent *ngFor="let country of countryAndFlagData"
+                                        nzValue="{{country?.name}}" nzLabel="{{country?.name}}">
+                                        <img class="multilanguage-img" [alt]="country?.name" [src]="country?.flag" />
+                                        {{country?.name}}
+                                    </nz-option>
+                                    <ng-template #defaultTemplate let-selected>
+                                        <img class="multilanguage-img" [alt]="selected.nzLabel"
+                                            [src]="handleOnFlagSelected(selected)" />
+                                        {{ selected.nzLabel }}
+                                    </ng-template>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div class="col-md-3">
+                        <nz-form-label nzFor="state">{{"register.state.title" | translate }}<span
+                                class="warehouse-required"> *</span></nz-form-label>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="'register.state.required'| translate">
+                                <nz-select [nzDisabled]="!!countryStatesData?.length ? false : true" nzShowSearch
+                                    [nzPlaceHolder]="'register.state.placeholder'| translate" formControlName="state"
+                                    (click)="handleOnChangeInput()" (ngModelChange)="handleOnSelectState($event)"
+                                    [(ngModel)]="stateSelected">
+                                    <nz-option nzCustomContent *ngFor="let state of countryStatesData"
+                                        [nzValue]="state?.name" [nzLabel]="state?.name">
+                                        {{state?.name}}
+                                    </nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div class="col-md-2">
+                        <nz-form-label nzFor="zipCode">{{"register.zipCode.title" | translate }}</nz-form-label>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="'register.zipCode.required'| translate">
+                                <nz-input-group nzPrefixIcon="field-number">
+                                    <input type="tel" nz-input formControlName="zipCode"
+                                        [placeholder]="'register.zipCode.placeholder'| translate"
+                                        (click)="handleOnChangeInput()" (keypress)="handleOnKeyPress($event)" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <nz-form-label nzFor="address">{{"register.address.title" | translate }} <span
+                                class="warehouse-required"> *</span></nz-form-label>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="'register.address.required' | translate">
+                                <nz-input-group nzPrefixIcon="environment">
+                                    <input type="text" nz-input formControlName="address"
+                                        [placeholder]="'register.address.placeholder' | translate"
+                                        (click)="handleOnChangeInput()" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 dashboard-user-personal-contact">
+                <h2 class="dashboard-user-profile-title" nz-typography>{{"profile.personalContact.title" | translate}}
+                </h2>
+                <nz-divider class="warehouse-background-primary warehouse-not-padding warehouse-not-margin">
+                </nz-divider>
+                <div class="row mt-4">
+                    <div class="col-md-5">
+                        <nz-form-label nzFor="email">{{"register.email.title" | translate }}<span
+                                class="warehouse-required"> *</span></nz-form-label>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="'register.email.required' | translate">
+                                <nz-input-group nzPrefixIcon="mail">
+                                    <input type="email" nz-input [value]="dataUser?.email"
+                                        [placeholder]="'register.email.placeholder' | translate"
+                                        (click)="handleOnChangeInput()" [disabled]="true" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div class="col-md-5">
+                        <nz-form-label nzFor="emailPec">{{"register.emailPec.title" | translate }}</nz-form-label>
+                        <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover
+                            class="m-2 warehouse-cursor-pointer"
+                            [nzPopoverTitle]="'profile.personalContact.popover.title' | translate"
+                            [nzPopoverContent]="emailContentTemplate" nzPopoverPlacement="right"></i>
+                        <ng-template #emailContentTemplate>
+                            <div class="warehouse-popover-wrapper">
+                                <p>{{'profile.personalContact.popover.contentOne' | translate }}</p>
+                                <p><b>{{'profile.personalContact.popover.contentTwo' | translate }}</b></p>
+                            </div>
+                        </ng-template>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="'register.emailPec.required' | translate">
+                                <nz-input-group nzPrefixIcon="mail">
+                                    <input type="email" nz-input formControlName="emailPec"
+                                        [placeholder]="'register.emailPec.placeholder' | translate"
+                                        (click)="handleOnChangeInput()" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-5">
+                        <nz-form-label *ngIf="!!countrySelected?.length" nzFor="phone">{{"register.phone.title" |
+                            translate }}<span class="warehouse-required"> *</span></nz-form-label>
+                        <nz-form-item *ngIf="!!countrySelected?.length">
+                            <nz-form-control [nzErrorTip]="'register.phone.required'| translate">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img class="multilanguage" [src]="handleOnCountrySelected()" />
+                                        {{getPhonePrefixNumber()}}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <nz-input-group nzPrefixIcon="phone">
+                                            <input type="tel" nz-input formControlName="phoneNumber"
+                                                [placeholder]="'register.phone.placeholder'| translate"
+                                                (click)="handleOnChangeInput()" (keypress)="handleOnKeyPress($event)" />
+                                        </nz-input-group>
+                                    </div>
+                                </div>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div class="col-md-5" *ngIf="!!this.prefixPhoneData?.length">
+                        <nz-form-label nzFor="landlineNumber">{{"register.landline.title" | translate }}</nz-form-label>
+                        <nz-form-item>
+                            <nz-form-control [nzErrorTip]="'register.landline.required' | translate">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <nz-select nzShowSearch
+                                            [nzPlaceHolder]="'register.state.placeholder'| translate"
+                                            formControlName="landlinePrefix" (click)="handleOnChangeInput()"
+                                            (ngModelChange)="handleOnSelectLandlinePrefix($event)"
+                                            [(ngModel)]="landlinePrefixSelected">
+                                            <nz-option nzCustomContent *ngFor="let landlinePrefix of prefixPhoneData"
+                                                [nzValue]="handleOnFormatPrefix(landlinePrefix?.dialCode)"
+                                                [nzLabel]="handleOnFormatPrefix(landlinePrefix?.dialCode)">
+                                                {{handleOnFormatPrefix(landlinePrefix?.dialCode)}}
+                                            </nz-option>
+                                        </nz-select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <nz-input-group nzPrefixIcon="mobile">
+                                            <input type="tel" nz-input formControlName="landlineNumber"
+                                                [placeholder]="'register.landline.placeholder'| translate"
+                                                (click)="handleOnChangeInput()" (keypress)="handleOnKeyPress($event)" />
+                                        </nz-input-group>
+                                    </div>
+                                </div>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nz-divider class="warehouse-background-sliver"></nz-divider>
+        <div class="row mb-4">
+            <div class="col-md-12 mt-3">
+                <button nz-button (click)="handleOnBack()" class="profile-back" nzType="primary" nzDanger>
+                    <i nz-icon nzType="left" nzTheme="outline"></i>{{'dashboard.cta.back' | translate}}</button>
+                <button [disabled]="!validateForm.valid" nz-button (click)="handleOnUpdateUser()"
+                    class="dashboard-user-cta-create" [nzType]="'primary'">
+                    <i nz-icon nzType="user" nzTheme="outline"></i>{{'dashboard.cta.update.user' | translate}}</button>
+            </div>
+        </div>
+    </form>
+</div>

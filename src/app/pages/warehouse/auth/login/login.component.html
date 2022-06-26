@@ -14,9 +14,10 @@
         </div>
         <div class="col-md-12" *ngIf="!dataUserActive">
           <warehouse-modal [okTextModal]="okText" [typeModal]="alertTypeModal" [messageModal]="messageAlertModal"
-              [descriptionModal]="descriptionAlertModal" (handleOnOkModal)="handleOnOkModal($event)">
+            [showClosableModal]="true" [descriptionModal]="descriptionAlertModal"
+            (handleOnOkModal)="handleOnOkModal($event)">
           </warehouse-modal>
-      </div>
+        </div>
       </div>
       <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
         <nz-form-item>

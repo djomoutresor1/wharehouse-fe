@@ -13,27 +13,29 @@ export class ModalComponent implements OnInit {
   @Input() messageModal: string = '';
   @Input() descriptionModal: string = '';
   @Input() okTextModal: string = '';
+  @Input() cancelTextModal: string = '';
+  @Input() showClosableModal: boolean = false;
 
   @Output() handleOnOkModal: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private nzModalService: NzModalService) {}
 
   ngOnInit(): void {
-    if (this.typeModal == AlertType.ALERT_WARNING) {
+    if (this.typeModal === AlertType.ALERT_WARNING) {
       this.nzModalService.warning({
         nzTitle: this.messageModal,
         nzContent: this.descriptionModal,
-        nzClosable: false,
+        nzClosable: this.showClosableModal,
         nzOkText: this.okTextModal,
         nzCentered: false,
         nzOnOk: () => this.handleOnOkModal.emit(Utils.WAREHOUSE_TIMEOUT_TOKEN),
       });
     }
-    if (this.typeModal == AlertType.ALERT_SUCCESS) {
+    if (this.typeModal === AlertType.ALERT_SUCCESS) {
       this.nzModalService.success({
         nzTitle: this.messageModal,
         nzContent: this.descriptionModal,
-        nzClosable: false,
+        nzClosable: this.showClosableModal,
         nzOkText: this.okTextModal,
         nzCentered: false,
         nzOnOk: () => this.handleOnOkModal.emit(Utils.WAREHOUSE_TIMEOUT_TOKEN),

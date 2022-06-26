@@ -8,11 +8,8 @@ export interface UserRegisterModel {
   lastLogin?: string;
   userId?: string;
 }
-
-
-
-export interface UserRegisterModelStepThree {
+export interface UserRegisterStepThreeModel {
   dateOfBirth: string;
-  phoneNumber:any;
-  country:string
+  phoneNumber: string;
+  country: string;
 }
