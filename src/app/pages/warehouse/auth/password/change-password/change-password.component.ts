@@ -10,6 +10,7 @@ import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseModel } from 'src/model/auth/response/response-model';
+import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 
 @Component({
@@ -77,10 +78,13 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   getInfosUser() {
-    this.profilService.getImageUser(this.user?.userId).subscribe(
-      (response) => {
-        let objectURL = 'data:image/jpeg;base64,' + response?.object?.data;
-        this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+    this.profilService.getUserInfos(this.user?.userId).subscribe(
+      (response: ResponseUserModel) => {
+        if (response?.profileImage) {
+          let objectURL =
+            'data:image/jpeg;base64,' + response?.profileImage?.data;
+          this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        }
       },
       (error: HttpErrorResponse) => {
         console.log('Error Occured duringng downloading: ', error);
@@ -128,11 +132,11 @@ export class ChangePasswordComponent implements OnInit {
   ): boolean {
     let message = '';
     if (oldPassword === password) {
-      message = 'Old password and new password cannot be the same. Try again.';
+      message = this.translate.instant('message.changePassword.newPassword');
       this.errorAlertType(message);
     }
     if (confirmPassword !== password) {
-      message = "Password and confirm password don't match. Try again.";
+      message = this.translate.instant('message.changePassword.confirmPassword');
       this.errorAlertType(message);
     }
     return !!message?.length ? false : true;
@@ -142,9 +146,9 @@ export class ChangePasswordComponent implements OnInit {
     this.isSuccess = true;
     this.alertType = AlertType.ALERT_SUCCESS;
     this.messageAlert = message;
-    this.okText = 'Login with your new password';
+    this.okText = this.translate.instant('message.changePassword.success.title');
     this.descriptionAlert =
-      'It is necessary logout to continue in Warehouse System.';
+    this.translate.instant('message.changePassword.success.description');
     // First cancel the token in localStorage
     // because the user could refresh the page without click in the OK button in modal confirmation
     this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();

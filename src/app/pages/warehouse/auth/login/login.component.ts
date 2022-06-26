@@ -118,6 +118,7 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm() {
+    this.dataUserActive = true;
     let userData = {
       username: this.validateForm.controls['username']?.value.toLowerCase(),
       password: this.validateForm.controls['password']?.value,
@@ -160,8 +161,9 @@ export class LoginComponent implements OnInit {
   successNotificationVerification() {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
-    this.messageAlert =
-      'Verification profil has been seen in your email, please check your email';
+    this.messageAlert = this.translate.instant(
+      'message.verification.email.confirmation'
+    );
   }
 
   alertModalActive() {

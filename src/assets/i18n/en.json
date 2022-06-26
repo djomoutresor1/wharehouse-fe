@@ -5,8 +5,17 @@
       "email": {
         "title": "Verification Email",
         "description": "It looks like your account hasn't passed the verification criteria.",
-        "cta": "Send link"
+        "cta": "Send link",
+        "confirmation": "A verification email has been sent to your email. Please check your messages to continue certifying your email."
       }
+    },
+    "changePassword": {
+      "success": {
+        "title": "Login with your new password.",
+        "description": "It is necessary logout to continue in Warehouse System."
+      },
+      "newPassword": "Old password and new password cannot be the same. Try again.",
+      "confirmPassword": "Password and confirm password don't match. Try again."
     }
   },
   "operation": {
