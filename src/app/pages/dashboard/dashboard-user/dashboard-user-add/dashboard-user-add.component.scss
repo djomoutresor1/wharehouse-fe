@@ -54,4 +54,13 @@
 .multilanguage {
   width: 52px;
   height: 31px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.warehouse-popover-wrapper {
+  width: 250px;
+  p {
+    text-align: justify;
+  }
 }

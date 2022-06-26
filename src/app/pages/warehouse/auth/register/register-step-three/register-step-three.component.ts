@@ -11,7 +11,6 @@ import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
-
 @Component({
   selector: 'warehouse-register-step-three',
   templateUrl: './register-step-three.component.html',
@@ -109,7 +108,7 @@ export class RegisterStepThreeComponent implements OnInit {
 
   checkIfUserIsAlreadyLogged() {
     let user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
-    if (user?.token) {
+    if (user?.token || user?.user) {
       this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
     }
   }

@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NzButtonSize } from 'ng-zorro-antd/button';
@@ -10,8 +9,9 @@ import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
+import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
-
+import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 @Component({
   selector: 'warehouse-register-step-two',
   templateUrl: './register-step-two.component.html',
@@ -44,6 +44,7 @@ export class RegisterStepTwoComponent implements OnInit {
   isExpiredLink: boolean = false;
   user!: ResponseResetModel;
   isVerifyEmail: boolean = false;
+  userActivateStatusType: boolean = false;
 
   constructor(
     private router: Router,
@@ -83,6 +84,11 @@ export class RegisterStepTwoComponent implements OnInit {
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER_STEP_3}`]);
   }
 
+  handleOnGoToLogin() {
+    this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+  }
+
   onRetrieveUser() {
     return this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
   }
@@ -92,41 +98,59 @@ export class RegisterStepTwoComponent implements OnInit {
       .userVerifyLink(this.idLinkVerifyEmail, this.verifyType)
       .subscribe(
         (response: ResponseResetModel) => {
+          console.log('response', response);
           this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
           this.user = response;
           this.checkIfExpirationLinkIsCorrect();
           if (!this.isExpiredLink && !this.isVerifyEmail) {
-            this.activateStatusUser();
+            this.handleOnActivateStatusUser();
+            setTimeout(() => {
+              this.handleOnGetUserInfos(this.user?.userId);
+            }, 2000);
           }
         },
         (error: HttpErrorResponse) => {
           if (error.status === 404) {
-            this.isVerifyEmail = true;
             this.errorAlertType(error?.error.message);
           }
         }
       );
   }
 
-  activateStatusUser() {
-    this.profilService
-      .onActivateUser(this.user?.user?.userId as string)
-      .subscribe((response: any) => {
+  handleOnActivateStatusUser() {
+    this.profilService.onActivateUser(this.user?.userId).subscribe(
+      (response: ResponseModel) => {
+        console.log('response: ', response);
         this.successAlertType(response?.message);
-        (error: HttpErrorResponse) => {
-          console.log('Error: ', error);
-          this.errorAlertType(error.error.message);
-        };
-      });
+      },
+      (error: HttpErrorResponse) => {
+        console.log('Error: ', error);
+        this.isVerifyEmail = true;
+        this.errorAlertType(error?.error?.message);
+      }
+    );
+  }
+
+  handleOnGetUserInfos(userId: string) {
+    this.profilService.getUserInfos(userId).subscribe(
+      (response: ResponseUserModel) => {
+        console.log('response: ', response);
+        this.userActivateStatusType = response.userInfo?.adminUser;
+        if (!this.userActivateStatusType) {
+          this.handleOnGoToStepThree();
+        }
+      },
+      (error: HttpErrorResponse) => {
+        console.log('Error: ', error);
+        this.errorAlertType(error?.error?.message);
+      }
+    );
   }
 
   successAlertType(message: string): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
     this.messageAlert = message;
-    setTimeout(() => {
-      this.handleOnGoToStepThree();
-    }, 2000);
   }
 
   checkIfExpirationLinkIsCorrect() {
@@ -140,7 +164,9 @@ export class RegisterStepTwoComponent implements OnInit {
         this.isExpiredLink = false;
       } else {
         this.isExpiredLink = true;
-        this.errorAlertType(this.translate.instant('validations.link.expiration'));
+        this.errorAlertType(
+          this.translate.instant('validations.link.expiration')
+        );
       }
     } else {
       this.isExpiredLink = true;

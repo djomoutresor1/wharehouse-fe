@@ -15,30 +15,13 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <nz-avatar *ngIf="!profileURL" class="dashboard-user-profile-avatar mb-3" [nzSize]="100" nzIcon="user">
+                <nz-avatar *ngIf="!imgURL" class="dashboard-user-profile-avatar mb-3" [nzSize]="100" nzIcon="user">
                 </nz-avatar>
-                <nz-avatar *ngIf="profileURL" class="dashboard-user-profile-avatar mb-3" [nzSize]="100" [nzSrc]="profileURL">
+                <nz-avatar *ngIf="imgURL" class="dashboard-user-profile-avatar mb-3" [nzSize]="100"
+                    [nzSrc]="imgURL">
                 </nz-avatar>
             </div>
-            <div class="col-md-8">
-                <div class="row mt-3 profile-user">
-                  <div class="col-md-3">
-                    <p class="profile-title" nz-typography>{{ "register.username.placeholder" | translate }}</p>
-                    <h3 class="profile-title" nz-typography>{{ dataUser?.username }}</h3>
-                  </div>
-                  <div class="col-md-3">
-                    <p class="profile-title" nz-typography>{{ "profile.personalData.userId" | translate }}</p>
-                    <h3 class="profile-title" nz-typography aria-readonly>{{ dataUser?.userId }}</h3>
-                  </div>
-                  <div class="col-md-4">
-                  <div class="col-md-12">
-                    <span nz-typography><strong>{{"profile.lastLoginMessage" | translate}} {{ dataUser?.lastLogin
-                        }}</strong></span>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            <div class="col-md-8 mb-5 dashboard-user-upload-image-container">
+            <div class="col-md-8 mt-4 dashboard-user-upload-image-container">
                 <label class="ant-btn ant-btn-primary">
                     <i nz-icon nzType="file-image" nzTheme="fill"></i>
                     <span>{{(showbuttonUpload ? "dashboard.cta.file.change" : "dashboard.cta.file.upload") | translate
@@ -66,8 +49,10 @@
                             <nz-form-control [nzErrorTip]="'register.gender.required' | translate">
                                 <nz-radio-group nzName="radiogroup" (ngModelChange)="handleOnChangeInput()"
                                     formControlName="gender">
-                                    <label nz-radio nzValue="Male">{{ 'register.gender.male' | translate }}</label>
-                                    <label nz-radio nzValue="Female">{{ 'register.gender.female' | translate }}</label>
+                                    <label nz-radio nzValue="Male">{{ 'register.gender.male' | translate }}<i
+                                            class="m-1" nz-icon nzType="man" nzTheme="outline"></i></label>
+                                    <label nz-radio nzValue="Female">{{ 'register.gender.female' | translate }}<i
+                                            class="m-1" nz-icon nzType="woman" nzTheme="outline"></i></label>
                                 </nz-radio-group>
                             </nz-form-control>
                         </nz-form-item>
@@ -91,7 +76,7 @@
                         <nz-form-item>
                             <nz-form-control [nzErrorTip]="'register.username.required' | translate">
                                 <nz-input-group nzPrefixIcon="user">
-                                    <input type="text" nz-input formControlName="username" 
+                                    <input type="text" nz-input formControlName="username"
                                         [placeholder]="'register.username.placeholder' | translate"
                                         (click)="handleOnChangeInput()" />
                                 </nz-input-group>
@@ -103,7 +88,7 @@
                                 class="warehouse-required"> *</span></nz-form-label>
                         <nz-form-item *ngIf="!!rolesList?.length">
                             <nz-form-control [nzErrorTip]="'register.role.required' | translate">
-                                <nz-select nzAllowClear [nzPlaceHolder]="'register.role.placeholder' | translate"
+                                <nz-select [nzDisabled]="checkIfUserHasAdminRole()" nzAllowClear [nzPlaceHolder]="'register.role.placeholder' | translate"
                                     nzMode="multiple" formControlName="role" [nzCustomTemplate]="multipleTemplate">
                                     <nz-option *ngFor="let role of rolesList" [nzValue]="role.value"
                                         [nzLabel]="role.label">
@@ -214,18 +199,28 @@
                                 <nz-input-group nzPrefixIcon="mail">
                                     <input type="email" nz-input [value]="dataUser?.email"
                                         [placeholder]="'register.email.placeholder' | translate"
-                                        (click)="handleOnChangeInput()" [disabled]="true"/>
+                                        (click)="handleOnChangeInput()" [disabled]="true" />
                                 </nz-input-group>
                             </nz-form-control>
                         </nz-form-item>
                     </div>
                     <div class="col-md-5">
-                        <nz-form-label nzFor="emailPec">{{"register.secondEmail.title" | translate }}</nz-form-label>
+                        <nz-form-label nzFor="emailPec">{{"register.emailPec.title" | translate }}</nz-form-label>
+                        <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover
+                            class="m-2 warehouse-cursor-pointer"
+                            [nzPopoverTitle]="'profile.personalContact.popover.title' | translate"
+                            [nzPopoverContent]="emailContentTemplate" nzPopoverPlacement="right"></i>
+                        <ng-template #emailContentTemplate>
+                            <div class="warehouse-popover-wrapper">
+                                <p>{{'profile.personalContact.popover.contentOne' | translate }}</p>
+                                <p><b>{{'profile.personalContact.popover.contentTwo' | translate }}</b></p>
+                            </div>
+                        </ng-template>
                         <nz-form-item>
-                            <nz-form-control [nzErrorTip]="'register.secondEmail.required' | translate">
+                            <nz-form-control [nzErrorTip]="'register.emailPec.required' | translate">
                                 <nz-input-group nzPrefixIcon="mail">
                                     <input type="email" nz-input formControlName="emailPec"
-                                        [placeholder]="'register.secondEmail.placeholder' | translate"
+                                        [placeholder]="'register.emailPec.placeholder' | translate"
                                         (click)="handleOnChangeInput()" />
                                 </nz-input-group>
                             </nz-form-control>
@@ -266,9 +261,9 @@
                                             (ngModelChange)="handleOnSelectLandlinePrefix($event)"
                                             [(ngModel)]="landlinePrefixSelected">
                                             <nz-option nzCustomContent *ngFor="let landlinePrefix of prefixPhoneData"
-                                                [nzValue]="landlinePrefix?.dialCode"
-                                                [nzLabel]="landlinePrefix?.dialCode">
-                                                {{landlinePrefix?.dialCode}}
+                                                [nzValue]="handleOnFormatPrefix(landlinePrefix?.dialCode)"
+                                                [nzLabel]="handleOnFormatPrefix(landlinePrefix?.dialCode)">
+                                                {{handleOnFormatPrefix(landlinePrefix?.dialCode)}}
                                             </nz-option>
                                         </nz-select>
                                     </div>
@@ -298,4 +293,3 @@
         </div>
     </form>
 </div>
-
