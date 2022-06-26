@@ -154,7 +154,7 @@
       "required": "Posta elettronica è richiesta",
       "placeholder": "Posta Elettronica"
     },
-    "secondEmail": {
+    "emailPec": {
       "title": "PEC Posta elettronica",
       "required": "PEC posta elettronica è richiesta",
       "placeholder": "PEC posta Elettronica"

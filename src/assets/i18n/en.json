@@ -153,7 +153,7 @@
       "required": "Email is required",
       "placeholder": "Email"
     },
-    "secondEmail": {
+    "emailPec": {
       "title": "PEC Email Address",
       "required": "PEC Email is required",
       "placeholder": "PEC Email"

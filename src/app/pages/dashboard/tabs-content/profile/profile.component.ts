@@ -12,6 +12,7 @@ import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 import { FlagService } from 'src/app/services/flag.service';
+import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 @Component({
   selector: 'warehouse-profile',
   templateUrl: './profile.component.html',
@@ -32,8 +33,6 @@ export class ProfileComponent implements OnInit {
   dateFormat = 'DD/MM/YYYY HH:mm:ss';
   enableEdit: boolean = true;
   dataUser: any;
-  teste: any;
-  dataRoles: any[] = [];
 
   constructor(
     private router: Router,
@@ -68,12 +67,14 @@ export class ProfileComponent implements OnInit {
   }
 
   getInfosUser() {
-    this.profilService.getImageUser(this.userLocalStorage?.userId).subscribe(
-      (response) => {
-        let objectURL = 'data:image/jpeg;base64,' + response?.object?.data;
-        this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-        this.dataUser = response?.object?.user;
-        this.dataRoles.push(this.rolesUser(this.dataUser?.roles));
+    this.profilService.getUserInfos(this.userLocalStorage?.userId).subscribe(
+      (response: ResponseUserModel) => {
+        console.log('response: ', response);
+        if(response?.profileImage) {
+          let objectURL = 'data:image/jpeg;base64,' + response?.profileImage?.data;
+          this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        }
+        this.dataUser = response;
       },
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
@@ -89,14 +90,6 @@ export class ProfileComponent implements OnInit {
         }
       }
     );
-  }
-
-  rolesUser(data: any) {
-    return data
-      ?.map((currElement: any) => {
-        return this.getRoleName(currElement.name);
-      })
-      .join(',');
   }
 
   getUserDateCreation(createdAt: string): string {
@@ -128,8 +121,8 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  getRoleName(role: string) {
-    switch (role) {
+  getRoleName(role: any) {
+    switch (role?.name) {
       case Utils.ROLE_ADMIN:
         return Utils.ADMINS;
         break;
@@ -145,8 +138,8 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  getUserColorRole(role: string) {
-    switch (role) {
+  getUserColorRole(role: any) {
+    switch (role?.name) {
       case Utils.ROLE_USER:
         return '#0096c8';
         break;

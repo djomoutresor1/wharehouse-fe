@@ -7,7 +7,7 @@ export interface UserInsertModel {
   fullname: string;
   username: string;
   email: string;
-  secondEmail: string;
+  emailPec: string;
   role: string[];
   address: UserAddressModel;
   contact: UserContactModel;

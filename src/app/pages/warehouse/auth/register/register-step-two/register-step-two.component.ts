@@ -11,6 +11,7 @@ import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
+import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 @Component({
   selector: 'warehouse-register-step-two',
   templateUrl: './register-step-two.component.html',
@@ -132,9 +133,9 @@ export class RegisterStepTwoComponent implements OnInit {
 
   handleOnGetUserInfos(userId: string) {
     this.profilService.getUserInfos(userId).subscribe(
-      (response: ResponseModel) => {
+      (response: ResponseUserModel) => {
         console.log('response: ', response);
-        this.userActivateStatusType = response.object?.adminUser;
+        this.userActivateStatusType = response.userInfo?.adminUser;
         if (!this.userActivateStatusType) {
           this.handleOnGoToStepThree();
         }

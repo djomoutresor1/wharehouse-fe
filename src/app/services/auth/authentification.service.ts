@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
@@ -6,7 +6,10 @@ import { environment } from 'src/environments/environment';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
 import { UserLoginModel } from 'src/model/auth/request/user-login-model';
-import { UserRegisterModel, UserRegisterModelStepThree } from 'src/model/auth/request/user-register-model';
+import {
+  UserRegisterModel,
+  UserRegisterStepThreeModel,
+} from 'src/model/auth/request/user-register-model';
 import { Auth } from '../../shared/enums/auth-enums';
 
 @Injectable({
@@ -36,11 +39,11 @@ export class AuthentificationService {
   }
 
   public userRegisterStepThree(
-    user: UserRegisterModelStepThree,
+    user: UserRegisterStepThreeModel,
     step: number,
-    userName:String
-  ): Observable<UserRegisterModelStepThree> {
-    return this.http.patch<UserRegisterModelStepThree>(
+    userName: String
+  ): Observable<UserRegisterStepThreeModel> {
+    return this.http.patch<UserRegisterStepThreeModel>(
       `${this.apiServerUrl}${Auth.WAREHOUSE_REGISTER_USER_STEP_THREE}/${userName}`,
       user,
       {

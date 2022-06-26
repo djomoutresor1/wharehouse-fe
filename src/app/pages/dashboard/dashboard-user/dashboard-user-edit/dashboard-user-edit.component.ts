@@ -1,11 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FlagService } from 'src/app/services/flag.service';
@@ -17,7 +12,13 @@ import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 import * as _ from 'lodash';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Utils } from 'src/app/shared/enums/utils-enums';
-
+import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
+import { UserContactModel } from 'src/model/dashboard/request/user-contact-model';
+import { UserAddressModel } from 'src/model/dashboard/request/user-address-model';
+import { UserInsertModel } from 'src/model/dashboard/request/user-insert-model';
+import * as moment from 'moment';
+import { ResponseModel } from 'src/model/auth/response/response-model';
+import { ImageService } from 'src/app/services/image.service';
 @Component({
   selector: 'warehouse-dashboard-user-edit',
   templateUrl: './dashboard-user-edit.component.html',
@@ -48,9 +49,8 @@ export class DashboardUserEditComponent implements OnInit {
   descriptionAlert: string = '';
   isExpiredToken: boolean = false;
   keypressInput: boolean = false;
-  dataUser: any;
+  dataUser!: ResponseUserModel;
   userLocalStorage: any;
-  profileURL: any;
 
   rolesList = [
     { label: 'Admin', value: 'admin' },
@@ -68,7 +68,6 @@ export class DashboardUserEditComponent implements OnInit {
     '.webp',
   ];
 
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -76,7 +75,8 @@ export class DashboardUserEditComponent implements OnInit {
     private warehouseLocalStorage: WarehouseLocalStorage,
     private profilService: ProfilService,
     private flagService: FlagService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private imageService: ImageService
   ) {}
 
   ngOnInit(): void {
@@ -138,7 +138,6 @@ export class DashboardUserEditComponent implements OnInit {
       address: ['', [Validators.required]],
     });
   }
-
 
   initComponent() {
     this.user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
@@ -217,6 +216,7 @@ export class DashboardUserEditComponent implements OnInit {
     this.alertType = AlertType.ALERT_ERROR;
     this.messageAlert = message;
   }
+
   handleOnRemoneImage() {
     this.imgURL = '';
     this.showbuttonUpload = false;
@@ -279,97 +279,9 @@ export class DashboardUserEditComponent implements OnInit {
 
   handleOnGetStatesByCountry() {
     this.stateSelected = '';
-    this.flagService
-      .getStatesByCountry(this.countrySelected)
-      .subscribe((states) => {
+    this.flagService.getStatesByCountry(this.countrySelected).subscribe(
+      (states) => {
         this.countryStatesData = states.data?.states;
-      }),
-      (error: HttpErrorResponse) => {
-        if (error.status === 403) {
-          // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = 'Go to login';
-          this.messageAlert = `Session timeout expiration`;
-          this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
-          this.isExpiredToken = true;
-        } else {
-          console.log('Error Occured during downloading: ', error);
-          this.errorAlertType(error?.error.message);
-        }
-      };
-  }
-
-  handleOnSelectState(selectedState: string) {
-    console.log('handleOnSelectState: ', selectedState);
-    this.stateSelected = selectedState;
-  }
-
-  successNotificationType(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_SUCCESS;
-    this.messageAlert = message;
-    setTimeout(() => {
-      this.handleOnBack()
-    }, 2000);
- 
-  }
-
-  handleOnUpdateUser() {
-    let userUpdateData = {
-      fullname: this.validateForm.controls['fullName']?.value,
-      username: this.validateForm.controls['username']?.value.toLowerCase(),
-      email: this.validateForm.controls['email']?.value,
-      emailPec: this.validateForm.controls['emailPec']?.value,
-      dateOfBirth: this.validateForm.controls['dateOfBirth']?.value,
-      country: this.validateForm.controls['country']?.value,
-      state: this.validateForm.controls['state']?.value,
-      address: this.validateForm.controls['address']?.value,
-      zipCode: this.validateForm.controls['zipCode']?.value,
-      landlinePrefix: this.getPhonePrefixNumber(),
-      phoneNumber: this.validateForm.controls['phoneNumber']?.value,
-      landlineNumber: this.validateForm.controls['landlineNumber']?.value,
-      role: this.validateForm.controls['role']?.value,
-      gender: this.validateForm.controls['gender']?.value,
-    };
-    console.log('userUpdateData: ', userUpdateData);
-   this.profilService.onUpdateUser(userUpdateData,this.dataUser?.userId).subscribe((response:any)=>{
-    this.successNotificationType(response?.message);
-      console.log('updateResponse: ', response);
-    }),
-    (error: HttpErrorResponse) => {
-      if (error.status === 403) {
-        // Expiration token
-        this.alertType = AlertType.ALERT_WARNING;
-        this.okText = 'Go to login';
-        this.messageAlert = `Session timeout expiration`;
-        this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
-        this.isExpiredToken = true;
-      } else {
-        console.log('Error Occured during downloading: ', error);
-        this.errorAlertType(error?.error.message);
-      }
-    };
-  }
-
-
-
-  handleOnSelectLandlinePrefix(landlinePrefix: string) {
-    console.log('handleOnSelectLandlinePrefix: ', landlinePrefix);
-  }
-
-  handleOnBack() {
-    this.router.navigate([
-      `${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.PROFILE}`,
-    ]);
-  }
-
-  getInfosUser() {
-    this.profilService.getImageUser(this.userLocalStorage?.userId).subscribe(
-      (response) => {
-        let objectURL = 'data:image/jpeg;base64,' + response?.object?.data;
-        this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-        this.dataUser = response?.object?.user;
-        this.setDefaults();
       },
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
@@ -387,31 +299,184 @@ export class DashboardUserEditComponent implements OnInit {
     );
   }
 
-  setDefaults() {
+  handleOnSelectState(selectedState: string) {
+    console.log('handleOnSelectState: ', selectedState);
+    this.stateSelected = selectedState;
+  }
+
+  successNotificationType(message: string): void {
+    this.isAuth = true;
+    this.alertType = AlertType.ALERT_SUCCESS;
+    this.messageAlert = message;
+    // setTimeout(() => {
+    //   this.handleOnBack();
+    // }, 500);
+  }
+
+  handleOnUpdateUser() {
+    let userContact: UserContactModel = {
+      landlinePrefix: this.landlinePrefixSelected,
+      phoneNumber: this.validateForm.controls['phoneNumber']?.value,
+      landlineNumber: this.validateForm.controls['landlineNumber']?.value,
+      phonePrefix: this.getPhonePrefixNumber(),
+    };
+
+    let userAddress: UserAddressModel = {
+      country: this.validateForm.controls['country']?.value,
+      state: this.validateForm.controls['state']?.value,
+      addressLine: this.validateForm.controls['address']?.value,
+      zipCode: this.validateForm.controls['zipCode']?.value,
+    };
+
+    let userUpdateData: UserInsertModel = {
+      fullname: this.validateForm.controls['fullName']?.value,
+      username: this.validateForm.controls['username']?.value.toLowerCase(),
+      email: this.validateForm.controls['email']?.value,
+      emailPec: this.validateForm.controls['emailPec']?.value,
+      dateOfBirth: moment(
+        this.validateForm.controls['dateOfBirth']?.value
+      ).format('L'),
+      contact: userContact,
+      address: userAddress,
+      role: this.validateForm.controls['role']?.value,
+      gender: this.validateForm.controls['gender']?.value,
+    };
+
+    console.log('userUpdateData: ', userUpdateData);
+
+    // let userUpdateData = {
+    //   fullname: this.validateForm.controls['fullName']?.value,
+    //   username: this.validateForm.controls['username']?.value.toLowerCase(),
+    //   email: this.validateForm.controls['email']?.value,
+    //   emailPec: this.validateForm.controls['emailPec']?.value,
+    //   dateOfBirth: this.validateForm.controls['dateOfBirth']?.value,
+    //   country: this.validateForm.controls['country']?.value,
+    //   state: this.validateForm.controls['state']?.value,
+    //   address: this.validateForm.controls['address']?.value,
+    //   zipCode: this.validateForm.controls['zipCode']?.value,
+    //   landlinePrefix: this.getPhonePrefixNumber(),
+    //   phoneNumber: this.validateForm.controls['phoneNumber']?.value,
+    //   landlineNumber: this.validateForm.controls['landlineNumber']?.value,
+    //   role: this.validateForm.controls['role']?.value,
+    //   gender: this.validateForm.controls['gender']?.value,
+    // };
+
+  if (!!this.imgURL?.length) {
+      this.handleOnUploadImageProfile(this.dataUser?.userId);
+    }
+
+    // this.profilService
+    //   .onUpdateUser(userUpdateData, this.dataUser?.userId)
+    //   .subscribe(
+    //     (response: ResponseModel) => {
+    //       this.successNotificationType(response?.message);
+    //       console.log('updateResponse: ', response);
+    //     },
+    //     (error: HttpErrorResponse) => {
+    //       if (error.status === 403) {
+    //         // Expiration token
+    //         this.alertType = AlertType.ALERT_WARNING;
+    //         this.okText = 'Go to login';
+    //         this.messageAlert = `Session timeout expiration`;
+    //         this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
+    //         this.isExpiredToken = true;
+    //       } else {
+    //         console.log('Error Occured during downloading: ', error);
+    //         this.errorAlertType(error?.error.message);
+    //       }
+    //     }
+    //   );
+  }
+
+  handleOnUploadImageProfile(userId: string) {
+    // Instantiate a FormData to store form fields and encode the file
+    let uploadData = new FormData();
+    // Add file content to prepare the request
+    uploadData.append('file', this.selectedFile);
+
+    this.imageService.uploadImageProfile(uploadData, userId).subscribe(
+      (response: ResponseModel) => {
+        //this.successNotificationType(response?.message);
+      },
+      (error: HttpErrorResponse) => {
+        console.log('Error Occured duringng saving: ', error);
+        this.errorAlertType(error?.message || error?.error?.message);
+      }
+    );
+  }
+
+  handleOnSelectLandlinePrefix(landlinePrefix: string) {
+    console.log('handleOnSelectLandlinePrefix: ', landlinePrefix);
+  }
+
+  handleOnBack() {
+    this.router.navigate([
+      `${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.PROFILE}`,
+    ]);
+  }
+
+  getInfosUser() {
+    this.profilService.getUserInfos(this.userLocalStorage?.userId).subscribe(
+      (response: ResponseUserModel) => {
+        this.showbuttonUpload = response?.profileImage !== null ? true : false;
+        if (response?.profileImage) {
+          let objectURL =
+            'data:image/jpeg;base64,' + response?.profileImage?.data;
+          this.imgURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        }
+        this.dataUser = response;
+        this.setDefaultsInfosUserData();
+        this.checkIfUserHasAdminRole();
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = 'Go to login';
+          this.messageAlert = `Session timeout expiration`;
+          this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
+          this.isExpiredToken = true;
+        } else {
+          console.log('Error Occured during downloading: ', error);
+          this.errorAlertType(error?.error.message);
+        }
+      }
+    );
+  }
+
+  setDefaultsInfosUserData() {
     // to set default value retrieved from BE
+    this.countrySelected = this.dataUser?.address?.country;
     this.validateForm.patchValue({
       fullName: this.dataUser?.fullname,
       username: this.dataUser?.username,
       email: this.dataUser?.email,
-      secondEmail: this.dataUser?.secondEmail,
+      emailPec: this.dataUser?.emailPec,
       role: this.getDefaultRolesUser(this.dataUser?.roles),
       gender: this.dataUser?.gender,
-      image: this.dataUser?.image,
       dateOfBirth: this.dataUser?.dateOfBirth,
-      phoneNumber: this.dataUser?.phoneNumber,
-      landlinePrefix: this.dataUser?.landlinePrefix,
-      landlineNumber: this.dataUser?.landlineNumber,
-      country: this.dataUser?.country,
-      state: this.dataUser?.state,
-      zipCode: this.dataUser?.zipCode,
-      address: this.dataUser?.address,
+      phoneNumber: this.dataUser?.contact?.phoneNumber,
+      phonePrefix: this.dataUser?.contact?.phonePrefix,
+      landlinePrefix: this.dataUser?.contact?.landlinePrefix,
+      landlineNumber: this.dataUser?.contact?.landlineNumber,
+      country: this.dataUser?.address?.country,
+      state: this.dataUser?.address?.state,
+      zipCode: this.dataUser?.address?.zipCode,
+      address: this.dataUser?.address?.addressLine,
     });
+  }
+
+  checkIfUserHasAdminRole() {
+    let userAdminRole = this.dataUser?.roles?.find(
+      (role: any) => role?.name === Utils.ROLE_ADMIN
+    );
+    return userAdminRole !== undefined ? false : true;
   }
 
   userRoleName(role: string) {
     switch (role) {
       case Utils.ROLE_ADMIN:
-        return Utils.ADMINS as String;
+        return Utils.ADMINS;
         break;
       case Utils.ROLE_MODERATOR:
         return Utils.MODERATOR;
@@ -482,5 +547,8 @@ export class DashboardUserEditComponent implements OnInit {
     }
   }
 
-
+  // Add + at first of the prefix
+  handleOnFormatPrefix(prefix: string): string {
+    return prefix?.startsWith('+') ? prefix : '+' + prefix;
+  }
 }

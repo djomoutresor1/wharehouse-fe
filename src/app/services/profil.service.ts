@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseModel } from 'src/model/auth/response/response-model';
-import { ResponseUserInfoModel } from 'src/model/auth/response/response-user-info-model';
-import { UserUpdateModel } from 'src/model/auth/resquest/user-register-model';
+import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
+import { UserInsertModel } from 'src/model/dashboard/request/user-insert-model';
 import { Auth } from '../shared/enums/auth-enums';
 import { Pages } from '../shared/enums/pages-enums';
 import { WarehouseLocalStorage } from '../utils/warehouse-local-storage';
@@ -27,8 +27,8 @@ export class ProfilService {
     );
   }
 
-  public getUserInfos(userId: string): Observable<ResponseModel> {
-    return this.http.get<ResponseModel>(
+  public getUserInfos(userId: string): Observable<ResponseUserModel> {
+    return this.http.get<ResponseUserModel>(
       `${this.apiServerUrl}${Auth.WAREHOUSE_FIND_USER_INFOS}/${userId}`
     );
   }
@@ -52,9 +52,13 @@ export class ProfilService {
     );
   }
 
-  public onUpdateUser(user: UserUpdateModel,userId:string): Observable<any> {
-    return this.http.put<any>(
-      `${this.apiServerUrl}${Auth.WAREHOUSE_UPDATE_USER}/${userId}`,user
+  public onUpdateUser(
+    user: UserInsertModel,
+    userId: string
+  ): Observable<ResponseModel> {
+    return this.http.put<ResponseModel>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_UPDATE_USER}/${userId}`,
+      user
     );
   }
 }

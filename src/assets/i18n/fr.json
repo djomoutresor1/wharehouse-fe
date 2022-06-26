@@ -154,7 +154,7 @@
       "required": "Courrier électronique est obbligatoire",
       "placeholder": "Courrier électronique"
     },
-    "secondEmail": {
+    "emailPec": {
       "title": "Courrier électronique PEC",
       "required": "Courrier électronique PEC est obbligatoire",
       "placeholder": "Courrier électronique PEC"

@@ -80,15 +80,14 @@
         <div class="col-md-4 mt-3">
           <label class="mb-2">{{"profile.personalData.fullname" | translate }}</label>
           <nz-input-group nzPrefixIcon="user">
-            <input nz-input
-              [value]="dataUser?.fullname ? dataUser?.fullname : 'profile.empty' | translate"
+            <input nz-input [value]="dataUser?.fullname ? dataUser?.fullname : 'profile.empty' | translate"
               [disabled]="true" />
           </nz-input-group>
         </div>
         <div class="col-md-4 mt-3">
           <label class="mb-2">{{ "profile.personalData.userId" | translate }}</label>
           <nz-input-group nzPrefixIcon="safety">
-            <input nz-input [value]="dataUser?.userId  ? dataUser?.userId : 'profile.empty' | translate"
+            <input nz-input [value]="dataUser?.userId ? dataUser?.userId : 'profile.empty' | translate"
               [disabled]="true" />
           </nz-input-group>
         </div>
@@ -121,8 +120,7 @@
         <div class="col-md-3 mt-3">
           <label class="mb-2">{{"profile.personalData.city" | translate }}</label>
           <nz-input-group nzPrefixIcon="home">
-            <input nz-input
-              [value]="dataUser?.address?.state ? dataUser?.address?.state : 'profile.empty' | translate"
+            <input nz-input [value]="dataUser?.address?.state ? dataUser?.address?.state : 'profile.empty' | translate"
               [disabled]="true" />
           </nz-input-group>
         </div>
@@ -185,7 +183,7 @@
               <img class="multilanguage" [src]="handleOnCountryFlagSelected(dataUser?.address?.country)" />
               <span class="profile-flag-phone-prefix">{{dataUser?.contact?.phonePrefix}}</span>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-6">
               <label class="mb-2">{{"profile.personalContact.mobilePhone" | translate }}</label>
               <nz-input-group nzPrefixIcon="mobile">
                 <input nz-input
@@ -202,7 +200,7 @@
               <img class="multilanguage" [src]="handleOnFlagByPrefixCode(dataUser?.contact?.landlinePrefix)" />
               <span class="profile-flag-phone-prefix">{{dataUser?.contact?.landlinePrefix}}</span>
             </div>
-            <div [ngClass]="dataUser?.contact?.landlinePrefix ? 'col-md-9' : 'col-md-12'">
+            <div [ngClass]="dataUser?.contact?.landlinePrefix ? 'col-md-6' : 'col-md-12'">
               <label class="mb-2">{{"profile.personalContact.landlinePhone" | translate }}</label>
               <nz-input-group nzPrefixIcon="phone">
                 <input nz-input

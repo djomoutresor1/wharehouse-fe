@@ -205,7 +205,7 @@
                         </nz-form-item>
                     </div>
                     <div class="col-md-5">
-                        <nz-form-label nzFor="secondEmail">{{"register.secondEmail.title" | translate }}</nz-form-label>
+                        <nz-form-label nzFor="emailPec">{{"register.emailPec.title" | translate }}</nz-form-label>
                         <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover class="m-2 warehouse-cursor-pointer"
                             [nzPopoverTitle]="'profile.personalContact.popover.title' | translate"
                             [nzPopoverContent]="emailContentTemplate" nzPopoverPlacement="right"></i>
@@ -216,10 +216,10 @@
                             </div>
                         </ng-template>
                         <nz-form-item>
-                            <nz-form-control [nzErrorTip]="'register.secondEmail.required' | translate">
+                            <nz-form-control [nzErrorTip]="'register.emailPec.required' | translate">
                                 <nz-input-group nzPrefixIcon="mail">
-                                    <input type="email" nz-input formControlName="secondEmail"
-                                        [placeholder]="'register.secondEmail.placeholder' | translate"
+                                    <input type="email" nz-input formControlName="emailPec"
+                                        [placeholder]="'register.emailPec.placeholder' | translate"
                                         (click)="handleOnChangeInput()" />
                                 </nz-input-group>
                             </nz-form-control>

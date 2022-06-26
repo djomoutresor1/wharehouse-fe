@@ -16,7 +16,6 @@ import { UserContactModel } from 'src/model/dashboard/request/user-contact-model
 import { UserAddressModel } from 'src/model/dashboard/request/user-address-model';
 import { ImageService } from 'src/app/services/image.service';
 import * as moment from 'moment';
-
 @Component({
   selector: 'warehouse-dashboard-user-add',
   templateUrl: './dashboard-user-add.component.html',
@@ -87,7 +86,7 @@ export class DashboardUserAddComponent implements OnInit {
         [Validators.required, Validators.min(5), Validators.max(15)],
       ],
       email: [null, [Validators.required, Validators.email]],
-      secondEmail: [null, [Validators.email]],
+      emailPec: [null, [Validators.email]],
       role: [null, [Validators.required]],
       gender: [null, [Validators.required]],
       image: '',
@@ -317,7 +316,7 @@ export class DashboardUserAddComponent implements OnInit {
       fullname: this.validateForm.controls['fullName']?.value,
       username: this.validateForm.controls['username']?.value.toLowerCase(),
       email: this.validateForm.controls['email']?.value,
-      secondEmail: this.validateForm.controls['secondEmail']?.value,
+      emailPec: this.validateForm.controls['emailPec']?.value,
       dateOfBirth: moment(
         this.validateForm.controls['dateOfBirth']?.value
       ).format('L'),
