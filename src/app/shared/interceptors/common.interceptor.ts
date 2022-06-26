@@ -41,7 +41,7 @@ export class CommonInterceptor implements HttpInterceptor {
       !request.url.includes(Auth.WAREHOUSE_FORGOT_PASSWORD) &&
       !request.url.includes(Auth.WAREHOUSE_VERIFY_LINK) &&
       !request.url.includes(Auth.WAREHOUSE_RESET_PASSWORD) &&
-      !request.url.endsWith(Auth.WAREHOUSE_UPLOAD_IMAGE) &&
+      !request.url.includes(Auth.WAREHOUSE_UPLOAD_IMAGE) &&
       !request.url.endsWith(Auth.WAREHOUSE_VERIFICATION_EMAIL) &&
       !request.url.includes(Auth.WAREHOUSE_ACTIVATE_DESATTIVATE_USER) &&
       !request.url.endsWith(Pages.REGISTER_STEP_2) &&

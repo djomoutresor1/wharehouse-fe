@@ -112,7 +112,7 @@ export class LoginComponent implements OnInit {
           this.validateForm.reset();
         },
         (error: HttpErrorResponse) => {
-          this.errorAlertType(error.error);
+          this.errorAlertType(error?.error?.message);
         }
       );
   }
@@ -126,8 +126,8 @@ export class LoginComponent implements OnInit {
     this.authentificationService.userLogin(userData).subscribe(
       (response: ResponseLoginModel) => {
         this.handleOnRememberMe();
-        this.dataUserActive = response.active;
-        this.dataUserEmail = response.email;
+        this.dataUserActive = response?.active;
+        this.dataUserEmail = response?.email;
 
         if (!this.dataUserActive) {
           this.alertModalActive();
@@ -137,7 +137,7 @@ export class LoginComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        this.errorAlertType(error.error);
+        this.errorAlertType(error?.error || error?.error?.message);
       }
     );
   }
@@ -151,7 +151,8 @@ export class LoginComponent implements OnInit {
   successNotificationType(userInfo: ResponseLoginModel): void {
     this.isLogged = true;
     this.alertType = AlertType.ALERT_SUCCESS;
-    this.messageAlert = `Welcome to warehouse ${userInfo?.username}`;
+    this.messageAlert =
+      this.translate.instant('message.welcome') + `${userInfo?.username}`;
     this.descriptionAlert = userInfo?.message;
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
   }
@@ -165,9 +166,13 @@ export class LoginComponent implements OnInit {
 
   alertModalActive() {
     this.alertTypeModal = AlertType.ALERT_WARNING;
-    this.messageAlertModal = 'Verification Email';
-    this.okText = 'Verify Email';
-    this.descriptionAlertModal = "your account hasn't been verified";
+    this.messageAlertModal = this.translate.instant(
+      'message.verification.email.title'
+    );
+    this.okText = this.translate.instant('message.verification.email.cta');
+    this.descriptionAlertModal = this.translate.instant(
+      'message.verification.email.description'
+    );
   }
 
   handleOnRegister() {

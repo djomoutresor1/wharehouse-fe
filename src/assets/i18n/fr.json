@@ -1,4 +1,21 @@
 {
+  "message": {
+    "welcome": "Bienvenu sur WareHouse System ",
+    "verification": {
+      "email": {
+        "title": "Vérification du courrier électronique",
+        "description": "Il semble que votre compte n'ait pas satisfait aux critères de vérification.",
+        "cta": "Envoyez le lien"
+      }
+    }
+  },
+  "operation": {
+    "confirmation": {
+      "insert": {
+        "user": "Confirmation ajout nouveau utilisateur"
+      }
+    }
+  },
   "dashboard": {
     "title": "Tableau de bord",
     "home": "Page d'accueil",
@@ -118,7 +135,7 @@
     },
     "fullname": {
       "title": "Nom et Prénom",
-      "placeholder": "Insert Nom et Prénom",
+      "placeholder": "Insérez nom et prénom",
       "required": "Nom et Prénom sont obbligatoires"
     },
     "username": {
@@ -137,7 +154,7 @@
       "required": "Courrier électronique est obbligatoire",
       "placeholder": "Courrier électronique"
     },
-    "secondEmail": {
+    "emailPec": {
       "title": "Courrier électronique PEC",
       "required": "Courrier électronique PEC est obbligatoire",
       "placeholder": "Courrier électronique PEC"
@@ -252,7 +269,7 @@
     "role": "Vous avez les rôles",
     "roles": "Rôles",
     "lastLogin": "Dernière Connexion",
-    "lastLoginMessage": "Vous étiez connecté pour la dernière fois le",
+    "lastLoginMessage": "Vous étiez connecté pour la dernière fois sur WareHouse System le ",
     "verified": "Vérifié",
     "notVerified": "Pas vérifié",
     "personalData": {
@@ -263,14 +280,20 @@
       "country": "Pays",
       "city": "Cité",
       "address": "Adresse",
-      "zip": "Code Postal"
+      "zip": "Code Postal",
+      "createdAt": "Membre depuis"
     },
     "personalContact": {
       "title": "Contacts Personnels",
       "personalEmail": "Adresse E-mail Personnelle",
       "otherPersonalEmail": "Adresse PEC Personnelle",
       "mobilePhone": "Téléphone Portable",
-      "landlinePhone": "Téléphone fixe"
+      "landlinePhone": "Téléphone fixe",
+      "popover": {
+        "title": "Qu'est ce que l'adresse PEC personnelle?",
+        "contentOne": "Il s'agit d'une adresse e-mail secondaire, qui peut être utilisée en cas de besoin, en complément de l'adresse e-mail personnelle.",
+        "contentTwo": "Pour être utilisé, il doit être certifié (vérifié par la personne)."
+      }
     }
   },
   "All Users": "tous les utilisateurs",
