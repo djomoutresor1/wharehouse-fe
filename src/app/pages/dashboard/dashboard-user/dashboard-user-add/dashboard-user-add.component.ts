@@ -202,7 +202,9 @@ export class DashboardUserAddComponent implements OnInit {
     this.descriptionAlert = this.translate.instant(
       'operation.confirmation.insert.user'
     );
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+    setTimeout(() => {
+      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+    });
   }
 
   errorAlertType(message: string): void {

@@ -5,8 +5,17 @@
       "email": {
         "title": "Verifica Posta Elettronica",
         "description": "Sembra che il tuo account non abbia superato i criteri di verifica.",
-        "cta": "Invio link"
+        "cta": "Invio link",
+        "confirmation": "Un'e-mail di verifica è stata inviata alla tua posta elettronica. Controlla i tuoi messaggi per continuare a certificare la tua posta elettronica."
       }
+    },
+    "changePassword": {
+      "success": {
+        "title": "Accedi con la tua nuova password",
+        "description": "È necessario disconnettersi per continuare nel WareHouse System."
+      },
+      "newPassword": "La vecchia password e la nuova password non possono essere la stessa cosa. Riprova.",
+      "confirmPassword": "Password e conferma password non corrispondono. Riprova."
     }
   },
   "operation": {

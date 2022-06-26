@@ -5,8 +5,17 @@
       "email": {
         "title": "Vérification du courrier électronique",
         "description": "Il semble que votre compte n'ait pas satisfait aux critères de vérification.",
-        "cta": "Envoyez le lien"
+        "cta": "Envoyez le lien",
+        "confirmation": "Un e-mail de vérification a été envoyé à votre courrier électronique. Veuillez vérifier vos messages pour continuer à certifier votre e-mail"
       }
+    },
+    "changePassword": { 
+      "success": {
+        "title": "Connectez-vous avec votre nouveau mot de passe.",
+        "description": "Il est nécessaire de se déconnecter pour continuer dans Warehouse System."
+      },
+      "newPassword": "L'ancien mot de passe et le nouveau mot de passe ne peuvent pas être identiques. Réessayer.",
+      "confirmPassword": "Le mot de passe et le mot de passe de confirmation ne correspondent pas. Réessayer."
     }
   },
   "operation": {

@@ -171,7 +171,7 @@
             </ng-template>
           </label>
           <nz-input-group nzPrefixIcon="mail">
-            <input nz-input [value]="'profile.empty' | translate" [disabled]="true" />
+            <input nz-input [value]="dataUser?.emailPec ? dataUser?.emailPec : 'profile.empty' | translate" [disabled]="true" />
           </nz-input-group>
         </div>
       </div>

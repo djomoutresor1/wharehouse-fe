@@ -308,9 +308,9 @@ export class DashboardUserEditComponent implements OnInit {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
     this.messageAlert = message;
-    // setTimeout(() => {
-    //   this.handleOnBack();
-    // }, 500);
+    setTimeout(() => {
+      this.handleOnBack();
+    }, 500);
   }
 
   handleOnUpdateUser() {
@@ -361,31 +361,31 @@ export class DashboardUserEditComponent implements OnInit {
     //   gender: this.validateForm.controls['gender']?.value,
     // };
 
-  if (!!this.imgURL?.length) {
+    if (!!this.imgURL?.length) {
       this.handleOnUploadImageProfile(this.dataUser?.userId);
     }
 
-    // this.profilService
-    //   .onUpdateUser(userUpdateData, this.dataUser?.userId)
-    //   .subscribe(
-    //     (response: ResponseModel) => {
-    //       this.successNotificationType(response?.message);
-    //       console.log('updateResponse: ', response);
-    //     },
-    //     (error: HttpErrorResponse) => {
-    //       if (error.status === 403) {
-    //         // Expiration token
-    //         this.alertType = AlertType.ALERT_WARNING;
-    //         this.okText = 'Go to login';
-    //         this.messageAlert = `Session timeout expiration`;
-    //         this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
-    //         this.isExpiredToken = true;
-    //       } else {
-    //         console.log('Error Occured during downloading: ', error);
-    //         this.errorAlertType(error?.error.message);
-    //       }
-    //     }
-    //   );
+    this.profilService
+      .onUpdateUser(userUpdateData, this.dataUser?.userId)
+      .subscribe(
+        (response: ResponseModel) => {
+          this.successNotificationType(response?.message);
+          console.log('updateResponse: ', response);
+        },
+        (error: HttpErrorResponse) => {
+          if (error.status === 403) {
+            // Expiration token
+            this.alertType = AlertType.ALERT_WARNING;
+            this.okText = 'Go to login';
+            this.messageAlert = `Session timeout expiration`;
+            this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
+            this.isExpiredToken = true;
+          } else {
+            console.log('Error Occured during downloading: ', error);
+            this.errorAlertType(error?.error.message);
+          }
+        }
+      );
   }
 
   handleOnUploadImageProfile(userId: string) {

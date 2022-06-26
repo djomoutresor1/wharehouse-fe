@@ -1,11 +1,15 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AuthentificationService } from 'src/app/services/auth/authentification.service';
+import { ProfilService } from 'src/app/services/profil.service';
+import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
+import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 
 @Component({
   selector: 'warehouse-dashboard-header',
@@ -20,23 +24,67 @@ export class DashboardHeaderComponent implements OnInit {
     new EventEmitter<boolean>();
 
   checkRole: any;
-  name = '';
   userLocalStorage: any;
+  okText: string = '';
+  alertType: string = '';
+  messageAlert: string = '';
+  descriptionAlert: string = '';
+  isExpiredToken: boolean = false;
+  imgURL: any;
+  dataUser!: ResponseUserModel;
+  isAuth: boolean = false;
 
   constructor(
     private nzModalService: NzModalService,
     private router: Router,
     private authentificationService: AuthentificationService,
     private warehouseLocalStorage: WarehouseLocalStorage,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private profilService: ProfilService,
+    private sanitizer: DomSanitizer
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userLocalStorage =
+      this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
+    this.getInfosUser();
+  }
+
+  getInfosUser() {
+    this.profilService.getUserInfos(this.userLocalStorage?.userId).subscribe(
+      (response: ResponseUserModel) => {
+        if (response?.profileImage) {
+          let objectURL =
+            'data:image/jpeg;base64,' + response?.profileImage?.data;
+          this.imgURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        }
+        this.dataUser = response;
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = 'Go to login';
+          this.messageAlert = `Session timeout expiration`;
+          this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
+        } else {
+          console.log('Error Occured during downloading: ', error);
+          this.errorAlertType(error?.error.message);
+        }
+      }
+    );
+  }
+
+  errorAlertType(message: string): void {
+    this.isAuth = true;
+    this.alertType = AlertType.ALERT_ERROR;
+    this.messageAlert = message;
+  }
 
   // da implementare avec un alert ng-zorro
   handleOnNavigate(url: string) {
     this.handleOnNotifyNavigation.emit(url);
-}
+  }
 
   handleOnCollapsed(collapsed: boolean) {
     this.handleOnNotifyCollapsed.emit(collapsed);
@@ -47,8 +95,14 @@ export class DashboardHeaderComponent implements OnInit {
       this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
 
     this.nzModalService.confirm({
-      nzTitle: '<h4>' + this.translate.instant('dashboard.modal.logout.title') + '</h4>',
-      nzContent: '<p>' + this.translate.instant('dashboard.modal.logout.subtitle') + '</p>',
+      nzTitle:
+        '<h4>' +
+        this.translate.instant('dashboard.modal.logout.title') +
+        '</h4>',
+      nzContent:
+        '<p>' +
+        this.translate.instant('dashboard.modal.logout.subtitle') +
+        '</p>',
       nzCancelText: this.translate.instant('dashboard.cta.back'),
       nzOkText: this.translate.instant('dashboard.cta.logout'),
       nzOnOk: () => {
@@ -67,5 +121,9 @@ export class DashboardHeaderComponent implements OnInit {
           );
       },
     });
+  }
+
+  getCapitalizeUsername(username: string): string {
+    return username?.charAt(0).toUpperCase() + username?.slice(1);
   }
 }
