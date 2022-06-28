@@ -8,7 +8,7 @@
   </nz-breadcrumb-item>
 </nz-breadcrumb> -->
 <warehouse-breadcrumb [items]="breadcrumbItems"></warehouse-breadcrumb>
-<div class="profile-wrapper">
+<div class="profile-wrapper" *ngIf="dataUser">
   <div class="row" *ngIf="isAuth">
     <div class="col">
       <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert">
@@ -149,10 +149,13 @@
       <nz-divider class="warehouse-background-primary warehouse-not-padding warehouse-not-margin"></nz-divider>
       <div class="row mb-2">
         <div class="col-md-6 mt-3">
-          <label class="mb-2">{{"profile.personalContact.personalEmail" | translate }} (<span class="profile-verified"
-              [ngClass]="dataUser?.active ? 'warehouse-success' : 'warehouse-tomato'">{{(dataUser?.active
-              ?
-              "profile.verified" : "profile.notVerified") | translate}}</span>)</label>
+          <label class="mb-2">
+            {{"profile.personalContact.personalEmail" | translate }} 
+            <span class="profile-verified" [ngClass]="dataUser?.active ? 'warehouse-background-success' : 'warehouse-background-tomato'">
+              <i nz-icon nzType="{{dataUser?.active ? 'check-circle' : 'close-circle'}}" nzTheme="outline"></i>
+              {{(dataUser?.active ? "profile.verified" : "profile.notVerified") | translate}}
+            </span>
+          </label>
           <nz-input-group nzPrefixIcon="mail">
             <input nz-input [value]="dataUser?.email ? dataUser?.email : 'profile.empty' | translate"
               [disabled]="true" />
@@ -171,7 +174,8 @@
             </ng-template>
           </label>
           <nz-input-group nzPrefixIcon="mail">
-            <input nz-input [value]="dataUser?.emailPec ? dataUser?.emailPec : 'profile.empty' | translate" [disabled]="true" />
+            <input nz-input [value]="dataUser?.emailPec ? dataUser?.emailPec : 'profile.empty' | translate"
+              [disabled]="true" />
           </nz-input-group>
         </div>
       </div>
