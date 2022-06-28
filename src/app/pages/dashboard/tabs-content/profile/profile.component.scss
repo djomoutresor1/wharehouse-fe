@@ -37,6 +37,10 @@
       margin-bottom: 50px;
       .profile-verified {
         font-weight: 600;
+        color: var(--warehouse-white) !important;
+        border-radius: var(--warehouse-border-radius-two);
+        padding: 2px 10px;
+        font-size: 13px;
       }
       .profile-flag-country {
         display: flex;

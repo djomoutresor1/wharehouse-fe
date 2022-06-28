@@ -33,6 +33,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
@@ -90,7 +91,8 @@ const icons = [
     NzRadioModule,
     NzDatePickerModule,
     NzDropDownModule,
-    NzUploadModule
+    NzUploadModule,
+    NzBadgeModule
   ],
   exports: [
     NzButtonModule,
@@ -126,7 +128,8 @@ const icons = [
     NzRadioModule,
     NzDatePickerModule,
     NzDropDownModule,
-    NzUploadModule
+    NzUploadModule,
+    NzBadgeModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })
