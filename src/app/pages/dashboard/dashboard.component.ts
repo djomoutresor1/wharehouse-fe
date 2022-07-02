@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { ProfilService } from 'src/app/services/profil.service';
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
   descriptionAlert: string = '';
   checkRole: any;
   okText: string = '';
+  isExpiredToken: boolean = false;
 
   @HostListener('document:click', ['$event'])
   clickout() {
@@ -52,7 +54,7 @@ export class DashboardComponent implements OnInit {
     private dashboardService: DashboardService,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private authorizationService: AuthorizationService,
-    private profilService: ProfilService
+    private translate: TranslateService
   ) {
     console.log(
       "localStorage.getItem('theme'): ",
@@ -91,13 +93,13 @@ export class DashboardComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         console.log('error: ', error);
-        if (error?.status === 403) {
+        if (error.status === 403) {
           // Expiration token
           this.alertType = AlertType.ALERT_WARNING;
-          this.okText = 'Go to login';
-          this.messageAlert = `Session timeout expiration`;
-          this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
-          this.isValidToken = true;
+          this.okText = this.translate.instant("message.timeout.cta");
+          this.messageAlert = this.translate.instant("message.timeout.title");
+          this.descriptionAlert = this.translate.instant("message.timeout.description");
+          this.isExpiredToken = true;
         } else {
           this.errorAlertType(error?.error.message);
         }
@@ -119,7 +121,9 @@ export class DashboardComponent implements OnInit {
       this.messageAlert = `Good bye`;
       this.descriptionAlert = 'Hope to see your soon in our system.';
     }
-    this.router.navigate([`${Pages.WAREHOUSE}/${url}/`]);
+    setTimeout(() => {
+      this.router.navigate([`${Pages.WAREHOUSE}/${url}/`]);
+    }, 1000)
   }
 
   handleOnUser(url: String) {

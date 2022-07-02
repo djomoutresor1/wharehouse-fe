@@ -27,7 +27,9 @@ export class ResetPasswordComponent implements OnInit {
   confirmPassword?: string;
   alertType: string = '';
   messageAlert: string = '';
+  okText: string = '';
   descriptionAlert: string = '';
+  isExpiredToken: boolean = false;
   user!: ResponseResetModel;
   isSecurePassword: boolean = false;
 
@@ -88,9 +90,18 @@ export class ResetPasswordComponent implements OnInit {
           this.checkIfExpirationLinkIsCorrect();
         },
         (error: HttpErrorResponse) => {
-          if (error.status === 404) {
+          if (error.status === 403) {
+            // Expiration token
+            this.alertType = AlertType.ALERT_WARNING;
+            this.okText = this.translate.instant('message.timeout.cta');
+            this.messageAlert = this.translate.instant('message.timeout.title');
+            this.descriptionAlert = this.translate.instant(
+              'message.timeout.description'
+            );
+            this.isExpiredToken = true;
+          } else {
             this.isResetPassword = true;
-            this.errorAlertType(error?.error.message);
+            this.errorAlertType(error?.error || error?.error?.message);
           }
         }
       );
@@ -149,7 +160,21 @@ export class ResetPasswordComponent implements OnInit {
             this.successNotificationType(response);
           },
           (error: HttpErrorResponse) => {
-            this.errorAlertType(error.error.message);
+            if (error.status === 403) {
+              // Expiration token
+              this.alertType = AlertType.ALERT_WARNING;
+              this.okText = this.translate.instant('message.timeout.cta');
+              this.messageAlert = this.translate.instant(
+                'message.timeout.title'
+              );
+              this.descriptionAlert = this.translate.instant(
+                'message.timeout.description'
+              );
+              this.isExpiredToken = true;
+            } else {
+              this.isResetPassword = true;
+              this.errorAlertType(error?.error || error?.error?.message);
+            }
           }
         );
     }
@@ -193,5 +218,11 @@ export class ResetPasswordComponent implements OnInit {
 
   handleOnChangePassword() {
     this.password = this.validateForm.controls['password']?.value;
+  }
+
+  handleOnOkModal(event: string) {
+    this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
+    window.location.reload();
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
 }

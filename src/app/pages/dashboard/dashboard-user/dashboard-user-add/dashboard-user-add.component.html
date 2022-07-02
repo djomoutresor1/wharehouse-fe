@@ -6,6 +6,12 @@
             </warehouse-notification>
         </div>
     </div>
+    <div class="row" *ngIf="isExpiredToken">
+        <div class="col">
+            <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert"
+                [descriptionModal]="descriptionAlert" (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
+        </div>
+    </div>
     <form nz-form [formGroup]="validateForm" class="dashboard-user-form">
         <div class="row">
             <div class="col-md-12">
@@ -206,7 +212,8 @@
                     </div>
                     <div class="col-md-5">
                         <nz-form-label nzFor="emailPec">{{"register.emailPec.title" | translate }}</nz-form-label>
-                        <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover class="m-2 warehouse-cursor-pointer"
+                        <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover
+                            class="m-2 warehouse-cursor-pointer"
                             [nzPopoverTitle]="'profile.personalContact.popover.title' | translate"
                             [nzPopoverContent]="emailContentTemplate" nzPopoverPlacement="right"></i>
                         <ng-template #emailContentTemplate>

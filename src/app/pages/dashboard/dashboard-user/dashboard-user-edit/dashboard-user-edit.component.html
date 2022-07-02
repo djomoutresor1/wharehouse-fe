@@ -6,6 +6,12 @@
             </warehouse-notification>
         </div>
     </div>
+    <div class="row" *ngIf="isExpiredToken">
+        <div class="col">
+            <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert"
+                [descriptionModal]="descriptionAlert" (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
+        </div>
+    </div>
     <form nz-form [formGroup]="validateForm" class="dashboard-user-form">
         <div class="row">
             <div class="col-md-12">
@@ -17,8 +23,7 @@
             <div class="col-md-2">
                 <nz-avatar *ngIf="!imgURL" class="dashboard-user-profile-avatar mb-3" [nzSize]="100" nzIcon="user">
                 </nz-avatar>
-                <nz-avatar *ngIf="imgURL" class="dashboard-user-profile-avatar mb-3" [nzSize]="100"
-                    [nzSrc]="imgURL">
+                <nz-avatar *ngIf="imgURL" class="dashboard-user-profile-avatar mb-3" [nzSize]="100" [nzSrc]="imgURL">
                 </nz-avatar>
             </div>
             <div class="col-md-8 mt-4 dashboard-user-upload-image-container">
@@ -88,8 +93,9 @@
                                 class="warehouse-required"> *</span></nz-form-label>
                         <nz-form-item *ngIf="!!rolesList?.length">
                             <nz-form-control [nzErrorTip]="'register.role.required' | translate">
-                                <nz-select [nzDisabled]="checkIfUserHasAdminRole()" nzAllowClear [nzPlaceHolder]="'register.role.placeholder' | translate"
-                                    nzMode="multiple" formControlName="role" [nzCustomTemplate]="multipleTemplate">
+                                <nz-select [nzDisabled]="checkIfUserHasAdminRole()" nzAllowClear
+                                    [nzPlaceHolder]="'register.role.placeholder' | translate" nzMode="multiple"
+                                    formControlName="role" [nzCustomTemplate]="multipleTemplate">
                                     <nz-option *ngFor="let role of rolesList" [nzValue]="role.value"
                                         [nzLabel]="role.label">
                                     </nz-option>

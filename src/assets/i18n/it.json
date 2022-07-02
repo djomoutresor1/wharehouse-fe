@@ -1,6 +1,10 @@
 {
   "message": {
     "welcome": "Benvenuto in WareHouse System ",
+    "bye": {
+      "title": "Arrivederci",
+      "description": "Spero di vederti presto nel nostro sistema."
+    },
     "verification": {
       "email": {
         "title": "Verifica Posta Elettronica",
@@ -16,6 +20,11 @@
       },
       "newPassword": "La vecchia password e la nuova password non possono essere la stessa cosa. Riprova.",
       "confirmPassword": "Password e conferma password non corrispondono. Riprova."
+    },
+    "timeout": {
+      "cta": "Vai al login",
+      "title": "Scadenza del timeout della sessione",
+      "description": "Spiacenti, la tua sessione in Warehouse System è scaduta. Prova ad accedere di nuovo e ritorna."
     }
   },
   "operation": {

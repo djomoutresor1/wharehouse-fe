@@ -24,7 +24,10 @@ export class RegisterStepThreeComponent implements OnInit {
   isAuth: boolean = false;
   isNoAuth: boolean = false;
   alertType: string = '';
+  okText: string = '';
   messageAlert: string = '';
+  descriptionAlert: string = '';
+  isExpiredToken: boolean = false;
   messageNotification: string = '';
   countryAndFlagData: any;
   dateFormat = 'dd/MM/YYYY';
@@ -76,7 +79,19 @@ export class RegisterStepThreeComponent implements OnInit {
         this.countryAndFlagData = response.data;
       },
       (error: HttpErrorResponse) => {
-        console.log('enable to retrieve data country and flag ' + error);
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
+          console.log('enable to retrieve data country and flag ' + error);
+          this.errorAlertType(error?.error || error?.error?.message);
+        }
       }
     );
   }
@@ -150,7 +165,19 @@ export class RegisterStepThreeComponent implements OnInit {
           localStorage.removeItem(Utils.WAREHOUSE_REMEMBER_ME);
         },
         (error: HttpErrorResponse) => {
-          this.errorAlertType(error.error.message);
+          if (error.status === 403) {
+            // Expiration token
+            this.alertType = AlertType.ALERT_WARNING;
+            this.okText = this.translate.instant('message.timeout.cta');
+            this.messageAlert = this.translate.instant('message.timeout.title');
+            this.descriptionAlert = this.translate.instant(
+              'message.timeout.description'
+            );
+            this.isExpiredToken = true;
+          } else {
+            console.log('enable to retrieve data country and flag ' + error);
+            this.errorAlertType(error?.error || error?.error?.message);
+          }
         }
       );
   }
@@ -196,8 +223,19 @@ export class RegisterStepThreeComponent implements OnInit {
         this.successNotificationType(response?.message);
       },
       (error: HttpErrorResponse) => {
-        console.log('Error Occured duringng saving: ', error);
-        this.errorAlertType(error?.message || error?.error?.message);
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
+          console.log('Error Occured duringng saving: ', error);
+          this.errorAlertType(error?.error || error?.error?.message);
+        }
       }
     );
   }
@@ -261,5 +299,11 @@ export class RegisterStepThreeComponent implements OnInit {
       );
       this.countryDialCode = country?.dialCode;
     }
+  }
+
+  handleOnOkModal(event: string) {
+    this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
+    window.location.reload();
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
 }
