@@ -64,9 +64,12 @@ export class DashboardHeaderComponent implements OnInit {
         if (error.status === 403) {
           // Expiration token
           this.alertType = AlertType.ALERT_WARNING;
-          this.okText = 'Go to login';
-          this.messageAlert = `Session timeout expiration`;
-          this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
         } else {
           console.log('Error Occured during downloading: ', error);
           this.errorAlertType(error?.error.message);
@@ -79,6 +82,16 @@ export class DashboardHeaderComponent implements OnInit {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_ERROR;
     this.messageAlert = message;
+  }
+
+  successAlertType(message: string): void {
+    this.isAuth = true;
+    this.alertType = AlertType.ALERT_SUCCESS;
+    this.messageAlert = message;
+    this.descriptionAlert = this.translate.instant("message.bye.description");
+    setTimeout(() => {
+      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+    }, 200);
   }
 
   // da implementare avec un alert ng-zorro
@@ -113,10 +126,24 @@ export class DashboardHeaderComponent implements OnInit {
             (response: any) => {
               console.log('response: ', response);
               this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
-              this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+              this.successAlertType(this.translate.instant("message.bye.title"));
             },
             (error: HttpErrorResponse) => {
-              console.log('error: ', error);
+              if (error.status === 403) {
+                // Expiration token
+                this.alertType = AlertType.ALERT_WARNING;
+                this.okText = this.translate.instant('message.timeout.cta');
+                this.messageAlert = this.translate.instant(
+                  'message.timeout.title'
+                );
+                this.descriptionAlert = this.translate.instant(
+                  'message.timeout.description'
+                );
+                this.isExpiredToken = true;
+              } else {
+                console.log('error: ', error);
+                this.errorAlertType(error?.error.message);
+              }
             }
           );
       },
@@ -125,5 +152,11 @@ export class DashboardHeaderComponent implements OnInit {
 
   getCapitalizeUsername(username: string): string {
     return username?.charAt(0).toUpperCase() + username?.slice(1);
+  }
+
+  handleOnOkModal(event: string) {
+    this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
+    window.location.reload();
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
 }

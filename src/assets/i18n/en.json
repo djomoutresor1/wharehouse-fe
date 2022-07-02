@@ -1,6 +1,10 @@
 {
   "message": {
     "welcome": "Welcome to WareHouse System ",
+    "bye": {
+      "title": "Good Bye",
+      "description": "Hope to see your soon in our system."
+    },
     "verification": {
       "email": {
         "title": "Verification Email",
@@ -16,6 +20,11 @@
       },
       "newPassword": "Old password and new password cannot be the same. Try again.",
       "confirmPassword": "Password and confirm password don't match. Try again."
+    },
+    "timeout": {
+      "cta": "Go to login",
+      "title": "Session timeout expiration",
+      "description": "Sorry, you session in Warehouse System is expired. Try relogin again and come back."
     }
   },
   "operation": {

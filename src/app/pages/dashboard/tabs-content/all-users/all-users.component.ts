@@ -52,9 +52,12 @@ export class AllUsersComponent implements OnInit {
   setOfCheckedId = new Set<number>();
   allUsers: any;
   user!: ResponseLoginModel;
-  messageAlert: string = "";
-  alertType: string = "";
+  messageAlert: string = '';
+  alertType: string = '';
   isAuth: boolean = false;
+  okText: string = '';
+  descriptionAlert: string = '';
+  isExpiredToken: boolean = false;
 
   constructor(
     private router: Router,
@@ -70,15 +73,30 @@ export class AllUsersComponent implements OnInit {
   }
 
   getAllWarehousUsers() {
-    this.profilService
-    .getAllUsers()
-    .subscribe((users: ResponseLoginModel[]) => {
-      // Take all users and remove the current user connected
-      this.allUsers = users?.filter(
-        (user) => user.userId !== this.user?.userId
-      );
-      console.log('allUsers: ', users);
-    });
+    this.profilService.getAllUsers().subscribe(
+      (users: ResponseLoginModel[]) => {
+        // Take all users and remove the current user connected
+        this.allUsers = users?.filter(
+          (user) => user.userId !== this.user?.userId
+        );
+        console.log('allUsers: ', users);
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
+          console.log('Error Occured during downloading: ', error);
+          this.errorAlertType(error?.error.message);
+        }
+      }
+    );
   }
 
   nameUser(role: string) {
@@ -207,19 +225,42 @@ export class AllUsersComponent implements OnInit {
   handleOnDelete(user: ResponseLoginModel) {
     console.log('user - handleOnDelete: ', user);
     this.nzModalService.confirm({
-      nzTitle: '<h4>' + this.translate.instant('dashboard.modal.deleteUser.title') + '</h4>',
-      nzContent: '<p>' + this.translate.instant('dashboard.modal.deleteUser.subtitle') + '</p>',
+      nzTitle:
+        '<h4>' +
+        this.translate.instant('dashboard.modal.deleteUser.title') +
+        '</h4>',
+      nzContent:
+        '<p>' +
+        this.translate.instant('dashboard.modal.deleteUser.subtitle') +
+        '</p>',
       nzCancelText: this.translate.instant('dashboard.cta.no'),
       nzOkText: this.translate.instant('dashboard.cta.yes'),
       nzOnOk: () => {
-        this.profilService.onDeleteUser(user?.userId).subscribe((response: any) => {
-          console.log('onResponseDelete: ', response);
-          this.successAlertType(response?.message);
-          this.getAllWarehousUsers();
-        }, (error: HttpErrorResponse) => {
-          console.log("error: ", error);
-          this.errorAlertType(error?.error.message || error?.message);
-        });
+        this.profilService.onDeleteUser(user?.userId).subscribe(
+          (response: any) => {
+            console.log('onResponseDelete: ', response);
+            this.successAlertType(response?.message);
+            this.getAllWarehousUsers();
+          },
+          (error: HttpErrorResponse) => {
+            console.log('error: ', error);
+            if (error.status === 403) {
+              // Expiration token
+              this.alertType = AlertType.ALERT_WARNING;
+              this.okText = this.translate.instant('message.timeout.cta');
+              this.messageAlert = this.translate.instant(
+                'message.timeout.title'
+              );
+              this.descriptionAlert = this.translate.instant(
+                'message.timeout.description'
+              );
+              this.isExpiredToken = true;
+            } else {
+              console.log('Error Occured during downloading: ', error);
+              this.errorAlertType(error?.error.message || error?.message);
+            }
+          }
+        );
       },
     });
   }

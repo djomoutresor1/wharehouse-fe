@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
@@ -20,12 +21,16 @@ export class ForgottenPasswordComponent implements OnInit {
   alertType: string = '';
   messageAlert: string = '';
   email: string = '';
+  okText: string = '';
+  descriptionAlert: string = '';
+  isExpiredToken: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private warehouseLocalStorage: WarehouseLocalStorage,
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
+    private translate: TranslateService
   ) {
     this.checkIfUserIsAlreadyLogged();
   }
@@ -54,9 +59,18 @@ export class ForgottenPasswordComponent implements OnInit {
         this.isMailSent = true;
       },
       (error: HttpErrorResponse) => {
-        if (error?.status === 404) {
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
           this.isMailSent = false;
-          this.errorAlertType(error?.error?.message);
+          this.errorAlertType(error?.error || error?.error?.message);
         }
       }
     );
@@ -78,5 +92,11 @@ export class ForgottenPasswordComponent implements OnInit {
     if (this.isAuth) {
       this.isAuth = !this.isAuth;
     }
+  }
+
+  handleOnOkModal(event: string) {
+    this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
+    window.location.reload();
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
 }

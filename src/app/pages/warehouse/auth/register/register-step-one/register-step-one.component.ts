@@ -25,6 +25,9 @@ export class RegisterStepOneComponent implements OnInit {
   isAuth: boolean = false;
   alertType: string = '';
   messageAlert: string = '';
+  okText: string = '';
+  descriptionAlert: string = '';
+  isExpiredToken: boolean = false;
   role: string = '';
   rolesList = [
     { label: 'Admin', value: 'admin' },
@@ -118,7 +121,21 @@ export class RegisterStepOneComponent implements OnInit {
             this.currentStep = 1;
           },
           (error: HttpErrorResponse) => {
-            this.errorAlertType(error.error.message);
+            if (error.status === 403) {
+              // Expiration token
+              this.alertType = AlertType.ALERT_WARNING;
+              this.okText = this.translate.instant('message.timeout.cta');
+              this.messageAlert = this.translate.instant(
+                'message.timeout.title'
+              );
+              this.descriptionAlert = this.translate.instant(
+                'message.timeout.description'
+              );
+              this.isExpiredToken = true;
+            } else {
+              this.isResetPassword = true;
+              this.errorAlertType(error?.error || error?.error?.message);
+            }
           }
         );
     }
@@ -174,5 +191,11 @@ export class RegisterStepOneComponent implements OnInit {
 
   handleOnNotifyPassword(event: boolean) {
     this.isSecurePassword = event;
+  }
+
+  handleOnOkModal(event: string) {
+    this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
+    window.location.reload();
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
 }

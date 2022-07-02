@@ -174,6 +174,19 @@ export class DashboardUserEditComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         console.log('enable to retrieve data country and flag ' + error);
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
+          console.log('Error Occured during downloading: ', error);
+          this.errorAlertType(error?.error.message);
+        }
       }
     );
   }
@@ -287,9 +300,11 @@ export class DashboardUserEditComponent implements OnInit {
         if (error.status === 403) {
           // Expiration token
           this.alertType = AlertType.ALERT_WARNING;
-          this.okText = 'Go to login';
-          this.messageAlert = `Session timeout expiration`;
-          this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
           this.isExpiredToken = true;
         } else {
           console.log('Error Occured during downloading: ', error);
@@ -376,9 +391,11 @@ export class DashboardUserEditComponent implements OnInit {
           if (error.status === 403) {
             // Expiration token
             this.alertType = AlertType.ALERT_WARNING;
-            this.okText = 'Go to login';
-            this.messageAlert = `Session timeout expiration`;
-            this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
+            this.okText = this.translate.instant('message.timeout.cta');
+            this.messageAlert = this.translate.instant('message.timeout.title');
+            this.descriptionAlert = this.translate.instant(
+              'message.timeout.description'
+            );
             this.isExpiredToken = true;
           } else {
             console.log('Error Occured during downloading: ', error);
@@ -400,7 +417,19 @@ export class DashboardUserEditComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         console.log('Error Occured duringng saving: ', error);
-        this.errorAlertType(error?.message || error?.error?.message);
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
+          console.log('Error Occured during downloading: ', error);
+          this.errorAlertType(error?.message || error?.error?.message);
+        }
       }
     );
   }
@@ -432,9 +461,11 @@ export class DashboardUserEditComponent implements OnInit {
         if (error.status === 403) {
           // Expiration token
           this.alertType = AlertType.ALERT_WARNING;
-          this.okText = 'Go to login';
-          this.messageAlert = `Session timeout expiration`;
-          this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
           this.isExpiredToken = true;
         } else {
           console.log('Error Occured during downloading: ', error);
@@ -550,5 +581,11 @@ export class DashboardUserEditComponent implements OnInit {
   // Add + at first of the prefix
   handleOnFormatPrefix(prefix: string): string {
     return prefix?.startsWith('+') ? prefix : '+' + prefix;
+  }
+
+  handleOnOkModal(event: string) {
+    this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
+    window.location.reload();
+    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
 }
