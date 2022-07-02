@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,12 +13,16 @@ import * as moment from 'moment';
 import * as _ from 'lodash';
 import { FlagService } from 'src/app/services/flag.service';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
+import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 @Component({
   selector: 'warehouse-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  @Input() mode: string = '';
+  @Input() user!: ResponseLoginModel;
+
   userLocalStorage: any;
   breadcrumbItems!: BreadcrumbItemsModel;
   isAuth: boolean = false;
@@ -45,8 +49,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.initComponent();
-    this.userLocalStorage =
-      this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
+    this.userLocalStorage = this.user
+      ? this.user
+      : this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
     this.getCountriesAndPrefixPhoneWorld();
     this.getInfosUser();
   }

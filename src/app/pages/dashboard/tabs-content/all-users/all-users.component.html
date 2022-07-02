@@ -10,10 +10,10 @@
 <div class="warehouse-users-wrapper container-fluid">
   <div class="row" *ngIf="isAuth">
     <div class="col">
-        <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert">
-        </warehouse-notification>
+      <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert">
+      </warehouse-notification>
     </div>
-   </div> 
+  </div>
   <div class="row">
     <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="allUsers"
       (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
@@ -54,9 +54,11 @@
             </button>
             <nz-dropdown-menu #options="nzDropdownMenu">
               <ul nz-menu>
-                <li nz-menu-item (click)="handleOnShow(data)"><i nz-icon nzType="eye" nzTheme="twotone"></i> {{ "dashboard.dataTable.options.show" |
+                <li nz-menu-item (click)="handleOnShow(data)"><i nz-icon nzType="eye" nzTheme="twotone"></i> {{
+                  "dashboard.dataTable.options.show" |
                   translate }}</li>
-                <li nz-menu-item (click)="handleOnEdit(data)"><i nz-icon nzType="edit" nzTheme="twotone"></i> {{ "dashboard.dataTable.options.edit" |
+                <li nz-menu-item (click)="handleOnEdit(data)"><i nz-icon nzType="edit" nzTheme="twotone"></i> {{
+                  "dashboard.dataTable.options.edit" |
                   translate }}</li>
                 <li nz-menu-item (click)="handleOnDelete(data)"><i nz-icon nzType="delete" nzTheme="twotone"></i> {{
                   "dashboard.dataTable.options.delete" | translate }}</li>
@@ -66,5 +68,15 @@
         </tr>
       </tbody>
     </nz-table>
+  </div>
+  <div class="row">
+    <div class="col">
+      <nz-drawer [nzVisible]="visibleDrawer" nzPlacement="right" [nzTitle]="titleDrawer"
+        (nzOnClose)="handleOncloseDrawer()">
+        <ng-container *nzDrawerContent>
+          <warehouse-profile [mode]="mode" [user]="userDatatable"></warehouse-profile>
+        </ng-container>
+      </nz-drawer>
+    </div>
   </div>
 </div>
