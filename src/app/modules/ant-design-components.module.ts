@@ -34,6 +34,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
@@ -92,7 +93,8 @@ const icons = [
     NzDatePickerModule,
     NzDropDownModule,
     NzUploadModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NzDrawerModule
   ],
   exports: [
     NzButtonModule,
@@ -129,7 +131,8 @@ const icons = [
     NzDatePickerModule,
     NzDropDownModule,
     NzUploadModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NzDrawerModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })

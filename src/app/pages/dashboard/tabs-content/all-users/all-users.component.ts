@@ -9,7 +9,6 @@ import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
-
 interface ItemData {
   id: 45;
 }
@@ -58,6 +57,11 @@ export class AllUsersComponent implements OnInit {
   okText: string = '';
   descriptionAlert: string = '';
   isExpiredToken: boolean = false;
+  titleDrawer: string = "";
+  sizeDrawer: string = "large"
+  visibleDrawer: boolean = false;
+  mode: string = Utils.WAREHOUSE_MODE_PROFILE_DATATABLE;
+  userDatatable!: ResponseLoginModel;
 
   constructor(
     private router: Router,
@@ -215,7 +219,9 @@ export class AllUsersComponent implements OnInit {
   }
 
   handleOnShow(user: ResponseLoginModel) {
-    console.log('user - handleOnShow: ', user);
+    this.visibleDrawer = true;
+    this.titleDrawer = user.fullname;
+    this.userDatatable = user;
   }
 
   handleOnEdit(user: ResponseLoginModel) {
@@ -275,5 +281,9 @@ export class AllUsersComponent implements OnInit {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
     this.messageAlert = message;
+  }
+
+  handleOncloseDrawer() {
+    this.visibleDrawer = false;
   }
 }
