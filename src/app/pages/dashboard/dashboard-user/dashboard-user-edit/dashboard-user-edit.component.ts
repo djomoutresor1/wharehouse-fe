@@ -329,6 +329,7 @@ export class DashboardUserEditComponent implements OnInit {
   }
 
   handleOnUpdateUser() {
+    this.isAuth = false;
     let userContact: UserContactModel = {
       landlinePrefix: this.landlinePrefixSelected,
       phoneNumber: this.validateForm.controls['phoneNumber']?.value,
@@ -358,23 +359,6 @@ export class DashboardUserEditComponent implements OnInit {
     };
 
     console.log('userUpdateData: ', userUpdateData);
-
-    // let userUpdateData = {
-    //   fullname: this.validateForm.controls['fullName']?.value,
-    //   username: this.validateForm.controls['username']?.value.toLowerCase(),
-    //   email: this.validateForm.controls['email']?.value,
-    //   emailPec: this.validateForm.controls['emailPec']?.value,
-    //   dateOfBirth: this.validateForm.controls['dateOfBirth']?.value,
-    //   country: this.validateForm.controls['country']?.value,
-    //   state: this.validateForm.controls['state']?.value,
-    //   address: this.validateForm.controls['address']?.value,
-    //   zipCode: this.validateForm.controls['zipCode']?.value,
-    //   landlinePrefix: this.getPhonePrefixNumber(),
-    //   phoneNumber: this.validateForm.controls['phoneNumber']?.value,
-    //   landlineNumber: this.validateForm.controls['landlineNumber']?.value,
-    //   role: this.validateForm.controls['role']?.value,
-    //   gender: this.validateForm.controls['gender']?.value,
-    // };
 
     if (!!this.imgURL?.length) {
       this.handleOnUploadImageProfile(this.dataUser?.userId);
@@ -478,6 +462,7 @@ export class DashboardUserEditComponent implements OnInit {
   setDefaultsInfosUserData() {
     // to set default value retrieved from BE
     this.countrySelected = this.dataUser?.address?.country;
+    this.handleOnSelectCountry(this.countrySelected);
     this.validateForm.patchValue({
       fullName: this.dataUser?.fullname,
       username: this.dataUser?.username,
