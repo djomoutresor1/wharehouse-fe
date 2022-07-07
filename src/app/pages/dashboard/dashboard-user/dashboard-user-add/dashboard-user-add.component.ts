@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { FlagService } from 'src/app/services/flag.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
@@ -16,6 +16,7 @@ import { UserContactModel } from 'src/model/dashboard/request/user-contact-model
 import { UserAddressModel } from 'src/model/dashboard/request/user-address-model';
 import { ImageService } from 'src/app/services/image.service';
 import * as moment from 'moment';
+import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'warehouse-dashboard-user-add',
   templateUrl: './dashboard-user-add.component.html',
@@ -59,6 +60,8 @@ export class DashboardUserAddComponent implements OnInit {
     '.webp',
   ];
 
+  onDestroy$ = new Subject<any>();
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -73,6 +76,9 @@ export class DashboardUserAddComponent implements OnInit {
     this.initForm();
     this.initComponent();
     this.getCountriesAndPrefixPhoneWorld();
+    this.translate.onLangChange.pipe(takeUntil(this.onDestroy$)).subscribe((lang: LangChangeEvent) => {
+
+    });
   }
 
   initForm() {
