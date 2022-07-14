@@ -21,9 +21,9 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <nz-avatar *ngIf="!imgURL" class="dashboard-user-profile-avatar mb-3" [nzSize]="100" nzIcon="user">
+                <nz-avatar *ngIf="!imgURL" class="dashboard-user-profile-avatar" [nzSize]="100" nzIcon="user">
                 </nz-avatar>
-                <nz-avatar *ngIf="imgURL" class="dashboard-user-profile-avatar mb-3" [nzSize]="100" [nzSrc]="imgURL">
+                <nz-avatar *ngIf="imgURL" class="dashboard-user-profile-avatar" [nzSize]="100" [nzSrc]="imgURL">
                 </nz-avatar>
             </div>
             <!-- It isn't necessary to admin user to upload avatar/cover image to the new user -->
@@ -114,7 +114,7 @@
                         <nz-form-label nzFor="dateOfBirth">{{"register.date.title" | translate }}<span
                                 class="warehouse-required"> *</span></nz-form-label>
                         <nz-form-item>
-                            <nz-form-control>
+                            <nz-form-control [nzErrorTip]="'register.date.required'| translate">
                                 <nz-date-picker nzAllowClear="true" [nzFormat]="dateFormat"
                                     formControlName="dateOfBirth" (click)="handleOnChangeInput()"
                                     (ngModelChange)="handleOnChangeDate($event)">
@@ -256,12 +256,15 @@
                         </nz-form-item>
                     </div>
                     <div class="col-md-5" *ngIf="!!this.prefixPhoneData?.length">
-                        <nz-form-label nzFor="landlineNumber">{{"register.landline.title" | translate }}</nz-form-label>
+                        <nz-form-label nzFor="landlineNumber">{{"register.landline.title" | translate }} <span
+                                *ngIf="!!landlinePrefixSelected?.length" class="warehouse-required"> *</span>
+                        </nz-form-label>
                         <nz-form-item>
-                            <nz-form-control [nzErrorTip]="'register.landline.required' | translate">
+                            <nz-form-control [nzValidateStatus]="landlineNumberValidate"
+                                [nzErrorTip]="'register.landline.required' | translate">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <nz-select nzShowSearch
+                                        <nz-select nzShowSearch [nzAllowClear]="true"
                                             [nzPlaceHolder]="'register.state.placeholder'| translate"
                                             formControlName="landlinePrefix" (click)="handleOnChangeInput()"
                                             (ngModelChange)="handleOnSelectLandlinePrefix($event)"
@@ -290,9 +293,10 @@
         <nz-divider class="warehouse-background-sliver"></nz-divider>
         <div class="row mb-4">
             <div class="col-md-12 mt-3">
-                <button nz-button (click)="handleOnBack()" class="warehouse-btn-outline-danger" nzType="primary" nzDanger>
+                <button nz-button (click)="handleOnBack()" class="warehouse-btn-outline-danger" nzType="primary"
+                    nzDanger>
                     <i nz-icon nzType="left" nzTheme="outline"></i>{{'dashboard.cta.back' | translate}}</button>
-                <button [disabled]="!validateForm.valid" nz-button (click)="handleOnInsertUser()"
+                <button [disabled]="!this.validateForm.valid || !handleOnChoiceLandlineMobile()" nz-button (click)="handleOnInsertUser()"
                     class="dashboard-user-cta-create" [nzType]="'primary'">
                     <i nz-icon nzType="user" nzTheme="outline"></i>{{'dashboard.cta.create.user' | translate}}</button>
             </div>

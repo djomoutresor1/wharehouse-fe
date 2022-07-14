@@ -17,6 +17,7 @@ import { UserAddressModel } from 'src/model/dashboard/request/user-address-model
 import { ImageService } from 'src/app/services/image.service';
 import * as moment from 'moment';
 import { Subject, takeUntil } from 'rxjs';
+import { faBullseye } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'warehouse-dashboard-user-add',
   templateUrl: './dashboard-user-add.component.html',
@@ -43,6 +44,7 @@ export class DashboardUserAddComponent implements OnInit {
   okText: string = '';
   descriptionAlert: string = '';
   isExpiredToken: boolean = false;
+  landlineNumberValidate: string = '';
 
   rolesList = [
     { label: 'Admin', value: 'admin' },
@@ -76,22 +78,24 @@ export class DashboardUserAddComponent implements OnInit {
     this.initForm();
     this.initComponent();
     this.getCountriesAndPrefixPhoneWorld();
-    this.translate.onLangChange.pipe(takeUntil(this.onDestroy$)).subscribe((lang: LangChangeEvent) => {
-
-    });
+    this.translate.onLangChange
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((lang: LangChangeEvent) => {
+        console.log('lang: ', lang);
+      });
   }
 
   initForm() {
     this.validateForm = this.fb.group({
       fullName: [
-        null,
+        '',
         [Validators.required, Validators.min(5), Validators.max(25)],
       ],
       username: [
-        null,
+        '',
         [Validators.required, Validators.min(5), Validators.max(15)],
       ],
-      email: [null, [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       emailPec: [null, [Validators.email]],
       role: [null, [Validators.required]],
       gender: [null, [Validators.required]],
@@ -102,29 +106,15 @@ export class DashboardUserAddComponent implements OnInit {
         [
           Validators.required,
           Validators.pattern('^[0-9]*$'),
-          Validators.minLength(6),
+          Validators.minLength(8),
           Validators.maxLength(10),
         ],
       ],
       landlinePrefix: [null],
-      landlineNumber: [
-        '',
-        [
-          Validators.pattern('^[0-9]*$'),
-          Validators.minLength(6),
-          Validators.maxLength(10),
-        ],
-      ],
+      landlineNumber: [''],
       country: ['', [Validators.required]],
       state: ['', [Validators.required]],
-      zipCode: [
-        '',
-        [
-          Validators.pattern('^[0-9]*$'),
-          Validators.minLength(3),
-          Validators.maxLength(6),
-        ],
-      ],
+      zipCode: ['', [Validators.minLength(4), Validators.maxLength(6)]],
       address: ['', [Validators.required]],
     });
   }
@@ -265,6 +255,8 @@ export class DashboardUserAddComponent implements OnInit {
   }
 
   handleOnKeyPress(event: any) {
+    console.log('handleOnKeyPress: ', event);
+
     const pattern = /[0-9\+\-\ ]/;
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
@@ -402,7 +394,25 @@ export class DashboardUserAddComponent implements OnInit {
   }
 
   handleOnSelectLandlinePrefix(landlinePrefix: string) {
-    console.log('handleOnSelectLandlinePrefix: ', landlinePrefix);
+    this.landlinePrefixSelected = landlinePrefix;
+    if (landlinePrefix === null || landlinePrefix === undefined) {
+      this.landlineNumberValidate = '';
+      this.validateForm.patchValue({
+        landlineNumber: '',
+      });
+      this.validateForm.get('landlineNumber')?.clearValidators();
+    } else {
+      console.log('enter......');
+      if (landlinePrefix) {
+        console.log('not enter......');
+        this.validateForm.controls['landlineNumber'].setValidators([
+          Validators.pattern('^[0-9]*$'),
+          Validators.minLength(8),
+          Validators.maxLength(10),
+        ]);
+        this.handleOnChoiceLandlineMobile();
+      }
+    }
   }
 
   handleOnBack() {
@@ -418,5 +428,23 @@ export class DashboardUserAddComponent implements OnInit {
     this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
     window.location.reload();
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+  }
+
+  handleOnChoiceLandlineMobile() {
+    if (this.landlinePrefixSelected) {
+      this.landlineNumberValidate = AlertType.ALERT_ERROR;
+      if (!!this.validateForm.controls['landlineNumber'].value?.length) {
+        this.landlineNumberValidate =
+          this.validateForm.controls['landlineNumber'].value?.length < 8 ||
+          this.validateForm.controls['landlineNumber'].value?.length > 10
+            ? AlertType.ALERT_ERROR
+            : '';
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
   }
 }
