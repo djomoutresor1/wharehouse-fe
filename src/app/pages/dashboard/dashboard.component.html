@@ -48,13 +48,13 @@
 </div>
 <div class="row" *ngIf="isAuth">
   <div class="col">
-      <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
-      </warehouse-alert>
+    <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
+    </warehouse-alert>
   </div>
 </div>
-<div class="row" *ngIf="isValidToken">
+<div class="row" *ngIf="isValidToken || isExpiredToken">
   <div class="col">
-    <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert" [descriptionModal]="descriptionAlert"
-      (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
+    <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert"
+      [descriptionModal]="descriptionAlert" (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
   </div>
 </div>

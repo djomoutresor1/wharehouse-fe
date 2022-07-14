@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,12 +13,16 @@ import * as moment from 'moment';
 import * as _ from 'lodash';
 import { FlagService } from 'src/app/services/flag.service';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
+import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 @Component({
   selector: 'warehouse-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  @Input() mode: string = '';
+  @Input() user!: ResponseLoginModel;
+
   userLocalStorage: any;
   breadcrumbItems!: BreadcrumbItemsModel;
   isAuth: boolean = false;
@@ -45,8 +49,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.initComponent();
-    this.userLocalStorage =
-      this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
+    this.userLocalStorage = this.user
+      ? this.user
+      : this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
     this.getCountriesAndPrefixPhoneWorld();
     this.getInfosUser();
   }
@@ -70,8 +75,9 @@ export class ProfileComponent implements OnInit {
     this.profilService.getUserInfos(this.userLocalStorage?.userId).subscribe(
       (response: ResponseUserModel) => {
         console.log('response: ', response);
-        if(response?.profileImage) {
-          let objectURL = 'data:image/jpeg;base64,' + response?.profileImage?.data;
+        if (response?.profileImage) {
+          let objectURL =
+            'data:image/jpeg;base64,' + response?.profileImage?.data;
           this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
         }
         this.dataUser = response;
@@ -80,9 +86,11 @@ export class ProfileComponent implements OnInit {
         if (error.status === 403) {
           // Expiration token
           this.alertType = AlertType.ALERT_WARNING;
-          this.okText = 'Go to login';
-          this.messageAlert = `Session timeout expiration`;
-          this.descriptionAlert = `Sorry, you session in Warehouse System is expired. Try relogin again and come back.`;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
           this.isExpiredToken = true;
         } else {
           console.log('Error Occured during downloading: ', error);
@@ -107,7 +115,19 @@ export class ProfileComponent implements OnInit {
         this.prefixPhoneData = _.uniqWith(this.prefixPhoneData, _.isEqual);
       },
       (error: HttpErrorResponse) => {
-        console.log('enable to retrieve data country and flag ' + error);
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
+          console.log('enable to retrieve data country and flag ' + error);
+          this.errorAlertType(error?.error.message);
+        }
       }
     );
   }

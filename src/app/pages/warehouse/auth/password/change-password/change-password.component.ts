@@ -34,6 +34,7 @@ export class ChangePasswordComponent implements OnInit {
   descriptionAlert: string = '';
   user: any;
   isSecurePassword: boolean = false;
+  isExpiredToken: boolean = false;
 
   breadcrumbItems!: BreadcrumbItemsModel;
   profileURL: any;
@@ -87,8 +88,19 @@ export class ChangePasswordComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        console.log('Error Occured duringng downloading: ', error);
-        this.errorAlertType(error?.error.message);
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
+          console.log('Error Occured duringng downloading: ', error);
+          this.errorAlertType(error?.error || error?.error?.message);
+        }
       }
     );
   }
@@ -117,8 +129,20 @@ export class ChangePasswordComponent implements OnInit {
             this.successAlertType(response?.message);
           },
           (error: HttpErrorResponse) => {
-            if (error?.status === 404) {
-              this.errorAlertType(error?.error?.message);
+            if (error.status === 403) {
+              // Expiration token
+              this.alertType = AlertType.ALERT_WARNING;
+              this.okText = this.translate.instant('message.timeout.cta');
+              this.messageAlert = this.translate.instant(
+                'message.timeout.title'
+              );
+              this.descriptionAlert = this.translate.instant(
+                'message.timeout.description'
+              );
+              this.isExpiredToken = true;
+            } else {
+              console.log('Error Occured duringng downloading: ', error);
+              this.errorAlertType(error?.error || error?.error?.message);
             }
           }
         );
@@ -136,7 +160,9 @@ export class ChangePasswordComponent implements OnInit {
       this.errorAlertType(message);
     }
     if (confirmPassword !== password) {
-      message = this.translate.instant('message.changePassword.confirmPassword');
+      message = this.translate.instant(
+        'message.changePassword.confirmPassword'
+      );
       this.errorAlertType(message);
     }
     return !!message?.length ? false : true;
@@ -146,9 +172,12 @@ export class ChangePasswordComponent implements OnInit {
     this.isSuccess = true;
     this.alertType = AlertType.ALERT_SUCCESS;
     this.messageAlert = message;
-    this.okText = this.translate.instant('message.changePassword.success.title');
-    this.descriptionAlert =
-    this.translate.instant('message.changePassword.success.description');
+    this.okText = this.translate.instant(
+      'message.changePassword.success.title'
+    );
+    this.descriptionAlert = this.translate.instant(
+      'message.changePassword.success.description'
+    );
     // First cancel the token in localStorage
     // because the user could refresh the page without click in the OK button in modal confirmation
     this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();

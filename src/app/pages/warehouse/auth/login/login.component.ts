@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
   dataUserEmail: string = '';
   WAREHOUSE_AFTER_7_DAYS = 7 * 24 * 60 * 60 * 1000;
   expiredRemember: number = 0;
+  isExpiredToken: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -112,7 +113,19 @@ export class LoginComponent implements OnInit {
           this.validateForm.reset();
         },
         (error: HttpErrorResponse) => {
-          this.errorAlertType(error?.error?.message);
+          if (error.status === 403) {
+            // Expiration token
+            this.alertType = AlertType.ALERT_WARNING;
+            this.okText = this.translate.instant('message.timeout.cta');
+            this.messageAlert = this.translate.instant('message.timeout.title');
+            this.descriptionAlert = this.translate.instant(
+              'message.timeout.description'
+            );
+            this.isExpiredToken = true;
+          } else {
+            console.log('error: ', error);
+            this.errorAlertType(error?.error?.message);
+          }
         }
       );
   }
@@ -138,7 +151,19 @@ export class LoginComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        this.errorAlertType(error?.error || error?.error?.message);
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
+          console.log('error: ', error);
+          this.errorAlertType(error?.error || error?.error?.message);
+        }
       }
     );
   }

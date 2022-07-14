@@ -11,7 +11,7 @@ export interface ResponseUserModel {
   email: string;
   emailPec: string;
   roles: string[];
-  isActive: boolean;
+  active: boolean;
   lastLogin: string;
   dateOfBirth: string;
   createdAt: string;

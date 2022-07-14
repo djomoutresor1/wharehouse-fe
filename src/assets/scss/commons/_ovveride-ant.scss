@@ -58,8 +58,15 @@
   font-weight: 500 !important;
   color: var(--warehouse-primary) !important;
 }
+.ant-input-affix-wrapper-disabled {
+  opacity: 0.6 !important;
+}
 
 .ant-menu-vertical.ant-menu-sub:not([class*='-active']) {
   right: 30px !important;
   position: relative;
+}
+
+.ant-drawer-content-wrapper {
+  width: 1000px !important;
 }

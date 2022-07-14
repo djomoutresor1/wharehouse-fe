@@ -80,3 +80,35 @@
 .warehouse-not-margin-top {
   margin-top: 0 !important;
 }
+
+.warehouse-btn-outline-primary {
+  background: var(--warehouse-white) !important;
+  border-color: var(--warehouse-primary) !important;
+  color: var(--warehouse-primary) !important;
+  &:hover {
+    color: var(--warehouse-white) !important;
+    background: var(--warehouse-primary) !important;
+  }
+  &:disabled {
+    opacity: 0.5 !important;
+    &:hover {
+      pointer-events: unset;
+    }
+  }
+}
+
+.warehouse-btn-outline-danger {
+  background: var(--warehouse-white) !important;
+  border-color: var(--warehouse-danger) !important;
+  color: var(--warehouse-danger) !important;
+  &:hover {
+    color: var(--warehouse-white) !important;
+    background: var(--warehouse-danger) !important;
+  }
+  &:disabled {
+    opacity: 0.5 !important;
+    &:hover {
+      pointer-events: unset;
+    }
+  }
+}

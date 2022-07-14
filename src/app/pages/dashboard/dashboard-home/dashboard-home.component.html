@@ -7,24 +7,44 @@
 </nz-breadcrumb> -->
 <warehouse-breadcrumb [items]="breadcrumbItems"></warehouse-breadcrumb>
 <div class="container-fluid dashboard-home-wrapper">
-    <p *ngIf="!lanes.length"><warehouse-loading [typeLoad]="'info'"></warehouse-loading><p>
     <div class="row">
-        <div class="col">{{'one position free' | translate}}<p class="onePositionFree"></p></div>
-        <div class="col">{{'two position free' | translate}}<p class="twoPositionFree"></p></div>
-        <div class="col">{{'three position free' | translate}}<p class="threePositionFree"></p></div>
-        <div class="col">{{'more than three position free'| translate}}<p class="moreThanthreePositionFree"></p></div>
-        <div class="col">{{'Full Rack' | translate}}<p class="fullRack"></p></div>
+        <div class="col">
+            <nz-alert nzType="info" nzMessage="Informational Notes"
+                nzDescription="Pour améliorer nos services, nous effectuons une opération de maintenance du 6 au 8 juillet entre 22h00 et 03h00. Durant ces créneaux certains services en ligne peuvent-être perturbés. Nous vous prions de bien vouloir nous excuser pour la gêne occasionnée."
+                nzShowIcon></nz-alert>
+        </div>
+    </div>
+    <p *ngIf="!lanes.length">
+        <warehouse-loading [typeLoad]="'info'"></warehouse-loading>
+    <p>
+    <div class="row">
+        <div class="col">{{'one position free' | translate}}<p class="onePositionFree"></p>
+        </div>
+        <div class="col">{{'two position free' | translate}}<p class="twoPositionFree"></p>
+        </div>
+        <div class="col">{{'three position free' | translate}}<p class="threePositionFree"></p>
+        </div>
+        <div class="col">{{'more than three position free'| translate}}<p class="moreThanthreePositionFree"></p>
+        </div>
+        <div class="col">{{'Full Rack' | translate}}<p class="fullRack"></p>
+        </div>
     </div>
     <div class="row" *ngIf="!!lanes.length">
         <div class="col d-flex">
             <div *ngFor="let lane of lanes" class="column">
-                <warehouse-vertical-lane  [lane]="lane"></warehouse-vertical-lane>
+                <warehouse-vertical-lane [lane]="lane"></warehouse-vertical-lane>
             </div>
         </div>
     </div>
     <div class="row" *ngIf="lastLane">
         <div class="col column">
             <warehouse-horizontal-lane [lane]="lastLane"></warehouse-horizontal-lane>
+        </div>
+    </div>
+    <div class="row" *ngIf="isExpiredToken">
+        <div class="col">
+            <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert"
+                [descriptionModal]="descriptionAlert" (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
         </div>
     </div>
 </div>

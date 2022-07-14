@@ -7,8 +7,8 @@
     <a>My Profile</a>
   </nz-breadcrumb-item>
 </nz-breadcrumb> -->
-<warehouse-breadcrumb [items]="breadcrumbItems"></warehouse-breadcrumb>
-<div class="profile-wrapper">
+<warehouse-breadcrumb *ngIf="mode !== 'datatable'" [items]="breadcrumbItems"></warehouse-breadcrumb>
+<div class="container-fluid profile-wrapper" *ngIf="dataUser">
   <div class="row" *ngIf="isAuth">
     <div class="col">
       <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert">
@@ -23,9 +23,9 @@
   </div>
   <div class="row">
     <div class="col-md-3 profile-avatar-container">
-      <nz-avatar *ngIf="!profileURL" class="profile-avatar mb-3" nzIcon="user">
+      <nz-avatar *ngIf="!profileURL" class="profile-avatar" nzIcon="user">
       </nz-avatar>
-      <nz-avatar *ngIf="profileURL" class="profile-avatar mb-3" [nzSrc]="profileURL">
+      <nz-avatar *ngIf="profileURL" class="profile-avatar" [nzSrc]="profileURL">
       </nz-avatar>
     </div>
     <div class="col-md-9">
@@ -103,11 +103,11 @@
         </div>
         <div class="col-md-4 mt-3">
           <div class="row">
-            <div class="col-md-2 profile-flag-country">
+            <div class="col-md-2 profile-flag-country" *ngIf="dataUser?.address?.country">
               <label class="mb-2"></label>
               <img class="multilanguage" [src]="handleOnCountryFlagSelected(dataUser?.address?.country)" />
             </div>
-            <div class="col-md-10">
+            <div [ngClass]="dataUser?.address?.country ? 'col-md-10' : 'col-md-12'">
               <label class="mb-2">{{"profile.personalData.country" | translate }}</label>
               <nz-input-group nzPrefixIcon="flag">
                 <input nz-input
@@ -149,10 +149,14 @@
       <nz-divider class="warehouse-background-primary warehouse-not-padding warehouse-not-margin"></nz-divider>
       <div class="row mb-2">
         <div class="col-md-6 mt-3">
-          <label class="mb-2">{{"profile.personalContact.personalEmail" | translate }} (<span class="profile-verified"
-              [ngClass]="dataUser?.active ? 'warehouse-success' : 'warehouse-tomato'">{{(dataUser?.active
-              ?
-              "profile.verified" : "profile.notVerified") | translate}}</span>)</label>
+          <label class="mb-2">
+            {{"profile.personalContact.personalEmail" | translate }}
+            <span class="profile-verified"
+              [ngClass]="dataUser?.active ? 'warehouse-background-success' : 'warehouse-background-tomato'">
+              <i nz-icon nzType="{{dataUser?.active ? 'check-circle' : 'close-circle'}}" nzTheme="outline"></i>
+              {{(dataUser?.active ? "profile.verified" : "profile.notVerified") | translate}}
+            </span>
+          </label>
           <nz-input-group nzPrefixIcon="mail">
             <input nz-input [value]="dataUser?.email ? dataUser?.email : 'profile.empty' | translate"
               [disabled]="true" />
@@ -171,19 +175,20 @@
             </ng-template>
           </label>
           <nz-input-group nzPrefixIcon="mail">
-            <input nz-input [value]="dataUser?.emailPec ? dataUser?.emailPec : 'profile.empty' | translate" [disabled]="true" />
+            <input nz-input [value]="dataUser?.emailPec ? dataUser?.emailPec : 'profile.empty' | translate"
+              [disabled]="true" />
           </nz-input-group>
         </div>
       </div>
       <div class="row mb-4">
         <div class="col-md-6 mt-3">
           <div class="row">
-            <div class="col-md-3 profile-flag-country">
+            <div class="col-md-3 profile-flag-country" *ngIf="dataUser?.contact?.phonePrefix">
               <label class="mb-2"></label>
               <img class="multilanguage" [src]="handleOnCountryFlagSelected(dataUser?.address?.country)" />
               <span class="profile-flag-phone-prefix">{{dataUser?.contact?.phonePrefix}}</span>
             </div>
-            <div class="col-md-6">
+            <div [ngClass]="dataUser?.contact?.phonePrefix ? 'col-md-6' : 'col-md-12'">
               <label class="mb-2">{{"profile.personalContact.mobilePhone" | translate }}</label>
               <nz-input-group nzPrefixIcon="mobile">
                 <input nz-input
@@ -213,8 +218,8 @@
       </div>
     </div>
   </div>
-  <nz-divider class="warehouse-background-sliver"></nz-divider>
-  <div class="row mb-4">
+  <nz-divider *ngIf="mode !== 'datatable'" class="warehouse-background-sliver"></nz-divider>
+  <div *ngIf="mode !== 'datatable'" class="row mb-4">
     <div class="col-md-12 mt-3">
       <button nz-button (click)="handleOnBack()" class="profile-back" nzType="primary" nzDanger>
         <i nz-icon nzType="left" nzTheme="outline"></i>{{'dashboard.cta.back' | translate}}</button>
@@ -232,3 +237,4 @@
         [descriptionModal]="descriptionAlert" (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
     </div>
   </div>
+</div>

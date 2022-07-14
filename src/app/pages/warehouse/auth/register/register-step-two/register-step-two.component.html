@@ -61,4 +61,10 @@
             </nz-result>
         </div>
     </div>
+    <div class="row" *ngIf="isExpiredToken">
+        <div class="col">
+            <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert"
+                [descriptionModal]="descriptionAlert" (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
+        </div>
+    </div>
 </div>
