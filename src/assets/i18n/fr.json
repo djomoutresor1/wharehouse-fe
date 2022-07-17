@@ -25,6 +25,10 @@
       "cta": "Aller à la connexion",
       "title": "Expiration du délai de session",
       "description": "Désolé, votre session dans Warehouse System a expiré. Essayez de vous reconnecter et revenez."
+    },
+    "insertUser": {
+      "email": "Le courrier électronique et le courrier électronique PEC sont identiques. Veuillez en changer un autre et réessayer.",
+      "phone": "Le numéro de téléphone et la ligne fixe sont les mêmes. S'il vous plaît, changez-en un autre et réessayez."
     }
   },
   "operation": {
@@ -65,6 +69,10 @@
           "title": "Confirmation de Supression",
           "subtitle": "Êtes-vous sûr de vouloir supprimer ce profil ?"
         }
+      },
+      "insertUser": {
+        "title": "Confirmation Annulation",
+        "subtitle": "Vous avez saisi un courrier électronique PEC certifié et un e-mail de confirmation vous sera envoyé afin de le certifier. Êtes-vous sur de vouloir continuer ?"
       },
       "check": {
         "title": "Verification Email",

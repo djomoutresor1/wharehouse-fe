@@ -25,6 +25,10 @@
       "cta": "Vai al login",
       "title": "Scadenza del timeout della sessione",
       "description": "Spiacenti, la tua sessione in Warehouse System è scaduta. Prova ad accedere di nuovo e ritorna."
+    },
+    "insertUser": {
+      "email": "Email e PEC Posta Elettronica sono le stesse. Per favore, cambiane un altro e riprova.",
+      "phone": "Il numero di telefono e di rete fissa sono gli stessi. Per favore, cambiane un altro e riprova."
     }
   },
   "operation": {
@@ -65,6 +69,10 @@
           "title": "Conferma Cancellazione",
           "subtitle": "Sei sicuro di voler cancellare questo profilo ?"
         }
+      },
+      "insertUser": {
+        "title": "Conferma Inserzione",
+        "subtitle": "Avete inserito una PEC posta Elettronica ed vi verrà inviato una mail di conferma in questa posta per certificarla. Siete sicuro di voler continuare ?"
       },
       "check": {
         "title": "Verifica Email",

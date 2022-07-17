@@ -25,6 +25,10 @@
       "cta": "Go to login",
       "title": "Session timeout expiration",
       "description": "Sorry, you session in Warehouse System is expired. Try relogin again and come back."
+    },
+    "insertUser": {
+      "email": "Email and Pec Email are the same. Please, Change another one and try again.",
+      "phone": "The Phone and Landline are the same. Please, Change another one and try again."
     }
   },
   "operation": {
@@ -69,6 +73,10 @@
           "title": "Confirmation Cancel",
           "subtitle": "Are you sure you want to cancel this profil ?"
         }
+      },
+      "insertUser": {
+        "title": "Confirmation Insertion",
+        "subtitle": "You have entered a certified e-mail and a confirmation email will be sent to you in order to certify it. Are you sure you want to continue ?"
       }
     }
   },
