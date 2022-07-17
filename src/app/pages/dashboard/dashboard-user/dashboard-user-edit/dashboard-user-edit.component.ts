@@ -38,6 +38,7 @@ export class DashboardUserEditComponent implements OnInit {
   countryStatesData: any[] = [];
   prefixPhoneData: any[] = [];
   showbuttonUpload: boolean = false;
+  isRemovePicture: boolean = false;
   countrySelected: string = '';
   stateSelected: string = '';
   landlinePrefixSelected: string = '';
@@ -233,6 +234,7 @@ export class DashboardUserEditComponent implements OnInit {
   handleOnRemoneImage() {
     this.imgURL = '';
     this.showbuttonUpload = false;
+    this.isRemovePicture = true;
   }
 
   handleOnChangeInput() {
@@ -284,6 +286,7 @@ export class DashboardUserEditComponent implements OnInit {
         (countryFlag: any) => countryFlag?.name === this.countrySelected
       );
       this.countryDialCode = country?.dialCode;
+      this.getPhonePrefixNumber();
     }
     if (!!this.countrySelected?.length) {
       this.handleOnGetStatesByCountry();
@@ -363,6 +366,9 @@ export class DashboardUserEditComponent implements OnInit {
     if (!!this.imgURL?.length) {
       this.handleOnUploadImageProfile(this.dataUser?.userId);
     }
+    if(this.isRemovePicture)  {
+      this.handleOnDeleteImageProfile(this.dataUser?.userId);
+    }
 
     this.profilService
       .onUpdateUser(userUpdateData, this.dataUser?.userId)
@@ -387,6 +393,30 @@ export class DashboardUserEditComponent implements OnInit {
           }
         }
       );
+  }
+
+  handleOnDeleteImageProfile(userId: string) {
+    this.imageService.deleteImageProfile(userId).subscribe(
+      (response: ResponseModel) => {
+        this.successNotificationType(response?.message);
+      },
+      (error: HttpErrorResponse) => {
+        console.log('Error Occured duringng saving: ', error);
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
+          console.log('Error Occured during downloading: ', error);
+          this.errorAlertType(error?.message || error?.error?.message);
+        }
+      }
+    );
   }
 
   handleOnUploadImageProfile(userId: string) {

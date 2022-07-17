@@ -33,4 +33,10 @@ export class ImageService {
       }
     );
   }
+
+  deleteImageProfile(userId: string): Observable<any> {
+    return this.http.delete(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_DELETE_IMAGE}/${userId}`
+    );
+  }
 }

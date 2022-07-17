@@ -16,6 +16,7 @@ export enum Auth {
   WAREHOUSE_CHANGE_PASSWORD = '/change/password',
   WAREHOUSE_VERIFICATION_EMAIL = '/verifyemail',
   WAREHOUSE_UPLOAD_IMAGE = '/upload_file',
+  WAREHOUSE_DELETE_IMAGE = '/delete_file',
   WAREHOUSE_DOWNLOAD_IMAGE = '/download',
   WAREHOUSE_APPLICATION_JSON = 'application/json',
 }

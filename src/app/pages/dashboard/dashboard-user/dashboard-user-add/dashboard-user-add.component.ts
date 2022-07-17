@@ -17,7 +17,7 @@ import { UserAddressModel } from 'src/model/dashboard/request/user-address-model
 import { ImageService } from 'src/app/services/image.service';
 import * as moment from 'moment';
 import { Subject, takeUntil } from 'rxjs';
-import { faBullseye } from '@fortawesome/free-solid-svg-icons';
+import { NzModalService } from 'ng-zorro-antd/modal';
 @Component({
   selector: 'warehouse-dashboard-user-add',
   templateUrl: './dashboard-user-add.component.html',
@@ -45,6 +45,7 @@ export class DashboardUserAddComponent implements OnInit {
   descriptionAlert: string = '';
   isExpiredToken: boolean = false;
   landlineNumberValidate: string = '';
+  isFormFieldsValidate: boolean = true;
 
   rolesList = [
     { label: 'Admin', value: 'admin' },
@@ -71,7 +72,8 @@ export class DashboardUserAddComponent implements OnInit {
     private warehouseLocalStorage: WarehouseLocalStorage,
     private dashboardService: DashboardService,
     private flagService: FlagService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private nzModalService: NzModalService
   ) {}
 
   ngOnInit(): void {
@@ -212,7 +214,7 @@ export class DashboardUserAddComponent implements OnInit {
     );
     setTimeout(() => {
       this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
-    });
+    }, 500);
   }
 
   errorAlertType(message: string): void {
@@ -255,8 +257,6 @@ export class DashboardUserAddComponent implements OnInit {
   }
 
   handleOnKeyPress(event: any) {
-    console.log('handleOnKeyPress: ', event);
-
     const pattern = /[0-9\+\-\ ]/;
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
@@ -342,6 +342,30 @@ export class DashboardUserAddComponent implements OnInit {
 
     console.log('userData: ', userData);
 
+    // this.handleOnFieldsValidation(userData);
+
+    if (!!userData?.emailPec?.length) {
+      this.checkIfPecEmailIsNotEmpty(userData);
+    } else {
+      this.handleOnAdminInsertUser(userData);
+    }
+  }
+
+  handleOnFieldsValidation(userData: UserInsertModel): void {
+    let message = '';
+    let phone = userData?.contact?.phonePrefix + userData?.contact?.phoneNumber;
+    let landline =
+      userData?.contact?.landlinePrefix + userData?.contact?.landlineNumber;
+    if (userData?.email === userData?.emailPec) {
+      message = this.translate.instant('message.insertUser.email');
+    } else if (phone?.trim() === landline?.trim()) {
+      message = this.translate.instant('message.insertUser.phone');
+    }
+    this.isFormFieldsValidate = !!message?.length ? false : true;
+    this.errorAlertType(message);
+  }
+
+  handleOnAdminInsertUser(userData: UserInsertModel) {
     this.dashboardService.adminInsertUser(userData).subscribe(
       (response: ResponseUserInsertModel) => {
         console.log('response: ', response);
@@ -363,6 +387,24 @@ export class DashboardUserAddComponent implements OnInit {
         }
       }
     );
+  }
+
+  checkIfPecEmailIsNotEmpty(userData: UserInsertModel) {
+    this.nzModalService.confirm({
+      nzTitle:
+        '<h4>' +
+        this.translate.instant('dashboard.modal.insertUser.title') +
+        '</h4>',
+      nzContent:
+        '<p>' +
+        this.translate.instant('dashboard.modal.insertUser.subtitle') +
+        '</p>',
+      nzCancelText: this.translate.instant('dashboard.cta.back'),
+      nzOkText: this.translate.instant('dashboard.cta.create.user'),
+      nzOnOk: () => {
+        this.handleOnAdminInsertUser(userData);
+      },
+    });
   }
 
   handleOnUploadImageProfile(userId: string) {
@@ -402,9 +444,7 @@ export class DashboardUserAddComponent implements OnInit {
       });
       this.validateForm.get('landlineNumber')?.clearValidators();
     } else {
-      console.log('enter......');
       if (landlinePrefix) {
-        console.log('not enter......');
         this.validateForm.controls['landlineNumber'].setValidators([
           Validators.pattern('^[0-9]*$'),
           Validators.minLength(8),

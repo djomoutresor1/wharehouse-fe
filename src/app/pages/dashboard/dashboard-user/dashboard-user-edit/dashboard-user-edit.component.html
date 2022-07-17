@@ -267,8 +267,8 @@
                             <nz-form-control [nzErrorTip]="'register.landline.required' | translate">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <nz-select nzShowSearch
-                                            [nzPlaceHolder]="'register.state.placeholder'| translate"
+                                        <nz-select nzShowSearch [nzAllowClear]="true"
+                                            [nzPlaceHolder]="'register.landline.placeholder'| translate"
                                             formControlName="landlinePrefix" (click)="handleOnChangeInput()"
                                             (ngModelChange)="handleOnSelectLandlinePrefix($event)"
                                             [(ngModel)]="landlinePrefixSelected">
