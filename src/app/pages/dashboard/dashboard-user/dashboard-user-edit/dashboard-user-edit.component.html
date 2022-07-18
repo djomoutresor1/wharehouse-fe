@@ -201,11 +201,12 @@
                         <label class="mb-2">
                             {{"profile.personalContact.personalEmail" | translate }}
                             <span class="profile-verified"
-                              [ngClass]="dataUser?.active ? 'warehouse-background-success' : 'warehouse-background-tomato'">
-                              <i nz-icon nzType="{{dataUser?.active ? 'check-circle' : 'close-circle'}}" nzTheme="outline"></i>
-                              {{(dataUser?.active ? "profile.verified" : "profile.notVerified") | translate}}
+                                [ngClass]="dataUser?.active ? 'warehouse-background-success' : 'warehouse-background-tomato'">
+                                <i nz-icon nzType="{{dataUser?.active ? 'check-circle' : 'close-circle'}}"
+                                    nzTheme="outline"></i>
+                                {{(dataUser?.active ? "profile.verified" : "profile.notVerified") | translate}}
                             </span>
-                          </label>
+                        </label>
                         <nz-form-item>
                             <nz-form-control [nzErrorTip]="'register.email.required' | translate">
                                 <nz-input-group nzPrefixIcon="mail">
@@ -262,7 +263,9 @@
                         </nz-form-item>
                     </div>
                     <div class="col-md-5" *ngIf="!!this.prefixPhoneData?.length">
-                        <nz-form-label nzFor="landlineNumber">{{"register.landline.title" | translate }}</nz-form-label>
+                        <nz-form-label nzFor="landlineNumber">{{"register.landline.title" | translate }} <span
+                                *ngIf="!!landlinePrefixSelected?.length" class="warehouse-required"> *</span>
+                        </nz-form-label>
                         <nz-form-item>
                             <nz-form-control [nzErrorTip]="'register.landline.required' | translate">
                                 <div class="row">
@@ -298,8 +301,8 @@
             <div class="col-md-12 mt-3">
                 <button nz-button (click)="handleOnBack()" class="profile-back" nzType="primary" nzDanger>
                     <i nz-icon nzType="left" nzTheme="outline"></i>{{'dashboard.cta.back' | translate}}</button>
-                <button [disabled]="!validateForm.valid" nz-button (click)="handleOnUpdateUser()"
-                    class="dashboard-user-cta-create" [nzType]="'primary'">
+                <button [disabled]="!validateForm.valid || !handleOnChoiceLandlineMobile()" nz-button
+                    (click)="handleOnUpdateUser()" class="dashboard-user-cta-create" [nzType]="'primary'">
                     <i nz-icon nzType="user" nzTheme="outline"></i>{{'dashboard.cta.update.user' | translate}}</button>
             </div>
         </div>
