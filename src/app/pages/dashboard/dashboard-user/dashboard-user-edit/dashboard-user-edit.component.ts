@@ -52,6 +52,7 @@ export class DashboardUserEditComponent implements OnInit {
   keypressInput: boolean = false;
   dataUser!: ResponseUserModel;
   userLocalStorage: any;
+  landlineNumberValidate: string = '';
 
   rolesList = [
     { label: 'Admin', value: 'admin' },
@@ -81,9 +82,9 @@ export class DashboardUserEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getCountriesAndPrefixPhoneWorld();
     this.initForm();
     this.initComponent();
-    this.getCountriesAndPrefixPhoneWorld();
     this.userLocalStorage =
       this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
     this.getInfosUser();
@@ -113,26 +114,19 @@ export class DashboardUserEditComponent implements OnInit {
         [
           Validators.required,
           Validators.pattern('^[0-9]*$'),
-          Validators.minLength(6),
+          Validators.minLength(8),
           Validators.maxLength(10),
         ],
       ],
-      landlinePrefix: [null],
-      landlineNumber: [
-        '',
-        [
-          Validators.pattern('^[0-9]*$'),
-          Validators.minLength(6),
-          Validators.maxLength(10),
-        ],
-      ],
+      landlinePrefix: [''],
+      landlineNumber: [''],
       country: ['', [Validators.required]],
       state: ['', [Validators.required]],
       zipCode: [
         '',
         [
           Validators.pattern('^[0-9]*$'),
-          Validators.minLength(3),
+          Validators.minLength(4),
           Validators.maxLength(6),
         ],
       ],
@@ -286,11 +280,11 @@ export class DashboardUserEditComponent implements OnInit {
         (countryFlag: any) => countryFlag?.name === this.countrySelected
       );
       this.countryDialCode = country?.dialCode;
-      this.getPhonePrefixNumber();
     }
     if (!!this.countrySelected?.length) {
       this.handleOnGetStatesByCountry();
     }
+    this.getPhonePrefixNumber();
   }
 
   handleOnGetStatesByCountry() {
@@ -366,7 +360,7 @@ export class DashboardUserEditComponent implements OnInit {
     if (!!this.imgURL?.length) {
       this.handleOnUploadImageProfile(this.dataUser?.userId);
     }
-    if(this.isRemovePicture)  {
+    if (this.isRemovePicture) {
       this.handleOnDeleteImageProfile(this.dataUser?.userId);
     }
 
@@ -449,7 +443,24 @@ export class DashboardUserEditComponent implements OnInit {
   }
 
   handleOnSelectLandlinePrefix(landlinePrefix: string) {
-    console.log('handleOnSelectLandlinePrefix: ', landlinePrefix);
+    this.landlinePrefixSelected = landlinePrefix;
+    if (landlinePrefix === null || landlinePrefix === undefined) {
+      this.landlineNumberValidate = '';
+      this.validateForm.patchValue({
+        landlineNumber: '',
+        landlinePrefix: ''
+      });
+      this.validateForm.get('landlineNumber')?.clearValidators();
+    } else {
+      if (landlinePrefix) {
+        this.validateForm.controls['landlineNumber'].setValidators([
+          Validators.pattern('^[0-9]*$'),
+          Validators.minLength(8),
+          Validators.maxLength(10),
+        ]);
+        this.handleOnChoiceLandlineMobile();
+      }
+    }
   }
 
   handleOnBack() {
@@ -602,5 +613,23 @@ export class DashboardUserEditComponent implements OnInit {
     this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
     window.location.reload();
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+  }
+
+  handleOnChoiceLandlineMobile() {
+    if (this.landlinePrefixSelected) {
+      this.landlineNumberValidate = AlertType.ALERT_ERROR;
+      if (!!this.validateForm.controls['landlineNumber'].value?.length) {
+        this.landlineNumberValidate =
+          this.validateForm.controls['landlineNumber'].value?.length < 8 ||
+          this.validateForm.controls['landlineNumber'].value?.length > 10
+            ? AlertType.ALERT_ERROR
+            : '';
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
   }
 }
