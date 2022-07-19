@@ -15,8 +15,26 @@
     <form nz-form [formGroup]="validateForm" class="dashboard-user-form">
         <div class="row">
             <div class="col-md-12">
-                <img alt="Warehouse Background Cover" class="dashboard-user-background-cover"
+                <img *ngIf="!bcgURL" alt="Warehouse Background Cover" class="dashboard-user-background-cover"
                     src="../../../../../assets/images/image_placeholder.jpg" />
+                <img *ngIf="bcgURL" alt="Warehouse Background Cover" class="dashboard-user-background-cover"
+                    [src]="bcgURL" />
+                <div class="dashboard-user-background-cta">
+                    <label class="ant-btn ant-btn-primary">
+                        <i nz-icon nzType="file-image" nzTheme="fill"></i>
+                        <span>{{(showbuttonUploadCover ? "dashboard.cta.file.change" : "dashboard.cta.file.upload") |
+                            translate
+                            }}</span>
+                        <input type="file" hidden accept="image/*" (change)="handleOnFileChanged($event, 'cover')"
+                            nz-input formControlName="image"
+                            [placeholder]="'dashboard.cta.file.placeholder' | translate" />
+                    </label>
+                    <button *ngIf="showbuttonUploadCover" class="cta-upload-image-remove" nz-button nzType="primary"
+                        nzDanger (click)="handleOnRemoneImage('cover')">
+                        <i nz-icon nzType="delete" nzTheme="fill"></i>
+                        {{ "dashboard.cta.file.remove" | translate }}
+                    </button>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -29,13 +47,14 @@
             <div class="col-md-8 mt-4 dashboard-user-upload-image-container">
                 <label class="ant-btn ant-btn-primary">
                     <i nz-icon nzType="file-image" nzTheme="fill"></i>
-                    <span>{{(showbuttonUpload ? "dashboard.cta.file.change" : "dashboard.cta.file.upload") | translate
+                    <span>{{(showbuttonUploadAvatar ? "dashboard.cta.file.change" : "dashboard.cta.file.upload") |
+                        translate
                         }}</span>
-                    <input type="file" hidden accept="image/*" (change)="handleOnFileChanged($event)" nz-input
+                    <input type="file" hidden accept="image/*" (change)="handleOnFileChanged($event, 'avatar')" nz-input
                         formControlName="image" [placeholder]="'dashboard.cta.file.placeholder' | translate" />
                 </label>
-                <button *ngIf="showbuttonUpload" class="cta-upload-image-remove" nz-button nzType="primary" nzDanger
-                    (click)="handleOnRemoneImage()">
+                <button *ngIf="showbuttonUploadAvatar" class="cta-upload-image-remove" nz-button nzType="primary"
+                    nzDanger (click)="handleOnRemoneImage('avatar')">
                     <i nz-icon nzType="delete" nzTheme="fill"></i>
                     {{ "dashboard.cta.file.remove" | translate }}
                 </button>

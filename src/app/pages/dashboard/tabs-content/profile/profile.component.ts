@@ -28,7 +28,8 @@ export class ProfileComponent implements OnInit {
   isAuth: boolean = false;
   alertType: string = '';
   messageAlert: string = '';
-  profileURL: any;
+  coverURL: any;
+  avatarURL: any;
   okText: string = '';
   descriptionAlert: string = '';
   isExpiredToken: boolean = false;
@@ -76,9 +77,12 @@ export class ProfileComponent implements OnInit {
       (response: ResponseUserModel) => {
         console.log('response: ', response);
         if (response?.profileImage) {
-          let objectURL =
-            'data:image/jpeg;base64,' + response?.profileImage?.data;
-          this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+          let objectAvatarURL =
+            'data:image/jpeg;base64,' + response?.profileImage?.find(profile => profile.imageType === Utils.WAREHOUSE_AVATAR_IMAGE)?.data;
+          this.avatarURL = this.sanitizer.bypassSecurityTrustUrl(objectAvatarURL);
+          let objectCoverURL =
+            'data:image/jpeg;base64,' + response?.profileImage?.find(profile => profile.imageType === Utils.WAREHOUSE_COVER_IMAGE)?.data;
+          this.coverURL = this.sanitizer.bypassSecurityTrustUrl(objectCoverURL);
         }
         this.dataUser = response;
       },

@@ -18,5 +18,5 @@ export interface ResponseUserModel {
   userInfo: ResponseUserInfoModel;
   address: ResponseAddressModel;
   contact: ResponseContactModel;
-  profileImage: ResponseFileModel;
+  profileImage: ResponseFileModel[];
 }

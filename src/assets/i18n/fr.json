@@ -72,7 +72,7 @@
       },
       "insertUser": {
         "title": "Confirmation Annulation",
-        "subtitle": "Vous avez saisi un courrier électronique PEC certifié et un e-mail de confirmation vous sera envoyé afin de le certifier. Êtes-vous sur de vouloir continuer ?"
+        "subtitle": "Vous avez saisi un courrier électronique PEC. Un e-mail de confirmation vous sera envoyé afin de le certifier. Êtes-vous sur de vouloir continuer ?"
       },
       "check": {
         "title": "Verification Email",

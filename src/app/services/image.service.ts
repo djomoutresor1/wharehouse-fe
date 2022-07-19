@@ -22,13 +22,14 @@ export class ImageService {
     );
   }
 
-  uploadImageProfile(file: FormData, userId: string): Observable<any> {
+  uploadImageProfile(file: FormData, userId: string, imageType: string): Observable<any> {
     return this.http.post(
       `${this.apiServerUrl}${Auth.WAREHOUSE_UPLOAD_IMAGE}`,
       file,
       {
         params: {
           userId,
+          imageType
         },
       }
     );
