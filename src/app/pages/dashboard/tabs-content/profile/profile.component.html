@@ -17,15 +17,17 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <img alt="Warehouse Background Cover" class="profile-background-cover"
+      <img alt="Warehouse Background Cover" class="profile-background-cover" *ngIf="!coverURL"
         src="../../../../../assets/images/image_placeholder.jpg" />
+      <img alt="Warehouse Background Cover" class="profile-background-cover" *ngIf="coverURL"
+        [src]="coverURL" />
     </div>
   </div>
   <div class="row">
     <div class="col-md-3 profile-avatar-container">
-      <nz-avatar *ngIf="!profileURL" class="profile-avatar" nzIcon="user">
+      <nz-avatar *ngIf="!avatarURL" class="profile-avatar" nzIcon="user">
       </nz-avatar>
-      <nz-avatar *ngIf="profileURL" class="profile-avatar" [nzSrc]="profileURL">
+      <nz-avatar *ngIf="avatarURL" class="profile-avatar" [nzSrc]="avatarURL">
       </nz-avatar>
     </div>
     <div class="col-md-9">

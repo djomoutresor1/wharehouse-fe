@@ -313,7 +313,7 @@ export class DashboardUserAddComponent implements OnInit {
   handleOnInsertUser() {
     this.isAuth = false;
     let userContact: UserContactModel = {
-      landlinePrefix: this.landlinePrefixSelected,
+      landlinePrefix: this.landlinePrefixSelected !== null ? this.landlinePrefixSelected : '',
       phoneNumber: this.validateForm.controls['phoneNumber']?.value,
       landlineNumber: this.validateForm.controls['landlineNumber']?.value,
       phonePrefix: this.getPhonePrefixNumber(),
@@ -407,33 +407,33 @@ export class DashboardUserAddComponent implements OnInit {
     });
   }
 
-  handleOnUploadImageProfile(userId: string) {
-    // Instantiate a FormData to store form fields and encode the file
-    let uploadData = new FormData();
-    // Add file content to prepare the request
-    uploadData.append('file', this.selectedFile);
+  // handleOnUploadImageProfile(userId: string) {
+  //   // Instantiate a FormData to store form fields and encode the file
+  //   let uploadData = new FormData();
+  //   // Add file content to prepare the request
+  //   uploadData.append('file', this.selectedFile);
 
-    this.imageService.uploadImageProfile(uploadData, userId).subscribe(
-      (response: any) => {
-        this.successAlertType(response?.message);
-      },
-      (error: HttpErrorResponse) => {
-        console.log('Error Occured duringng uploading file: ', error);
-        if (error.status === 403) {
-          // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
-        } else {
-          this.errorAlertType(error?.message || error?.error?.message);
-        }
-      }
-    );
-  }
+  //   this.imageService.uploadImageProfile(uploadData, userId).subscribe(
+  //     (response: any) => {
+  //       this.successAlertType(response?.message);
+  //     },
+  //     (error: HttpErrorResponse) => {
+  //       console.log('Error Occured duringng uploading file: ', error);
+  //       if (error.status === 403) {
+  //         // Expiration token
+  //         this.alertType = AlertType.ALERT_WARNING;
+  //         this.okText = this.translate.instant('message.timeout.cta');
+  //         this.messageAlert = this.translate.instant('message.timeout.title');
+  //         this.descriptionAlert = this.translate.instant(
+  //           'message.timeout.description'
+  //         );
+  //         this.isExpiredToken = true;
+  //       } else {
+  //         this.errorAlertType(error?.message || error?.error?.message);
+  //       }
+  //     }
+  //   );
+  // }
 
   handleOnSelectLandlinePrefix(landlinePrefix: string) {
     this.landlinePrefixSelected = landlinePrefix;

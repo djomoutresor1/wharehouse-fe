@@ -19,6 +19,7 @@ import { UserInsertModel } from 'src/model/dashboard/request/user-insert-model';
 import * as moment from 'moment';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ImageService } from 'src/app/services/image.service';
+import { NzModalService } from 'ng-zorro-antd/modal';
 @Component({
   selector: 'warehouse-dashboard-user-edit',
   templateUrl: './dashboard-user-edit.component.html',
@@ -37,14 +38,18 @@ export class DashboardUserEditComponent implements OnInit {
   countryAndFlagData: any[] = [];
   countryStatesData: any[] = [];
   prefixPhoneData: any[] = [];
-  showbuttonUpload: boolean = false;
-  isRemovePicture: boolean = false;
+  showbuttonUploadAvatar: boolean = false;
+  showbuttonUploadCover: boolean = false;
+  isRemovePictureAvatar: boolean = false;
+  isRemovePictureCover: boolean = false;
   countrySelected: string = '';
   stateSelected: string = '';
   landlinePrefixSelected: string = '';
   countryDialCode: string = '';
   imgURL: any;
-  selectedFile: any;
+  bcgURL: any;
+  selectedFileAvatar: any;
+  selectedFileCover: any;
   dateFormat = 'dd/MM/YYYY';
   okText: string = '';
   descriptionAlert: string = '';
@@ -78,7 +83,8 @@ export class DashboardUserEditComponent implements OnInit {
     private profilService: ProfilService,
     private flagService: FlagService,
     private sanitizer: DomSanitizer,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private nzModalService: NzModalService
   ) {}
 
   ngOnInit(): void {
@@ -186,18 +192,33 @@ export class DashboardUserEditComponent implements OnInit {
     );
   }
 
-  handleOnFileChanged(event: any) {
+  handleOnFileChanged(event: any, imageType: string) {
     this.handleOnChangeInput();
-    if (event.target.files && event.target.files.length > 0) {
-      this.selectedFile = event.target.files[0];
+    if (imageType === Utils.WAREHOUSE_AVATAR_IMAGE) {
+      if (event.target.files && event.target.files.length > 0) {
+        this.selectedFileAvatar = event.target.files[0];
+      }
+      if (this.checkFileValidation(this.selectedFileAvatar)) {
+        this.showbuttonUploadAvatar = true;
+        let reader = new FileReader();
+        reader.readAsDataURL(this.selectedFileAvatar);
+        reader.onload = () => {
+          this.imgURL = reader.result;
+        };
+      }
     }
-    if (this.checkFileValidation(this.selectedFile)) {
-      this.showbuttonUpload = true;
-      let reader = new FileReader();
-      reader.readAsDataURL(this.selectedFile);
-      reader.onload = () => {
-        this.imgURL = reader.result;
-      };
+    if (imageType === Utils.WAREHOUSE_COVER_IMAGE) {
+      if (event.target.files && event.target.files.length > 0) {
+        this.selectedFileCover = event.target.files[0];
+      }
+      if (this.checkFileValidation(this.selectedFileCover)) {
+        this.showbuttonUploadCover = true;
+        let reader = new FileReader();
+        reader.readAsDataURL(this.selectedFileCover);
+        reader.onload = () => {
+          this.bcgURL = reader.result;
+        };
+      }
     }
   }
 
@@ -225,10 +246,17 @@ export class DashboardUserEditComponent implements OnInit {
     this.messageAlert = message;
   }
 
-  handleOnRemoneImage() {
-    this.imgURL = '';
-    this.showbuttonUpload = false;
-    this.isRemovePicture = true;
+  handleOnRemoneImage(imageType: string) {
+    if (imageType.toLocaleUpperCase() === Utils.WAREHOUSE_AVATAR_IMAGE) {
+      this.imgURL = '';
+      this.showbuttonUploadAvatar = false;
+      this.isRemovePictureAvatar = true;
+    }
+    if (imageType.toLocaleUpperCase() === Utils.WAREHOUSE_COVER_IMAGE) {
+      this.bcgURL = '';
+      this.showbuttonUploadCover = false;
+      this.isRemovePictureCover = true;
+    }
   }
 
   handleOnChangeInput() {
@@ -328,7 +356,8 @@ export class DashboardUserEditComponent implements OnInit {
   handleOnUpdateUser() {
     this.isAuth = false;
     let userContact: UserContactModel = {
-      landlinePrefix: this.landlinePrefixSelected,
+      landlinePrefix:
+        this.landlinePrefixSelected !== null ? this.landlinePrefixSelected : '',
       phoneNumber: this.validateForm.controls['phoneNumber']?.value,
       landlineNumber: this.validateForm.controls['landlineNumber']?.value,
       phonePrefix: this.getPhonePrefixNumber(),
@@ -358,12 +387,47 @@ export class DashboardUserEditComponent implements OnInit {
     console.log('userUpdateData: ', userUpdateData);
 
     if (!!this.imgURL?.length) {
-      this.handleOnUploadImageProfile(this.dataUser?.userId);
+      this.handleOnUploadImageProfile(
+        this.dataUser?.userId,
+        Utils.WAREHOUSE_AVATAR_IMAGE
+      );
     }
-    if (this.isRemovePicture) {
+    if (!!this.bcgURL?.length) {
+      this.handleOnUploadImageProfile(
+        this.dataUser?.userId,
+        Utils.WAREHOUSE_COVER_IMAGE
+      );
+    }
+    if (this.isRemovePictureAvatar) {
       this.handleOnDeleteImageProfile(this.dataUser?.userId);
     }
 
+    if (!!userUpdateData?.emailPec?.length) {
+      this.checkIfPecEmailIsNotEmpty(userUpdateData);
+    } else {
+      this.handleOnAdminUpdateUser(userUpdateData);
+    }
+  }
+
+  checkIfPecEmailIsNotEmpty(userData: UserInsertModel) {
+    this.nzModalService.confirm({
+      nzTitle:
+        '<h4>' +
+        this.translate.instant('dashboard.modal.insertUser.title') +
+        '</h4>',
+      nzContent:
+        '<p>' +
+        this.translate.instant('dashboard.modal.insertUser.subtitle') +
+        '</p>',
+      nzCancelText: this.translate.instant('dashboard.cta.back'),
+      nzOkText: this.translate.instant('dashboard.cta.create.user'),
+      nzOnOk: () => {
+        this.handleOnAdminUpdateUser(userData);
+      },
+    });
+  }
+
+  handleOnAdminUpdateUser(userUpdateData: UserInsertModel) {
     this.profilService
       .onUpdateUser(userUpdateData, this.dataUser?.userId)
       .subscribe(
@@ -413,33 +477,40 @@ export class DashboardUserEditComponent implements OnInit {
     );
   }
 
-  handleOnUploadImageProfile(userId: string) {
+  handleOnUploadImageProfile(userId: string, imageType: string) {
     // Instantiate a FormData to store form fields and encode the file
     let uploadData = new FormData();
     // Add file content to prepare the request
-    uploadData.append('file', this.selectedFile);
+    if (imageType === Utils.WAREHOUSE_AVATAR_IMAGE) {
+      uploadData.append('file', this.selectedFileAvatar);
+    }
+    if (imageType === Utils.WAREHOUSE_COVER_IMAGE) {
+      uploadData.append('file', this.selectedFileCover);
+    }
 
-    this.imageService.uploadImageProfile(uploadData, userId).subscribe(
-      (response: ResponseModel) => {
-        //this.successNotificationType(response?.message);
-      },
-      (error: HttpErrorResponse) => {
-        console.log('Error Occured duringng saving: ', error);
-        if (error.status === 403) {
-          // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
-        } else {
-          console.log('Error Occured during downloading: ', error);
-          this.errorAlertType(error?.message || error?.error?.message);
+    this.imageService
+      .uploadImageProfile(uploadData, userId, imageType)
+      .subscribe(
+        (response: ResponseModel) => {
+          //this.successNotificationType(response?.message);
+        },
+        (error: HttpErrorResponse) => {
+          console.log('Error Occured duringng saving: ', error);
+          if (error.status === 403) {
+            // Expiration token
+            this.alertType = AlertType.ALERT_WARNING;
+            this.okText = this.translate.instant('message.timeout.cta');
+            this.messageAlert = this.translate.instant('message.timeout.title');
+            this.descriptionAlert = this.translate.instant(
+              'message.timeout.description'
+            );
+            this.isExpiredToken = true;
+          } else {
+            console.log('Error Occured during downloading: ', error);
+            this.errorAlertType(error?.message || error?.error?.message);
+          }
         }
-      }
-    );
+      );
   }
 
   handleOnSelectLandlinePrefix(landlinePrefix: string) {
@@ -448,7 +519,7 @@ export class DashboardUserEditComponent implements OnInit {
       this.landlineNumberValidate = '';
       this.validateForm.patchValue({
         landlineNumber: '',
-        landlinePrefix: ''
+        landlinePrefix: '',
       });
       this.validateForm.get('landlineNumber')?.clearValidators();
     } else {
@@ -472,11 +543,31 @@ export class DashboardUserEditComponent implements OnInit {
   getInfosUser() {
     this.profilService.getUserInfos(this.userLocalStorage?.userId).subscribe(
       (response: ResponseUserModel) => {
-        this.showbuttonUpload = response?.profileImage !== null ? true : false;
+        this.showbuttonUploadAvatar =
+          response?.profileImage?.find(
+            (profile) => profile.imageType === Utils.WAREHOUSE_AVATAR_IMAGE
+          ) !== null
+            ? true
+            : false;
+        this.showbuttonUploadCover =
+          response?.profileImage?.find(
+            (profile) => profile.imageType === Utils.WAREHOUSE_COVER_IMAGE
+          ) !== null
+            ? true
+            : false;
         if (response?.profileImage) {
-          let objectURL =
-            'data:image/jpeg;base64,' + response?.profileImage?.data;
-          this.imgURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+          let objectAvatarURL =
+            'data:image/jpeg;base64,' +
+            response?.profileImage?.find(
+              (profile) => profile.imageType === Utils.WAREHOUSE_AVATAR_IMAGE
+            )?.data;
+          this.imgURL = this.sanitizer.bypassSecurityTrustUrl(objectAvatarURL);
+          let objectCoverURL =
+            'data:image/jpeg;base64,' +
+            response?.profileImage?.find(
+              (profile) => profile.imageType === Utils.WAREHOUSE_COVER_IMAGE
+            )?.data;
+          this.bcgURL = this.sanitizer.bypassSecurityTrustUrl(objectCoverURL);
         }
         this.dataUser = response;
         this.setDefaultsInfosUserData();

@@ -8,6 +8,7 @@ import { AuthentificationService } from 'src/app/services/auth/authentification.
 import { ProfilService } from 'src/app/services/profil.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
+import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 
@@ -55,7 +56,10 @@ export class DashboardHeaderComponent implements OnInit {
       (response: ResponseUserModel) => {
         if (response?.profileImage) {
           let objectURL =
-            'data:image/jpeg;base64,' + response?.profileImage?.data;
+            'data:image/jpeg;base64,' +
+            response?.profileImage?.find(
+              (profile) => profile.imageType === Utils.WAREHOUSE_AVATAR_IMAGE
+            )?.data;
           this.imgURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
         }
         this.dataUser = response;
@@ -88,7 +92,7 @@ export class DashboardHeaderComponent implements OnInit {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
     this.messageAlert = message;
-    this.descriptionAlert = this.translate.instant("message.bye.description");
+    this.descriptionAlert = this.translate.instant('message.bye.description');
     setTimeout(() => {
       this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
     }, 200);
@@ -126,7 +130,9 @@ export class DashboardHeaderComponent implements OnInit {
             (response: any) => {
               console.log('response: ', response);
               this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
-              this.successAlertType(this.translate.instant("message.bye.title"));
+              this.successAlertType(
+                this.translate.instant('message.bye.title')
+              );
             },
             (error: HttpErrorResponse) => {
               if (error.status === 403) {

@@ -218,7 +218,7 @@ export class RegisterStepThreeComponent implements OnInit {
     // Add file content to prepare the request
     uploadData.append('file', this.selectedFile);
 
-    this.imageService.uploadImageProfile(uploadData, userId).subscribe(
+    this.imageService.uploadImageProfile(uploadData, userId, Utils.WAREHOUSE_AVATAR_IMAGE).subscribe(
       (response: any) => {
         this.successNotificationType(response?.message);
       },

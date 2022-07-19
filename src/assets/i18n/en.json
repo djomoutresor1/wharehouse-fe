@@ -76,7 +76,7 @@
       },
       "insertUser": {
         "title": "Confirmation Insertion",
-        "subtitle": "You have entered a certified e-mail and a confirmation email will be sent to you in order to certify it. Are you sure you want to continue ?"
+        "subtitle": "You have entered a PEC e-mail. A confirmation email will be sent to you in order to certify it. Are you sure you want to continue ?"
       }
     }
   },

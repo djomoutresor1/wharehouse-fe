@@ -72,7 +72,7 @@
       },
       "insertUser": {
         "title": "Conferma Inserzione",
-        "subtitle": "Avete inserito una PEC posta Elettronica ed vi verrà inviato una mail di conferma in questa posta per certificarla. Siete sicuro di voler continuare ?"
+        "subtitle": "Avete inserito una PEC posta Elettronica. Vi verrà inviato una mail di conferma in questa posta per certificarla. Siete sicuro di voler continuare ?"
       },
       "check": {
         "title": "Verifica Email",

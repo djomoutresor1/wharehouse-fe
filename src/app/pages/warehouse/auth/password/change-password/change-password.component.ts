@@ -8,6 +8,7 @@ import { AuthorizationService } from 'src/app/services/auth/authorization.servic
 import { ProfilService } from 'src/app/services/profil.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
+import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
@@ -83,7 +84,10 @@ export class ChangePasswordComponent implements OnInit {
       (response: ResponseUserModel) => {
         if (response?.profileImage) {
           let objectURL =
-            'data:image/jpeg;base64,' + response?.profileImage?.data;
+            'data:image/jpeg;base64,' +
+            response?.profileImage?.find(
+              (profile) => profile.imageType === Utils.WAREHOUSE_AVATAR_IMAGE
+            )?.data;
           this.profileURL = this.sanitizer.bypassSecurityTrustUrl(objectURL);
         }
       },
