@@ -7,6 +7,8 @@
       width: 100%;
       height: 300px;
       object-fit: cover;
+      border-radius: var(--warehouse-border-radius-one);
+      border: 2px solid var(--warehouse-sliver);
     }
     .dashboard-user-profile-avatar {
       width: 150px !important;

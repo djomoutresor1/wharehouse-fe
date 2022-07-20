@@ -14,6 +14,7 @@ import * as _ from 'lodash';
 import { FlagService } from 'src/app/services/flag.service';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
+import { ResponseFileModel } from 'src/model/auth/response/response-file-model';
 @Component({
   selector: 'warehouse-profile',
   templateUrl: './profile.component.html',
@@ -76,13 +77,8 @@ export class ProfileComponent implements OnInit {
     this.profilService.getUserInfos(this.userLocalStorage?.userId).subscribe(
       (response: ResponseUserModel) => {
         console.log('response: ', response);
-        if (response?.profileImage) {
-          let objectAvatarURL =
-            'data:image/jpeg;base64,' + response?.profileImage?.find(profile => profile.imageType === Utils.WAREHOUSE_AVATAR_IMAGE)?.data;
-          this.avatarURL = this.sanitizer.bypassSecurityTrustUrl(objectAvatarURL);
-          let objectCoverURL =
-            'data:image/jpeg;base64,' + response?.profileImage?.find(profile => profile.imageType === Utils.WAREHOUSE_COVER_IMAGE)?.data;
-          this.coverURL = this.sanitizer.bypassSecurityTrustUrl(objectCoverURL);
+        if (!!response?.profileImage?.length) {
+          this.getDefaultObjectImageURL(response?.profileImage);
         }
         this.dataUser = response;
       },
@@ -102,6 +98,27 @@ export class ProfileComponent implements OnInit {
         }
       }
     );
+  }
+
+  getDefaultObjectImageURL(profileImage: ResponseFileModel[]) {
+    let objectAvatarURL = profileImage?.find(
+      (profile) => profile.imageType === Utils.WAREHOUSE_AVATAR_IMAGE
+    )?.data;
+    this.avatarURL =
+      objectAvatarURL === undefined
+        ? ''
+        : this.sanitizer.bypassSecurityTrustUrl(
+            Utils.WAREHOUSE_DATA_IMAGE_BASE64 + objectAvatarURL
+          );
+    let objectCoverURL = profileImage?.find(
+      (profile) => profile.imageType === Utils.WAREHOUSE_COVER_IMAGE
+    )?.data;
+    this.coverURL =
+      objectCoverURL === undefined
+        ? ''
+        : this.sanitizer.bypassSecurityTrustUrl(
+            Utils.WAREHOUSE_DATA_IMAGE_BASE64 + objectCoverURL
+          );
   }
 
   getUserDateCreation(createdAt: string): string {

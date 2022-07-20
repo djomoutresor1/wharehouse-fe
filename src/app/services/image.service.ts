@@ -22,22 +22,31 @@ export class ImageService {
     );
   }
 
-  uploadImageProfile(file: FormData, userId: string, imageType: string): Observable<any> {
+  uploadImageProfile(
+    file: FormData,
+    userId: string,
+    imageType: string
+  ): Observable<any> {
     return this.http.post(
       `${this.apiServerUrl}${Auth.WAREHOUSE_UPLOAD_IMAGE}`,
       file,
       {
         params: {
           userId,
-          imageType
+          imageType,
         },
       }
     );
   }
 
-  deleteImageProfile(userId: string): Observable<any> {
+  deleteImageProfile(userId: string, imageType: string): Observable<any> {
     return this.http.delete(
-      `${this.apiServerUrl}${Auth.WAREHOUSE_DELETE_IMAGE}/${userId}`
+      `${this.apiServerUrl}${Auth.WAREHOUSE_DELETE_IMAGE}/${userId}`,
+      {
+        params: {
+          imageType,
+        },
+      }
     );
   }
 }

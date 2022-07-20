@@ -54,7 +54,7 @@ export class DashboardHeaderComponent implements OnInit {
   getInfosUser() {
     this.profilService.getUserInfos(this.userLocalStorage?.userId).subscribe(
       (response: ResponseUserModel) => {
-        if (response?.profileImage) {
+        if (!!response?.profileImage?.length) {
           let objectURL =
             'data:image/jpeg;base64,' +
             response?.profileImage?.find(
