@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -19,6 +20,17 @@ interface ItemData {
   styleUrls: ['./all-users.component.scss'],
 })
 export class AllUsersComponent implements OnInit {
+  searchForm!: FormGroup;
+  listOfStatus = [
+    { label: 'All', value: 'All' },
+    { label: 'Active', value: 'active' },
+    { label: 'Not Active', value: 'disable' },
+  ];
+  listOfRoles = [
+    { label: 'Admin', value: 'admin' },
+    { label: 'User', value: 'user' },
+    { label: 'Moderator', value: 'moderator' },
+  ];
   listOfSelection = [
     {
       text: 'Select All Row',
@@ -50,6 +62,7 @@ export class AllUsersComponent implements OnInit {
   listOfCurrentPageData: readonly ItemData[] = [];
   setOfCheckedId = new Set<number>();
   allUsers: any;
+  tmpUsers: ResponseLoginModel[] = [];
   user!: ResponseLoginModel;
   messageAlert: string = '';
   alertType: string = '';
@@ -57,13 +70,15 @@ export class AllUsersComponent implements OnInit {
   okText: string = '';
   descriptionAlert: string = '';
   isExpiredToken: boolean = false;
-  titleDrawer: string = "";
-  sizeDrawer: string = "large"
+  titleDrawer: string = '';
+  sizeDrawer: string = 'large';
   visibleDrawer: boolean = false;
   mode: string = Utils.WAREHOUSE_MODE_PROFILE_DATATABLE;
   userDatatable!: ResponseLoginModel;
+  statusSelected: string = '';
 
   constructor(
+    private fb: FormBuilder,
     private router: Router,
     private profilService: ProfilService,
     private warehouseLocalStorage: WarehouseLocalStorage,
@@ -72,8 +87,17 @@ export class AllUsersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.initSearch();
     this.user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
     this.getAllWarehousUsers();
+  }
+
+  initSearch() {
+    this.searchForm = this.fb.group({
+      search: '',
+      status: '',
+      role: ''
+    });
   }
 
   getAllWarehousUsers() {
@@ -83,6 +107,7 @@ export class AllUsersComponent implements OnInit {
         this.allUsers = users?.filter(
           (user) => user.userId !== this.user?.userId
         );
+        this.tmpUsers = this.allUsers;
         console.log('allUsers: ', users);
       },
       (error: HttpErrorResponse) => {
@@ -202,6 +227,8 @@ export class AllUsersComponent implements OnInit {
   }
 
   getRoleIcon(role: any) {
+    console.log("role: ", role);
+    
     switch (role?.name) {
       case Utils.ROLE_USER:
         return 'user';
@@ -285,5 +312,22 @@ export class AllUsersComponent implements OnInit {
 
   handleOncloseDrawer() {
     this.visibleDrawer = false;
+  }
+
+  handleOnSearchUser() {
+    let search = this.searchForm.controls['search']?.value;
+    console.log('allUsers: ', search);
+    if (search) {
+      this.allUsers = this.tmpUsers.filter(
+        (user: ResponseLoginModel) =>
+          user.fullname.toLowerCase().indexOf(search.toLowerCase()) >= 0
+      );
+    } else {
+      this.tmpUsers;
+    }
+  }
+
+  handleOnSelectStatus(status: any) {
+    console.log('status: ', status);
   }
 }
