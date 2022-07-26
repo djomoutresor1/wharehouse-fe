@@ -14,6 +14,43 @@
       </warehouse-notification>
     </div>
   </div>
+  <div [formGroup]="searchForm" class="row">
+    <div class="col-md-3">
+      <nz-form-label nzFor="status">{{"register.country.title" | translate }}
+      </nz-form-label>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-select [nzPlaceHolder]="'register.country.placeholder'| translate" formControlName="status"
+            (ngModelChange)="handleOnSelectStatus($event)">
+            <nz-option *ngFor="let status of listOfStatus" [nzValue]="status?.value" nzLabel="{{status?.label}}">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div class="col-md-3">
+      <nz-form-label nzFor="status">{{"register.country.title" | translate }}
+      </nz-form-label>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-select [nzPlaceHolder]="'register.country.placeholder'| translate" formControlName="role"
+            (ngModelChange)="handleOnSelectStatus($event)">
+            <nz-option *ngFor="let role of listOfRoles" [nzValue]="role?.value" nzLabel="{{role?.label}}">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div class="col-md-4 offset-md-2 mb-4">
+      <nz-form-label></nz-form-label>
+      <nz-form-item>
+        <nz-input-group nzPrefixIcon="search">
+          <input type="text" nz-input formControlName="search" [placeholder]="'login.username.placeholder' | translate"
+            (input)="handleOnSearchUser()" />
+        </nz-input-group>
+      </nz-form-item>
+    </div>
+  </div>
   <div class="row">
     <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="allUsers"
       (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">

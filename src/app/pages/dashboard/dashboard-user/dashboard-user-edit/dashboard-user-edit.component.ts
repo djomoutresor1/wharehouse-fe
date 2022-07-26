@@ -20,6 +20,7 @@ import * as moment from 'moment';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ImageService } from 'src/app/services/image.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { ResponseFileModel } from 'src/model/auth/response/response-file-model';
 @Component({
   selector: 'warehouse-dashboard-user-edit',
   templateUrl: './dashboard-user-edit.component.html',
@@ -194,7 +195,7 @@ export class DashboardUserEditComponent implements OnInit {
 
   handleOnFileChanged(event: any, imageType: string) {
     this.handleOnChangeInput();
-    if (imageType === Utils.WAREHOUSE_AVATAR_IMAGE) {
+    if (imageType.toLocaleUpperCase() === Utils.WAREHOUSE_AVATAR_IMAGE) {
       if (event.target.files && event.target.files.length > 0) {
         this.selectedFileAvatar = event.target.files[0];
       }
@@ -207,7 +208,7 @@ export class DashboardUserEditComponent implements OnInit {
         };
       }
     }
-    if (imageType === Utils.WAREHOUSE_COVER_IMAGE) {
+    if (imageType.toLocaleUpperCase() === Utils.WAREHOUSE_COVER_IMAGE) {
       if (event.target.files && event.target.files.length > 0) {
         this.selectedFileCover = event.target.files[0];
       }
@@ -399,7 +400,16 @@ export class DashboardUserEditComponent implements OnInit {
       );
     }
     if (this.isRemovePictureAvatar) {
-      this.handleOnDeleteImageProfile(this.dataUser?.userId);
+      this.handleOnDeleteImageProfile(
+        this.dataUser?.userId,
+        Utils.WAREHOUSE_AVATAR_IMAGE
+      );
+    }
+    if (this.isRemovePictureCover) {
+      this.handleOnDeleteImageProfile(
+        this.dataUser?.userId,
+        Utils.WAREHOUSE_COVER_IMAGE
+      );
     }
 
     if (!!userUpdateData?.emailPec?.length) {
@@ -453,8 +463,8 @@ export class DashboardUserEditComponent implements OnInit {
       );
   }
 
-  handleOnDeleteImageProfile(userId: string) {
-    this.imageService.deleteImageProfile(userId).subscribe(
+  handleOnDeleteImageProfile(userId: string, imageType: string) {
+    this.imageService.deleteImageProfile(userId, imageType).subscribe(
       (response: ResponseModel) => {
         this.successNotificationType(response?.message);
       },
@@ -543,31 +553,9 @@ export class DashboardUserEditComponent implements OnInit {
   getInfosUser() {
     this.profilService.getUserInfos(this.userLocalStorage?.userId).subscribe(
       (response: ResponseUserModel) => {
-        this.showbuttonUploadAvatar =
-          response?.profileImage?.find(
-            (profile) => profile.imageType === Utils.WAREHOUSE_AVATAR_IMAGE
-          ) !== null
-            ? true
-            : false;
-        this.showbuttonUploadCover =
-          response?.profileImage?.find(
-            (profile) => profile.imageType === Utils.WAREHOUSE_COVER_IMAGE
-          ) !== null
-            ? true
-            : false;
-        if (response?.profileImage) {
-          let objectAvatarURL =
-            'data:image/jpeg;base64,' +
-            response?.profileImage?.find(
-              (profile) => profile.imageType === Utils.WAREHOUSE_AVATAR_IMAGE
-            )?.data;
-          this.imgURL = this.sanitizer.bypassSecurityTrustUrl(objectAvatarURL);
-          let objectCoverURL =
-            'data:image/jpeg;base64,' +
-            response?.profileImage?.find(
-              (profile) => profile.imageType === Utils.WAREHOUSE_COVER_IMAGE
-            )?.data;
-          this.bcgURL = this.sanitizer.bypassSecurityTrustUrl(objectCoverURL);
+        this.getDefaultButtonsAction(response?.profileImage);
+        if (!!response?.profileImage?.length) {
+          this.getDefaultObjectImageURL(response?.profileImage);
         }
         this.dataUser = response;
         this.setDefaultsInfosUserData();
@@ -589,6 +577,44 @@ export class DashboardUserEditComponent implements OnInit {
         }
       }
     );
+  }
+
+  getDefaultButtonsAction(profileImage: ResponseFileModel[]) {
+    this.showbuttonUploadAvatar = !!profileImage?.length
+      ? profileImage?.find(
+          (profile) => profile.imageType === Utils.WAREHOUSE_AVATAR_IMAGE
+        ) !== null
+        ? true
+        : false
+      : false;
+    this.showbuttonUploadCover = !!profileImage?.length
+      ? profileImage?.find(
+          (profile) => profile.imageType === Utils.WAREHOUSE_COVER_IMAGE
+        ) !== null
+        ? true
+        : false
+      : false;
+  }
+
+  getDefaultObjectImageURL(profileImage: ResponseFileModel[]) {
+    let objectAvatarURL = profileImage?.find(
+      (profile) => profile.imageType === Utils.WAREHOUSE_AVATAR_IMAGE
+    )?.data;
+    this.imgURL =
+      objectAvatarURL === undefined
+        ? ''
+        : this.sanitizer.bypassSecurityTrustUrl(
+            Utils.WAREHOUSE_DATA_IMAGE_BASE64 + objectAvatarURL
+          );
+    let objectCoverURL = profileImage?.find(
+      (profile) => profile.imageType === Utils.WAREHOUSE_COVER_IMAGE
+    )?.data;
+    this.bcgURL =
+      objectCoverURL === undefined
+        ? ''
+        : this.sanitizer.bypassSecurityTrustUrl(
+            Utils.WAREHOUSE_DATA_IMAGE_BASE64 + objectCoverURL
+          );
   }
 
   setDefaultsInfosUserData() {
