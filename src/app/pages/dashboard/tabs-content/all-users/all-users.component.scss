@@ -1,6 +1,11 @@
 .warehouse-users-wrapper {
   position: relative;
   padding: 20px 0;
+  .warehouse-users-filter {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
 }
 
 .ant-dropdown-menu-item {

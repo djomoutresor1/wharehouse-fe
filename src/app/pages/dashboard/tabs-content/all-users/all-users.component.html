@@ -14,40 +14,52 @@
       </warehouse-notification>
     </div>
   </div>
-  <div [formGroup]="searchForm" class="row">
-    <div class="col-md-3">
-      <nz-form-label nzFor="status">{{"register.country.title" | translate }}
+  <div [formGroup]="searchForm" class="row warehouse-users-filter">
+    <div class="col-md-1">
+      <button nz-button nzType="primary" class="mt-2" (click)="handleOnResetFilter()">
+        <i nz-icon nzType="clear" nzTheme="outline"></i>
+        {{ "dashboard.dataTable.options.reset" | translate }}
+      </button>
+    </div>
+    <div class="col-md-2">
+      <nz-form-label nzFor="status">{{"dashboard.dataTable.status.title" | translate }}
       </nz-form-label>
       <nz-form-item>
         <nz-form-control>
-          <nz-select [nzPlaceHolder]="'register.country.placeholder'| translate" formControlName="status"
-            (ngModelChange)="handleOnSelectStatus($event)">
+          <nz-select ngModel="all" [nzPlaceHolder]="'dashboard.dataTable.status.placeholder'| translate"
+            formControlName="status" (ngModelChange)="handleOnSearchUsers()">
             <nz-option *ngFor="let status of listOfStatus" [nzValue]="status?.value" nzLabel="{{status?.label}}">
             </nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
     </div>
-    <div class="col-md-3">
-      <nz-form-label nzFor="status">{{"register.country.title" | translate }}
+    <div class="col-md-2">
+      <nz-form-label nzFor="role">{{"register.role.title" | translate }}
       </nz-form-label>
       <nz-form-item>
         <nz-form-control>
-          <nz-select [nzPlaceHolder]="'register.country.placeholder'| translate" formControlName="role"
-            (ngModelChange)="handleOnSelectStatus($event)">
+          <nz-select ngModel="all" [nzPlaceHolder]="'register.role.placeholder'| translate" formControlName="role"
+            (ngModelChange)="handleOnSearchUsers()">
             <nz-option *ngFor="let role of listOfRoles" [nzValue]="role?.value" nzLabel="{{role?.label}}">
             </nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
     </div>
-    <div class="col-md-4 offset-md-2 mb-4">
+    <div class="col-md-4 offset-md-3 mb-2">
       <nz-form-label></nz-form-label>
       <nz-form-item>
-        <nz-input-group nzPrefixIcon="search">
-          <input type="text" nz-input formControlName="search" [placeholder]="'login.username.placeholder' | translate"
-            (input)="handleOnSearchUser()" />
-        </nz-input-group>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="search" [nzSuffix]="inputClearTpl">
+            <input type="text" [(ngModel)]="search" nz-input formControlName="search"
+              [placeholder]="'dashboard.dataTable.options.search' | translate" (input)="handleOnSearchUsers()" />
+          </nz-input-group>
+          <ng-template #inputClearTpl>
+            <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="search"
+              (click)="handleOnSearchClear()"></i>
+          </ng-template>
+        </nz-form-control>
       </nz-form-item>
     </div>
   </div>
