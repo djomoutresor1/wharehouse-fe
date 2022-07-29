@@ -22,14 +22,21 @@ interface ItemData {
 export class AllUsersComponent implements OnInit {
   searchForm!: FormGroup;
   listOfStatus = [
-    { label: 'All', value: 'All' },
-    { label: 'Active', value: 'active' },
-    { label: 'Not Active', value: 'disable' },
+    {
+      label: this.translate.instant('dashboard.dataTable.status.all'),
+      value: Utils.WAREHOUSE_PREFIX_ALL,
+    },
+    { label: this.translate.instant('profile.verified'), value: true },
+    { label: this.translate.instant('profile.notVerified'), value: false },
   ];
   listOfRoles = [
-    { label: 'Admin', value: 'admin' },
-    { label: 'User', value: 'user' },
-    { label: 'Moderator', value: 'moderator' },
+    {
+      label: this.translate.instant('dashboard.dataTable.status.all'),
+      value: Utils.WAREHOUSE_PREFIX_ALL,
+    },
+    { label: 'Admin', value: Utils.ROLE_ADMIN },
+    { label: 'User', value: Utils.ROLE_USER },
+    { label: 'Moderator', value: Utils.ROLE_MODERATOR },
   ];
   listOfSelection = [
     {
@@ -75,7 +82,7 @@ export class AllUsersComponent implements OnInit {
   visibleDrawer: boolean = false;
   mode: string = Utils.WAREHOUSE_MODE_PROFILE_DATATABLE;
   userDatatable!: ResponseLoginModel;
-  statusSelected: string = '';
+  search: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -95,8 +102,8 @@ export class AllUsersComponent implements OnInit {
   initSearch() {
     this.searchForm = this.fb.group({
       search: '',
-      status: '',
-      role: ''
+      status: Utils.WAREHOUSE_PREFIX_ALL,
+      role: Utils.WAREHOUSE_PREFIX_ALL,
     });
   }
 
@@ -108,7 +115,6 @@ export class AllUsersComponent implements OnInit {
           (user) => user.userId !== this.user?.userId
         );
         this.tmpUsers = this.allUsers;
-        console.log('allUsers: ', users);
       },
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
@@ -227,8 +233,6 @@ export class AllUsersComponent implements OnInit {
   }
 
   getRoleIcon(role: any) {
-    console.log("role: ", role);
-    
     switch (role?.name) {
       case Utils.ROLE_USER:
         return 'user';
@@ -256,7 +260,6 @@ export class AllUsersComponent implements OnInit {
   }
 
   handleOnDelete(user: ResponseLoginModel) {
-    console.log('user - handleOnDelete: ', user);
     this.nzModalService.confirm({
       nzTitle:
         '<h4>' +
@@ -271,12 +274,10 @@ export class AllUsersComponent implements OnInit {
       nzOnOk: () => {
         this.profilService.onDeleteUser(user?.userId).subscribe(
           (response: any) => {
-            console.log('onResponseDelete: ', response);
             this.successAlertType(response?.message);
             this.getAllWarehousUsers();
           },
           (error: HttpErrorResponse) => {
-            console.log('error: ', error);
             if (error.status === 403) {
               // Expiration token
               this.alertType = AlertType.ALERT_WARNING;
@@ -314,20 +315,61 @@ export class AllUsersComponent implements OnInit {
     this.visibleDrawer = false;
   }
 
-  handleOnSearchUser() {
+  handleOnSearchUsers() {
     let search = this.searchForm.controls['search']?.value;
-    console.log('allUsers: ', search);
+    let status = this.searchForm.controls['status']?.value;
+    let role = this.searchForm.controls['role']?.value;
+
+    this.handleOnSearchUser(search);
+    this.handleOnSelectRole(role);
+    this.handleOnSelectStatus(status);
+  }
+
+  handleOnSearchUser(search: string) {
     if (search) {
       this.allUsers = this.tmpUsers.filter(
         (user: ResponseLoginModel) =>
-          user.fullname.toLowerCase().indexOf(search.toLowerCase()) >= 0
+          user.fullname.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||
+          user.email.toLowerCase().indexOf(search.toLowerCase()) >= 0
       );
     } else {
-      this.tmpUsers;
+      this.allUsers = this.tmpUsers;
     }
   }
 
-  handleOnSelectStatus(status: any) {
-    console.log('status: ', status);
+  handleOnSelectStatus(status: boolean | string) {
+    if (status === Utils.WAREHOUSE_PREFIX_ALL) {
+      this.allUsers = this.allUsers;
+    } else {
+      this.allUsers = this.allUsers?.filter(
+        (user: ResponseLoginModel) => user.active === status
+      );
+    }
+  }
+
+  handleOnSelectRole(role: string) {
+    if (role === Utils.WAREHOUSE_PREFIX_ALL) {
+      this.allUsers = this.allUsers;
+    } else {
+      this.allUsers = this.allUsers?.filter((user: ResponseLoginModel) => {
+        return user.roles
+          .map((userRole: any) => {
+            return userRole?.name;
+          })
+          .includes(role.toUpperCase());
+      });
+    }
+  }
+
+  handleOnResetFilter() {
+    this.search = '';
+    this.initSearch();
+    this.getAllWarehousUsers();
+  }
+
+  handleOnSearchClear() {
+    this.search = '';
+    this.searchForm.controls['search'].reset();
+    this.handleOnSearchUsers();
   }
 }

@@ -21,4 +21,5 @@ export enum Utils {
   WAREHOUSE_COVER_IMAGE = 'COVER',
   WAREHOUSE_AVATAR_IMAGE = 'AVATAR',
   WAREHOUSE_DATA_IMAGE_BASE64 = 'data:image/jpeg;base64,',
+  WAREHOUSE_PREFIX_ALL = "all"
 }

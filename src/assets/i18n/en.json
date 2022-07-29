@@ -85,7 +85,14 @@
       "title": "Select",
       "edit": "Edit",
       "show": "Show",
-      "delete": "Delete"
+      "delete": "Delete",
+      "reset": "Reset",
+      "search": "Find by email or full name"
+    },
+    "status": {
+      "all": "All",
+      "placeholder": "Select a status",
+      "title": "Status"
     }
   },
   "warehouse": {

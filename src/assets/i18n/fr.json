@@ -84,7 +84,14 @@
         "title": "Selectionez",
         "edit": "Modifier",
         "show": "Voir",
-        "delete": "Effacer"
+        "delete": "Effacer",
+        "reset": "Réinitialiser",
+        "search": "Rechercher par email ou Nome et Prénom"
+      },
+      "status": {
+        "all": "Tous",
+        "placeholder": "Selectionez un statut",
+        "title": "statut"
       }
     }
   },

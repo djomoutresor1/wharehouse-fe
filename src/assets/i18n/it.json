@@ -84,7 +84,14 @@
         "title": "Seleziona",
         "edit": "Modifica",
         "show": "Vedi",
-        "delete": "Cancella"
+        "delete": "Cancella",
+        "reset": "Ripristina",
+        "search": "Cerca con email o Nome e Cognome"
+      },
+      "status": {
+        "all": "Tutti",
+        "placeholder": "Seleziona uno stato",
+        "title": "Stato"
       }
     }
   },
