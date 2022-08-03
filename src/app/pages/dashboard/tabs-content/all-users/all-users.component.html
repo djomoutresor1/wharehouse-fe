@@ -71,11 +71,12 @@
           <!-- <th [nzSelections]="listOfSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
             (nzCheckedChange)="onAllChecked($event)"></th> -->
           <th>{{ "profile.personalData.userId" | translate }}</th>
-          <th>{{ "register.username.title" | translate }}</th>
-          <th>{{ "register.gender.placeholder" | translate }}</th>
+          <!-- <th>{{ "register.username.title" | translate }}</th>
+          <th>{{ "register.gender.placeholder" | translate }}</th> -->
           <th>{{ "profile.personalData.fullname" | translate }}</th>
           <th>{{ "register.email.placeholder" | translate }}</th>
           <th>{{ "profile.roles" | translate }}</th>
+          <th>Status</th>
           <th>{{ "profile.personalData.dateOfBorn" | translate }}</th>
           <th>{{ "profile.lastLogin" | translate }}</th>
         </tr>
@@ -83,19 +84,26 @@
       <tbody>
         <tr *ngFor="let data of rowSelectionTable.data">
           <!-- <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td> -->
-          <td>{{ data.userId }}</td>
-          <td>{{ data.username }}</td>
-          <td>{{ data.gender }}</td>
-          <td>{{ data.fullname }}</td>
-          <td>{{ data.email }}</td>
+          <td>{{ data.user.userId }}</td>
+          <!-- <td>{{ data.user.username }}</td>
+          <td>{{ data.user.gender }}</td> -->
+          <td>{{ data.user.fullname }}</td>
+          <td>{{ data.user.email }}</td>
           <td>
-            <nz-tag *ngFor="let role of data.roles" [nzColor]="getUserColorRole(role)">
+            <nz-tag *ngFor="let role of data.user.roles" [nzColor]="getUserColorRole(role)">
               <i nz-icon [nzType]="getRoleIcon(role)"></i>
               {{ getRoleName(role)}}
             </nz-tag>
           </td>
-          <td>{{ data.dateOfBirth }}</td>
-          <td>{{ data.lastLogin }}</td>
+          <td>
+            <span class="profile-verified"
+              [ngClass]="data.user?.active ? 'warehouse-background-success' : 'warehouse-background-tomato'">
+              <i nz-icon nzType="{{data.user?.active ? 'check-circle' : 'close-circle'}}" nzTheme="outline"></i>
+              {{(data.user?.active ? "profile.verified" : "profile.notVerified") | translate}}
+            </span>
+          </td>
+          <td>{{ data.user.dateOfBirth }}</td>
+          <td>{{ data.user.lastLogin }}</td>
           <td>
             <button nz-button nz-dropdown [nzDropdownMenu]="options" nzType="primary">
               {{ "dashboard.dataTable.options.title" | translate }}
@@ -103,13 +111,13 @@
             </button>
             <nz-dropdown-menu #options="nzDropdownMenu">
               <ul nz-menu>
-                <li nz-menu-item (click)="handleOnShow(data)"><i nz-icon nzType="eye" nzTheme="twotone"></i> {{
+                <li nz-menu-item (click)="handleOnShow(data.user)"><i nz-icon nzType="eye" nzTheme="twotone"></i> {{
                   "dashboard.dataTable.options.show" |
                   translate }}</li>
-                <li nz-menu-item (click)="handleOnEdit(data)"><i nz-icon nzType="edit" nzTheme="twotone"></i> {{
+                <li nz-menu-item (click)="handleOnEdit(data.user)"><i nz-icon nzType="edit" nzTheme="twotone"></i> {{
                   "dashboard.dataTable.options.edit" |
                   translate }}</li>
-                <li nz-menu-item (click)="handleOnDelete(data)"><i nz-icon nzType="delete" nzTheme="twotone"></i> {{
+                <li nz-menu-item (click)="handleOnDelete(data.user)"><i nz-icon nzType="delete" nzTheme="twotone"></i> {{
                   "dashboard.dataTable.options.delete" | translate }}</li>
               </ul>
             </nz-dropdown-menu>

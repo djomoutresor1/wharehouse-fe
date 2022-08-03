@@ -1,5 +1,6 @@
 import { ResponseAddressModel } from "./response-address-model";
 import { ResponseContactModel } from "./response-contact-model";
+import { ResponseUserInfoModel } from "./response-user-info-model";
 
 export interface ResponseLoginModel {
   fullname: string;
@@ -18,6 +19,7 @@ export interface ResponseLoginModel {
   country: string;
   lastLogin: string;
   createdAt: string;
+  userInfo: ResponseUserInfoModel;
   address: ResponseAddressModel;
   contact: ResponseContactModel;
 }

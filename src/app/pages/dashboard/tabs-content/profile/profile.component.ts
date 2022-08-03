@@ -22,7 +22,7 @@ import { ResponseFileModel } from 'src/model/auth/response/response-file-model';
 })
 export class ProfileComponent implements OnInit {
   @Input() mode: string = '';
-  @Input() user!: ResponseLoginModel;
+  @Input() user!: ResponseUserModel;
 
   userLocalStorage: any;
   breadcrumbItems!: BreadcrumbItemsModel;

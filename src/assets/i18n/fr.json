@@ -11,6 +11,11 @@
         "description": "Il semble que votre compte n'ait pas satisfait aux critères de vérification.",
         "cta": "Envoyez le lien",
         "confirmation": "Un e-mail de vérification a été envoyé à votre courrier électronique. Veuillez vérifier vos messages pour continuer à certifier votre e-mail"
+      },
+      "profile": {
+        "title": "Autorisation du profil d'activation",
+        "description": "Votre profil n'a pas été validé par l'administrateur de votre departement. Contactez-le pour vous donnez accés au  système.",
+        "cta": "Fermez"
       }
     },
     "changePassword": { 

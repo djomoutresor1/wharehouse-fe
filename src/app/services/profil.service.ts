@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseModel } from 'src/model/auth/response/response-model';
+import { ResponseUserDataModel } from 'src/model/auth/response/response-user-data-model';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 import { UserInsertModel } from 'src/model/dashboard/request/user-insert-model';
 import { Auth } from '../shared/enums/auth-enums';
@@ -21,8 +22,8 @@ export class ProfilService {
     private warehouseLocalStorage: WarehouseLocalStorage
   ) {}
 
-  public getAllUsers(): Observable<ResponseLoginModel[]> {
-    return this.http.get<ResponseLoginModel[]>(
+  public getAllUsers(): Observable<ResponseUserDataModel[]> {
+    return this.http.get<ResponseUserDataModel[]>(
       `${this.apiServerUrl}/${Pages.USERS}`
     );
   }
