@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
   isAuth: boolean = false;
   isLogged: boolean = false;
   dataUserActive: boolean = true;
+  dataActiveUserByAdmin: boolean = true;
   alertType: string = '';
   messageAlert: string = '';
   descriptionAlert: string = '';
@@ -132,6 +133,7 @@ export class LoginComponent implements OnInit {
 
   submitForm() {
     this.dataUserActive = true;
+    this.dataActiveUserByAdmin = true;
     let userData = {
       username: this.validateForm.controls['username']?.value.toLowerCase(),
       password: this.validateForm.controls['password']?.value,
@@ -142,10 +144,34 @@ export class LoginComponent implements OnInit {
         this.handleOnRememberMe();
         this.dataUserActive = response?.active;
         this.dataUserEmail = response?.email;
+        this.dataActiveUserByAdmin = response?.userInfo?.activeUserByAdmin;
 
         if (!this.dataUserActive) {
-          this.alertModalActive();
-        } else {
+          this.alertTypeModal = AlertType.ALERT_WARNING;
+          this.messageAlertModal = this.translate.instant(
+            'message.verification.email.title'
+          );
+          this.okText = this.translate.instant(
+            'message.verification.email.cta'
+          );
+          this.descriptionAlertModal = this.translate.instant(
+            'message.verification.email.description'
+          );
+          // this.alertModalActive();
+        } else if (!this.dataActiveUserByAdmin) {
+          this.alertTypeModal = AlertType.ALERT_INFO;
+          this.messageAlertModal = this.translate.instant(
+            'message.verification.profile.title'
+          );
+          this.okText = this.translate.instant(
+            'message.verification.profile.cta'
+          );
+          this.descriptionAlertModal = this.translate.instant(
+            'message.verification.profile.description'
+          );
+          // this.alertModalActive();
+        } 
+        else {
           this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
           this.successNotificationType(response);
         }

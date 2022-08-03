@@ -18,6 +18,11 @@
             (handleOnOkModal)="handleOnOkModal($event)">
           </warehouse-modal>
         </div>
+        <div class="col-md-12" *ngIf="!dataActiveUserByAdmin">
+          <warehouse-modal [okTextModal]="okText" [typeModal]="alertTypeModal" [messageModal]="messageAlertModal"
+            [showClosableModal]="true" [descriptionModal]="descriptionAlertModal">
+          </warehouse-modal>
+        </div>
       </div>
       <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
         <nz-form-item>

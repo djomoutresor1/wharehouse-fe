@@ -10,6 +10,8 @@ import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
+import { ResponseUserDataModel } from 'src/model/auth/response/response-user-data-model';
+import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 interface ItemData {
   id: 45;
 }
@@ -69,7 +71,7 @@ export class AllUsersComponent implements OnInit {
   listOfCurrentPageData: readonly ItemData[] = [];
   setOfCheckedId = new Set<number>();
   allUsers: any;
-  tmpUsers: ResponseLoginModel[] = [];
+  tmpUsers: ResponseUserDataModel[] = [];
   user!: ResponseLoginModel;
   messageAlert: string = '';
   alertType: string = '';
@@ -81,7 +83,7 @@ export class AllUsersComponent implements OnInit {
   sizeDrawer: string = 'large';
   visibleDrawer: boolean = false;
   mode: string = Utils.WAREHOUSE_MODE_PROFILE_DATATABLE;
-  userDatatable!: ResponseLoginModel;
+  userDatatable!: ResponseUserModel;
   search: string = '';
 
   constructor(
@@ -109,10 +111,10 @@ export class AllUsersComponent implements OnInit {
 
   getAllWarehousUsers() {
     this.profilService.getAllUsers().subscribe(
-      (users: ResponseLoginModel[]) => {
+      (users: ResponseUserDataModel[]) => {
         // Take all users and remove the current user connected
         this.allUsers = users?.filter(
-          (user) => user.userId !== this.user?.userId
+          (user) => user.user.userId !== this.user?.userId
         );
         this.tmpUsers = this.allUsers;
       },
@@ -249,17 +251,17 @@ export class AllUsersComponent implements OnInit {
     }
   }
 
-  handleOnShow(user: ResponseLoginModel) {
+  handleOnShow(user: ResponseUserModel) {
     this.visibleDrawer = true;
     this.titleDrawer = user.fullname;
     this.userDatatable = user;
   }
 
-  handleOnEdit(user: ResponseLoginModel) {
+  handleOnEdit(user: ResponseUserModel) {
     console.log('user - handleOnEdit: ', user);
   }
 
-  handleOnDelete(user: ResponseLoginModel) {
+  handleOnDelete(user: ResponseUserModel) {
     this.nzModalService.confirm({
       nzTitle:
         '<h4>' +
@@ -328,9 +330,9 @@ export class AllUsersComponent implements OnInit {
   handleOnSearchUser(search: string) {
     if (search) {
       this.allUsers = this.tmpUsers.filter(
-        (user: ResponseLoginModel) =>
-          user.fullname.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||
-          user.email.toLowerCase().indexOf(search.toLowerCase()) >= 0
+        (user: ResponseUserDataModel) =>
+          user.user.fullname.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||
+          user.user.email.toLowerCase().indexOf(search.toLowerCase()) >= 0
       );
     } else {
       this.allUsers = this.tmpUsers;
@@ -342,7 +344,7 @@ export class AllUsersComponent implements OnInit {
       this.allUsers = this.allUsers;
     } else {
       this.allUsers = this.allUsers?.filter(
-        (user: ResponseLoginModel) => user.active === status
+        (user: ResponseUserDataModel) => user.user.active === status
       );
     }
   }
@@ -351,8 +353,8 @@ export class AllUsersComponent implements OnInit {
     if (role === Utils.WAREHOUSE_PREFIX_ALL) {
       this.allUsers = this.allUsers;
     } else {
-      this.allUsers = this.allUsers?.filter((user: ResponseLoginModel) => {
-        return user.roles
+      this.allUsers = this.allUsers?.filter((user: ResponseUserDataModel) => {
+        return user.user.roles
           .map((userRole: any) => {
             return userRole?.name;
           })

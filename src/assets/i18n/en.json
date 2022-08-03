@@ -11,6 +11,11 @@
         "description": "It looks like your account hasn't passed the verification criteria.",
         "cta": "Send link",
         "confirmation": "A verification email has been sent to your email. Please check your messages to continue certifying your email."
+      },
+      "profile": {
+        "title": "Activation profile authorization",
+        "description": "Your profile has not been validated by your department administrator. Contact him to give you access to the system.",
+        "cta": "Close"
       }
     },
     "changePassword": {
