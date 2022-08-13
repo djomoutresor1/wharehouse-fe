@@ -16,10 +16,6 @@
   position: relative;
 }
 
-.ant-layout-sider {
-  //background: inherit !important;
-}
-
 .ant-input-prefix,
 .ant-input-suffix {
   justify-content: center !important;
@@ -67,6 +63,8 @@
   position: relative;
 }
 
-.ant-drawer-content-wrapper {
-  width: 1000px !important;
+.ant-badge-status-dot {
+  width: 25px !important;
+  height: 25px !important;
+  border: 5px solid var(--warehouse-white);
 }
