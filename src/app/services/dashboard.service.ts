@@ -2,6 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ResponseModel } from 'src/model/auth/response/response-model';
 import { LanesModel } from 'src/model/corsia/lanes-model';
 import { UserInsertModel } from 'src/model/dashboard/request/user-insert-model';
 import { ResponseUserInsertModel } from 'src/model/dashboard/response/response-user-insert-model';
@@ -40,6 +41,22 @@ export class DashboardService {
     return this.http.post<ResponseUserInsertModel>(
       `${this.apiServerUrl}${Dashboard.WAREHOUSE_DASHBOARD_ADMIN_INSERT_USER}`,
       user
+    );
+  }
+
+  public adminChangeStatusUser(
+    adminId: string,
+    userId: string,
+    status: string
+  ): Observable<ResponseModel> {
+    return this.http.put<ResponseModel>(
+      `${this.apiServerUrl}${Dashboard.WAREHOUSE_DASHBOARD_ADMIN_PERMISSION_USER}/${status}`,{},
+      {
+        params: {
+          adminId,
+          userId,
+        },
+      }
     );
   }
 }

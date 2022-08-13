@@ -8,6 +8,7 @@ import { AuthentificationService } from 'src/app/services/auth/authentification.
 import { AuthorizationService } from 'src/app/services/auth/authorization.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
+import { StatusType } from 'src/app/shared/enums/status-type-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
   isAuth: boolean = false;
   isLogged: boolean = false;
   dataUserActive: boolean = true;
-  dataActiveUserByAdmin: boolean = true;
+  dataUserStatus: boolean = false;
   alertType: string = '';
   messageAlert: string = '';
   descriptionAlert: string = '';
@@ -133,7 +134,7 @@ export class LoginComponent implements OnInit {
 
   submitForm() {
     this.dataUserActive = true;
-    this.dataActiveUserByAdmin = true;
+    this.dataUserStatus = false;
     let userData = {
       username: this.validateForm.controls['username']?.value.toLowerCase(),
       password: this.validateForm.controls['password']?.value,
@@ -144,7 +145,7 @@ export class LoginComponent implements OnInit {
         this.handleOnRememberMe();
         this.dataUserActive = response?.active;
         this.dataUserEmail = response?.email;
-        this.dataActiveUserByAdmin = response?.userInfo?.activeUserByAdmin;
+        this.dataUserStatus = this.checkUserStatus(response?.userInfo?.status);
 
         if (!this.dataUserActive) {
           this.alertTypeModal = AlertType.ALERT_WARNING;
@@ -158,7 +159,7 @@ export class LoginComponent implements OnInit {
             'message.verification.email.description'
           );
           // this.alertModalActive();
-        } else if (!this.dataActiveUserByAdmin) {
+        } else if (this.dataUserStatus) {
           this.alertTypeModal = AlertType.ALERT_INFO;
           this.messageAlertModal = this.translate.instant(
             'message.verification.profile.title'
@@ -170,8 +171,7 @@ export class LoginComponent implements OnInit {
             'message.verification.profile.description'
           );
           // this.alertModalActive();
-        } 
-        else {
+        } else {
           this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
           this.successNotificationType(response);
         }
@@ -192,6 +192,17 @@ export class LoginComponent implements OnInit {
         }
       }
     );
+  }
+
+  checkUserStatus(status: string): boolean {
+    if (
+      status === StatusType.STATUS_PENDING ||
+      status === StatusType.STATUS_DISABLED
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   errorAlertType(message: string): void {

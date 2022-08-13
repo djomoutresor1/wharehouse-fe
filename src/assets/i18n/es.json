@@ -40,6 +40,12 @@
     "confirmation": {
       "insert": {
         "user": "Conferma inserimento nuono utente"
+      },
+      "change": {
+        "status": "Conferma cambia stato utente",
+        "firstText": "L'utente",
+        "secondText": " ha lo stato",
+        "thirdText": "Vuoi scambiarlo con lo stato ?"
       }
     }
   },
@@ -91,10 +97,14 @@
         "show": "Vedi",
         "delete": "Cancella",
         "reset": "Ripristina",
-        "search": "Cerca con email o Nome e Cognome"
+        "search": "Cerca con email o Nome e Cognome",
+        "status": "Cambia stato"
       },
       "status": {
         "all": "Tutti",
+        "active": "Attivo",
+        "pending": "In attesa",
+        "disabled": "Disabilitato",
         "placeholder": "Seleziona uno stato",
         "title": "Stato"
       }
@@ -310,6 +320,7 @@
     "lastLoginMessage": "Hai effettuato il tuo ultimo accesso in WareHouse System il ",
     "verified": "Verificato",
     "notVerified": "Non verificato",
+    "status": "Stato",
     "personalData": {
       "title": "Dati Anagrafici",
       "fullname": "Nome e Cognome",

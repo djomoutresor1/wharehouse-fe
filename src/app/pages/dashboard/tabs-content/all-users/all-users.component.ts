@@ -4,12 +4,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { ProfilService } from 'src/app/services/profil.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
+import { StatusType } from 'src/app/shared/enums/status-type-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
+import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseUserDataModel } from 'src/model/auth/response/response-user-data-model';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 interface ItemData {
@@ -80,11 +83,13 @@ export class AllUsersComponent implements OnInit {
   descriptionAlert: string = '';
   isExpiredToken: boolean = false;
   titleDrawer: string = '';
-  sizeDrawer: string = 'large';
-  visibleDrawer: boolean = false;
+  sizeDrawer: number = 1000;
+  visibleDrawerShow: boolean = false;
+  visibleDrawerStatus: boolean = false;
   mode: string = Utils.WAREHOUSE_MODE_PROFILE_DATATABLE;
   userDatatable!: ResponseUserModel;
   search: string = '';
+  userStatusSelected: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -92,7 +97,8 @@ export class AllUsersComponent implements OnInit {
     private profilService: ProfilService,
     private warehouseLocalStorage: WarehouseLocalStorage,
     private nzModalService: NzModalService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private dashboardService: DashboardService
   ) {}
 
   ngOnInit(): void {
@@ -136,31 +142,6 @@ export class AllUsersComponent implements OnInit {
     );
   }
 
-  nameUser(role: string) {
-    switch (role) {
-      case Utils.ROLE_ADMIN:
-        return Utils.ADMINS;
-        break;
-      case Utils.ROLE_MODERATOR:
-        return Utils.MODERATOR;
-        break;
-      case Utils.ROLE_USER:
-        return Utils.USER;
-        break;
-      default:
-        return Utils.USER;
-        break;
-    }
-  }
-
-  rolesUser(data: any) {
-    return data
-      .map((currElement: any) => {
-        return this.nameUser(currElement.name);
-      })
-      .join(',');
-  }
-
   updateCheckedSet(id: number, checked: boolean): void {
     if (checked) {
       this.setOfCheckedId.add(id);
@@ -200,20 +181,16 @@ export class AllUsersComponent implements OnInit {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
   }
 
-  getRoleName(role: any) {
+  getUserRoleName(role: any) {
     switch (role?.name) {
       case Utils.ROLE_ADMIN:
         return Utils.ADMINS;
-        break;
       case Utils.ROLE_MODERATOR:
         return Utils.MODERATOR;
-        break;
       case Utils.ROLE_USER:
         return Utils.USER;
-        break;
       default:
         return Utils.USER;
-        break;
     }
   }
 
@@ -221,44 +198,72 @@ export class AllUsersComponent implements OnInit {
     switch (role?.name) {
       case Utils.ROLE_USER:
         return '#0096c8';
-        break;
       case Utils.ROLE_MODERATOR:
         return '#ffc107';
-        break;
       case Utils.ROLE_ADMIN:
         return '#2a7a39';
-        break;
       default:
         return '#0096c8';
-        break;
     }
   }
 
-  getRoleIcon(role: any) {
+  getUserRoleIcon(role: any) {
     switch (role?.name) {
       case Utils.ROLE_USER:
         return 'user';
-        break;
       case Utils.ROLE_MODERATOR:
         return 'user-switch';
-        break;
       case Utils.ROLE_ADMIN:
         return 'team';
-        break;
       default:
         return 'user';
-        break;
+    }
+  }
+
+  getUserStatus(status: string): string {
+    switch (status) {
+      case StatusType.STATUS_ACTIVE:
+        return AlertType.ALERT_SUCCESS;
+      case StatusType.STATUS_DISABLED:
+        return AlertType.ALERT_ERROR;
+      case StatusType.STATUS_PENDING:
+        return AlertType.ALERT_WARNING;
+      default:
+        return AlertType.ALERT_WARNING;
+    }
+  }
+
+  formatUserStatus(status: string): string {
+    switch (status) {
+      case StatusType.STATUS_ACTIVE:
+        return this.translate.instant('dashboard.dataTable.status.active');
+      case StatusType.STATUS_DISABLED:
+        return this.translate.instant('dashboard.dataTable.status.disabled');
+      case StatusType.STATUS_PENDING:
+        return this.translate.instant('dashboard.dataTable.status.pending');
+      default:
+        return this.translate.instant('dashboard.dataTable.status.pending');
     }
   }
 
   handleOnShow(user: ResponseUserModel) {
-    this.visibleDrawer = true;
+    this.visibleDrawerShow = true;
     this.titleDrawer = user.fullname;
     this.userDatatable = user;
   }
 
   handleOnEdit(user: ResponseUserModel) {
     console.log('user - handleOnEdit: ', user);
+  }
+
+  handleOnStatus(user: ResponseUserDataModel) {
+    this.visibleDrawerStatus = true;
+    this.titleDrawer = this.translate.instant(
+      'operation.confirmation.change.status'
+    );
+    this.userDatatable = user.user;
+    this.userDatatable.userInfo = user.userInfo;
+    this.userStatusSelected = this.userDatatable.userInfo.status;
   }
 
   handleOnDelete(user: ResponseUserModel) {
@@ -313,8 +318,41 @@ export class AllUsersComponent implements OnInit {
     this.messageAlert = message;
   }
 
-  handleOncloseDrawer() {
-    this.visibleDrawer = false;
+  handleOnCloseDrawer() {
+    this.visibleDrawerShow = false;
+    this.visibleDrawerStatus = false;
+  }
+
+  handleOnChangeStatus() {
+    this.isAuth = false;
+    this.dashboardService
+      .adminChangeStatusUser(
+        this.user?.userId,
+        this.userDatatable?.userId,
+        this.userStatusSelected
+      )
+      .subscribe(
+        (response: ResponseModel) => {
+          this.successAlertType(response?.message);
+          this.visibleDrawerStatus = false;
+          this.getAllWarehousUsers();
+        },
+        (error: HttpErrorResponse) => {
+          if (error.status === 403) {
+            // Expiration token
+            this.alertType = AlertType.ALERT_WARNING;
+            this.okText = this.translate.instant('message.timeout.cta');
+            this.messageAlert = this.translate.instant('message.timeout.title');
+            this.descriptionAlert = this.translate.instant(
+              'message.timeout.description'
+            );
+            this.isExpiredToken = true;
+          } else {
+            console.log('Error Occured during downloading: ', error);
+            this.errorAlertType(error?.error.message || error?.message);
+          }
+        }
+      );
   }
 
   handleOnSearchUsers() {

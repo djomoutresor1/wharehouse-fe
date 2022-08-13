@@ -40,6 +40,12 @@
     "confirmation": {
       "insert": {
         "user": "Confirmation insert new user"
+      },
+      "change": {
+        "status": "Confirmation chnage status user",
+        "firstText": "Th user",
+        "secondText": " have the status",
+        "thirdText": "Would you like to change with the status ?"
       }
     }
   },
@@ -92,10 +98,14 @@
       "show": "Show",
       "delete": "Delete",
       "reset": "Reset",
-      "search": "Find by email or full name"
+      "search": "Find by email or full name",
+      "status": "change status"
     },
     "status": {
       "all": "All",
+      "active": "Active",
+      "pending": "Pending",
+      "disabled": "Disabled",
       "placeholder": "Select a status",
       "title": "Status"
     }
@@ -309,6 +319,7 @@
     "lastLoginMessage": "You were last logged in WareHouse System on",
     "verified": "Verified",
     "notVerified": "Not verified",
+    "status": "Status",
     "personalData": {
       "title": "Personal Data",
       "fullname": "First and Last Name",

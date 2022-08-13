@@ -75,8 +75,9 @@
           <th>{{ "register.gender.placeholder" | translate }}</th> -->
           <th>{{ "profile.personalData.fullname" | translate }}</th>
           <th>{{ "register.email.placeholder" | translate }}</th>
+          <th>{{ "verifyEmail.title" | translate }}</th>
           <th>{{ "profile.roles" | translate }}</th>
-          <th>Status</th>
+          <th>{{ "profile.status" | translate }}</th>
           <th>{{ "profile.personalData.dateOfBorn" | translate }}</th>
           <th>{{ "profile.lastLogin" | translate }}</th>
         </tr>
@@ -84,23 +85,27 @@
       <tbody>
         <tr *ngFor="let data of rowSelectionTable.data">
           <!-- <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td> -->
-          <td>{{ data.user.userId }}</td>
+          <td><b>{{ data.user.userId }}</b></td>
           <!-- <td>{{ data.user.username }}</td>
           <td>{{ data.user.gender }}</td> -->
           <td>{{ data.user.fullname }}</td>
           <td>{{ data.user.email }}</td>
-          <td>
-            <nz-tag *ngFor="let role of data.user.roles" [nzColor]="getUserColorRole(role)">
-              <i nz-icon [nzType]="getRoleIcon(role)"></i>
-              {{ getRoleName(role)}}
-            </nz-tag>
-          </td>
           <td>
             <span class="profile-verified"
               [ngClass]="data.user?.active ? 'warehouse-background-success' : 'warehouse-background-tomato'">
               <i nz-icon nzType="{{data.user?.active ? 'check-circle' : 'close-circle'}}" nzTheme="outline"></i>
               {{(data.user?.active ? "profile.verified" : "profile.notVerified") | translate}}
             </span>
+          </td>
+          <td>
+            <nz-tag *ngFor="let role of data.user.roles" [nzColor]="getUserColorRole(role)">
+              <i nz-icon [nzType]="getUserRoleIcon(role)"></i>
+              {{ getUserRoleName(role)}}
+            </nz-tag>
+          </td>
+          <td class="text-center">
+            <nz-badge nz-tooltip nzTooltipTitle="{{formatUserStatus(data.userInfo.status)}}"
+              nzTooltipPlacement="bottomLeft" nzStatus="{{ getUserStatus(data.userInfo.status) }}"></nz-badge>
           </td>
           <td>{{ data.user.dateOfBirth }}</td>
           <td>{{ data.user.lastLogin }}</td>
@@ -111,13 +116,18 @@
             </button>
             <nz-dropdown-menu #options="nzDropdownMenu">
               <ul nz-menu>
+                <li nz-menu-item (click)="handleOnStatus(data)"><i nz-icon nzType="right-circle" nzTheme="twotone"></i>
+                  {{
+                  "dashboard.dataTable.options.status" |
+                  translate }}</li>
                 <li nz-menu-item (click)="handleOnShow(data.user)"><i nz-icon nzType="eye" nzTheme="twotone"></i> {{
                   "dashboard.dataTable.options.show" |
                   translate }}</li>
                 <li nz-menu-item (click)="handleOnEdit(data.user)"><i nz-icon nzType="edit" nzTheme="twotone"></i> {{
                   "dashboard.dataTable.options.edit" |
                   translate }}</li>
-                <li nz-menu-item (click)="handleOnDelete(data.user)"><i nz-icon nzType="delete" nzTheme="twotone"></i> {{
+                <li nz-menu-item (click)="handleOnDelete(data.user)"><i nz-icon nzType="delete" nzTheme="twotone"></i>
+                  {{
                   "dashboard.dataTable.options.delete" | translate }}</li>
               </ul>
             </nz-dropdown-menu>
@@ -128,11 +138,36 @@
   </div>
   <div class="row">
     <div class="col">
-      <nz-drawer [nzVisible]="visibleDrawer" nzPlacement="right" [nzTitle]="titleDrawer"
-        (nzOnClose)="handleOncloseDrawer()">
+      <nz-drawer [nzWidth]="sizeDrawer" [nzVisible]="visibleDrawerShow" nzPlacement="right" [nzTitle]="titleDrawer"
+        (nzOnClose)="handleOnCloseDrawer()">
         <ng-container *nzDrawerContent>
           <warehouse-profile [mode]="mode" [user]="userDatatable"></warehouse-profile>
         </ng-container>
+      </nz-drawer>
+      <nz-drawer *ngIf="userDatatable" [nzClosable]="false" [nzVisible]="visibleDrawerStatus" nzPlacement="right"
+        [nzTitle]="titleDrawer" [nzFooter]="nzDrawerFooter" (nzOnClose)="handleOnCloseDrawer()">
+        <ng-container *nzDrawerContent>
+          <p>{{ "operation.confirmation.change.firstText" | translate }} <b>{{userDatatable.userId }}</b>{{
+            "operation.confirmation.change.secondText" | translate }} <b
+              class="warehouse-tomato">{{formatUserStatus(userDatatable.userInfo.status)}}</b></p>
+          <p>{{"operation.confirmation.change.thirdText" | translate }} </p>
+          <nz-radio-group [(ngModel)]="userStatusSelected">
+            <label nz-radio [nzDisabled]="userDatatable.userInfo.status === 'active'" nzValue="active">{{
+              "dashboard.dataTable.status.active" | translate }}</label>
+            <label nz-radio [nzDisabled]="userDatatable.userInfo.status === 'pending'" nzValue="pending">{{
+              "dashboard.dataTable.status.pending" | translate }}</label>
+            <label nz-radio [nzDisabled]="userDatatable.userInfo.status === 'disabled'" nzValue="disabled">{{
+              "dashboard.dataTable.status.disabled" | translate }}</label>
+          </nz-radio-group>
+        </ng-container>
+        <ng-template #nzDrawerFooter>
+          <div style="float: right">
+            <button nz-button style="margin-right: 8px;" (click)="handleOnCloseDrawer()"><i nz-icon nzType="left"
+                nzTheme="outline"></i> {{ "dashboard.cta.back" | translate }}</button>
+            <button nz-button nzType="primary" (click)="handleOnChangeStatus()"><i nz-icon nzType="check-circle"
+                nzTheme="outline"></i> {{ "dashboard.cta.edit" | translate }}</button>
+          </div>
+        </ng-template>
       </nz-drawer>
     </div>
   </div>

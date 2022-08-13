@@ -13,8 +13,8 @@ import * as moment from 'moment';
 import * as _ from 'lodash';
 import { FlagService } from 'src/app/services/flag.service';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
-import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseFileModel } from 'src/model/auth/response/response-file-model';
+import { StatusType } from 'src/app/shared/enums/status-type-enums';
 @Component({
   selector: 'warehouse-profile',
   templateUrl: './profile.component.html',
@@ -162,20 +162,33 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  getRoleName(role: any) {
+  getUserStatus(status: string): string {
+    switch (status) {
+      case StatusType.STATUS_ACTIVE:
+        return AlertType.ALERT_SUCCESS;
+      case StatusType.STATUS_DISABLED:
+        return AlertType.ALERT_ERROR;
+      case StatusType.STATUS_PENDING:
+        return AlertType.ALERT_WARNING;
+      default:
+        return AlertType.ALERT_WARNING;
+    }
+  }
+
+  formatUserStatus(status: string): string {
+    return status.charAt(0).toUpperCase() + status.slice(1)
+  }
+  
+  getUserRoleName(role: any) {
     switch (role?.name) {
       case Utils.ROLE_ADMIN:
         return Utils.ADMINS;
-        break;
       case Utils.ROLE_MODERATOR:
         return Utils.MODERATOR;
-        break;
       case Utils.ROLE_USER:
         return Utils.USER;
-        break;
       default:
         return Utils.USER;
-        break;
     }
   }
 
@@ -183,33 +196,25 @@ export class ProfileComponent implements OnInit {
     switch (role?.name) {
       case Utils.ROLE_USER:
         return '#0096c8';
-        break;
       case Utils.ROLE_MODERATOR:
         return '#ffc107';
-        break;
       case Utils.ROLE_ADMIN:
         return '#2a7a39';
-        break;
       default:
         return '#0096c8';
-        break;
     }
   }
 
-  getRoleIcon(role: string) {
+  getUserRoleIcon(role: string) {
     switch (role) {
       case Utils.ROLE_USER:
         return 'user';
-        break;
       case Utils.ROLE_MODERATOR:
         return 'user-switch';
-        break;
       case Utils.ROLE_ADMIN:
         return 'team';
-        break;
       default:
         return 'user';
-        break;
     }
   }
 
