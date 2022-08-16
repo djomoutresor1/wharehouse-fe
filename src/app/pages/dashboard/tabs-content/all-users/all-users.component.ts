@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { ProfilService } from 'src/app/services/profil.service';
+import { ViewService } from 'src/app/services/view-file.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { StatusType } from 'src/app/shared/enums/status-type-enums';
@@ -123,7 +124,8 @@ export class AllUsersComponent implements OnInit {
     private warehouseLocalStorage: WarehouseLocalStorage,
     private nzModalService: NzModalService,
     private translate: TranslateService,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private viewService: ViewService,
   ) {}
 
   ngOnInit(): void {
@@ -455,5 +457,28 @@ export class AllUsersComponent implements OnInit {
     this.search = '';
     this.searchForm.controls['search'].reset();
     this.handleOnSearchUsers();
+  }
+
+  onExportExcellFile(){
+    this.viewService.getExportUsers().subscribe(
+      (response: any) => {
+          console.log(response)
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
+          console.log('enable to export excel file, ERROR: ' + error?.message);
+          this.errorAlertType(error?.message);
+        }
+      })
+
   }
 }

@@ -15,6 +15,7 @@ import { FlagService } from 'src/app/services/flag.service';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 import { ResponseFileModel } from 'src/model/auth/response/response-file-model';
 import { StatusType } from 'src/app/shared/enums/status-type-enums';
+import { ViewService } from 'src/app/services/view-file.service';
 @Component({
   selector: 'warehouse-profile',
   templateUrl: './profile.component.html',
@@ -46,7 +47,9 @@ export class ProfileComponent implements OnInit {
     private warehouseLocalStorage: WarehouseLocalStorage,
     private profilService: ProfilService,
     private sanitizer: DomSanitizer,
-    private flagService: FlagService
+    private flagService: FlagService,
+    private viewService: ViewService,
+    
   ) {}
 
   ngOnInit(): void {
@@ -276,5 +279,27 @@ export class ProfileComponent implements OnInit {
     this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
     window.location.reload();
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+  }
+
+  onViewProfilePdf(){
+    this.viewService.getPdfViewer().subscribe(
+      (response: any) => {
+          console.log(response)
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
+          console.log('enable to retrieve data country and flag ' + error);
+          this.errorAlertType(error?.error.message);
+        }
+      })
   }
 }
