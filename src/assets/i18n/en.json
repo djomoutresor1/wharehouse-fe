@@ -98,7 +98,10 @@
       "show": "Show",
       "delete": "Delete",
       "reset": "Reset",
-      "search": "Find by email or full name",
+      "search": {
+        "simple": "Find by email or full name",
+        "advanced": "Advanced Search"
+      },
       "status": "change status"
     },
     "status": {

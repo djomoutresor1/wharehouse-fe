@@ -15,45 +15,13 @@
     </div>
   </div>
   <div [formGroup]="searchForm" class="row warehouse-users-filter">
-    <div class="col-md-1">
-      <button nz-button nzType="primary" class="mt-2" (click)="handleOnResetFilter()">
-        <i nz-icon nzType="clear" nzTheme="outline"></i>
-        {{ "dashboard.dataTable.options.reset" | translate }}
-      </button>
-    </div>
-    <div class="col-md-2">
-      <nz-form-label nzFor="status">{{"dashboard.dataTable.status.title" | translate }}
-      </nz-form-label>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-select ngModel="all" [nzPlaceHolder]="'dashboard.dataTable.status.placeholder'| translate"
-            formControlName="status" (ngModelChange)="handleOnSearchUsers()">
-            <nz-option *ngFor="let status of listOfStatus" [nzValue]="status?.value" nzLabel="{{status?.label}}">
-            </nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-    <div class="col-md-2">
-      <nz-form-label nzFor="role">{{"register.role.title" | translate }}
-      </nz-form-label>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-select ngModel="all" [nzPlaceHolder]="'register.role.placeholder'| translate" formControlName="role"
-            (ngModelChange)="handleOnSearchUsers()">
-            <nz-option *ngFor="let role of listOfRoles" [nzValue]="role?.value" nzLabel="{{role?.label}}">
-            </nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-    <div class="col-md-4 offset-md-3 mb-2">
+    <div class="col-md-4 offset-md-8 mb-2">
       <nz-form-label></nz-form-label>
       <nz-form-item>
         <nz-form-control>
           <nz-input-group nzPrefixIcon="search" [nzSuffix]="inputClearTpl">
             <input type="text" [(ngModel)]="search" nz-input formControlName="search"
-              [placeholder]="'dashboard.dataTable.options.search' | translate" (input)="handleOnSearchUsers()" />
+              [placeholder]="'dashboard.dataTable.options.search.simple' | translate" (input)="handleOnSearchUsers()" />
           </nz-input-group>
           <ng-template #inputClearTpl>
             <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="search"
@@ -63,7 +31,100 @@
       </nz-form-item>
     </div>
   </div>
-  <div class="row">
+  <nz-collapse [nzExpandIconPosition]="'left'">
+    <nz-collapse-panel [nzHeader]="'dashboard.dataTable.options.search.advanced' | translate" [nzActive]="false"
+      [nzExtra]="collapseContent" [nzDisabled]="false">
+      <div [formGroup]="searchForm" class="row warehouse-not-margin warehouse-users-filter">
+        <div class="col-md-2">
+          <nz-form-label nzFor="typeEmailVerification">{{"verifyEmail.title" | translate }}
+          </nz-form-label>
+          <nz-form-item>
+            <nz-form-control>
+              <nz-select [(ngModel)]="selectedTypeEmail" [nzCustomTemplate]="typeEmailTemplate"
+                [nzPlaceHolder]="'dashboard.dataTable.status.placeholder'| translate"
+                formControlName="typeEmailVerification" (ngModelChange)="handleOnSearchUsers()">
+                <nz-option nzCustomContent *ngFor="let typeEmailVerification of listOfTypeEmailVerification"
+                  [nzValue]="typeEmailVerification?.value" [nzLabel]="typeEmailVerification?.label">
+                  <span class="profile-verified" *ngIf="typeEmailVerification?.value !== 'all'"
+                    [ngClass]="typeEmailVerification?.value ? 'warehouse-background-success' : 'warehouse-background-tomato'">
+                    <i nz-icon nzType="{{typeEmailVerification?.value ? 'check-circle' : 'close-circle'}}"
+                      nzTheme="outline"></i>
+                  </span>
+                  {{typeEmailVerification?.label}}
+                </nz-option>
+              </nz-select>
+              <ng-template #typeEmailTemplate let-selected>
+                <span class="profile-verified" *ngIf="selected?.nzValue !== 'all'"
+                  [ngClass]="selected?.nzValue ? 'warehouse-background-success' : 'warehouse-background-tomato'">
+                  <i nz-icon nzType="{{selected?.nzValue ? 'check-circle' : 'close-circle'}}" nzTheme="outline"></i>
+                </span>
+                {{ selected.nzLabel }}
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-md-2">
+          <nz-form-label nzFor="role">{{"register.role.title" | translate }}
+          </nz-form-label>
+          <nz-form-item>
+            <nz-form-control>
+              <nz-select [(ngModel)]="selectedRole" [nzCustomTemplate]="roleTemplate"
+                [nzPlaceHolder]="'register.role.placeholder'| translate" formControlName="role"
+                (ngModelChange)="handleOnSearchUsers()">
+                <nz-option nzCustomContent *ngFor="let role of listOfRoles" [nzValue]="role?.value"
+                  [nzLabel]="role?.label">
+                  <nz-tag *ngIf="role.value !== 'all'" [nzColor]="getUserColorRole(role?.value)">
+                    <i nz-icon [nzType]="getUserRoleIcon(role?.value)"></i>
+                  </nz-tag>
+                  {{ role?.label }}
+                </nz-option>
+              </nz-select>
+              <ng-template #roleTemplate let-selected>
+                <nz-tag *ngIf="selected?.nzValue !== 'all'" [nzColor]="getUserColorRole(selected?.nzValue)">
+                  <i nz-icon [nzType]="getUserRoleIcon(selected?.nzValue)"></i>
+                </nz-tag>
+                {{ selected.nzLabel }}
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-md-2">
+          <nz-form-label nzFor="status">{{"profile.status" | translate }}
+          </nz-form-label>
+          <nz-form-item>
+            <nz-form-control>
+              <nz-select [(ngModel)]="selectedStatus" [nzCustomTemplate]="statusTemplate"
+                [nzPlaceHolder]="'dashboard.dataTable.status.placeholder'| translate" formControlName="status"
+                (ngModelChange)="handleOnSearchUsers()">
+                <nz-option nzCustomContent *ngFor="let status of listOfStatus" [nzValue]="status?.value"
+                  [nzLabel]="status?.label">
+                  <nz-badge [nzStatus]="status?.style"></nz-badge>
+                  {{ status?.label }}
+                </nz-option>
+              </nz-select>
+              <ng-template #statusTemplate let-selected>
+                <nz-badge [nzStatus]="getUserStatusSelected(selected?.nzValue)"></nz-badge>
+                {{ selected.nzLabel }}
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <div class="row warehouse-not-margin">
+        <div class="col-md-1">
+          <button nz-button nzType="primary" class="mt-2" (click)="handleOnResetFilter()">
+            <i nz-icon nzType="clear" nzTheme="outline"></i>
+            {{ "dashboard.dataTable.options.reset" | translate }}
+          </button>
+        </div>
+      </div>
+    </nz-collapse-panel>
+  </nz-collapse>
+  <ng-template #collapseContent>
+    <!-- You can use stopPropagation if you don't want the panel to toggle -->
+    <i nz-icon nzType="search" (click)="$event.stopPropagation()"></i>
+  </ng-template>
+  <div class="row mt-4">
     <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="allUsers"
       (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
       <thead>
@@ -164,8 +225,9 @@
           <div style="float: right">
             <button nz-button style="margin-right: 8px;" (click)="handleOnCloseDrawer()"><i nz-icon nzType="left"
                 nzTheme="outline"></i> {{ "dashboard.cta.back" | translate }}</button>
-            <button nz-button nzType="primary" (click)="handleOnChangeStatus()"><i nz-icon nzType="check-circle"
-                nzTheme="outline"></i> {{ "dashboard.cta.edit" | translate }}</button>
+            <button nz-button nzType="primary" [disabled]="userStatusSelected === userDatatable.userInfo.status"
+              (click)="handleOnChangeStatus()"><i nz-icon nzType="check-circle" nzTheme="outline"></i> {{
+              "dashboard.cta.edit" | translate }}</button>
           </div>
         </ng-template>
       </nz-drawer>

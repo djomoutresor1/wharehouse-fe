@@ -97,7 +97,10 @@
         "show": "Vedi",
         "delete": "Cancella",
         "reset": "Ripristina",
-        "search": "Cerca con email o Nome e Cognome",
+        "search": {
+          "simple": "Cerca con email o Nome e Cognome",
+          "advanced": "Ricerca Avanzata"
+        },
         "status": "Cambia stato"
       },
       "status": {
@@ -315,7 +318,7 @@
     "title": "Mio Profilo",
     "empty": "--- Non Specificato ---",
     "role": "Hai i roli",
-    "roles": "Roli",
+    "roles": "Ruoli",
     "lastLogin": "Ultimo Accesso",
     "lastLoginMessage": "Hai effettuato il tuo ultimo accesso in WareHouse System il ",
     "verified": "Verificato",

@@ -35,7 +35,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip'
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
@@ -96,7 +97,8 @@ const icons = [
     NzUploadModule,
     NzBadgeModule,
     NzDrawerModule,
-    NzToolTipModule
+    NzToolTipModule,
+    NzCollapseModule
   ],
   exports: [
     NzButtonModule,
@@ -135,7 +137,8 @@ const icons = [
     NzUploadModule,
     NzBadgeModule,
     NzDrawerModule,
-    NzToolTipModule
+    NzToolTipModule,
+    NzCollapseModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })

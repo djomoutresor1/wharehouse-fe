@@ -26,13 +26,35 @@ interface ItemData {
 })
 export class AllUsersComponent implements OnInit {
   searchForm!: FormGroup;
-  listOfStatus = [
+  listOfTypeEmailVerification = [
     {
       label: this.translate.instant('dashboard.dataTable.status.all'),
       value: Utils.WAREHOUSE_PREFIX_ALL,
     },
     { label: this.translate.instant('profile.verified'), value: true },
     { label: this.translate.instant('profile.notVerified'), value: false },
+  ];
+  listOfStatus = [
+    {
+      label: this.translate.instant('dashboard.dataTable.status.all'),
+      value: Utils.WAREHOUSE_PREFIX_ALL,
+      style: '',
+    },
+    {
+      label: this.translate.instant('dashboard.dataTable.status.active'),
+      value: StatusType.STATUS_ACTIVE,
+      style: AlertType.ALERT_SUCCESS,
+    },
+    {
+      label: this.translate.instant('dashboard.dataTable.status.pending'),
+      value: StatusType.STATUS_PENDING,
+      style: AlertType.ALERT_WARNING,
+    },
+    {
+      label: this.translate.instant('dashboard.dataTable.status.disabled'),
+      value: StatusType.STATUS_DISABLED,
+      style: AlertType.ALERT_ERROR,
+    },
   ];
   listOfRoles = [
     {
@@ -90,6 +112,9 @@ export class AllUsersComponent implements OnInit {
   userDatatable!: ResponseUserModel;
   search: string = '';
   userStatusSelected: string = '';
+  selectedStatus: string = 'all';
+  selectedRole: string = 'all';
+  selectedTypeEmail: string = 'all';
 
   constructor(
     private fb: FormBuilder,
@@ -110,6 +135,7 @@ export class AllUsersComponent implements OnInit {
   initSearch() {
     this.searchForm = this.fb.group({
       search: '',
+      typeEmailVerification: Utils.WAREHOUSE_PREFIX_ALL,
       status: Utils.WAREHOUSE_PREFIX_ALL,
       role: Utils.WAREHOUSE_PREFIX_ALL,
     });
@@ -195,7 +221,7 @@ export class AllUsersComponent implements OnInit {
   }
 
   getUserColorRole(role: any) {
-    switch (role?.name) {
+    switch (role?.name || role) {
       case Utils.ROLE_USER:
         return '#0096c8';
       case Utils.ROLE_MODERATOR:
@@ -208,7 +234,7 @@ export class AllUsersComponent implements OnInit {
   }
 
   getUserRoleIcon(role: any) {
-    switch (role?.name) {
+    switch (role?.name || role) {
       case Utils.ROLE_USER:
         return 'user';
       case Utils.ROLE_MODERATOR:
@@ -231,6 +257,10 @@ export class AllUsersComponent implements OnInit {
       default:
         return AlertType.ALERT_WARNING;
     }
+  }
+
+  getUserStatusSelected(value: string) {
+    return this.listOfStatus.find((element) => element?.value === value)?.style;
   }
 
   formatUserStatus(status: string): string {
@@ -357,11 +387,14 @@ export class AllUsersComponent implements OnInit {
 
   handleOnSearchUsers() {
     let search = this.searchForm.controls['search']?.value;
+    let typeEmailVerification =
+      this.searchForm.controls['typeEmailVerification']?.value;
     let status = this.searchForm.controls['status']?.value;
     let role = this.searchForm.controls['role']?.value;
 
     this.handleOnSearchUser(search);
     this.handleOnSelectRole(role);
+    this.handleOnSelectTypeEmailVerification(typeEmailVerification);
     this.handleOnSelectStatus(status);
   }
 
@@ -377,12 +410,23 @@ export class AllUsersComponent implements OnInit {
     }
   }
 
-  handleOnSelectStatus(status: boolean | string) {
+  handleOnSelectTypeEmailVerification(typeEmailVerification: boolean | string) {
+    if (typeEmailVerification === Utils.WAREHOUSE_PREFIX_ALL) {
+      this.allUsers = this.allUsers;
+    } else {
+      this.allUsers = this.allUsers?.filter(
+        (user: ResponseUserDataModel) =>
+          user.user.active === typeEmailVerification
+      );
+    }
+  }
+
+  handleOnSelectStatus(status: string) {
     if (status === Utils.WAREHOUSE_PREFIX_ALL) {
       this.allUsers = this.allUsers;
     } else {
       this.allUsers = this.allUsers?.filter(
-        (user: ResponseUserDataModel) => user.user.active === status
+        (user: ResponseUserDataModel) => user.userInfo.status === status
       );
     }
   }
