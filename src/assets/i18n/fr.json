@@ -97,7 +97,10 @@
         "show": "Voir",
         "delete": "Effacer",
         "reset": "Réinitialiser",
-        "search": "Rechercher par email ou Nome et Prénom",
+        "search": {
+          "simple": "Rechercher par email ou Nome et Prénom",
+          "advanced": "Recherche Avancée"
+        },
         "status": "Changer statut"
       },
       "status": {
