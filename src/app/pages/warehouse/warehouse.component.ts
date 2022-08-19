@@ -1,24 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Pages } from 'src/app/shared/enums/pages-enums';
+import { Component, Injector, OnInit } from '@angular/core';
+import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 
 @Component({
   selector: 'app-warehouse',
   templateUrl: './warehouse.component.html',
   styleUrls: ['./warehouse.component.scss'],
 })
-export class WarehouseComponent implements OnInit {
-  constructor(private router: Router) {}
+export class WarehouseComponent extends WarehouseBaseComponent implements OnInit {
+  constructor(injector: Injector) {
+    super(injector);
+  }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     document.title = "Warehouse home"
-  }
-
-  handleOnLogin() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
-  }
-
-  handleOnRegister() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER}`]);
   }
 }

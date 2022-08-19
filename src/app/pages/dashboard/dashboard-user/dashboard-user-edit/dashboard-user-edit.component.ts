@@ -1,16 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { FlagService } from 'src/app/services/flag.service';
-import { ProfilService } from 'src/app/services/profil.service';
+import { Component, Injector, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
-import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 import * as _ from 'lodash';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 import { UserContactModel } from 'src/model/dashboard/request/user-contact-model';
@@ -18,9 +12,8 @@ import { UserAddressModel } from 'src/model/dashboard/request/user-address-model
 import { UserInsertModel } from 'src/model/dashboard/request/user-insert-model';
 import * as moment from 'moment';
 import { ResponseModel } from 'src/model/auth/response/response-model';
-import { ImageService } from 'src/app/services/image.service';
-import { NzModalService } from 'ng-zorro-antd/modal';
 import { ResponseFileModel } from 'src/model/auth/response/response-file-model';
+import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 @Component({
   selector: 'warehouse-dashboard-user-edit',
   templateUrl: './dashboard-user-edit.component.html',
@@ -29,13 +22,8 @@ import { ResponseFileModel } from 'src/model/auth/response/response-file-model';
     '../dashboard-user-add/dashboard-user-add.component.scss',
   ],
 })
-export class DashboardUserEditComponent implements OnInit {
-  user: any;
-  validateForm!: FormGroup;
+export class DashboardUserEditComponent extends WarehouseBaseComponent implements OnInit {
   breadcrumbItems!: BreadcrumbItemsModel;
-  isAuth: boolean = false;
-  alertType: string = '';
-  messageAlert: string = '';
   countryAndFlagData: any[] = [];
   countryStatesData: any[] = [];
   prefixPhoneData: any[] = [];
@@ -51,44 +39,14 @@ export class DashboardUserEditComponent implements OnInit {
   bcgURL: any;
   selectedFileAvatar: any;
   selectedFileCover: any;
-  dateFormat = 'dd/MM/YYYY';
-  okText: string = '';
-  descriptionAlert: string = '';
-  isExpiredToken: boolean = false;
   keypressInput: boolean = false;
   dataUser!: ResponseUserModel;
   userLocalStorage: any;
   landlineNumberValidate: string = '';
 
-  rolesList = [
-    { label: 'Admin', value: 'admin' },
-    { label: 'User', value: 'user' },
-    { label: 'Moderator', value: 'moderator' },
-  ];
-  acceptPictures: string[] = [
-    '.jpg',
-    '.jpeg',
-    '.png',
-    '.gif',
-    '.tif',
-    '.tiff',
-    '.bmp',
-    '.webp',
-  ];
+  constructor(injector: Injector) { super(injector); }
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private translate: TranslateService,
-    private warehouseLocalStorage: WarehouseLocalStorage,
-    private profilService: ProfilService,
-    private flagService: FlagService,
-    private sanitizer: DomSanitizer,
-    private imageService: ImageService,
-    private nzModalService: NzModalService
-  ) {}
-
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.getCountriesAndPrefixPhoneWorld();
     this.initForm();
     this.initComponent();
@@ -178,13 +136,7 @@ export class DashboardUserEditComponent implements OnInit {
         console.log('enable to retrieve data country and flag ' + error);
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           console.log('Error Occured during downloading: ', error);
           this.errorAlertType(error?.error.message);
@@ -227,7 +179,7 @@ export class DashboardUserEditComponent implements OnInit {
     const fileExt: string =
       '.' + file.name.split('.')[file.name.split('.').length - 1].toLowerCase();
     if (this.acceptPictures.includes(fileExt)) {
-      if (file.size < 5000000) {
+      if (file.size < this.WAREHOUSE_MAX_SIZE_FILE) {
         return true;
       } else {
         this.errorAlertType(this.translate.instant('validations.upload.size'));
@@ -241,12 +193,6 @@ export class DashboardUserEditComponent implements OnInit {
     }
   }
 
-  errorAlertType(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_ERROR;
-    this.messageAlert = message;
-  }
-
   handleOnRemoneImage(imageType: string) {
     if (imageType.toLocaleUpperCase() === Utils.WAREHOUSE_AVATAR_IMAGE) {
       this.imgURL = '';
@@ -257,14 +203,6 @@ export class DashboardUserEditComponent implements OnInit {
       this.bcgURL = '';
       this.showbuttonUploadCover = false;
       this.isRemovePictureCover = true;
-    }
-  }
-
-  handleOnChangeInput() {
-    // If the alert incorrect password is opened,
-    // when the user point the password/confirm password, the alert disappear.
-    if (this.isAuth) {
-      this.isAuth = !this.isAuth;
     }
   }
 
@@ -325,13 +263,7 @@ export class DashboardUserEditComponent implements OnInit {
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           console.log('Error Occured during downloading: ', error);
           this.errorAlertType(error?.error.message);
@@ -448,13 +380,7 @@ export class DashboardUserEditComponent implements OnInit {
         (error: HttpErrorResponse) => {
           if (error.status === 403) {
             // Expiration token
-            this.alertType = AlertType.ALERT_WARNING;
-            this.okText = this.translate.instant('message.timeout.cta');
-            this.messageAlert = this.translate.instant('message.timeout.title');
-            this.descriptionAlert = this.translate.instant(
-              'message.timeout.description'
-            );
-            this.isExpiredToken = true;
+            this.expirationToken();
           } else {
             console.log('Error Occured during downloading: ', error);
             this.errorAlertType(error?.error.message);
@@ -472,13 +398,7 @@ export class DashboardUserEditComponent implements OnInit {
         console.log('Error Occured duringng saving: ', error);
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           console.log('Error Occured during downloading: ', error);
           this.errorAlertType(error?.message || error?.error?.message);
@@ -508,13 +428,7 @@ export class DashboardUserEditComponent implements OnInit {
           console.log('Error Occured duringng saving: ', error);
           if (error.status === 403) {
             // Expiration token
-            this.alertType = AlertType.ALERT_WARNING;
-            this.okText = this.translate.instant('message.timeout.cta');
-            this.messageAlert = this.translate.instant('message.timeout.title');
-            this.descriptionAlert = this.translate.instant(
-              'message.timeout.description'
-            );
-            this.isExpiredToken = true;
+            this.expirationToken();
           } else {
             console.log('Error Occured during downloading: ', error);
             this.errorAlertType(error?.message || error?.error?.message);
@@ -564,13 +478,7 @@ export class DashboardUserEditComponent implements OnInit {
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           console.log('Error Occured during downloading: ', error);
           this.errorAlertType(error?.error.message);
@@ -651,16 +559,12 @@ export class DashboardUserEditComponent implements OnInit {
     switch (role) {
       case Utils.ROLE_ADMIN:
         return Utils.ADMINS;
-        break;
       case Utils.ROLE_MODERATOR:
         return Utils.MODERATOR;
-        break;
       case Utils.ROLE_USER:
         return Utils.USER;
-        break;
       default:
         return Utils.USER;
-        break;
     }
   }
 
@@ -668,57 +572,6 @@ export class DashboardUserEditComponent implements OnInit {
     return roles?.map((role: any) => {
       return this.userRoleName(role?.name).toLowerCase();
     });
-  }
-
-  getUserColorRole(role: string) {
-    switch (role) {
-      case Utils.ROLE_USER:
-        return '#0096c8';
-        break;
-      case Utils.ROLE_MODERATOR:
-        return '#ffc107';
-        break;
-      case Utils.ROLE_ADMIN:
-        return '#2a7a39';
-        break;
-      default:
-        return '#0096c8';
-        break;
-    }
-  }
-
-  getRoleIcon(role: string) {
-    switch (role) {
-      case Utils.ROLE_USER:
-        return 'user';
-        break;
-      case Utils.ROLE_MODERATOR:
-        return 'user-switch';
-        break;
-      case Utils.ROLE_ADMIN:
-        return 'team';
-        break;
-      default:
-        return 'user';
-        break;
-    }
-  }
-
-  getRoleName(role: string) {
-    switch (role) {
-      case Utils.ROLE_ADMIN:
-        return Utils.ADMINS;
-        break;
-      case Utils.ROLE_MODERATOR:
-        return Utils.MODERATOR;
-        break;
-      case Utils.ROLE_USER:
-        return Utils.USER;
-        break;
-      default:
-        return Utils.USER;
-        break;
-    }
   }
 
   // Add + at first of the prefix

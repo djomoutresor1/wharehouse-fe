@@ -1,15 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { NzModalService } from 'ng-zorro-antd/modal';
-import { AuthentificationService } from 'src/app/services/auth/authentification.service';
-import { ProfilService } from 'src/app/services/profil.service';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
-import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 
 @Component({
@@ -17,7 +11,7 @@ import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
   templateUrl: './dashboard-header.component.html',
   styleUrls: ['./dashboard-header.component.scss'],
 })
-export class DashboardHeaderComponent implements OnInit {
+export class DashboardHeaderComponent extends WarehouseBaseComponent implements OnInit {
   @Input() isCollapsed: boolean = false;
   @Output() handleOnNotifyNavigation: EventEmitter<string> =
     new EventEmitter<string>();
@@ -26,26 +20,14 @@ export class DashboardHeaderComponent implements OnInit {
 
   checkRole: any;
   userLocalStorage: any;
-  okText: string = '';
-  alertType: string = '';
-  messageAlert: string = '';
-  descriptionAlert: string = '';
-  isExpiredToken: boolean = false;
   imgURL: any;
   dataUser!: ResponseUserModel;
-  isAuth: boolean = false;
 
-  constructor(
-    private nzModalService: NzModalService,
-    private router: Router,
-    private authentificationService: AuthentificationService,
-    private warehouseLocalStorage: WarehouseLocalStorage,
-    private translate: TranslateService,
-    private profilService: ProfilService,
-    private sanitizer: DomSanitizer
-  ) {}
+  constructor(injector: Injector) {
+    super(injector);
+  }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.userLocalStorage =
       this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
     this.getInfosUser();
@@ -67,13 +49,7 @@ export class DashboardHeaderComponent implements OnInit {
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           console.log('Error Occured during downloading: ', error);
           this.errorAlertType(error?.error.message);
@@ -82,13 +58,7 @@ export class DashboardHeaderComponent implements OnInit {
     );
   }
 
-  errorAlertType(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_ERROR;
-    this.messageAlert = message;
-  }
-
-  successAlertType(message: string): void {
+  successAlertTypeComponent(message: string): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
     this.messageAlert = message;
@@ -130,22 +100,14 @@ export class DashboardHeaderComponent implements OnInit {
             (response: any) => {
               console.log('response: ', response);
               this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
-              this.successAlertType(
+              this.successAlertTypeComponent(
                 this.translate.instant('message.bye.title')
               );
             },
             (error: HttpErrorResponse) => {
               if (error.status === 403) {
                 // Expiration token
-                this.alertType = AlertType.ALERT_WARNING;
-                this.okText = this.translate.instant('message.timeout.cta');
-                this.messageAlert = this.translate.instant(
-                  'message.timeout.title'
-                );
-                this.descriptionAlert = this.translate.instant(
-                  'message.timeout.description'
-                );
-                this.isExpiredToken = true;
+                this.expirationToken();
               } else {
                 console.log('error: ', error);
                 this.errorAlertType(error?.error.message);
