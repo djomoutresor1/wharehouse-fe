@@ -1,34 +1,23 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { AuthorizationService } from 'src/app/services/auth/authorization.service';
-import { DashboardService } from 'src/app/services/dashboard.service';
-import { ProfilService } from 'src/app/services/profil.service';
+import { Component, HostListener, Injector, OnInit } from '@angular/core';
+import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
-import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent extends WarehouseBaseComponent implements OnInit {
   warehouseUser: any;
   theme: any = false;
   mode: any = false;
   isCollapsed = false;
-  isAuth: boolean = false;
   isLogout: boolean = false;
   isValidToken: boolean = false;
-  alertType: string = '';
-  messageAlert: string = '';
-  descriptionAlert: string = '';
   checkRole: any;
-  okText: string = '';
-  isExpiredToken: boolean = false;
 
   @HostListener('document:click', ['$event'])
   clickout() {
@@ -48,14 +37,8 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private dashboardService: DashboardService,
-    private warehouseLocalStorage: WarehouseLocalStorage,
-    private authorizationService: AuthorizationService,
-    private translate: TranslateService
-  ) {
+  constructor(injector: Injector) {
+    super(injector);
     console.log(
       "localStorage.getItem('theme'): ",
       localStorage.getItem('theme')
@@ -73,7 +56,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.warehouseUser =
       this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
     if (this.warehouseUser?.token) {
@@ -95,22 +78,12 @@ export class DashboardComponent implements OnInit {
         console.log('error: ', error);
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant("message.timeout.cta");
-          this.messageAlert = this.translate.instant("message.timeout.title");
-          this.descriptionAlert = this.translate.instant("message.timeout.description");
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           this.errorAlertType(error?.error.message);
         }
       }
     );
-  }
-
-  errorAlertType(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_ERROR;
-    this.messageAlert = message;
   }
 
   handleOnNavigate(url: String) {

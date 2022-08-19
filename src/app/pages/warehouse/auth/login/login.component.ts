@@ -1,67 +1,39 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { NzModalService } from 'ng-zorro-antd/modal';
-import { AuthentificationService } from 'src/app/services/auth/authentification.service';
-import { AuthorizationService } from 'src/app/services/auth/authorization.service';
+import { Component, Injector, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { StatusType } from 'src/app/shared/enums/status-type-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
-import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseModel } from 'src/model/auth/response/response-model';
-
-const fakeProfil = {
-  fullName: 'Mario Rossi',
-  username: 'admin',
-  email: 'mario.rossi@hotmail.fr',
-  password: 'Qwerty84.',
-};
-
 @Component({
   selector: 'warehouse-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
-  validateForm!: FormGroup;
+export class LoginComponent extends WarehouseBaseComponent implements OnInit {
   username?: string;
   passwordVisible = false;
   password?: string;
   remember: boolean = false;
-  isAuth: boolean = false;
   isLogged: boolean = false;
   dataUserActive: boolean = true;
   dataUserStatus: boolean = false;
-  alertType: string = '';
-  messageAlert: string = '';
-  descriptionAlert: string = '';
   alertTypeModal: string = '';
   messageAlertModal: string = '';
   descriptionAlertModal: string = '';
-  okText: string = '';
   dataUserEmail: string = '';
-  WAREHOUSE_AFTER_7_DAYS = 7 * 24 * 60 * 60 * 1000;
   expiredRemember: number = 0;
-  isExpiredToken: boolean = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private translate: TranslateService,
-    private nzModalService: NzModalService,
-    private authentificationService: AuthentificationService,
-    private warehouseLocalStorage: WarehouseLocalStorage,
-    private authorizationService: AuthorizationService
-  ) {
+  constructor(injector: Injector) {
+    super(injector);
     this.checkIfUserIsAlreadyLogged();
     this.checkIfUserIsRemember();
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.initForm();
   }
 
@@ -74,13 +46,6 @@ export class LoginComponent implements OnInit {
       password: [this.password, [Validators.required]],
       remember: [this.remember],
     });
-  }
-
-  checkIfUserIsAlreadyLogged() {
-    let user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
-    if (user?.token) {
-      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
-    }
   }
 
   checkIfUserIsRemember() {
@@ -117,13 +82,7 @@ export class LoginComponent implements OnInit {
         (error: HttpErrorResponse) => {
           if (error.status === 403) {
             // Expiration token
-            this.alertType = AlertType.ALERT_WARNING;
-            this.okText = this.translate.instant('message.timeout.cta');
-            this.messageAlert = this.translate.instant('message.timeout.title');
-            this.descriptionAlert = this.translate.instant(
-              'message.timeout.description'
-            );
-            this.isExpiredToken = true;
+            this.expirationToken();
           } else {
             console.log('error: ', error);
             this.errorAlertType(error?.error?.message);
@@ -179,13 +138,7 @@ export class LoginComponent implements OnInit {
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           console.log('error: ', error);
           this.errorAlertType(error?.error || error?.error?.message);
@@ -203,12 +156,6 @@ export class LoginComponent implements OnInit {
     } else {
       return false;
     }
-  }
-
-  errorAlertType(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_ERROR;
-    this.messageAlert = message;
   }
 
   successNotificationType(userInfo: ResponseLoginModel): void {
@@ -239,14 +186,6 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  handleOnRegister() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER}`]);
-  }
-
-  handleOnForgotPassword() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.FORGOT_PASSWORD}`]);
-  }
-
   handleOnRememberMe() {
     if (this.validateForm.controls['remember']?.value) {
       localStorage.setItem(
@@ -259,14 +198,6 @@ export class LoginComponent implements OnInit {
       );
     } else {
       localStorage.removeItem(Utils.WAREHOUSE_REMEMBER_ME);
-    }
-  }
-
-  handleOnChangeInput() {
-    // If the alert incorrect password is opened,
-    // when the user point the password/confirm password, the alert disappear.
-    if (this.isAuth) {
-      this.isAuth = !this.isAuth;
     }
   }
 }

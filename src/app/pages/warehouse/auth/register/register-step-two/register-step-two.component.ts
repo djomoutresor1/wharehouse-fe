@@ -1,14 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { NzButtonSize } from 'ng-zorro-antd/button';
-import { AuthorizationService } from 'src/app/services/auth/authorization.service';
-import { ProfilService } from 'src/app/services/profil.service';
-import { AlertType } from 'src/app/shared/enums/alert-type-enums';
+import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
-import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
@@ -20,43 +15,17 @@ import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
     '../register-step-one/register-step-one.component.scss',
   ],
 })
-export class RegisterStepTwoComponent implements OnInit {
-  currentStep: number = 1;
+export class RegisterStepTwoComponent extends WarehouseBaseComponent implements OnInit {
   size: NzButtonSize = 'large';
-  isAuth: boolean = false;
-  alertType: string = '';
-  messageAlert: string = '';
-  role: string = '';
-  rolesList = [
-    { label: 'Admin', value: 'admin' },
-    { label: 'User', value: 'user' },
-    { label: 'Moderator', value: 'moderator' },
-  ];
-  steps: string[] = [
-    'register.step.information',
-    'register.step.verification',
-    'register.step.registration',
-  ];
-
   idLinkVerifyEmail: any;
   expirationLink: any;
   verifyType: any;
   isExpiredLink: boolean = false;
-  user!: ResponseResetModel;
   isVerifyEmail: boolean = false;
   userActivateStatusType: boolean = false;
-  okText: string = '';
-  isExpiredToken: boolean = false;
-  descriptionAlert: string = '';
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private warehouseLocalStorage: WarehouseLocalStorage,
-    private authorizationService: AuthorizationService,
-    private profilService: ProfilService,
-    private translate: TranslateService
-  ) {
+  constructor(injector: Injector) {
+    super(injector);
     this.idLinkVerifyEmail = this.route.snapshot.queryParamMap.get(
       PathParams.ID_LINK_VERIFICATION_EMAIL
     );
@@ -68,7 +37,8 @@ export class RegisterStepTwoComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
+    this.currentStep = 1;
     this.initComponent();
     this.checkIfIdLinkVerifyEmailAndVerifyTypeAreCorrects();
   }
@@ -115,13 +85,7 @@ export class RegisterStepTwoComponent implements OnInit {
         (error: HttpErrorResponse) => {
           if (error.status === 403) {
             // Expiration token
-            this.alertType = AlertType.ALERT_WARNING;
-            this.okText = this.translate.instant('message.timeout.cta');
-            this.messageAlert = this.translate.instant('message.timeout.title');
-            this.descriptionAlert = this.translate.instant(
-              'message.timeout.description'
-            );
-            this.isExpiredToken = true;
+            this.expirationToken();
           } else {
             this.errorAlertType(error?.error.message);
           }
@@ -138,13 +102,7 @@ export class RegisterStepTwoComponent implements OnInit {
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           console.log('Error: ', error);
           this.isVerifyEmail = true;
@@ -166,25 +124,13 @@ export class RegisterStepTwoComponent implements OnInit {
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           console.log('Error: ', error);
           this.errorAlertType(error?.error?.message);
         }
       }
     );
-  }
-
-  successAlertType(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_SUCCESS;
-    this.messageAlert = message;
   }
 
   checkIfExpirationLinkIsCorrect() {
@@ -206,12 +152,6 @@ export class RegisterStepTwoComponent implements OnInit {
       this.isExpiredLink = true;
       this.errorAlertType(this.translate.instant('validations.link.date'));
     }
-  }
-
-  errorAlertType(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_ERROR;
-    this.messageAlert = message;
   }
 
   verifyTheCorrectDate(
