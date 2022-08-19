@@ -1,22 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CategoriesService } from 'src/app/services/categories.service';
+import { Component, Injector, OnInit } from '@angular/core';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { CategorieModel } from 'src/model/categories/categorie-model';
 import { RowCategoriesModel } from 'src/model/categories/rowCategories-model';
 import { faAppleWhole, faBowlFood, faBroom, faCarBattery, faCat, faChildDress, faGamepad, faGift, faHouse, faPerson,faPlateWheat, faPumpSoap, faShirt, faShoePrints, faWineGlass } from '@fortawesome/free-solid-svg-icons';
 import {faEnvira, faWindows } from '@fortawesome/free-brands-svg-icons';
-import { FontawesomeComponent } from 'src/app/shared/composants/fontawesome/fontawesome.component';
-
-
+import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 
 @Component({
   selector: 'warehouse-dashboard-rack-global',
   templateUrl: './dashboard-rack-global.component.html',
   styleUrls: ['./dashboard-rack-global.component.scss']
 })
-export class DashboardRackGlobalComponent implements OnInit {
+export class DashboardRackGlobalComponent extends WarehouseBaseComponent implements OnInit {
 
   rackName: any;
   resultCategories: any;
@@ -27,17 +23,12 @@ export class DashboardRackGlobalComponent implements OnInit {
   faBroom:any;
   b:any;
 
-
-
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private categoriesService:CategoriesService
-  ) {
+  constructor(injector: Injector) {
+    super(injector);
     this.rackName = this.route.snapshot.paramMap.get(PathParams.RACK_NAME);
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.categoriesService.getDataGlobalTable().subscribe((response) => {
       console.log('globalTableResponse: ', response.categories);
       response.categories.map((categories: CategorieModel) => {
@@ -50,15 +41,12 @@ export class DashboardRackGlobalComponent implements OnInit {
             this.categorieFinale = element.shelf[0].tipologie
           });
         }
-
       })
-
   })}
 
   handleOnNavigate(url: String) {
    this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
   }
-
 
 iconValues (type: string) {
   return  {

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { DashboardService } from 'src/app/services/dashboard.service';
+import { Component, Injector, OnInit } from '@angular/core';
+import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 
 @Component({
@@ -8,14 +7,12 @@ import { Pages } from 'src/app/shared/enums/pages-enums';
   templateUrl: './preferences.component.html',
   styleUrls: ['./preferences.component.scss'],
 })
-export class PreferencesComponent implements OnInit {
+export class PreferencesComponent extends WarehouseBaseComponent implements OnInit {
   mode: any;
   theme: any;
 
-  constructor(
-    private router: Router,
-    private dashboardService: DashboardService
-  ) {
+  constructor(injector: Injector) {
+    super(injector);
     if (localStorage.getItem('theme') !== undefined) {
       this.theme = localStorage.getItem('theme');
     }
@@ -24,7 +21,7 @@ export class PreferencesComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  override ngOnInit(): void {}
 
   handleOnNavigate(url: String) {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);

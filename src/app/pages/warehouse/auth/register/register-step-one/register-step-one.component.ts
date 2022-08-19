@@ -1,69 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthentificationService } from 'src/app/services/auth/authentification.service';
-import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
-import { AlertType } from 'src/app/shared/enums/alert-type-enums';
+import { Component, Injector, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { ResponseRegisterModel } from 'src/model/auth/response/response-register-model';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Utils } from 'src/app/shared/enums/utils-enums';
-import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
-import { TranslateService } from '@ngx-translate/core';
+import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 
 @Component({
   selector: 'warehouse-register-step-one',
   templateUrl: './register-step-one.component.html',
   styleUrls: ['./register-step-one.component.scss'],
 })
-export class RegisterStepOneComponent implements OnInit {
-  validateForm!: FormGroup;
+export class RegisterStepOneComponent extends WarehouseBaseComponent implements OnInit {
   passwordVisible = false;
   password: string = '';
   confirmPasswordVisible = false;
   confirmPassword?: string;
-  isAuth: boolean = false;
-  alertType: string = '';
-  messageAlert: string = '';
-  okText: string = '';
-  descriptionAlert: string = '';
-  isExpiredToken: boolean = false;
-  role: string = '';
-  rolesList = [
-    { label: 'Admin', value: 'admin' },
-    { label: 'User', value: 'user' },
-    { label: 'Moderator', value: 'moderator' },
-  ];
-  selectedValue = { label: 'User', value: 'user' };
-  steps: string[] = [
-    'register.step.information',
-    'register.step.verification',
-    'register.step.registration',
-  ];
-  currentStep: number = 0;
-  selectedFile: any;
-  event1: any;
-  radioValue: any;
   isSecurePassword: boolean = false;
-  info: any;
   isMailSent: boolean = false;
   email: string = '';
   idLinkResetPassword: any;
   expirationLink: any;
   verifyType: any;
   isExpiredLink: boolean = false;
-  user!: ResponseResetModel;
   isResetPassword: boolean = false;
 
-  constructor(
-    public fb: FormBuilder,
-    private router: Router,
-    private authentificationService: AuthentificationService,
-    private warehouseLocalStorage: WarehouseLocalStorage,
-    private translate: TranslateService
-  ) {}
+  constructor(injector: Injector) {
+    super(injector);
+  }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.initForm();
   }
 
@@ -83,13 +49,6 @@ export class RegisterStepOneComponent implements OnInit {
       role: [null, [Validators.required]],
       gender: [null, [Validators.required]],
     });
-  }
-
-  checkIfUserIsAlreadyLogged() {
-    let user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
-    if (user?.token) {
-      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
-    }
   }
 
   submitForm() {
@@ -123,15 +82,7 @@ export class RegisterStepOneComponent implements OnInit {
           (error: HttpErrorResponse) => {
             if (error.status === 403) {
               // Expiration token
-              this.alertType = AlertType.ALERT_WARNING;
-              this.okText = this.translate.instant('message.timeout.cta');
-              this.messageAlert = this.translate.instant(
-                'message.timeout.title'
-              );
-              this.descriptionAlert = this.translate.instant(
-                'message.timeout.description'
-              );
-              this.isExpiredToken = true;
+              this.expirationToken();
             } else {
               this.isResetPassword = true;
               this.errorAlertType(error?.error || error?.error?.message);
@@ -155,33 +106,6 @@ export class RegisterStepOneComponent implements OnInit {
       return message;
     } else {
       return message;
-    }
-  }
-
-  errorAlertType(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_ERROR;
-    this.messageAlert = message;
-  }
-
-  successAlertType(message: string): void {
-    this.alertType = AlertType.ALERT_SUCCESS;
-    //  this.messageAlert = message;
-    setTimeout(() => {
-      this.isAuth = false;
-    }, 1000);
-  }
-
-  handleOnLogin() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
-    // this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTERSTEP3}`]);
-  }
-
-  handleOnChangeInput() {
-    // If the alert incorrect password is opened,
-    // when the user point the password/confirm password, the alert disappear.
-    if (this.isAuth) {
-      this.isAuth = !this.isAuth;
     }
   }
 
