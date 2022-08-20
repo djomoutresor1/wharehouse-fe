@@ -32,8 +32,8 @@ export class ProfileComponent extends WarehouseBaseComponent implements OnInit {
 
   override ngOnInit(): void {
     this.initComponent();
-    this.userLocalStorage = this.user
-      ? this.user
+    this.userLocalStorage = this.userProfile
+      ? this.userProfile
       : this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
     this.getCountriesAndPrefixPhoneWorld();
     this.getInfosUser();
