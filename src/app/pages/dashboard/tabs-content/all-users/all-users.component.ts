@@ -360,7 +360,7 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
   }
 
   onExportExcellFile(){
-    this.viewService.getExportUsers().subscribe(
+    this.viewProfilService.getExportUsers().subscribe(
       (response: any) => {
           console.log(response)
       },
@@ -382,3 +382,4 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
 
   }
 }
+

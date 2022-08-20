@@ -8,7 +8,6 @@ import * as _ from 'lodash';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 import { ResponseFileModel } from 'src/model/auth/response/response-file-model';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
-import { ViewService } from 'src/app/services/view-file.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 @Component({
   selector: 'warehouse-profile',
@@ -193,7 +192,7 @@ export class ProfileComponent extends WarehouseBaseComponent implements OnInit {
   }
 
   onViewProfilePdf(){
-    this.viewService.getPdfViewer().subscribe(
+    this.viewProfilService.getPdfViewer().subscribe(
       (response: any) => {
           console.log(response)
       },
