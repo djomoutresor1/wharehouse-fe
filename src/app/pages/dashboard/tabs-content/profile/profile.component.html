@@ -32,6 +32,9 @@
         <nz-badge class="profile-status-large" nz-tooltip nzTooltipTitle="{{formatUserStatus(dataUser.userInfo.status)}}" nzTooltipPlacement="bottomLeft"
         nzStatus="{{ getUserStatus(dataUser.userInfo.status) }}"></nz-badge>
       </span>
+      <div class="col-md-12 ml-65">
+        <button nz-button (click)="onViewProfilePdf()" [nzType]="'primary'">view your etire profile on pdf</button>
+      </div>
     </div>
     <div class="col-md-9">
       <div class="row mt-3 profile-user">

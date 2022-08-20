@@ -6,6 +6,9 @@
   <nz-breadcrumb-item>
     <a>All users</a>
   </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+   <a><button nz-button (click)="onExportExcellFile()" [nzType]="'primary'">export excell Data</button></a> 
+  </nz-breadcrumb-item>
 </nz-breadcrumb>
 <div class="warehouse-users-wrapper container-fluid">
   <div class="row" *ngIf="isAuth">

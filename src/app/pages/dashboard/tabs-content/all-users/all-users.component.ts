@@ -351,4 +351,28 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
     this.searchForm.controls['search'].reset();
     this.handleOnSearchUsers();
   }
+
+  onExportExcellFile(){
+    this.viewProfilService.getExportUsers().subscribe(
+      (response: any) => {
+          console.log(response)
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
+          console.log('enable to export excel file, ERROR: ' + error?.message);
+          this.errorAlertType(error?.message);
+        }
+      })
+
+  }
 }
+

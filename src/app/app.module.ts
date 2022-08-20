@@ -24,6 +24,7 @@ import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import { FlagService } from './services/flag.service';
 import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
 import { WarehouseBaseComponent } from './base/warehouse-base/warehouse-base.component';
+import { ViewProfilService } from './services/view-profil.service';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -59,6 +60,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DashboardService,
     ProfilService,
     FlagService,
+    ViewProfilService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CommonInterceptor,
