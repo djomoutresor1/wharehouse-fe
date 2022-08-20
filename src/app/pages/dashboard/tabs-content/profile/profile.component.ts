@@ -28,7 +28,8 @@ export class ProfileComponent extends WarehouseBaseComponent implements OnInit {
   dataUser: any;
 
   constructor(
-    injector: Injector
+    injector: Injector,
+    private viewService:ViewService
   ) { super(injector); }
 
   override ngOnInit(): void {
