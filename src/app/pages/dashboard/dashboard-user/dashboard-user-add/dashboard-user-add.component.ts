@@ -1,35 +1,25 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { FlagService } from 'src/app/services/flag.service';
+import { Component, Injector, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { LangChangeEvent } from '@ngx-translate/core';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
-import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 import * as _ from 'lodash';
-import { DashboardService } from 'src/app/services/dashboard.service';
 import { ResponseUserInsertModel } from 'src/model/dashboard/response/response-user-insert-model';
 import { UserInsertModel } from 'src/model/dashboard/request/user-insert-model';
 import { UserContactModel } from 'src/model/dashboard/request/user-contact-model';
 import { UserAddressModel } from 'src/model/dashboard/request/user-address-model';
-import { ImageService } from 'src/app/services/image.service';
 import * as moment from 'moment';
 import { Subject, takeUntil } from 'rxjs';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 @Component({
   selector: 'warehouse-dashboard-user-add',
   templateUrl: './dashboard-user-add.component.html',
   styleUrls: ['./dashboard-user-add.component.scss'],
 })
-export class DashboardUserAddComponent implements OnInit {
-  user: any;
-  validateForm!: FormGroup;
+export class DashboardUserAddComponent extends WarehouseBaseComponent implements OnInit {
   breadcrumbItems!: BreadcrumbItemsModel;
-  isAuth: boolean = false;
-  alertType: string = '';
-  messageAlert: string = '';
   countryAndFlagData: any[] = [];
   countryStatesData: any[] = [];
   prefixPhoneData: any[] = [];
@@ -40,43 +30,14 @@ export class DashboardUserAddComponent implements OnInit {
   countryDialCode: string = '';
   imgURL: any;
   selectedFile: any;
-  dateFormat = 'dd/MM/YYYY';
-  okText: string = '';
-  descriptionAlert: string = '';
-  isExpiredToken: boolean = false;
   landlineNumberValidate: string = '';
   isFormFieldsValidate: boolean = true;
 
-  rolesList = [
-    { label: 'Admin', value: 'admin' },
-    { label: 'User', value: 'user' },
-    { label: 'Moderator', value: 'moderator' },
-  ];
-  acceptPictures: string[] = [
-    '.jpg',
-    '.jpeg',
-    '.png',
-    '.gif',
-    '.tif',
-    '.tiff',
-    '.bmp',
-    '.webp',
-  ];
-
   onDestroy$ = new Subject<any>();
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private translate: TranslateService,
-    private warehouseLocalStorage: WarehouseLocalStorage,
-    private dashboardService: DashboardService,
-    private flagService: FlagService,
-    private imageService: ImageService,
-    private nzModalService: NzModalService
-  ) {}
+  constructor(injector: Injector) { super(injector); }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.initForm();
     this.initComponent();
     this.getCountriesAndPrefixPhoneWorld();
@@ -158,13 +119,7 @@ export class DashboardUserAddComponent implements OnInit {
         console.log('Unenable to retrieve data country and flag ' + error);
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           this.errorAlertType(error?.error.message);
         }
@@ -191,7 +146,7 @@ export class DashboardUserAddComponent implements OnInit {
     const fileExt: string =
       '.' + file.name.split('.')[file.name.split('.').length - 1].toLowerCase();
     if (this.acceptPictures.includes(fileExt)) {
-      if (file.size < 5000000) {
+      if (file.size < this.WAREHOUSE_MAX_SIZE_FILE) {
         return true;
       } else {
         this.errorAlertType(this.translate.instant('validations.upload.size'));
@@ -205,7 +160,7 @@ export class DashboardUserAddComponent implements OnInit {
     }
   }
 
-  successAlertType(message: string): void {
+  successAlertTypeComponent(message: string): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
     this.messageAlert = message;
@@ -217,23 +172,9 @@ export class DashboardUserAddComponent implements OnInit {
     }, 500);
   }
 
-  errorAlertType(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_ERROR;
-    this.messageAlert = message;
-  }
-
   handleOnRemoneImage() {
     this.imgURL = '';
     this.showbuttonUpload = false;
-  }
-
-  handleOnChangeInput() {
-    // If the alert incorrect password is opened,
-    // when the user point the password/confirm password, the alert disappear.
-    if (this.isAuth) {
-      this.isAuth = !this.isAuth;
-    }
   }
 
   handleOnChangeDate(date: any) {
@@ -292,13 +233,7 @@ export class DashboardUserAddComponent implements OnInit {
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           this.errorAlertType(error?.error.message);
         }
@@ -370,18 +305,12 @@ export class DashboardUserAddComponent implements OnInit {
       (response: ResponseUserInsertModel) => {
         console.log('response: ', response);
         //this.handleOnUploadImageProfile(response?.object?.userId as string);
-        this.successAlertType(response?.message);
+        this.successAlertTypeComponent(response?.message);
       },
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           this.errorAlertType(error?.error.message);
         }
@@ -415,7 +344,7 @@ export class DashboardUserAddComponent implements OnInit {
 
   //   this.imageService.uploadImageProfile(uploadData, userId).subscribe(
   //     (response: any) => {
-  //       this.successAlertType(response?.message);
+  //       this.successAlertTypeComponent(response?.message);
   //     },
   //     (error: HttpErrorResponse) => {
   //       console.log('Error Occured duringng uploading file: ', error);

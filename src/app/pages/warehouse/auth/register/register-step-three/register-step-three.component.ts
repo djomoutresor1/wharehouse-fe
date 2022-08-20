@@ -1,16 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, Injector, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { AuthentificationService } from 'src/app/services/auth/authentification.service';
-import { FlagService } from 'src/app/services/flag.service';
-import { ImageService } from 'src/app/services/image.service';
+import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
-import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 @Component({
   selector: 'warehouse-register-step-three',
   templateUrl: './register-step-three.component.html',
@@ -19,36 +14,10 @@ import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
     '../register-step-one/register-step-one.component.scss',
   ],
 })
-export class RegisterStepThreeComponent implements OnInit {
-  validateForm!: FormGroup;
-  isAuth: boolean = false;
+export class RegisterStepThreeComponent extends WarehouseBaseComponent implements OnInit {
   isNoAuth: boolean = false;
-  alertType: string = '';
-  okText: string = '';
-  messageAlert: string = '';
-  descriptionAlert: string = '';
-  isExpiredToken: boolean = false;
   messageNotification: string = '';
   countryAndFlagData: any;
-  dateFormat = 'dd/MM/YYYY';
-  acceptPictures: string[] = [
-    '.jpg',
-    '.jpeg',
-    '.png',
-    '.gif',
-    '.tif',
-    '.tiff',
-    '.bmp',
-    '.webp',
-  ];
-
-  selectedValue = { label: 'User', value: 'user' };
-  steps: string[] = [
-    'register.step.information',
-    'register.step.verification',
-    'register.step.registration',
-  ];
-  currentStep: number = 2;
   selectedFile: any;
   imgURL: any;
   showbuttonUpload: boolean = false;
@@ -57,18 +26,14 @@ export class RegisterStepThreeComponent implements OnInit {
   userId: string = '';
 
   constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private authentificationService: AuthentificationService,
-    private warehouseLocalStorage: WarehouseLocalStorage,
-    private flagService: FlagService,
-    private imageService: ImageService,
-    private translate: TranslateService
+    injector: Injector
   ) {
+    super(injector);
     this.checkIfUserIsAlreadyLogged();
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
+    this.currentStep = 2;
     this.initForm();
     this.getWorldCountries();
   }
@@ -81,13 +46,7 @@ export class RegisterStepThreeComponent implements OnInit {
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           console.log('enable to retrieve data country and flag ' + error);
           this.errorAlertType(error?.error || error?.error?.message);
@@ -119,13 +78,6 @@ export class RegisterStepThreeComponent implements OnInit {
       ],
       country: ['', [Validators.required]],
     });
-  }
-
-  checkIfUserIsAlreadyLogged() {
-    let user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
-    if (user?.token || user?.user) {
-      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
-    }
   }
 
   getCountryDialCode(): string {
@@ -167,13 +119,7 @@ export class RegisterStepThreeComponent implements OnInit {
         (error: HttpErrorResponse) => {
           if (error.status === 403) {
             // Expiration token
-            this.alertType = AlertType.ALERT_WARNING;
-            this.okText = this.translate.instant('message.timeout.cta');
-            this.messageAlert = this.translate.instant('message.timeout.title');
-            this.descriptionAlert = this.translate.instant(
-              'message.timeout.description'
-            );
-            this.isExpiredToken = true;
+            this.expirationToken();
           } else {
             console.log('enable to retrieve data country and flag ' + error);
             this.errorAlertType(error?.error || error?.error?.message);
@@ -182,34 +128,10 @@ export class RegisterStepThreeComponent implements OnInit {
       );
   }
 
-  errorAlertType(message: string): void {
-    this.isNoAuth = true;
-    this.alertType = AlertType.ALERT_ERROR;
-    this.messageAlert = message;
-  }
-
-  successAlertType(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_SUCCESS;
-    this.messageAlert = message;
-  }
-
   successNotificationType(message: string): void {
     this.isAuth = true;
     this.alertType = AlertType.ALERT_SUCCESS;
     this.messageNotification = message;
-  }
-
-  handleOnLogin() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
-  }
-
-  handleOnChangeInput() {
-    // If the alert incorrect password is opened,
-    // when the user point the password/confirm password, the alert disappear.
-    if (this.isNoAuth) {
-      this.isNoAuth = !this.isNoAuth;
-    }
   }
 
   handleOnUploadImageProfile(userId: string) {
@@ -225,13 +147,7 @@ export class RegisterStepThreeComponent implements OnInit {
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           console.log('Error Occured duringng saving: ', error);
           this.errorAlertType(error?.error || error?.error?.message);
@@ -259,7 +175,7 @@ export class RegisterStepThreeComponent implements OnInit {
     const fileExt: string =
       '.' + file.name.split('.')[file.name.split('.').length - 1].toLowerCase();
     if (this.acceptPictures.includes(fileExt)) {
-      if (file.size < 5000000) {
+      if (file.size < this.WAREHOUSE_MAX_SIZE_FILE) {
         return true;
       } else {
         this.errorAlertType(this.translate.instant('validations.upload.size'));

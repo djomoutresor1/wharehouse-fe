@@ -1,5 +1,4 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,12 +6,12 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { ProfilService } from 'src/app/services/profil.service';
 import { ViewService } from 'src/app/services/view-file.service';
+import { Component, Injector, OnInit } from '@angular/core';
+import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { StatusType } from 'src/app/shared/enums/status-type-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
-import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
-import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseUserDataModel } from 'src/model/auth/response/response-user-data-model';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
@@ -25,7 +24,7 @@ interface ItemData {
   templateUrl: './all-users.component.html',
   styleUrls: ['./all-users.component.scss'],
 })
-export class AllUsersComponent implements OnInit {
+export class AllUsersComponent extends WarehouseBaseComponent implements OnInit {
   searchForm!: FormGroup;
   listOfTypeEmailVerification = [
     {
@@ -98,13 +97,6 @@ export class AllUsersComponent implements OnInit {
   setOfCheckedId = new Set<number>();
   allUsers: any;
   tmpUsers: ResponseUserDataModel[] = [];
-  user!: ResponseLoginModel;
-  messageAlert: string = '';
-  alertType: string = '';
-  isAuth: boolean = false;
-  okText: string = '';
-  descriptionAlert: string = '';
-  isExpiredToken: boolean = false;
   titleDrawer: string = '';
   sizeDrawer: number = 1000;
   visibleDrawerShow: boolean = false;
@@ -117,18 +109,10 @@ export class AllUsersComponent implements OnInit {
   selectedRole: string = 'all';
   selectedTypeEmail: string = 'all';
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private profilService: ProfilService,
-    private warehouseLocalStorage: WarehouseLocalStorage,
-    private nzModalService: NzModalService,
-    private translate: TranslateService,
-    private dashboardService: DashboardService,
-    private viewService: ViewService,
-  ) {}
+  constructor(injector: Injector,
+    private viewService:ViewService) { super(injector); }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.initSearch();
     this.user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
     this.getAllWarehousUsers();
@@ -155,13 +139,7 @@ export class AllUsersComponent implements OnInit {
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           console.log('Error Occured during downloading: ', error);
           this.errorAlertType(error?.error.message);
@@ -207,58 +185,6 @@ export class AllUsersComponent implements OnInit {
 
   handleOnNavigate(url: String) {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
-  }
-
-  getUserRoleName(role: any) {
-    switch (role?.name) {
-      case Utils.ROLE_ADMIN:
-        return Utils.ADMINS;
-      case Utils.ROLE_MODERATOR:
-        return Utils.MODERATOR;
-      case Utils.ROLE_USER:
-        return Utils.USER;
-      default:
-        return Utils.USER;
-    }
-  }
-
-  getUserColorRole(role: any) {
-    switch (role?.name || role) {
-      case Utils.ROLE_USER:
-        return '#0096c8';
-      case Utils.ROLE_MODERATOR:
-        return '#ffc107';
-      case Utils.ROLE_ADMIN:
-        return '#2a7a39';
-      default:
-        return '#0096c8';
-    }
-  }
-
-  getUserRoleIcon(role: any) {
-    switch (role?.name || role) {
-      case Utils.ROLE_USER:
-        return 'user';
-      case Utils.ROLE_MODERATOR:
-        return 'user-switch';
-      case Utils.ROLE_ADMIN:
-        return 'team';
-      default:
-        return 'user';
-    }
-  }
-
-  getUserStatus(status: string): string {
-    switch (status) {
-      case StatusType.STATUS_ACTIVE:
-        return AlertType.ALERT_SUCCESS;
-      case StatusType.STATUS_DISABLED:
-        return AlertType.ALERT_ERROR;
-      case StatusType.STATUS_PENDING:
-        return AlertType.ALERT_WARNING;
-      default:
-        return AlertType.ALERT_WARNING;
-    }
   }
 
   getUserStatusSelected(value: string) {
@@ -319,15 +245,7 @@ export class AllUsersComponent implements OnInit {
           (error: HttpErrorResponse) => {
             if (error.status === 403) {
               // Expiration token
-              this.alertType = AlertType.ALERT_WARNING;
-              this.okText = this.translate.instant('message.timeout.cta');
-              this.messageAlert = this.translate.instant(
-                'message.timeout.title'
-              );
-              this.descriptionAlert = this.translate.instant(
-                'message.timeout.description'
-              );
-              this.isExpiredToken = true;
+              this.expirationToken();
             } else {
               console.log('Error Occured during downloading: ', error);
               this.errorAlertType(error?.error.message || error?.message);
@@ -336,18 +254,6 @@ export class AllUsersComponent implements OnInit {
         );
       },
     });
-  }
-
-  errorAlertType(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_ERROR;
-    this.messageAlert = message;
-  }
-
-  successAlertType(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_SUCCESS;
-    this.messageAlert = message;
   }
 
   handleOnCloseDrawer() {
@@ -372,13 +278,7 @@ export class AllUsersComponent implements OnInit {
         (error: HttpErrorResponse) => {
           if (error.status === 403) {
             // Expiration token
-            this.alertType = AlertType.ALERT_WARNING;
-            this.okText = this.translate.instant('message.timeout.cta');
-            this.messageAlert = this.translate.instant('message.timeout.title');
-            this.descriptionAlert = this.translate.instant(
-              'message.timeout.description'
-            );
-            this.isExpiredToken = true;
+            this.expirationToken();
           } else {
             console.log('Error Occured during downloading: ', error);
             this.errorAlertType(error?.error.message || error?.message);

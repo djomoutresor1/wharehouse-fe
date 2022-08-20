@@ -1,61 +1,42 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { ProfilService } from 'src/app/services/profil.service';
-import { AlertType } from 'src/app/shared/enums/alert-type-enums';
+import { Component, Injector, Input, OnInit } from '@angular/core';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
-import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 import * as moment from 'moment';
 import * as _ from 'lodash';
-import { FlagService } from 'src/app/services/flag.service';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 import { ResponseFileModel } from 'src/model/auth/response/response-file-model';
-import { StatusType } from 'src/app/shared/enums/status-type-enums';
+import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { ViewService } from 'src/app/services/view-file.service';
+import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 @Component({
   selector: 'warehouse-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent extends WarehouseBaseComponent implements OnInit {
   @Input() mode: string = '';
-  @Input() user!: ResponseUserModel;
+  @Input() userProfile!: ResponseUserModel;
 
   userLocalStorage: any;
   breadcrumbItems!: BreadcrumbItemsModel;
-  isAuth: boolean = false;
-  alertType: string = '';
-  messageAlert: string = '';
   coverURL: any;
   avatarURL: any;
-  okText: string = '';
-  descriptionAlert: string = '';
-  isExpiredToken: boolean = false;
   countryAndFlagData: any[] = [];
   prefixPhoneData: any[] = [];
-  dateFormat = 'DD/MM/YYYY HH:mm:ss';
   enableEdit: boolean = true;
   dataUser: any;
 
   constructor(
-    private router: Router,
-    private translate: TranslateService,
-    private warehouseLocalStorage: WarehouseLocalStorage,
-    private profilService: ProfilService,
-    private sanitizer: DomSanitizer,
-    private flagService: FlagService,
-    private viewService: ViewService,
-    
-  ) {}
+    injector: Injector,
+    private viewService:ViewService
+  ) { super(injector); }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.initComponent();
-    this.userLocalStorage = this.user
-      ? this.user
+    this.userLocalStorage = this.userProfile
+      ? this.userProfile
       : this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
     this.getCountriesAndPrefixPhoneWorld();
     this.getInfosUser();
@@ -88,13 +69,7 @@ export class ProfileComponent implements OnInit {
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           console.log('Error Occured during downloading: ', error);
           this.errorAlertType(error?.error.message);
@@ -141,13 +116,7 @@ export class ProfileComponent implements OnInit {
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
           // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
+          this.expirationToken();
         } else {
           console.log('enable to retrieve data country and flag ' + error);
           this.errorAlertType(error?.error.message);
@@ -165,60 +134,8 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  getUserStatus(status: string): string {
-    switch (status) {
-      case StatusType.STATUS_ACTIVE:
-        return AlertType.ALERT_SUCCESS;
-      case StatusType.STATUS_DISABLED:
-        return AlertType.ALERT_ERROR;
-      case StatusType.STATUS_PENDING:
-        return AlertType.ALERT_WARNING;
-      default:
-        return AlertType.ALERT_WARNING;
-    }
-  }
-
   formatUserStatus(status: string): string {
     return status.charAt(0).toUpperCase() + status.slice(1)
-  }
-  
-  getUserRoleName(role: any) {
-    switch (role?.name) {
-      case Utils.ROLE_ADMIN:
-        return Utils.ADMINS;
-      case Utils.ROLE_MODERATOR:
-        return Utils.MODERATOR;
-      case Utils.ROLE_USER:
-        return Utils.USER;
-      default:
-        return Utils.USER;
-    }
-  }
-
-  getUserColorRole(role: any) {
-    switch (role?.name) {
-      case Utils.ROLE_USER:
-        return '#0096c8';
-      case Utils.ROLE_MODERATOR:
-        return '#ffc107';
-      case Utils.ROLE_ADMIN:
-        return '#2a7a39';
-      default:
-        return '#0096c8';
-    }
-  }
-
-  getUserRoleIcon(role: string) {
-    switch (role) {
-      case Utils.ROLE_USER:
-        return 'user';
-      case Utils.ROLE_MODERATOR:
-        return 'user-switch';
-      case Utils.ROLE_ADMIN:
-        return 'team';
-      default:
-        return 'user';
-    }
   }
 
   handleOnNavigate(url: String) {
@@ -246,12 +163,6 @@ export class ProfileComponent implements OnInit {
     this.router.navigate([
       `${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.CHANGE_PASSWORD}`,
     ]);
-  }
-
-  errorAlertType(message: string): void {
-    this.isAuth = true;
-    this.alertType = AlertType.ALERT_ERROR;
-    this.messageAlert = message;
   }
 
   getFormatDateOfBirth(dateOfBirth: string): string {

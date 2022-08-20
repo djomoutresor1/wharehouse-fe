@@ -1,24 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
+import { Component, Injector, OnInit } from '@angular/core';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { LaneModel } from 'src/model/corsia/lane-model';
 import { RowModel } from 'src/model/corsia/row-model';
-import { TableService } from 'src/app/services/table.service';
 import { PositionModel } from 'src/model/corsia/position-model';
 import { RackModel } from 'src/model/rack/rack-model';
-import { CategoriesService } from 'src/app/services/categories.service';
 import { CategorieModel } from 'src/model/categories/categorie-model';
 import { RowCategoriesModel } from 'src/model/categories/rowCategories-model';
-
+import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 
 @Component({
   selector: 'warehouse-dashboard-rack-detail',
   templateUrl: './dashboard-rack-detail.component.html',
   styleUrls: ['./dashboard-rack-detail.component.scss'],
 })
-export class DashboardRackDetailComponent implements OnInit {
+export class DashboardRackDetailComponent extends WarehouseBaseComponent implements OnInit {
   rackName: any;
   rackNumber: any;
   racks: RackModel[] = [];
@@ -37,17 +33,13 @@ export class DashboardRackDetailComponent implements OnInit {
   messageType: any;
   description:any;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private tableService: TableService,
-    private categoriesService:CategoriesService
-  ) {
+  constructor(injector: Injector) {
+    super(injector);
     this.rackName = this.route.snapshot.paramMap.get(PathParams.RACK_NAME);
     this.rackNumber = this.route.snapshot.paramMap.get(PathParams.RACK_NUMBER);
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.categoriesService.getDataGlobalTable().subscribe((response) => {
       console.log('categoriesclothers: ', response.categories);
       response.categories.map((categories: CategorieModel) => {
