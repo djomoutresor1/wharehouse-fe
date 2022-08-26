@@ -1,6 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { DashboardService } from 'src/app/services/dashboard.service';
+import { ProfilService } from 'src/app/services/profil.service';
+import { ViewService } from 'src/app/services/view-file.service';
 import { Component, Injector, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
@@ -103,7 +109,8 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
   selectedRole: string = 'all';
   selectedTypeEmail: string = 'all';
 
-  constructor(injector: Injector) { super(injector); }
+  constructor(injector: Injector,
+    private viewService:ViewService) { super(injector); }
 
   override ngOnInit(): void {
     this.initSearch();
@@ -351,4 +358,28 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
     this.searchForm.controls['search'].reset();
     this.handleOnSearchUsers();
   }
+
+  onExportExcellFile(){
+    this.viewProfilService.getExportUsers().subscribe(
+      (response: any) => {
+          console.log(response)
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
+          console.log('enable to export excel file, ERROR: ' + error?.message);
+          this.errorAlertType(error?.message);
+        }
+      })
+
+  }
 }
+

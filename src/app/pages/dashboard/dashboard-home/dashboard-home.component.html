@@ -7,11 +7,23 @@
 </nz-breadcrumb> -->
 <warehouse-breadcrumb [items]="breadcrumbItems"></warehouse-breadcrumb>
 <div class="container-fluid dashboard-home-wrapper">
+    <div class="row mb-2">
+        <div class="col">
+            <nz-alert nzType="warning" [nzMessage]="alertWarningTemplate" nzShowIcon nzCloseable="true"></nz-alert>
+        </div>
+        <ng-template #alertWarningTemplate>
+            <div class="alert-warning-container">
+                <span><b>{{ "message.alert.emailPec.title" | translate }}</b></span>
+                <span>{{ "message.alert.emailPec.description" | translate }}</span>
+                <span class="recovery-email" (click)="handleOnRecoveryEmail()">{{ "message.alert.emailPec.cta" | translate }}</span>
+            </div>
+        </ng-template>
+    </div>
     <div class="row">
         <div class="col">
             <nz-alert nzType="info" nzMessage="Informational Notes"
                 nzDescription="Pour améliorer nos services, nous effectuons une opération de maintenance du 6 au 8 juillet entre 22h00 et 03h00. Durant ces créneaux certains services en ligne peuvent-être perturbés. Nous vous prions de bien vouloir nous excuser pour la gêne occasionnée."
-                nzShowIcon></nz-alert>
+                nzShowIcon nzCloseable="true"></nz-alert>
         </div>
     </div>
     <p *ngIf="!lanes.length">

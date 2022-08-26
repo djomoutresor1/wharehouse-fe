@@ -8,6 +8,8 @@ import * as _ from 'lodash';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 import { ResponseFileModel } from 'src/model/auth/response/response-file-model';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+import { AlertType } from 'src/app/shared/enums/alert-type-enums';
+import { ViewService } from 'src/app/services/view-file.service';
 @Component({
   selector: 'warehouse-profile',
   templateUrl: './profile.component.html',
@@ -26,9 +28,9 @@ export class ProfileComponent extends WarehouseBaseComponent implements OnInit {
   enableEdit: boolean = true;
   dataUser: any;
 
-  constructor(
-    injector: Injector
-  ) { super(injector); }
+  constructor(injector: Injector, private viewService: ViewService) {
+    super(injector);
+  }
 
   override ngOnInit(): void {
     this.initComponent();
@@ -132,7 +134,7 @@ export class ProfileComponent extends WarehouseBaseComponent implements OnInit {
   }
 
   formatUserStatus(status: string): string {
-    return status.charAt(0).toUpperCase() + status.slice(1)
+    return status.charAt(0).toUpperCase() + status.slice(1);
   }
 
   handleOnNavigate(url: String) {
@@ -157,9 +159,10 @@ export class ProfileComponent extends WarehouseBaseComponent implements OnInit {
   }
 
   handleOnChangePassword() {
-    this.router.navigate([
-      `${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.CHANGE_PASSWORD}`,
-    ]);
+    this.router.navigate(
+      [`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.MANAGE_PASSWORD}`],
+      { queryParams: { tabNumber: 0 } }
+    );
   }
 
   getFormatDateOfBirth(dateOfBirth: string): string {
@@ -187,5 +190,28 @@ export class ProfileComponent extends WarehouseBaseComponent implements OnInit {
     this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
     window.location.reload();
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+  }
+
+  onViewProfilePdf() {
+    this.viewProfilService.getPdfViewer().subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          // Expiration token
+          this.alertType = AlertType.ALERT_WARNING;
+          this.okText = this.translate.instant('message.timeout.cta');
+          this.messageAlert = this.translate.instant('message.timeout.title');
+          this.descriptionAlert = this.translate.instant(
+            'message.timeout.description'
+          );
+          this.isExpiredToken = true;
+        } else {
+          console.log('enable to retrieve data country and flag ' + error);
+          this.errorAlertType(error?.error.message);
+        }
+      }
+    );
   }
 }

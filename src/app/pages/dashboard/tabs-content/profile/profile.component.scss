@@ -9,13 +9,13 @@
     border: 2px solid var(--warehouse-sliver);
   }
   .profile-avatar-container {
-    display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
     .profile-avatar {
       width: 150px;
       height: 150px;
-      float: right;
+      float: inherit;
       top: -70px;
       display: inline-flex;
       justify-content: center;
@@ -34,6 +34,10 @@
           height: 15px !important;
         }
       }
+    }
+    .profile-view-pdf {
+      top: -55px;
+      position: relative;
     }
   }
   .profile-user {
@@ -74,6 +78,9 @@
   }
   .profile-change-password {
     right: 20px;
+  }
+  .ml-65{
+    margin-left: 65px;
   }
 }
 

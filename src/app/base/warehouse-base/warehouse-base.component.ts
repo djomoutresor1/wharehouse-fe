@@ -12,6 +12,7 @@ import { FlagService } from 'src/app/services/flag.service';
 import { ImageService } from 'src/app/services/image.service';
 import { ProfilService } from 'src/app/services/profil.service';
 import { TableService } from 'src/app/services/table.service';
+import { ViewProfilService } from 'src/app/services/view-profil.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { StatusType } from 'src/app/shared/enums/status-type-enums';
@@ -40,6 +41,7 @@ export class WarehouseBaseComponent implements OnInit {
   nzModalService: NzModalService;
   categoriesService: CategoriesService;
   tableService: TableService;
+  viewProfilService:ViewProfilService
 
   validateForm!: FormGroup;
   user!: ResponseResetModel;
@@ -93,6 +95,7 @@ export class WarehouseBaseComponent implements OnInit {
     this.nzModalService = injector.get(NzModalService);
     this.categoriesService = injector.get(CategoriesService);
     this.tableService = injector.get(TableService);
+    this.viewProfilService = injector.get(ViewProfilService);
   }
 
   ngOnInit(): void {}

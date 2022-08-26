@@ -15,7 +15,10 @@
     </div>
   </div>
   <div [formGroup]="searchForm" class="row warehouse-users-filter">
-    <div class="col-md-4 offset-md-8 mb-2">
+    <div class="col-md-2">
+      <button nz-button (click)="onExportExcellFile()" [nzType]="'primary'"><span nz-icon nzType="export" nzTheme="outline"></span> Export excel Data</button>
+    </div>
+    <div class="col-md-4 offset-md-6 mb-2">
       <nz-form-label></nz-form-label>
       <nz-form-item>
         <nz-form-control>

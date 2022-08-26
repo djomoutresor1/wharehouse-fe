@@ -34,6 +34,13 @@
     "insertUser": {
       "email": "Email and Pec Email are the same. Please, Change another one and try again.",
       "phone": "The Phone and Landline are the same. Please, Change another one and try again."
+    },
+    "alert": {
+      "emailPec": {
+        "title": "Warning! ",
+        "description": "A password recovery email address is required. ",
+        "cta": "Added Email"
+      }
     }
   },
   "operation": {
@@ -313,8 +320,17 @@
     },
     "cta": "Change password"
   },
+  "managePassword": {
+    "title": "Manage my profile",
+    "recovery": {
+      "title": "My recovery email (PEC)"
+    }
+  },
   "profile": {
     "title": "My Profile",
+    "preferences": "Preferences",
+    "notifications": "Notifications",
+    "help": "Help",
     "empty": "--- Not specified ---",
     "role": "You are",
     "roles": "Roles",
