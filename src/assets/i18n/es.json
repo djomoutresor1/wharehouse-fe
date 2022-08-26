@@ -34,6 +34,13 @@
     "insertUser": {
       "email": "Email e PEC Posta Elettronica sono le stesse. Per favore, cambiane un altro e riprova.",
       "phone": "Il numero di telefono e di rete fissa sono gli stessi. Per favore, cambiane un altro e riprova."
+    },
+    "alert": {
+      "emailPec": {
+        "title": "Attenzione! ",
+        "description": "È necessario indicare un'indirizzo email di recupero password. ",
+        "cta": "Agguingi Email"
+      }
     }
   },
   "operation": {
@@ -314,8 +321,17 @@
     },
     "cta": "Cambia la mia password"
   },
+  "managePassword": {
+    "title": "Gestire il mio profilo",
+    "recovery": {
+      "title": "La mia email di recupero (PEC)"
+    }
+  },
   "profile": {
     "title": "Mio Profilo",
+    "preferences": "Preferenze",
+    "notifications": "Notifiche",
+    "help": "Guida",
     "empty": "--- Non Specificato ---",
     "role": "Hai i roli",
     "roles": "Ruoli",

@@ -61,7 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DashboardService,
     ProfilService,
     FlagService,
-    ViewProfilService
+    ViewProfilService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CommonInterceptor,

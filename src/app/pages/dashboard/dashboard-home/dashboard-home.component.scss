@@ -39,6 +39,14 @@ nz-footer {
   justify-content: center;
   align-items: center;
   display: inline-grid;
+  .recovery-email {
+    color: var(--warehouse-primary);
+    font-weight: 600;
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
 }
 
 .fullRack {

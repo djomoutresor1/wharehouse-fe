@@ -10,9 +10,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ResetPasswordComponent } from './auth/password/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './auth/password/change-password/change-password.component';
-import { SecurePasswordComponent } from './auth/password/components/secure-password/secure-password.component';
+import { SecurePasswordComponent } from './components/secure-password/secure-password.component';
 import { RegisterStepThreeComponent } from './auth/register/register-step-three/register-step-three.component';
 import { RegisterStepTwoComponent } from './auth/register/register-step-two/register-step-two.component';
+import { ManagePasswordComponent } from './components/manage-password/manage-password.component';
+import { RecoveryEmailComponent } from './components/recovery-email/recovery-email.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { RegisterStepTwoComponent } from './auth/register/register-step-two/regi
     SecurePasswordComponent,
     RegisterStepTwoComponent,
     RegisterStepThreeComponent,
+    ManagePasswordComponent,
+    RecoveryEmailComponent,
   ],
   imports: [
     ReactiveFormsModule,

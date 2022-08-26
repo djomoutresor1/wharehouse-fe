@@ -18,5 +18,6 @@ export enum Pages {
   CREATE = "insert",
   EDIT = "edit",
   RESET_PASSWORD = "noAuth/resetPassword",
-  CHANGE_PASSWORD = "change/password"
+  CHANGE_PASSWORD = "change/password",
+  MANAGE_PASSWORD = "manage/password"
 }

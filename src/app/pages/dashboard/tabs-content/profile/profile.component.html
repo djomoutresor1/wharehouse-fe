@@ -24,16 +24,24 @@
   </div>
   <div class="row">
     <div class="col-md-3 profile-avatar-container">
-      <nz-avatar *ngIf="!avatarURL" class="profile-avatar" nzIcon="user">
-      </nz-avatar>
-      <nz-avatar *ngIf="avatarURL" class="profile-avatar" [nzSrc]="avatarURL">
-      </nz-avatar>
-      <span class="profile-status">
-        <nz-badge class="profile-status-large" nz-tooltip nzTooltipTitle="{{formatUserStatus(dataUser.userInfo.status)}}" nzTooltipPlacement="bottomLeft"
-        nzStatus="{{ getUserStatus(dataUser.userInfo.status) }}"></nz-badge>
-      </span>
-      <div class="col-md-12 ml-65">
-        <button nz-button (click)="onViewProfilePdf()" [nzType]="'primary'">view your etire profile on pdf</button>
+      <div class="row">
+        <div class="col">
+          <nz-avatar *ngIf="!avatarURL" class="profile-avatar" nzIcon="user">
+          </nz-avatar>
+          <nz-avatar *ngIf="avatarURL" class="profile-avatar" [nzSrc]="avatarURL">
+          </nz-avatar>
+          <span class="profile-status">
+            <nz-badge class="profile-status-large" nz-tooltip
+              nzTooltipTitle="{{formatUserStatus(dataUser.userInfo.status)}}" nzTooltipPlacement="bottomLeft"
+              nzStatus="{{ getUserStatus(dataUser.userInfo.status) }}"></nz-badge>
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col profile-view-pdf">
+          <button nz-button (click)="onViewProfilePdf()" [nzType]="'primary'"><span nz-icon nzType="file-pdf"
+              nzTheme="outline"></span> View your profile on pdf</button>
+        </div>
       </div>
     </div>
     <div class="col-md-9">
@@ -66,9 +74,6 @@
           }}"></nz-alert>
         </div>
       </div>
-    </div>
-    <div class="col-md-12 ml-65">
-      <button nz-button (click)="onViewProfilePdf()" [nzType]="'primary'">view your etire profile on pdf</button>
     </div>
   </div>
   <div class="row profile-content">

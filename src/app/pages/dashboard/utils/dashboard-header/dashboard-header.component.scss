@@ -17,6 +17,15 @@
     float: right;
     right: 30px;
     position: absolute;
+    .dashboard-header-notifications {
+      font-size: 25px;
+      top: 0px;
+      left: -10px;
+    }
+    .dashboard-header-help {
+      font-size: 25px;
+      top: 0px;
+    }
     .dashboard-user-profile-container {
       display: flex;
       .dashboard-user-profile-row {

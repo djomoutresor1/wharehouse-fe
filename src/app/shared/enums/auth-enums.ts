@@ -18,10 +18,8 @@ export enum Auth {
   WAREHOUSE_UPLOAD_IMAGE = '/upload_file',
   WAREHOUSE_DELETE_IMAGE = '/delete_file',
   WAREHOUSE_DOWNLOAD_IMAGE = '/download_file',
-  WAREHOUSE_VIEW_PDF = 'view_pdf',
-  WAREHOUSE_VIEW_EXPORT_FILE = 'users/export',
   WAREHOUSE_APPLICATION_JSON = 'application/json',
   WAREHOUSE_VIEW_PDF ='view_pdf',
-  WAREHOUSE_VIEW_EXPORT_FILE ='export_excel_file'
+  WAREHOUSE_VIEW_EXPORT_FILE ='export_excel_file',
   WAREHOUSE_EXCEL = 'application/octet-stream',
 }

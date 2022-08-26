@@ -57,4 +57,11 @@ export class DashboardHomeComponent extends WarehouseBaseComponent implements On
     window.location.reload();
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
+
+  handleOnRecoveryEmail() {
+    this.router.navigate(
+      [`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.MANAGE_PASSWORD}`],
+      { queryParams: { tabNumber: 1 } }
+    );
+  }
 }

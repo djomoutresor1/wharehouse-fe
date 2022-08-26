@@ -34,6 +34,13 @@
     "insertUser": {
       "email": "Le courrier électronique et le courrier électronique PEC sont identiques. Veuillez en changer un autre et réessayer.",
       "phone": "Le numéro de téléphone et la ligne fixe sont les mêmes. S'il vous plaît, changez-en un autre et réessayez."
+    },
+    "alert": {
+      "emailPec": {
+        "title": "Attention! ",
+        "description": "Une adresse e-mail de récupération de mot de passe est requise. ",
+        "cta": "Ajoutez un'e-mail"
+      }
     }
   },
   "operation": {
@@ -314,8 +321,17 @@
     },
     "cta": "Changer mon mot de passe"
   },
+  "managePassword": {
+    "title": "Gérer mon profil",
+    "recovery": {
+      "title": "Mon e-mail de secours (PEC)"
+    }
+  },
   "profile": {
     "title": "Mon Profil",
+    "preferences": "Préférences",
+    "notifications": "Notifications",
+    "help": "Guide",
     "empty": "--- Non Précisé ---",
     "role": "Vous avez les rôles",
     "roles": "Rôles",
