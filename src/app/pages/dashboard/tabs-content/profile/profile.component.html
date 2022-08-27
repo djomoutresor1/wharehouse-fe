@@ -32,7 +32,7 @@
           </nz-avatar>
           <span class="profile-status">
             <nz-badge class="profile-status-large" nz-tooltip
-              nzTooltipTitle="{{formatUserStatus(dataUser.userInfo.status)}}" nzTooltipPlacement="bottomLeft"
+              nzTooltipTitle="{{firstLetterUpperCase(dataUser.userInfo.status)}}" nzTooltipPlacement="bottomLeft"
               nzStatus="{{ getUserStatus(dataUser.userInfo.status) }}"></nz-badge>
           </span>
         </div>
@@ -48,7 +48,7 @@
       <div class="row mt-3 profile-user">
         <div class="col-md-3">
           <p class="profile-title" nz-typography>{{ "register.username.title" | translate }}</p>
-          <h3 class="profile-title" nz-typography>{{ getCapitalizeUsername(dataUser?.username) }}</h3>
+          <h3 class="profile-title" nz-typography>{{ firstLetterUpperCase(dataUser?.username) }}</h3>
         </div>
         <div class="col-md-3">
           <p class="profile-title" nz-typography>{{ "profile.personalData.userId" | translate }}</p>
