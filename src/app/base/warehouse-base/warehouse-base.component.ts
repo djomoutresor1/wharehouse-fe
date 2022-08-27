@@ -200,4 +200,8 @@ export class WarehouseBaseComponent implements OnInit {
       this.isAuth = !this.isAuth;
     }
   }
+
+  firstLetterUpperCase(content: string): string {
+    return content.charAt(0).toUpperCase() + content.slice(1);
+  }
 }

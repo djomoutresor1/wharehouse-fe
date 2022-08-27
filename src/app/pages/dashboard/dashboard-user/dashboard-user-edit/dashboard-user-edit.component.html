@@ -38,11 +38,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 profile-avatar-container">
                 <nz-avatar *ngIf="!imgURL" class="dashboard-user-profile-avatar" [nzSize]="100" nzIcon="user">
                 </nz-avatar>
                 <nz-avatar *ngIf="imgURL" class="dashboard-user-profile-avatar" [nzSize]="100" [nzSrc]="imgURL">
                 </nz-avatar>
+                <span *ngIf="dataUser?.userInfo" class="profile-status">
+                    <nz-badge class="profile-status-large" nz-tooltip
+                        nzTooltipTitle="{{firstLetterUpperCase(dataUser.userInfo.status)}}"
+                        nzTooltipPlacement="bottomLeft" nzStatus="{{ getUserStatus(dataUser.userInfo.status) }}">
+                    </nz-badge>
+                </span>
             </div>
             <div class="col-md-8 mt-4 dashboard-user-upload-image-container">
                 <label class="ant-btn ant-btn-primary">

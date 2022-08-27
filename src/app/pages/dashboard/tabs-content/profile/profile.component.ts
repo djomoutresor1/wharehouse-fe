@@ -133,10 +133,6 @@ export class ProfileComponent extends WarehouseBaseComponent implements OnInit {
     }
   }
 
-  formatUserStatus(status: string): string {
-    return status.charAt(0).toUpperCase() + status.slice(1);
-  }
-
   handleOnNavigate(url: String) {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
   }
@@ -171,10 +167,6 @@ export class ProfileComponent extends WarehouseBaseComponent implements OnInit {
 
   getFormatUserLastLogin(lastLogin: string): string {
     return moment(lastLogin).format(this.dateFormat);
-  }
-
-  getCapitalizeUsername(username: string): string {
-    return username?.charAt(0).toUpperCase() + username?.slice(1);
   }
 
   handleOnFlagByPrefixCode(prefix: string) {
