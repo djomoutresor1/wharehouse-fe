@@ -1,14 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { NzModalService } from 'ng-zorro-antd/modal';
-import { DashboardService } from 'src/app/services/dashboard.service';
-import { ProfilService } from 'src/app/services/profil.service';
 import { ViewService } from 'src/app/services/view-file.service';
 import { Component, Injector, OnInit } from '@angular/core';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
-import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { StatusType } from 'src/app/shared/enums/status-type-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
@@ -25,46 +18,6 @@ interface ItemData {
   styleUrls: ['./all-users.component.scss'],
 })
 export class AllUsersComponent extends WarehouseBaseComponent implements OnInit {
-  searchForm!: FormGroup;
-  listOfTypeEmailVerification = [
-    {
-      label: this.translate.instant('dashboard.dataTable.status.all'),
-      value: Utils.WAREHOUSE_PREFIX_ALL,
-    },
-    { label: this.translate.instant('profile.verified'), value: true },
-    { label: this.translate.instant('profile.notVerified'), value: false },
-  ];
-  listOfStatus = [
-    {
-      label: this.translate.instant('dashboard.dataTable.status.all'),
-      value: Utils.WAREHOUSE_PREFIX_ALL,
-      style: '',
-    },
-    {
-      label: this.translate.instant('dashboard.dataTable.status.active'),
-      value: StatusType.STATUS_ACTIVE,
-      style: AlertType.ALERT_SUCCESS,
-    },
-    {
-      label: this.translate.instant('dashboard.dataTable.status.pending'),
-      value: StatusType.STATUS_PENDING,
-      style: AlertType.ALERT_WARNING,
-    },
-    {
-      label: this.translate.instant('dashboard.dataTable.status.disabled'),
-      value: StatusType.STATUS_DISABLED,
-      style: AlertType.ALERT_ERROR,
-    },
-  ];
-  listOfRoles = [
-    {
-      label: this.translate.instant('dashboard.dataTable.status.all'),
-      value: Utils.WAREHOUSE_PREFIX_ALL,
-    },
-    { label: 'Admin', value: Utils.ROLE_ADMIN },
-    { label: 'User', value: Utils.ROLE_USER },
-    { label: 'Moderator', value: Utils.ROLE_MODERATOR },
-  ];
   listOfSelection = [
     {
       text: 'Select All Row',
@@ -96,6 +49,7 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
   listOfCurrentPageData: readonly ItemData[] = [];
   setOfCheckedId = new Set<number>();
   allUsers: any;
+  warehouseUsers: ResponseUserDataModel[] = [];
   tmpUsers: ResponseUserDataModel[] = [];
   titleDrawer: string = '';
   sizeDrawer: number = 1000;
@@ -103,33 +57,21 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
   visibleDrawerStatus: boolean = false;
   mode: string = Utils.WAREHOUSE_MODE_PROFILE_DATATABLE;
   userDatatable!: ResponseUserModel;
-  search: string = '';
   userStatusSelected: string = '';
-  selectedStatus: string = 'all';
-  selectedRole: string = 'all';
-  selectedTypeEmail: string = 'all';
 
-  constructor(injector: Injector,
-    private viewService:ViewService) { super(injector); }
-
-  override ngOnInit(): void {
-    this.initSearch();
-    this.user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
-    this.getAllWarehousUsers();
+  constructor(injector: Injector, private viewService: ViewService) {
+    super(injector);
   }
 
-  initSearch() {
-    this.searchForm = this.fb.group({
-      search: '',
-      typeEmailVerification: Utils.WAREHOUSE_PREFIX_ALL,
-      status: Utils.WAREHOUSE_PREFIX_ALL,
-      role: Utils.WAREHOUSE_PREFIX_ALL,
-    });
+  override ngOnInit(): void {
+    this.user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
+    this.getAllWarehousUsers();
   }
 
   getAllWarehousUsers() {
     this.profilService.getAllUsers().subscribe(
       (users: ResponseUserDataModel[]) => {
+        this.warehouseUsers = users;
         // Take all users and remove the current user connected
         this.allUsers = users?.filter(
           (user) => user.user.userId !== this.user?.userId
@@ -185,10 +127,6 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
 
   handleOnNavigate(url: String) {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
-  }
-
-  getUserStatusSelected(value: string) {
-    return this.listOfStatus.find((element) => element?.value === value)?.style;
   }
 
   formatUserStatus(status: string): string {
@@ -287,99 +225,11 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
       );
   }
 
-  handleOnSearchUsers() {
-    let search = this.searchForm.controls['search']?.value;
-    let typeEmailVerification =
-      this.searchForm.controls['typeEmailVerification']?.value;
-    let status = this.searchForm.controls['status']?.value;
-    let role = this.searchForm.controls['role']?.value;
-
-    this.handleOnSearchUser(search);
-    this.handleOnSelectRole(role);
-    this.handleOnSelectTypeEmailVerification(typeEmailVerification);
-    this.handleOnSelectStatus(status);
-  }
-
-  handleOnSearchUser(search: string) {
-    if (search) {
-      this.allUsers = this.tmpUsers.filter(
-        (user: ResponseUserDataModel) =>
-          user.user.fullname.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||
-          user.user.email.toLowerCase().indexOf(search.toLowerCase()) >= 0
-      );
-    } else {
-      this.allUsers = this.tmpUsers;
-    }
-  }
-
-  handleOnSelectTypeEmailVerification(typeEmailVerification: boolean | string) {
-    if (typeEmailVerification === Utils.WAREHOUSE_PREFIX_ALL) {
-      this.allUsers = this.allUsers;
-    } else {
-      this.allUsers = this.allUsers?.filter(
-        (user: ResponseUserDataModel) =>
-          user.user.active === typeEmailVerification
-      );
-    }
-  }
-
-  handleOnSelectStatus(status: string) {
-    if (status === Utils.WAREHOUSE_PREFIX_ALL) {
-      this.allUsers = this.allUsers;
-    } else {
-      this.allUsers = this.allUsers?.filter(
-        (user: ResponseUserDataModel) => user.userInfo.status === status
-      );
-    }
-  }
-
-  handleOnSelectRole(role: string) {
-    if (role === Utils.WAREHOUSE_PREFIX_ALL) {
-      this.allUsers = this.allUsers;
-    } else {
-      this.allUsers = this.allUsers?.filter((user: ResponseUserDataModel) => {
-        return user.user.roles
-          .map((userRole: any) => {
-            return userRole?.name;
-          })
-          .includes(role.toUpperCase());
-      });
-    }
-  }
-
   handleOnResetFilter() {
-    this.search = '';
-    this.initSearch();
     this.getAllWarehousUsers();
   }
 
-  handleOnSearchClear() {
-    this.search = '';
-    this.searchForm.controls['search'].reset();
-    this.handleOnSearchUsers();
-  }
-
-  onExportExcellFile(){
-    this.viewProfilService.getExportUsers().subscribe(
-      (response: any) => {
-          console.log(response)
-      },
-      (error: HttpErrorResponse) => {
-        if (error.status === 403) {
-          // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
-        } else {
-          console.log('enable to export excel file, ERROR: ' + error?.message);
-          this.errorAlertType(error?.message);
-        }
-      })
-
+  handleOnUsersFitered(users: ResponseUserDataModel[]) {
+    this.allUsers = users;
   }
 }
-

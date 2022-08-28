@@ -18,6 +18,7 @@ import { DashboardRackGlobalComponent } from './dashboard-rack-global/dashboard-
 import { AllUsersComponent } from './tabs-content/all-users/all-users.component';
 import { DashboardUserAddComponent } from './dashboard-user/dashboard-user-add/dashboard-user-add.component';
 import { DashboardUserEditComponent } from './dashboard-user/dashboard-user-edit/dashboard-user-edit.component';
+import { AdvancedFiltersComponent } from './tabs-content/all-users/advanced-filters/advanced-filters.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { DashboardUserEditComponent } from './dashboard-user/dashboard-user-edit
     DashboardRackGlobalComponent,
     AllUsersComponent,
     DashboardUserAddComponent,
-    DashboardUserEditComponent
+    DashboardUserEditComponent,
+    AdvancedFiltersComponent
   ],
   imports: [
     HttpClientModule,
