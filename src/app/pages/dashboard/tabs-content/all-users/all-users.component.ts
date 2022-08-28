@@ -15,6 +15,7 @@ import { Utils } from 'src/app/shared/enums/utils-enums';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseUserDataModel } from 'src/model/auth/response/response-user-data-model';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
+import * as XLSX from 'xlsx';
 interface ItemData {
   id: 45;
 }
@@ -96,6 +97,7 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
   listOfCurrentPageData: readonly ItemData[] = [];
   setOfCheckedId = new Set<number>();
   allUsers: any;
+  warehouseUsers: ResponseUserDataModel[] = [];
   tmpUsers: ResponseUserDataModel[] = [];
   titleDrawer: string = '';
   sizeDrawer: number = 1000;
@@ -130,6 +132,7 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
   getAllWarehousUsers() {
     this.profilService.getAllUsers().subscribe(
       (users: ResponseUserDataModel[]) => {
+        this.warehouseUsers = users;
         // Take all users and remove the current user connected
         this.allUsers = users?.filter(
           (user) => user.user.userId !== this.user?.userId
@@ -359,27 +362,47 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
     this.handleOnSearchUsers();
   }
 
-  onExportExcellFile(){
-    this.viewProfilService.getExportUsers().subscribe(
-      (response: any) => {
-          console.log(response)
-      },
-      (error: HttpErrorResponse) => {
-        if (error.status === 403) {
-          // Expiration token
-          this.alertType = AlertType.ALERT_WARNING;
-          this.okText = this.translate.instant('message.timeout.cta');
-          this.messageAlert = this.translate.instant('message.timeout.title');
-          this.descriptionAlert = this.translate.instant(
-            'message.timeout.description'
-          );
-          this.isExpiredToken = true;
-        } else {
-          console.log('enable to export excel file, ERROR: ' + error?.message);
-          this.errorAlertType(error?.message);
-        }
-      })
+  onExportExcellFile() {
+    // this.viewProfilService.getExportUsers().subscribe(
+    //   (response: any) => {
+    //       console.log(response)
+    //   },
+    //   (error: HttpErrorResponse) => {
+    //     if (error.status === 403) {
+    //       // Expiration token
+    //       this.alertType = AlertType.ALERT_WARNING;
+    //       this.okText = this.translate.instant('message.timeout.cta');
+    //       this.messageAlert = this.translate.instant('message.timeout.title');
+    //       this.descriptionAlert = this.translate.instant(
+    //         'message.timeout.description'
+    //       );
+    //       this.isExpiredToken = true;
+    //     } else {
+    //       console.log('enable to export excel file, ERROR: ' + error?.message);
+    //       this.errorAlertType(error?.message);
+    //     }
+    //   })
+    const csvUser = this.warehouseUsers?.map((user: ResponseUserDataModel) => {
+      return {
+        UserID: user.user.userId,
+        FullName: user.user.fullname,
+        Pseudo: user.user.username,
+        Gender: user.user.gender,
+        Email: user.user.email,
+        EmailPEC: user.user.emailPec,
+        EmailVerification: user.user.active,
+        Status: user.userInfo.status,
+        Roles: user.user.roles.map((role: any) => role?.name).join(","),
+        DateOfBirth: user.user.dateOfBirth,
+        LastLogin: user.user.lastLogin,
+        CreatedAt: user.user.createdAt,
+      }
+    });
+    const workBook = XLSX.utils.book_new(); // Create a new blank book
+    const workSheet = XLSX.utils.json_to_sheet(csvUser);
 
+    XLSX.utils.book_append_sheet(workBook, workSheet, 'data'); // Add the worksheet to the book
+    XLSX.writeFile(workBook, 'warehouse_users.xlsx'); // Initiate a file download in browser
   }
 }
 
