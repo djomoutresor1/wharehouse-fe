@@ -1,27 +1,28 @@
 <div [formGroup]="searchForm" class="row warehouse-users-filter">
     <div class="col-md-2">
-      <button nz-button (click)="handleOnExportUsers()" [nzType]="'primary'"><span nz-icon nzType="export" nzTheme="outline"></span> Export excel Data</button>
+        <button nz-button (click)="handleOnExportUsers()" [nzType]="'primary'"><span nz-icon nzType="export"
+                nzTheme="outline"></span> {{ "dataTable.filter.exportUsers" | translate }}</button>
     </div>
     <div class="col-md-4 offset-md-6 mb-2">
-      <nz-form-label></nz-form-label>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="search" [nzSuffix]="inputClearTpl">
-            <input type="text" [(ngModel)]="search" nz-input formControlName="search"
-              [placeholder]="'dashboard.dataTable.options.search.simple' | translate" (input)="handleOnSearchUsers()" />
-          </nz-input-group>
-          <ng-template #inputClearTpl>
-            <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="search"
-              (click)="handleOnSearchClear()"></i>
-          </ng-template>
-        </nz-form-control>
-      </nz-form-item>
+        <nz-form-label></nz-form-label>
+        <nz-form-item>
+            <nz-form-control>
+                <nz-input-group nzPrefixIcon="search" [nzSuffix]="inputClearTpl">
+                    <input type="text" [(ngModel)]="search" nz-input formControlName="search"
+                        [placeholder]="'dataTable.options.search.simple' | translate" (input)="handleOnSearchUsers()" />
+                </nz-input-group>
+                <ng-template #inputClearTpl>
+                    <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="search"
+                        (click)="handleOnSearchClear()"></i>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
     </div>
-  </div>
+</div>
 <div class="row">
     <div class="col-md-12">
         <nz-collapse [nzExpandIconPosition]="'left'">
-            <nz-collapse-panel [nzHeader]="'dashboard.dataTable.options.search.advanced' | translate" [nzActive]="false"
+            <nz-collapse-panel [nzHeader]="'dataTable.options.search.advanced' | translate" [nzActive]="false"
                 [nzExtra]="collapseContent" [nzDisabled]="false">
                 <div [formGroup]="searchForm" class="row warehouse-not-margin warehouse-users-filter">
                     <div class="col-md-2">
@@ -30,7 +31,7 @@
                         <nz-form-item>
                             <nz-form-control>
                                 <nz-select [(ngModel)]="selectedTypeEmail" [nzCustomTemplate]="typeEmailTemplate"
-                                    [nzPlaceHolder]="'dashboard.dataTable.status.placeholder'| translate"
+                                    [nzPlaceHolder]="'dataTable.status.placeholder'| translate"
                                     formControlName="typeEmailVerification" (ngModelChange)="handleOnSearchUsers()">
                                     <nz-option nzCustomContent
                                         *ngFor="let typeEmailVerification of listOfTypeEmailVerification"
@@ -88,8 +89,8 @@
                         <nz-form-item>
                             <nz-form-control>
                                 <nz-select [(ngModel)]="selectedStatus" [nzCustomTemplate]="statusTemplate"
-                                    [nzPlaceHolder]="'dashboard.dataTable.status.placeholder'| translate"
-                                    formControlName="status" (ngModelChange)="handleOnSearchUsers()">
+                                    [nzPlaceHolder]="'dataTable.status.placeholder'| translate" formControlName="status"
+                                    (ngModelChange)="handleOnSearchUsers()">
                                     <nz-option nzCustomContent *ngFor="let status of listOfStatus"
                                         [nzValue]="status?.value" [nzLabel]="status?.label">
                                         <nz-badge [nzStatus]="status?.style"></nz-badge>
@@ -103,12 +104,19 @@
                             </nz-form-control>
                         </nz-form-item>
                     </div>
+                    <div class="col-md-3 warehouse-filter-range">
+                        <nz-form-label nzFor="createdAt">{{ "dataTable.filter.createdAt" | translate }}
+                        </nz-form-label>
+                        <nz-range-picker nzAllowClear="true" formControlName="createdAt" [nzFormat]="dateFormatOne"
+                            (ngModelChange)="handleOnSearchUsers()">
+                        </nz-range-picker>
+                    </div>
                 </div>
                 <div class="row warehouse-not-margin">
                     <div class="col-md-1">
                         <button nz-button nzType="primary" class="mt-2" (click)="handleOnResetFilter()">
                             <i nz-icon nzType="clear" nzTheme="outline"></i>
-                            {{ "dashboard.dataTable.options.reset" | translate }}
+                            {{ "dataTable.options.reset" | translate }}
                         </button>
                     </div>
                 </div>

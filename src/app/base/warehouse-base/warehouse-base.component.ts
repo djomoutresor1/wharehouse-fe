@@ -53,7 +53,8 @@ export class WarehouseBaseComponent implements OnInit {
   messageAlert: string = '';
   descriptionAlert: string = '';
   okText: string = '';
-  dateFormat = 'dd/MM/YYYY';
+  dateFormatOne = 'dd/MM/YYYY';
+  dateFormatTwo = 'YYYY/MM/DD';
   WAREHOUSE_AFTER_7_DAYS = 7 * 24 * 60 * 60 * 1000;
   WAREHOUSE_MAX_SIZE_FILE = 5000000;
 

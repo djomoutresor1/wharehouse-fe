@@ -118,6 +118,10 @@
       "disabled": "Disabled",
       "placeholder": "Select a status",
       "title": "Status"
+    },
+    "filter": {
+      "exportUsers": "Export Excel Users",
+      "createdAt": "From - To"
     }
   },
   "warehouse": {
