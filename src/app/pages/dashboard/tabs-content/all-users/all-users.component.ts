@@ -132,13 +132,13 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
   formatUserStatus(status: string): string {
     switch (status) {
       case StatusType.STATUS_ACTIVE:
-        return this.translate.instant('dashboard.dataTable.status.active');
+        return this.translate.instant('dataTable.status.active');
       case StatusType.STATUS_DISABLED:
-        return this.translate.instant('dashboard.dataTable.status.disabled');
+        return this.translate.instant('dataTable.status.disabled');
       case StatusType.STATUS_PENDING:
-        return this.translate.instant('dashboard.dataTable.status.pending');
+        return this.translate.instant('dataTable.status.pending');
       default:
-        return this.translate.instant('dashboard.dataTable.status.pending');
+        return this.translate.instant('dataTable.status.pending');
     }
   }
 

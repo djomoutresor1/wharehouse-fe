@@ -71,24 +71,24 @@
           <td>{{ data.user.lastLogin }}</td>
           <td>
             <button nz-button nz-dropdown [nzDropdownMenu]="options" nzType="primary">
-              {{ "dashboard.dataTable.options.title" | translate }}
+              {{ "dataTable.options.title" | translate }}
               <i nz-icon nzType="down"></i>
             </button>
             <nz-dropdown-menu #options="nzDropdownMenu">
               <ul nz-menu>
                 <li nz-menu-item (click)="handleOnStatus(data)"><i nz-icon nzType="right-circle" nzTheme="twotone"></i>
                   {{
-                  "dashboard.dataTable.options.status" |
+                  "dataTable.options.status" |
                   translate }}</li>
                 <li nz-menu-item (click)="handleOnShow(data.user)"><i nz-icon nzType="eye" nzTheme="twotone"></i> {{
-                  "dashboard.dataTable.options.show" |
+                  "dataTable.options.show" |
                   translate }}</li>
                 <li nz-menu-item (click)="handleOnEdit(data.user)"><i nz-icon nzType="edit" nzTheme="twotone"></i> {{
-                  "dashboard.dataTable.options.edit" |
+                  "dataTable.options.edit" |
                   translate }}</li>
                 <li nz-menu-item (click)="handleOnDelete(data.user)"><i nz-icon nzType="delete" nzTheme="twotone"></i>
                   {{
-                  "dashboard.dataTable.options.delete" | translate }}</li>
+                  "dataTable.options.delete" | translate }}</li>
               </ul>
             </nz-dropdown-menu>
           </td>
@@ -113,20 +113,20 @@
           <p>{{"operation.confirmation.change.thirdText" | translate }} </p>
           <nz-radio-group [(ngModel)]="userStatusSelected">
             <label nz-radio [nzDisabled]="userDatatable.userInfo.status === 'active'" nzValue="active">{{
-              "dashboard.dataTable.status.active" | translate }}</label>
+              "dataTable.status.active" | translate }}</label>
             <label nz-radio [nzDisabled]="userDatatable.userInfo.status === 'pending'" nzValue="pending">{{
-              "dashboard.dataTable.status.pending" | translate }}</label>
+              "dataTable.status.pending" | translate }}</label>
             <label nz-radio [nzDisabled]="userDatatable.userInfo.status === 'disabled'" nzValue="disabled">{{
-              "dashboard.dataTable.status.disabled" | translate }}</label>
+              "dataTable.status.disabled" | translate }}</label>
           </nz-radio-group>
         </ng-container>
         <ng-template #nzDrawerFooter>
           <div style="float: right">
             <button nz-button style="margin-right: 8px;" (click)="handleOnCloseDrawer()"><i nz-icon nzType="left"
-                nzTheme="outline"></i> {{ "dashboard.cta.back" | translate }}</button>
+                nzTheme="outline"></i> {{ "cta.back" | translate }}</button>
             <button nz-button nzType="primary" [disabled]="userStatusSelected === userDatatable.userInfo.status"
               (click)="handleOnChangeStatus()"><i nz-icon nzType="check-circle" nzTheme="outline"></i> {{
-              "dashboard.cta.edit" | translate }}</button>
+              "cta.edit" | translate }}</button>
           </div>
         </ng-template>
       </nz-drawer>

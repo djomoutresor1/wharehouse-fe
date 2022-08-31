@@ -117,6 +117,10 @@
         "disabled": "Disabilitato",
         "placeholder": "Seleziona uno stato",
         "title": "Stato"
+      },
+      "filter": {
+        "exportUsers": "Esportare Excel Utenti",
+        "createdAt": "Da - A"
       }
     }
   },
