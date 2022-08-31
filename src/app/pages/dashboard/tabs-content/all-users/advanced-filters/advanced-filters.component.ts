@@ -1,5 +1,13 @@
-import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Injector,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import * as moment from 'moment';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { StatusType } from 'src/app/shared/enums/status-type-enums';
@@ -10,14 +18,18 @@ import * as XLSX from 'xlsx';
 @Component({
   selector: 'warehouse-advanced-filters',
   templateUrl: './advanced-filters.component.html',
-  styleUrls: ['./advanced-filters.component.scss']
+  styleUrls: ['./advanced-filters.component.scss'],
 })
-export class AdvancedFiltersComponent extends WarehouseBaseComponent implements OnInit {
-
+export class AdvancedFiltersComponent
+  extends WarehouseBaseComponent
+  implements OnInit
+{
   @Input() tmpUsers: ResponseUserDataModel[] = [];
   @Input() warehouseUsers: ResponseUserDataModel[] = [];
-  @Output() handleOnNotifyUsersFiltered: EventEmitter<ResponseUserDataModel[]> = new EventEmitter<ResponseUserDataModel[]>();
-  @Output() handleOnNotifyResetFilter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() handleOnNotifyUsersFiltered: EventEmitter<ResponseUserDataModel[]> =
+    new EventEmitter<ResponseUserDataModel[]>();
+  @Output() handleOnNotifyResetFilter: EventEmitter<any> =
+    new EventEmitter<any>();
 
   searchForm!: FormGroup;
 
@@ -29,7 +41,7 @@ export class AdvancedFiltersComponent extends WarehouseBaseComponent implements 
 
   listOfTypeEmailVerification = [
     {
-      label: this.translate.instant('dashboard.dataTable.status.all'),
+      label: this.translate.instant('dataTable.status.all'),
       value: Utils.WAREHOUSE_PREFIX_ALL,
     },
     { label: this.translate.instant('profile.verified'), value: true },
@@ -37,29 +49,29 @@ export class AdvancedFiltersComponent extends WarehouseBaseComponent implements 
   ];
   listOfStatus = [
     {
-      label: this.translate.instant('dashboard.dataTable.status.all'),
+      label: this.translate.instant('dataTable.status.all'),
       value: Utils.WAREHOUSE_PREFIX_ALL,
       style: '',
     },
     {
-      label: this.translate.instant('dashboard.dataTable.status.active'),
+      label: this.translate.instant('dataTable.status.active'),
       value: StatusType.STATUS_ACTIVE,
       style: AlertType.ALERT_SUCCESS,
     },
     {
-      label: this.translate.instant('dashboard.dataTable.status.pending'),
+      label: this.translate.instant('dataTable.status.pending'),
       value: StatusType.STATUS_PENDING,
       style: AlertType.ALERT_WARNING,
     },
     {
-      label: this.translate.instant('dashboard.dataTable.status.disabled'),
+      label: this.translate.instant('dataTable.status.disabled'),
       value: StatusType.STATUS_DISABLED,
       style: AlertType.ALERT_ERROR,
     },
   ];
   listOfRoles = [
     {
-      label: this.translate.instant('dashboard.dataTable.status.all'),
+      label: this.translate.instant('dataTable.status.all'),
       value: Utils.WAREHOUSE_PREFIX_ALL,
     },
     { label: 'Admin', value: Utils.ROLE_ADMIN },
@@ -67,7 +79,9 @@ export class AdvancedFiltersComponent extends WarehouseBaseComponent implements 
     { label: 'Moderator', value: Utils.ROLE_MODERATOR },
   ];
 
-  constructor(injector: Injector) { super(injector); }
+  constructor(injector: Injector) {
+    super(injector);
+  }
 
   override ngOnInit(): void {
     this.initSearch();
@@ -79,11 +93,22 @@ export class AdvancedFiltersComponent extends WarehouseBaseComponent implements 
       this.searchForm.controls['typeEmailVerification']?.value;
     let status = this.searchForm.controls['status']?.value;
     let role = this.searchForm.controls['role']?.value;
+    let createdAtStart = moment(
+      this.searchForm.controls['createdAt']?.value?.[0]
+    ).format(this.dateFormatTwo);
+    let createdAtEnd = moment(
+      this.searchForm.controls['createdAt']?.value?.[1]
+    ).format(this.dateFormatTwo);
 
+    let now = moment(new Date()).format(this.dateFormatTwo);
+    
     this.handleOnSearchUser(search);
     this.handleOnSelectRole(role);
     this.handleOnSelectTypeEmailVerification(typeEmailVerification);
     this.handleOnSelectStatus(status);
+    if(now !== createdAtStart && now !== createdAtEnd) {
+      this.handleOnSelectCreatedAt(createdAtStart, createdAtEnd);
+    }
     this.handleOnNotifyUsersFiltered.emit(this.usersFiltered);
   }
 
@@ -120,17 +145,29 @@ export class AdvancedFiltersComponent extends WarehouseBaseComponent implements 
     }
   }
 
+  handleOnSelectCreatedAt(start: string, end: string) {
+    this.usersFiltered = this.usersFiltered?.filter(
+      (user: ResponseUserDataModel) =>
+        new Date(user.user.createdAt.split(' ')[0]).getTime() >=
+          new Date(start).getTime() &&
+        new Date(user.user.createdAt.split(' ')[0]).getTime() <=
+          new Date(end).getTime()
+    );
+  }
+
   handleOnSelectRole(role: string) {
     if (role === Utils.WAREHOUSE_PREFIX_ALL) {
       this.usersFiltered = this.usersFiltered;
     } else {
-      this.usersFiltered = this.usersFiltered?.filter((user: ResponseUserDataModel) => {
-        return user.user.roles
-          .map((userRole: any) => {
-            return userRole?.name;
-          })
-          .includes(role.toUpperCase());
-      });
+      this.usersFiltered = this.usersFiltered?.filter(
+        (user: ResponseUserDataModel) => {
+          return user.user.roles
+            .map((userRole: any) => {
+              return userRole?.name;
+            })
+            .includes(role.toUpperCase());
+        }
+      );
     }
   }
 
@@ -157,11 +194,14 @@ export class AdvancedFiltersComponent extends WarehouseBaseComponent implements 
       typeEmailVerification: Utils.WAREHOUSE_PREFIX_ALL,
       status: Utils.WAREHOUSE_PREFIX_ALL,
       role: Utils.WAREHOUSE_PREFIX_ALL,
+      createdAt: [],
     });
   }
 
   handleOnExportUsers() {
-    let users = !!this.usersFiltered?.length ? this.usersFiltered : this.warehouseUsers;
+    let users = !!this.usersFiltered?.length
+      ? this.usersFiltered
+      : this.warehouseUsers;
     const csvUser = users?.map((user: ResponseUserDataModel) => {
       return {
         UserID: user.user.userId,
@@ -172,17 +212,23 @@ export class AdvancedFiltersComponent extends WarehouseBaseComponent implements 
         EmailPEC: user.user.emailPec,
         EmailVerification: user.user.active,
         Status: user.userInfo.status,
-        Roles: user.user.roles.map((role: any) => role?.name).join(","),
+        Roles: user.user.roles.map((role: any) => role?.name).join(','),
         DateOfBirth: user.user.dateOfBirth,
         Country: user.userAddress.country,
         State: user.userAddress.state,
         ZipCode: user.userAddress.zipCode,
         AddressLine: user.userAddress.addressLine,
-        Phone: user.userContact.phonePrefix ? user.userContact.phonePrefix + " " + user.userContact.phoneNumber : "",
-        Landline: user.userContact.landlinePrefix ? user.userContact.landlinePrefix + " " + user.userContact.landlineNumber : "",
+        Phone: user.userContact.phonePrefix
+          ? user.userContact.phonePrefix + ' ' + user.userContact.phoneNumber
+          : '',
+        Landline: user.userContact.landlinePrefix
+          ? user.userContact.landlinePrefix +
+            ' ' +
+            user.userContact.landlineNumber
+          : '',
         LastLogin: user.user.lastLogin,
         CreatedAt: user.user.createdAt,
-      }
+      };
     });
     const workBook = XLSX.utils.book_new(); // Create a new blank book
     const workSheet = XLSX.utils.json_to_sheet(csvUser);
