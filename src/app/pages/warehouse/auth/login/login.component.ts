@@ -21,6 +21,7 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
   isLogged: boolean = false;
   dataUserActive: boolean = true;
   dataUserStatus: boolean = false;
+  dataUserTmpPassword: boolean = false;
   alertTypeModal: string = '';
   messageAlertModal: string = '';
   descriptionAlertModal: string = '';
@@ -91,9 +92,14 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
       );
   }
 
+  handleOnOkModalNavigate(url: string) {
+    this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);
+  }
+
   submitForm() {
     this.dataUserActive = true;
     this.dataUserStatus = false;
+    this.dataUserTmpPassword = false;
     let userData = {
       username: this.validateForm.controls['username']?.value.toLowerCase(),
       password: this.validateForm.controls['password']?.value,
@@ -105,35 +111,9 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
         this.dataUserActive = response?.active;
         this.dataUserEmail = response?.email;
         this.dataUserStatus = this.checkUserStatus(response?.userInfo?.status);
+        this.dataUserTmpPassword = response?.userInfo?.temporalPassword;
 
-        if (!this.dataUserActive) {
-          this.alertTypeModal = AlertType.ALERT_WARNING;
-          this.messageAlertModal = this.translate.instant(
-            'message.verification.email.title'
-          );
-          this.okText = this.translate.instant(
-            'message.verification.email.cta'
-          );
-          this.descriptionAlertModal = this.translate.instant(
-            'message.verification.email.description'
-          );
-          // this.alertModalActive();
-        } else if (this.dataUserStatus) {
-          this.alertTypeModal = AlertType.ALERT_INFO;
-          this.messageAlertModal = this.translate.instant(
-            'message.verification.profile.title'
-          );
-          this.okText = this.translate.instant(
-            'message.verification.profile.cta'
-          );
-          this.descriptionAlertModal = this.translate.instant(
-            'message.verification.profile.description'
-          );
-          // this.alertModalActive();
-        } else {
-          this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
-          this.successNotificationType(response);
-        }
+        this.checkUserLoginVerification(response);
       },
       (error: HttpErrorResponse) => {
         if (error.status === 403) {
@@ -145,6 +125,44 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
         }
       }
     );
+  }
+
+  checkUserLoginVerification(response: ResponseLoginModel) {
+    if (!this.dataUserActive) {
+      this.alertTypeModal = AlertType.ALERT_WARNING;
+      this.messageAlertModal = this.translate.instant(
+        'message.verification.email.title'
+      );
+      this.okText = this.translate.instant(
+        'message.verification.email.cta'
+      );
+      this.descriptionAlertModal = this.translate.instant(
+        'message.verification.email.description'
+      );
+    } else if (this.dataUserStatus) {
+      this.alertTypeModal = AlertType.ALERT_INFO;
+      this.messageAlertModal = this.translate.instant(
+        'message.verification.profile.title'
+      );
+      this.okText = this.translate.instant(
+        'message.verification.profile.cta'
+      );
+      this.descriptionAlertModal = this.translate.instant(
+        'message.verification.profile.description'
+      );
+    } else if(this.dataUserTmpPassword) {
+      this.alertTypeModal = AlertType.ALERT_WARNING;
+      this.messageAlertModal = this.translate.instant(
+        'message.verification.temporary.password.title'
+      );
+      this.descriptionAlertModal = this.translate.instant(
+        'message.verification.temporary.password.description'
+      );
+      this.okText = this.translate.instant('changePassword.cta');
+    } else {
+      this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
+      this.successNotificationType(response);
+    }
   }
 
   checkUserStatus(status: string): boolean {
