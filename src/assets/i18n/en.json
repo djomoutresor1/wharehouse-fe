@@ -16,6 +16,10 @@
         "title": "Activation profile authorization",
         "description": "Your profile has not been validated by your department administrator. Contact him to give you access to the system.",
         "cta": "Close"
+      },
+      "temporary.password": {
+        "title": "Password Temporary",
+        "description": "It appears to be your first login with a temporary password. It must be changed to continue in the system."
       }
     },
     "changePassword": {

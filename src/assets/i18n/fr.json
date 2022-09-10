@@ -16,6 +16,10 @@
         "title": "Autorisation du profil d'activation",
         "description": "Votre profil n'a pas été validé par l'administrateur de votre departement. Contactez-le pour vous donnez accés au  système.",
         "cta": "Fermez"
+      },
+      "temporary.password": {
+        "title": "Mot de passe temporaire",
+        "description": "Il semble que ce soit votre première connexion avec un mot de passe temporaire. Il doit être changé pour continuer sur le système."
       }
     },
     "changePassword": { 
