@@ -97,6 +97,14 @@
         "title": "Confirmation Insertion",
         "subtitle": "You have entered a PEC e-mail. A confirmation email will be sent to you in order to certify it. Are you sure you want to continue ?"
       }
+    },
+    "footer": {
+      "all-rights": "All rights reserved.",
+      "legal-info": "Legal Informations",
+      "cgu": "CGU",
+      "privacy-policy": "Privacy Policy",
+      "cookies": "Cookies",
+      "help": "Hepl & Contact"
     }
   },
   "dataTable": {

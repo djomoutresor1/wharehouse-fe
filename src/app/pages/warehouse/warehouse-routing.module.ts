@@ -8,16 +8,27 @@ import { ResetPasswordComponent } from './auth/password/reset-password/reset-pas
 import { WarehouseComponent } from './warehouse.component';
 import { RegisterStepThreeComponent } from './auth/register/register-step-three/register-step-three.component';
 import { RegisterStepTwoComponent } from './auth/register/register-step-two/register-step-two.component';
+import { LegalInfoComponent } from './web/legal-info/legal-info.component';
+import { CguComponent } from './web/cgu/cgu.component';
+import { CookiesComponent } from './web/cookies/cookies.component';
+import { PrivacyPolicyComponent } from './web/privacy-policy/privacy-policy.component';
+import { HelpContactComponent } from './web/help-contact/help-contact.component';
 
 const routes: Routes = [
-  { path: '', component: WarehouseComponent },
+  {
+    path: '',
+    component: WarehouseComponent,
+  },
   {
     path: `${Pages.WAREHOUSE}`,
     children: [
       { path: `${Pages.LOGIN}`, component: LoginComponent },
-      { path: `${Pages.REGISTER}`,component: RegisterStepOneComponent  },
-      { path: `${Pages.REGISTER_STEP_2}`, component: RegisterStepTwoComponent},
-      { path: `${Pages.REGISTER_STEP_3}`, component: RegisterStepThreeComponent},
+      { path: `${Pages.REGISTER}`, component: RegisterStepOneComponent },
+      { path: `${Pages.REGISTER_STEP_2}`, component: RegisterStepTwoComponent },
+      {
+        path: `${Pages.REGISTER_STEP_3}`,
+        component: RegisterStepThreeComponent,
+      },
       {
         path: `${Pages.RESET_PASSWORD}`, //http://localhost:4201/warehouse/noAuth/resetPassword?idLinkResetPassword=:idLinkResetPassword&expirationLink=:expirationLink&verifyType=:verifyType
         component: ResetPasswordComponent,
@@ -28,6 +39,11 @@ const routes: Routes = [
       },
     ],
   },
+  { path: `${Pages.LEGAL_INFO}`, component: LegalInfoComponent },
+  { path: `${Pages.CGU}`, component: CguComponent },
+  { path: `${Pages.COOKIES}`, component: CookiesComponent },
+  { path: `${Pages.PRIVACY_POLICY}`, component: PrivacyPolicyComponent },
+  { path: `${Pages.HELP_CONTACT}`, component: HelpContactComponent },
 ];
 
 @NgModule({
