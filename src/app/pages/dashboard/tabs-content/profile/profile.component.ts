@@ -156,7 +156,7 @@ export class ProfileComponent extends WarehouseBaseComponent implements OnInit {
 
   handleOnChangePassword() {
     this.router.navigate(
-      [`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.MANAGE_PASSWORD}`],
+      [`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.MANAGE_ACCOUNT}`],
       { queryParams: { tabNumber: 0 } }
     );
   }

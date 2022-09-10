@@ -27,8 +27,11 @@
                             <i nz-icon class="dashboard-header-notifications" nzType="notification" nzTheme="twotone"></i>
                         </nz-badge>
                     </li>
-                    <li nz-menu-item  nzTooltipTitle="{{'profile.help' | translate }}" nzTooltipPlacement="bottom" nz-button nz-tooltip>
+                    <li nz-menu-item nzTooltipTitle="{{'profile.help' | translate }}" nzTooltipPlacement="bottom" nz-button nz-tooltip>
                         <i nz-icon class="dashboard-header-help" nzType="question-circle" nzTheme="twotone"></i>
+                    </li>
+                    <li nz-menu-item nzTooltipTitle="{{'profile.quickLinks' | translate }}" nzTooltipPlacement="bottom" nz-button nz-tooltip>
+                        <span nz-icon class="dashboard-header-quick-links" nzType="appstore" nzTheme="twotone"></span>
                     </li>
                     <li nz-menu-item class="dashboard-user-profile-row">
                         <nz-avatar *ngIf="!imgURL" class="dashboard-user-profile-avatar" [nzSize]="50" nzIcon="user">
@@ -36,11 +39,15 @@
                         <nz-avatar *ngIf="imgURL" class="dashboard-user-profile-avatar" [nzSize]="50" [nzSrc]="imgURL">
                         </nz-avatar>
                     </li>
-                    <li nz-submenu nzTitle="{{dataUser?.username}}" class="dashboard-header-icon">
+                    <li nz-submenu nzTitle="{{dataUser?.username}}" class="dashboard-header-icon" >
                         <ul class="dashboard-header-menu-items">
                             <li nz-menu-item (click)="handleOnNavigate('dashboard/my-profile')">
                                 <i nz-icon nzType="user"></i>
                                 <span>{{ 'profile.title' | translate }}</span>
+                            </li>
+                            <li nz-menu-item (click)="handleOnNavigateWithParams('dashboard/manage/account')">
+                                <i nz-icon nzType="account-book"></i>
+                                <span>{{ 'profile.account.settings' | translate }}</span>
                             </li>
                             <li nz-menu-item (click)="handleOnNavigate('dashboard/settings')">
                                 <i nz-icon nzType="setting"></i>
