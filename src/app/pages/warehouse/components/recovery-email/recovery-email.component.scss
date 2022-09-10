@@ -1,0 +1,58 @@
+.warehouse-recovery-email-wrapper {
+  padding-top: 25px;
+  .warehouse-recovery-card {
+    .warehouse-recovery-text {
+      text-align: justify;
+    }
+    .warehouse-recovery-code {
+      text-align: center;
+      .warehouse-recovery-code-input {
+        width: 50px;
+        height: 50px;
+        margin: 10px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 22px;
+      }
+    }
+    .warehouse-recovery-send-again {
+      text-align: center;
+      margin-bottom: 25px;
+      .warehouse-recovery-send-again-link {
+        font-weight: 600;
+        font-size: 16px;
+      }
+      .warehouse-recovery-send-again-icon {
+        top: -2px;
+      }
+    }
+    .warehouse-recovery-security {
+      padding: 15px;
+      border: 1px solid var(--warehouse-sliver);
+      border-radius: var(--warehouse-border-radius-one);
+      box-shadow: var(--warehouse-box-shadow);
+      .warehouse-recovery-security-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    .warehouse-recovery-email-success {
+      text-align: center;
+      .warehouse-recovery-email-success-title {
+        margin-bottom: 15px;
+      }
+      .warehouse-recovery-email-success-description {
+        margin: 15px;
+      }
+      p {
+        text-align: justify;
+        span {
+          &:first-child {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}

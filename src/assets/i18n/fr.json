@@ -39,7 +39,8 @@
       "emailPec": {
         "title": "Attention! ",
         "description": "Une adresse e-mail de récupération de mot de passe est requise. ",
-        "cta": "Ajoutez un'e-mail"
+        "cta": "Ajoutez un'e-mail",
+        "send": "Envoyer le code par email"
       }
     }
   },
@@ -96,32 +97,32 @@
         "title": "Verification Email",
         "subtitle": "votre compte n'a pas été vérifié, accédez à votre e-mail et vérifiez-le"
       }
+    }
+  },
+  "dataTable": {
+    "options": {
+      "title": "Selectionez",
+      "edit": "Modifier",
+      "show": "Voir",
+      "delete": "Effacer",
+      "reset": "Réinitialiser",
+      "search": {
+        "simple": "Rechercher par email ou Nome et Prénom",
+        "advanced": "Recherche Avancée"
+      },
+      "status": "Changer statut"
     },
-    "dataTable": {
-      "options": {
-        "title": "Selectionez",
-        "edit": "Modifier",
-        "show": "Voir",
-        "delete": "Effacer",
-        "reset": "Réinitialiser",
-        "search": {
-          "simple": "Rechercher par email ou Nome et Prénom",
-          "advanced": "Recherche Avancée"
-        },
-        "status": "Changer statut"
-      },
-      "status": {
-        "all": "Tous",
-        "active": "Activé",
-        "pending": "En attente",
-        "disabled": "Désactivé",
-        "placeholder": "Selectionez un statut",
-        "title": "statut"
-      },
-      "filter": {
-        "exportUsers": "Exporter Excel Utilisateurs",
-        "createdAt": "De - A"
-      }
+    "status": {
+      "all": "Tous",
+      "active": "Activé",
+      "pending": "En attente",
+      "disabled": "Désactivé",
+      "placeholder": "Selectionez un statut",
+      "title": "statut"
+    },
+    "filter": {
+      "exportUsers": "Exporter Excel Utilisateurs",
+      "createdAt": "De - A"
     }
   },
   "warehouse": {
@@ -328,14 +329,32 @@
   "managePassword": {
     "title": "Gérer mon profil",
     "recovery": {
-      "title": "Mon e-mail de secours (PEC)"
+      "title": "Mon e-mail de secours (PEC)",
+      "presentEmailPec": {
+        "title": "Pour compléter la certification de votre courrier électronique PEC personnelle, vous deviez entrer le code à 6 chiffres qui vous a été envoyé par courrier électronique.",
+        "subtitle": "Vous n'avez pas réçu de code ou votre est expiré?",
+        "description": "La sécurité de vos informations personnelles est essentielle. Nous vérifions donc que vous êtes bien à l'origine de cette demande.",
+        "send.again": "Envoyez de nouveau"
+      },
+      "notPresentEmailPec": {
+        "form.title": "À partir d'aujourd'hui, vous pouvez désigner un courrier électronique de récupération pour votre boîte aux lettres. Si vous oubliez votre propre courrier électronique, vous pouvez simplement en choisir un nouveau en utilisant le courrier électronique fourni.",
+        "form.subtitle": "Nous enverrons un code de vérification au courrier électronique fourni, veuillez donc vous assurer que vous pouvez accéder à cette boîte aux lettres pour terminer la procédure."
+      },
+      "successEmailPec": {
+        "title": "Sécurité renforcée de votre espace",
+        "subtitle": "Votre courrier électronique PEC a été vérifié et validé pour améliorer la sécurité de votre espace sur notre système.",
+        "descriptionOne": "En cas de problème avec votre courrier électronique principal, vous pouvez utiliser le courrier électronique PEC",
+        "descriptionTwo": "pour toutes vos opèrations sur notre système."
+      }
     }
   },
   "profile": {
     "title": "Mon Profil",
     "preferences": "Préférences",
+    "account.settings": "Paramètres du compte",
     "notifications": "Notifications",
     "help": "Guide",
+    "quickLinks": "Liens rapides",
     "empty": "--- Non Précisé ---",
     "role": "Vous avez les rôles",
     "roles": "Rôles",

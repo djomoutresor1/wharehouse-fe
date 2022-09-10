@@ -81,6 +81,7 @@
   margin-top: 0 !important;
 }
 
+// Buttons
 .warehouse-btn-outline-primary {
   background: var(--warehouse-white) !important;
   border-color: var(--warehouse-primary) !important;
@@ -111,4 +112,15 @@
       pointer-events: unset;
     }
   }
+}
+
+// Icons size
+.warehouse-icon-small {
+  font-size: 25px !important;
+}
+.warehouse-icon-medium {
+  font-size: 50px !important;
+}
+.warehouse-icon-large {
+  font-size: 75px !important;
 }

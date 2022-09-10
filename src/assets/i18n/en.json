@@ -39,7 +39,8 @@
       "emailPec": {
         "title": "Warning! ",
         "description": "A password recovery email address is required. ",
-        "cta": "Added Email"
+        "cta": "Added Email",
+        "send": "Send code by email"
       }
     }
   },
@@ -109,7 +110,7 @@
         "simple": "Find by email or full name",
         "advanced": "Advanced Search"
       },
-      "status": "change status"
+      "status": "Change status"
     },
     "status": {
       "all": "All",
@@ -327,14 +328,32 @@
   "managePassword": {
     "title": "Manage my profile",
     "recovery": {
-      "title": "My recovery email (PEC)"
+      "title": "My recovery email (PEC)",
+      "presentEmailPec": {
+        "title": "To complete your personal PEC email certification, you were required to enter the 6-digit code that was emailed to you.",
+        "subtitle": "Didn't receive a code or your code has expired ?",
+        "description": "The security of your personal information is essential. We therefore verify that you are indeed at the origin of this request.",
+        "send.again": "Send again"
+      },
+      "notPresentEmailPec": {
+        "form.title": "From today, you can designate a recovery email address for your mailbox. If you forget your own email, you can simply choose a new one using the email address provided.",
+        "form.subtitle": "We will send a verification code to the email address provided, so please male sure that you can access that mailbox to complete the procedure."
+      },
+      "successEmailPec": {
+        "title": "Enhanced security of your space",
+        "subtitle": "Your PEC email address has been verified and validated to improve the security of your space on our system.",
+        "descriptionOne": "In case of problem with your main email address, you can use the PEC email address",
+        "descriptionTwo": "for all your operations on our system."
+      }
     }
   },
   "profile": {
     "title": "My Profile",
     "preferences": "Preferences",
+    "account.settings": "Account Settings",
     "notifications": "Notifications",
     "help": "Help",
+    "quickLinks": "Quick links",
     "empty": "--- Not specified ---",
     "role": "You are",
     "roles": "Roles",

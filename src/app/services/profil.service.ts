@@ -62,4 +62,35 @@ export class ProfilService {
       user
     );
   }
+
+  public onUpdateEmailPecUser(
+    emailPec: string,
+    userId: string
+  ): Observable<ResponseModel> {
+    return this.http.put<ResponseModel>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_UPDATE_EMAIL_PEC_USER}/${userId}`,
+      emailPec
+    );
+  }
+
+  public onVerificationCodeUser(
+    code: string,
+    verifyType: string,
+    userId: string
+  ): Observable<ResponseModel> {
+    return this.http.post<ResponseModel>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_VERIFICATION_CODE}/${userId}`,
+      { code, verifyType }
+    );
+  }
+
+  public onUpdateUserInfosByOperationType(
+    userId: string,
+    operationType: string
+  ): Observable<ResponseModel> {
+    return this.http.put<ResponseModel>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_UPDATE_USER_OPERATION_TYPE}/${userId}`,
+      operationType
+    );
+  }
 }

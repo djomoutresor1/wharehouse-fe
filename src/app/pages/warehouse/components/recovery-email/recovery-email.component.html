@@ -1,1 +1,106 @@
-<p>recovery-email works!</p>
+<div class="warehouse-recovery-email-wrapper container-fluid">
+    <div class="row" *ngIf="isAuth">
+        <div class="col">
+            <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert">
+            </warehouse-notification>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <nz-card class="warehouse-recovery-card" nzTitle="{{'register.emailPec.title' | translate }}"
+                [nzExtra]="extraTemplate">
+                <form *ngIf="!userEmailPec?.length; else presentEmailPec" nz-form [formGroup]="validateForm"
+                    (ngSubmit)="submitForm()">
+                    <p class="warehouse-recovery-text">{{ 'managePassword.recovery.notPresentEmailPec.form.title' |
+                        translate
+                        }}</p>
+                    <nz-form-item>
+                        <nz-form-control [nzErrorTip]="'register.emailPec.required' | translate">
+                            <nz-input-group nzPrefixIcon="mail">
+                                <input type="email" nz-input formControlName="emailPec"
+                                    [placeholder]="'register.emailPec.title' | translate"
+                                    (click)="handleOnChangeInput()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <p class="warehouse-recovery-text">{{'managePassword.recovery.notPresentEmailPec.form.subtitle' |
+                        translate }}</p>
+                    <button nz-button [disabled]="!validateForm.valid" nzBlock
+                        class="login-form-button login-form-margin" [nzType]="'primary'"><i nz-icon
+                            nzType="check-circle" nzTheme="outline"></i> {{'message.alert.emailPec.send' | translate
+                        }}</button>
+                </form>
+                <ng-template #presentEmailPec>
+                    <form nz-form [formGroup]="validateForm" *ngIf="!userInfoEmailPecVerified; else verifyEmailPec">
+                        <h5 nz-typography class="warehouse-recovery-text">{{
+                            'managePassword.recovery.presentEmailPec.title'
+                            |
+                            translate }}</h5>
+                        <div class="warehouse-recovery-code">
+                            <input nz-input (ngModelChange)="handleOnChangeCode()" formControlName="codeOne"
+                                (keypress)="handleIsNumberKey($event)" (keyup)="handleOnKeyTab($event)" maxlength="1"
+                                placeholder="0" nzSize="large" class="warehouse-recovery-code-input" />
+                            <input nz-input (ngModelChange)="handleOnChangeCode()" formControlName="codeTwo"
+                                (keypress)="handleIsNumberKey($event)" (keyup)="handleOnKeyTab($event)" maxlength="1"
+                                placeholder="0" nzSize="large" class="warehouse-recovery-code-input" />
+                            <input nz-input (ngModelChange)="handleOnChangeCode()" formControlName="codeThree"
+                                (keypress)="handleIsNumberKey($event)" (keyup)="handleOnKeyTab($event)" maxlength="1"
+                                placeholder="0" nzSize="large" class="warehouse-recovery-code-input" />
+                            <input nz-input (ngModelChange)="handleOnChangeCode()" formControlName="codeFourth"
+                                (keypress)="handleIsNumberKey($event)" (keyup)="handleOnKeyTab($event)" maxlength="1"
+                                placeholder="0" nzSize="large" class="warehouse-recovery-code-input" />
+                            <input nz-input (ngModelChange)="handleOnChangeCode()" formControlName="codeFive"
+                                (keypress)="handleIsNumberKey($event)" (keyup)="handleOnKeyTab($event)" maxlength="1"
+                                placeholder="0" nzSize="large" class="warehouse-recovery-code-input" />
+                            <input (ngModelChange)="handleOnChangeCode()" formControlName="codeSix" nz-input
+                                (keypress)="handleIsNumberKey($event)" (keyup)="handleOnKeyTab($event)" maxlength="1"
+                                placeholder="0" nzSize="large" class="warehouse-recovery-code-input" />
+                        </div>
+                        <nz-divider nzDashed [nzText]="'managePassword.recovery.presentEmailPec.subtitle' | translate">
+                        </nz-divider>
+                        <div class="warehouse-recovery-send-again">
+                            <a class="warehouse-primary warehouse-recovery-send-again-link"
+                                (click)="handleOnSendAgainCode()">{{'managePassword.recovery.presentEmailPec.send.again'
+                                |
+                                translate }} <span class="warehouse-recovery-send-again-icon" nz-icon nzType="right"
+                                    nzTheme="outline"></span></a>
+                        </div>
+                        <div class="warehouse-recovery-security">
+                            <div class="row">
+                                <div class="col-md-2 warehouse-recovery-security-icon">
+                                    <span class="warehouse-icon-medium" nz-icon nzType="security-scan"
+                                        nzTheme="twotone"></span>
+                                </div>
+                                <div class="col-md-10 warehouse-recovery-security-description">
+                                    {{'managePassword.recovery.presentEmailPec.description' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </ng-template>
+                <ng-template #verifyEmailPec>
+                    <div class="warehouse-recovery-email-success">
+                        <h3 nz-typography class="warehouse-recovery-email-success-title">
+                            {{"managePassword.recovery.successEmailPec.title" | translate}}</h3>
+                        <span nz-icon nzType="check-circle" nzTheme="outline"
+                            class="warehouse-icon-large warehouse-success"></span>
+                        <h5 nz-typography class="warehouse-recovery-email-success-description">
+                            {{"managePassword.recovery.successEmailPec.subtitle" | translate}}</h5>
+                        <nz-divider class="warehouse-background-sliver"></nz-divider>
+                        <p>{{"managePassword.recovery.successEmailPec.descriptionOne" | translate}}
+                            <span class="warehouse-primary">{{userLocalStorage?.emailPec}}</span>
+                            {{"managePassword.recovery.successEmailPec.descriptionTwo" | translate}}
+                        </p>
+                    </div>
+                </ng-template>
+            </nz-card>
+            <ng-template #extraTemplate>
+                <span [ngClass]="userInfoEmailPecVerified ? 'warehouse-success' : 'warehouse-tomato'"
+                    class="warehouse-cursor-pointer warehouse-icon-small"
+                    nzTooltipTitle="{{(userInfoEmailPecVerified ? 'profile.verified' : 'profile.notVerified') | translate }}"
+                    nzTooltipPlacement="bottom" nz-tooltip nz-icon
+                    nzType="{{userInfoEmailPecVerified ? 'check-circle' : 'close-circle'}}" nzTheme="outline"></span>
+            </ng-template>
+        </div>
+    </div>
+</div>

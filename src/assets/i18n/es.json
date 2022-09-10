@@ -39,7 +39,8 @@
       "emailPec": {
         "title": "Attenzione! ",
         "description": "È necessario indicare un'indirizzo email di recupero password. ",
-        "cta": "Agguingi Email"
+        "cta": "Agguingi Email",
+        "send": "Invia il codice via e-mail"
       }
     }
   },
@@ -96,32 +97,32 @@
         "title": "Verifica Email",
         "subtitle": "il tuo account non è stato verificato, vai alla tua email e verificalo"
       }
+    }
+  },
+  "dataTable": {
+    "options": {
+      "title": "Seleziona",
+      "edit": "Modifica",
+      "show": "Vedi",
+      "delete": "Cancella",
+      "reset": "Ripristina",
+      "search": {
+        "simple": "Cerca con email o Nome e Cognome",
+        "advanced": "Ricerca Avanzata"
+      },
+      "status": "Cambia stato"
     },
-    "dataTable": {
-      "options": {
-        "title": "Seleziona",
-        "edit": "Modifica",
-        "show": "Vedi",
-        "delete": "Cancella",
-        "reset": "Ripristina",
-        "search": {
-          "simple": "Cerca con email o Nome e Cognome",
-          "advanced": "Ricerca Avanzata"
-        },
-        "status": "Cambia stato"
-      },
-      "status": {
-        "all": "Tutti",
-        "active": "Attivo",
-        "pending": "In attesa",
-        "disabled": "Disabilitato",
-        "placeholder": "Seleziona uno stato",
-        "title": "Stato"
-      },
-      "filter": {
-        "exportUsers": "Esportare Excel Utenti",
-        "createdAt": "Da - A"
-      }
+    "status": {
+      "all": "Tutti",
+      "active": "Attivo",
+      "pending": "In attesa",
+      "disabled": "Disabilitato",
+      "placeholder": "Seleziona uno stato",
+      "title": "Stato"
+    },
+    "filter": {
+      "exportUsers": "Esportare Excel Utenti",
+      "createdAt": "Da - A"
     }
   },
   "warehouse": {
@@ -328,14 +329,32 @@
   "managePassword": {
     "title": "Gestire il mio profilo",
     "recovery": {
-      "title": "La mia email di recupero (PEC)"
+      "title": "La mia email di recupero (PEC)",
+      "presentEmailPec": {
+        "title": "Per completare la tua certificazione e-mail PEC personale, è necessario inserire il codice a 6 cifre che ti è stato inviato via e-mail.",
+        "subtitle": "Non hai ricevuto un codice o il tuo codice è scaduto?",
+        "description": "La sicurezza delle tue informazioni personali è essenziale. Verifichiamo quindi che siete effettivamente all'origine di questa richiesta.",
+        "send.again": "Invia di nuovo"
+      },
+      "notPresentEmailPec": {
+        "form.title": "Da oggi puoi designare un indirizzo email di recupero per la tua casella di posta. Se dimentichi la tua email, puoi semplicemente sceglierne una nuova utilizzando l'indirizzo email fornito.",
+        "form.subtitle": "Invieremo un codice di verifica all'indirizzo e-mail fornito, quindi assicurati di poter accedere a quella casella di posta per completare la procedura."
+      },
+      "successEmailPec": {
+        "title": "Sicurezza rafforzata del tuo spazio",
+        "subtitle": "La tua email PEC è stata verificata e validata per migliorare la sicurezza del tuo spazio sul nostro sistema.",
+        "descriptionOne": "In caso di problemi con la tua posta elettronica principale, puoi utilizzare la posta elettronica PEC",
+        "descriptionTwo": "per tutte le tue operazioni sul nostro sistema."
+      }
     }
   },
   "profile": {
     "title": "Mio Profilo",
     "preferences": "Preferenze",
+    "account.settings": "Impostazioni Account",
     "notifications": "Notifiche",
     "help": "Guida",
+    "quickLinks": "Link veloci",
     "empty": "--- Non Specificato ---",
     "role": "Hai i roli",
     "roles": "Ruoli",
