@@ -127,4 +127,10 @@ export class DashboardHeaderComponent extends WarehouseBaseComponent implements 
     window.location.reload();
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
   }
+
+  handleOnNavigateWithParams(url: string) {
+    this.router.navigate(
+      [`${Pages.WAREHOUSE}/${url}`], { queryParams: { tabNumber: 0 } }
+    );
+  }
 }

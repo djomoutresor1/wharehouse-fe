@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { ChangePasswordComponent } from '../warehouse/auth/password/change-password/change-password.component';
-import { ManagePasswordComponent } from '../warehouse/components/manage-password/manage-password.component';
+import { ManageAccountComponent } from '../warehouse/components/manage-account/manage-account.component';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { DashboardRackDetailComponent } from './dashboard-rack-detail/dashboard-rack-detail.component';
 import { DashboardRackGlobalComponent } from './dashboard-rack-global/dashboard-rack-global.component';
@@ -48,8 +48,8 @@ const routes: Routes = [
         component: ProfileComponent
       },
       {
-        path: `${Pages.MANAGE_PASSWORD}`,
-        component: ManagePasswordComponent,
+        path: `${Pages.MANAGE_ACCOUNT}`,
+        component: ManageAccountComponent,
       },
       { path: `${Pages.SETTINGS}`, component: PreferencesComponent },
       { path: `${Pages.USERS}`, component: AllUsersComponent },

@@ -13,7 +13,7 @@ import { ChangePasswordComponent } from './auth/password/change-password/change-
 import { SecurePasswordComponent } from './components/secure-password/secure-password.component';
 import { RegisterStepThreeComponent } from './auth/register/register-step-three/register-step-three.component';
 import { RegisterStepTwoComponent } from './auth/register/register-step-two/register-step-two.component';
-import { ManagePasswordComponent } from './components/manage-password/manage-password.component';
+import { ManageAccountComponent } from './components/manage-account/manage-account.component';
 import { RecoveryEmailComponent } from './components/recovery-email/recovery-email.component';
 
 @NgModule({
@@ -27,7 +27,7 @@ import { RecoveryEmailComponent } from './components/recovery-email/recovery-ema
     SecurePasswordComponent,
     RegisterStepTwoComponent,
     RegisterStepThreeComponent,
-    ManagePasswordComponent,
+    ManageAccountComponent,
     RecoveryEmailComponent,
   ],
   imports: [

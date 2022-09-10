@@ -1,4 +1,5 @@
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
+import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
 import { Auth } from '../shared/enums/auth-enums';
 import { Utils } from '../shared/enums/utils-enums';
@@ -22,6 +23,11 @@ export class WarehouseLocalStorage {
 
   WarehouseSetTokenLocalStorage(response: ResponseLoginModel|ResponseResetModel) {
     localStorage.setItem(Utils.WAREHOUSE_JWT_TOKEN, JSON.stringify(response));
+  }
+
+  WarehouseUpdateTokenLocalStorage(response: ResponseModel) {
+    this.WarehouseRemoveTokenLocalStorage();
+    localStorage.setItem(Utils.WAREHOUSE_JWT_TOKEN, JSON.stringify(response?.object));
   }
 
   WarehouseRemoveTokenLocalStorage() {

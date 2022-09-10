@@ -10,16 +10,30 @@ import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
   templateUrl: './dashboard-home.component.html',
   styleUrls: ['./dashboard-home.component.scss'],
 })
-export class DashboardHomeComponent extends WarehouseBaseComponent implements OnInit {
+export class DashboardHomeComponent
+  extends WarehouseBaseComponent
+  implements OnInit
+{
   lanes: LaneModel[] = [];
   lastLane: any;
   name = '';
   language: string = 'en';
   breadcrumbItems!: BreadcrumbItemsModel;
+  userLocalStorage: any;
+  isEmailPec: boolean = false;
 
-  constructor(injector: Injector) { super(injector); }
+  constructor(injector: Injector) {
+    super(injector);
+  }
 
   override ngOnInit(): void {
+    this.userLocalStorage =
+      this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
+    this.isEmailPec =
+      this.userLocalStorage?.emailPec === null ||
+      this.userLocalStorage?.emailPec === ''
+        ? true
+        : false;
     this.initComponent();
     this.dashboardService.getDashboard().subscribe(
       (response) => {
@@ -41,15 +55,16 @@ export class DashboardHomeComponent extends WarehouseBaseComponent implements On
   initComponent() {
     let currentLang = null;
     currentLang = this.translate.currentLang;
-    if(currentLang === undefined) {
-      currentLang = this.warehouseLocalStorage.WarehouseGetLanguageLocalStorage()
+    if (currentLang === undefined) {
+      currentLang =
+        this.warehouseLocalStorage.WarehouseGetLanguageLocalStorage();
     }
     this.translate.use(currentLang as string);
     this.breadcrumbItems = {
       parent: {
-        title: this.translate.instant("dashboard.home")
-      }
-    }
+        title: this.translate.instant('dashboard.home'),
+      },
+    };
   }
 
   handleOnOkModal(event: string) {
@@ -60,7 +75,7 @@ export class DashboardHomeComponent extends WarehouseBaseComponent implements On
 
   handleOnRecoveryEmail() {
     this.router.navigate(
-      [`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.MANAGE_PASSWORD}`],
+      [`${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.MANAGE_ACCOUNT}`],
       { queryParams: { tabNumber: 1 } }
     );
   }

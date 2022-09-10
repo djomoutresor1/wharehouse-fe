@@ -19,5 +19,5 @@ export enum Pages {
   EDIT = "edit",
   RESET_PASSWORD = "noAuth/resetPassword",
   CHANGE_PASSWORD = "change/password",
-  MANAGE_PASSWORD = "manage/password"
+  MANAGE_ACCOUNT = "manage/account"
 }

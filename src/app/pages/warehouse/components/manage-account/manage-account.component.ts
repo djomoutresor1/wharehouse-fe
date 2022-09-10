@@ -5,11 +5,11 @@ import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 
 @Component({
-  selector: 'warehouse-manage-password',
-  templateUrl: './manage-password.component.html',
-  styleUrls: ['./manage-password.component.scss']
+  selector: 'warehouse-manage-account',
+  templateUrl: './manage-account.component.html',
+  styleUrls: ['./manage-account.component.scss']
 })
-export class ManagePasswordComponent extends WarehouseBaseComponent implements OnInit {
+export class ManageAccountComponent extends WarehouseBaseComponent implements OnInit {
 
   breadcrumbItems!: BreadcrumbItemsModel;
 

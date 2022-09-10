@@ -7,7 +7,7 @@
 </nz-breadcrumb> -->
 <warehouse-breadcrumb [items]="breadcrumbItems"></warehouse-breadcrumb>
 <div class="container-fluid dashboard-home-wrapper">
-    <div class="row mb-2">
+    <div *ngIf="isEmailPec" class="row mb-2">
         <div class="col">
             <nz-alert nzType="warning" [nzMessage]="alertWarningTemplate" nzShowIcon nzCloseable="true"></nz-alert>
         </div>
