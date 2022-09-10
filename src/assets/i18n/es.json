@@ -97,6 +97,14 @@
         "title": "Verifica Email",
         "subtitle": "il tuo account non è stato verificato, vai alla tua email e verificalo"
       }
+    },
+    "footer": {
+      "all-rights": "Tutti i diritti riservati",
+      "legal-info": "Informazioni Legali",
+      "cgu": "CGU",
+      "privacy-policy": "Politica di riservatezza",
+      "cookies": "Cookies",
+      "help": "Aiuto & Contatti"
     }
   },
   "dataTable": {

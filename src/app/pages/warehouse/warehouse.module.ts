@@ -15,6 +15,11 @@ import { RegisterStepThreeComponent } from './auth/register/register-step-three/
 import { RegisterStepTwoComponent } from './auth/register/register-step-two/register-step-two.component';
 import { ManageAccountComponent } from './components/manage-account/manage-account.component';
 import { RecoveryEmailComponent } from './components/recovery-email/recovery-email.component';
+import { CookiesComponent } from './web/cookies/cookies.component';
+import { CguComponent } from './web/cgu/cgu.component';
+import { HelpContactComponent } from './web/help-contact/help-contact.component';
+import { PrivacyPolicyComponent } from './web/privacy-policy/privacy-policy.component';
+import { LegalInfoComponent } from './web/legal-info/legal-info.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +34,11 @@ import { RecoveryEmailComponent } from './components/recovery-email/recovery-ema
     RegisterStepThreeComponent,
     ManageAccountComponent,
     RecoveryEmailComponent,
+    CookiesComponent,
+    CguComponent,
+    HelpContactComponent,
+    PrivacyPolicyComponent,
+    LegalInfoComponent,
   ],
   imports: [
     ReactiveFormsModule,

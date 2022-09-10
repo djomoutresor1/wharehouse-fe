@@ -1,0 +1,64 @@
+<nz-footer class="dashboard-footer-wrapper container-fluid">
+    <div class="row">
+        <div class="dashboard-footer-left col-md-3">
+            <p nz-typography class="warehouse-not-margin warehouse-black">
+                ©<span *ngIf="currentYear > createdYear; else otherYear">{{createdYear}} - {{currentYear}}</span>
+                <ng-template #otherYear>
+                    {{createdYear}}
+                </ng-template>
+                WareHouse System. (v1.0.0)
+            </p>
+        </div>
+        <div class="dashboard-footer-center col-md-8">
+            <ul class="dashboard-footer-center-items">
+                <li class="dashboard-footer-center-item">
+                    <a href="/legal-info" target="_blank" title="{{ 'dashboard.footer.legal-info' | translate }}"
+                        class="dashboard-footer-center-item-link">
+                        {{ "dashboard.footer.legal-info" | translate }}
+                    </a>
+                </li>
+                <li class="dashboard-footer-center-item">
+                    <a href="/general-condition" target="_blank" title="{{ 'dashboard.footer.cgu' | translate }}"
+                        class="dashboard-footer-center-item-link">
+                        {{ "dashboard.footer.cgu" | translate }}
+                    </a>
+                </li>
+                <li class="dashboard-footer-center-item">
+                    <a href="/privacy-policy" target="_blank"
+                        title="{{ 'dashboard.footer.privacy-policy' | translate }}"
+                        class="dashboard-footer-center-item-link">
+                        {{ "dashboard.footer.privacy-policy" | translate }}
+                    </a>
+                </li>
+                <li class="dashboard-footer-center-item">
+                    <a href="/cookies" target="_blank" title="{{ 'dashboard.footer.cookies' | translate }}"
+                        class="dashboard-footer-center-item-link">
+                        {{ "dashboard.footer.cookies" | translate }}
+                    </a>
+                </li>
+                <li class="dashboard-footer-center-item">
+                    <a href="/help-contact" target="_blank" title="{{ 'dashboard.footer.help' | translate }}"
+                        class="dashboard-footer-center-item-link">
+                        {{ "dashboard.footer.help" | translate }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="dashboard-footer-right col-md-1">
+            <div class="dashboard-footer-right-socials">
+                <a href="#" target="_blank" title="Social Twitter" class="dashboard-footer-right-social">
+                    <span class="dashboard-footer-right-social-twitter" nz-icon nzType="twitter-square"
+                        nzTheme="fill"></span>
+                </a>
+                <a href="#" target="_blank" title="Social Facebook" class="dashboard-footer-right-social">
+                    <span class="dashboard-footer-right-social-facebook" nz-icon nzType="facebook"
+                        nzTheme="fill"></span>
+                </a>
+                <a href="#" target="_blank" title="Social Linkedin" class="dashboard-footer-right-social">
+                    <span class="dashboard-footer-right-social-linkedin" nz-icon nzType="linkedin"
+                        nzTheme="fill"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nz-footer>
