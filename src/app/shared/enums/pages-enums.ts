@@ -19,5 +19,10 @@ export enum Pages {
   EDIT = "edit",
   RESET_PASSWORD = "noAuth/resetPassword",
   CHANGE_PASSWORD = "change/password",
-  MANAGE_ACCOUNT = "manage/account"
+  MANAGE_ACCOUNT = "manage/account",
+  COOKIES = "cookies",
+  CGU = "general-condition",
+  LEGAL_INFO = "legal-info",
+  PRIVACY_POLICY = "privacy-policy",
+  HELP_CONTACT = "help-contact"
 }

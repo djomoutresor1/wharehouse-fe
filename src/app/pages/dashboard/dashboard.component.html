@@ -9,7 +9,7 @@
         <i nz-icon nzType="dashboard"></i>
         <span>Dashboard</span>
       </li>
-      <li *ngIf="this.checkRole === undefined? false:true" nz-submenu nzTitle="{{'Users' | translate}}" nzIcon="user">
+      <li *ngIf="this.checkRole === undefined ? false : true" nz-submenu nzTitle="{{'Users' | translate}}" nzIcon="user">
         <ul>
           <li nz-menu-item (click)="handleOnUser('dashboard/users')">{{'All users'| translate}}</li>
           <li nz-menu-item (click)="handleOnAddUser()">{{'Add new user' | translate}}</li>
@@ -36,7 +36,7 @@
       <router-outlet></router-outlet>
     </nz-content>
     <nz-divider class="warehouse-background-sliver warehouse-not-margin-bottom"></nz-divider>
-    <nz-footer>Warehouse ©2020 Implement By Angular</nz-footer>
+    <warehouse-dashboard-footer></warehouse-dashboard-footer>
   </nz-layout>
 </nz-layout>
 <div class="row" *ngIf="isLogout">
