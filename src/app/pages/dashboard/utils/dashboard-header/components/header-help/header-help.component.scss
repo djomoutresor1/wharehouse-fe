@@ -1,0 +1,87 @@
+.dashboard-header-help-items {
+  margin-top: 25px;
+  .dashboard-header-help-item {
+    padding: 5px;
+    &:hover {
+      cursor: pointer;
+      background: var(--warehouse-warm-gray-20);
+      border-radius: var(--warehouse-border-radius-one);
+      transition: var(--warehouse-transition);
+    }
+    .dashboard-header-help-item-title {
+      color: var(--warehouse-primary);
+      text-align: justify;
+    }
+    .dashboard-header-help-item-description {
+      text-align: justify;
+    }
+  }
+  .dashboard-header-help-show-more {
+    padding-left: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.dashboard-header-help-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .dashboard-header-help-items {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    .dashboard-header-help-item {
+      font-size: 15px;
+      color: var(--warehouse-primary);
+      font-weight: 500;
+      &:not(:first-child) {
+        &::before {
+          content: "\00A0 \2022";
+          padding: 0 5px;
+        }
+      }
+      &:hover {
+        background: none;
+      }
+      .dashboard-header-help-item-link {
+        text-decoration: none;
+        position: relative;
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 0.1rem;
+          background-color: var(--warehouse-primary);
+          transform-origin: right center;
+          transform: scale(0, 1);
+          transition: transform 0.3s ease;
+          bottom: -5px;
+        }
+        &:hover {
+          color: var(--warehouse-primary);
+          &::before {
+            transform-origin: left center;
+            transform: scale(1, 1);
+            bottom: -5px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dashboard-header-help-children-item {
+  padding: 5px;
+  .dashboard-header-help-children-item-title,
+  .dashboard-header-help-children-item-description {
+    text-align: justify;
+  }
+}

@@ -20,6 +20,7 @@ import { CguComponent } from './web/cgu/cgu.component';
 import { HelpContactComponent } from './web/help-contact/help-contact.component';
 import { PrivacyPolicyComponent } from './web/privacy-policy/privacy-policy.component';
 import { LegalInfoComponent } from './web/legal-info/legal-info.component';
+import { AboutUsComponent } from './web/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { LegalInfoComponent } from './web/legal-info/legal-info.component';
     HelpContactComponent,
     PrivacyPolicyComponent,
     LegalInfoComponent,
+    AboutUsComponent,
   ],
   imports: [
     ReactiveFormsModule,

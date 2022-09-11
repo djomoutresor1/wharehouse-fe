@@ -1,0 +1,122 @@
+<nz-drawer class="dashboard-header-help-wrapper" [nzClosable]="true" [nzWidth]="sizeDrawerHelp" [nzVisible]="visible"
+    [nzFooter]="footerTplHelp" nzPlacement="right" [nzTitle]="title" (nzOnClose)="handleOnCloseDrawerHelp()">
+    <ng-container class="dashboard-header-help-content" *nzDrawerContent>
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+            <input type="text" nz-input placeholder="Search help articles" />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+            <span nz-icon nzType="search"></span>
+        </ng-template>
+        <div class="dashboard-header-help-items">
+            <div (click)="handleOnOpenChildren()" class="dashboard-header-help-item">
+                <h5 nz-typography class="dashboard-header-help-item-title">Lorem ipsum, dolor sit amet consectetur
+                    adipisicing elit. Dolorum, odio!</h5>
+                <p class="dashboard-header-help-item-description">Lorem ipsum dolor, sit amet consectetur adipisicing
+                    elit. Corrupti veritatis nesciunt labore
+                    quisquam quae eligendi facere odit delectus. Beatae est voluptatem laborum distinctio error nesciunt
+                    minus nulla quidem sint ex.</p>
+            </div>
+            <div class="dashboard-header-help-item">
+                <h5 nz-typography class="dashboard-header-help-item-title">Lorem ipsum, dolor sit amet consectetur
+                    adipisicing elit. Dolorum, odio!</h5>
+                <p class="dashboard-header-help-item-description">Lorem ipsum dolor, sit amet consectetur adipisicing
+                    elit. Corrupti veritatis nesciunt labore
+                    quisquam quae eligendi facere odit delectus. Beatae est voluptatem laborum distinctio error nesciunt
+                    minus nulla quidem sint ex.</p>
+            </div>
+            <div class="dashboard-header-help-item">
+                <h5 nz-typography class="dashboard-header-help-item-title">Lorem ipsum, dolor sit amet consectetur
+                    adipisicing elit. Dolorum, odio!</h5>
+                <p class="dashboard-header-help-item-description">Lorem ipsum dolor, sit amet consectetur adipisicing
+                    elit. Corrupti veritatis nesciunt labore
+                    quisquam quae eligendi facere odit delectus. Beatae est voluptatem laborum distinctio error nesciunt
+                    minus nulla quidem sint ex.</p>
+            </div>
+            <div class="dashboard-header-help-item">
+                <h5 nz-typography class="dashboard-header-help-item-title">Lorem ipsum, dolor sit amet consectetur
+                    adipisicing elit. Dolorum, odio!</h5>
+                <p class="dashboard-header-help-item-description">Lorem ipsum dolor, sit amet consectetur adipisicing
+                    elit. Corrupti veritatis nesciunt labore
+                    quisquam quae eligendi facere odit delectus. Beatae est voluptatem laborum distinctio error nesciunt
+                    minus nulla quidem sint ex.</p>
+            </div>
+            <div class="dashboard-header-help-item" *ngIf="showMoreHelp">
+                <h5 nz-typography class="dashboard-header-help-item-title">Lorem ipsum, dolor sit amet consectetur
+                    adipisicing elit. Dolorum, odio!</h5>
+                <p class="dashboard-header-help-item-description">Lorem ipsum dolor, sit amet consectetur adipisicing
+                    elit. Corrupti veritatis nesciunt labore
+                    quisquam quae eligendi facere odit delectus. Beatae est voluptatem laborum distinctio error nesciunt
+                    minus nulla quidem sint ex.</p>
+            </div>
+            <div class="dashboard-header-help-item" *ngIf="showMoreHelp">
+                <h5 nz-typography class="dashboard-header-help-item-title">Lorem ipsum, dolor sit amet consectetur
+                    adipisicing elit. Dolorum, odio!</h5>
+                <p class="dashboard-header-help-item-description">Lorem ipsum dolor, sit amet consectetur adipisicing
+                    elit. Corrupti veritatis nesciunt labore
+                    quisquam quae eligendi facere odit delectus. Beatae est voluptatem laborum distinctio error nesciunt
+                    minus nulla quidem sint ex.</p>
+            </div>
+            <div class="dashboard-header-help-item" *ngIf="showMoreHelp">
+                <h5 nz-typography class="dashboard-header-help-item-title">Lorem ipsum, dolor sit amet consectetur
+                    adipisicing elit. Dolorum, odio!</h5>
+                <p class="dashboard-header-help-item-description">Lorem ipsum dolor, sit amet consectetur adipisicing
+                    elit. Corrupti veritatis nesciunt labore
+                    quisquam quae eligendi facere odit delectus. Beatae est voluptatem laborum distinctio error nesciunt
+                    minus nulla quidem sint ex.</p>
+            </div>
+            <div class="dashboard-header-help-item" *ngIf="showMoreHelp">
+                <h5 nz-typography class="dashboard-header-help-item-title">Lorem ipsum, dolor sit amet consectetur
+                    adipisicing elit. Dolorum, odio!</h5>
+                <p class="dashboard-header-help-item-description">Lorem ipsum dolor, sit amet consectetur adipisicing
+                    elit. Corrupti veritatis nesciunt labore
+                    quisquam quae eligendi facere odit delectus. Beatae est voluptatem laborum distinctio error nesciunt
+                    minus nulla quidem sint ex.</p>
+            </div>
+            <span (click)="handleOnShowMore()" class="warehouse-primary dashboard-header-help-show-more">{{!showMoreHelp
+                ? "Show more 9 articles" : "Show less"}}</span>
+        </div>
+    </ng-container>
+    <ng-template #footerTplHelp>
+        <div class="dashboard-header-help-footer">
+            <ul class="dashboard-header-help-items">
+                <li class="dashboard-header-help-item">
+                    <a href="/about-us" target="_blank" title="{{ 'dashboard.footer.legal-info' | translate }}"
+                        class="dashboard-header-help-item-link">
+                        {{ "dashboard.footer.about-us" | translate }}
+                    </a>
+                </li>
+                <li class="dashboard-header-help-item">
+                    <a href="/legal-info" target="_blank" title="{{ 'dashboard.footer.legal-info' | translate }}"
+                        class="dashboard-header-help-item-link">
+                        {{ "dashboard.footer.legal-info" | translate }}
+                    </a>
+                </li>
+                <li class="dashboard-header-help-item">
+                    <a href="/general-condition" target="_blank" title="{{ 'dashboard.footer.cgu' | translate }}"
+                        class="dashboard-header-help-item-link">
+                        {{ "dashboard.footer.cgu" | translate }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </ng-template>
+</nz-drawer>
+<nz-drawer [nzWidth]="childrenSizeDrawerHelp" [nzClosable]="false" [nzVisible]="childrenVisible" nzTitle="Food"
+    (nzOnClose)="handleOnCloseChildren()">
+    <!-- <nz-list *nzDrawerContent [nzDataSource]="vegetables" [nzRenderItem]="item">
+  <ng-template #item let-item>
+    <nz-list-item [nzContent]="item"></nz-list-item>
+  </ng-template>
+</nz-list> -->
+    <ng-container class="dashboard-header-help-children-content" *nzDrawerContent>
+        <div class="dashboard-header-help-children-item">
+            <h4 nz-typography class="warehouse-primary dashboard-header-help-children-item-title">Lorem ipsum, dolor sit amet consectetur
+                adipisicing elit. Dolorum, odio!</h4>
+            <p class="dashboard-header-help-children-item-description">Lorem ipsum dolor, sit amet consectetur
+                adipisicing
+                elit. Corrupti veritatis nesciunt labore
+                quisquam quae eligendi facere odit delectus. Beatae est voluptatem laborum distinctio error nesciunt
+                minus nulla quidem sint ex.</p>
+        </div>
+    </ng-container>
+</nz-drawer>
