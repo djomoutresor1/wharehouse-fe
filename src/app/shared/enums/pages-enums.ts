@@ -22,6 +22,7 @@ export enum Pages {
   MANAGE_ACCOUNT = "manage/account",
   COOKIES = "cookies",
   CGU = "general-condition",
+  ABOUT_US = "about-us",
   LEGAL_INFO = "legal-info",
   PRIVACY_POLICY = "privacy-policy",
   HELP_CONTACT = "help-contact"

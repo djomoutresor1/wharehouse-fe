@@ -13,6 +13,7 @@ import { CguComponent } from './web/cgu/cgu.component';
 import { CookiesComponent } from './web/cookies/cookies.component';
 import { PrivacyPolicyComponent } from './web/privacy-policy/privacy-policy.component';
 import { HelpContactComponent } from './web/help-contact/help-contact.component';
+import { AboutUsComponent } from './web/about-us/about-us.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: `${Pages.ABOUT_US}`, component: AboutUsComponent },
   { path: `${Pages.LEGAL_INFO}`, component: LegalInfoComponent },
   { path: `${Pages.CGU}`, component: CguComponent },
   { path: `${Pages.COOKIES}`, component: CookiesComponent },

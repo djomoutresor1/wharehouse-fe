@@ -20,6 +20,7 @@ import { DashboardUserAddComponent } from './dashboard-user/dashboard-user-add/d
 import { DashboardUserEditComponent } from './dashboard-user/dashboard-user-edit/dashboard-user-edit.component';
 import { AdvancedFiltersComponent } from './tabs-content/all-users/advanced-filters/advanced-filters.component';
 import { DashboardFooterComponent } from './utils/dashboard-footer/dashboard-footer.component';
+import { HeaderHelpComponent } from './utils/dashboard-header/components/header-help/header-help.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { DashboardFooterComponent } from './utils/dashboard-footer/dashboard-foo
     DashboardUserAddComponent,
     DashboardUserEditComponent,
     AdvancedFiltersComponent,
-    DashboardFooterComponent
+    DashboardFooterComponent,
+    HeaderHelpComponent
   ],
   imports: [
     HttpClientModule,
