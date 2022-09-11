@@ -22,6 +22,9 @@ export class DashboardHeaderComponent extends WarehouseBaseComponent implements 
   userLocalStorage: any;
   imgURL: any;
   dataUser!: ResponseUserModel;
+  titleDrawerHelp: string = '';
+  visibleDrawerHelp: boolean = false;
+  sizeDrawerHelp: number = 500;
 
   constructor(injector: Injector) {
     super(injector);
@@ -132,5 +135,14 @@ export class DashboardHeaderComponent extends WarehouseBaseComponent implements 
     this.router.navigate(
       [`${Pages.WAREHOUSE}/${url}`], { queryParams: { tabNumber: 0 } }
     );
+  }
+
+  handleOnDrawerHelp() {
+    this.titleDrawerHelp = this.translate.instant("profile.help");
+    this.visibleDrawerHelp = true;
+  }
+
+  handleOnCloseDrawerHelp() {
+    this.visibleDrawerHelp = false;
   }
 }
