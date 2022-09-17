@@ -22,7 +22,7 @@
         "description": "Il semble que ce soit votre première connexion avec un mot de passe temporaire. Il doit être changé pour continuer sur le système."
       }
     },
-    "changePassword": { 
+    "changePassword": {
       "success": {
         "title": "Connectez-vous avec votre nouveau mot de passe.",
         "description": "Il est nécessaire de se déconnecter pour continuer dans Warehouse System."
@@ -46,6 +46,16 @@
         "cta": "Ajoutez un'e-mail",
         "send": "Envoyer le code par email"
       }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "show.not.read": "Afficher les non lus",
+      "new.window": "Ouvrir dans la nouvelle fenêtre",
+      "owner": "Direct",
+      "others": "Suivi",
+      "empty": "Il n'y a pas de notifications pour les 30 derniers jours.",
+      "recent": "Plus récents",
+      "make.all.read": "Tout marquer comme lu"
     }
   },
   "operation": {

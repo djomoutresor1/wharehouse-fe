@@ -25,5 +25,6 @@ export enum Pages {
   ABOUT_US = "about-us",
   LEGAL_INFO = "legal-info",
   PRIVACY_POLICY = "privacy-policy",
-  HELP_CONTACT = "help-contact"
+  HELP_CONTACT = "help-contact",
+  NOTIFICATIONS = 'notifications',
 }

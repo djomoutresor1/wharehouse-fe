@@ -46,6 +46,16 @@
         "cta": "Agguingi Email",
         "send": "Invia il codice via e-mail"
       }
+    },
+    "notifications": {
+      "title": "Notifiche",
+      "show.not.read": "Mostra solo non letti",
+      "new.window": "Apri in una nuova finestra",
+      "owner": "Dirette",
+      "others": "Seguite",
+      "empty": "Non ci sono notifiche per gli ultimi 30 giorni.",
+      "recent": "Più recenti",
+      "make.all.read": "Segna tutti come letti"
     }
   },
   "operation": {

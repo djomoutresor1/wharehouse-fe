@@ -46,6 +46,16 @@
         "cta": "Added Email",
         "send": "Send code by email"
       }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "show.not.read": "Show only unread",
+      "new.window": "Open on the new window",
+      "owner": "Direct",
+      "others": "Follow",
+      "empty": "There are no notifications for the last 30 days.",
+      "recent": "Latest",
+      "make.all.read": "Mark all as read"
     }
   },
   "operation": {

@@ -1,0 +1,148 @@
+<div *ngIf="showNotifications" class="warehouse-notifications-wrapper container-fluid">
+    <div class="row warehouse-notifications-header">
+        <div class="col-md-5 warehouse-notifications-header-title">
+            <h3 nz-typography class="warehouse-not-padding warehouse-not-margin">{{ "message.notifications.title" |
+                translate }}</h3>
+        </div>
+        <div class="col-md-7 warehouse-notifications-header-actions">
+            <p nz-typography class="warehouse-not-padding warehouse-not-margin">{{ "message.notifications.show.not.read"
+                | translate }}</p>
+            <nz-switch [ngModel]="true" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate">
+            </nz-switch>
+            <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
+            <ng-template #unCheckedTemplate><span nz-icon nzType="close"></span></ng-template>
+            <span (click)="handleOnGoToNotifications()" class="notifications-header-new-page" nz-tooltip
+                nzTooltipTitle="{{ 'message.notifications.new.window' | translate }}" nzTooltipPlacement="bottom"
+                nz-icon nzType="select" nzTheme="outline"></span>
+        </div>
+    </div>
+    <div class="row warehouse-notifications-body">
+        <div class="col">
+            <nz-tabset>
+                <nz-tab nzTitle="{{ 'message.notifications.owner' | translate }}">
+                    <nz-empty nzNotFoundContent="{{ 'message.notifications.empty' | translate }}"></nz-empty>
+                </nz-tab>
+                <nz-tab nzTitle="{{ 'message.notifications.others' | translate }}">
+                    <div class="row warehouse-notifications-tab-content">
+                        <div class="col-md-6 warehouse-notifications-tab-content-left">
+                            <h4 nz-typography class="warehouse-not-padding warehouse-not-margin">Più recenti</h4>
+                        </div>
+                        <div class="col-md-6 warehouse-notifications-tab-content-right">
+                            <p (click)="handleOnNotificationsReadAll()" nz-typography
+                                class="warehouse-notifications-tab-content-right-link warehouse-primary warehouse-not-padding warehouse-not-margin">
+                                {{ "message.notifications.make.all.read" | translate }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row warehouse-notifications-tab-items">
+                        <div class="row warehouse-notifications-tab-item">
+                            <div class="col-md-2 warehouse-notifications-tab-item-avatar">
+                                <nz-avatar [nzSize]="64" nzIcon="user"></nz-avatar>
+                            </div>
+                            <div class="col-md-9 warehouse-notifications-tab-item-content">
+                                <div class="warehouse-notifications-tab-item-title">
+                                    <h5 nz-typography class="warehouse-not-padding warehouse-not-margin">Lorem ipsum
+                                        dolor
+                                        sit
+                                        amet consectetur adipisicing elit. Eligendi, officiis! - <span
+                                            class="warehouse-primary">3 settimane
+                                            fa</span></h5>
+                                </div>
+                                <span class="warehouse-notifications-tab-item-description">Lorem ipsum dolor sit amet
+                                    consectetur, adipisicing elit. Natus non voluptates debitis
+                                    praesentium saepe dolor amet tempore esse suscipit blanditiis?</span>
+                            </div>
+                            <div class="col-md-1 warehouse-notifications-tab-item-status">
+                                <nz-badge nzStatus="processing"></nz-badge>
+                            </div>
+                        </div>
+                        <div class="row warehouse-notifications-tab-item">
+                            <div class="col-md-2 warehouse-notifications-tab-item-avatar">
+                                <nz-avatar [nzSize]="64" nzIcon="user"></nz-avatar>
+                            </div>
+                            <div class="col-md-9 warehouse-notifications-tab-item-content">
+                                <div class="warehouse-notifications-tab-item-title">
+                                    <h5 nz-typography class="warehouse-not-padding warehouse-not-margin">Lorem ipsum
+                                        dolor
+                                        sit
+                                        amet consectetur adipisicing elit. Eligendi, officiis! - <span
+                                            class="warehouse-primary">3 settimane
+                                            fa</span></h5>
+                                </div>
+                                <span class="warehouse-notifications-tab-item-description">Lorem ipsum dolor sit amet
+                                    consectetur, adipisicing elit. Natus non voluptates debitis
+                                    praesentium saepe dolor amet tempore esse suscipit blanditiis?</span>
+                            </div>
+                            <div class="col-md-1 warehouse-notifications-tab-item-status">
+                                <nz-badge nzStatus="processing"></nz-badge>
+                            </div>
+                        </div>
+                        <div class="row warehouse-notifications-tab-item">
+                            <div class="col-md-2 warehouse-notifications-tab-item-avatar">
+                                <nz-avatar [nzSize]="64" nzIcon="user"></nz-avatar>
+                            </div>
+                            <div class="col-md-9 warehouse-notifications-tab-item-content">
+                                <div class="warehouse-notifications-tab-item-title">
+                                    <h5 nz-typography class="warehouse-not-padding warehouse-not-margin">Lorem ipsum
+                                        dolor
+                                        sit
+                                        amet consectetur adipisicing elit. Eligendi, officiis! - <span
+                                            class="warehouse-primary">3 settimane
+                                            fa</span></h5>
+                                </div>
+                                <span class="warehouse-notifications-tab-item-description">Lorem ipsum dolor sit amet
+                                    consectetur, adipisicing elit. Natus non voluptates debitis
+                                    praesentium saepe dolor amet tempore esse suscipit blanditiis?</span>
+                            </div>
+                            <div class="col-md-1 warehouse-notifications-tab-item-status">
+                                <nz-badge nzStatus="processing"></nz-badge>
+                            </div>
+                        </div>
+                        <div class="row warehouse-notifications-tab-item">
+                            <div class="col-md-2 warehouse-notifications-tab-item-avatar">
+                                <nz-avatar [nzSize]="64" nzIcon="user"></nz-avatar>
+                            </div>
+                            <div class="col-md-9 warehouse-notifications-tab-item-content">
+                                <div class="warehouse-notifications-tab-item-title">
+                                    <h5 nz-typography class="warehouse-not-padding warehouse-not-margin">Lorem ipsum
+                                        dolor
+                                        sit
+                                        amet consectetur adipisicing elit. Eligendi, officiis! - <span
+                                            class="warehouse-primary">3 settimane
+                                            fa</span></h5>
+                                </div>
+                                <span class="warehouse-notifications-tab-item-description">Lorem ipsum dolor sit amet
+                                    consectetur, adipisicing elit. Natus non voluptates debitis
+                                    praesentium saepe dolor amet tempore esse suscipit blanditiis?</span>
+                            </div>
+                            <div class="col-md-1 warehouse-notifications-tab-item-status">
+                                <nz-badge nzStatus="processing"></nz-badge>
+                            </div>
+                        </div>
+                        <div class="row warehouse-notifications-tab-item">
+                            <div class="col-md-2 warehouse-notifications-tab-item-avatar">
+                                <nz-avatar [nzSize]="64" nzIcon="user"></nz-avatar>
+                            </div>
+                            <div class="col-md-9 warehouse-notifications-tab-item-content">
+                                <div class="warehouse-notifications-tab-item-title">
+                                    <h5 nz-typography class="warehouse-not-padding warehouse-not-margin">Lorem ipsum
+                                        dolor
+                                        sit
+                                        amet consectetur adipisicing elit. Eligendi, officiis! - <span
+                                            class="warehouse-primary">3 settimane
+                                            fa</span></h5>
+                                </div>
+                                <span class="warehouse-notifications-tab-item-description">Lorem ipsum dolor sit amet
+                                    consectetur, adipisicing elit. Natus non voluptates debitis
+                                    praesentium saepe dolor amet tempore esse suscipit blanditiis?</span>
+                            </div>
+                            <div class="col-md-1 warehouse-notifications-tab-item-status">
+                                <nz-badge nzStatus="processing"></nz-badge>
+                            </div>
+                        </div>
+                    </div>
+                </nz-tab>
+            </nz-tabset>
+        </div>
+    </div>
+</div>
