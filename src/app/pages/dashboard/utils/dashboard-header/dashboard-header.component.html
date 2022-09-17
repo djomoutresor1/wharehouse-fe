@@ -23,7 +23,7 @@
                 </div>
                 <div class="col dashboard-user-profile-container">
                     <li nz-menu-item nzTooltipTitle="{{'profile.notifications' | translate }}"
-                        nzTooltipPlacement="bottom" nz-button nz-tooltip>
+                        (click)="handleOnShowNotification()" nzTooltipPlacement="bottom" nz-button nz-tooltip>
                         <nz-badge [nzCount]="99">
                             <i nz-icon class="dashboard-header-notifications" nzType="notification"
                                 nzTheme="twotone"></i>
@@ -72,3 +72,5 @@
         </ul>
     </div>
 </nz-header>
+<warehouse-header-notifications [showNotifications]="visibleShowNotifications"
+    (OnNotifyNotifications)="handleOnNotifyNotifications($event)"></warehouse-header-notifications>

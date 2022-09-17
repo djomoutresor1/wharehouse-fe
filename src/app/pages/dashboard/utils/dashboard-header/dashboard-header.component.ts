@@ -1,5 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Injector,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
@@ -11,7 +18,10 @@ import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
   templateUrl: './dashboard-header.component.html',
   styleUrls: ['./dashboard-header.component.scss'],
 })
-export class DashboardHeaderComponent extends WarehouseBaseComponent implements OnInit {
+export class DashboardHeaderComponent
+  extends WarehouseBaseComponent
+  implements OnInit
+{
   @Input() isCollapsed: boolean = false;
   @Output() handleOnNotifyNavigation: EventEmitter<string> =
     new EventEmitter<string>();
@@ -24,6 +34,7 @@ export class DashboardHeaderComponent extends WarehouseBaseComponent implements 
   dataUser!: ResponseUserModel;
   titleDrawerHelp: string = '';
   visibleDrawerHelp: boolean = false;
+  visibleShowNotifications: boolean = false;
   sizeDrawerHelp: number = 500;
 
   constructor(injector: Injector) {
@@ -132,17 +143,26 @@ export class DashboardHeaderComponent extends WarehouseBaseComponent implements 
   }
 
   handleOnNavigateWithParams(url: string) {
-    this.router.navigate(
-      [`${Pages.WAREHOUSE}/${url}`], { queryParams: { tabNumber: 0 } }
-    );
+    this.router.navigate([`${Pages.WAREHOUSE}/${url}`], {
+      queryParams: { tabNumber: 0 },
+    });
   }
 
   handleOnDrawerHelp() {
-    this.titleDrawerHelp = this.translate.instant("profile.help");
+    this.titleDrawerHelp = this.translate.instant('profile.help');
     this.visibleDrawerHelp = true;
   }
 
   handleOnCloseDrawerHelp() {
     this.visibleDrawerHelp = false;
+  }
+
+  handleOnShowNotification() {
+    this.visibleShowNotifications = !this.visibleShowNotifications;
+  }
+
+  handleOnNotifyNotifications(event: any) {
+    // Send false from child component to alert closing parent component;
+    this.visibleShowNotifications = event;
   }
 }

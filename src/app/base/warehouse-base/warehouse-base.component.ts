@@ -79,7 +79,6 @@ export class WarehouseBaseComponent implements OnInit {
     '.webp',
   ];
   
-
   constructor(injector: Injector) {
     this.router = injector.get(Router);
     this.route = injector.get(ActivatedRoute);
@@ -170,16 +169,23 @@ export class WarehouseBaseComponent implements OnInit {
     this.isExpiredToken = true;
   }
 
+  handleOnNavigateByUrl(url: string) {
+    this.router.navigate([url]);
+  }
+
   handleOnLogin() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+    let url = `${Pages.WAREHOUSE}/${Pages.LOGIN}`;
+    this.handleOnNavigateByUrl(url);
   }
 
   handleOnRegister() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.REGISTER}`]);
+    let url = `${Pages.WAREHOUSE}/${Pages.REGISTER}`
+    this.handleOnNavigateByUrl(url);
   }
 
   handleOnForgotPassword() {
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.FORGOT_PASSWORD}`]);
+    let url = `${Pages.WAREHOUSE}/${Pages.FORGOT_PASSWORD}`;
+    this.handleOnNavigateByUrl(url);
   }
 
   errorAlertType(message: string): void {

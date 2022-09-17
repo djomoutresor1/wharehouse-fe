@@ -27,6 +27,7 @@ export class RegisterStepOneComponent extends WarehouseBaseComponent implements 
 
   constructor(injector: Injector) {
     super(injector);
+    this.checkIfUserIsAlreadyLogged();
   }
 
   override ngOnInit(): void {

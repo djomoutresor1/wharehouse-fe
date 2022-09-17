@@ -1,0 +1,104 @@
+.warehouse-notifications-wrapper {
+  background: var(--warehouse-white);
+  border-radius: var(--warehouse-border-radius-one);
+  box-shadow: var(--warehouse-box-shadow);
+  .warehouse-notifications-header {
+    padding: 15px 10px;
+    .warehouse-notifications-header-title {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+    }
+    .warehouse-notifications-header-actions {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      p {
+        margin-right: 10px !important;
+      }
+      .notifications-header-new-page {
+        font-size: 20px;
+        margin: 10px 0px 0 20px;
+        cursor: pointer;
+      }
+    }
+  }
+  .warehouse-notifications-body {
+    .warehouse-notifications-tab-content {
+      .warehouse-notifications-tab-content-right {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        font-weight: 500;
+        .warehouse-notifications-tab-content-right-link {
+          text-decoration: none;
+          position: relative;
+          &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 0.1rem;
+            background-color: var(--warehouse-primary);
+            transform-origin: right center;
+            transform: scale(0, 1);
+            transition: transform 0.3s ease;
+            bottom: -5px;
+          }
+          &:hover {
+            color: var(--warehouse-primary);
+            cursor: pointer;
+            &::before {
+              transform-origin: left center;
+              transform: scale(1, 1);
+              bottom: -5px;
+            }
+          }
+        }
+      }
+    }
+    .warehouse-notifications-tab-items {
+      margin-top: 15px;
+      height: calc(80vh - 100px);
+      overflow: scroll;
+      .warehouse-notifications-tab-item {
+        margin: 10px 0;
+        &:hover {
+          .warehouse-notifications-tab-item-content {
+            cursor: pointer;
+            background: var(--warehouse-warm-gray-20);
+            border-radius: var(--warehouse-border-radius-one);
+            transition: var(--warehouse-transition);
+          }
+        }
+        .warehouse-notifications-tab-item-avatar {
+          margin: 0;
+          padding: 0;
+        }
+        .warehouse-notifications-tab-item-content {
+          margin: 0;
+          .warehouse-notifications-tab-item-title {
+            text-align: justify;
+            margin-bottom: 5px;
+          }
+          .warehouse-notifications-tab-item-description {
+            text-align: justify;
+          }
+        }
+        .warehouse-notifications-tab-item-status {
+          display: flex;
+          justify-content: end;
+          align-items: start;
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
