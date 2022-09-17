@@ -39,3 +39,13 @@
     }
   }
 }
+
+warehouse-header-notifications {
+  width: 540px;
+  height: auto;
+  display: flex;
+  float: right;
+  right: 20%;
+  position: absolute;
+  z-index: 1;
+}
