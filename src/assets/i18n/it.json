@@ -19,7 +19,18 @@
       },
       "temporary.password": {
         "title": "Password Temporanea",
-        "description": "Sembra che sia il tuo primo accesso con una password temporanea. Deve essere cambiata per continuare nel sistema."
+        "description": "Sembra che sia il tuo primo accesso con una password temporanea. Deve essere cambiata per continuare nel sistema.",
+        "tootlip": {
+          "title": "Che cosa significa ?",
+          "description": "Sono utenti registrati che non hanno/hanno ancora cambiato la password generata da sistema con la loro propria password."
+        }
+      },
+      "user.organization": {
+        "title": "Utenti dall'organizzazione",
+        "tootlip": {
+          "title": "Che cosa significa ?",
+          "description": "Si tratta di utenti aggiunti dall'amministrazione dell'organizzazione / che si sono registrati al sistema stessi."
+        }
       }
     },
     "changePassword": {

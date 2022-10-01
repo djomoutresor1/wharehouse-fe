@@ -25,8 +25,9 @@
             <nz-collapse-panel [nzHeader]="'dataTable.options.search.advanced' | translate" [nzActive]="false"
                 [nzExtra]="collapseContent" [nzDisabled]="false">
                 <div [formGroup]="searchForm" class="row warehouse-not-margin warehouse-users-filter">
+                    <!-- Email Search -->
                     <div class="col-md-2">
-                        <nz-form-label nzFor="typeEmailVerification">{{"verifyEmail.title" | translate }}
+                        <nz-form-label nzFor="typeEmailVerification">{{"register.email.title" | translate }}
                         </nz-form-label>
                         <nz-form-item>
                             <nz-form-control>
@@ -57,6 +58,40 @@
                             </nz-form-control>
                         </nz-form-item>
                     </div>
+                    <!-- Email Pec Search -->
+                    <div class="col-md-2">
+                        <nz-form-label nzFor="typeEmailPecVerification">{{"register.emailPec.title" | translate }}
+                        </nz-form-label>
+                        <nz-form-item>
+                            <nz-form-control>
+                                <nz-select [(ngModel)]="selectedTypeEmailPec" [nzCustomTemplate]="typeEmailTemplate"
+                                    [nzPlaceHolder]="'dataTable.status.placeholder'| translate"
+                                    formControlName="typeEmailPecVerification" (ngModelChange)="handleOnSearchUsers()">
+                                    <nz-option nzCustomContent
+                                        *ngFor="let typeEmailVerification of listOfTypeEmailVerification"
+                                        [nzValue]="typeEmailVerification?.value"
+                                        [nzLabel]="typeEmailVerification?.label">
+                                        <span class="profile-verified" *ngIf="typeEmailVerification?.value !== 'all'"
+                                            [ngClass]="typeEmailVerification?.value ? 'warehouse-background-success' : 'warehouse-background-tomato'">
+                                            <i nz-icon
+                                                nzType="{{typeEmailVerification?.value ? 'check-circle' : 'close-circle'}}"
+                                                nzTheme="outline"></i>
+                                        </span>
+                                        {{typeEmailVerification?.label}}
+                                    </nz-option>
+                                </nz-select>
+                                <ng-template #typeEmailTemplate let-selected>
+                                    <span class="profile-verified" *ngIf="selected?.nzValue !== 'all'"
+                                        [ngClass]="selected?.nzValue ? 'warehouse-background-success' : 'warehouse-background-tomato'">
+                                        <i nz-icon nzType="{{selected?.nzValue ? 'check-circle' : 'close-circle'}}"
+                                            nzTheme="outline"></i>
+                                    </span>
+                                    {{ selected.nzLabel }}
+                                </ng-template>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Role Search -->
                     <div class="col-md-2">
                         <nz-form-label nzFor="role">{{"register.role.title" | translate }}
                         </nz-form-label>
@@ -83,6 +118,7 @@
                             </nz-form-control>
                         </nz-form-item>
                     </div>
+                    <!-- Status Search -->
                     <div class="col-md-2">
                         <nz-form-label nzFor="status">{{"profile.status" | translate }}
                         </nz-form-label>
@@ -104,6 +140,63 @@
                             </nz-form-control>
                         </nz-form-item>
                     </div>
+                    <!-- Temporary Password Search -->
+                    <div class="col-md-2">
+                        <nz-form-label nzFor="temporaryPassword">{{"message.verification.temporary.password.title" |
+                            translate }}
+                        </nz-form-label>
+                        <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover
+                            class="temporary-password-tootlip warehouse-cursor-pointer"
+                            [nzPopoverTitle]="'message.verification.temporary.password.tootlip.title' | translate"
+                            [nzPopoverContent]="temporaryPasswordContentTemplate" nzPopoverPlacement="right"></i>
+                        <ng-template #temporaryPasswordContentTemplate>
+                            <div class="warehouse-popover-wrapper">
+                                <p>{{'message.verification.temporary.password.tootlip.description' | translate }}
+                                </p>
+                            </div>
+                        </ng-template>
+                        <nz-form-item>
+                            <nz-form-control>
+                                <nz-select [(ngModel)]="selectedPassword"
+                                    [nzPlaceHolder]="'dataTable.status.placeholder'| translate"
+                                    formControlName="temporaryPassword" (ngModelChange)="handleOnSearchUsers()">
+                                    <nz-option nzCustomContent *ngFor="let genericType of listOfGenericType"
+                                        [nzValue]="genericType?.value" [nzLabel]="genericType?.label">
+                                        {{genericType?.label}}
+                                    </nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Users added by organization admin Search -->
+                    <div class="col-md-2">
+                        <nz-form-label nzFor="temporaryPassword">{{"message.verification.user.organization.title" |
+                            translate }}
+                        </nz-form-label>
+                        <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover
+                            class="temporary-password-tootlip warehouse-cursor-pointer"
+                            [nzPopoverTitle]="'message.verification.user.organization.tootlip.title' | translate"
+                            [nzPopoverContent]="organizationContentTemplate" nzPopoverPlacement="right"></i>
+                        <ng-template #organizationContentTemplate>
+                            <div class="warehouse-popover-wrapper">
+                                <p>{{'message.verification.user.organization.tootlip.description' | translate }}
+                                </p>
+                            </div>
+                        </ng-template>
+                        <nz-form-item>
+                            <nz-form-control>
+                                <nz-select [(ngModel)]="selectedOrganizationUsers"
+                                    [nzPlaceHolder]="'dataTable.status.placeholder'| translate"
+                                    formControlName="organizationUsers" (ngModelChange)="handleOnSearchUsers()">
+                                    <nz-option nzCustomContent *ngFor="let genericType of listOfGenericType"
+                                        [nzValue]="genericType?.value" [nzLabel]="genericType?.label">
+                                        {{genericType?.label}}
+                                    </nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Range createdAt Search -->
                     <div class="col-md-3 warehouse-filter-range">
                         <nz-form-label nzFor="createdAt">{{ "dataTable.filter.createdAt" | translate }}
                         </nz-form-label>
