@@ -19,7 +19,11 @@
       },
       "temporary.password": {
         "title": "Password Temporary",
-        "description": "It appears to be your first login with a temporary password. It must be changed to continue in the system."
+        "description": "It appears to be your first login with a temporary password. It must be changed to continue in the system.",
+        "tootlip": {
+          "title": "What does it mean ?",
+          "description": "These are users who have not yet changed the system-generated password to their own password."
+        }
       }
     },
     "changePassword": {

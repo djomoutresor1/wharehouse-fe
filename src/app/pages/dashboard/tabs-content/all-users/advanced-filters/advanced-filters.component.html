@@ -25,6 +25,7 @@
             <nz-collapse-panel [nzHeader]="'dataTable.options.search.advanced' | translate" [nzActive]="false"
                 [nzExtra]="collapseContent" [nzDisabled]="false">
                 <div [formGroup]="searchForm" class="row warehouse-not-margin warehouse-users-filter">
+                    <!-- Email Search -->
                     <div class="col-md-2">
                         <nz-form-label nzFor="typeEmailVerification">{{"verifyEmail.title" | translate }}
                         </nz-form-label>
@@ -57,6 +58,7 @@
                             </nz-form-control>
                         </nz-form-item>
                     </div>
+                    <!-- Role Search -->
                     <div class="col-md-2">
                         <nz-form-label nzFor="role">{{"register.role.title" | translate }}
                         </nz-form-label>
@@ -83,6 +85,7 @@
                             </nz-form-control>
                         </nz-form-item>
                     </div>
+                    <!-- Status Search -->
                     <div class="col-md-2">
                         <nz-form-label nzFor="status">{{"profile.status" | translate }}
                         </nz-form-label>
@@ -104,6 +107,35 @@
                             </nz-form-control>
                         </nz-form-item>
                     </div>
+                    <!-- Temporary Password Search -->
+                    <div class="col-md-2">
+                        <nz-form-label nzFor="temporaryPassword">{{"message.verification.temporary.password.title" |
+                            translate }}
+                        </nz-form-label>
+                        <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover
+                            class="temporary-assword-tootlip warehouse-cursor-pointer"
+                            [nzPopoverTitle]="'message.verification.temporary.password.tootlip.title' | translate"
+                            [nzPopoverContent]="temporaryPasswordContentTemplate" nzPopoverPlacement="right"></i>
+                        <ng-template #temporaryPasswordContentTemplate>
+                            <div class="warehouse-popover-wrapper">
+                                <p>{{'message.verification.temporary.password.tootlip.description' | translate }}
+                                </p>
+                            </div>
+                        </ng-template>
+                        <nz-form-item>
+                            <nz-form-control>
+                                <nz-select [(ngModel)]="selectedPassword"
+                                    [nzPlaceHolder]="'dataTable.status.placeholder'| translate"
+                                    formControlName="temporaryPassword" (ngModelChange)="handleOnSearchUsers()">
+                                    <nz-option nzCustomContent *ngFor="let genericType of listOfGenericType"
+                                        [nzValue]="genericType?.value" [nzLabel]="genericType?.label">
+                                        {{genericType?.label}}
+                                    </nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Range createdAt Search -->
                     <div class="col-md-3 warehouse-filter-range">
                         <nz-form-label nzFor="createdAt">{{ "dataTable.filter.createdAt" | translate }}
                         </nz-form-label>

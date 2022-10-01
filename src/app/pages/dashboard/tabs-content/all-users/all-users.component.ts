@@ -77,6 +77,8 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
           (user) => user.user.userId !== this.user?.userId
         );
         this.tmpUsers = this.allUsers;
+        console.log("this.allUsers: ", this.allUsers);
+        
       },
       (error: HttpErrorResponse) => {
         if (error.status === 403) {

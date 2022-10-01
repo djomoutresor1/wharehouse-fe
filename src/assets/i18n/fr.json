@@ -19,7 +19,11 @@
       },
       "temporary.password": {
         "title": "Mot de passe temporaire",
-        "description": "Il semble que ce soit votre première connexion avec un mot de passe temporaire. Il doit être changé pour continuer sur le système."
+        "description": "Il semble que ce soit votre première connexion avec un mot de passe temporaire. Il doit être changé pour continuer sur le système.",
+        "tootlip": {
+          "title": "Qu'est-ce que ça veut dire ?",
+          "description": "Il s'agit d'utilisateurs qui n'ont pas encore remplacé le mot de passe généré par le système par leur propre mot de passe."
+        }
       }
     },
     "changePassword": {
