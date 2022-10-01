@@ -146,7 +146,7 @@
                             translate }}
                         </nz-form-label>
                         <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover
-                            class="temporary-assword-tootlip warehouse-cursor-pointer"
+                            class="temporary-password-tootlip warehouse-cursor-pointer"
                             [nzPopoverTitle]="'message.verification.temporary.password.tootlip.title' | translate"
                             [nzPopoverContent]="temporaryPasswordContentTemplate" nzPopoverPlacement="right"></i>
                         <ng-template #temporaryPasswordContentTemplate>
@@ -160,6 +160,34 @@
                                 <nz-select [(ngModel)]="selectedPassword"
                                     [nzPlaceHolder]="'dataTable.status.placeholder'| translate"
                                     formControlName="temporaryPassword" (ngModelChange)="handleOnSearchUsers()">
+                                    <nz-option nzCustomContent *ngFor="let genericType of listOfGenericType"
+                                        [nzValue]="genericType?.value" [nzLabel]="genericType?.label">
+                                        {{genericType?.label}}
+                                    </nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Users added by organization admin Search -->
+                    <div class="col-md-2">
+                        <nz-form-label nzFor="temporaryPassword">{{"message.verification.user.organization.title" |
+                            translate }}
+                        </nz-form-label>
+                        <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover
+                            class="temporary-password-tootlip warehouse-cursor-pointer"
+                            [nzPopoverTitle]="'message.verification.user.organization.tootlip.title' | translate"
+                            [nzPopoverContent]="organizationContentTemplate" nzPopoverPlacement="right"></i>
+                        <ng-template #organizationContentTemplate>
+                            <div class="warehouse-popover-wrapper">
+                                <p>{{'message.verification.user.organization.tootlip.description' | translate }}
+                                </p>
+                            </div>
+                        </ng-template>
+                        <nz-form-item>
+                            <nz-form-control>
+                                <nz-select [(ngModel)]="selectedOrganizationUsers"
+                                    [nzPlaceHolder]="'dataTable.status.placeholder'| translate"
+                                    formControlName="organizationUsers" (ngModelChange)="handleOnSearchUsers()">
                                     <nz-option nzCustomContent *ngFor="let genericType of listOfGenericType"
                                         [nzValue]="genericType?.value" [nzLabel]="genericType?.label">
                                         {{genericType?.label}}

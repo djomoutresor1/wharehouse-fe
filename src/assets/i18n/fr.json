@@ -22,7 +22,14 @@
         "description": "Il semble que ce soit votre première connexion avec un mot de passe temporaire. Il doit être changé pour continuer sur le système.",
         "tootlip": {
           "title": "Qu'est-ce que ça veut dire ?",
-          "description": "Il s'agit d'utilisateurs qui n'ont pas encore remplacé le mot de passe généré par le système par leur propre mot de passe."
+          "description": "Il s'agit d'utilisateurs qui n'ont pas encore/ont déjà remplacé le mot de passe généré par le système par leur propre mot de passe."
+        }
+      },
+      "user.organization": {
+        "title": "Utilisateurs de l'organisation",
+        "tootlip": {
+          "title": "Qu'est-ce que ça veut dire ?",
+          "description": "Il s'agit des utilisateurs ajoutés par l'administration de l'organisation / ayant procédé sois même à la registration sur le système."
         }
       }
     },

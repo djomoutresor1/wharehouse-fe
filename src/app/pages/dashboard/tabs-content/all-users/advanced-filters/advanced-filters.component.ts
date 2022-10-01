@@ -40,6 +40,7 @@ export class AdvancedFiltersComponent
   selectedTypeEmail: string = 'all';
   selectedTypeEmailPec: string = 'all';
   selectedPassword: string = 'all';
+  selectedOrganizationUsers: string = 'all';
 
   listOfGenericType = [
     {
@@ -107,6 +108,8 @@ export class AdvancedFiltersComponent
       this.searchForm.controls['temporaryPassword']?.value;
     let status = this.searchForm.controls['status']?.value;
     let role = this.searchForm.controls['role']?.value;
+    let organizationAdmin =
+      this.searchForm.controls['organizationUsers']?.value;
     let createdAtStart = moment(
       this.searchForm.controls['createdAt']?.value?.[0]
     ).format(this.dateFormatTwo);
@@ -122,6 +125,7 @@ export class AdvancedFiltersComponent
     this.handleOnSelectTypeEmailPecVerification(typeEmailPecVerification);
     this.handleOnSelectTemporaryPassword(temporaryPassword);
     this.handleOnSelectStatus(status);
+    this.handleOnSelectOrganizationUsers(organizationAdmin);
     if (now !== createdAtStart && now !== createdAtEnd) {
       this.handleOnSelectCreatedAt(createdAtStart, createdAtEnd);
     }
@@ -171,6 +175,17 @@ export class AdvancedFiltersComponent
       this.usersFiltered = this.usersFiltered?.filter(
         (user: ResponseUserDataModel) =>
           !user.userInfo.temporalPassword === temporaryPassword
+      );
+    }
+  }
+
+  handleOnSelectOrganizationUsers(organizationAdmin: boolean | string) {
+    if (organizationAdmin === Utils.WAREHOUSE_PREFIX_ALL) {
+      this.usersFiltered = this.usersFiltered;
+    } else {
+      this.usersFiltered = this.usersFiltered?.filter(
+        (user: ResponseUserDataModel) =>
+          !user.userInfo.adminUser === organizationAdmin
       );
     }
   }
@@ -236,6 +251,7 @@ export class AdvancedFiltersComponent
       temporaryPassword: Utils.WAREHOUSE_PREFIX_ALL,
       status: Utils.WAREHOUSE_PREFIX_ALL,
       role: Utils.WAREHOUSE_PREFIX_ALL,
+      organizationUsers: Utils.WAREHOUSE_PREFIX_ALL,
       createdAt: [],
     });
   }
