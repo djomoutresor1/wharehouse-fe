@@ -27,13 +27,46 @@
                 <div [formGroup]="searchForm" class="row warehouse-not-margin warehouse-users-filter">
                     <!-- Email Search -->
                     <div class="col-md-2">
-                        <nz-form-label nzFor="typeEmailVerification">{{"verifyEmail.title" | translate }}
+                        <nz-form-label nzFor="typeEmailVerification">{{"register.email.title" | translate }}
                         </nz-form-label>
                         <nz-form-item>
                             <nz-form-control>
                                 <nz-select [(ngModel)]="selectedTypeEmail" [nzCustomTemplate]="typeEmailTemplate"
                                     [nzPlaceHolder]="'dataTable.status.placeholder'| translate"
                                     formControlName="typeEmailVerification" (ngModelChange)="handleOnSearchUsers()">
+                                    <nz-option nzCustomContent
+                                        *ngFor="let typeEmailVerification of listOfTypeEmailVerification"
+                                        [nzValue]="typeEmailVerification?.value"
+                                        [nzLabel]="typeEmailVerification?.label">
+                                        <span class="profile-verified" *ngIf="typeEmailVerification?.value !== 'all'"
+                                            [ngClass]="typeEmailVerification?.value ? 'warehouse-background-success' : 'warehouse-background-tomato'">
+                                            <i nz-icon
+                                                nzType="{{typeEmailVerification?.value ? 'check-circle' : 'close-circle'}}"
+                                                nzTheme="outline"></i>
+                                        </span>
+                                        {{typeEmailVerification?.label}}
+                                    </nz-option>
+                                </nz-select>
+                                <ng-template #typeEmailTemplate let-selected>
+                                    <span class="profile-verified" *ngIf="selected?.nzValue !== 'all'"
+                                        [ngClass]="selected?.nzValue ? 'warehouse-background-success' : 'warehouse-background-tomato'">
+                                        <i nz-icon nzType="{{selected?.nzValue ? 'check-circle' : 'close-circle'}}"
+                                            nzTheme="outline"></i>
+                                    </span>
+                                    {{ selected.nzLabel }}
+                                </ng-template>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <!-- Email Pec Search -->
+                    <div class="col-md-2">
+                        <nz-form-label nzFor="typeEmailPecVerification">{{"register.emailPec.title" | translate }}
+                        </nz-form-label>
+                        <nz-form-item>
+                            <nz-form-control>
+                                <nz-select [(ngModel)]="selectedTypeEmailPec" [nzCustomTemplate]="typeEmailTemplate"
+                                    [nzPlaceHolder]="'dataTable.status.placeholder'| translate"
+                                    formControlName="typeEmailPecVerification" (ngModelChange)="handleOnSearchUsers()">
                                     <nz-option nzCustomContent
                                         *ngFor="let typeEmailVerification of listOfTypeEmailVerification"
                                         [nzValue]="typeEmailVerification?.value"

@@ -38,6 +38,7 @@ export class AdvancedFiltersComponent
   selectedStatus: string = 'all';
   selectedRole: string = 'all';
   selectedTypeEmail: string = 'all';
+  selectedTypeEmailPec: string = 'all';
   selectedPassword: string = 'all';
 
   listOfGenericType = [
@@ -100,6 +101,8 @@ export class AdvancedFiltersComponent
     let search = this.searchForm.controls['search']?.value;
     let typeEmailVerification =
       this.searchForm.controls['typeEmailVerification']?.value;
+    let typeEmailPecVerification =
+      this.searchForm.controls['typeEmailPecVerification']?.value;
     let temporaryPassword =
       this.searchForm.controls['temporaryPassword']?.value;
     let status = this.searchForm.controls['status']?.value;
@@ -116,6 +119,7 @@ export class AdvancedFiltersComponent
     this.handleOnSearchUser(search);
     this.handleOnSelectRole(role);
     this.handleOnSelectTypeEmailVerification(typeEmailVerification);
+    this.handleOnSelectTypeEmailPecVerification(typeEmailPecVerification);
     this.handleOnSelectTemporaryPassword(temporaryPassword);
     this.handleOnSelectStatus(status);
     if (now !== createdAtStart && now !== createdAtEnd) {
@@ -143,6 +147,19 @@ export class AdvancedFiltersComponent
       this.usersFiltered = this.usersFiltered?.filter(
         (user: ResponseUserDataModel) =>
           user.user.active === typeEmailVerification
+      );
+    }
+  }
+
+  handleOnSelectTypeEmailPecVerification(
+    typeEmailPecVerification: boolean | string
+  ) {
+    if (typeEmailPecVerification === Utils.WAREHOUSE_PREFIX_ALL) {
+      this.usersFiltered = this.usersFiltered;
+    } else {
+      this.usersFiltered = this.usersFiltered?.filter(
+        (user: ResponseUserDataModel) =>
+          user.userInfo.emailPecVerified === typeEmailPecVerification
       );
     }
   }
@@ -215,6 +232,7 @@ export class AdvancedFiltersComponent
     this.searchForm = this.fb.group({
       search: '',
       typeEmailVerification: Utils.WAREHOUSE_PREFIX_ALL,
+      typeEmailPecVerification: Utils.WAREHOUSE_PREFIX_ALL,
       temporaryPassword: Utils.WAREHOUSE_PREFIX_ALL,
       status: Utils.WAREHOUSE_PREFIX_ALL,
       role: Utils.WAREHOUSE_PREFIX_ALL,
