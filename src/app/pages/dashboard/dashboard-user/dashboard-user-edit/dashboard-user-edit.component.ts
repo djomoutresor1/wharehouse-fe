@@ -14,6 +14,7 @@ import * as moment from 'moment';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseFileModel } from 'src/model/auth/response/response-file-model';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+
 @Component({
   selector: 'warehouse-dashboard-user-edit',
   templateUrl: './dashboard-user-edit.component.html',
@@ -31,6 +32,8 @@ export class DashboardUserEditComponent extends WarehouseBaseComponent implement
   showbuttonUploadCover: boolean = false;
   isRemovePictureAvatar: boolean = false;
   isRemovePictureCover: boolean = false;
+  isUpdatePictureAvatar: boolean = false;
+  isUpdatePictureCover: boolean = false;
   countrySelected: string = '';
   stateSelected: string = '';
   landlinePrefixSelected: string = '';
@@ -157,6 +160,7 @@ export class DashboardUserEditComponent extends WarehouseBaseComponent implement
         reader.readAsDataURL(this.selectedFileAvatar);
         reader.onload = () => {
           this.imgURL = reader.result;
+          this.isUpdatePictureAvatar = true;
         };
       }
     }
@@ -170,6 +174,7 @@ export class DashboardUserEditComponent extends WarehouseBaseComponent implement
         reader.readAsDataURL(this.selectedFileCover);
         reader.onload = () => {
           this.bcgURL = reader.result;
+          this.isUpdatePictureCover = true;
         };
       }
     }
@@ -206,8 +211,10 @@ export class DashboardUserEditComponent extends WarehouseBaseComponent implement
     }
   }
 
-  handleOnChangeDate(date: any) {
-    console.log('handleOnChangeDate: ', date);
+  handleOnChangeDate(dateSelected: Date) {
+    if(!this.handleOnCheckAlmost18YearsOld(dateSelected)) {
+      this.handleOnModalAlmost18YearsOld();
+    }
   }
 
   handleOnCountrySelected() {
@@ -319,13 +326,13 @@ export class DashboardUserEditComponent extends WarehouseBaseComponent implement
 
     console.log('userUpdateData: ', userUpdateData);
 
-    if (!!this.imgURL?.length) {
+    if (this.isUpdatePictureAvatar) {
       this.handleOnUploadImageProfile(
         this.dataUser?.userId,
         Utils.WAREHOUSE_AVATAR_IMAGE
       );
     }
-    if (!!this.bcgURL?.length) {
+    if (this.isUpdatePictureCover) {
       this.handleOnUploadImageProfile(
         this.dataUser?.userId,
         Utils.WAREHOUSE_COVER_IMAGE
@@ -344,8 +351,10 @@ export class DashboardUserEditComponent extends WarehouseBaseComponent implement
       );
     }
 
-    if (!!userUpdateData?.emailPec?.length) {
-      this.checkIfPecEmailIsNotEmpty(userUpdateData);
+    if (this.dataUser?.emailPec === undefined || this.dataUser?.emailPec === null) {
+      if(!!userUpdateData?.emailPec?.length) {
+        this.checkIfPecEmailIsNotEmpty(userUpdateData);
+      }
     } else {
       this.handleOnAdminUpdateUser(userUpdateData);
     }
@@ -602,4 +611,6 @@ export class DashboardUserEditComponent extends WarehouseBaseComponent implement
       return true;
     }
   }
+
+
 }

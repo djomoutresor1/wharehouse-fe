@@ -120,7 +120,12 @@
       },
       "check": {
         "title": "Verifica Email",
-        "subtitle": "il tuo account non è stato verificato, vai alla tua email e verificalo"
+        "subtitle": "il tuo account non è stato verificato, vai nella tua posta elettronica e verificalo"
+      },
+      "almost18YearsOld": {
+        "title": "Per favore conferma la tua età",
+        "subtitle": "Warehouse System, solo per adulti.",
+        "description": "Per confermare la registrazione, l'utente deve avere almeno 18 anni."
       }
     },
     "footer": {
