@@ -140,7 +140,7 @@
                                 class="warehouse-required"> *</span></nz-form-label>
                         <nz-form-item>
                             <nz-form-control>
-                                <nz-date-picker nzAllowClear="true" [nzFormat]="dateFormatOne"
+                                <nz-date-picker nzAllowClear="true" [nzDisabledDate]="handleOnDisabledDatePicker"
                                     formControlName="dateOfBirth" (click)="handleOnChangeInput()"
                                     (ngModelChange)="handleOnChangeDate($event)">
                                 </nz-date-picker>
@@ -243,21 +243,24 @@
                         </nz-form-item>
                     </div>
                     <div class="col-md-5">
-                        <nz-form-label nzFor="emailPec">{{"register.emailPec.title" | translate }}</nz-form-label>
-                        <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover
-                            class="m-2 warehouse-cursor-pointer"
-                            [nzPopoverTitle]="'profile.personalContact.popover.title' | translate"
-                            [nzPopoverContent]="emailContentTemplate" nzPopoverPlacement="right"></i>
-                        <ng-template #emailContentTemplate>
-                            <div class="warehouse-popover-wrapper">
-                                <p>{{'profile.personalContact.popover.contentOne' | translate }}</p>
-                                <p><b>{{'profile.personalContact.popover.contentTwo' | translate }}</b></p>
-                            </div>
-                        </ng-template>
+                        <label class="mb-2">
+                            {{"register.emailPec.title" | translate }}
+                            <span class="profile-verified"
+                                [ngClass]="dataUser?.userInfo?.emailPecVerified ? 'warehouse-background-success' : 'warehouse-background-tomato'">
+                                <i nz-icon
+                                    nzType="{{dataUser?.userInfo?.emailPecVerified ? 'check-circle' : 'close-circle'}}"
+                                    nzTheme="outline"></i>
+                                {{(dataUser?.userInfo?.emailPecVerified ? "profile.verified" : "profile.notVerified") |
+                                translate}}
+                            </span>
+                        </label>
                         <nz-form-item>
                             <nz-form-control [nzErrorTip]="'register.emailPec.required' | translate">
                                 <nz-input-group nzPrefixIcon="mail">
-                                    <input type="email" nz-input formControlName="emailPec"
+                                    <input *ngIf="!!dataUser?.emailPec?.length" type="email" nz-input [value]="dataUser?.emailPec" [disabled]="true"
+                                        [placeholder]="'register.emailPec.placeholder' | translate"
+                                        (click)="handleOnChangeInput()" />
+                                    <input *ngIf="!dataUser?.emailPec?.length" type="email" nz-input formControlName="emailPec" [disabled]="true"
                                         [placeholder]="'register.emailPec.placeholder' | translate"
                                         (click)="handleOnChangeInput()" />
                                 </nz-input-group>

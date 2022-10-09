@@ -50,7 +50,8 @@
                 </nz-form-item>
                 <nz-form-item>
                     <nz-form-control>
-                        <nz-date-picker nzAllowClear="true" [nzFormat]="dateFormatOne" formControlName="dateOfBirth"
+                        <nz-date-picker nzAllowClear="true" [nzFormat]="dateFormatOne" 
+                            formControlName="dateOfBirth" [nzDisabledDate]="handleOnDisabledDatePicker"
                             (click)="handleOnChangeInput()" (ngModelChange)="handleOnChangeDate($event)">
                         </nz-date-picker>
                     </nz-form-control>

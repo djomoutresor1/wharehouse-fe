@@ -179,7 +179,7 @@
           </nz-input-group>
         </div>
         <div class="col-md-6 mt-3">
-          <label class="mb-2">{{"profile.personalContact.otherPersonalEmail" | translate }}
+          <label class="mb-2">
             <i nz-icon nzType="info-circle" nzTheme="twotone" nz-popover class="warehouse-cursor-pointer"
               [nzPopoverTitle]="'profile.personalContact.popover.title' | translate"
               [nzPopoverContent]="emailContentTemplate" nzPopoverPlacement="right"></i>
@@ -189,6 +189,13 @@
                 <p><b>{{'profile.personalContact.popover.contentTwo' | translate }}</b></p>
               </div>
             </ng-template>
+            {{"profile.personalContact.otherPersonalEmail" | translate }}
+            <span *ngIf="!!dataUser?.emailPec?.length" class="profile-verified"
+              [ngClass]="dataUser?.userInfo?.emailPecVerified ? 'warehouse-background-success' : 'warehouse-background-tomato'">
+              <i nz-icon nzType="{{dataUser?.userInfo?.emailPecVerified ? 'check-circle' : 'close-circle'}}"
+                nzTheme="outline"></i>
+              {{(dataUser?.userInfo?.emailPecVerified ? "profile.verified" : "profile.notVerified") | translate}}
+            </span>
           </label>
           <nz-input-group nzPrefixIcon="mail">
             <input nz-input [value]="dataUser?.emailPec ? dataUser?.emailPec : 'profile.empty' | translate"
