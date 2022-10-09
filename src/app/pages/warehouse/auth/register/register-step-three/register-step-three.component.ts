@@ -194,8 +194,10 @@ export class RegisterStepThreeComponent extends WarehouseBaseComponent implement
     this.showbuttonUpload = false;
   }
 
-  handleOnChangeDate(date: any) {
-    console.log('handleOnChangeDate: ', date);
+  handleOnChangeDate(dateSelected: Date) {
+    if(!this.handleOnCheckAlmost18YearsOld(dateSelected)) {
+      this.handleOnModalAlmost18YearsOld();
+    }
   }
 
   handleOnFlagSelected() {

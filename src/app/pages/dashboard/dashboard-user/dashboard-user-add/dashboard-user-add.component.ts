@@ -177,8 +177,10 @@ export class DashboardUserAddComponent extends WarehouseBaseComponent implements
     this.showbuttonUpload = false;
   }
 
-  handleOnChangeDate(date: any) {
-    console.log('handleOnChangeDate: ', date);
+  handleOnChangeDate(dateSelected: Date) {
+    if(!this.handleOnCheckAlmost18YearsOld(dateSelected)) {
+      this.handleOnModalAlmost18YearsOld();
+    }
   }
 
   handleOnCountrySelected() {

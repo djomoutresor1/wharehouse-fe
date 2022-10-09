@@ -20,6 +20,7 @@ import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
 import { differenceInCalendarDays } from 'date-fns';
+import * as moment from 'moment';
 
 @Component({
   selector: 'warehouse-warehouse-base',
@@ -58,6 +59,7 @@ export class WarehouseBaseComponent implements OnInit {
   dateFormatTwo = 'YYYY/MM/DD';
   WAREHOUSE_AFTER_7_DAYS = 7 * 24 * 60 * 60 * 1000;
   WAREHOUSE_MAX_SIZE_FILE = 5000000;
+  WAREHOUSE_18_YEARS_OLD = 18;
 
   rolesList = [
     { label: 'Admin', value: 'admin' },
@@ -215,5 +217,32 @@ export class WarehouseBaseComponent implements OnInit {
 
   handleOnDisabledDatePicker(current: Date): boolean {
     return differenceInCalendarDays(current, new Date()) > 0;
+  }
+
+  handleOnCheckAlmost18YearsOld(dateSelected: Date): boolean {
+    var now = moment(new Date()); // todays date
+    var end = moment(dateSelected); // another date
+    var duration = moment.duration(now.diff(end));
+    return duration.asYears() > this.WAREHOUSE_18_YEARS_OLD ? true : false;
+  }
+
+  handleOnModalAlmost18YearsOld() {
+    this.nzModalService.warning({
+      nzTitle:  this.translate.instant('dashboard.modal.almost18YearsOld.title'),
+      nzContent: 
+        '<div class="modal-wrapper container">' + 
+          '<div class="row modal-body">' +
+            '<div class="col modal-body-year">' +
+              '<span class="modal-year">' + this.WAREHOUSE_18_YEARS_OLD + '</span>' +
+            '</div>' +
+            '<div class="col modal-body-title">' +
+              '<span class="modal-title">' + this.translate.instant('dashboard.modal.almost18YearsOld.subtitle') + '</span>' +
+            '</div>' +
+            '<div class="col modal-body-description">' +
+              '<span class="modal-description">' + this.translate.instant('dashboard.modal.almost18YearsOld.description') + '</span>' +
+            '</div>' +
+          '</div>' +
+        '</div>'
+    });
   }
 }

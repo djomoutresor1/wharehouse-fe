@@ -5,7 +5,6 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
-
 // body {
 //   height: 100%;
 //   width: 100%;
@@ -27,4 +26,38 @@ nz-breadcrumb {
 
 .overlay-container {
   overflow: hidden;
+}
+
+.modal-wrapper {
+  .modal-body {
+    display: grid;
+    text-align: center;
+    .modal-body-year {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .modal-year {
+        border-radius: 100%;
+        border: 1px solid var(--warehouse-primary);
+        font-size: 32px;
+        padding: 20px 25px;
+        font-weight: 600;
+        color: var(--warehouse-white);
+        background: var(--warehouse-primary);
+      }
+    }
+    .modal-body-title {
+      margin: 10px 0;
+      .modal-title {
+        font-weight: 600;
+        font-size: 18px;
+      }
+    }
+    .modal-body-description {
+      .modal-description {
+        color: var(--warehouse-primary);
+        font-weight: 500;
+      }
+    }
+  }
 }

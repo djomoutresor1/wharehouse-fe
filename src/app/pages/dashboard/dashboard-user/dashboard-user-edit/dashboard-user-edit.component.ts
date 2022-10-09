@@ -211,8 +211,10 @@ export class DashboardUserEditComponent extends WarehouseBaseComponent implement
     }
   }
 
-  handleOnChangeDate(date: any) {
-    console.log('handleOnChangeDate: ', date);
+  handleOnChangeDate(dateSelected: Date) {
+    if(!this.handleOnCheckAlmost18YearsOld(dateSelected)) {
+      this.handleOnModalAlmost18YearsOld();
+    }
   }
 
   handleOnCountrySelected() {
