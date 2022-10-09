@@ -19,6 +19,7 @@ import { StatusType } from 'src/app/shared/enums/status-type-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
+import { differenceInCalendarDays } from 'date-fns';
 
 @Component({
   selector: 'warehouse-warehouse-base',
@@ -53,7 +54,7 @@ export class WarehouseBaseComponent implements OnInit {
   messageAlert: string = '';
   descriptionAlert: string = '';
   okText: string = '';
-  dateFormatOne = 'dd/MM/YYYY';
+  dateFormatOne = 'DD/MM/YYYY';
   dateFormatTwo = 'YYYY/MM/DD';
   WAREHOUSE_AFTER_7_DAYS = 7 * 24 * 60 * 60 * 1000;
   WAREHOUSE_MAX_SIZE_FILE = 5000000;
@@ -210,5 +211,9 @@ export class WarehouseBaseComponent implements OnInit {
 
   firstLetterUpperCase(content: string): string {
     return content.charAt(0).toUpperCase() + content.slice(1);
+  }
+
+  handleOnDisabledDatePicker(current: Date): boolean {
+    return differenceInCalendarDays(current, new Date()) > 0;
   }
 }
