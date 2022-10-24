@@ -18,6 +18,7 @@ export enum Auth {
   WAREHOUSE_VERIFICATION_EMAIL = '/verifyemail',
   WAREHOUSE_VERIFICATION_CODE = '/verifycode',
   WAREHOUSE_UPDATE_USER_OPERATION_TYPE = '/update/operation-type',
+  WAREHOUSE_SEND_CODE_OPERATION_TYPE = '/send/verification-code',
   WAREHOUSE_UPLOAD_IMAGE = '/upload_file',
   WAREHOUSE_DELETE_IMAGE = '/delete_file',
   WAREHOUSE_DOWNLOAD_IMAGE = '/download_file',

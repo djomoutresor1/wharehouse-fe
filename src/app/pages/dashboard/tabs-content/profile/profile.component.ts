@@ -166,7 +166,7 @@ export class ProfileComponent extends WarehouseBaseComponent implements OnInit {
   }
 
   getFormatUserLastLogin(lastLogin: string): string {
-    return moment(lastLogin).format(this.dateFormatOne);
+    return moment(lastLogin).format(this.dateFormatThree);
   }
 
   handleOnFlagByPrefixCode(prefix: string) {

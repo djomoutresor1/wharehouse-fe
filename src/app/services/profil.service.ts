@@ -93,4 +93,14 @@ export class ProfilService {
       operationType
     );
   }
+
+  public onSendAgainCodeByOperationType(
+    userId: string,
+    operationType: string
+  ): Observable<ResponseModel> {
+    return this.http.put<ResponseModel>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_SEND_CODE_OPERATION_TYPE}/${userId}`,
+      operationType
+    );
+  }
 }

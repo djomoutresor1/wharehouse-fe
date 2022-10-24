@@ -355,9 +355,8 @@ export class DashboardUserEditComponent extends WarehouseBaseComponent implement
       if(!!userUpdateData?.emailPec?.length) {
         this.checkIfPecEmailIsNotEmpty(userUpdateData);
       }
-    } else {
-      this.handleOnAdminUpdateUser(userUpdateData);
     }
+    this.handleOnAdminUpdateUser(userUpdateData);
   }
 
   checkIfPecEmailIsNotEmpty(userData: UserInsertModel) {
