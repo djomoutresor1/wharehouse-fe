@@ -1,11 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import {
-  Component,
-  Injector,
-  OnInit,
-} from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+import { OperationType } from 'src/app/shared/enums/operation-type-enums';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 
 @Component({
@@ -13,10 +10,13 @@ import { ResponseModel } from 'src/model/auth/response/response-model';
   templateUrl: './recovery-email.component.html',
   styleUrls: ['./recovery-email.component.scss'],
 })
-export class RecoveryEmailComponent extends WarehouseBaseComponent implements OnInit {
+export class RecoveryEmailComponent
+  extends WarehouseBaseComponent
+  implements OnInit
+{
   userLocalStorage: any;
   form!: FormGroup;
-  userEmailPec: string = "";
+  userEmailPec: string = '';
   userInfoEmailPecVerified: boolean = false;
 
   constructor(injector: Injector) {
@@ -30,20 +30,21 @@ export class RecoveryEmailComponent extends WarehouseBaseComponent implements On
 
   getUserInState() {
     this.userLocalStorage =
-    this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
+      this.warehouseLocalStorage?.WarehouseGetTokenLocalStorage();
     this.userEmailPec = this.userLocalStorage?.emailPec;
-    this.userInfoEmailPecVerified = this.userLocalStorage?.userInfo?.emailPecVerified;
+    this.userInfoEmailPecVerified =
+      this.userLocalStorage?.userInfo?.emailPecVerified;
   }
 
   initForm() {
     this.validateForm = this.fb.group({
       emailPec: [null, [Validators.required, Validators.email]],
-      codeOne: "",
-      codeTwo: "",
-      codeThree: "",
-      codeFourth: "",
-      codeFive: "",
-      codeSix: ""
+      codeOne: '',
+      codeTwo: '',
+      codeThree: '',
+      codeFourth: '',
+      codeFive: '',
+      codeSix: '',
     });
   }
 
@@ -55,10 +56,11 @@ export class RecoveryEmailComponent extends WarehouseBaseComponent implements On
       .subscribe(
         (response: ResponseModel) => {
           this.successAlertType(response?.message);
-          let newUser = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
+          let newUser =
+            this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
           newUser = {
             ...newUser,
-            emailPec: response?.object?.emailPec
+            emailPec: response?.object?.emailPec,
           };
           this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(newUser);
           this.getUserInState();
@@ -98,22 +100,59 @@ export class RecoveryEmailComponent extends WarehouseBaseComponent implements On
 
   handleOnChangeCode() {
     this.isAuth = false;
-    let codeOne = this.validateForm.controls["codeOne"].value;
-    let codeTwo = this.validateForm.controls["codeTwo"].value;
-    let codeThree = this.validateForm.controls["codeThree"].value;
-    let codeFourth = this.validateForm.controls["codeFourth"].value;
-    let codeFive = this.validateForm.controls["codeFive"].value;
-    let codeSix = this.validateForm.controls["codeSix"].value;
+    let codeOne = this.validateForm.controls['codeOne'].value;
+    let codeTwo = this.validateForm.controls['codeTwo'].value;
+    let codeThree = this.validateForm.controls['codeThree'].value;
+    let codeFourth = this.validateForm.controls['codeFourth'].value;
+    let codeFive = this.validateForm.controls['codeFive'].value;
+    let codeSix = this.validateForm.controls['codeSix'].value;
 
     let code = [codeOne, codeTwo, codeThree, codeFourth, codeFive, codeSix];
 
-    if(code.join("")?.length === 6) { // Length code is 6
-      this.profilService.onVerificationCodeUser(code.join(""), "EMAIL_PEC_VERIFICATION", this.userLocalStorage?.userId)
+    if (code.join('')?.length === 6) {
+      // Length code is 6
+      this.profilService
+        .onVerificationCodeUser(
+          code.join(''),
+          'EMAIL_PEC_VERIFICATION',
+          this.userLocalStorage?.userId
+        )
+        .subscribe(
+          (response: ResponseModel) => {
+            if (response?.object) {
+              this.handleOnUpdateInfosUser();
+            }
+          },
+          (error: HttpErrorResponse) => {
+            console.log('error: ', error);
+            if (error.status === 403) {
+              // Expiration token
+              this.expirationToken();
+            } else {
+              this.errorAlertType(error?.error.message);
+            }
+          }
+        );
+    }
+  }
+
+  handleOnUpdateInfosUser() {
+    this.profilService
+      .onUpdateUserInfosByOperationType(
+        this.userLocalStorage?.userId,
+        OperationType.EMAIL_PEC_VERIFICATION
+      )
       .subscribe(
         (response: ResponseModel) => {
-          if(response?.object) {
-            this.handleOnUpdateInfosUser();
-          }
+          this.successAlertType(response?.message);
+          let newUser =
+            this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
+          newUser = {
+            ...newUser,
+            userInfo: response.object,
+          };
+          this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(newUser);
+          this.getUserInState();
         },
         (error: HttpErrorResponse) => {
           console.log('error: ', error);
@@ -125,35 +164,28 @@ export class RecoveryEmailComponent extends WarehouseBaseComponent implements On
           }
         }
       );
-    }
-  }
-
-  handleOnUpdateInfosUser() {
-    this.profilService.onUpdateUserInfosByOperationType(this.userLocalStorage?.userId, "EMAIL_PEC_VERIFICATION")
-    .subscribe(
-      (response: ResponseModel) => {
-        this.successAlertType(response?.message);
-        let newUser = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
-        newUser = {
-          ...newUser,
-          userInfo: response.object
-        };
-        this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(newUser);
-        this.getUserInState();
-      },
-      (error: HttpErrorResponse) => {
-        console.log('error: ', error);
-        if (error.status === 403) {
-          // Expiration token
-          this.expirationToken();
-        } else {
-          this.errorAlertType(error?.error.message);
-        }
-      }
-    );
   }
 
   handleOnSendAgainCode() {
-    console.log("handleOnSendAgainCode");
+    this.isAuth = false;
+    this.profilService
+      .onSendAgainCodeByOperationType(
+        this.userLocalStorage?.userId,
+        OperationType.EMAIL_PEC_VERIFICATION
+      )
+      .subscribe(
+        (response: ResponseModel) => {
+          this.successAlertType(response?.message);
+        },
+        (error: HttpErrorResponse) => {
+          console.log('error: ', error);
+          if (error.status === 403) {
+            // Expiration token
+            this.expirationToken();
+          } else {
+            this.errorAlertType(error?.error.message);
+          }
+        }
+      );
   }
 }
