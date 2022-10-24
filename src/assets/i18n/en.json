@@ -381,7 +381,7 @@
       "successEmailPec": {
         "title": "Enhanced security of your space",
         "subtitle": "Your PEC email address has been verified and validated to improve the security of your space on our system.",
-        "descriptionOne": "In case of problem with your main email address, you can use the PEC email address",
+        "descriptionOne": "In case of problem with your main email address {{ email }}, you can use the PEC email address",
         "descriptionTwo": "for all your operations on our system."
       }
     }
