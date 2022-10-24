@@ -87,7 +87,7 @@
                         <h5 nz-typography class="warehouse-recovery-email-success-description">
                             {{"managePassword.recovery.successEmailPec.subtitle" | translate}}</h5>
                         <nz-divider class="warehouse-background-sliver"></nz-divider>
-                        <p>{{"managePassword.recovery.successEmailPec.descriptionOne" | translate}}
+                        <p>{{"managePassword.recovery.successEmailPec.descriptionOne" | translate: { email: userLocalStorage?.email } }}
                             <span class="warehouse-primary">{{userLocalStorage?.emailPec}}</span>
                             {{"managePassword.recovery.successEmailPec.descriptionTwo" | translate}}
                         </p>

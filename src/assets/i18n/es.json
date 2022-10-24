@@ -382,7 +382,7 @@
       "successEmailPec": {
         "title": "Sicurezza rafforzata del tuo spazio",
         "subtitle": "La tua email PEC è stata verificata e validata per migliorare la sicurezza del tuo spazio sul nostro sistema.",
-        "descriptionOne": "In caso di problemi con la tua posta elettronica principale, puoi utilizzare la posta elettronica PEC",
+        "descriptionOne": "In caso di problemi con la tua posta elettronica principale {{ email }}, puoi utilizzare la posta elettronica PEC",
         "descriptionTwo": "per tutte le tue operazioni sul nostro sistema."
       }
     }
