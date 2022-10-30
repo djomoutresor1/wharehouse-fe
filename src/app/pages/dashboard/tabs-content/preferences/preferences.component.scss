@@ -1,0 +1,28 @@
+.warehouse-preferences-wrapper {
+  .warehouse-preferences-account {
+    border-radius: var(--warehouse-border-radius-one);
+    padding: 10px;
+    background: var(--warehouse-white);
+    box-shadow: var(--warehouse-box-shadow);
+    .warehouse-preferences-left {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      .warehouse-preferences-left-confirm {
+        left: 15px;
+        position: relative;
+      }
+    }
+    .warehouse-preferences-right {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      button {
+        margin: 0 5px;
+      }
+    }
+  }
+}
+i {
+  cursor: pointer;
+}

@@ -13,3 +13,13 @@
 .warehouse-required {
   color: var(--warehouse-danger) !important;
 }
+
+.warehouse-text-justify {
+  text-align: justify !important;
+}
+
+.warehouse-text-underline {
+  &:hover {
+    text-decoration: underline !important;
+  }
+}

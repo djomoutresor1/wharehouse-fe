@@ -67,6 +67,11 @@
       "empty": "Il n'y a pas de notifications pour les 30 derniers jours.",
       "recent": "Plus récents",
       "make.all.read": "Tout marquer comme lu"
+    },
+    "preferences": {
+      "success": {
+        "description": "Vous seriez redirigé vers la page de login dans 2 secondes."
+      }
     }
   },
   "operation": {
@@ -389,7 +394,31 @@
   },
   "profile": {
     "title": "Mon Profil",
-    "preferences": "Préférences",
+    "preferences": {
+      "title": "Préférences",
+      "subtitleOne": "Annulation / Désactivation",
+      "subtitleTwo": "Une fois votre compte supprimé/désactivé, il n'est plus possible de revenir en arrière. Soyez assuré",
+      "description": "Je veux procéder à l'opération d'annulation ou de désactivation",
+      "action": {
+        "confirm": "Confirmation",
+        "delete": "Supprimer le profil",
+        "disabled": "Désactiver le profil",
+        "cancel": "Supprimer le compte"
+      },
+      "modal": {
+        "title": "Êtes-vous sûr de vouloir effectuer cette action ?",
+        "message.delete": "Si vous supprimez votre compte, il ne sera plus disponible pendant 90 jours. Après cela, il sera définitivement supprimé dans le système Warehouse. Si vous souhaites restaure de nouveau votre compte, veuillez contacter l'organisation de votre département.",
+        "message.disabled": "En désactivant votre compte, il ne sera plus possible de vous reconnecter. Si vous souhaitez restaurer de nouveau votre compte, contactez l'organisation de votre département.",
+        "terms.services": {
+          "title": "Conditions de services",
+          "subtitleOne": "Avant de poursuivre, veuillez consulter les ",
+          "subtitleTwo": "concernant la suppression ou la désactivation du compte."
+        },
+        "form": {
+          "label": "Inserisci la tua matricola per confermare l'operazione"
+        }
+      }
+    },
     "account.settings": "Paramètres du compte",
     "notifications": "Notifications",
     "help": "Guide",
