@@ -133,9 +133,7 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
       this.messageAlertModal = this.translate.instant(
         'message.verification.email.title'
       );
-      this.okText = this.translate.instant(
-        'message.verification.email.cta'
-      );
+      this.okText = this.translate.instant('message.verification.email.cta');
       this.descriptionAlertModal = this.translate.instant(
         'message.verification.email.description'
       );
@@ -144,13 +142,11 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
       this.messageAlertModal = this.translate.instant(
         'message.verification.profile.title'
       );
-      this.okText = this.translate.instant(
-        'message.verification.profile.cta'
-      );
+      this.okText = this.translate.instant('message.verification.profile.cta');
       this.descriptionAlertModal = this.translate.instant(
         'message.verification.profile.description'
       );
-    } else if(this.dataUserTmpPassword) {
+    } else if (this.dataUserTmpPassword) {
       this.alertTypeModal = AlertType.ALERT_WARNING;
       this.messageAlertModal = this.translate.instant(
         'message.verification.temporary.password.title'
@@ -168,7 +164,8 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
   checkUserStatus(status: string): boolean {
     if (
       status === StatusType.STATUS_PENDING ||
-      status === StatusType.STATUS_DISABLED
+      status === StatusType.STATUS_DISABLED ||
+      status === StatusType.STATUS_DELETED
     ) {
       return true;
     } else {

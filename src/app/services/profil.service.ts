@@ -9,6 +9,7 @@ import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 import { UserInsertModel } from 'src/model/dashboard/request/user-insert-model';
 import { Auth } from '../shared/enums/auth-enums';
 import { Pages } from '../shared/enums/pages-enums';
+import { StatusType } from '../shared/enums/status-type-enums';
 import { WarehouseLocalStorage } from '../utils/warehouse-local-storage';
 
 @Injectable({
@@ -101,6 +102,22 @@ export class ProfilService {
     return this.http.put<ResponseModel>(
       `${this.apiServerUrl}${Auth.WAREHOUSE_SEND_CODE_OPERATION_TYPE}/${userId}`,
       operationType
+    );
+  }
+
+  public onChangeStatusUser(
+    userId: string,
+    status: StatusType,
+    passwordUser: string
+  ): Observable<ResponseModel> {
+    return this.http.put<ResponseModel>(
+      `${this.apiServerUrl}${Auth.WAREHOUSE_CHANGE_STATUS_USER}/${userId}`, {},
+      {
+        params: {
+          status,
+          passwordUser,
+        },
+      }
     );
   }
 }

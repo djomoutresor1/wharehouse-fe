@@ -67,6 +67,11 @@
       "empty": "Non ci sono notifiche per gli ultimi 30 giorni.",
       "recent": "Più recenti",
       "make.all.read": "Segna tutti come letti"
+    },
+    "preferences": {
+      "success": {
+        "description": "Verrai reindirizzato alla pagina di accesso in 2 secondi."
+      }
     }
   },
   "operation": {
@@ -389,7 +394,30 @@
   },
   "profile": {
     "title": "Mio Profilo",
-    "preferences": "Preferenze",
+    "preferences": {
+      "title": "Preferenze",
+      "subtitleOne": "Cancellazione / Disattivazione",
+      "subtitleTwo": "Una volta eliminato/disabilitato il tuo account, non è più possibile tornare indietro. Si prega di essere certi",
+      "description": "Voglio procedere con l'operazione di cancellazione o disattivazione",
+      "action": {
+        "confirm": "Conferma",
+        "delete": "Eliminare profilo",
+        "disabled": "Disabilitare profilo",
+        "cancel": "Cancella account"
+      },
+      "modal": {
+        "title": "Sei sicuro di voler eseguire questa azione?",
+        "message": "Eliminando il tuo account, questo non sarà disponibile per 90 giorni. Successivamente, verrà eliminato definitivamente nel sistema Warehouse. In caso di ripristino del tuo account, contatta l'organizzazione del tuo dipartimento.",
+        "terms.services": {
+          "title": "Termini Servizi",
+          "subtitleOne": "Prima di procedere, si prega di rivedere i ",
+          "subtitleTwo": "per quanto riguarda l'eliminazione o la disabilitazione dell'account."
+        },
+        "form": {
+          "label": "Inserisci la tua matricola per confermare l'operazione"
+        }
+      }
+    },
     "account.settings": "Impostazioni Account",
     "notifications": "Notifiche",
     "help": "Guida",

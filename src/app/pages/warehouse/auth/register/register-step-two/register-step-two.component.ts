@@ -23,6 +23,7 @@ export class RegisterStepTwoComponent extends WarehouseBaseComponent implements 
   isExpiredLink: boolean = false;
   isVerifyEmail: boolean = false;
   userActivateStatusType: boolean = false;
+  userVerified!: ResponseResetModel;
 
   constructor(injector: Injector) {
     super(injector);
@@ -73,7 +74,7 @@ export class RegisterStepTwoComponent extends WarehouseBaseComponent implements 
         (response: ResponseResetModel) => {
           console.log('response', response);
           this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
-          this.user = response;
+          this.userVerified = response;
           this.checkIfExpirationLinkIsCorrect();
           if (!this.isExpiredLink && !this.isVerifyEmail) {
             this.handleOnActivateStatusUser();
@@ -136,7 +137,7 @@ export class RegisterStepTwoComponent extends WarehouseBaseComponent implements 
   checkIfExpirationLinkIsCorrect() {
     let now = new Date().getTime();
     let expiredLinkUrl = new Date(this.expirationLink).getTime();
-    let expiredLinkUser = new Date(this.user?.expiryDate).getTime();
+    let expiredLinkUser = new Date(this.userVerified?.expiryDate).getTime();
     // First verify if the expired date in url is same with expired date user's in db
     if (this.verifyTheCorrectDate(expiredLinkUrl, expiredLinkUser)) {
       // Compare the expired date with the current date
