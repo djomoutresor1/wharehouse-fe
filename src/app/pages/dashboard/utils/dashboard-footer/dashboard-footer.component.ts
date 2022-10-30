@@ -9,7 +9,7 @@ import { Utils } from 'src/app/shared/enums/utils-enums';
 export class DashboardFooterComponent implements OnInit {
 
    currentYear = new Date().getFullYear();
-   createdYear = Utils.CREATED_WAREHOUSE_SYSTEM;
+   createdYear = Utils.WAREHOUSE_CREATED_SYSTEM;
 
   constructor() { }
 

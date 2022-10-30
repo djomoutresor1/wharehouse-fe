@@ -67,6 +67,11 @@
       "empty": "There are no notifications for the last 30 days.",
       "recent": "Latest",
       "make.all.read": "Mark all as read"
+    },
+    "preferences": {
+      "success": {
+        "description": "You will be redirected to the login page in 5 seconds."
+      }
     }
   },
   "operation": {
@@ -388,7 +393,32 @@
   },
   "profile": {
     "title": "My Profile",
-    "preferences": "Preferences",
+    "preferences": {
+      "title": "Preferences",
+      "subtitleOne": "Cancellation / Deactivation",
+      "subtitleTwo": "Once you delete/disable your account, there isn't going back. Please be certain",
+      "description": "I want to proceed the operation deletion or deactivation",
+      "action": {
+        "confirm": "Confirm",
+        "delete": "Delete account",
+        "disabled": "Disabled account",
+        "cancel": "Cancel account"
+      },
+      "modal": {
+        "title": "Are you sure you want to perform this action ?",
+        "message.delete": "Deleting your account, this will be unavailable for 90 days. Then after, it will be deleted definitive in warehouse system. In case you want to restore your account, contact your department organization.",
+        "message.disabled": "Disabling your account, it will not longer possible to login again. In case you want to restore your account, contact your department organization.",
+        "terms.services": {
+          "title": "Terms Services",
+          "subtitleOne": "Before proceeding, please review the ",
+          "subtitleTwo": "regarding account deleting or disabling."
+        },
+        "form": {
+          "label": "Enter your matricule to confirm the operation",
+          "placeholder": "Entrez votre matricule"
+        }
+      }
+    },
     "account.settings": "Account Settings",
     "notifications": "Notifications",
     "help": "Help",

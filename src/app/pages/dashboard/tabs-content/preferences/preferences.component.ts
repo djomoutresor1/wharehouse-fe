@@ -1,15 +1,31 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Injector, OnInit } from '@angular/core';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
+import { StatusType } from 'src/app/shared/enums/status-type-enums';
+import { Utils } from 'src/app/shared/enums/utils-enums';
+import { ResponseModel } from 'src/model/auth/response/response-model';
 
 @Component({
   selector: 'warehouse-preferences',
   templateUrl: './preferences.component.html',
   styleUrls: ['./preferences.component.scss'],
 })
-export class PreferencesComponent extends WarehouseBaseComponent implements OnInit {
+export class PreferencesComponent
+  extends WarehouseBaseComponent
+  implements OnInit
+{
+  passwordVisible: boolean = false;
+  passwordUser!: string;
   mode: any;
   theme: any;
+  account: boolean = false;
+  accountName!: string;
+  actionMode!: string;
+  isVisible: boolean = false;
+  isOkLoading: boolean = false;
+  isSuccess: boolean = false;
 
   constructor(injector: Injector) {
     super(injector);
@@ -33,5 +49,81 @@ export class PreferencesComponent extends WarehouseBaseComponent implements OnIn
 
   handleOnChangeMode(selectedMode: any) {
     this.dashboardService.handleOnChangeMode(selectedMode);
+  }
+
+  handleOnDisabled(disabledMode: boolean) {
+    this.account = disabledMode;
+  }
+
+  handleOnAction(action: string) {
+    console.log('action: ', action);
+    this.isVisible = true;
+    this.actionMode = action;
+  }
+
+  handleOnCancelOperation() {
+    this.isVisible = false;
+    this.passwordUser = '';
+  }
+
+  handleOnOkOperation() {
+    this.isSuccess = false;
+    console.log('passwordUser: ', this.passwordUser);
+    let user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
+    var statusType =
+      this.actionMode === Utils.WAREHOUSE_ACTION_DISABLE
+        ? StatusType.STATUS_DISABLED
+        : StatusType.STATUS_DELETED;
+    this.profilService
+      .onChangeStatusUser(
+        user.userId,
+        statusType,
+        this.passwordUser
+      )
+      .subscribe(
+        (response: ResponseModel) => {
+          this.handleOnCancelOperation();
+          this.successAlertTypeAndRedirectLogin(response?.message);
+        },
+        (error: HttpErrorResponse) => {
+          if (error.status === 403) {
+            // Expiration token
+            this.expirationToken();
+          } else {
+            this.errorAlertType(error?.error.message);
+          }
+        }
+      );
+  }
+
+  successAlertTypeAndRedirectLogin(message: string): void {
+    this.isSuccess = true;
+    this.alertType = AlertType.ALERT_SUCCESS;
+    this.messageAlert = message;
+    this.descriptionAlert =
+      this.translate.instant('message.changePassword.success.description') +
+      this.translate.instant('message.preferences.success.description');
+    // First cancel the token in localStorage
+    // because the user could refresh the page without click in the OK button in modal confirmation
+    this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
+    setTimeout(() => {
+      this.isSuccess = false;
+      this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}/`]);
+    }, 5000);
+  }
+
+  handleOnGetMessageModal() {
+    if (this.actionMode === 'delete') {
+      return this.translate.instant('profile.preferences.modal.message.delete');
+    }
+    if (this.actionMode === 'disabled') {
+      return this.translate.instant(
+        'profile.preferences.modal.message.disabled'
+      );
+    }
+  }
+
+  handleOnCheckPasswordUser() {
+    return this.passwordUser.length > 6 ? false : true;
   }
 }
