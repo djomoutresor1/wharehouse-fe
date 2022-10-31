@@ -112,7 +112,6 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
         this.dataUserEmail = response?.email;
         this.dataUserStatus = this.checkUserStatus(response?.userInfo?.status);
         this.dataUserTmpPassword = response?.userInfo?.temporalPassword;
-
         this.checkUserLoginVerification(response);
       },
       (error: HttpErrorResponse) => {
@@ -174,12 +173,13 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
   }
 
   successNotificationType(userInfo: ResponseLoginModel): void {
+    this.isLoading = true;
     this.isLogged = true;
     this.alertType = AlertType.ALERT_SUCCESS;
     this.messageAlert =
       this.translate.instant('message.welcome') + `${userInfo?.username}`;
     this.descriptionAlert = userInfo?.message;
-    this.router.navigate([`${Pages.WAREHOUSE}/${Pages.DASHBOARD}`]);
+    this.redirectUrlAfterLoading = `${Pages.WAREHOUSE}/${Pages.DASHBOARD}`;
   }
 
   successNotificationVerification() {

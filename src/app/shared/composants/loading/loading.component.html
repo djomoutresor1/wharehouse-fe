@@ -1,5 +1,13 @@
-<nz-spin *ngIf="loadingService.isLoading | async" nzSimple [nzSize]="size" [nzIndicator]="indicatorTemplate"></nz-spin>
-<ng-template #indicatorTemplate>
-    <i nz-icon nzType="loading"><a>loading...</a>
-    </i>
-</ng-template>
+<div *ngIf="loading" class="warehouse-loading-wrapper container">
+    <div class="row warehouse-loading-content">
+        <div class="col">
+            <h3 nz-typography class="mb-3">Loading <span class="warehouse-primary">{{email}} ...</span></h3>
+            <nz-progress [nzPercent]="loadingPercent"></nz-progress>
+            <!-- <nz-spin nzSimple [nzSize]="size" [nzIndicator]="indicatorTemplate"></nz-spin>
+            <ng-template #indicatorTemplate>
+                <i nz-icon nzType="loading"><a>loading...</a>
+                </i>
+            </ng-template> -->
+        </div>
+    </div>
+</div>
