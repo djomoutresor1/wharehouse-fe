@@ -1,20 +1,17 @@
-
-i {
-    font-size: 80px;
-    a{
-        font-size: 17px;
-    }
+.warehouse-loading-wrapper {
+  text-align: inherit;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 50%;
+  .warehouse-loading-content {
+    text-align: center;
+    margin: 20px !important;
+    padding: 35px !important;
+    border-radius: var(--warehouse-border-radius-one);
+    box-shadow: var(--warehouse-box-shadow);
+    background: var(--warehouse-white);
   }
-  
-.ng-star-inserted{
-    margin: auto;
-    width: 20px;
-    height: 20px;
-    position: absolute!important;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-
-
+}

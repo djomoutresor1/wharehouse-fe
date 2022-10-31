@@ -1,5 +1,5 @@
-<warehouse-multilanguage></warehouse-multilanguage>
-<div class="warehouse-auth-wrapper container">
+<warehouse-multilanguage *ngIf="!isLoading" ></warehouse-multilanguage>
+<div *ngIf="!isLoading" class="warehouse-auth-wrapper container">
   <div class="row">
     <div class="col text-center">
       <h2 nz-typography>{{ 'login.title' | translate }}</h2>
@@ -25,7 +25,8 @@
         </div>
         <div class="col-md-12" *ngIf="dataUserTmpPassword">
           <warehouse-modal [okTextModal]="okText" [typeModal]="alertTypeModal" [messageModal]="messageAlertModal"
-            [showClosableModal]="true" [descriptionModal]="descriptionAlertModal" (handleOnOkModal)="handleOnOkModalNavigate('forgotten/password')">
+            [showClosableModal]="true" [descriptionModal]="descriptionAlertModal"
+            (handleOnOkModal)="handleOnOkModalNavigate('forgotten/password')">
           </warehouse-modal>
         </div>
       </div>
@@ -91,7 +92,8 @@
           [nzType]="'primary'"><i nz-icon nzType="check-circle" nzTheme="outline"></i> {{'login.cta.login' | translate
           }}</button>
         <nz-divider nzDashed [nzText]="'login.divider.title' | translate"></nz-divider>
-        <button nz-button nzType="primary" class="warehouse-btn-outline-primary" (click)="handleOnRegister()" nzBlock>{{'login.cta.register' | translate }}
+        <button nz-button nzType="primary" class="warehouse-btn-outline-primary" (click)="handleOnRegister()"
+          nzBlock>{{'login.cta.register' | translate }}
           <i nz-icon nzType="right" nzTheme="outline"></i></button>
       </form>
     </div>
@@ -110,3 +112,6 @@
     </div>
   </div>
 </div>
+<warehouse-loading *ngIf="isLoading" [loading]="isLoading" [redirectUrl]="redirectUrlAfterLoading"
+  [email]="dataUserEmail">
+</warehouse-loading>

@@ -50,6 +50,9 @@ export class WarehouseBaseComponent implements OnInit {
 
   currentStep: number = 0;
   isAuth: boolean = false;
+  isLoading: boolean = false;
+  loadingPercent: number = 25;
+  redirectUrlAfterLoading: string = '';
   isExpiredToken: boolean = false;
   alertType: string = '';
   messageAlert: string = '';
