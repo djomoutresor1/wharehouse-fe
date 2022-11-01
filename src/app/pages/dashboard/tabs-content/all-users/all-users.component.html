@@ -24,8 +24,7 @@
   </warehouse-advanced-filters>
 
   <div class="row mt-4">
-    <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="allUsers"
-      (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+    <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="allUsers">
       <thead>
         <tr>
           <!-- <th [nzSelections]="listOfSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
@@ -64,8 +63,8 @@
             </nz-tag>
           </td>
           <td class="text-center">
-            <nz-badge nz-tooltip nzTooltipTitle="{{formatUserStatus(data.userInfo.status)}}"
-              nzTooltipPlacement="bottomLeft" nzStatus="{{ getUserStatus(data.userInfo.status) }}"></nz-badge>
+            <nz-badge nz-tooltip nzTooltipTitle="{{formatObjectStatus(data.userInfo.status)}}"
+              nzTooltipPlacement="bottomLeft" nzStatus="{{ getObjectStatus(data.userInfo.status) }}"></nz-badge>
           </td>
           <td>{{ data.user.dateOfBirth }}</td>
           <td>{{ data.user.lastLogin }}</td>
@@ -98,18 +97,21 @@
   </div>
   <div class="row">
     <div class="col">
+      <!-- Section Show Profile --> 
       <nz-drawer [nzWidth]="sizeDrawer" [nzVisible]="visibleDrawerShow" nzPlacement="right" [nzTitle]="titleDrawer"
         (nzOnClose)="handleOnCloseDrawer()">
         <ng-container *nzDrawerContent>
           <warehouse-profile [mode]="mode" [userProfile]="userDatatable"></warehouse-profile>
         </ng-container>
       </nz-drawer>
+      <!-- Section Change Status Profile --> 
       <nz-drawer *ngIf="userDatatable" [nzClosable]="false" [nzVisible]="visibleDrawerStatus" nzPlacement="right"
         [nzTitle]="titleDrawer" [nzFooter]="nzDrawerFooter" (nzOnClose)="handleOnCloseDrawer()">
         <ng-container *nzDrawerContent>
           <p>{{ "operation.confirmation.change.firstText" | translate }} <b>{{userDatatable.userId }}</b>{{
             "operation.confirmation.change.secondText" | translate }} <b
-              class="warehouse-tomato">{{formatUserStatus(userDatatable.userInfo.status)}}</b></p>
+              class="warehouse-tomato">{{formatObjectStatus(userDatatable.userInfo.status)}}.</b>
+          </p>
           <p>{{"operation.confirmation.change.thirdText" | translate }} </p>
           <nz-radio-group [(ngModel)]="userStatusSelected">
             <label nz-radio [nzDisabled]="userDatatable.userInfo.status === 'active'" nzValue="active">{{

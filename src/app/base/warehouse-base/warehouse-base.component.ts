@@ -21,6 +21,7 @@ import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
 import { differenceInCalendarDays } from 'date-fns';
 import * as moment from 'moment';
+import { ConfigurationService } from 'src/app/services/configuration.service';
 
 @Component({
   selector: 'warehouse-warehouse-base',
@@ -43,7 +44,8 @@ export class WarehouseBaseComponent implements OnInit {
   nzModalService: NzModalService;
   categoriesService: CategoriesService;
   tableService: TableService;
-  viewProfilService:ViewProfilService
+  viewProfilService: ViewProfilService;
+  configurationService: ConfigurationService;
 
   validateForm!: FormGroup;
   user!: ResponseResetModel;
@@ -85,7 +87,7 @@ export class WarehouseBaseComponent implements OnInit {
     '.bmp',
     '.webp',
   ];
-  
+
   constructor(injector: Injector) {
     this.router = injector.get(Router);
     this.route = injector.get(ActivatedRoute);
@@ -103,6 +105,7 @@ export class WarehouseBaseComponent implements OnInit {
     this.categoriesService = injector.get(CategoriesService);
     this.tableService = injector.get(TableService);
     this.viewProfilService = injector.get(ViewProfilService);
+    this.configurationService = injector.get(ConfigurationService);
   }
 
   ngOnInit(): void {}
@@ -114,14 +117,43 @@ export class WarehouseBaseComponent implements OnInit {
     }
   }
 
-  getUserStatus(status: string): string {
-    switch (status) {
+  formatObjectDate(date: string, format: string): string {
+    return moment(date).format(format);
+  }
+
+  formatObjectStatus(status: string): string {
+    switch (status.toLowerCase()) {
+      case StatusType.STATUS_ACTIVE:
+        return this.translate.instant('dataTable.status.active');
+      case StatusType.STATUS_DISABLED:
+        return this.translate.instant('dataTable.status.disabled');
+      case StatusType.STATUS_PENDING:
+        return this.translate.instant('dataTable.status.pending');
+      case StatusType.STATUS_NEVER_CONNECTED:
+        return this.translate.instant('dataTable.status.never.connected');
+      case StatusType.STATUS_DELETED:
+        return this.translate.instant('dataTable.status.deleted');
+      case StatusType.STATUS_PROCESSING:
+        return this.translate.instant('dataTable.status.processing');
+      default:
+        return this.translate.instant('dataTable.status.pending');
+    }
+  }
+
+  getObjectStatus(status: string): string {
+    switch (status.toLowerCase()) {
       case StatusType.STATUS_ACTIVE:
         return AlertType.ALERT_SUCCESS;
       case StatusType.STATUS_DISABLED:
         return AlertType.ALERT_ERROR;
       case StatusType.STATUS_PENDING:
         return AlertType.ALERT_WARNING;
+      case StatusType.STATUS_DELETED:
+        return AlertType.ALERT_ERROR;
+      case StatusType.STATUS_DISCONNECTED:
+        return AlertType.ALERT_NEVER_CONNECT;
+      case StatusType.STATUS_PROCESSING:
+        return AlertType.ALERT_PROCESSING;
       default:
         return AlertType.ALERT_WARNING;
     }
@@ -177,22 +209,24 @@ export class WarehouseBaseComponent implements OnInit {
   }
 
   handleOnNavigateByUrl(url: string) {
-    this.router.navigate([url]);
+    this.router.navigate([url], {
+      relativeTo: this.route,
+    });
   }
 
   handleOnLogin() {
     let url = `${Pages.WAREHOUSE}/${Pages.LOGIN}`;
-    this.handleOnNavigateByUrl(url);
+    this.router.navigate([url]);
   }
 
   handleOnRegister() {
-    let url = `${Pages.WAREHOUSE}/${Pages.REGISTER}`
-    this.handleOnNavigateByUrl(url);
+    let url = `${Pages.WAREHOUSE}/${Pages.REGISTER}`;
+    this.router.navigate([url]);
   }
 
   handleOnForgotPassword() {
     let url = `${Pages.WAREHOUSE}/${Pages.FORGOT_PASSWORD}`;
-    this.handleOnNavigateByUrl(url);
+    this.router.navigate([url]);
   }
 
   errorAlertType(message: string): void {
@@ -206,7 +240,7 @@ export class WarehouseBaseComponent implements OnInit {
     this.alertType = AlertType.ALERT_SUCCESS;
     this.messageAlert = message;
   }
-  
+
   handleOnChangeInput() {
     // If the alert incorrect password is opened,
     // when the user point the password/confirm password, the alert disappear.
@@ -217,6 +251,15 @@ export class WarehouseBaseComponent implements OnInit {
 
   firstLetterUpperCase(content: string): string {
     return content.charAt(0).toUpperCase() + content.slice(1);
+  }
+
+  truncateLongText(content: string, truncateTo?: number) {
+    if (truncateTo && truncateTo != 0) {
+      return content.length > truncateTo
+        ? content.slice(0, truncateTo) + ' ...'
+        : content;
+    }
+    return content.slice(0, 25) + ' ...'; // default truncate content to 25 if the user not precised parameter truncateTo
   }
 
   handleOnDisabledDatePicker(current: Date): boolean {
@@ -232,21 +275,27 @@ export class WarehouseBaseComponent implements OnInit {
 
   handleOnModalAlmost18YearsOld() {
     this.nzModalService.warning({
-      nzTitle:  this.translate.instant('dashboard.modal.almost18YearsOld.title'),
-      nzContent: 
-        '<div class="modal-wrapper container">' + 
-          '<div class="row modal-body">' +
-            '<div class="col modal-body-year">' +
-              '<span class="modal-year">' + this.WAREHOUSE_18_YEARS_OLD + '</span>' +
-            '</div>' +
-            '<div class="col modal-body-title">' +
-              '<span class="modal-title">' + this.translate.instant('dashboard.modal.almost18YearsOld.subtitle') + '</span>' +
-            '</div>' +
-            '<div class="col modal-body-description">' +
-              '<span class="modal-description">' + this.translate.instant('dashboard.modal.almost18YearsOld.description') + '</span>' +
-            '</div>' +
-          '</div>' +
-        '</div>'
+      nzTitle: this.translate.instant('dashboard.modal.almost18YearsOld.title'),
+      nzContent:
+        '<div class="modal-wrapper container">' +
+        '<div class="row modal-body">' +
+        '<div class="col modal-body-year">' +
+        '<span class="modal-year">' +
+        this.WAREHOUSE_18_YEARS_OLD +
+        '</span>' +
+        '</div>' +
+        '<div class="col modal-body-title">' +
+        '<span class="modal-title">' +
+        this.translate.instant('dashboard.modal.almost18YearsOld.subtitle') +
+        '</span>' +
+        '</div>' +
+        '<div class="col modal-body-description">' +
+        '<span class="modal-description">' +
+        this.translate.instant('dashboard.modal.almost18YearsOld.description') +
+        '</span>' +
+        '</div>' +
+        '</div>' +
+        '</div>',
     });
   }
 }

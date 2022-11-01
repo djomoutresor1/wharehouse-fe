@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { ManageAccountComponent } from '../warehouse/components/manage-account/manage-account.component';
+import { HelpComponent } from './dashboard-configuration/help/help.component';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { DashboardRackDetailComponent } from './dashboard-rack-detail/dashboard-rack-detail.component';
 import { DashboardRackGlobalComponent } from './dashboard-rack-global/dashboard-rack-global.component';
@@ -56,7 +57,11 @@ const routes: Routes = [
       {
         path: `${Pages.NOTIFICATIONS}`,
         component: DashboardNotificationsComponent
-      }
+      },
+      {
+        path: `${Pages.HELP_CONTACT}`,
+        component: HelpComponent,
+      },
     ],
   },
 ];

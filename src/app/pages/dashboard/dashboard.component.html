@@ -7,11 +7,18 @@
     <ul nz-menu [nzTheme]="theme ? 'dark' : 'light'" [nzMode]="mode ? 'vertical' : 'inline'">
       <li nz-menu-item (click)="handleOnNavigate('dashboard')">
         <i nz-icon nzType="dashboard"></i>
-        <span>Dashboard</span>
+        <span>{{'dashboard.title' | translate}}</span>
       </li>
-      <li *ngIf="this.checkRole === undefined ? false : true" nz-submenu nzTitle="{{'Users' | translate}}" nzIcon="user">
+      <li *ngIf="this.checkRole === undefined ? false : true" nz-submenu nzTitle="{{'side.nav.left.users' | translate}}" nzIcon="user">
         <ul>
-          <li nz-menu-item (click)="handleOnUser('dashboard/users')">{{'All users'| translate}}</li>
+          <li nz-menu-item (click)="handleOnNavigateByUrl('users')">{{'side.nav.left.all.users'| translate}}</li>
+          <li nz-menu-item (click)="handleOnNavigateByUrl('user/insert')">{{'side.nav.left.add.new.user' | translate}}</li>
+          <!-- <li nz-menu-item>Alex</li> -->
+        </ul>
+      </li>
+      <li *ngIf="this.checkRole === undefined ? false : true" nz-submenu nzTitle="{{'side.nav.left.configuration' | translate}}" nzIcon="file-text">
+        <ul>
+          <li nz-menu-item (click)="handleOnNavigateByUrl('help-contact')">{{'side.nav.left.help.title'| translate}}</li>
           <li nz-menu-item (click)="handleOnAddUser()">{{'Add new user' | translate}}</li>
           <!-- <li nz-menu-item>Alex</li> -->
         </ul>
