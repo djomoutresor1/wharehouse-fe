@@ -80,7 +80,7 @@
         "user": "Confirmation ajout nouveau utilisateur"
       },
       "change": {
-        "status": "Confirmation changement statut utilisateur",
+        "status": "Confirmation changement statut",
         "firstText": "L'utilisateur",
         "secondText": " a le statut",
         "thirdText": "Voulez-vous l'échanger avec le status ?"
@@ -110,6 +110,9 @@
       "logout": {
         "title": "Confirmation Déconnexion",
         "subtitle": "Êtes-vous sûr de vouloir vous déconnecter ?"
+      },
+      "delete": {
+        "subtitle": "Êtes-vous sûr de vouloir supprimer cet objet ?"
       },
       "deleteUser": {
         "title": "Confirmation Annulation",
@@ -161,6 +164,9 @@
       "active": "Activé",
       "pending": "En attente",
       "disabled": "Désactivé",
+      "never.connected": "Jamais connecté",
+      "deleted": "Supprimé",
+      "processing": "En cours",
       "placeholder": "Selectionez un statut",
       "title": "statut"
     },
@@ -453,6 +459,48 @@
         "contentOne": "Il s'agit d'une adresse e-mail secondaire, qui peut être utilisée en cas de besoin, en complément de l'adresse e-mail personnelle.",
         "contentTwo": "Pour être utilisé, il doit être certifié (vérifié par la personne)."
       }
+    }
+  },
+  "side.nav.left":  {
+    "users": "Utilisateurs",
+    "all.users": "Tous les usagers",
+    "configuration": "Configuration",
+    "help": {
+      "title": "Aide",
+      "datagrid": {
+        "title": "Title",
+        "description": "Description",
+        "status": "Statut",
+        "createdAt": "Date di creation/mise à jour",
+        "createdBy": "Créé par"
+      },
+      "field": {
+        "title": "Ttile",
+        "description": "Description",
+        "content": "Contenu",
+        "status": "Statut"
+      },
+      "required": {
+        "title": "Le title est obbligatoire",
+        "description": "La description est obbligatoire",
+        "content": "Il contenu est obbligatoire"
+      },
+      "placeholder": {
+        "title": "Insérez le title",
+        "description": "Insérez la description",
+        "content": "Insérez plus de contenu"
+      },
+      "create": "Créer l'aide",
+      "update": "Ajourner l'aide",
+      "show": "Toutes les informations sur l'aide"
+    },
+    "add": {
+      "new.user": "Nouveau usager",
+      "new.help": "Nouvelle aide",
+      "new.object": "Nouveau objet"
+    },
+    "update": {
+      "object": "Ajournez l'objet"
     }
   },
   "All Users": "tous les utilisateurs",
