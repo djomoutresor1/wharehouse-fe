@@ -26,6 +26,7 @@ import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
 import { ViewService } from './services/view-file.service';
 import { WarehouseBaseComponent } from './base/warehouse-base/warehouse-base.component';
 import { ViewProfilService } from './services/view-profil.service';
+import { ConfigurationService } from './services/configuration.service';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -62,6 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProfilService,
     FlagService,
     ViewProfilService,
+    ConfigurationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CommonInterceptor,

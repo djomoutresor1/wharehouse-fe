@@ -17,8 +17,11 @@ export enum Pages {
   USER = "user",
   CREATE = "insert",
   EDIT = "edit",
+  DELETE = "delete",
+  UPDATE = "update",
   RESET_PASSWORD = "noAuth/resetPassword",
   CHANGE_PASSWORD = "change/password",
+  CHANGE_STATUS = "change-status",
   MANAGE_ACCOUNT = "manage/account",
   COOKIES = "cookies",
   CGU = "general-condition",
@@ -27,4 +30,6 @@ export enum Pages {
   PRIVACY_POLICY = "privacy-policy",
   HELP_CONTACT = "help-contact",
   NOTIFICATIONS = 'notifications',
+  HELPS = "helps",
+  HELP = "help"
 }

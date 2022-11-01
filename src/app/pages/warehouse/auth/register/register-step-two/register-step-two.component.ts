@@ -77,9 +77,9 @@ export class RegisterStepTwoComponent extends WarehouseBaseComponent implements 
           this.userVerified = response;
           this.checkIfExpirationLinkIsCorrect();
           if (!this.isExpiredLink && !this.isVerifyEmail) {
-            this.handleOnActivateStatusUser();
+            this.handleOnActivateStatusUser(response.userId);
             setTimeout(() => {
-              this.handleOnGetUserInfos(this.user?.userId);
+              this.handleOnGetUserInfos(response.userId);
             }, 2000);
           }
         },
@@ -94,8 +94,8 @@ export class RegisterStepTwoComponent extends WarehouseBaseComponent implements 
       );
   }
 
-  handleOnActivateStatusUser() {
-    this.profilService.onActivateUser(this.user?.userId).subscribe(
+  handleOnActivateStatusUser(userId: string) {
+    this.profilService.onActivateUser(userId).subscribe(
       (response: ResponseModel) => {
         console.log('response: ', response);
         this.successAlertType(response?.message);

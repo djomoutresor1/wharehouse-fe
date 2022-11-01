@@ -12,6 +12,10 @@
 
 .warehouse-required {
   color: var(--warehouse-danger) !important;
+  left: 0px;
+  position: relative;
+  width: 10px;
+  font-weight: 600;
 }
 
 .warehouse-text-justify {

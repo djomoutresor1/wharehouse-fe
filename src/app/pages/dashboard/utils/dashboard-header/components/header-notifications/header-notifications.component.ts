@@ -22,8 +22,7 @@ export class HeaderNotificationsComponent extends WarehouseBaseComponent impleme
   handleOnGoToNotifications() {
     this.showNotifications = false;
     this.OnNotifyNotifications.emit(false);
-    let url = `${Pages.WAREHOUSE}/${Pages.DASHBOARD}/${Pages.NOTIFICATIONS}`;
-    this.handleOnNavigateByUrl(url);
+    this.handleOnNavigateByUrl(`${Pages.NOTIFICATIONS}`);
   }
 
   handleOnNotificationsReadAll() {

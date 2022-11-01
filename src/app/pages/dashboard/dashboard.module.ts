@@ -23,6 +23,7 @@ import { DashboardFooterComponent } from './utils/dashboard-footer/dashboard-foo
 import { HeaderHelpComponent } from './utils/dashboard-header/components/header-help/header-help.component';
 import { HeaderNotificationsComponent } from './utils/dashboard-header/components/header-notifications/header-notifications.component';
 import { DashboardNotificationsComponent } from './utils/dashboard-notifications/dashboard-notifications.component';
+import { HelpComponent } from './dashboard-configuration/help/help.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { DashboardNotificationsComponent } from './utils/dashboard-notifications
     DashboardFooterComponent,
     HeaderHelpComponent,
     HeaderNotificationsComponent,
-    DashboardNotificationsComponent
+    DashboardNotificationsComponent,
+    HelpComponent
   ],
   imports: [
     HttpClientModule,

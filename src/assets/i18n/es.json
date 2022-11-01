@@ -70,17 +70,17 @@
     },
     "preferences": {
       "success": {
-        "description": "Verrai reindirizzato alla pagina di accesso in 2 secondi."
+        "description": "Verrai reindirizzato alla pagina di accesso in 5 secondi."
       }
     }
   },
   "operation": {
     "confirmation": {
       "insert": {
-        "user": "Conferma inserimento nuono utente"
+        "user": "Conferma inserimento nuovo utente"
       },
       "change": {
-        "status": "Conferma cambia stato utente",
+        "status": "Conferma cambia stato",
         "firstText": "L'utente",
         "secondText": " ha lo stato",
         "thirdText": "Vuoi scambiarlo con lo stato ?"
@@ -110,6 +110,9 @@
       "logout": {
         "title": "Conferma Logout",
         "subtitle": "Sei sicuro di voler uscire ?"
+      },
+      "delete": {
+        "subtitle": "Sei sicuro di voler eliminare questo oggetto ?"
       },
       "deleteUser": {
         "title": "Conferma Cancelazzione",
@@ -161,6 +164,9 @@
       "active": "Attivo",
       "pending": "In attesa",
       "disabled": "Disabilitato",
+      "never.connected": "Mai connesso",
+      "deleted": "Cancellato",
+      "processing": "In corso",
       "placeholder": "Seleziona uno stato",
       "title": "Stato"
     },
@@ -406,8 +412,9 @@
         "cancel": "Cancella account"
       },
       "modal": {
-        "title": "Sei sicuro di voler eseguire questa azione?",
-        "message": "Eliminando il tuo account, questo non sarà disponibile per 90 giorni. Successivamente, verrà eliminato definitivamente nel sistema Warehouse. In caso di ripristino del tuo account, contatta l'organizzazione del tuo dipartimento.",
+        "title": "Sei sicuro di voler eseguire questa azione ?",
+        "message.delete": "Eliminando il tuo account, questo non sarà disponibile per 90 giorni. Successivamente, verrà eliminato definitivamente nel sistema Warehouse. Nel caso in cui desideri ripristinare di nuovo il tuo account, contatta l'organizzazione del tuo dipartimento.",
+        "message.disabled": "Disabilitando il tuo account, non sarà più possibile effettuare nuovamente il login. Nel caso in cui desideri ripristinare di nuovo il tuo account, contatta l'organizzazione del tuo dipartimento.",
         "terms.services": {
           "title": "Termini Servizi",
           "subtitleOne": "Prima di procedere, si prega di rivedere i ",
@@ -455,6 +462,48 @@
     },
     "add": {
       "title": "Nuovo utente"
+    }
+  },
+  "side.nav.left":  {
+    "users": "Utenti",
+    "all.users": "Tutti gli utenti",
+    "configuration": "Configurazione",
+    "help": {
+      "title": "Guida",
+      "datagrid": {
+        "title": "Titolo",
+        "description": "Descrizione",
+        "status": "Stato",
+        "createdAt": "Data di creazione/aggiornamento",
+        "createdBy": "Creato da"
+      },
+      "field": {
+        "title": "Titolo",
+        "description": "Descrizione",
+        "content": "Contenuto",
+        "status": "Stato"
+      },
+      "required": {
+        "title": "Il titolo è richiesto",
+        "description": "La descrizione è richiesto",
+        "content": "Il contenuto è richiesto"
+      },
+      "placeholder": {
+        "title": "Inserisci il titolo",
+        "description": "Inserisci la descrizione",
+        "content": "Inserisci più contenuto"
+      },
+      "create": "Crea guida",
+      "update": "Aggiorna guida",
+      "show": "Tutte le informazini sulla guida"
+    },
+    "add": {
+      "new.user": "Nuovo utente",
+      "new.help": "Nuova guida",
+      "new.object": "Nuovo oggetto"
+    },
+    "update": {
+      "object": "Aggiorna oggetto"
     }
   },
   "All Users": "tutti gli utenti",
