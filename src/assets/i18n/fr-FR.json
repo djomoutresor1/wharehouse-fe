@@ -134,6 +134,10 @@
         "title": "Veuillez confirmez votre âge",
         "subtitle": "Warehouse System, réservé aux adultes.",
         "description": "Pour confirmer l'inscription, l'utilisateur doit être âgé d'au moins 18 ans."
+      },
+      "deleteGlossary": {
+        "title": "Confirmation Annulation",
+        "subtitle": "La suppression de ce glossaire supprimera tous les glossaires avec le même code {{code}}. Etes-vous sûr de vouloir continuer ?"
       }
     },
     "footer": {
@@ -471,7 +475,7 @@
         "title": "Title",
         "description": "Description",
         "status": "Statut",
-        "createdAt": "Date di creation/mise à jour",
+        "createdAt": "Date de creation/mise à jour",
         "createdBy": "Créé par"
       },
       "field": {
@@ -494,10 +498,59 @@
       "update": "Ajourner l'aide",
       "show": "Toutes les informations sur l'aide"
     },
+    "glossary": {
+      "title": "Glossaire",
+      "alert": {
+        "title": "Glossaire informatif",
+        "description": "Le glossaire est un dictionnaire de services qui retourne les éléments recherchés, au format json, en passant une clé (objet) et la langue (it-IT, en-GB, es-ES, fr-FR).",
+        "create": {
+          "title": "Informations créer un glossaire",
+          "description": "Pour créer le glossaire, l'opérateur doit remplir le glossaire dans toutes les langues. Par défaut, le code et le sujet du glossaire seront les mêmes."
+        },
+        "update": {
+          "title": "Informations sur la mise à jour du glossaire",
+          "description": "En mettant à jour le glossaire, si l'opérateur apporte des modifications au code ou à l'objet, tous les glossaires correspondants dans toutes les langues seront mis à jour avec le nouveau code ou objet."
+        }
+      },
+      "datagrid": {
+        "code": "Code",
+        "description": "Description",
+        "status": "Statut",
+        "object": "Objet",
+        "language": "Langue",
+        "createdAt": "Date de creation/mise à jour",
+        "createdBy": "Créé par"
+      },
+      "field": {
+        "code": "Code",
+        "description": "Description",
+        "object": "Clé",
+        "status": "Statut"
+      },
+      "required": {
+        "code": "Le code est obbligatoire",
+        "description": "La description est obbligatoire",
+        "object": "La clé est obbligatoire"
+      },
+      "placeholder": {
+        "code": "Insérez",
+        "description": "Insérez la description",
+        "object": "Insérez la clé d'identification"
+      },
+      "panel": {
+        "it": "Glossaire Italien",
+        "en": "Glossaire Anglais",
+        "es": "Glossaire Espagnol",
+        "fr": "Glossaire Français"
+      },
+      "create": "Créer le glossaire",
+      "update": "Ajourner le glossaire"
+    },
     "add": {
       "new.user": "Nouveau usager",
       "new.help": "Nouvelle aide",
-      "new.object": "Nouveau objet"
+      "new.object": "Nouveau objet",
+      "new.glossary": "Nouveau glossaire"
     },
     "update": {
       "object": "Ajournez l'objet"

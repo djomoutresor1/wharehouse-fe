@@ -109,6 +109,7 @@ export class HelpComponent extends WarehouseBaseComponent implements OnInit {
   }
 
   handleOnCreateHelp() {
+    this.isAuth = false;
     let help = {
       title: this.validateForm.controls['title'].value,
       description: this.validateForm.controls['description'].value,
@@ -135,6 +136,7 @@ export class HelpComponent extends WarehouseBaseComponent implements OnInit {
   }
 
   handleOnUpdateHelp() {
+    this.isAuth = false;
     let help = {
       title: this.validateForm.controls['title'].value,
       description: this.validateForm.controls['description'].value,
@@ -172,7 +174,7 @@ export class HelpComponent extends WarehouseBaseComponent implements OnInit {
       .subscribe(
         (response: ResponseModel) => {
           this.successAlertType(response?.message);
-          this.handleOnCloseDrawer(Utils.WAREHOUSE_ACTION_SHOW);
+          this.handleOnCloseDrawer(Utils.WAREHOUSE_ACTION_STATUS);
           this.handleOnGetHelps();
         },
         (error: HttpErrorResponse) => {
@@ -213,6 +215,7 @@ export class HelpComponent extends WarehouseBaseComponent implements OnInit {
   }
 
   handleOnDelete(title: string) {
+    this.isAuth = false;
     this.nzModalService.confirm({
       nzTitle:
         '<h4>' +

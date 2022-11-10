@@ -1,0 +1,411 @@
+<warehouse-breadcrumb [items]="breadcrumbItems"></warehouse-breadcrumb>
+<div class="dashboard-glossary-wrapper container-fluid">
+    <div class="row">
+        <div class="col">
+            <nz-alert nzType="info" [nzMessage]="'side.nav.left.glossary.alert.title' | translate"
+                [nzDescription]="'side.nav.left.glossary.alert.description' | translate" nzShowIcon></nz-alert>
+        </div>
+    </div>
+    <div class="row" *ngIf="isAuth">
+        <div class="col">
+            <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert">
+            </warehouse-notification>
+        </div>
+    </div>
+    <div class="row" *ngIf="isExpiredToken">
+        <div class="col">
+            <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert"
+                [descriptionModal]="descriptionAlert" (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <button nz-button nzType="primary" (click)="handleOnAddGlossary()"><span nz-icon nzType="plus-circle"
+                    nzTheme="outline"></span> {{"side.nav.left.add.new.glossary" |
+                translate}}</button>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="glossaries">
+            <thead>
+                <tr>
+                    <th>{{ "side.nav.left.glossary.datagrid.code" | translate }}</th>
+                    <th>{{ "side.nav.left.glossary.datagrid.description" | translate }}</th>
+                    <th>{{ "side.nav.left.glossary.datagrid.object" | translate }}</th>
+                    <th>{{ "side.nav.left.glossary.datagrid.language" | translate }}</th>
+                    <th>{{ "side.nav.left.glossary.datagrid.createdAt" | translate }}</th>
+                    <th>{{ "side.nav.left.glossary.datagrid.createdBy" | translate }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of rowSelectionTable.data">
+                    <td>{{ data.code.toUpperCase() }}</td>
+                    <td>{{ data.description }}</td>
+                    <td>{{ data.object }}</td>
+                    <td><img class="multilanguage" [src]="getFlagLanguageByCode(data.language)" [alt]="data.language" />
+                    </td>
+                    <td>{{ formatObjectDate(data.updatedAt, dateFormatThree) }}</td>
+                    <td>{{ data.user.fullname }}</td>
+                    <td>
+                        <button nz-button nz-dropdown [nzDropdownMenu]="options" nzType="primary">
+                            {{ "dataTable.options.title" | translate }}
+                            <i nz-icon nzType="down"></i>
+                        </button>
+                        <nz-dropdown-menu #options="nzDropdownMenu">
+                            <ul nz-menu>
+                                <!-- <li nz-menu-item (click)="handleOnStatus(data)"><i nz-icon nzType="right-circle"
+                                        nzTheme="twotone"></i>
+                                    {{
+                                    "dataTable.options.status" |
+                                    translate }}</li> -->
+                                <li nz-menu-item (click)="handleOnEdit(data)"><i nz-icon nzType="edit"
+                                        nzTheme="twotone"></i> {{
+                                    "dataTable.options.edit" |
+                                    translate }}</li>
+                                <li nz-menu-item (click)="handleOnDelete(data)"><i nz-icon nzType="delete"
+                                        nzTheme="twotone"></i>
+                                    {{
+                                    "dataTable.options.delete" | translate }}</li>
+                            </ul>
+                        </nz-dropdown-menu>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+    <!-- Section Create Glossary -->
+    <nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720"
+        [nzVisible]="drawerCreateVisible" [nzTitle]="'side.nav.left.add.new.object' | translate"
+        [nzFooter]="nzDrawerAddFooter" (nzOnClose)="handleOnCloseDrawer('create')">
+        <form nz-form [formGroup]="validateForm" *nzDrawerContent class="warehouse-not-padding warehouse-not-margin">
+            <div class="row">
+                <div class="col">
+                    <nz-alert nzType="warning" [nzMessage]="'side.nav.left.glossary.alert.create.title' | translate"
+                        [nzDescription]="'side.nav.left.glossary.alert.create.description' | translate" nzShowIcon>
+                    </nz-alert>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    <nz-collapse [nzBordered]="false">
+                        <!-- Glossary it-IT -->
+                        <nz-collapse-panel [nzHeader]="'side.nav.left.glossary.panel.it' | translate" [nzActive]="true"
+                            [nzExtra]="extraTplIT">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <nz-form-label nzFor="code">{{"side.nav.left.glossary.field.code" | translate
+                                        }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-item>
+                                        <nz-form-control
+                                            [nzErrorTip]="'side.nav.left.glossary.required.code' | translate">
+                                            <nz-input-group nzPrefixIcon="align-left">
+                                                <input type="text" nz-input formControlName="code" class="glossary-code"
+                                                    [minlength]="2" [maxlength]="3"
+                                                    [placeholder]="'side.nav.left.glossary.placeholder.code' | translate"
+                                                    (click)="handleOnChangeInput()"
+                                                    (ngModelChange)="handleOnChangeCode($event)" />
+                                            </nz-input-group>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                                <div class="col-md-6">
+                                    <nz-form-label nzFor="object">{{"side.nav.left.glossary.field.object" | translate
+                                        }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-item>
+                                        <nz-form-control
+                                            [nzErrorTip]="'side.nav.left.glossary.required.object' | translate">
+                                            <nz-input-group nzPrefixIcon="key">
+                                                <input type="text" nz-input formControlName="object"
+                                                    class="glossary-object"
+                                                    (ngModelChange)="handleOnChangeObject($event)"
+                                                    [placeholder]="'side.nav.left.glossary.placeholder.object' | translate"
+                                                    (click)="handleOnChangeInput()" />
+                                            </nz-input-group>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <nz-form-label nzFor="description_it">{{"side.nav.left.glossary.field.description" |
+                                        translate }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-control
+                                        [nzErrorTip]="'side.nav.left.glossary.required.description' | translate">
+                                        <nz-input-group nzPrefixIcon="align-left">
+                                            <input type="text" nz-input formControlName="description_it"
+                                                [placeholder]="'side.nav.left.glossary.placeholder.description' | translate"
+                                                (click)="handleOnChangeInput()" />
+                                        </nz-input-group>
+                                    </nz-form-control>
+                                </div>
+                            </div>
+                        </nz-collapse-panel>
+                        <!-- Glossary en-GB -->
+                        <nz-collapse-panel [nzHeader]="'side.nav.left.glossary.panel.en' | translate" [nzActive]="false"
+                            [nzExtra]="extraTplEN">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <nz-form-label nzFor="code">{{"side.nav.left.glossary.field.code" | translate
+                                        }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-item>
+                                        <nz-form-control
+                                            [nzErrorTip]="'side.nav.left.glossary.required.code' | translate">
+                                            <nz-input-group nzPrefixIcon="align-left">
+                                                <input type="text" nz-input [disabled]="true" class="glossary-code"
+                                                    [value]="glossaryCode"
+                                                    [placeholder]="'side.nav.left.glossary.placeholder.code' | translate"
+                                                    (click)="handleOnChangeInput()" />
+                                            </nz-input-group>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                                <div class="col-md-6">
+                                    <nz-form-label nzFor="object">{{"side.nav.left.glossary.field.object" | translate
+                                        }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-item>
+                                        <nz-form-control
+                                            [nzErrorTip]="'side.nav.left.glossary.required.object' | translate">
+                                            <nz-input-group nzPrefixIcon="key">
+                                                <input type="text" nz-input [disabled]="true" [value]="glossaryObject"
+                                                    [placeholder]="'side.nav.left.glossary.placeholder.object' | translate"
+                                                    (click)="handleOnChangeInput()" />
+                                            </nz-input-group>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <nz-form-label nzFor="description_en">{{"side.nav.left.glossary.field.description" |
+                                        translate }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-control
+                                        [nzErrorTip]="'side.nav.left.glossary.required.description' | translate">
+                                        <nz-input-group nzPrefixIcon="align-left">
+                                            <input type="text" nz-input formControlName="description_en"
+                                                [placeholder]="'side.nav.left.glossary.placeholder.description' | translate"
+                                                (click)="handleOnChangeInput()" />
+                                        </nz-input-group>
+                                    </nz-form-control>
+                                </div>
+                            </div>
+                        </nz-collapse-panel>
+                        <!-- Glossary es-ES -->
+                        <nz-collapse-panel [nzHeader]="'side.nav.left.glossary.panel.es' | translate" [nzActive]="false"
+                            [nzExtra]="extraTplES">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <nz-form-label nzFor="code">{{"side.nav.left.glossary.field.code" | translate
+                                        }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-item>
+                                        <nz-form-control
+                                            [nzErrorTip]="'side.nav.left.glossary.required.code' | translate">
+                                            <nz-input-group nzPrefixIcon="align-left">
+                                                <input type="text" nz-input [disabled]="true" [value]="glossaryCode"
+                                                    class="glossary-code"
+                                                    [placeholder]="'side.nav.left.glossary.placeholder.code' | translate"
+                                                    (click)="handleOnChangeInput()" />
+                                            </nz-input-group>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                                <div class="col-md-6">
+                                    <nz-form-label nzFor="object">{{"side.nav.left.glossary.field.object" | translate
+                                        }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-item>
+                                        <nz-form-control
+                                            [nzErrorTip]="'side.nav.left.glossary.required.object' | translate">
+                                            <nz-input-group nzPrefixIcon="key">
+                                                <input type="text" nz-input [disabled]="true" [value]="glossaryObject"
+                                                    [placeholder]="'side.nav.left.glossary.placeholder.object' | translate"
+                                                    (click)="handleOnChangeInput()" />
+                                            </nz-input-group>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <nz-form-label nzFor="description_es">{{"side.nav.left.glossary.field.description" |
+                                        translate }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-control
+                                        [nzErrorTip]="'side.nav.left.glossary.required.description' | translate">
+                                        <nz-input-group nzPrefixIcon="align-left">
+                                            <input type="text" nz-input formControlName="description_es"
+                                                [placeholder]="'side.nav.left.glossary.placeholder.description' | translate"
+                                                (click)="handleOnChangeInput()" />
+                                        </nz-input-group>
+                                    </nz-form-control>
+                                </div>
+                            </div>
+                        </nz-collapse-panel>
+                        <!-- Glossary fr-FR -->
+                        <nz-collapse-panel [nzHeader]="'side.nav.left.glossary.panel.fr' | translate" [nzActive]="false"
+                            [nzExtra]="extraTplFR">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <nz-form-label nzFor="code">{{"side.nav.left.glossary.field.code" | translate
+                                        }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-item>
+                                        <nz-form-control
+                                            [nzErrorTip]="'side.nav.left.glossary.required.code' | translate">
+                                            <nz-input-group nzPrefixIcon="align-left">
+                                                <input type="text" nz-input [disabled]="true" [value]="glossaryCode"
+                                                    class="glossary-code"
+                                                    [placeholder]="'side.nav.left.glossary.placeholder.code' | translate"
+                                                    (click)="handleOnChangeInput()" />
+                                            </nz-input-group>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                                <div class="col-md-6">
+                                    <nz-form-label nzFor="object">{{"side.nav.left.glossary.field.object" | translate
+                                        }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-item>
+                                        <nz-form-control
+                                            [nzErrorTip]="'side.nav.left.glossary.required.object' | translate">
+                                            <nz-input-group nzPrefixIcon="key">
+                                                <input type="text" nz-input [disabled]="true" [value]="glossaryObject"
+                                                    [placeholder]="'side.nav.left.glossary.placeholder.object' | translate"
+                                                    (click)="handleOnChangeInput()" />
+                                            </nz-input-group>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <nz-form-label nzFor="description_fr">{{"side.nav.left.glossary.field.description" |
+                                        translate }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-control
+                                        [nzErrorTip]="'side.nav.left.glossary.required.description' | translate">
+                                        <nz-input-group nzPrefixIcon="align-left">
+                                            <input type="text" nz-input formControlName="description_fr"
+                                                [placeholder]="'side.nav.left.glossary.placeholder.description' | translate"
+                                                (click)="handleOnChangeInput()" />
+                                        </nz-input-group>
+                                    </nz-form-control>
+                                </div>
+                            </div>
+                        </nz-collapse-panel>
+                    </nz-collapse>
+                    <ng-template #extraTplIT>
+                        <!-- You can use stopPropagation if you don't want the panel to toggle -->
+                        <span (click)="$event.stopPropagation()"><img class="multilanguage"
+                                src="../../../../../assets/countrie-flags/it.png" alt="Flag IT" /></span>
+                    </ng-template>
+                    <ng-template #extraTplES>
+                        <!-- You can use stopPropagation if you don't want the panel to toggle -->
+                        <span (click)="$event.stopPropagation()"><img class="multilanguage"
+                                src="../../../../../assets/countrie-flags/es.png" alt="Flag ES" /></span>
+                    </ng-template>
+                    <ng-template #extraTplFR>
+                        <!-- You can use stopPropagation if you don't want the panel to toggle -->
+                        <span (click)="$event.stopPropagation()"><img class="multilanguage"
+                                src="../../../../../assets/countrie-flags/fr.png" alt="Flag FR" /></span>
+                    </ng-template>
+                    <ng-template #extraTplEN>
+                        <!-- You can use stopPropagation if you don't want the panel to toggle -->
+                        <span (click)="$event.stopPropagation()"><img class="multilanguage"
+                                src="../../../../../assets/countrie-flags/en.png" alt="Flag EN" /></span>
+                    </ng-template>
+                </div>
+            </div>
+        </form>
+        <ng-template #nzDrawerAddFooter>
+            <div style="float: right">
+                <button nz-button style="margin-right: 8px;" (click)="handleOnCloseDrawer('create')"><span nz-icon
+                        nzType="left" nzTheme="outline"></span> {{"dashboard.cta.back" | translate }}</button>
+                <button nz-button [disabled]="!this.validateForm.valid" nzType="primary"
+                    (click)="handleOnCreateGlossary()">
+                    <span nz-icon nzType="check-circle" nzTheme="outline"></span>{{ "side.nav.left.glossary.create" |
+                    translate }}</button>
+            </div>
+        </ng-template>
+    </nz-drawer>
+
+    <!-- Section Update Glossary -->
+    <nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720"
+        [nzVisible]="drawerUpdateVisible" [nzTitle]="'side.nav.left.update.object' | translate"
+        [nzFooter]="nzDrawerEditFooter" (nzOnClose)="handleOnCloseDrawer('update')">
+        <form nz-form [formGroup]="updateGlossaryForm" *nzDrawerContent
+            class="warehouse-not-padding warehouse-not-margin">
+            <div class="row">
+                <div class="col">
+                    <nz-alert nzType="info" [nzMessage]="'side.nav.left.glossary.alert.update.title' | translate"
+                        [nzDescription]="'side.nav.left.glossary.alert.update.description' | translate" nzShowIcon>
+                    </nz-alert>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    <nz-collapse [nzBordered]="false">
+                        <nz-collapse-panel [nzHeader]="'side.nav.left.glossary.panel.it' | translate" [nzActive]="true"
+                            [nzExtra]="extraTpl">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <nz-form-label nzFor="code">{{"side.nav.left.glossary.field.code" | translate
+                                        }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-item>
+                                        <nz-form-control
+                                            [nzErrorTip]="'side.nav.left.glossary.required.code' | translate">
+                                            <nz-input-group nzPrefixIcon="align-left">
+                                                <input type="text" nz-input formControlName="code" class="glossary-code"
+                                                    [minlength]="2" [maxlength]="3"
+                                                    [placeholder]="'side.nav.left.glossary.placeholder.code' | translate"
+                                                    (click)="handleOnChangeInput()" />
+                                            </nz-input-group>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                                <div class="col-md-6">
+                                    <nz-form-label nzFor="object">{{"side.nav.left.glossary.field.object" | translate
+                                        }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-item>
+                                        <nz-form-control
+                                            [nzErrorTip]="'side.nav.left.glossary.required.object' | translate">
+                                            <nz-input-group nzPrefixIcon="key">
+                                                <input type="text" nz-input formControlName="object"
+                                                    class="glossary-object"
+                                                    [placeholder]="'side.nav.left.glossary.placeholder.object' | translate"
+                                                    (click)="handleOnChangeInput()" />
+                                            </nz-input-group>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <nz-form-label nzFor="description_it">{{"side.nav.left.glossary.field.description" |
+                                        translate }}<span class="warehouse-required"> *</span></nz-form-label>
+                                    <nz-form-control
+                                        [nzErrorTip]="'side.nav.left.glossary.required.description' | translate">
+                                        <nz-input-group nzPrefixIcon="align-left">
+                                            <input type="text" nz-input formControlName="description"
+                                                [placeholder]="'side.nav.left.glossary.placeholder.description' | translate"
+                                                (click)="handleOnChangeInput()" />
+                                        </nz-input-group>
+                                    </nz-form-control>
+                                </div>
+                            </div>
+                        </nz-collapse-panel>
+                    </nz-collapse>
+                    <ng-template #extraTpl>
+                        <!-- You can use stopPropagation if you don't want the panel to toggle -->
+                        <span (click)="$event.stopPropagation()"><img class="multilanguage" [src]="glossaryFlag"
+                                alt="Flag Generic" /></span>
+                    </ng-template>
+                </div>
+            </div>
+        </form>
+        <ng-template #nzDrawerEditFooter>
+            <div style="float: right">
+                <button nz-button style="margin-right: 8px;" (click)="handleOnCloseDrawer('update')"><span nz-icon
+                        nzType="left" nzTheme="outline"></span> {{"dashboard.cta.back" | translate }}</button>
+                <button nz-button [disabled]="!this.updateGlossaryForm.valid" nzType="primary"
+                    (click)="handleOnUpdateGlossary()">
+                    <span nz-icon nzType="check-circle" nzTheme="outline"></span>{{ "side.nav.left.glossary.update" |
+                    translate }}</button>
+            </div>
+        </ng-template>
+    </nz-drawer>
+</div>

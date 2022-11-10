@@ -31,5 +31,7 @@ export enum Pages {
   HELP_CONTACT = "help-contact",
   NOTIFICATIONS = 'notifications',
   HELPS = "helps",
-  HELP = "help"
+  HELP = "help",
+  GLOSSARIES = "glossaries",
+  GLOSSARY = "glossary"
 }
