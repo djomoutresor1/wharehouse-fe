@@ -28,4 +28,5 @@ export enum Utils {
   WAREHOUSE_ACTION_CREATE = "create",
   WAREHOUSE_ACTION_UPDATE = "update",
   WAREHOUSE_ACTION_SHOW = "show",
+  WAREHOUSE_ACTION_STATUS = "status",
 }

@@ -134,6 +134,10 @@
         "title": "Per favore conferma la tua età",
         "subtitle": "Warehouse System, solo per adulti.",
         "description": "Per confermare la registrazione, l'utente deve avere almeno 18 anni."
+      },
+      "deleteGlossary": {
+        "title": "Conferma Cancelazzione",
+        "subtitle": "Cancellando questo glossario, verrà cancellato tutti gli glossari con lo stesso codice {{ code }}. Sei sicuro di voler continuare ?"
       }
     },
     "footer": {
@@ -497,10 +501,59 @@
       "update": "Aggiorna guida",
       "show": "Tutte le informazini sulla guida"
     },
+    "glossary": {
+      "title": "Glossario",
+      "alert": {
+        "title": "Glossario informativo",
+        "description": "Il glossario è un dizionario di servizi che restituisce gli elementi desiderati, in formato json, passando una chiave (oggetto) e la lingua (it-IT, en-GB, es-ES, fr-FR)",
+        "create": {
+          "title": "Informazione creare glossario",
+          "description": "Per creare il glossario, l'operatore deve compilare il glossario in tutte le lingue. Per impostazione predefinita, il codice e l'oggetto del glossario saranno gli stessi."
+        },
+        "update": {
+          "title": "Informazione aggiornamento glossario",
+          "description": "Aggiornando il glossario, se l'operatore apporta modifiche al codice o all'oggetto, tutti i glossari corrispondenti in tutte le lingue verranno aggiornati con il nuovo codice o oggetto."
+        }
+      },
+      "datagrid": {
+        "code": "Codice",
+        "description": "Descrizione",
+        "status": "Stato",
+        "object": "Oggetto",
+        "language": "Lingua",
+        "createdAt": "Data di creazione/aggiornamento",
+        "createdBy": "Creato da"
+      },
+      "field": {
+        "code": "Codice",
+        "description": "Descrizione",
+        "object": "Chiave",
+        "status": "Stato"
+      },
+      "required": {
+        "code": "Il codice è richiesto",
+        "description": "La descrizione è richiesto",
+        "object": "La chiave è richiesto"
+      },
+      "placeholder": {
+        "code": "Inserisci",
+        "description": "Inserisci la descrizione",
+        "object": "Inserisci la chiave di identificazione"
+      },
+      "panel": {
+        "it": "Glossario Italiano",
+        "en": "Glossario Inglese",
+        "es": "Glossario Spagnolo",
+        "fr": "Glossario Francese"
+      },
+      "create": "Crea glossario",
+      "update": "Aggiorna glossario"
+    },
     "add": {
       "new.user": "Nuovo utente",
       "new.help": "Nuova guida",
-      "new.object": "Nuovo oggetto"
+      "new.object": "Nuovo oggetto",
+      "new.glossary": "Nuovo glossario"
     },
     "update": {
       "object": "Aggiorna oggetto"

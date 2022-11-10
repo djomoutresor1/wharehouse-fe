@@ -24,6 +24,7 @@ import { HeaderHelpComponent } from './utils/dashboard-header/components/header-
 import { HeaderNotificationsComponent } from './utils/dashboard-header/components/header-notifications/header-notifications.component';
 import { DashboardNotificationsComponent } from './utils/dashboard-notifications/dashboard-notifications.component';
 import { HelpComponent } from './dashboard-configuration/help/help.component';
+import { GlossaryComponent } from './dashboard-configuration/glossary/glossary.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { HelpComponent } from './dashboard-configuration/help/help.component';
     HeaderHelpComponent,
     HeaderNotificationsComponent,
     DashboardNotificationsComponent,
-    HelpComponent
+    HelpComponent,
+    GlossaryComponent
   ],
   imports: [
     HttpClientModule,

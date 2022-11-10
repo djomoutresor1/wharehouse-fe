@@ -16,7 +16,7 @@ export class MultilanguageComponent implements OnInit {
 
   countries: any[] = [
     {
-      img: '../../../../../assets/countrie-flags/gb.png',
+      img: '../../../../../assets/countrie-flags/en.png',
       code: Internationalizations.ENGLISH,
       name: Languages.ENGLISH,
     },

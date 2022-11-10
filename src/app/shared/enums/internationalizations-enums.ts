@@ -1,6 +1,6 @@
 export enum Internationalizations {
-  ENGLISH = 'en',
-  ITALIAN = 'it',
-  FRENCH = 'fr',
-  SPAIN = 'es',
+  ENGLISH = 'en-GB',
+  ITALIAN = 'it-IT',
+  FRENCH = 'fr-FR',
+  SPAIN = 'es-ES',
 }
