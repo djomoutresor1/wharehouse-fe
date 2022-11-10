@@ -22,6 +22,9 @@ import { ResponseResetModel } from 'src/model/auth/response/response-reset-model
 import { differenceInCalendarDays } from 'date-fns';
 import * as moment from 'moment';
 import { ConfigurationService } from 'src/app/services/configuration.service';
+import { Internationalizations } from 'src/app/shared/enums/internationalizations-enums';
+import { Languages } from 'src/app/shared/enums/languages-enums';
+import { LanguageModel } from 'src/model/utils/language-model';
 
 @Component({
   selector: 'warehouse-warehouse-base',
@@ -86,6 +89,29 @@ export class WarehouseBaseComponent implements OnInit {
     '.tiff',
     '.bmp',
     '.webp',
+  ];
+
+  languages: LanguageModel[] = [
+    {
+      img: '../../../../../assets/countrie-flags/en.png',
+      code: Internationalizations.ENGLISH,
+      name: Languages.ENGLISH,
+    },
+    {
+      img: '../../../../../assets/countrie-flags/it.png',
+      code: Internationalizations.ITALIAN,
+      name: Languages.ITALIAN,
+    },
+    {
+      img: '../../../../../assets/countrie-flags/fr.png',
+      code: Internationalizations.FRENCH,
+      name: Languages.FRENCH,
+    },
+    {
+      img: '../../../../../assets/countrie-flags/es.png',
+      code: Internationalizations.SPAIN,
+      name: Languages.SPAIN,
+    },
   ];
 
   constructor(injector: Injector) {
@@ -196,6 +222,10 @@ export class WarehouseBaseComponent implements OnInit {
       default:
         return 'user';
     }
+  }
+
+  getFlagLanguageByCode(flag: string): string {
+    return this.languages.filter(language =>  language.code === flag)[0]?.img;
   }
 
   expirationToken() {

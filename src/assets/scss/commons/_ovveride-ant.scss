@@ -68,3 +68,11 @@
   height: 25px !important;
   border: 5px solid var(--warehouse-white);
 }
+
+.ant-dropdown-menu-item {
+  .anticon {
+    right: 5px;
+    position: relative;
+    top: 0 !important;
+  }
+}

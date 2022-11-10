@@ -1,0 +1,26 @@
+.dashboard-glossary-wrapper {
+  padding: 10px 0;
+}
+
+.glossary-code {
+  text-transform: uppercase;
+}
+.glossary-object {
+  text-transform: lowercase;
+}
+
+.multilanguage {
+  width: 35px;
+  height: 25px;
+  position: relative;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+input::placeholder {
+  text-transform: capitalize;
+}
+
+.ant-form {
+  box-shadow: none;
+}

@@ -80,7 +80,7 @@
         "user": "Confirmation insert new user"
       },
       "change": {
-        "status": "Confirmation chnage status",
+        "status": "Confirmation change status",
         "firstText": "Th user",
         "secondText": " have the status",
         "thirdText": "Would you like to change with the status ?"
@@ -134,6 +134,10 @@
         "title": "Please confirm your age",
         "subtitle": "Warehouse System, adults only.",
         "description": "To confirm registration, the user must be at least 18 years old."
+      },
+      "deleteGlossary": {
+        "title": "Confirmation Cancellation",
+        "subtitle": "Deleting this glossary will delete all glossaries with the same {{code}} code. Are you sure you want to continue ?"
       }
     },
     "footer": {
@@ -472,7 +476,7 @@
         "description": "Description",
         "status": "Status",
         "createdAt": "Date create/update",
-        "createdBy": "Create by"
+        "createdBy": "Created by"
       },
       "field": {
         "title": "Title",
@@ -481,7 +485,7 @@
         "status": "Status"
       },
       "required": {
-        "title": "Titile is required",
+        "title": "Title is required",
         "description": "Description is required",
         "content": "Content is required"
       },
@@ -494,10 +498,59 @@
       "update": "Update help",
       "show": "All the information about the help"
     },
+    "glossary": {
+      "title": "Glossary",
+      "alert": {
+        "title": "Informative glossary",
+        "description": "The glossary is a dictionary of services that returns the desired elements, in json format, passing a key (object) and the language (it-IT, en-GB, es-ES, fr-FR).",
+        "create": {
+          "title": "Glossary create information",
+          "description": "To create the glossary, the operator must fill in the glossary in all languages. By default, the glossary code and subject will be the same."
+        },
+        "update": {
+          "title": "Glossary update information",
+          "description": "Updating the glossary, if the operator makes change in code or object, all the correspondent glossaries in all languages will be updated with the new code or object."
+        }
+      },
+      "datagrid": {
+        "code": "code",
+        "description": "Description",
+        "status": "Status",
+        "object": "Object",
+        "language": "Language",
+        "createdAt": "Date create/update",
+        "createdBy": "Create by"
+      },
+      "field": {
+        "code": "code",
+        "description": "Description",
+        "object": "Key",
+        "status": "Status"
+      },
+      "required": {
+        "code": "Code is required",
+        "description": "Description is required",
+        "object": "Object is required"
+      },
+      "placeholder": {
+        "code": "Insert",
+        "description": "Insert the description",
+        "object": "Insert the identification key"
+      },
+      "panel": {
+        "it": "Glossary Italian",
+        "en": "Glossary English",
+        "es": "Glossary Spain",
+        "fr": "Glossary French"
+      },
+      "create": "Create glossary",
+      "update": "Update glossary"
+    },
     "add": {
       "new.user": "New user",
       "new.help": "New help",
-      "new.object": "New object"
+      "new.object": "New object",
+      "new.glossary": "New glossary"
     },
     "update": {
       "object": "Update object"
