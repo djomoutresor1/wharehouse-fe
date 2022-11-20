@@ -1,0 +1,57 @@
+.warehouse-links-wrapper {
+  background: var(--warehouse-white);
+  border-radius: var(--warehouse-border-radius-one);
+  box-shadow: var(--warehouse-box-shadow);
+  padding: 0;
+  margin: 0;
+  .warehouse-links-header {
+    border-top-left-radius: var(--warehouse-border-radius-one);
+    border-top-right-radius: var(--warehouse-border-radius-one);
+    margin: 0;
+    padding: 15px 10px;
+    background: var(--warehouse-primary);
+    .warehouse-links-header-title {
+      nz-typography {
+        color: var(--warehouse-white);
+      }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .warehouse-links-body {
+    padding: 0;
+    margin: 0;
+    .warehouse-links-item {
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 0.125px solid var(--warehouse-sliver);
+      &:hover {
+        background-color: var(--warehouse-sliver);
+      }
+      .warehouse-links-item-box {
+        display: grid;
+        text-decoration: none;
+        .warehouse-links-item-img {
+          .warehouse-icon-small {
+            width: 28px;
+            height: 28px;
+          }
+        }
+        .warehouse-links-item-title {
+          font-size: 1.125rem;
+          font-weight: 600;
+        }
+        .warehouse-links-item-description {
+          font-size: 0.95rem;
+          color: var(--warehouse-sliver);
+        }
+      }
+    }
+  }
+}

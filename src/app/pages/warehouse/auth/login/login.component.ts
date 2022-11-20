@@ -140,7 +140,7 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
       this.descriptionAlertModal = this.translate.instant(
         'message.verification.account.disabled.description'
       );
-    } else if (this.dataUserActive) {
+    } else if (!this.dataUserActive) {
       this.alertTypeModal = AlertType.ALERT_WARNING;
       this.messageAlertModal = this.translate.instant(
         'message.verification.email.title'

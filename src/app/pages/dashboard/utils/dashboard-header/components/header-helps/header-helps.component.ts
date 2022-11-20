@@ -3,10 +3,10 @@ import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-ba
 
 @Component({
   selector: 'warehouse-header-help',
-  templateUrl: './header-help.component.html',
-  styleUrls: ['./header-help.component.scss'],
+  templateUrl: './header-helps.component.html',
+  styleUrls: ['./header-helps.component.scss'],
 })
-export class HeaderHelpComponent extends WarehouseBaseComponent implements OnInit {
+export class HeaderHelpsComponent extends WarehouseBaseComponent implements OnInit {
   @Input() title: string = '';
   @Input() visible: boolean = false;
   @Output() handleOnNotifyCloseDrawerHelp: EventEmitter<any> =

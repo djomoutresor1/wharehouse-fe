@@ -20,11 +20,12 @@ import { DashboardUserAddComponent } from './dashboard-user/dashboard-user-add/d
 import { DashboardUserEditComponent } from './dashboard-user/dashboard-user-edit/dashboard-user-edit.component';
 import { AdvancedFiltersComponent } from './tabs-content/all-users/advanced-filters/advanced-filters.component';
 import { DashboardFooterComponent } from './utils/dashboard-footer/dashboard-footer.component';
-import { HeaderHelpComponent } from './utils/dashboard-header/components/header-help/header-help.component';
+import { HeaderHelpsComponent } from './utils/dashboard-header/components/header-helps/header-helps.component';
 import { HeaderNotificationsComponent } from './utils/dashboard-header/components/header-notifications/header-notifications.component';
 import { DashboardNotificationsComponent } from './utils/dashboard-notifications/dashboard-notifications.component';
 import { HelpComponent } from './dashboard-configuration/help/help.component';
 import { GlossaryComponent } from './dashboard-configuration/glossary/glossary.component';
+import { HeaderLinksComponent } from './utils/dashboard-header/components/header-links/header-links.component';
 
 @NgModule({
   declarations: [
@@ -42,11 +43,12 @@ import { GlossaryComponent } from './dashboard-configuration/glossary/glossary.c
     DashboardUserEditComponent,
     AdvancedFiltersComponent,
     DashboardFooterComponent,
-    HeaderHelpComponent,
+    HeaderHelpsComponent,
     HeaderNotificationsComponent,
     DashboardNotificationsComponent,
     HelpComponent,
-    GlossaryComponent
+    GlossaryComponent,
+    HeaderLinksComponent
   ],
   imports: [
     HttpClientModule,
