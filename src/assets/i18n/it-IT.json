@@ -31,6 +31,10 @@
           "title": "Che cosa significa ?",
           "description": "Si tratta di utenti aggiunti dall'amministrazione dell'organizzazione / che si sono registrati al sistema stessi."
         }
+      },
+      "account.disabled": {
+        "title": "Account disabilitato",
+        "description": "Sembra che il tuo account sia disabilitato. Contatta l'amministratore del tuo dipartimento per riabilitarlo."
       }
     },
     "changePassword": {

@@ -26,6 +26,7 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
   messageAlertModal: string = '';
   descriptionAlertModal: string = '';
   dataUserEmail: string = '';
+  dataUserDeletedAt: boolean = false;
   expiredRemember: number = 0;
 
   constructor(injector: Injector) {
@@ -99,6 +100,7 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
   submitForm() {
     this.dataUserActive = true;
     this.dataUserStatus = false;
+    this.dataUserDeletedAt = false;
     this.dataUserTmpPassword = false;
     let userData = {
       username: this.validateForm.controls['username']?.value.toLowerCase(),
@@ -110,6 +112,7 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
         this.handleOnRememberMe();
         this.dataUserActive = response?.active;
         this.dataUserEmail = response?.email;
+        this.dataUserDeletedAt = !!response?.deletedAt?.length ? true : false;
         this.dataUserStatus = this.checkUserStatus(response?.userInfo?.status);
         this.dataUserTmpPassword = response?.userInfo?.temporalPassword;
         this.checkUserLoginVerification(response);
@@ -127,7 +130,17 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
   }
 
   checkUserLoginVerification(response: ResponseLoginModel) {
-    if (!this.dataUserActive) {
+    if (this.dataUserDeletedAt) {
+      this.dataUserActive = true;
+      this.alertTypeModal = AlertType.ALERT_ERROR;
+      this.messageAlertModal = this.translate.instant(
+        'message.verification.account.disabled.title'
+      );
+      this.okText = this.translate.instant('message.verification.profile.cta');
+      this.descriptionAlertModal = this.translate.instant(
+        'message.verification.account.disabled.description'
+      );
+    } else if (this.dataUserActive) {
       this.alertTypeModal = AlertType.ALERT_WARNING;
       this.messageAlertModal = this.translate.instant(
         'message.verification.email.title'
