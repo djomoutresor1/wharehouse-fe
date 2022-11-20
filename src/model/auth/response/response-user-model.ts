@@ -15,6 +15,8 @@ export interface ResponseUserModel {
   lastLogin: string;
   dateOfBirth: string;
   createdAt: string;
+  updatedAt: string;
+  deletedAt: string;
   userInfo: ResponseUserInfoModel;
   address: ResponseAddressModel;
   contact: ResponseContactModel;

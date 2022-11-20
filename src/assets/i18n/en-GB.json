@@ -31,6 +31,10 @@
           "title": "What does it mean ?",
           "description": "These are users added by the administration of the organization / who have registered on the system themselves."
         }
+      },
+      "account.disabled": {
+        "title": "Account disabled",
+        "description": "It appears that your account is disabled. Contact your department administrator to re-enable it."
       }
     },
     "changePassword": {
