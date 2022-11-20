@@ -76,6 +76,21 @@
       "success": {
         "description": "Verrai reindirizzato alla pagina di accesso in 5 secondi."
       }
+    },
+    "quick.links": {
+      "title": "Link Veloci",
+      "dashboard": {
+        "description": "Pagina iniziale"
+      },
+      "user": {
+        "description": "Lista utenti"
+      },
+      "organization": {
+        "description": "Lista organizzazioni"
+      },
+      "inventory": {
+        "description": "Inventario"
+      }
     }
   },
   "operation": {
@@ -473,6 +488,8 @@
     }
   },
   "side.nav.left":  {
+    "inventories": "Inventari",
+    "organizations": "Organizzazioni",
     "users": "Utenti",
     "all.users": "Tutti gli utenti",
     "configuration": "Configurazione",

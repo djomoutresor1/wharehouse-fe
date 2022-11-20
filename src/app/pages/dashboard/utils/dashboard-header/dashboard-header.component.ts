@@ -35,6 +35,7 @@ export class DashboardHeaderComponent
   titleDrawerHelp: string = '';
   visibleDrawerHelp: boolean = false;
   visibleShowNotifications: boolean = false;
+  visibleShowLinks: boolean = false;
   sizeDrawerHelp: number = 500;
 
   constructor(injector: Injector) {
@@ -157,8 +158,14 @@ export class DashboardHeaderComponent
     this.visibleDrawerHelp = false;
   }
 
-  handleOnShowNotification() {
+  handleOnShowNotifications() {
+    this.visibleShowLinks = false;
     this.visibleShowNotifications = !this.visibleShowNotifications;
+  }
+
+  handleOnShowLinks() {
+    this.visibleShowNotifications = false;
+    this.visibleShowLinks = !this.visibleShowLinks;
   }
 
   handleOnNotifyNotifications(event: any) {

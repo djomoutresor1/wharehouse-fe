@@ -76,6 +76,21 @@
       "success": {
         "description": "You will be redirected to the login page in 5 seconds."
       }
+    },
+    "quick.links": {
+      "title": "Quick Links",
+      "dashboard": {
+        "description": "Welcome page"
+      },
+      "user": {
+        "description": "List of users"
+      },
+      "organization": {
+        "description": "List organizations"
+      },
+      "inventory": {
+        "description": "Inventories"
+      }
     }
   },
   "operation": {
@@ -470,6 +485,8 @@
     }
   },
   "side.nav.left":  {
+    "inventories": "Inventories",
+    "organizations": "Organizations",
     "users": "Users",
     "all.users": "All users",
     "configuration": "Configuration",

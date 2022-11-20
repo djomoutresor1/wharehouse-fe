@@ -49,3 +49,13 @@ warehouse-header-notifications {
   position: absolute;
   z-index: 1;
 }
+
+warehouse-header-links {
+  width: 300px;
+  height: auto;
+  display: flex;
+  float: right;
+  right: 12.5%;
+  position: absolute;
+  z-index: 1;
+}
