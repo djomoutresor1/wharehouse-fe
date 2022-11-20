@@ -1,0 +1,19 @@
+<div *ngIf="showLinks" class="warehouse-links-wrapper container">
+    <div class="row warehouse-links-header">
+        <div class="col warehouse-links-header-title">
+            <h4 nz-typography class="warehouse-white warehouse-not-padding warehouse-not-margin">
+                {{"message.quick.links.title" | translate}}</h4>
+        </div>
+    </div>
+    <div class="row warehouse-links-body">
+        <div *ngFor="let link of links" class="col-md-6 warehouse-links-item">
+            <a [href]="link.url" class="warehouse-links-item-box">
+                <span class="warehouse-links-item-img">
+                    <img [alt]="link.title" class="warehouse-icon-small" [src]="link.icon" />
+                </span>
+                <span class="warehouse-links-item-title">{{link.title}}</span>
+                <span class="warehouse-links-item-description">{{link.description}}</span>
+            </a>
+        </div>
+    </div>
+</div>
