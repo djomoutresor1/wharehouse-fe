@@ -56,7 +56,6 @@ export class PreferencesComponent
   }
 
   handleOnAction(action: string) {
-    console.log('action: ', action);
     this.isVisible = true;
     this.actionMode = action;
   }
@@ -68,18 +67,17 @@ export class PreferencesComponent
 
   handleOnOkOperation() {
     this.isSuccess = false;
-    console.log('passwordUser: ', this.passwordUser);
     let user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
-    var statusType =
-      this.actionMode === Utils.WAREHOUSE_ACTION_DISABLE
-        ? StatusType.STATUS_DISABLED
-        : StatusType.STATUS_DELETED;
+    if (this.actionMode === Utils.WAREHOUSE_ACTION_DISABLE) {
+      this.handleOnOkDisabled(user?.userId);
+    } else {
+      this.handleOnOkDeleted(user?.userId);
+    }
+  }
+
+  handleOnOkDisabled(userId: string) {
     this.profilService
-      .onChangeStatusUser(
-        user.userId,
-        statusType,
-        this.passwordUser
-      )
+      .onChangeStatusUser(userId, StatusType.STATUS_DISABLED, this.passwordUser)
       .subscribe(
         (response: ResponseModel) => {
           this.handleOnCancelOperation();
@@ -94,6 +92,23 @@ export class PreferencesComponent
           }
         }
       );
+  }
+
+  handleOnOkDeleted(userId: string) {
+    this.profilService.onDeleteUser(userId).subscribe(
+      (response: ResponseModel) => {
+        this.handleOnCancelOperation();
+        this.successAlertTypeAndRedirectLogin(response?.message);
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          // Expiration token
+          this.expirationToken();
+        } else {
+          this.errorAlertType(error?.error.message);
+        }
+      }
+    );
   }
 
   successAlertTypeAndRedirectLogin(message: string): void {

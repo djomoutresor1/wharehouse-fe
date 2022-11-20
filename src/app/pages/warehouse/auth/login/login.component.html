@@ -1,4 +1,7 @@
-<warehouse-multilanguage *ngIf="!isLoading" ></warehouse-multilanguage>
+<warehouse-multilanguage *ngIf="!isLoading"></warehouse-multilanguage>
+<warehouse-loading *ngIf="isLoading" [loading]="isLoading" [redirectUrl]="redirectUrlAfterLoading"
+  [email]="dataUserEmail">
+</warehouse-loading>
 <div *ngIf="!isLoading" class="warehouse-auth-wrapper container">
   <div class="row">
     <div class="col text-center">
@@ -11,6 +14,11 @@
         <div class="col-md-12" *ngIf="isAuth">
           <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
           </warehouse-alert>
+        </div>
+        <div class="col-md-12" *ngIf="dataUserDeletedAt">
+          <warehouse-modal [okTextModal]="okText" [typeModal]="alertTypeModal" [messageModal]="messageAlertModal"
+            [showClosableModal]="true" [descriptionModal]="descriptionAlertModal">
+          </warehouse-modal>
         </div>
         <div class="col-md-12" *ngIf="!dataUserActive">
           <warehouse-modal [okTextModal]="okText" [typeModal]="alertTypeModal" [messageModal]="messageAlertModal"
@@ -112,6 +120,3 @@
     </div>
   </div>
 </div>
-<warehouse-loading *ngIf="isLoading" [loading]="isLoading" [redirectUrl]="redirectUrlAfterLoading"
-  [email]="dataUserEmail">
-</warehouse-loading>

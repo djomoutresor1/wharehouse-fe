@@ -19,6 +19,8 @@ export interface ResponseLoginModel {
   country: string;
   lastLogin: string;
   createdAt: string;
+  updatedAt: string;
+  deletedAt: string;
   userInfo: ResponseUserInfoModel;
   address: ResponseAddressModel;
   contact: ResponseContactModel;
