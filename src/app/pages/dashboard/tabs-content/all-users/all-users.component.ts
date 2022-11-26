@@ -7,14 +7,17 @@ import { Utils } from 'src/app/shared/enums/utils-enums';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseUserDataModel } from 'src/model/auth/response/response-user-data-model';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
+import { HeaderTableModel } from 'src/model/utils/header-table-model';
 
 @Component({
   selector: 'warehouse-all-users',
   templateUrl: './all-users.component.html',
   styleUrls: ['./all-users.component.scss'],
 })
-export class AllUsersComponent extends WarehouseBaseComponent implements OnInit {
-
+export class AllUsersComponent
+  extends WarehouseBaseComponent
+  implements OnInit
+{
   checked = false;
   indeterminate = false;
   setOfCheckedId = new Set<number>();
@@ -28,6 +31,8 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
   mode: string = Utils.WAREHOUSE_MODE_PROFILE_DATATABLE;
   userDatatable!: ResponseUserModel;
   userStatusSelected: string = '';
+  usersHeaderTable: HeaderTableModel[] = [];
+  headerIndex: number = 0;
 
   constructor(injector: Injector, private viewService: ViewService) {
     super(injector);
@@ -35,7 +40,45 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
 
   override ngOnInit(): void {
     this.user = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
+    this.initComponent();
     this.getAllWarehousUsers();
+  }
+
+  initComponent() {
+    this.usersHeaderTable = [
+      {
+        title: this.translate.instant('profile.personalData.userId'),
+        show: true,
+      },
+      {
+        title: this.translate.instant('profile.personalData.fullname'),
+        show: true,
+      },
+      {
+        title: this.translate.instant('register.email.placeholder'),
+        show: true,
+      },
+      {
+        title: this.translate.instant('verifyEmail.title'),
+        show: true,
+      },
+      {
+        title: this.translate.instant('profile.roles'),
+        show: true,
+      },
+      {
+        title: this.translate.instant('profile.status'),
+        show: true,
+      },
+      {
+        title: this.translate.instant('profile.personalData.dateOfBorn'),
+        show: true,
+      },
+      {
+        title: this.translate.instant('profile.lastLogin'),
+        show: true,
+      },
+    ];
   }
 
   getAllWarehousUsers() {
@@ -152,7 +195,11 @@ export class AllUsersComponent extends WarehouseBaseComponent implements OnInit 
     this.getAllWarehousUsers();
   }
 
-  handleOnUsersFitered(users: ResponseUserDataModel[]) {
+  handleOnUsersFiltered(users: ResponseUserDataModel[]) {
     this.allUsers = users;
+  }
+
+  handleOnHeadersTable(headers: HeaderTableModel[]) {
+    this.usersHeaderTable = headers;
   }
 }

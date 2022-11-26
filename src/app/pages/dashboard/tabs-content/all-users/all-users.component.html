@@ -16,58 +16,48 @@
   </div>
 
   <!-- Advanced Filter -->
-  <warehouse-advanced-filters 
-    [warehouseUsers]="warehouseUsers" 
-    [tmpUsers]="tmpUsers" 
-    (handleOnNotifyUsersFiltered)="handleOnUsersFitered($event)"
-    (handleOnNotifyResetFilter)="handleOnResetFilter()">
+  <warehouse-advanced-filters [warehouseUsers]="warehouseUsers" [tmpUsers]="tmpUsers" [headersTable]="usersHeaderTable"
+    (handleOnNotifyHeadersTable)="handleOnHeadersTable($event)"
+    (handleOnNotifyUsersFiltered)="handleOnUsersFiltered($event)" (handleOnNotifyResetFilter)="handleOnResetFilter()">
   </warehouse-advanced-filters>
 
   <div class="row mt-4">
     <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="allUsers">
-      <thead>
+      <thead *ngIf="!!usersHeaderTable?.length">
         <tr>
-          <!-- <th [nzSelections]="listOfSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
-            (nzCheckedChange)="onAllChecked($event)"></th> -->
-          <th>{{ "profile.personalData.userId" | translate }}</th>
-          <!-- <th>{{ "register.username.title" | translate }}</th>
-          <th>{{ "register.gender.placeholder" | translate }}</th> -->
-          <th>{{ "profile.personalData.fullname" | translate }}</th>
-          <th>{{ "register.email.placeholder" | translate }}</th>
-          <th>{{ "verifyEmail.title" | translate }}</th>
-          <th>{{ "profile.roles" | translate }}</th>
-          <th>{{ "profile.status" | translate }}</th>
-          <th>{{ "profile.personalData.dateOfBorn" | translate }}</th>
-          <th>{{ "profile.lastLogin" | translate }}</th>
+          <th *ngFor="let userHeaderTable of usersHeaderTable"
+            [ngClass]="!userHeaderTable?.show ? 'warehouse-header-hidden' : ''">
+            <span>{{ userHeaderTable.title }}</span>
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of rowSelectionTable.data">
+        <tr *ngFor="let data of rowSelectionTable.data; let i = index;">
           <!-- <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td> -->
-          <td><b>{{ data.user.userId }}</b></td>
+          <td [ngClass]="!usersHeaderTable[0].show ? 'warehouse-header-hidden' : ''"><b>{{ data.user.userId }}</b></td>
           <!-- <td>{{ data.user.username }}</td>
           <td>{{ data.user.gender }}</td> -->
-          <td>{{ data.user.fullname }}</td>
-          <td>{{ data.user.email }}</td>
-          <td>
+          <td [ngClass]="!usersHeaderTable[1].show ? 'warehouse-header-hidden' : ''">{{ data.user.fullname }}</td>
+          <td [ngClass]="!usersHeaderTable[2].show ? 'warehouse-header-hidden' : ''">{{ data.user.email }}</td>
+          <td [ngClass]="!usersHeaderTable[3].show ? 'warehouse-header-hidden' : ''">
             <span class="profile-verified"
               [ngClass]="data.user?.active ? 'warehouse-background-success' : 'warehouse-background-tomato'">
               <i nz-icon nzType="{{data.user?.active ? 'check-circle' : 'close-circle'}}" nzTheme="outline"></i>
               {{(data.user?.active ? "profile.verified" : "profile.notVerified") | translate}}
             </span>
           </td>
-          <td>
+          <td [ngClass]="!usersHeaderTable[4].show ? 'warehouse-header-hidden' : ''">
             <nz-tag *ngFor="let role of data.user.roles" [nzColor]="getUserColorRole(role)">
               <i nz-icon [nzType]="getUserRoleIcon(role)"></i>
               {{ getUserRoleName(role)}}
             </nz-tag>
           </td>
-          <td class="text-center">
+          <td [ngClass]="!usersHeaderTable[5].show ? 'warehouse-header-hidden' : ''" class="text-center">
             <nz-badge nz-tooltip nzTooltipTitle="{{formatObjectStatus(data.userInfo.status)}}"
               nzTooltipPlacement="bottomLeft" nzStatus="{{ getObjectStatus(data.userInfo.status) }}"></nz-badge>
           </td>
-          <td>{{ data.user.dateOfBirth }}</td>
-          <td>{{ data.user.lastLogin }}</td>
+          <td [ngClass]="!usersHeaderTable[6].show ? 'warehouse-header-hidden' : ''">{{ data.user.dateOfBirth }}</td>
+          <td [ngClass]="!usersHeaderTable[7].show ? 'warehouse-header-hidden' : ''">{{ data.user.lastLogin }}</td>
           <td>
             <button nz-button nz-dropdown [nzDropdownMenu]="options" nzType="primary">
               {{ "dataTable.options.title" | translate }}
@@ -97,14 +87,14 @@
   </div>
   <div class="row">
     <div class="col">
-      <!-- Section Show Profile --> 
+      <!-- Section Show Profile -->
       <nz-drawer [nzWidth]="sizeDrawer" [nzVisible]="visibleDrawerShow" nzPlacement="right" [nzTitle]="titleDrawer"
         (nzOnClose)="handleOnCloseDrawer()">
         <ng-container *nzDrawerContent>
           <warehouse-profile [mode]="mode" [userProfile]="userDatatable"></warehouse-profile>
         </ng-container>
       </nz-drawer>
-      <!-- Section Change Status Profile --> 
+      <!-- Section Change Status Profile -->
       <nz-drawer *ngIf="userDatatable" [nzClosable]="false" [nzVisible]="visibleDrawerStatus" nzPlacement="right"
         [nzTitle]="titleDrawer" [nzFooter]="nzDrawerFooter" (nzOnClose)="handleOnCloseDrawer()">
         <ng-container *nzDrawerContent>
