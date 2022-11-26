@@ -10,6 +10,22 @@
     left: 5px;
     position: relative;
   }
+  .warehouse-users-filter-panel {
+    padding: 20px;
+    width: 300px;
+    background: var(--warehouse-white);
+    border-radius: var(--warehouse-border-radius-one);
+    position: absolute;
+    right: 65px;
+    float: right;
+    top: 95px;
+    z-index: 1;
+    .warehouse-users-filter-panel-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
 
 .profile-verified {

@@ -13,6 +13,7 @@ import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { StatusType } from 'src/app/shared/enums/status-type-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { ResponseUserDataModel } from 'src/model/auth/response/response-user-data-model';
+import { HeaderTableModel } from 'src/model/utils/header-table-model';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -24,8 +25,11 @@ export class AdvancedFiltersComponent
   extends WarehouseBaseComponent
   implements OnInit
 {
+  @Input() headersTable: HeaderTableModel[] = [];
   @Input() tmpUsers: ResponseUserDataModel[] = [];
   @Input() warehouseUsers: ResponseUserDataModel[] = [];
+  @Output() handleOnNotifyHeadersTable: EventEmitter<HeaderTableModel[]> =
+    new EventEmitter<HeaderTableModel[]>();
   @Output() handleOnNotifyUsersFiltered: EventEmitter<ResponseUserDataModel[]> =
     new EventEmitter<ResponseUserDataModel[]>();
   @Output() handleOnNotifyResetFilter: EventEmitter<any> =
@@ -41,6 +45,9 @@ export class AdvancedFiltersComponent
   selectedTypeEmailPec: string = 'all';
   selectedPassword: string = 'all';
   selectedOrganizationUsers: string = 'all';
+  showHidePanel: boolean = false;
+
+  tmpHeadersTable: HeaderTableModel[] = [];
 
   listOfGenericType = [
     {
@@ -95,6 +102,7 @@ export class AdvancedFiltersComponent
   }
 
   override ngOnInit(): void {
+    this.tmpHeadersTable = this.headersTable;
     this.initSearch();
   }
 
@@ -253,6 +261,7 @@ export class AdvancedFiltersComponent
       role: Utils.WAREHOUSE_PREFIX_ALL,
       organizationUsers: Utils.WAREHOUSE_PREFIX_ALL,
       createdAt: [],
+      selectedOption: '',
     });
   }
 
@@ -293,5 +302,18 @@ export class AdvancedFiltersComponent
 
     XLSX.utils.book_append_sheet(workBook, workSheet, 'Users WareHouse System'); // Add the worksheet to the book
     XLSX.writeFile(workBook, 'warehouse_users.xlsx'); // Initiate a file download in browser
+  }
+
+  handleOnShowHidePanel() {
+    this.headersTable = this.tmpHeadersTable;
+    this.showHidePanel = !this.showHidePanel;
+  }
+
+  handleOnSelectedOption(headerIndex: number, value: boolean) {
+    this.headersTable.map((header, index) =>
+      index === headerIndex ? { ...header, show: !value } : header
+    );
+    this.tmpHeadersTable = this.headersTable;
+    this.handleOnNotifyHeadersTable.emit(this.headersTable);
   }
 }
