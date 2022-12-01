@@ -24,9 +24,9 @@ export class CommonInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(
-    request: HttpRequest<unknown>,
+    request: HttpRequest<any>,
     next: HttpHandler
-  ): Observable<HttpEvent<unknown>> {
+  ): Observable<HttpEvent<any>> {
     console.log('url chiamato: ' + request.url);
 
     const user: ResponseLoginModel =

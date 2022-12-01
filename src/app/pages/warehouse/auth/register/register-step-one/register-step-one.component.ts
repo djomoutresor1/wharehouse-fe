@@ -24,6 +24,7 @@ export class RegisterStepOneComponent extends WarehouseBaseComponent implements 
   verifyType: any;
   isExpiredLink: boolean = false;
   isResetPassword: boolean = false;
+  isAcceptTerms: boolean = false;
 
   constructor(injector: Injector) {
     super(injector);
@@ -49,6 +50,7 @@ export class RegisterStepOneComponent extends WarehouseBaseComponent implements 
       confirmPassword: [null, [Validators.required]],
       role: [null, [Validators.required]],
       gender: [null, [Validators.required]],
+      termsAccept: [false, [Validators.required]],
     });
   }
 
@@ -122,5 +124,9 @@ export class RegisterStepOneComponent extends WarehouseBaseComponent implements 
     this.warehouseLocalStorage.WarehouseRemoveTokenLocalStorage();
     window.location.reload();
     this.router.navigate([`${Pages.WAREHOUSE}/${Pages.LOGIN}`]);
+  }
+
+  handleOnAcceptTerms() {
+    this.isAcceptTerms = !this.validateForm.controls['termsAccept']?.value;
   }
 }

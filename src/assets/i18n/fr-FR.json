@@ -341,6 +341,10 @@
     },
     "divider": {
       "title": "Vous avez déjà un compte ?"
+    },
+    "acceptTerms": {
+      "titleOne": "Je confirme avoir lu et accepté les",
+      "titleTwo": "et la"
     }
   },
   "securePassword": {
@@ -444,7 +448,7 @@
           "subtitleTwo": "concernant la suppression ou la désactivation du compte."
         },
         "form": {
-          "label": "Inserisci la tua matricola per confermare l'operazione"
+          "label": "Entrez votre matricule pour confirmer l'opération"
         }
       }
     },

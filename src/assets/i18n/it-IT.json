@@ -341,6 +341,10 @@
     },
     "divider": {
       "title": "Already have an account ?"
+    },
+    "acceptTerms": {
+      "titleOne": "Confermo aver letto e accettato le",
+      "titleTwo": "e la"
     }
   },
   "securePassword": {

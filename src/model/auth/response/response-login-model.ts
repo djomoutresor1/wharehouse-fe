@@ -14,7 +14,7 @@ export interface ResponseLoginModel {
   email: string;
   roles: string[];
   gender: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   phoneNumber: number;
   country: string;
   lastLogin: string;

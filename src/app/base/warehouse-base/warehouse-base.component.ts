@@ -1,4 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,6 +27,8 @@ import { ConfigurationService } from 'src/app/services/configuration.service';
 import { Internationalizations } from 'src/app/shared/enums/internationalizations-enums';
 import { Languages } from 'src/app/shared/enums/languages-enums';
 import { LanguageModel } from 'src/model/utils/language-model';
+import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
+import { HttpRequest } from '@angular/common/http';
 
 @Component({
   selector: 'warehouse-warehouse-base',
@@ -32,6 +36,7 @@ import { LanguageModel } from 'src/model/utils/language-model';
   styleUrls: ['./warehouse-base.component.scss'],
 })
 export class WarehouseBaseComponent implements OnInit {
+  store: Store<any>;
   router: Router;
   route: ActivatedRoute;
   fb: FormBuilder;
@@ -52,6 +57,8 @@ export class WarehouseBaseComponent implements OnInit {
 
   validateForm!: FormGroup;
   user!: ResponseResetModel;
+  warehouseUserData!: Observable<ResponseLoginModel>;
+  request!: HttpRequest<any>;
 
   currentStep: number = 0;
   isAuth: boolean = false;
@@ -115,6 +122,7 @@ export class WarehouseBaseComponent implements OnInit {
   ];
 
   constructor(injector: Injector) {
+    this.store = injector.get(Store);
     this.router = injector.get(Router);
     this.route = injector.get(ActivatedRoute);
     this.fb = injector.get(FormBuilder);

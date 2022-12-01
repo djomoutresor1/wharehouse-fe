@@ -1,164 +1,168 @@
 <warehouse-multilanguage></warehouse-multilanguage>
 <div class="warehouse-auth-wrapper container">
-    <div class="row">
-        <div class="col text-center">
-            <h2 nz-typography>{{ 'register.title' | translate }}</h2>
-        </div>
+  <div class="row">
+    <div class="col text-center">
+      <h2 nz-typography>{{ 'register.title' | translate }}</h2>
     </div>
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <nz-steps [nzCurrent]="currentStep" nzSize="small">
-                <nz-step *ngFor="let step of steps" [nzTitle]="step | translate"></nz-step>
-            </nz-steps>
-        </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <nz-steps [nzCurrent]="currentStep" nzSize="small">
+        <nz-step *ngFor="let step of steps" [nzTitle]="step | translate"></nz-step>
+      </nz-steps>
     </div>
-    <div class="row" *ngIf="!isMailSent">
-        <div class="col-md-6 offset-md-3">
-            <div class="row mt-5">
-                <div class="col" *ngIf="isAuth">
-                    <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
-                    </warehouse-alert>
-                </div>
-            </div>
-            <form nz-form [formGroup]="validateForm" class="register-form" (ngSubmit)="submitForm()">
-                <div class="row">
-                    <div class="col">
-                        <nz-form-item>
-                            <nz-form-control [nzErrorTip]="'register.gender.required' | translate">
-                                <nz-radio-group nzName="radiogroup" (ngModelChange)="handleOnChangeInput()"
-                                    formControlName="gender">
-                                    <label nz-radio nzValue="Male">{{ 'register.gender.male' | translate }}<i
-                                            class="m-1" nz-icon nzType="man" nzTheme="outline"></i></label>
-                                    <label nz-radio nzValue="Female">{{ 'register.gender.female' | translate }}<i
-                                            class="m-1" nz-icon nzType="woman" nzTheme="outline"></i></label>
-                                </nz-radio-group>
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <nz-form-item>
-                            <nz-form-control [nzErrorTip]="'register.fullname.required' | translate">
-                                <nz-input-group nzPrefixIcon="user">
-                                    <input type="text" nz-input formControlName="fullName"
-                                        [placeholder]="'register.fullname.placeholder' | translate"
-                                        (click)="handleOnChangeInput()" />
-                                </nz-input-group>
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                    <div class="col-md-6">
-                        <nz-form-item>
-                            <nz-form-control [nzErrorTip]="'register.username.required' | translate">
-                                <nz-input-group nzPrefixIcon="user">
-                                    <input type="text" nz-input formControlName="username"
-                                        [placeholder]="'register.username.placeholder' | translate"
-                                        (click)="handleOnChangeInput()" />
-                                </nz-input-group>
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <nz-form-item>
-                            <nz-form-control [nzErrorTip]="'register.email.required' | translate">
-                                <nz-input-group nzPrefixIcon="mail">
-                                    <input type="email" nz-input formControlName="email"
-                                        [placeholder]="'register.email.placeholder' | translate"
-                                        (click)="handleOnChangeInput()" />
-                                </nz-input-group>
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                    <div class="col-md-4">
-                        <nz-form-item *ngIf="!!rolesList?.length">
-                            <nz-form-control [nzErrorTip]="'register.role.required' | translate">
-                                <nz-select nzAllowClear [nzPlaceHolder]="'register.role.placeholder' | translate"
-                                    nzMode="multiple" formControlName="role" [nzCustomTemplate]="multipleTemplate">
-                                    <nz-option *ngFor="let role of rolesList" [nzValue]="role.value"
-                                        [nzLabel]="role.label">
-                                    </nz-option>
-                                </nz-select>
-                                <ng-template #multipleTemplate let-selected>
-                                    <div class="ant-select-selection-item-content">
-                                        {{ selected.nzLabel }}
-                                    </div>
-                                </ng-template>
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <nz-form-item>
-                            <nz-form-control [nzErrorTip]="'login.password.required' | translate" nz-popover
-                                [nzPopoverTitle]="'login.password.popover.title' | translate"
-                                [nzPopoverContent]="securityTemplate" nzPopoverPlacement="right">
-                                <nz-input-group nzPrefixIcon="lock" [nzSuffix]="passwordTemplate">
-                                    <input [type]="passwordVisible ? 'text' : 'password'" nz-input
-                                        formControlName="password"
-                                        [placeholder]="'login.password.placeholder' | translate"
-                                        (ngModelChange)="handleOnChangePassword()" (click)="handleOnChangeInput()" />
-                                </nz-input-group>
-                                <ng-template #passwordTemplate>
-                                    <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
-                                        (click)="passwordVisible = !passwordVisible"></i>
-                                </ng-template>
-                                <ng-template #securityTemplate>
-                                    <warehouse-secure-password [password]="password"
-                                        (notifyOnPassword)="handleOnNotifyPassword($event)"></warehouse-secure-password>
-                                </ng-template>
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                    <div class="col-md-6">
-                        <nz-form-item>
-                            <nz-form-control [nzErrorTip]="'register.confirmPassword.required' | translate">
-                                <nz-input-group nzPrefixIcon="lock" [nzSuffix]="confirmPasswordTemplate">
-                                    <input [type]="confirmPasswordVisible ? 'text' : 'password'" nz-input
-                                        formControlName="confirmPassword"
-                                        [placeholder]="'register.confirmPassword.placeholder' | translate"
-                                        (click)="handleOnChangeInput()" />
-                                </nz-input-group>
-                                <ng-template #confirmPasswordTemplate>
-                                    <i nz-icon [nzType]="confirmPasswordVisible ? 'eye-invisible' : 'eye'"
-                                        (click)="confirmPasswordVisible = !confirmPasswordVisible"></i>
-                                </ng-template>
-                            </nz-form-control>
-                        </nz-form-item>
-                    </div>
-                </div>
-                <button nz-button [disabled]="!validateForm.valid || !isSecurePassword" nzBlock
-                    class="register-form-button register-form-margin" [nzType]="'primary'"><i nz-icon nzType="mail"
-                        nzTheme="outline"></i> {{'register.cta.stepOne' |
-                    translate}}</button>
-                <nz-divider nzDashed [nzText]="'register.divider.title' | translate"></nz-divider>
-                <button nz-button nzType="primary" class="warehouse-btn-outline-primary" (click)="handleOnLogin()" nzBlock>
-                    <i nz-icon nzType="left" nzTheme="outline"></i>{{'login.cta.login' | translate}}</button>
-            </form>
+  </div>
+  <div class="row" *ngIf="!isMailSent">
+    <div class="col-md-6 offset-md-3">
+      <div class="row mt-5">
+        <div class="col" *ngIf="isAuth">
+          <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
+          </warehouse-alert>
         </div>
-    </div>
-    <div class="row forgot-password-mail-sent" *ngIf="isMailSent">
-        <div class="col-md-4 offset-md-4">
-            <div class="forgot-password-mail-sent-content">
-                <i nz-icon nzType="mail" nzTheme="twotone" class="forgot-password-mail-sent-icon text-center"></i>
-                <h4 nz-typography class="text-center"><b>Nous venons de vous envoyer un email à: </b></h4>
-                <p nz-typography class="warehouse-success text-center">{{email}}</p>
-                <p nz-typography>{{'verifyEmail.success.content.one' | translate}}</p>
-                <h5 nz-typography><b>{{'verifyEmail.success.content.two' | translate}}</b></h5>
-                <p nz-typography>{{'verifyEmail.success.content.three' | translate}}</p>
-                <br />
-                <button nz-button nzType="primary" (click)="handleOnLogin()" nzBlock>
-                    <i nz-icon nzType="left" nzTheme="outline"></i>{{'verifyEmail.cta.login' | translate}}</button>
-            </div>
+      </div>
+      <form nz-form [formGroup]="validateForm" class="register-form" (ngSubmit)="submitForm()">
+        <div class="row">
+          <div class="col">
+            <nz-form-item>
+              <nz-form-control [nzErrorTip]="'register.gender.required' | translate">
+                <nz-radio-group nzName="radiogroup" (ngModelChange)="handleOnChangeInput()" formControlName="gender">
+                  <label nz-radio nzValue="Male">{{ 'register.gender.male' | translate }}<i class="m-1" nz-icon
+                      nzType="man" nzTheme="outline"></i></label>
+                  <label nz-radio nzValue="Female">{{ 'register.gender.female' | translate }}<i class="m-1" nz-icon
+                      nzType="woman" nzTheme="outline"></i></label>
+                </nz-radio-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
         </div>
-    </div>
-    <div class="row" *ngIf="isExpiredToken">
-        <div class="col">
-            <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert"
-                [descriptionModal]="descriptionAlert" (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
+        <div class="row">
+          <div class="col-md-6">
+            <nz-form-item>
+              <nz-form-control [nzErrorTip]="'register.fullname.required' | translate">
+                <nz-input-group nzPrefixIcon="user">
+                  <input type="text" nz-input formControlName="fullName"
+                    [placeholder]="'register.fullname.placeholder' | translate" (click)="handleOnChangeInput()" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div class="col-md-6">
+            <nz-form-item>
+              <nz-form-control [nzErrorTip]="'register.username.required' | translate">
+                <nz-input-group nzPrefixIcon="user">
+                  <input type="text" nz-input formControlName="username"
+                    [placeholder]="'register.username.placeholder' | translate" (click)="handleOnChangeInput()" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
         </div>
+        <div class="row">
+          <div class="col-md-8">
+            <nz-form-item>
+              <nz-form-control [nzErrorTip]="'register.email.required' | translate">
+                <nz-input-group nzPrefixIcon="mail">
+                  <input type="email" nz-input formControlName="email"
+                    [placeholder]="'register.email.placeholder' | translate" (click)="handleOnChangeInput()" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div class="col-md-4">
+            <nz-form-item *ngIf="!!rolesList?.length">
+              <nz-form-control [nzErrorTip]="'register.role.required' | translate">
+                <nz-select nzAllowClear [nzPlaceHolder]="'register.role.placeholder' | translate" nzMode="multiple"
+                  formControlName="role" [nzCustomTemplate]="multipleTemplate">
+                  <nz-option *ngFor="let role of rolesList" [nzValue]="role.value" [nzLabel]="role.label">
+                  </nz-option>
+                </nz-select>
+                <ng-template #multipleTemplate let-selected>
+                  <div class="ant-select-selection-item-content">
+                    {{ selected.nzLabel }}
+                  </div>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <nz-form-item>
+              <nz-form-control [nzErrorTip]="'login.password.required' | translate" nz-popover
+                [nzPopoverTitle]="'login.password.popover.title' | translate" [nzPopoverContent]="securityTemplate"
+                nzPopoverPlacement="right">
+                <nz-input-group nzPrefixIcon="lock" [nzSuffix]="passwordTemplate">
+                  <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password"
+                    [placeholder]="'login.password.placeholder' | translate" (ngModelChange)="handleOnChangePassword()"
+                    (click)="handleOnChangeInput()" />
+                </nz-input-group>
+                <ng-template #passwordTemplate>
+                  <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                    (click)="passwordVisible = !passwordVisible"></i>
+                </ng-template>
+                <ng-template #securityTemplate>
+                  <warehouse-secure-password [password]="password" (notifyOnPassword)="handleOnNotifyPassword($event)">
+                  </warehouse-secure-password>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div class="col-md-6">
+            <nz-form-item>
+              <nz-form-control [nzErrorTip]="'register.confirmPassword.required' | translate">
+                <nz-input-group nzPrefixIcon="lock" [nzSuffix]="confirmPasswordTemplate">
+                  <input [type]="confirmPasswordVisible ? 'text' : 'password'" nz-input
+                    formControlName="confirmPassword" [placeholder]="'register.confirmPassword.placeholder' | translate"
+                    (click)="handleOnChangeInput()" />
+                </nz-input-group>
+                <ng-template #confirmPasswordTemplate>
+                  <i nz-icon [nzType]="confirmPasswordVisible ? 'eye-invisible' : 'eye'"
+                    (click)="confirmPasswordVisible = !confirmPasswordVisible"></i>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <p class="warehouse-text-justify">
+          <label nz-checkbox (ngModelChange)="handleOnAcceptTerms()" formControlName="termsAccept"></label>
+          {{ "register.acceptTerms.titleOne" | translate }}
+          <a href="/general-condition" target="_blank" class="warehouse-text-underline">
+            {{ "dashboard.footer.cgu" | translate }}
+          </a>
+          {{ "register.acceptTerms.titleTwo" | translate }}
+          <a href="/privacy-policy" target="_blank" class="warehouse-text-underline">
+            {{ "dashboard.footer.privacy-policy" | translate }}
+          </a>.
+        </p>
+        <button nz-button [disabled]="!validateForm.valid || !isSecurePassword || isAcceptTerms" nzBlock
+          class="register-form-button register-form-margin" [nzType]="'primary'"><i nz-icon nzType="mail"
+            nzTheme="outline"></i> {{'register.cta.stepOne' |
+          translate}}</button>
+        <nz-divider nzDashed [nzText]="'register.divider.title' | translate"></nz-divider>
+        <button nz-button nzType="primary" class="warehouse-btn-outline-primary" (click)="handleOnLogin()" nzBlock>
+          <i nz-icon nzType="left" nzTheme="outline"></i>{{'login.cta.login' | translate}}</button>
+      </form>
     </div>
+  </div>
+  <div class="row forgot-password-mail-sent" *ngIf="isMailSent">
+    <div class="col-md-4 offset-md-4">
+      <div class="forgot-password-mail-sent-content">
+        <i nz-icon nzType="mail" nzTheme="twotone" class="forgot-password-mail-sent-icon text-center"></i>
+        <h4 nz-typography class="text-center"><b>Nous venons de vous envoyer un email à: </b></h4>
+        <p nz-typography class="warehouse-success text-center">{{email}}</p>
+        <p nz-typography>{{'verifyEmail.success.content.one' | translate}}</p>
+        <h5 nz-typography><b>{{'verifyEmail.success.content.two' | translate}}</b></h5>
+        <p nz-typography>{{'verifyEmail.success.content.three' | translate}}</p>
+        <br />
+        <button nz-button nzType="primary" (click)="handleOnLogin()" nzBlock>
+          <i nz-icon nzType="left" nzTheme="outline"></i>{{'verifyEmail.cta.login' | translate}}</button>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="isExpiredToken">
+    <div class="col">
+      <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert"
+        [descriptionModal]="descriptionAlert" (handleOnOkModal)="handleOnOkModal($event)"></warehouse-modal>
+    </div>
+  </div>
 </div>
