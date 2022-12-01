@@ -16,6 +16,12 @@ warehouse-multilanguage {
     i {
       cursor: pointer;
     }
+    a {
+      text-decoration: none !important;
+      &:hover {
+        color: var(--warehouse-primary) !important;
+      }
+    }
   }
 
   .register-form-margin {
