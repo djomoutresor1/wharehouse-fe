@@ -1,9 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
 import { Component, HostListener, Injector, OnInit } from '@angular/core';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { getWarehouseUserLogged } from 'src/state/warehouse-user/warehouse-user.actions';
+import { selectWarehouseUserData } from 'src/state/warehouse-user/warehouse-user.selectors';
+import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 
 @Component({
   selector: 'dashboard',
@@ -18,6 +23,8 @@ export class DashboardComponent extends WarehouseBaseComponent implements OnInit
   isLogout: boolean = false;
   isValidToken: boolean = false;
   checkRole: any;
+
+  userData: Observable<ResponseLoginModel> =  this.store.pipe(select(selectWarehouseUserData));
 
   @HostListener('document:click', ['$event'])
   clickout() {
@@ -57,8 +64,13 @@ export class DashboardComponent extends WarehouseBaseComponent implements OnInit
   }
 
   override ngOnInit(): void {
+    console.log("request: ", this.request.headers);
     this.warehouseUser =
       this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
+      this.userData.subscribe(res => {
+        console.log("res: ", res);
+      })
+
     if (this.warehouseUser?.token) {
       this.handleOnVerifyToken(this.warehouseUser?.token);
     }

@@ -23,10 +23,11 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import { FlagService } from './services/flag.service';
 import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
-import { ViewService } from './services/view-file.service';
+import { Store, StoreModule } from '@ngrx/store';
 import { WarehouseBaseComponent } from './base/warehouse-base/warehouse-base.component';
 import { ViewProfilService } from './services/view-profil.service';
 import { ConfigurationService } from './services/configuration.service';
+import { warehouseUserReducer } from 'src/state/warehouse-user/warehouse-user.reducer';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -47,6 +48,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     AntDesignComponentsModule,
     SharedModule,
+    StoreModule.forRoot({
+      warehouseUserData: warehouseUserReducer
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

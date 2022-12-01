@@ -8,6 +8,7 @@ import { StatusType } from 'src/app/shared/enums/status-type-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseModel } from 'src/model/auth/response/response-model';
+import { setWarehouseUserLogged } from 'src/state/warehouse-user/warehouse-user.actions';
 @Component({
   selector: 'warehouse-login',
   templateUrl: './login.component.html',
@@ -170,6 +171,7 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
     } else {
       this.warehouseLocalStorage.WarehouseSetTokenLocalStorage(response);
       this.successNotificationType(response);
+      this.store.dispatch(setWarehouseUserLogged(response));
     }
   }
 
