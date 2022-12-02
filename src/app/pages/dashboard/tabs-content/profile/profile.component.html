@@ -168,9 +168,9 @@
           <label class="mb-2">
             {{"profile.personalContact.personalEmail" | translate }}
             <span class="profile-verified"
-              [ngClass]="dataUser?.active ? 'warehouse-background-success' : 'warehouse-background-tomato'">
-              <i nz-icon nzType="{{dataUser?.active ? 'check-circle' : 'close-circle'}}" nzTheme="outline"></i>
-              {{(dataUser?.active ? "profile.verified" : "profile.notVerified") | translate}}
+              [ngClass]="dataUser?.userInfo?.emailVerified ? 'warehouse-background-success' : 'warehouse-background-tomato'">
+              <i nz-icon nzType="{{dataUser?.userInfo?.emailVerified ? 'check-circle' : 'close-circle'}}" nzTheme="outline"></i>
+              {{(dataUser?.userInfo?.emailVerified ? "profile.verified" : "profile.notVerified") | translate}}
             </span>
           </label>
           <nz-input-group nzPrefixIcon="mail">

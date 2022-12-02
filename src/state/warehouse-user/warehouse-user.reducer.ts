@@ -8,7 +8,7 @@ import {
 export const initialState: Readonly<ResponseLoginModel> = {
   fullname: '',
   userId: '',
-  active: false,
+  enabled: false,
   message: '',
   token: '',
   refreshToken: '',
@@ -27,6 +27,7 @@ export const initialState: Readonly<ResponseLoginModel> = {
     adminUser: false,
     temporalPassword: false,
     status: '',
+    emailVerified: false,
     emailPecVerified: false,
   },
   contact: {

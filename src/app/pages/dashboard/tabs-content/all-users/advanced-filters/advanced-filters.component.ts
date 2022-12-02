@@ -158,7 +158,7 @@ export class AdvancedFiltersComponent
     } else {
       this.usersFiltered = this.usersFiltered?.filter(
         (user: ResponseUserDataModel) =>
-          user.user.active === typeEmailVerification
+          user.userInfo.emailVerified === typeEmailVerification
       );
     }
   }
@@ -277,7 +277,7 @@ export class AdvancedFiltersComponent
         Gender: user.user.gender,
         Email: user.user.email,
         EmailPEC: user.user.emailPec,
-        EmailVerification: user.user.active,
+        EmailVerification: user.userInfo.emailVerified,
         Status: user.userInfo.status,
         Roles: user.user.roles.map((role: any) => role?.name).join(','),
         DateOfBirth: user.user.dateOfBirth,

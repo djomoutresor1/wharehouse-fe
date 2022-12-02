@@ -111,7 +111,7 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
     this.authentificationService.userLogin(userData).subscribe(
       (response: ResponseLoginModel) => {
         this.handleOnRememberMe();
-        this.dataUserActive = response?.active;
+        this.dataUserActive = response?.enabled;
         this.dataUserEmail = response?.email;
         this.dataUserDeletedAt = !!response?.deletedAt?.length ? true : false;
         this.dataUserStatus = this.checkUserStatus(response?.userInfo?.status);
