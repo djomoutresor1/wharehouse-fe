@@ -1,11 +1,11 @@
-import { ResponseAddressModel } from "./response-address-model";
-import { ResponseContactModel } from "./response-contact-model";
-import { ResponseUserInfoModel } from "./response-user-info-model";
+import { ResponseAddressModel } from './response-address-model';
+import { ResponseContactModel } from './response-contact-model';
+import { ResponseUserInfoModel } from './response-user-info-model';
 
 export interface ResponseLoginModel {
   fullname: string;
   userId: string;
-  active:boolean;
+  enabled: boolean;
   message: string;
   type?: string;
   token: string;
