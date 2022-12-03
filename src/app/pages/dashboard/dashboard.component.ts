@@ -64,7 +64,7 @@ export class DashboardComponent extends WarehouseBaseComponent implements OnInit
   }
 
   override ngOnInit(): void {
-    console.log("request: ", this.request.headers);
+    //console.log("request: ", this.request.headers);
     this.warehouseUser =
       this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
       this.userData.subscribe(res => {

@@ -28,6 +28,16 @@
           <!-- <li nz-menu-item>Alex</li> -->
         </ul>
       </li>
+      <li *ngIf="this.checkRole === undefined ? false : true" nz-submenu
+        nzTitle="{{'side.nav.left.organization.title' | translate}}" nzIcon="file-text">
+        <ul>
+          <li nz-menu-item (click)="handleOnNavigateByUrl('help-contact')"><span nz-icon nzType="info-circle"
+              nzTheme="outline"></span> {{'side.nav.left.help.title'| translate}}</li>
+          <li nz-menu-item (click)="handleOnNavigateByUrl('glossary')"><span nz-icon nzType="solution"
+              nzTheme="outline"></span> {{'side.nav.left.glossary.title'| translate}}</li>
+          <!-- <li nz-menu-item>Alex</li> -->
+        </ul>
+      </li>
       <li nz-submenu nzTitle="{{'Team'| translate}}" nzIcon="team">
         <ul>
           <li nz-menu-item>{{'Team 1'| translate}}</li>

@@ -497,6 +497,9 @@
     "users": "Utenti",
     "all.users": "Tutti gli utenti",
     "configuration": "Configurazione",
+    "orgamization": {
+      "title": "Organizzazioni"
+    },
     "help": {
       "title": "Guida",
       "datagrid": {

@@ -11,7 +11,6 @@ import { DashboardHomeComponent } from './dashboard-home/dashboard-home.componen
 import { ProfileComponent } from './tabs-content/profile/profile.component';
 import { PreferencesComponent } from './tabs-content/preferences/preferences.component';
 import { RackTableComponent } from 'src/app/table/rack-table/rack-table.component';
-
 import { DashboardHeaderComponent } from './utils/dashboard-header/dashboard-header.component';
 import { DashboardSiderComponent } from './utils/dashboard-sider/dashboard-sider.component';
 import { DashboardRackGlobalComponent } from './dashboard-rack-global/dashboard-rack-global.component';
@@ -20,9 +19,10 @@ import { DashboardUserAddComponent } from './dashboard-user/dashboard-user-add/d
 import { DashboardUserEditComponent } from './dashboard-user/dashboard-user-edit/dashboard-user-edit.component';
 import { AdvancedFiltersComponent } from './tabs-content/all-users/advanced-filters/advanced-filters.component';
 import { DashboardFooterComponent } from './utils/dashboard-footer/dashboard-footer.component';
-import { HeaderHelpsComponent } from './utils/dashboard-header/components/header-helps/header-helps.component';
 import { HeaderNotificationsComponent } from './utils/dashboard-header/components/header-notifications/header-notifications.component';
 import { DashboardNotificationsComponent } from './utils/dashboard-notifications/dashboard-notifications.component';
+import { DashboardOrganizationComponent } from './dashboard-organization/dashboard-organization.component';
+import { HeaderHelpsComponent } from './utils/dashboard-header/components/header-helps/header-helps.component';
 import { HelpComponent } from './dashboard-configuration/help/help.component';
 import { GlossaryComponent } from './dashboard-configuration/glossary/glossary.component';
 import { HeaderLinksComponent } from './utils/dashboard-header/components/header-links/header-links.component';
@@ -48,7 +48,8 @@ import { HeaderLinksComponent } from './utils/dashboard-header/components/header
     DashboardNotificationsComponent,
     HelpComponent,
     GlossaryComponent,
-    HeaderLinksComponent
+    HeaderLinksComponent,
+    DashboardOrganizationComponent
   ],
   imports: [
     HttpClientModule,

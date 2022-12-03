@@ -30,6 +30,7 @@ export enum Pages {
   PRIVACY_POLICY = "privacy-policy",
   HELP_CONTACT = "help-contact",
   NOTIFICATIONS = 'notifications',
+  ORGANIZATIONS = 'organizations',
   HELPS = "helps",
   HELP = "help",
   GLOSSARIES = "glossaries",

@@ -6,6 +6,7 @@ import { ManageAccountComponent } from '../warehouse/components/manage-account/m
 import { GlossaryComponent } from './dashboard-configuration/glossary/glossary.component';
 import { HelpComponent } from './dashboard-configuration/help/help.component';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
+import { DashboardOrganizationComponent } from './dashboard-organization/dashboard-organization.component';
 import { DashboardRackDetailComponent } from './dashboard-rack-detail/dashboard-rack-detail.component';
 import { DashboardRackGlobalComponent } from './dashboard-rack-global/dashboard-rack-global.component';
 import { DashboardUserAddComponent } from './dashboard-user/dashboard-user-add/dashboard-user-add.component';
@@ -66,6 +67,10 @@ const routes: Routes = [
       {
         path: `${Pages.GLOSSARY}`,
         component: GlossaryComponent,
+      },
+      {
+        path: `${Pages.ORGANIZATIONS}`,
+        component: DashboardOrganizationComponent,
       },
     ],
   },
