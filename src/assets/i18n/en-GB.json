@@ -194,8 +194,8 @@
       "title": "Status"
     },
     "filter": {
-      "exportUsers": "Export Excel Users",
-      "createdAt": "From - To"
+      "export": "Export Excel",
+      "createdAt": "Created From - To"
     }
   },
   "warehouse": {

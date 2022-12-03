@@ -17,11 +17,11 @@ import { HeaderTableModel } from 'src/model/utils/header-table-model';
 import * as XLSX from 'xlsx';
 
 @Component({
-  selector: 'warehouse-advanced-filters',
+  selector: 'warehouse-advanced-filters-users',
   templateUrl: './advanced-filters.component.html',
   styleUrls: ['./advanced-filters.component.scss'],
 })
-export class AdvancedFiltersComponent
+export class AdvancedFiltersUsersComponent
   extends WarehouseBaseComponent
   implements OnInit
 {

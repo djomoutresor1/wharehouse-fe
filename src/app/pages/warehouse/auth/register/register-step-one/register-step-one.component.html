@@ -94,7 +94,7 @@
                 <nz-input-group nzPrefixIcon="lock" [nzSuffix]="passwordTemplate">
                   <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password"
                     [placeholder]="'login.password.placeholder' | translate" (ngModelChange)="handleOnChangePassword()"
-                    (click)="handleOnChangeInput()" />
+                    (click)="handleOnChangeInput()" (paste)="handleOnPaste($event)" />
                 </nz-input-group>
                 <ng-template #passwordTemplate>
                   <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
@@ -113,7 +113,7 @@
                 <nz-input-group nzPrefixIcon="lock" [nzSuffix]="confirmPasswordTemplate">
                   <input [type]="confirmPasswordVisible ? 'text' : 'password'" nz-input
                     formControlName="confirmPassword" [placeholder]="'register.confirmPassword.placeholder' | translate"
-                    (click)="handleOnChangeInput()" />
+                    (click)="handleOnChangeInput()" (paste)="handleOnPaste($event)" />
                 </nz-input-group>
                 <ng-template #confirmPasswordTemplate>
                   <i nz-icon [nzType]="confirmPasswordVisible ? 'eye-invisible' : 'eye'"

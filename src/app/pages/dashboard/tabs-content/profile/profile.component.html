@@ -61,7 +61,7 @@
         <div class="col-md-3">
           <p class="profile-title" nz-typography>{{"profile.role" | translate}}</p>
           <h3 class="profile-title" nz-typography>
-            <nz-tag *ngFor="let role of dataUser?.roles" [nzColor]="getUserColorRole(role)">
+            <nz-tag *ngFor="let role of dataUser?.roles" [nzColor]="getObjectColor(role)">
               <i nz-icon [nzType]="getUserRoleIcon(role)"></i>
               {{ getUserRoleName(role) }}
             </nz-tag>

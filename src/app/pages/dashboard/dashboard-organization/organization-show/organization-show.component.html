@@ -1,0 +1,116 @@
+<nz-drawer [nzWidth]="sizeDrawer" [nzVisible]="visibleDrawerShow" nzPlacement="right" [nzTitle]="titleDrawer"
+  (nzOnClose)="handleOnCloseDrawer()">
+  <ng-container *nzDrawerContent>
+    <nz-descriptions [nzColumn]="2" nzTitle="Company">
+      <nz-descriptions-item nzTitle="Organization ID" [nzSpan]="1">
+        <b>{{organizationDatatable.organization.organizationId}}</b>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Organization Name" [nzSpan]="1">
+        {{organizationDatatable.organization.organizationName}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Organization Description" [nzSpan]="1">
+        {{organizationDatatable.organization.organizationDescription}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Referent" [nzSpan]="1">{{referent?.fullname}}
+        <span (click)="handleOnShowReferent()"
+          class="warehouse-primary organization-referent warehouse-cursor-pointer warehouse-text-underline">View profile
+          <span nz-icon nzType="arrow-right" nzTheme="outline"></span></span>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Collaborators" [nzSpan]="2">
+        <nz-avatar-group>
+          <nz-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+          <nz-avatar style="background-color: #f56a00" nzText="U"></nz-avatar>
+          <nz-avatar style="background-color: #87d068" nz-tooltip nzTooltipTitle="NG-ZORRO User" nzIcon="user">
+          </nz-avatar>
+          <nz-avatar style="background-color: #1890ff" nzText="NG"></nz-avatar>
+          <nz-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+          <nz-avatar style="background-color: #f56a00" nzText="U"></nz-avatar>
+          <nz-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+          <nz-avatar style="background-color: #f56a00" nzText="U"></nz-avatar>
+          <nz-avatar style="background-color: #fde3cf; color: #f56a00" nzText="+8"></nz-avatar>
+        </nz-avatar-group>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Package" [nzSpan]="1">
+        <nz-tag [nzColor]="getObjectColor(organizationDatatable.organization.organizationPackage)">
+          {{organizationDatatable.organization.organizationPackage}}
+        </nz-tag>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Trial Package" [nzSpan]="1">
+        <nz-switch [ngModel]="organizationDatatable.organization.trial" [nzDisabled]="true"
+          [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+        <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
+        <ng-template #unCheckedTemplate><span nz-icon nzType="close"></span></ng-template>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Number collaborators" [nzSpan]="1">
+        {{organizationDatatable.organization.maxNumberCollaborators}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Website" [nzSpan]="1"><a [href]="organizationDatatable.organization.website"
+          target="_blank">{{organizationDatatable.organization.website}}</a></nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Start Package" [nzSpan]="1">{{
+        formatObjectDate(organizationDatatable.organization.startPackage, dateFormatThree) }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="End Package" [nzSpan]="1">
+        {{formatObjectDate(organizationDatatable.organization.endPackage, dateFormatThree)}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Subcription Date" [nzSpan]="1">
+        {{formatObjectDate(organizationDatatable.organization.createdAt, dateFormatThree)}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Subcription updated" [nzSpan]="1">
+        {{formatObjectDate(organizationDatatable.organization.updatedAt, dateFormatThree)}}</nz-descriptions-item>
+    </nz-descriptions>
+    <nz-divider></nz-divider>
+    <nz-descriptions [nzColumn]="2" nzTitle="Contacts">
+      <nz-descriptions-item nzTitle="Phone Number" [nzSpan]="1">
+        {{organizationDatatable.organizationContact.phonePrefix}}
+        {{organizationDatatable.organizationContact.phoneNumber}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Landline Number" [nzSpan]="1">
+        {{organizationDatatable.organizationContact.landlinePrefix}}
+        {{organizationDatatable.organizationContact.landlineNumber}}</nz-descriptions-item>
+    </nz-descriptions>
+    <nz-divider></nz-divider>
+    <nz-descriptions [nzColumn]="2" nzTitle="Address">
+      <nz-descriptions-item nzTitle="Country" [nzSpan]="1"><img class="multilanguage"
+          [src]="handleOnCountryFlagSelected(organizationDatatable.organizationAddress.country)" />
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="State" [nzSpan]="1">{{organizationDatatable.organizationAddress.state}}
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Zip code" [nzSpan]="1">{{organizationDatatable.organizationAddress.zipCode}}
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Address" [nzSpan]="1">{{organizationDatatable.organizationAddress.addressLine}}
+      </nz-descriptions-item>
+    </nz-descriptions>
+  </ng-container>
+  <!-- Show details referent -->
+  <nz-drawer [nzWidth]="sizeDrawerReferent" [nzVisible]="visibleDrawerShowReferent" nzPlacement="right"
+    [nzTitle]="referent?.fullname" (nzOnClose)="handleOnCloseDrawerReferent()">
+    <ng-container *nzDrawerContent>
+      <nz-descriptions [nzColumn]="1">
+        <nz-descriptions-item class="profile-avatar-content">
+          <nz-avatar class="profile-avatar" [nzSrc]="avatarURL"></nz-avatar>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="User ID" [nzSpan]="1">
+          <b>{{referent?.userId}}</b>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Full name" [nzSpan]="1">
+          {{referent?.fullname}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Gender" [nzSpan]="1">
+          {{referent?.gender}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Pseudo" [nzSpan]="1">
+          {{referent?.username}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Email" [nzSpan]="1">
+          {{referent?.email}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Email PEC" [nzSpan]="1">
+          {{referent?.emailPec}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Country" [nzSpan]="1">
+          <img *ngIf="referent?.address" class="multilanguage" [src]="handleOnCountryFlagSelected(referent.address.country)" />
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Contact" [nzSpan]="1">
+          {{referent?.contact?.phonePrefix}} {{referent?.contact?.phoneNumber}} / {{referent?.contact?.landlinePrefix}}
+          {{referent?.contact?.landlineNumber}}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Last login" [nzSpan]="1" *ngIf="referent?.lastLogin">
+          {{formatObjectDate(referent.lastLogin, dateFormatThree)}}
+        </nz-descriptions-item>
+      </nz-descriptions>
+    </ng-container>
+  </nz-drawer>
+</nz-drawer>
