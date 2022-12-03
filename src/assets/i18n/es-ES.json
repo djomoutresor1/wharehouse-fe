@@ -194,7 +194,7 @@
       "title": "Stato"
     },
     "filter": {
-      "exportUsers": "Esportare Excel Utenti",
+      "export": "Esportare Excel",
       "createdAt": "Da - A"
     }
   },

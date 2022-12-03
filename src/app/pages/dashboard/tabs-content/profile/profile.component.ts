@@ -59,7 +59,6 @@ export class ProfileComponent extends WarehouseBaseComponent implements OnInit {
   getInfosUser() {
     this.profilService.getUserInfos(this.userLocalStorage?.userId).subscribe(
       (response: ResponseUserModel) => {
-        console.log('response: ', response);
         if (!!response?.profileImage?.length) {
           this.getDefaultObjectImageURL(response?.profileImage);
         }

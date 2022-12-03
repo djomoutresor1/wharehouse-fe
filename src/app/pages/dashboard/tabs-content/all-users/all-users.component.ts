@@ -8,6 +8,7 @@ import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseUserDataModel } from 'src/model/auth/response/response-user-data-model';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 import { HeaderTableModel } from 'src/model/utils/header-table-model';
+import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 
 @Component({
   selector: 'warehouse-all-users',
@@ -18,6 +19,7 @@ export class AllUsersComponent
   extends WarehouseBaseComponent
   implements OnInit
 {
+  breadcrumbItems!: BreadcrumbItemsModel;
   checked = false;
   indeterminate = false;
   setOfCheckedId = new Set<number>();
@@ -45,6 +47,18 @@ export class AllUsersComponent
   }
 
   initComponent() {
+    let currentLang = null;
+    currentLang = this.translate.currentLang;
+    if (currentLang === undefined) {
+      currentLang =
+        this.warehouseLocalStorage.WarehouseGetLanguageLocalStorage();
+    }
+    this.translate.use(currentLang as string);
+    this.breadcrumbItems = {
+      parent: {
+        title: this.translate.instant('side.nav.left.all.users'),
+      },
+    };
     this.usersHeaderTable = [
       {
         title: this.translate.instant('profile.personalData.userId'),

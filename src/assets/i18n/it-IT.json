@@ -177,7 +177,8 @@
       "delete": "Cancella",
       "reset": "Ripristina",
       "search": {
-        "simple": "Cerca con email o Nome e Cognome",
+        "organizations": "Cerca con nome organizzazione o website",
+        "users": "Cerca con email o Nome e Cognome",
         "advanced": "Ricerca Avanzata"
       },
       "status": "Cambia stato"
@@ -194,8 +195,8 @@
       "title": "Stato"
     },
     "filter": {
-      "exportUsers": "Esportare Excel Utenti",
-      "createdAt": "Da - A"
+      "export": "Esportare Excel",
+      "createdAt": "Creato Da - A"
     }
   },
   "warehouse": {
@@ -497,7 +498,7 @@
     "users": "Utenti",
     "all.users": "Tutti gli utenti",
     "configuration": "Configurazione",
-    "orgamization": {
+    "organization": {
       "title": "Organizzazioni"
     },
     "help": {
@@ -585,6 +586,19 @@
     },
     "update": {
       "object": "Aggiorna oggetto"
+    }
+  },
+  "header.table": {
+    "organization": {
+      "id": "ID Organizzazione",
+      "referent": "Responsabile",
+      "name": "Nome",
+      "website": "Sito web",
+      "package": "Pacchetto",
+      "collaborators": "Collaboratori",
+      "trial": "Prova",
+      "startPackage": "Inizio prova",
+      "endPackage": "Fine prova"
     }
   },
   "All Users": "tutti gli utenti",

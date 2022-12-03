@@ -17,7 +17,7 @@ import { DashboardRackGlobalComponent } from './dashboard-rack-global/dashboard-
 import { AllUsersComponent } from './tabs-content/all-users/all-users.component';
 import { DashboardUserAddComponent } from './dashboard-user/dashboard-user-add/dashboard-user-add.component';
 import { DashboardUserEditComponent } from './dashboard-user/dashboard-user-edit/dashboard-user-edit.component';
-import { AdvancedFiltersComponent } from './tabs-content/all-users/advanced-filters/advanced-filters.component';
+import { AdvancedFiltersUsersComponent } from './tabs-content/all-users/advanced-filters/advanced-filters.component';
 import { DashboardFooterComponent } from './utils/dashboard-footer/dashboard-footer.component';
 import { HeaderNotificationsComponent } from './utils/dashboard-header/components/header-notifications/header-notifications.component';
 import { DashboardNotificationsComponent } from './utils/dashboard-notifications/dashboard-notifications.component';
@@ -26,6 +26,8 @@ import { HeaderHelpsComponent } from './utils/dashboard-header/components/header
 import { HelpComponent } from './dashboard-configuration/help/help.component';
 import { GlossaryComponent } from './dashboard-configuration/glossary/glossary.component';
 import { HeaderLinksComponent } from './utils/dashboard-header/components/header-links/header-links.component';
+import { AdvancedFiltersOrganizationsComponent } from './dashboard-organization/advanced-filters/advanced-filters.component';
+import { OrganizationShowComponent } from './dashboard-organization/organization-show/organization-show.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { HeaderLinksComponent } from './utils/dashboard-header/components/header
     AllUsersComponent,
     DashboardUserAddComponent,
     DashboardUserEditComponent,
-    AdvancedFiltersComponent,
+    AdvancedFiltersUsersComponent,
+    AdvancedFiltersOrganizationsComponent,
     DashboardFooterComponent,
     HeaderHelpsComponent,
     HeaderNotificationsComponent,
@@ -49,7 +52,8 @@ import { HeaderLinksComponent } from './utils/dashboard-header/components/header
     HelpComponent,
     GlossaryComponent,
     HeaderLinksComponent,
-    DashboardOrganizationComponent
+    DashboardOrganizationComponent,
+    OrganizationShowComponent
   ],
   imports: [
     HttpClientModule,

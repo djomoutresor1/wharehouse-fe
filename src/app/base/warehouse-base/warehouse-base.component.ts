@@ -29,6 +29,7 @@ import { Languages } from 'src/app/shared/enums/languages-enums';
 import { LanguageModel } from 'src/model/utils/language-model';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { HttpRequest } from '@angular/common/http';
+import { OrganizationService } from 'src/app/services/organization.service';
 
 @Component({
   selector: 'warehouse-warehouse-base',
@@ -54,6 +55,7 @@ export class WarehouseBaseComponent implements OnInit {
   tableService: TableService;
   viewProfilService: ViewProfilService;
   configurationService: ConfigurationService;
+  organizationService: OrganizationService;
 
   validateForm!: FormGroup;
   user!: ResponseResetModel;
@@ -140,6 +142,7 @@ export class WarehouseBaseComponent implements OnInit {
     this.tableService = injector.get(TableService);
     this.viewProfilService = injector.get(ViewProfilService);
     this.configurationService = injector.get(ConfigurationService);
+    this.organizationService = injector.get(OrganizationService);
   }
 
   ngOnInit(): void {}
@@ -152,7 +155,10 @@ export class WarehouseBaseComponent implements OnInit {
   }
 
   formatObjectDate(date: string, format: string): string {
-    return moment(date).format(format);
+    if(!!date.length) {
+      return moment(date).format(format);
+    }
+    return "-";
   }
 
   formatObjectStatus(status: string): string {
@@ -206,13 +212,16 @@ export class WarehouseBaseComponent implements OnInit {
     }
   }
 
-  getUserColorRole(role: any) {
+  getObjectColor(role: any) {
     switch (role?.name || role) {
       case Utils.ROLE_USER:
+      case Utils.PACKAGE_STANDARD:
         return '#0096c8';
       case Utils.ROLE_MODERATOR:
+      case Utils.PACKAGE_BUSINESS:
         return '#ffc107';
       case Utils.ROLE_ADMIN:
+      case Utils.PACKAGE_PREMIUM:
         return '#2a7a39';
       default:
         return '#0096c8';
@@ -233,7 +242,7 @@ export class WarehouseBaseComponent implements OnInit {
   }
 
   getFlagLanguageByCode(flag: string): string {
-    return this.languages.filter(language =>  language.code === flag)[0]?.img;
+    return this.languages.filter((language) => language.code === flag)[0]?.img;
   }
 
   expirationToken() {
@@ -335,5 +344,10 @@ export class WarehouseBaseComponent implements OnInit {
         '</div>' +
         '</div>',
     });
+  }
+
+  handleOnPaste(event: any) {
+    event.preventDefault();
+    return false;
   }
 }

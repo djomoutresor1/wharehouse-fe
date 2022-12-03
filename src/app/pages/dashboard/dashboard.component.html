@@ -10,32 +10,29 @@
         <span>{{'dashboard.title' | translate}}</span>
       </li>
       <li *ngIf="this.checkRole === undefined ? false : true" nz-submenu nzTitle="{{'side.nav.left.users' | translate}}"
-        nzIcon="user">
+        nzIcon="team">
         <ul>
-          <li nz-menu-item (click)="handleOnNavigateByUrl('users')">{{'side.nav.left.all.users'| translate}}</li>
-          <li nz-menu-item (click)="handleOnNavigateByUrl('user/insert')">{{'side.nav.left.add.new.user' | translate}}
+          <li nz-menu-item (click)="handleOnNavigateByUrl('users')"><i class="remixicon ri-group-fill"></i>
+            {{'side.nav.left.all.users'| translate}}</li>
+          <li nz-menu-item (click)="handleOnNavigateByUrl('user/insert')"><i class="remixicon ri-user-add-fill"></i>
+            {{'side.nav.left.add.new.user' | translate}}
           </li>
-          <!-- <li nz-menu-item>Alex</li> -->
         </ul>
       </li>
       <li *ngIf="this.checkRole === undefined ? false : true" nz-submenu
-        nzTitle="{{'side.nav.left.configuration' | translate}}" nzIcon="file-text">
+        nzTitle="{{'side.nav.left.organization.title' | translate}}" nzIcon="home">
         <ul>
-          <li nz-menu-item (click)="handleOnNavigateByUrl('help-contact')"><span nz-icon nzType="info-circle"
-              nzTheme="outline"></span> {{'side.nav.left.help.title'| translate}}</li>
-          <li nz-menu-item (click)="handleOnNavigateByUrl('glossary')"><span nz-icon nzType="solution"
-              nzTheme="outline"></span> {{'side.nav.left.glossary.title'| translate}}</li>
-          <!-- <li nz-menu-item>Alex</li> -->
+          <li nz-menu-item (click)="handleOnNavigateByUrl('organizations')"><i class="remixicon ri-building-fill"></i>
+            {{'side.nav.left.organization.title' | translate}}</li>
         </ul>
       </li>
       <li *ngIf="this.checkRole === undefined ? false : true" nz-submenu
-        nzTitle="{{'side.nav.left.organization.title' | translate}}" nzIcon="file-text">
+        nzTitle="{{'side.nav.left.configuration' | translate}}" nzIcon="setting">
         <ul>
-          <li nz-menu-item (click)="handleOnNavigateByUrl('help-contact')"><span nz-icon nzType="info-circle"
-              nzTheme="outline"></span> {{'side.nav.left.help.title'| translate}}</li>
-          <li nz-menu-item (click)="handleOnNavigateByUrl('glossary')"><span nz-icon nzType="solution"
-              nzTheme="outline"></span> {{'side.nav.left.glossary.title'| translate}}</li>
-          <!-- <li nz-menu-item>Alex</li> -->
+          <li nz-menu-item (click)="handleOnNavigateByUrl('help-contact')"><i class="remixicon ri-question-fill"></i>
+            {{'side.nav.left.help.title'| translate}}</li>
+          <li nz-menu-item (click)="handleOnNavigateByUrl('glossary')"><i class="remixicon ri-database-fill"></i>
+            {{'side.nav.left.glossary.title'| translate}}</li>
         </ul>
       </li>
       <li nz-submenu nzTitle="{{'Team'| translate}}" nzIcon="team">

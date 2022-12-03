@@ -1,1 +1,94 @@
-<p>dashboard-organization works!</p>
+<warehouse-breadcrumb [items]="breadcrumbItems"></warehouse-breadcrumb>
+<div class="warehouse-organizations-wrapper container-fluid">
+  <div class="row" *ngIf="isAuth">
+    <div class="col">
+      <warehouse-notification [typeNotification]="alertType" [messageNotification]="messageAlert">
+      </warehouse-notification>
+    </div>
+  </div>
+
+  <!-- Advanced Filter -->
+  <warehouse-advanced-filters-organizations [warehouseOrganizations]="warehouseOrganizations"
+    [tmpOrganizations]="warehouseOrganizations" [headersTable]="organizationsHeaderTable"
+    (handleOnNotifyHeadersTable)="handleOnHeadersTable($event)"
+    (handleOnNotifyOrganizationsFiltered)="handleOnOrganizationsFiltered($event)"
+    (handleOnNotifyResetFilter)="handleOnResetFilter()">
+  </warehouse-advanced-filters-organizations>
+
+  <div class="row mt-4">
+    <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="warehouseOrganizations">
+      <thead *ngIf="!!organizationsHeaderTable?.length">
+        <tr>
+          <th *ngFor="let orgHeaderTable of organizationsHeaderTable"
+            [ngClass]="!orgHeaderTable?.show ? 'warehouse-header-hidden' : ''">
+            <span>{{ orgHeaderTable.title }}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of rowSelectionTable.data; let i = index;">
+          <td [ngClass]="!organizationsHeaderTable[0].show ? 'warehouse-header-hidden' : ''"><b>{{
+              data.organization.organizationId
+              }}</b></td>
+          <td [ngClass]="!organizationsHeaderTable[1].show ? 'warehouse-header-hidden' : ''">{{
+            data.organization.organizationName }}
+          </td>
+          <td [ngClass]="!organizationsHeaderTable[2].show ? 'warehouse-header-hidden' : ''">{{
+            data.organization.referent }}</td>
+          <td [ngClass]="!organizationsHeaderTable[3].show ? 'warehouse-header-hidden' : ''">
+            <nz-tag [nzColor]="getObjectColor(data.organization.organizationPackage)">
+              {{ data.organization.organizationPackage}}
+            </nz-tag>
+          </td>
+          <td [ngClass]="!organizationsHeaderTable[4].show ? 'warehouse-header-hidden' : ''">
+            <nz-switch [ngModel]="data.organization.trial" [nzDisabled]="true" [nzCheckedChildren]="checkedTemplate"
+              [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+            <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
+            <ng-template #unCheckedTemplate><span nz-icon nzType="close"></span></ng-template>
+          <td [ngClass]="!organizationsHeaderTable[5].show ? 'warehouse-header-hidden' : ''">
+            <nz-avatar-group>
+              <nz-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+              <nz-avatar style="background-color: #f56a00" nzText="U"></nz-avatar>
+              <nz-avatar style="background-color: #fde3cf; color: #f56a00" nzText="+2"></nz-avatar>
+            </nz-avatar-group>
+          </td>
+          <td [ngClass]="!organizationsHeaderTable[6].show ? 'warehouse-header-hidden' : ''">{{
+            data.organization.updatedAt }}</td>
+          <td>
+            <button nz-button nz-dropdown [nzDropdownMenu]="options" nzType="primary">
+              {{ "dataTable.options.title" | translate }}
+              <i nz-icon nzType="down"></i>
+            </button>
+            <nz-dropdown-menu #options="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item (click)="handleOnStatus(data)"><i nz-icon nzType="right-circle" nzTheme="twotone"></i>
+                  {{
+                  "dataTable.options.status" |
+                  translate }}</li>
+                <li nz-menu-item (click)="handleOnShow(data)"><i nz-icon nzType="eye" nzTheme="twotone"></i> {{
+                  "dataTable.options.show" |
+                  translate }}</li>
+                <li nz-menu-item (click)="handleOnEdit(data.organization)"><i nz-icon nzType="edit"
+                    nzTheme="twotone"></i> {{
+                  "dataTable.options.edit" |
+                  translate }}</li>
+                <li nz-menu-item (click)="handleOnDelete(data.organization)"><i nz-icon nzType="delete"
+                    nzTheme="twotone"></i>
+                  {{
+                  "dataTable.options.delete" | translate }}</li>
+              </ul>
+            </nz-dropdown-menu>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <div class="row">
+    <div class="col">
+      <!-- Section Show Organization -->
+      <warehouse-organization-show *ngIf="visibleDrawerShow" [visibleDrawerShow]="visibleDrawerShow"
+        [organizationDatatable]="organizationDatatable" (handleOnNotifyCloseDrawer)="handleOnCloseDrawer()">
+      </warehouse-organization-show>
+    </div>
+  </div>
+</div>

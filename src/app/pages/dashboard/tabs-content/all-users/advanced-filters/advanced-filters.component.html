@@ -1,7 +1,7 @@
 <div [formGroup]="searchForm" class="row warehouse-users-filter">
   <div class="col-md-2">
     <button nz-button (click)="handleOnExportUsers()" [nzType]="'primary'"><span nz-icon nzType="export"
-        nzTheme="outline"></span> {{ "dataTable.filter.exportUsers" | translate }}</button>
+        nzTheme="outline"></span> {{ "dataTable.filter.export" | translate }}</button>
   </div>
   <!-- Textual Search -->
   <div class="col-md-3 offset-md-6 mb-2">
@@ -10,7 +10,7 @@
       <nz-form-control>
         <nz-input-group nzPrefixIcon="search" [nzSuffix]="inputClearTpl">
           <input type="text" [(ngModel)]="search" nz-input formControlName="search"
-            [placeholder]="'dataTable.options.search.simple' | translate" (input)="handleOnSearchUsers()" />
+            [placeholder]="'dataTable.options.search.users' | translate" (input)="handleOnSearchUsers()" />
         </nz-input-group>
         <ng-template #inputClearTpl>
           <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="search"
@@ -113,14 +113,14 @@
                   (ngModelChange)="handleOnSearchUsers()">
                   <nz-option nzCustomContent *ngFor="let role of listOfRoles" [nzValue]="role?.value"
                     [nzLabel]="role?.label">
-                    <nz-tag *ngIf="role.value !== 'all'" [nzColor]="getUserColorRole(role?.value)">
+                    <nz-tag *ngIf="role.value !== 'all'" [nzColor]="getObjectColor(role?.value)">
                       <i nz-icon [nzType]="getUserRoleIcon(role?.value)"></i>
                     </nz-tag>
                     {{ role?.label }}
                   </nz-option>
                 </nz-select>
                 <ng-template #roleTemplate let-selected>
-                  <nz-tag *ngIf="selected?.nzValue !== 'all'" [nzColor]="getUserColorRole(selected?.nzValue)">
+                  <nz-tag *ngIf="selected?.nzValue !== 'all'" [nzColor]="getObjectColor(selected?.nzValue)">
                     <i nz-icon [nzType]="getUserRoleIcon(selected?.nzValue)"></i>
                   </nz-tag>
                   {{ selected.nzLabel }}

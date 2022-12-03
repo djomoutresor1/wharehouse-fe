@@ -194,8 +194,8 @@
       "title": "statut"
     },
     "filter": {
-      "exportUsers": "Exporter Excel Utilisateurs",
-      "createdAt": "De - A"
+      "export": "Exporter Excel",
+      "createdAt": "Créé De - A"
     }
   },
   "warehouse": {
