@@ -1,0 +1,58 @@
+<div [formGroup]="searchForm" class="row warehouse-organizations-filter">
+  <div class="col-md-2">
+    <button nz-button (click)="handleOnExportOrganizations()" [nzType]="'primary'"><span nz-icon nzType="export"
+        nzTheme="outline"></span> {{ "dataTable.filter.export" | translate }}</button>
+  </div>
+  <!-- Textual Search -->
+  <div class="col-md-3 offset-md-6 mb-2">
+    <nz-form-label></nz-form-label>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group nzPrefixIcon="search" [nzSuffix]="inputClearTpl">
+          <input type="text" [(ngModel)]="search" nz-input formControlName="search"
+            [placeholder]="'dataTable.options.search.organizations' | translate"
+            (input)="handleOnSearchOrganizations()" />
+        </nz-input-group>
+        <ng-template #inputClearTpl>
+          <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="search"
+            (click)="handleOnSearchClear()"></i>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div class="col-md-1">
+    <button (click)="handleOnShowHidePanel()" nz-button nzType="default" nzShape="circle"><span nz-icon nzType="more"
+        nzTheme="outline"></span></button>
+  </div>
+  <div class="warehouse-organizations-filter-panel" *ngIf="showHidePanel">
+    <div class="row warehouse-organizations-filter-panel-content"
+      *ngFor="let headerTable of headersTable; let i = index;">
+      <div class="col-md-3">
+        <nz-switch [(ngModel)]="headerTable.show" formControlName="selectedOption" [nzCheckedChildren]="checkedTemplate"
+          (ngModelChange)="handleOnSelectedOption(i, $event)" [nzUnCheckedChildren]="unCheckedTemplate">
+        </nz-switch>
+      </div>
+      <div class="col-md-9">
+        {{headerTable.title}}
+      </div>
+      <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
+      <ng-template #unCheckedTemplate><span nz-icon nzType="close"></span></ng-template>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <nz-collapse [nzExpandIconPosition]="'left'">
+      <nz-collapse-panel [nzHeader]="'dataTable.options.search.advanced' | translate" [nzActive]="false"
+        [nzExtra]="collapseContent" [nzDisabled]="false">
+        <div [formGroup]="searchForm" class="row warehouse-not-margin warehouse-organizations-filter">
+          <!-- Email Search -->
+        </div>
+      </nz-collapse-panel>
+    </nz-collapse>
+    <ng-template #collapseContent>
+      <!-- You can use stopPropagation if you don't want the panel to toggle -->
+      <i nz-icon nzType="filter" nzTheme="twotone" (click)="$event.stopPropagation()"></i>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+.warehouse-organizations-filter {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  .warehouse-filter-range {
+    margin: 0 0 24px;
+  }
+  .temporary-password-tootlip {
+    top: 0px;
+    left: 5px;
+    position: relative;
+  }
+  .warehouse-organizations-filter-panel {
+    padding: 20px;
+    width: 300px;
+    background: var(--warehouse-white);
+    border-radius: var(--warehouse-border-radius-one);
+    position: absolute;
+    right: 65px;
+    float: right;
+    top: 95px;
+    z-index: 1;
+    .warehouse-organizations-filter-panel-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

@@ -1,12 +1,4 @@
-<nz-breadcrumb>
-  <nz-breadcrumb-item (click)="handleOnNavigate('dashboard')">
-    <i nz-icon nzType="dashboard"></i>
-    <a>Dashboard</a>
-  </nz-breadcrumb-item>
-  <nz-breadcrumb-item>
-    <a>All users</a>
-  </nz-breadcrumb-item>
-</nz-breadcrumb>
+<warehouse-breadcrumb [items]="breadcrumbItems"></warehouse-breadcrumb>
 <div class="warehouse-users-wrapper container-fluid">
   <div class="row" *ngIf="isAuth">
     <div class="col">
@@ -16,10 +8,10 @@
   </div>
 
   <!-- Advanced Filter -->
-  <warehouse-advanced-filters [warehouseUsers]="warehouseUsers" [tmpUsers]="tmpUsers" [headersTable]="usersHeaderTable"
-    (handleOnNotifyHeadersTable)="handleOnHeadersTable($event)"
+  <warehouse-advanced-filters-users [warehouseUsers]="warehouseUsers" [tmpUsers]="tmpUsers"
+    [headersTable]="usersHeaderTable" (handleOnNotifyHeadersTable)="handleOnHeadersTable($event)"
     (handleOnNotifyUsersFiltered)="handleOnUsersFiltered($event)" (handleOnNotifyResetFilter)="handleOnResetFilter()">
-  </warehouse-advanced-filters>
+  </warehouse-advanced-filters-users>
 
   <div class="row mt-4">
     <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="allUsers">
@@ -47,7 +39,7 @@
             </span>
           </td>
           <td [ngClass]="!usersHeaderTable[4].show ? 'warehouse-header-hidden' : ''">
-            <nz-tag *ngFor="let role of data.user.roles" [nzColor]="getUserColorRole(role)">
+            <nz-tag *ngFor="let role of data.user.roles" [nzColor]="getObjectColor(role)">
               <i nz-icon [nzType]="getUserRoleIcon(role)"></i>
               {{ getUserRoleName(role)}}
             </nz-tag>

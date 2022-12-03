@@ -28,6 +28,7 @@ import { WarehouseBaseComponent } from './base/warehouse-base/warehouse-base.com
 import { ViewProfilService } from './services/view-profil.service';
 import { ConfigurationService } from './services/configuration.service';
 import { warehouseUserReducer } from 'src/state/warehouse-user/warehouse-user.reducer';
+import { OrganizationService } from './services/organization.service';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -68,6 +69,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FlagService,
     ViewProfilService,
     ConfigurationService,
+    OrganizationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CommonInterceptor,
