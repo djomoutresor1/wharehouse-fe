@@ -1,0 +1,147 @@
+.warehouse-auth-left {
+  @media only screen and (min-width: 64em) {
+    background-image: url("../../../../../assets/images/image_placeholder.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 50%;
+  }
+  .top-menu {
+    background-position: top;
+    background-repeat: repeat-x;
+    background-size: 1px 100%;
+    box-sizing: border-box;
+    height: 100px;
+    padding: 20px 0 0 30px;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    a {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    a.opsgenie-home {
+      background-image: url(https://og-frontend-static.us-west-2.prod.public.atl-paas.net/assets/img/8380..png);
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      height: 34px;
+      margin-right: 20px;
+      width: 134px;
+    }
+    a.lined-link {
+      color: var(--warehouse-default);
+      font-size: 13px;
+      line-height: 1;
+      margin-right: 10px;
+      padding: 7px 5px 4px;
+      text-decoration: none;
+      text-decoration: none;
+      position: relative;
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 0.1rem;
+        background-color: var(--warehouse-primary);
+        transform-origin: right center;
+        transform: scale(0, 1);
+        transition: transform 0.3s ease;
+        bottom: -5px;
+      }
+      &:hover {
+        color: var(--warehouse-primary);
+        &::before {
+          transform-origin: left center;
+          transform: scale(1, 1);
+          bottom: -5px;
+        }
+      }
+    }
+  }
+  .bottom-part {
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-size: 1px 100%;
+    bottom: 0;
+    box-sizing: border-box;
+    color: var(--n0);
+    font-size: 13px;
+    height: auto;
+    padding: 0 40px 40px;
+    position: absolute;
+    width: 100%;
+    .welcome {
+      margin-bottom: 50px;
+      h1.welcome-text {
+        color: var(--n0);
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 1;
+        margin: 0;
+        padding: 0;
+      }
+      p {
+        font-size: 18px;
+        font-weight: 300;
+        letter-spacing: 0.5px;
+        margin: 10px 0;
+      }
+    }
+    .whats-new {
+      .topic-tag.green {
+        background-color: #749c2f;
+        color: #bddb89;
+        border-radius: 12px;
+        display: inline-block;
+        font-size: 11px;
+        letter-spacing: 0.6px;
+        padding: 3px 14px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        width: auto;
+        line-height: 1;
+      }
+      .text-frame {
+        &:hover {
+          background-position: right 0 center;
+        }
+        background-image: url(https://og-frontend-static.us-west-2.prod.public.atl-paas.net/assets/img/9e90..png);
+        background-position: right 10px center;
+        background-repeat: no-repeat;
+        background-size: 29px 29px;
+        cursor: pointer;
+        margin-top: 40px;
+        -webkit-transition: all 0.4s;
+        transition: all 0.4s;
+        a {
+          color: var(--warehouse-default) !important;
+          text-decoration: none !important;
+          h2 {
+            font-size: 16px;
+            font-weight: 400;
+            margin: 0;
+          }
+          p {
+            color: var(--warehouse-default) !important;
+            font-size: 13px;
+            font-weight: 400;
+            margin: 0;
+            max-height: 65px;
+            overflow: hidden;
+            padding: 10px 70px 0 0;
+          }
+        }
+      }
+    }
+  }
+}

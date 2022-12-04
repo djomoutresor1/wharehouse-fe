@@ -21,6 +21,7 @@ import { HelpContactComponent } from './web/help-contact/help-contact.component'
 import { PrivacyPolicyComponent } from './web/privacy-policy/privacy-policy.component';
 import { LegalInfoComponent } from './web/legal-info/legal-info.component';
 import { AboutUsComponent } from './web/about-us/about-us.component';
+import { AuthTemplateLeftComponent } from './auth/components/auth-template-left/auth-template-left.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AboutUsComponent } from './web/about-us/about-us.component';
     PrivacyPolicyComponent,
     LegalInfoComponent,
     AboutUsComponent,
+    AuthTemplateLeftComponent,
   ],
   imports: [
     ReactiveFormsModule,
