@@ -30,6 +30,9 @@ export class LoginComponent extends WarehouseBaseComponent implements OnInit {
   dataUserDeletedAt: boolean = false;
   expiredRemember: number = 0;
 
+  currentYear = new Date().getFullYear();
+  createdYear = Utils.WAREHOUSE_CREATED_SYSTEM;
+
   constructor(injector: Injector) {
     super(injector);
     this.checkIfUserIsAlreadyLogged();
