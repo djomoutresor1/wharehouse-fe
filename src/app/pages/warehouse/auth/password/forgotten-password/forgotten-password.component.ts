@@ -3,6 +3,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { Pages } from 'src/app/shared/enums/pages-enums';
+import { Utils } from 'src/app/shared/enums/utils-enums';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 
 @Component({
@@ -11,6 +12,10 @@ import { ResponseModel } from 'src/model/auth/response/response-model';
   styleUrls: ['./forgotten-password.component.scss'],
 })
 export class ForgottenPasswordComponent extends WarehouseBaseComponent implements OnInit {
+
+  currentYear = new Date().getFullYear();
+  createdYear = Utils.WAREHOUSE_CREATED_SYSTEM;
+
   isMailSent: boolean = false;
   email: string = '';
 
@@ -36,12 +41,14 @@ export class ForgottenPasswordComponent extends WarehouseBaseComponent implement
         this.isMailSent = true;
       },
       (error: HttpErrorResponse) => {
+        console.log("error: ", error);
+
         if (error.status === 403) {
           // Expiration token
           this.expirationToken();
         } else {
           this.isMailSent = false;
-          this.errorAlertType(error?.error || error?.error?.message);
+          this.errorAlertType(error?.error?.message);
         }
       }
     );

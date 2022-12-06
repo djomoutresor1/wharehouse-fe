@@ -117,9 +117,20 @@
           </form>
         </div>
         <div class="col warehouse-auth-right-content-terms">
-          <a href="https://www.opsgenie.com/tos" class="footer-item-link">Terms and Conditions</a>
-          <a href="https://www.opsgenie.com/privacy" class="footer-item-link">Privacy Policy</a>
-          <!-- <b class="footer-item-copyright">© 2012-2022, All Rights Reserved.</b> -->
+          <ul class="footer-items">
+            <li class="footer-item">
+                <a href="/about-us" target="_blank" title="{{ 'dashboard.footer.legal-info' | translate }}"
+                    class="footer-item-link">
+                    {{ "dashboard.footer.legal-info" | translate }}
+                </a>
+            </li>
+            <li class="footer-item">
+                <a href="/legal-info" target="_blank" title="{{ 'dashboard.footer.privacy-policy' | translate }}"
+                    class="footer-item-link">
+                    {{ "dashboard.footer.privacy-policy" | translate }}
+                </a>
+            </li>
+          </ul>
           <p nz-typography class="footer-item-copyright">
             ©<span *ngIf="currentYear > createdYear; else otherYear">{{createdYear}} - {{currentYear}}</span>
             <ng-template #otherYear>
