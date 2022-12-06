@@ -12,6 +12,10 @@ import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-ba
   styleUrls: ['./register-step-one.component.scss'],
 })
 export class RegisterStepOneComponent extends WarehouseBaseComponent implements OnInit {
+
+  currentYear = new Date().getFullYear();
+  createdYear = Utils.WAREHOUSE_CREATED_SYSTEM;
+  
   passwordVisible = false;
   password: string = '';
   confirmPasswordVisible = false;
