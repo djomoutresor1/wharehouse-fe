@@ -2,15 +2,10 @@ warehouse-multilanguage {
   right: 0;
   margin: 25px;
   position: absolute;
+  z-index: 1;
 }
 
 .warehouse-auth-wrapper {
-  text-align: inherit;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
   .register-form {
     //max-width: 300px;
     i {
@@ -41,6 +36,7 @@ warehouse-multilanguage {
     width: 100%;
   }
   .forgot-password-mail-sent {
+    display: flex;
     .forgot-password-mail-sent-content {
       text-align: justify;
       margin: 20px !important;

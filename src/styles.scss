@@ -4,7 +4,7 @@
 @import "~ng-zorro-antd/ng-zorro-antd.min.css";
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-@import '~remixicon/fonts/remixicon.css';
+@import "~remixicon/fonts/remixicon.css";
 
 // body {
 //   height: 100%;
@@ -14,6 +14,101 @@
 //   background-repeat: no-repeat;
 //   background-position: center;
 // }
+
+.warehouse-auth-right {
+  .warehouse-auth-right-content {
+    align-items: center;
+    bottom: 0;
+    box-sizing: border-box;
+    display: inherit;
+    font-size: 13px;
+    justify-content: center;
+    overflow-x: hidden;
+    padding: 50px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    user-select: none;
+    width: 50%;
+    .warehouse-auth-right-content-alert {
+      display: grid;
+      align-items: center;
+      justify-content: center;
+    }
+    .warehouse-auth-right-content-form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .login-form {
+        width: 400px;
+        i {
+          cursor: pointer;
+        }
+      }
+    }
+    .warehouse-auth-right-content-terms {
+      align-items: center;
+      bottom: 10px;
+      display: flex;
+      flex: 0 0 auto;
+      font-size: 16px;
+      height: 30px;
+      justify-content: center;
+      left: 0;
+      position: absolute;
+      width: 100%;
+      .footer-items {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        .footer-item {
+          font-size: 15px;
+          font-weight: 500;
+          &:not(:first-child) {
+            &::before {
+              content: "\00A0 \2022";
+              padding: 0 5px;
+            }
+          }
+          .footer-item-link {
+            text-decoration: none;
+            position: relative;
+            color: var(--warehouse-default);
+            &::before {
+              content: "";
+              display: block;
+              position: absolute;
+              left: 0;
+              bottom: 0;
+              width: 100%;
+              height: 0.1rem;
+              background-color: var(--warehouse-primary);
+              transform-origin: right center;
+              transform: scale(0, 1);
+              transition: transform 0.3s ease;
+              bottom: -5px;
+            }
+            &:hover {
+              color: var(--warehouse-primary);
+              &::before {
+                transform-origin: left center;
+                transform: scale(1, 1);
+                bottom: -5px;
+              }
+            }
+          }
+        }
+      }
+      .footer-item-copyright {
+        color: var(--warehouse-primary);
+        font-weight: 500;
+        margin-left: 20px;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
 
 warehouse-loading {
   opacity: 0.6;
