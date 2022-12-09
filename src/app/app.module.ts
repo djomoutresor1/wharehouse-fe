@@ -30,10 +30,9 @@ import { ConfigurationService } from './services/configuration.service';
 import { warehouseUserReducer } from 'src/state/warehouse-user/warehouse-user.reducer';
 import { OrganizationService } from './services/organization.service';
 
-
 export function HttpLoaderFactory(http: HttpClient) {
   return new MultiTranslateHttpLoader(http, [
-    { prefix: '../assets/i18n/', suffix: ".json" },
+    { prefix: '../assets/i18n/', suffix: '.json' },
   ]);
 }
 
@@ -50,7 +49,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AntDesignComponentsModule,
     SharedModule,
     StoreModule.forRoot({
-      warehouseUserData: warehouseUserReducer
+      warehouseUserData: warehouseUserReducer,
     }),
     TranslateModule.forRoot({
       loader: {
@@ -75,7 +74,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       useClass: CommonInterceptor,
       multi: true,
     },
-    { provide: NZ_I18N, useValue: en_US }
+    { provide: NZ_I18N, useValue: en_US },
   ],
   bootstrap: [AppComponent],
 })

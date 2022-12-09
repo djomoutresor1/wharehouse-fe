@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -28,7 +28,7 @@ import { GlossaryComponent } from './dashboard-configuration/glossary/glossary.c
 import { HeaderLinksComponent } from './utils/dashboard-header/components/header-links/header-links.component';
 import { AdvancedFiltersOrganizationsComponent } from './dashboard-organization/advanced-filters/advanced-filters.component';
 import { OrganizationShowComponent } from './dashboard-organization/organization-show/organization-show.component';
-
+import { AngularEditorModule } from '@kolkov/angular-editor';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -55,15 +55,16 @@ import { OrganizationShowComponent } from './dashboard-organization/organization
     DashboardOrganizationComponent,
     OrganizationShowComponent
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
     SharedModule,
+    AngularEditorModule,
     DashboardRoutingModule,
     AntDesignComponentsModule,
-  ],
-  exports: [],
+  ]
 })
 export class DashboardModule {}

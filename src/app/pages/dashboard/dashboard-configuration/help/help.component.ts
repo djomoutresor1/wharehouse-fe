@@ -5,6 +5,7 @@ import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-ba
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { ResponseModel } from 'src/model/auth/response/response-model';
+import { HelpModel } from 'src/model/configuration/request/help-model';
 import { ResponseHelpModel } from 'src/model/configuration/response/response-help-model';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 
@@ -106,6 +107,7 @@ export class HelpComponent extends WarehouseBaseComponent implements OnInit {
     }
     this.modeAction = '';
     this.helpStatusSelected = '';
+    this.validateForm.reset();
   }
 
   handleOnCreateHelp() {
@@ -115,7 +117,7 @@ export class HelpComponent extends WarehouseBaseComponent implements OnInit {
       description: this.validateForm.controls['description'].value,
       content: this.validateForm.controls['content'].value,
       userId: this.user.userId,
-    };
+    } as HelpModel;
     this.configurationService.onCreateHelp(help).subscribe(
       (response: ResponseModel) => {
         this.successAlertType(response?.message);
