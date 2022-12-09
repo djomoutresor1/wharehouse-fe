@@ -31,7 +31,7 @@ import { BreadcrumbComponent } from './composants/breadcrumb/breadcrumb.componen
     CapitalizeFirstLetterPipe,
     ModalComponent,
     MultilanguageComponent,
-    BreadcrumbComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
