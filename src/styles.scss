@@ -161,3 +161,14 @@ nz-breadcrumb {
     }
   }
 }
+
+.warehouse-editor-show {
+  .angular-editor {
+    angular-editor-toolbar {
+      display: none !important;
+    }
+    .angular-editor-wrapper {
+      pointer-events: none;
+    }
+  }
+}

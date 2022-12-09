@@ -68,6 +68,21 @@ export class ConfigurationService {
     );
   }
 
+  public getGlossariesByObjectAndLanguage(
+    object: string,
+    language: string
+  ): Observable<ResponseGlossaryModel[]> {
+    return this.http.get<ResponseGlossaryModel[]>(
+      `${this.apiServerUrl}/${Pages.GLOSSARIES}`,
+      {
+        params: {
+          object,
+          language,
+        },
+      }
+    );
+  }
+
   public onCreateGlossary(
     glossary: GlossaryModel[]
   ): Observable<ResponseModel> {
