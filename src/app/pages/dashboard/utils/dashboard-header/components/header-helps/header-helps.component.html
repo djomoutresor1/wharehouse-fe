@@ -1,62 +1,54 @@
 <nz-drawer class="dashboard-header-help-wrapper" [nzClosable]="true" [nzWidth]="sizeDrawerHelp" [nzVisible]="visible"
-    [nzFooter]="footerTplHelp" nzPlacement="right" [nzTitle]="title" (nzOnClose)="handleOnCloseDrawerHelp()">
-    <ng-container class="dashboard-header-help-content" *nzDrawerContent>
-        <nz-input-group [nzSuffix]="suffixIconSearch">
-            <input [(ngModel)]="search" type="text" nz-input placeholder="Search help articles" (input)="handleOnSearchHelps()" />
-        </nz-input-group>
-        <ng-template #suffixIconSearch>
-            <span nz-icon nzType="search"></span>
-        </ng-template>
-        <div *ngIf="!!helps?.length" class="dashboard-header-help-items">
-            <div *ngFor="let help of helps" (click)="handleOnOpenChildren()" class="dashboard-header-help-item">
-                <h5 nz-typography class="dashboard-header-help-item-title">{{ firstLetterUpperCase(help.title) }}</h5>
-                <p class="dashboard-header-help-item-description">{{ firstLetterUpperCase(help.description) }}</p>
-            </div>
-            <span *ngIf="helps.length > 9" (click)="handleOnShowMore()" class="warehouse-primary dashboard-header-help-show-more">{{!showMoreHelp
-                ? "Show more 9 articles" : "Show less"}}</span>
-        </div>
-    </ng-container>
-    <ng-template #footerTplHelp>
-        <div class="dashboard-header-help-footer">
-            <ul class="dashboard-header-help-items">
-                <li class="dashboard-header-help-item">
-                    <a href="/about-us" target="_blank" title="{{ 'dashboard.footer.legal-info' | translate }}"
-                        class="dashboard-header-help-item-link">
-                        {{ "dashboard.footer.about-us" | translate }}
-                    </a>
-                </li>
-                <li class="dashboard-header-help-item">
-                    <a href="/legal-info" target="_blank" title="{{ 'dashboard.footer.legal-info' | translate }}"
-                        class="dashboard-header-help-item-link">
-                        {{ "dashboard.footer.legal-info" | translate }}
-                    </a>
-                </li>
-                <li class="dashboard-header-help-item">
-                    <a href="/general-condition" target="_blank" title="{{ 'dashboard.footer.cgu' | translate }}"
-                        class="dashboard-header-help-item-link">
-                        {{ "dashboard.footer.cgu" | translate }}
-                    </a>
-                </li>
-            </ul>
-        </div>
+  [nzFooter]="footerTplHelp" nzPlacement="right" [nzTitle]="title" (nzOnClose)="handleOnCloseDrawerHelp()">
+  <ng-container class="dashboard-header-help-content" *nzDrawerContent>
+    <nz-input-group [nzSuffix]="suffixIconSearch">
+      <input [(ngModel)]="search" type="text" nz-input placeholder="Search help articles"
+        (input)="handleOnSearchHelps()" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <span nz-icon nzType="search"></span>
     </ng-template>
+    <div *ngIf="!!helps?.length" class="dashboard-header-help-items">
+      <div *ngFor="let help of helps" (click)="handleOnOpenChildren(help)" class="dashboard-header-help-item">
+        <h5 nz-typography class="dashboard-header-help-item-title">{{ firstLetterUpperCase(help.title) }}</h5>
+        <p class="dashboard-header-help-item-description">{{ firstLetterUpperCase(help.description) }}</p>
+      </div>
+      <span *ngIf="helps.length > 9" (click)="handleOnShowMore()"
+        class="warehouse-primary dashboard-header-help-show-more">{{!showMoreHelp
+        ? "Show more 9 articles" : "Show less"}}</span>
+    </div>
+  </ng-container>
+  <ng-template #footerTplHelp>
+    <div class="dashboard-header-help-footer">
+      <ul class="dashboard-header-help-items">
+        <li class="dashboard-header-help-item">
+          <a href="/about-us" target="_blank" title="{{ 'dashboard.footer.legal-info' | translate }}"
+            class="dashboard-header-help-item-link">
+            {{ "dashboard.footer.about-us" | translate }}
+          </a>
+        </li>
+        <li class="dashboard-header-help-item">
+          <a href="/legal-info" target="_blank" title="{{ 'dashboard.footer.legal-info' | translate }}"
+            class="dashboard-header-help-item-link">
+            {{ "dashboard.footer.legal-info" | translate }}
+          </a>
+        </li>
+        <li class="dashboard-header-help-item">
+          <a href="/general-condition" target="_blank" title="{{ 'dashboard.footer.cgu' | translate }}"
+            class="dashboard-header-help-item-link">
+            {{ "dashboard.footer.cgu" | translate }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </ng-template>
 </nz-drawer>
 <nz-drawer [nzWidth]="childrenSizeDrawerHelp" [nzClosable]="false" [nzVisible]="childrenVisible" nzTitle="Food"
-    (nzOnClose)="handleOnCloseChildren()">
-    <!-- <nz-list *nzDrawerContent [nzDataSource]="vegetables" [nzRenderItem]="item">
-  <ng-template #item let-item>
-    <nz-list-item [nzContent]="item"></nz-list-item>
-  </ng-template>
-</nz-list> -->
-    <ng-container class="dashboard-header-help-children-content" *nzDrawerContent>
-        <div class="dashboard-header-help-children-item">
-            <h4 nz-typography class="warehouse-primary dashboard-header-help-children-item-title">Lorem ipsum, dolor sit amet consectetur
-                adipisicing elit. Dolorum, odio!</h4>
-            <p class="dashboard-header-help-children-item-description">Lorem ipsum dolor, sit amet consectetur
-                adipisicing
-                elit. Corrupti veritatis nesciunt labore
-                quisquam quae eligendi facere odit delectus. Beatae est voluptatem laborum distinctio error nesciunt
-                minus nulla quidem sint ex.</p>
-        </div>
-    </ng-container>
+  (nzOnClose)="handleOnCloseChildren()">
+  <ng-container class="dashboard-header-help-children-content" *nzDrawerContent>
+    <div class="dashboard-header-help-children-item">
+      <h4 nz-typography class="warehouse-primary dashboard-header-help-children-item-title">{{help.title}}</h4>
+      <angular-editor [config]="showEditorConfig" class="warehouse-editor-show" [(ngModel)]="help.content"></angular-editor>
+    </div>
+  </ng-container>
 </nz-drawer>

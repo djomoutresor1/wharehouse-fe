@@ -154,7 +154,7 @@
       <div class="row">
         <div class="col">
           <h5 nz-typography>{{"side.nav.left.help.field.content" | translate }}</h5>
-          <angular-editor class="warehouse-editor-show" [(ngModel)]="helpDatatable.content"></angular-editor>
+          <angular-editor [config]="showEditorConfig" class="warehouse-editor-show" [(ngModel)]="helpDatatable.content"></angular-editor>
         </div>
       </div>
       <nz-divider></nz-divider>

@@ -6,6 +6,8 @@ import { Pages } from 'src/app/shared/enums/pages-enums';
 import { StatusType } from 'src/app/shared/enums/status-type-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { ResponseModel } from 'src/model/auth/response/response-model';
+import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
+import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 
 @Component({
   selector: 'warehouse-preferences',
@@ -16,6 +18,8 @@ export class PreferencesComponent
   extends WarehouseBaseComponent
   implements OnInit
 {
+  userLogged!: ResponseUserModel;
+  breadcrumbItems!: BreadcrumbItemsModel;
   passwordVisible: boolean = false;
   passwordUser!: string;
   mode: any;
@@ -37,7 +41,25 @@ export class PreferencesComponent
     }
   }
 
-  override ngOnInit(): void {}
+  override ngOnInit(): void {
+    this.initComponent();
+  }
+
+  initComponent() {
+    this.userLogged = this.warehouseLocalStorage.WarehouseGetTokenLocalStorage();
+    let currentLang = null;
+    currentLang = this.translate.currentLang;
+    if (currentLang === undefined) {
+      currentLang =
+        this.warehouseLocalStorage.WarehouseGetLanguageLocalStorage();
+    }
+    this.translate.use(currentLang as string);
+    this.breadcrumbItems = {
+      parent: {
+        title: this.translate.instant('profile.preferences.title'),
+      },
+    };
+  }
 
   handleOnNavigate(url: String) {
     this.router.navigate([`${Pages.WAREHOUSE}/${url}`]);

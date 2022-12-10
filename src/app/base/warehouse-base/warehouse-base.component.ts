@@ -80,6 +80,12 @@ export class WarehouseBaseComponent implements OnInit {
   WAREHOUSE_MAX_SIZE_FILE = 5000000;
   WAREHOUSE_18_YEARS_OLD = 18;
 
+  showEditorConfig: AngularEditorConfig = {
+    editable: false,
+    enableToolbar: false,
+    showToolbar: false,
+  };
+
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -91,7 +97,6 @@ export class WarehouseBaseComponent implements OnInit {
     translate: 'yes',
     enableToolbar: true,
     showToolbar: true,
-    placeholder: 'Enter text here...',
     defaultParagraphSeparator: '',
     defaultFontName: '',
     defaultFontSize: '',

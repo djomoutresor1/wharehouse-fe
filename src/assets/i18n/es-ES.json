@@ -177,7 +177,8 @@
       "delete": "Cancella",
       "reset": "Ripristina",
       "search": {
-        "simple": "Cerca con email o Nome e Cognome",
+        "organizations": "Cerca con nome organizzazione o website",
+        "users": "Cerca con email o Nome e Cognome",
         "advanced": "Ricerca Avanzata"
       },
       "status": "Cambia stato"
@@ -187,6 +188,7 @@
       "active": "Attivo",
       "pending": "In attesa",
       "disabled": "Disabilitato",
+      "enabled": "Attivato",
       "never.connected": "Mai connesso",
       "deleted": "Cancellato",
       "processing": "In corso",
@@ -195,7 +197,7 @@
     },
     "filter": {
       "export": "Esportare Excel",
-      "createdAt": "Da - A"
+      "createdAt": "Creato Da - A"
     }
   },
   "warehouse": {
@@ -452,6 +454,14 @@
         }
       }
     },
+    "settings": {
+      "2fa": "Metodo di accesso",
+      "title": "Securizza il tuo profilo",
+      "description": "L'autenticazione a due fattori aggiunge un ulteriore livello di sicurezza al tuo account. Per accedere, inoltre, sarà necessario fornire un codice a 6 cifre",
+      "changeEmail": {
+        "title": "Cambia posta elettronica"
+      }
+    },
     "account.settings": "Impostazioni Account",
     "notifications": "Notifiche",
     "help": "Guida",
@@ -497,6 +507,9 @@
     "users": "Utenti",
     "all.users": "Tutti gli utenti",
     "configuration": "Configurazione",
+    "organization": {
+      "title": "Organizzazioni"
+    },
     "help": {
       "title": "Guida",
       "datagrid": {
@@ -582,6 +595,19 @@
     },
     "update": {
       "object": "Aggiorna oggetto"
+    }
+  },
+  "header.table": {
+    "organization": {
+      "id": "ID Organizzazione",
+      "referent": "Responsabile",
+      "name": "Nome",
+      "website": "Sito web",
+      "package": "Pacchetto",
+      "collaborators": "Collaboratori",
+      "trial": "Prova",
+      "startPackage": "Inizio prova",
+      "endPackage": "Fine prova"
     }
   },
   "All Users": "tutti gli utenti",
