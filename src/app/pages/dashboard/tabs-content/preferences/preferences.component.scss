@@ -2,7 +2,7 @@
   .warehouse-preferences-account {
     border-radius: var(--warehouse-border-radius-one);
     padding: 10px;
-    background: var(--warehouse-white);
+    background: var(--warehouse-tomato);
     box-shadow: var(--warehouse-box-shadow);
     .warehouse-preferences-left {
       display: flex;
@@ -22,6 +22,75 @@
       }
     }
   }
+  .warehouse-signin-methods {
+    border-radius: var(--warehouse-border-radius-one);
+    padding: 10px;
+    background: var(--warehouse-white);
+    box-shadow: var(--warehouse-box-shadow);
+    .ant-collapse-borderless {
+      .ant-collapse-item {
+        border-bottom: none !important;
+        padding: 0 !important;
+        .ant-collapse-header {
+          font-size: 22px !important;
+          line-height: 1.35;
+          font-weight: 400;
+        }
+      }
+    }
+    .warehouse-signin-email {
+      .warehouse-signin-email-content {
+        font-size: 16px;
+        font-weight: initial;
+      }
+      .warehouse-signin-email-cta {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+      }
+    }
+    .warehouse-signin-password {
+      .warehouse-signin-password-content {
+        font-size: 16px;
+        font-weight: initial;
+      }
+      .warehouse-signin-password-cta {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+      }
+    }
+    .warehouse-signin-2fa {
+      border: 2px dashed var(--warehouse-primary);
+      border-radius: var(--warehouse-border-radius-one);
+      padding: 10px;
+      .warehouse-signin-2fa-icon {
+        color: var(--warehouse-success);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .warehouse-signin-2fa-content {
+        font-size: 16px;
+        font-weight: initial;
+      }
+      .warehouse-signin-2fa-cta {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+      }
+    }
+  }
+}
+.ant-collapse-borderless > .ant-collapse-item:last-child,
+.ant-collapse-borderless > .ant-collapse-item:last-child .ant-collapse-header {
+  // div {
+  //   display: none !important;
+  // }
+  font-size: 22px !important;
+  line-height: 1.35 !important;
+  font-weight: 500;
+  padding: 12px 0 !important;
 }
 i {
   cursor: pointer;

@@ -1,98 +1,143 @@
-<nz-breadcrumb>
-    <nz-breadcrumb-item (click)="handleOnNavigate('dashboard')">
-        <i nz-icon nzType="dashboard"></i>
-        <a>Dashboard</a>
-    </nz-breadcrumb-item>
-    <nz-breadcrumb-item>Settings</nz-breadcrumb-item>
-</nz-breadcrumb>
+<warehouse-breadcrumb [items]="breadcrumbItems"></warehouse-breadcrumb>
 <div class="warehouse-preferences-wrapper container-fluid">
-    <div class="row" *ngIf="isSuccess">
-        <div class="col-md-12">
-            <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert"
-                [descriptionModal]="descriptionAlert">
-            </warehouse-modal>
-        </div>
+  <div class="row" *ngIf="isSuccess">
+    <div class="col-md-12">
+      <warehouse-modal [okTextModal]="okText" [typeModal]="alertType" [messageModal]="messageAlert"
+        [descriptionModal]="descriptionAlert">
+      </warehouse-modal>
     </div>
-    <div class="row mt-5">
-        <div class="col-md-6">
-            <h4>Change theme</h4>
-            <nz-divider class="warehouse-background-sliver"></nz-divider>
-            <nz-switch [(ngModel)]="theme" nzCheckedChildren="Dark" nzUnCheckedChildren="Light"
-                (ngModelChange)="handleOnChangeTheme($event)"></nz-switch>
-        </div>
-        <div class="col-md-6">
-            <h4>Change mode</h4>
-            <nz-divider class="warehouse-background-sliver"></nz-divider>
-            <nz-switch [(ngModel)]="mode" nzCheckedChildren="Vertical" nzUnCheckedChildren="Inline"
-                (ngModelChange)="handleOnChangeMode($event)"></nz-switch>
-        </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <h4>Change theme</h4>
+      <nz-divider class="warehouse-background-sliver"></nz-divider>
+      <nz-switch [(ngModel)]="theme" nzCheckedChildren="Dark" nzUnCheckedChildren="Light"
+        (ngModelChange)="handleOnChangeTheme($event)"></nz-switch>
     </div>
-    <div class="row mt-5 warehouse-preferences-account">
-        <div class="col">
-            <h4 nz-typography>{{'profile.preferences.subtitleOne' | translate}}</h4>
-            <p nz-typography>{{'profile.preferences.subtitleTwo' | translate}}</p>
-            <div class="row mt-3 mb-3">
-                <div class="warehouse-preferences-left col-md-6">
-                    <nz-switch [(ngModel)]="account" [nzCheckedChildren]="checkedTemplate"
-                        [nzUnCheckedChildren]="unCheckedTemplate" (ngModelChange)="handleOnDisabled($event)">
-                    </nz-switch>
-                    <div class="warehouse-preferences-left-confirm">
-                        <h4 nz-typography class="warehouse-not-margin warehouse-not-padding">
-                            {{'profile.preferences.action.confirm' | translate}}</h4>
-                        <p nz-typography class="warehouse-not-margin warehouse-not-padding">
-                            {{'profile.preferences.description' | translate}}</p>
-                    </div>
-                    <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
-                    <ng-template #unCheckedTemplate><span nz-icon nzType="close"></span></ng-template>
-                </div>
-                <div class="warehouse-preferences-right col-md-6">
-                    <button nz-button nzType="primary" (click)="handleOnAction('disabled')" nzShape="round"
-                        [nzSize]="'large'" [disabled]="!account"><span nz-icon nzType="pause-circle"
-                            nzTheme="outline"></span>{{'profile.preferences.action.disabled' | translate}}</button>
-                    <button nz-button nzType="primary" (click)="handleOnAction('delete')" nzDanger nzShape="round"
-                        [nzSize]="'large'" [disabled]="!account"><span nz-icon nzType="delete"
-                            nzTheme="outline"></span>{{'profile.preferences.action.delete' | translate}}</button>
-                </div>
+    <div class="col-md-6">
+      <h4>Change mode</h4>
+      <nz-divider class="warehouse-background-sliver"></nz-divider>
+      <nz-switch [(ngModel)]="mode" nzCheckedChildren="Vertical" nzUnCheckedChildren="Inline"
+        (ngModelChange)="handleOnChangeMode($event)"></nz-switch>
+    </div>
+  </div>
+  <!-- Sign In Methods -->
+  <div class="row mt-3 warehouse-signin-methods">
+    <div class="col warehouse-not-padding">
+      <nz-collapse [nzBordered]="false" [nzAccordion]="true">
+        <nz-collapse-panel [nzHeader]="'profile.settings.2fa' | translate" [nzActive]="true" [nzExtra]="extraTpl">
+          <nz-divider></nz-divider>
+          <div class="row warehouse-signin-email">
+            <div class="col-md-8 warehouse-signin-email-content">
+              <h3 nz-typography class="warehouse-not-padding warehouse-not-margin">{{"register.email.title" | translate
+                }}</h3>
+              <p nz-typography>{{userLogged.email}}</p>
             </div>
-        </div>
-    </div>
-    <nz-modal [(nzVisible)]="isVisible" [nzTitle]="'profile.preferences.modal.title' | translate"
-        (nzOnCancel)="handleOnCancelOperation()" [nzOkLoading]="isOkLoading" [nzFooter]="modalFooter">
-        <ng-container *nzModalContent>
-            <nz-alert nzType="info" class="warehouse-text-justify"
-                [nzMessage]="handleOnGetMessageModal()" nzShowIcon></nz-alert>
-            <h6 nz-typography class="mt-3 warehouse-text-justify">{{
-                "profile.preferences.modal.terms.services.subtitleOne"
-                |
-                translate }} <a href="" target="_blank"
-                    class="warehouse-text-underline">{{"profile.preferences.modal.terms.services.title" |
-                    translate}}</a>
-                {{ "profile.preferences.modal.terms.services.subtitleTwo" | translate }}</h6>
-            <div>
-                <nz-form-label nzFor="username">{{ "profile.preferences.modal.form.label" | translate }}<span
-                        class="warehouse-required"> *</span>
-                </nz-form-label>
-                <nz-form-item>
-                    <nz-form-control>
-                        <nz-input-group nzPrefixIcon="lock" [nzSuffix]="passwordTemplate">
-                            <input [type]="passwordVisible ? 'text' : 'password'" nz-input [(ngModel)]="passwordUser"
-                                [placeholder]="'profile.personalData.userId' | translate"
-                                (click)="handleOnChangeInput()" />
-                        </nz-input-group>
-                        <ng-template #passwordTemplate>
-                            <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
-                                (click)="passwordVisible = !passwordVisible"></i>
-                        </ng-template>
-                    </nz-form-control>
-                </nz-form-item>
+            <div class="col-md-4 warehouse-signin-email-cta">
+              <button nz-button nzSize="large" nzType="primary"><span nz-icon nzType="mail" nzTheme="outline"></span>
+                {{"profile.settings.changeEmail.title" | translate}}</button>
             </div>
-        </ng-container>
-        <ng-template #modalFooter>
-            <button nz-button nzDanger nzType="primary" (click)="handleOnCancelOperation()"><span nz-icon nzType="left"
-                    nzTheme="outline"></span> {{'dashboard.cta.back' | translate}}</button>
-            <button nz-button nzType="primary" (click)="handleOnOkOperation()" [nzLoading]="isOkLoading"><span nz-icon
-                    nzType="check-circle" nzTheme="outline"></span> {{'profile.preferences.action.cancel' |
-                translate}}</button>
-        </ng-template>
-    </nz-modal>
+          </div>
+          <nz-divider></nz-divider>
+          <div class="row warehouse-signin-password">
+            <div class="col-md-8 warehouse-signin-password-content">
+              <h3 nz-typography class="warehouse-not-padding warehouse-not-margin">{{"login.password.placeholder" |
+                translate}}</h3>
+              <p nz-typography>**************</p>
+            </div>
+            <div class="col-md-4 warehouse-signin-password-cta">
+              <button nz-button nzSize="large" nzType="primary"><span nz-icon nzType="lock" nzTheme="outline"></span>
+                {{"changePassword.title" | translate}}</button>
+            </div>
+          </div>
+          <nz-divider></nz-divider>
+          <div class="row warehouse-signin-2fa">
+            <div class="col-md-1 warehouse-signin-2fa-icon">
+              <span nz-icon nzType="safety-certificate" nzTheme="outline" class="warehouse-icon-medium"></span>
+            </div>
+            <div class="col-md-8 warehouse-signin-2fa-content">
+              <h3 nz-typography>{{ "profile.settings.title" | translate}}</h3>
+              <p nz-typography>{{ "profile.settings.description" | translate}}</p>
+            </div>
+            <div class="col-md-3 warehouse-signin-2fa-cta">
+              <button nz-button nzSize="large" nzType="primary"><span nz-icon nzType="lock" nzTheme="outline"></span>
+                {{"dataTable.status.enabled" | translate}}</button>
+            </div>
+          </div>
+        </nz-collapse-panel>
+      </nz-collapse>
+      <ng-template #extraTpl>
+        <!-- You can use stopPropagation if you don't want the panel to toggle -->
+        <i class="ri-user-settings-line" (click)="$event.stopPropagation()"></i>
+      </ng-template>
+    </div>
+  </div>
+   <!-- Cancell Account -->
+  <div class="row mt-3 warehouse-preferences-account">
+    <div class="col">
+      <h3 nz-typography class="warehouse-white">{{'profile.preferences.subtitleOne' | translate}}</h3>
+      <p nz-typography class="warehouse-white">{{'profile.preferences.subtitleTwo' | translate}}</p>
+      <div class="row mt-3 mb-3">
+        <div class="warehouse-preferences-left col-md-6">
+          <nz-switch [(ngModel)]="account" [nzCheckedChildren]="checkedTemplate"
+            [nzUnCheckedChildren]="unCheckedTemplate" (ngModelChange)="handleOnDisabled($event)">
+          </nz-switch>
+          <div class="warehouse-preferences-left-confirm">
+            <h4 nz-typography class="warehouse-sliver warehouse-not-margin warehouse-not-padding">
+              {{'profile.preferences.action.confirm' | translate}}</h4>
+            <p nz-typography class="warehouse-sliver warehouse-not-margin warehouse-not-padding">
+              {{'profile.preferences.description' | translate}}</p>
+          </div>
+          <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
+          <ng-template #unCheckedTemplate><span nz-icon nzType="close"></span></ng-template>
+        </div>
+        <div class="warehouse-preferences-right col-md-6">
+          <button nz-button nzType="primary" (click)="handleOnAction('disabled')" nzShape="round" [nzSize]="'large'"
+            [disabled]="!account"><span nz-icon nzType="pause-circle"
+              nzTheme="outline"></span>{{'profile.preferences.action.disabled' | translate}}</button>
+          <button nz-button nzType="primary" (click)="handleOnAction('delete')" nzDanger nzShape="round"
+            [nzSize]="'large'" [disabled]="!account"><span nz-icon nzType="delete"
+              nzTheme="outline"></span>{{'profile.preferences.action.delete' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="'profile.preferences.modal.title' | translate"
+    (nzOnCancel)="handleOnCancelOperation()" [nzOkLoading]="isOkLoading" [nzFooter]="modalFooter">
+    <ng-container *nzModalContent>
+      <nz-alert nzType="info" class="warehouse-text-justify" [nzMessage]="handleOnGetMessageModal()" nzShowIcon>
+      </nz-alert>
+      <h6 nz-typography class="mt-3 warehouse-text-justify">{{
+        "profile.preferences.modal.terms.services.subtitleOne"
+        |
+        translate }} <a href="" target="_blank"
+          class="warehouse-text-underline">{{"profile.preferences.modal.terms.services.title" |
+          translate}}</a>
+        {{ "profile.preferences.modal.terms.services.subtitleTwo" | translate }}</h6>
+      <div>
+        <nz-form-label nzFor="username">{{ "profile.preferences.modal.form.label" | translate }}<span
+            class="warehouse-required"> *</span>
+        </nz-form-label>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="lock" [nzSuffix]="passwordTemplate">
+              <input [type]="passwordVisible ? 'text' : 'password'" nz-input [(ngModel)]="passwordUser"
+                [placeholder]="'profile.personalData.userId' | translate" (click)="handleOnChangeInput()" />
+            </nz-input-group>
+            <ng-template #passwordTemplate>
+              <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                (click)="passwordVisible = !passwordVisible"></i>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </ng-container>
+    <ng-template #modalFooter>
+      <button nz-button nzDanger nzType="primary" (click)="handleOnCancelOperation()"><span nz-icon nzType="left"
+          nzTheme="outline"></span> {{'dashboard.cta.back' | translate}}</button>
+      <button nz-button nzType="primary" (click)="handleOnOkOperation()" [nzLoading]="isOkLoading"><span nz-icon
+          nzType="check-circle" nzTheme="outline"></span> {{'profile.preferences.action.cancel' |
+        translate}}</button>
+    </ng-template>
+  </nz-modal>
 </div>

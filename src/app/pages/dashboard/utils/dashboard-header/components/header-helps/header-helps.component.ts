@@ -1,5 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Injector,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { StatusType } from 'src/app/shared/enums/status-type-enums';
 import { ResponseHelpModel } from 'src/model/configuration/response/response-help-model';
@@ -9,16 +16,20 @@ import { ResponseHelpModel } from 'src/model/configuration/response/response-hel
   templateUrl: './header-helps.component.html',
   styleUrls: ['./header-helps.component.scss'],
 })
-export class HeaderHelpsComponent extends WarehouseBaseComponent implements OnInit {
+export class HeaderHelpsComponent
+  extends WarehouseBaseComponent
+  implements OnInit
+{
   @Input() title: string = '';
   @Input() visible: boolean = false;
   @Output() handleOnNotifyCloseDrawerHelp: EventEmitter<any> =
     new EventEmitter<any>();
 
   helps!: ResponseHelpModel[];
+  help!: ResponseHelpModel;
   tmpHelps!: ResponseHelpModel[];
   search!: string;
-  
+
   sizeDrawerHelp: number = 600;
   childrenSizeDrawerHelp: number = 500;
   showMoreHelp: boolean = false;
@@ -35,7 +46,9 @@ export class HeaderHelpsComponent extends WarehouseBaseComponent implements OnIn
   handleOnGetHelps() {
     this.configurationService.getAllHelps().subscribe(
       (response: ResponseHelpModel[]) => {
-        this.helps = response.filter(help => help.status.toLocaleLowerCase() === StatusType.STATUS_ACTIVE);
+        this.helps = response.filter(
+          (help) => help.status.toLocaleLowerCase() === StatusType.STATUS_ACTIVE
+        );
         this.tmpHelps = this.helps;
       },
       (error: HttpErrorResponse) => {
@@ -53,9 +66,8 @@ export class HeaderHelpsComponent extends WarehouseBaseComponent implements OnIn
     if (this.search) {
       this.helps = this.tmpHelps.filter(
         (help: ResponseHelpModel) =>
-        help.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0 ||
-        help.description.toLowerCase().indexOf(this.search.toLowerCase()) >= 0 ||
-        help.content.toLowerCase().indexOf(this.search.toLowerCase()) >= 0
+          help.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0 ||
+          help.description.toLowerCase().indexOf(this.search.toLowerCase()) >= 0
       );
     } else {
       this.helps = this.tmpHelps;
@@ -66,8 +78,9 @@ export class HeaderHelpsComponent extends WarehouseBaseComponent implements OnIn
     this.handleOnNotifyCloseDrawerHelp.emit();
   }
 
-  handleOnOpenChildren() {
+  handleOnOpenChildren(help: ResponseHelpModel) {
     this.childrenVisible = true;
+    this.help = help;
   }
 
   handleOnShowMore() {

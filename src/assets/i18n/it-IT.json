@@ -188,6 +188,7 @@
       "active": "Attivo",
       "pending": "In attesa",
       "disabled": "Disabilitato",
+      "enabled": "Attivato",
       "never.connected": "Mai connesso",
       "deleted": "Cancellato",
       "processing": "In corso",
@@ -451,6 +452,14 @@
         "form": {
           "label": "Inserisci la tua matricola per confermare l'operazione"
         }
+      }
+    },
+    "settings": {
+      "2fa": "Metodo di accesso",
+      "title": "Sicurizza il tuo profilo",
+      "description": "L'autenticazione a due fattori aggiunge un ulteriore livello di sicurezza al tuo account. Per accedere, inoltre, sarà necessario fornire un codice a 6 cifre.",
+      "changeEmail": {
+        "title": "Cambia posta elettronica"
       }
     },
     "account.settings": "Impostazioni Account",
