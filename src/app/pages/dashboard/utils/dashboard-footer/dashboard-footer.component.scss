@@ -17,7 +17,7 @@
       padding: 0;
       .dashboard-footer-center-item {
         font-size: 15px;
-        color: var(--warehouse-primary);
+        color: var(--warehouse-default);
         font-weight: 500;
         &:not(:first-child) {
           &::before {

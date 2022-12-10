@@ -187,6 +187,7 @@
       "active": "Activé",
       "pending": "En attente",
       "disabled": "Désactivé",
+      "enabled": "Activé",
       "never.connected": "Jamais connecté",
       "deleted": "Supprimé",
       "processing": "En cours",
@@ -450,6 +451,14 @@
         "form": {
           "label": "Entrez votre matricule pour confirmer l'opération"
         }
+      }
+    },
+    "settings": {
+      "2fa": "Méthode de connexion",
+      "title": "Sécurisez votre profil",
+      "description": "L'authentification à deux facteurs ajoute une couche de sécurité supplémentaire à votre compte. De plus, pour y accéder, vous devrez fournir un code à 6 chiffres.",
+      "changeEmail": {
+        "title": "Changer l'e-mail"
       }
     },
     "account.settings": "Paramètres du compte",
