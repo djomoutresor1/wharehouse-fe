@@ -11,11 +11,13 @@ import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-ba
   templateUrl: './register-step-one.component.html',
   styleUrls: ['./register-step-one.component.scss'],
 })
-export class RegisterStepOneComponent extends WarehouseBaseComponent implements OnInit {
-
+export class RegisterStepOneComponent
+  extends WarehouseBaseComponent
+  implements OnInit
+{
   currentYear = new Date().getFullYear();
   createdYear = Utils.WAREHOUSE_CREATED_SYSTEM;
-  
+
   passwordVisible = false;
   password: string = '';
   confirmPasswordVisible = false;
@@ -29,6 +31,7 @@ export class RegisterStepOneComponent extends WarehouseBaseComponent implements 
   isExpiredLink: boolean = false;
   isResetPassword: boolean = false;
   isAcceptTerms: boolean = false;
+  registrationType: string = Utils.WAREHOUSE_MODE_PROFILE_ORGANIZATION;
 
   constructor(injector: Injector) {
     super(injector);
@@ -41,6 +44,7 @@ export class RegisterStepOneComponent extends WarehouseBaseComponent implements 
 
   initForm() {
     this.validateForm = this.fb.group({
+      registrationType: ['organization', [Validators.required]],
       fullName: [
         null,
         [Validators.required, Validators.min(5), Validators.max(25)],
@@ -132,5 +136,10 @@ export class RegisterStepOneComponent extends WarehouseBaseComponent implements 
 
   handleOnAcceptTerms() {
     this.isAcceptTerms = !this.validateForm.controls['termsAccept']?.value;
+  }
+
+  handleOnChangeChoice() {
+    this.registrationType =
+      this.validateForm.controls['registrationType']?.value;
   }
 }

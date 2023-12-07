@@ -20,9 +20,21 @@
           <warehouse-alert [typeAlert]="alertType" [descriptionAlert]="messageAlert">
           </warehouse-alert>
         </div>
+        <div class="col mb-5 mt-5 text-center">
+          <nz-radio-group [(ngModel)]="registrationType" nzSize="large" (ngModelChange)="handleOnChangeChoice()" nzButtonStyle="solid">
+            <label nz-radio-button nzValue="organization"><i
+                class="remixicon ri-building-fill"></i>Organisation</label>
+            <label nz-radio-button nzValue="user"><i class="remixicon ri-user-3-fill"></i>User</label>
+          </nz-radio-group>
+        </div>
         <div class="col mt-5 warehouse-auth-right-content-form">
           <form nz-form [formGroup]="validateForm" class="register-form" (ngSubmit)="submitForm()">
-            <div class="row">
+            <warehouse-register-user [validateUserForm]="validateForm"
+              *ngIf="registrationType === 'user'; else organization"></warehouse-register-user>
+            <ng-template #organization>
+              <warehouse-register-organization></warehouse-register-organization>
+            </ng-template>
+            <!-- <div class="row">
               <div class="col">
                 <nz-form-item>
                   <nz-form-control [nzErrorTip]="'register.gender.required' | translate">
@@ -36,8 +48,8 @@
                   </nz-form-control>
                 </nz-form-item>
               </div>
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
               <div class="col-md-6">
                 <nz-form-item>
                   <nz-form-control [nzErrorTip]="'register.fullname.required' | translate">
@@ -58,8 +70,8 @@
                   </nz-form-control>
                 </nz-form-item>
               </div>
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
               <div class="col-md-8">
                 <nz-form-item>
                   <nz-form-control [nzErrorTip]="'register.email.required' | translate">
@@ -86,8 +98,8 @@
                   </nz-form-control>
                 </nz-form-item>
               </div>
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
               <div class="col-md-6">
                 <nz-form-item>
                   <nz-form-control [nzErrorTip]="'login.password.required' | translate" nz-popover
@@ -127,7 +139,7 @@
                   </nz-form-control>
                 </nz-form-item>
               </div>
-            </div>
+            </div> -->
             <p class="warehouse-text-justify">
               <label nz-checkbox (ngModelChange)="handleOnAcceptTerms()" formControlName="termsAccept"></label>
               {{ "register.acceptTerms.titleOne" | translate }}

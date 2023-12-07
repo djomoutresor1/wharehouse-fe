@@ -535,6 +535,11 @@
         "description": "Inserisci la descrizione",
         "content": "Inserisci più contenuto"
       },
+      "header": {
+        "search": "Cerca articoli della guida",
+        "more": "Mostra più articoli",
+        "less": "Mostra meno"
+      },
       "create": "Crea guida",
       "update": "Aggiorna guida",
       "show": "Tutte le informazini sulla guida"

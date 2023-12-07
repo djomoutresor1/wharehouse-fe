@@ -2,7 +2,7 @@
   [nzFooter]="footerTplHelp" nzPlacement="right" [nzTitle]="title" (nzOnClose)="handleOnCloseDrawerHelp()">
   <ng-container class="dashboard-header-help-content" *nzDrawerContent>
     <nz-input-group [nzSuffix]="suffixIconSearch">
-      <input [(ngModel)]="search" type="text" nz-input placeholder="Search help articles"
+      <input [(ngModel)]="search" type="text" nz-input placeholder="{{'side.nav.left.help.header.search' | translate}}"
         (input)="handleOnSearchHelps()" />
     </nz-input-group>
     <ng-template #suffixIconSearch>
@@ -15,7 +15,8 @@
       </div>
       <span *ngIf="helps.length > 9" (click)="handleOnShowMore()"
         class="warehouse-primary dashboard-header-help-show-more">{{!showMoreHelp
-        ? "Show more 9 articles" : "Show less"}}</span>
+        ? ('side.nav.left.help.header.more' | translate) : ('side.nav.left.help.header.less' |
+        translate)}}</span>
     </div>
   </ng-container>
   <ng-template #footerTplHelp>
@@ -48,7 +49,8 @@
   <ng-container class="dashboard-header-help-children-content" *nzDrawerContent>
     <div class="dashboard-header-help-children-item">
       <h4 nz-typography class="warehouse-primary dashboard-header-help-children-item-title">{{help.title}}</h4>
-      <angular-editor [config]="showEditorConfig" class="warehouse-editor-show" [(ngModel)]="help.content"></angular-editor>
+      <angular-editor [config]="showEditorConfig" class="warehouse-editor-show"
+        [(ngModel)]="help.content"></angular-editor>
     </div>
   </ng-container>
 </nz-drawer>
