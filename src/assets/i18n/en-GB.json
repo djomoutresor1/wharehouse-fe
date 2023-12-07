@@ -528,6 +528,11 @@
         "description": "Insert the description",
         "content": "Insert more content"
       },
+      "header": {
+        "search": "Search help articles",
+        "more": "Show more articles",
+        "less": "Show less"
+      },
       "create": "Create help",
       "update": "Update help",
       "show": "All the information about the help"

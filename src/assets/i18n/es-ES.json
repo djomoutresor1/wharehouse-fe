@@ -456,8 +456,8 @@
     },
     "settings": {
       "2fa": "Metodo di accesso",
-      "title": "Securizza il tuo profilo",
-      "description": "L'autenticazione a due fattori aggiunge un ulteriore livello di sicurezza al tuo account. Per accedere, inoltre, sarà necessario fornire un codice a 6 cifre",
+      "title": "Sicurizza il tuo profilo",
+      "description": "L'autenticazione a due fattori aggiunge un ulteriore livello di sicurezza al tuo account. Per accedere, inoltre, sarà necessario fornire un codice a 6 cifre.",
       "changeEmail": {
         "title": "Cambia posta elettronica"
       }
@@ -534,6 +534,11 @@
         "title": "Inserisci il titolo",
         "description": "Inserisci la descrizione",
         "content": "Inserisci più contenuto"
+      },
+      "header": {
+        "search": "Cerca articoli della guida",
+        "more": "Mostra più articoli",
+        "less": "Mostra meno"
       },
       "create": "Crea guida",
       "update": "Aggiorna guida",

@@ -503,6 +503,9 @@
     "users": "Utilisateurs",
     "all.users": "Tous les usagers",
     "configuration": "Configuration",
+    "organization": {
+      "title": "Organizations"
+    },
     "help": {
       "title": "Aide",
       "datagrid": {
@@ -527,6 +530,11 @@
         "title": "Insérez le title",
         "description": "Insérez la description",
         "content": "Insérez plus de contenu"
+      },
+      "header": {
+        "search": "Rechercher des articles d'aide",
+        "more": "Afficher plus d'articles",
+        "less": "Afficher moins"
       },
       "create": "Créer l'aide",
       "update": "Ajourner l'aide",
@@ -588,6 +596,19 @@
     },
     "update": {
       "object": "Ajournez l'objet"
+    }
+  },
+  "header.table": {
+    "organization": {
+      "id": "ID Organisation",
+      "referent": "Responsable",
+      "name": "Nom",
+      "website": "Website",
+      "package": "Abonnement",
+      "collaborators": "Collaborateurs",
+      "trial": "Essaie",
+      "startPackage": "Date de début",
+      "endPackage": "Date de fin"
     }
   },
   "All Users": "tous les utilisateurs",
