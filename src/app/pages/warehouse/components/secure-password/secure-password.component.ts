@@ -7,11 +7,14 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { ProgressType } from 'src/app/shared/enums/progress-type-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'warehouse-secure-password',
   templateUrl: './secure-password.component.html',
   styleUrls: ['./secure-password.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class SecurePasswordComponent implements OnInit {
   @Input() password: string = '';

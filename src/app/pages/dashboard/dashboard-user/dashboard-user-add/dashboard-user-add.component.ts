@@ -13,10 +13,13 @@ import { UserAddressModel } from 'src/model/dashboard/request/user-address-model
 import * as moment from 'moment';
 import { Subject, takeUntil } from 'rxjs';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 @Component({
   selector: 'warehouse-dashboard-user-add',
   templateUrl: './dashboard-user-add.component.html',
   styleUrls: ['./dashboard-user-add.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class DashboardUserAddComponent extends WarehouseBaseComponent implements OnInit {
   breadcrumbItems!: BreadcrumbItemsModel;

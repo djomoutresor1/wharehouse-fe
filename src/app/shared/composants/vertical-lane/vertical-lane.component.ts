@@ -6,11 +6,14 @@ import { PositionModel } from 'src/model/corsia/position-model';
 import { RowModel } from 'src/model/corsia/row-model';
 import { ShelfModel } from 'src/model/corsia/shelf-model';
 import { Pages } from '../../enums/pages-enums';
+import { SharedModule } from '../../shared.module';
 
 @Component({
   selector: 'warehouse-vertical-lane',
   templateUrl: './vertical-lane.component.html',
   styleUrls: ['./vertical-lane.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class VerticalLaneComponent implements OnInit {
   @Input() lane: LaneModel = { rows: [], name: '' };

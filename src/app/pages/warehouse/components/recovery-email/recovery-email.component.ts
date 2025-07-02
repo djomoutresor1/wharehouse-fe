@@ -3,12 +3,15 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { OperationType } from 'src/app/shared/enums/operation-type-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 
 @Component({
   selector: 'warehouse-recovery-email',
   templateUrl: './recovery-email.component.html',
   styleUrls: ['./recovery-email.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class RecoveryEmailComponent
   extends WarehouseBaseComponent

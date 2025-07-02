@@ -5,11 +5,16 @@ import { ResponseOrganizationDataModel } from 'src/model/organization/response/r
 import { ResponseOrganizationModel } from 'src/model/organization/response/response-organization-model';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 import { HeaderTableModel } from 'src/model/utils/header-table-model';
+import { OrganizationShowComponent } from './organization-show/organization-show.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { AdvancedFiltersOrganizationsComponent } from './advanced-filters/advanced-filters.component';
 
 @Component({
   selector: 'warehouse-dashboard-organization',
   templateUrl: './dashboard-organization.component.html',
   styleUrls: ['./dashboard-organization.component.scss'],
+  imports: [SharedModule, AdvancedFiltersOrganizationsComponent,OrganizationShowComponent],
+  standalone: true
 })
 export class DashboardOrganizationComponent
   extends WarehouseBaseComponent

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AntDesignComponentsModule } from './modules/ant-design-components.module';
@@ -37,8 +37,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, WarehouseBaseComponent],
   imports: [
+    AppComponent,
+    WarehouseBaseComponent,
     HttpClientModule,
     BrowserModule,
     FormsModule,
@@ -59,6 +60,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     AuthentificationService,
     AuthorizationService,
@@ -76,6 +78,5 @@ export function HttpLoaderFactory(http: HttpClient) {
     },
     { provide: NZ_I18N, useValue: en_US },
   ],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

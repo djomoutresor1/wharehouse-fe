@@ -8,11 +8,15 @@ import { RackModel } from 'src/model/rack/rack-model';
 import { CategorieModel } from 'src/model/categories/categorie-model';
 import { RowCategoriesModel } from 'src/model/categories/rowCategories-model';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { RackTableComponent } from 'src/app/table/rack-table/rack-table.component';
 
 @Component({
   selector: 'warehouse-dashboard-rack-detail',
   templateUrl: './dashboard-rack-detail.component.html',
   styleUrls: ['./dashboard-rack-detail.component.scss'],
+  imports: [SharedModule,RackTableComponent],
+  standalone: true
 })
 export class DashboardRackDetailComponent extends WarehouseBaseComponent implements OnInit {
   rackName: any;

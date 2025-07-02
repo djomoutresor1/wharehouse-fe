@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ResponseOrganizationModel } from 'src/model/organization/response/response-organization-model';
 import { HeaderTableModel } from 'src/model/utils/header-table-model';
 import * as XLSX from 'xlsx';
@@ -16,6 +17,8 @@ import * as XLSX from 'xlsx';
   selector: 'warehouse-advanced-filters-organizations',
   templateUrl: './advanced-filters.component.html',
   styleUrls: ['./advanced-filters.component.scss'],
+  imports: [SharedModule],
+  standalone: true,
 })
 export class AdvancedFiltersOrganizationsComponent
   extends WarehouseBaseComponent

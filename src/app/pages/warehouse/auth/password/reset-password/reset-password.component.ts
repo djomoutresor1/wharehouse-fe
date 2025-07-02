@@ -1,18 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Injector, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+import { AntDesignComponentsModule } from 'src/app/modules/ant-design-components.module';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
+import { SecurePasswordComponent } from '../../../components/secure-password/secure-password.component';
 
 @Component({
   selector: 'warehouse-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss'],
+  imports: [SharedModule,SecurePasswordComponent],
+  standalone: true
 })
 export class ResetPasswordComponent extends WarehouseBaseComponent implements OnInit {
   isResetPassword: boolean = false;

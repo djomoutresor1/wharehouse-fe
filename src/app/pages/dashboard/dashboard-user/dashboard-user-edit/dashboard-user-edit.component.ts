@@ -14,6 +14,7 @@ import * as moment from 'moment';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseFileModel } from 'src/model/auth/response/response-file-model';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'warehouse-dashboard-user-edit',
@@ -22,6 +23,8 @@ import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-ba
     './dashboard-user-edit.component.scss',
     '../dashboard-user-add/dashboard-user-add.component.scss',
   ],
+  imports: [SharedModule],
+  standalone: true
 })
 export class DashboardUserEditComponent extends WarehouseBaseComponent implements OnInit {
   breadcrumbItems!: BreadcrumbItemsModel;

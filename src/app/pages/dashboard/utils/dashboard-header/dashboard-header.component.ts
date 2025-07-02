@@ -11,12 +11,18 @@ import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-ba
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
+import { HeaderHelpsComponent } from './components/header-helps/header-helps.component';
+import { HeaderNotificationsComponent } from './components/header-notifications/header-notifications.component';
+import { HeaderLinksComponent } from './components/header-links/header-links.component';
 
 @Component({
   selector: 'warehouse-dashboard-header',
   templateUrl: './dashboard-header.component.html',
   styleUrls: ['./dashboard-header.component.scss'],
+  imports: [SharedModule,HeaderHelpsComponent,HeaderNotificationsComponent,HeaderLinksComponent],
+  standalone: true
 })
 export class DashboardHeaderComponent
   extends WarehouseBaseComponent

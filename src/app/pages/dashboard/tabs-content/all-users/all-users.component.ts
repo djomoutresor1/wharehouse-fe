@@ -9,11 +9,15 @@ import { ResponseUserDataModel } from 'src/model/auth/response/response-user-dat
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 import { HeaderTableModel } from 'src/model/utils/header-table-model';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'warehouse-all-users',
   templateUrl: './all-users.component.html',
   styleUrls: ['./all-users.component.scss'],
+  imports: [SharedModule,ProfileComponent],
+  standalone: true
 })
 export class AllUsersComponent
   extends WarehouseBaseComponent

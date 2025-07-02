@@ -5,14 +5,19 @@ import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-ba
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
+import { SecurePasswordComponent } from '../../../components/secure-password/secure-password.component';
 
 @Component({
   selector: 'warehouse-change-password',
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss'],
+  imports: [SharedModule,SecurePasswordComponent],
+  standalone: true
+  
 })
 export class ChangePasswordComponent extends WarehouseBaseComponent implements OnInit {
   oldPasswordVisible = false;

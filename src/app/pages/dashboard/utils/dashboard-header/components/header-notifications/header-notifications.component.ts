@@ -1,11 +1,14 @@
 import { Component, OnInit, Injector, Input, Output, EventEmitter } from '@angular/core';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { Pages } from 'src/app/shared/enums/pages-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'warehouse-header-notifications',
   templateUrl: './header-notifications.component.html',
-  styleUrls: ['./header-notifications.component.scss']
+  styleUrls: ['./header-notifications.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class HeaderNotificationsComponent extends WarehouseBaseComponent implements OnInit {
 

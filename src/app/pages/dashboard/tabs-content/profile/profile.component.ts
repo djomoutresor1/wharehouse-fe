@@ -10,10 +10,13 @@ import { ResponseFileModel } from 'src/model/auth/response/response-file-model';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { ViewService } from 'src/app/services/view-file.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 @Component({
   selector: 'warehouse-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class ProfileComponent extends WarehouseBaseComponent implements OnInit {
   @Input() mode: string = '';

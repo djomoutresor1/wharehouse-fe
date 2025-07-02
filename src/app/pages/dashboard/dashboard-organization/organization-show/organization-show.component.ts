@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ResponseFileModel } from 'src/model/auth/response/response-file-model';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 import { ResponseOrganizationModel } from 'src/model/organization/response/response-organization-model';
@@ -17,6 +18,8 @@ import { ResponseOrganizationModel } from 'src/model/organization/response/respo
   selector: 'warehouse-organization-show',
   templateUrl: './organization-show.component.html',
   styleUrls: ['./organization-show.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class OrganizationShowComponent
   extends WarehouseBaseComponent

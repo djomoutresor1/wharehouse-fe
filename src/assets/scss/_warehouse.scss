@@ -1,11 +1,11 @@
 // COMMONS
-@import "commons/variabiles";
-@import "commons/global";
-@import "commons/ovveride-ant";
+@use "commons/variabiles";
+@use "commons/global";
+@use "commons/ovveride-ant";
 
 // RESPONSIVE
-@import "responsive/media-queries";
+@use "responsive/media-queries";
 
 // COMPOSANTS
-@import "composants/styles";
-@import "composants/utils";
+@use "composants/styles";
+@use "composants/utils";

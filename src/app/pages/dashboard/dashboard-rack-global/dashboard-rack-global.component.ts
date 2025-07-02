@@ -6,11 +6,14 @@ import { RowCategoriesModel } from 'src/model/categories/rowCategories-model';
 import { faAppleWhole, faBowlFood, faBroom, faCarBattery, faCat, faChildDress, faGamepad, faGift, faHouse, faPerson,faPlateWheat, faPumpSoap, faShirt, faShoePrints, faWineGlass } from '@fortawesome/free-solid-svg-icons';
 import {faEnvira, faWindows } from '@fortawesome/free-brands-svg-icons';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'warehouse-dashboard-rack-global',
   templateUrl: './dashboard-rack-global.component.html',
-  styleUrls: ['./dashboard-rack-global.component.scss']
+  styleUrls: ['./dashboard-rack-global.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class DashboardRackGlobalComponent extends WarehouseBaseComponent implements OnInit {
 

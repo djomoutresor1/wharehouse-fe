@@ -5,6 +5,7 @@ import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { StatusType } from 'src/app/shared/enums/status-type-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
@@ -13,6 +14,8 @@ import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
   selector: 'warehouse-preferences',
   templateUrl: './preferences.component.html',
   styleUrls: ['./preferences.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class PreferencesComponent
   extends WarehouseBaseComponent

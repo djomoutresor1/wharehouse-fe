@@ -4,6 +4,7 @@ import { NzButtonSize } from 'ng-zorro-antd/button';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { ResponseResetModel } from 'src/model/auth/response/response-reset-model';
 import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
@@ -14,6 +15,8 @@ import { ResponseUserModel } from 'src/model/auth/response/response-user-model';
     './register-step-two.component.scss',
     '../register-step-one/register-step-one.component.scss',
   ],
+  imports: [SharedModule],
+  standalone: true
 })
 export class RegisterStepTwoComponent extends WarehouseBaseComponent implements OnInit {
   size: NzButtonSize = 'large';

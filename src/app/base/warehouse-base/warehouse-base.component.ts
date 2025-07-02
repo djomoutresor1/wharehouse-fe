@@ -31,11 +31,14 @@ import { LanguageModel } from 'src/model/utils/language-model';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { HttpRequest } from '@angular/common/http';
 import { OrganizationService } from 'src/app/services/organization.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'warehouse-warehouse-base',
   templateUrl: './warehouse-base.component.html',
   styleUrls: ['./warehouse-base.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class WarehouseBaseComponent implements OnInit {
   store: Store<any>;

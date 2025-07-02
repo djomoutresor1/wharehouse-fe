@@ -18,11 +18,14 @@ import {
   faWineGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import { faEnvira, faWindows } from '@fortawesome/free-brands-svg-icons';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'rackTable',
   templateUrl: './rack-table.component.html',
   styleUrls: ['./rack-table.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class RackTableComponent implements OnInit {
   @Input() racks: RackModel[] = [];

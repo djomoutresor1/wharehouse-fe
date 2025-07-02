@@ -4,11 +4,14 @@ import { WarehouseLocalStorage } from 'src/app/utils/warehouse-local-storage';
 import { Internationalizations } from '../../enums/internationalizations-enums';
 import { Languages } from '../../enums/languages-enums';
 import { Utils } from '../../enums/utils-enums';
+import { SharedModule } from '../../shared.module';
 
 @Component({
   selector: 'warehouse-multilanguage',
   templateUrl: './multilanguage.component.html',
   styleUrls: ['./multilanguage.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class MultilanguageComponent implements OnInit {
   selectedLanguage: string = '';

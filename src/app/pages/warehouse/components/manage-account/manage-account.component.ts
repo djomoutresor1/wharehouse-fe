@@ -3,11 +3,16 @@ import { NzTabChangeEvent } from 'ng-zorro-antd/tabs';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { PathParams } from 'src/app/shared/enums/path-params-enums';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
+import { RecoveryEmailComponent } from '../recovery-email/recovery-email.component';
+import { ChangePasswordComponent } from '../../auth/password/change-password/change-password.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'warehouse-manage-account',
   templateUrl: './manage-account.component.html',
-  styleUrls: ['./manage-account.component.scss']
+  styleUrls: ['./manage-account.component.scss'],
+  imports: [SharedModule,RecoveryEmailComponent,ChangePasswordComponent],
+  standalone: true
 })
 export class ManageAccountComponent extends WarehouseBaseComponent implements OnInit {
 

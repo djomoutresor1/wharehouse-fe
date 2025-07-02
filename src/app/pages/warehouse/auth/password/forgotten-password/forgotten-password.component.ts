@@ -4,12 +4,16 @@ import { Validators } from '@angular/forms';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ResponseModel } from 'src/model/auth/response/response-model';
+import { AuthTemplateLeftComponent } from '../../components/auth-template-left/auth-template-left.component';
 
 @Component({
   selector: 'warehouse-forgottenPassword',
   templateUrl: './forgotten-password.component.html',
   styleUrls: ['./forgotten-password.component.scss'],
+  imports: [SharedModule,AuthTemplateLeftComponent],
+  standalone: true
 })
 export class ForgottenPasswordComponent extends WarehouseBaseComponent implements OnInit {
 

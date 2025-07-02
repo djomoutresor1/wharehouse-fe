@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { TablesService } from 'src/app/services/tables.service';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
-import { Models } from '../../../model/populateModel';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'corsiaTable',
@@ -12,6 +12,8 @@ import { Models } from '../../../model/populateModel';
     './corsia-table.component.scss',
     '../rack-table/rack-table.component.scss',
   ],
+  imports: [SharedModule],
+  standalone: true,
 })
 export class CorsiaTableComponent implements OnInit {
   // rowsTable: LaneModel[] = [];

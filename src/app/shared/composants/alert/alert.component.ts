@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertType } from '../../enums/alert-type-enums';
+import { AntDesignComponentsModule } from 'src/app/modules/ant-design-components.module';
 
 @Component({
   selector: 'warehouse-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
+  imports: [AntDesignComponentsModule],
+  standalone: true
 })
 export class AlertComponent implements OnInit {
   @Input() typeAlert: any;

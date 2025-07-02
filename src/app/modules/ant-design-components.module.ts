@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
 import { NzResultModule } from 'ng-zorro-antd/result';

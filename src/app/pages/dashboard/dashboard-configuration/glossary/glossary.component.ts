@@ -2,9 +2,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+import { BreadcrumbComponent } from 'src/app/shared/composants/breadcrumb/breadcrumb.component';
+import { ModalComponent } from 'src/app/shared/composants/modal/modal.component';
+import { NotificationComponent } from 'src/app/shared/composants/notification/notification.component';
 import { Internationalizations } from 'src/app/shared/enums/internationalizations-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { GlossaryModel } from 'src/model/configuration/request/glossary-model';
 import { ResponseGlossaryModel } from 'src/model/configuration/response/response-glossary-model';
@@ -14,6 +18,8 @@ import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
   selector: 'warehouse-glossary',
   templateUrl: './glossary.component.html',
   styleUrls: ['./glossary.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class GlossaryComponent
   extends WarehouseBaseComponent

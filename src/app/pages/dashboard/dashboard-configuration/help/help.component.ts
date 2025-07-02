@@ -4,6 +4,7 @@ import { Validators } from '@angular/forms';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { HelpModel } from 'src/model/configuration/request/help-model';
 import { ResponseHelpModel } from 'src/model/configuration/response/response-help-model';
@@ -13,6 +14,8 @@ import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
   selector: 'warehouse-help',
   templateUrl: './help.component.html',
   styleUrls: ['./help.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class HelpComponent extends WarehouseBaseComponent implements OnInit {
   breadcrumbItems!: BreadcrumbItemsModel;

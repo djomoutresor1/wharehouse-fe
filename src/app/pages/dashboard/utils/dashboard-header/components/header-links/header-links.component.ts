@@ -1,11 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Injector, Input } from '@angular/core';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { HeaderQuickLinksModel } from 'src/model/utils/header-quick-links-model';
 
 @Component({
   selector: 'warehouse-header-links',
   templateUrl: './header-links.component.html',
   styleUrls: ['./header-links.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class HeaderLinksComponent
   extends WarehouseBaseComponent

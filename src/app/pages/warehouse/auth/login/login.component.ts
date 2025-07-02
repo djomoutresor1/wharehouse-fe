@@ -6,13 +6,17 @@ import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { StatusType } from 'src/app/shared/enums/status-type-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
 import { ResponseModel } from 'src/model/auth/response/response-model';
 import { setWarehouseUserLogged } from 'src/state/warehouse-user/warehouse-user.actions';
+import { AuthTemplateLeftComponent } from '../components/auth-template-left/auth-template-left.component';
 @Component({
   selector: 'warehouse-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  imports: [SharedModule,AuthTemplateLeftComponent],
+  standalone: true
 })
 export class LoginComponent extends WarehouseBaseComponent implements OnInit {
   username?: string;

@@ -12,6 +12,7 @@ import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-ba
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { StatusType } from 'src/app/shared/enums/status-type-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ResponseUserDataModel } from 'src/model/auth/response/response-user-data-model';
 import { HeaderTableModel } from 'src/model/utils/header-table-model';
 import * as XLSX from 'xlsx';
@@ -20,6 +21,8 @@ import * as XLSX from 'xlsx';
   selector: 'warehouse-advanced-filters-users',
   templateUrl: './advanced-filters.component.html',
   styleUrls: ['./advanced-filters.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class AdvancedFiltersUsersComponent
   extends WarehouseBaseComponent

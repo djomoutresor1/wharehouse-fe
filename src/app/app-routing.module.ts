@@ -27,7 +27,7 @@ const routes: Routes = [
 ]; // sets up routes constant where you define your routes
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

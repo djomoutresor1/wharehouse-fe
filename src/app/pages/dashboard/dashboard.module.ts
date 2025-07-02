@@ -30,13 +30,17 @@ import { AdvancedFiltersOrganizationsComponent } from './dashboard-organization/
 import { OrganizationShowComponent } from './dashboard-organization/organization-show/organization-show.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    DashboardRackDetailComponent,
-    DashboardHomeComponent,
-    ProfileComponent,
-    PreferencesComponent,
-    RackTableComponent,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
+    SharedModule,
+    AngularEditorModule,
+    DashboardRoutingModule,
+    AntDesignComponentsModule,
+    RackTableComponent, // Importing standalone component
     DashboardHeaderComponent,
     DashboardSiderComponent,
     DashboardRackGlobalComponent,
@@ -53,18 +57,13 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     GlossaryComponent,
     HeaderLinksComponent,
     DashboardOrganizationComponent,
-    OrganizationShowComponent
+    OrganizationShowComponent,
+    DashboardComponent,
+    DashboardRackDetailComponent,
+    DashboardHomeComponent,
+    ProfileComponent,
+    PreferencesComponent,
+    RackTableComponent,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    SharedModule,
-    AngularEditorModule,
-    DashboardRoutingModule,
-    AntDesignComponentsModule,
-  ]
 })
 export class DashboardModule {}

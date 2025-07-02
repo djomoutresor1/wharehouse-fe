@@ -1,10 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-@import "./assets/scss/warehouse"; /* Import all customize styles */
-@import "~ng-zorro-antd/style/index.min.css"; /* Import base styles */
-@import "~ng-zorro-antd/ng-zorro-antd.min.css";
-@import "~bootstrap/dist/css/bootstrap.css";
-@import "~bootstrap-icons/font/bootstrap-icons.css";
-@import "~remixicon/fonts/remixicon.css";
+//@import "./assets/scss/warehouse"; /* Import all customize styles */
+@use "./assets/scss/warehouse" as *;
+//@import "ng-zorro-antd/style/index.min.css"; /* Import base styles */
+@use "ng-zorro-antd/ng-zorro-antd.min.css";
+@use "bootstrap/dist/css/bootstrap.css";
+@use "bootstrap-icons/font/bootstrap-icons.css";
+@use "remixicon/fonts/remixicon.css";
 
 // body {
 //   height: 100%;

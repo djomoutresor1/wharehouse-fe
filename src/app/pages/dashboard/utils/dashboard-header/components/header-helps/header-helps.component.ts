@@ -7,14 +7,18 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { StatusType } from 'src/app/shared/enums/status-type-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ResponseHelpModel } from 'src/model/configuration/response/response-help-model';
 
 @Component({
   selector: 'warehouse-header-help',
   templateUrl: './header-helps.component.html',
   styleUrls: ['./header-helps.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class HeaderHelpsComponent
   extends WarehouseBaseComponent

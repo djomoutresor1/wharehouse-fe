@@ -3,11 +3,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LaneModel } from 'src/model/corsia/lane-model';
 import { RowModel } from 'src/model/corsia/row-model';
 import { Pages } from '../../enums/pages-enums';
+import { SharedModule } from '../../shared.module';
 
 @Component({
   selector: 'warehouse-horizontal-lane',
   templateUrl: './horizontal-lane.component.html',
   styleUrls: ['./horizontal-lane.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class HorizontalLaneComponent implements OnInit {
   

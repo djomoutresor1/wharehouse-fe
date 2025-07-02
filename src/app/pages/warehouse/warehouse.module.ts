@@ -26,7 +26,12 @@ import { RegisterUserComponent } from './auth/components/register-user/register-
 import { RegisterOrganizationComponent } from './auth/components/register-organization/register-organization.component';
 
 @NgModule({
-  declarations: [
+  imports: [
+    ReactiveFormsModule,
+    AntDesignComponentsModule,
+    WarehouseRoutingModule,
+    SharedModule,
+    CommonModule,
     WarehouseComponent,
     LoginComponent,
     RegisterStepOneComponent,
@@ -48,13 +53,7 @@ import { RegisterOrganizationComponent } from './auth/components/register-organi
     RegisterUserComponent,
     RegisterOrganizationComponent,
   ],
-  imports: [
-    ReactiveFormsModule,
-    AntDesignComponentsModule,
-    WarehouseRoutingModule,
-    SharedModule,
-    CommonModule,
-  ],
   exports: [WarehouseComponent, LoginComponent, RegisterStepOneComponent],
+  
 })
 export class WarehouseModule {}

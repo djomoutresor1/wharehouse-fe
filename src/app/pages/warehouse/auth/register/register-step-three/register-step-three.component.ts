@@ -1,11 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Injector, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+import { AlertComponent } from 'src/app/shared/composants/alert/alert.component';
+import { ModalComponent } from 'src/app/shared/composants/modal/modal.component';
+import { MultilanguageComponent } from 'src/app/shared/composants/multilanguage/multilanguage.component';
+import { NotificationComponent } from 'src/app/shared/composants/notification/notification.component';
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 @Component({
   selector: 'warehouse-register-step-three',
   templateUrl: './register-step-three.component.html',
@@ -13,6 +19,8 @@ import { Utils } from 'src/app/shared/enums/utils-enums';
     './register-step-three.component.scss',
     '../register-step-one/register-step-one.component.scss',
   ],
+  imports: [SharedModule],
+  standalone: true
 })
 export class RegisterStepThreeComponent extends WarehouseBaseComponent implements OnInit {
   isNoAuth: boolean = false;

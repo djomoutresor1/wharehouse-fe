@@ -1,11 +1,15 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { SecurePasswordComponent } from '../../../components/secure-password/secure-password.component';
 
 @Component({
   selector: 'warehouse-register-user',
   templateUrl: './register-user.component.html',
   styleUrls: ['./register-user.component.scss'],
+  imports: [SharedModule,SecurePasswordComponent],
+  standalone: true
 })
 export class RegisterUserComponent
   extends WarehouseBaseComponent

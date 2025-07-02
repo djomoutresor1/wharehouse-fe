@@ -5,11 +5,17 @@ import { ResponseRegisterModel } from 'src/model/auth/response/response-register
 import { HttpErrorResponse } from '@angular/common/http';
 import { Utils } from 'src/app/shared/enums/utils-enums';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { RegisterUserComponent } from '../../components/register-user/register-user.component';
+import { AuthTemplateLeftComponent } from '../../components/auth-template-left/auth-template-left.component';
+import { RegisterOrganizationComponent } from '../../components/register-organization/register-organization.component';
 
 @Component({
   selector: 'warehouse-register-step-one',
   templateUrl: './register-step-one.component.html',
   styleUrls: ['./register-step-one.component.scss'],
+  imports: [SharedModule,RegisterUserComponent,AuthTemplateLeftComponent,RegisterOrganizationComponent],
+  standalone: true
 })
 export class RegisterStepOneComponent
   extends WarehouseBaseComponent

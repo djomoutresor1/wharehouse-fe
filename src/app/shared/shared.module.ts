@@ -18,44 +18,53 @@ import { CapitalizeFirstLetterPipe } from './pipes/capitalize-first-letter.pipe'
 import { ModalComponent } from './composants/modal/modal.component';
 import { MultilanguageComponent } from './composants/multilanguage/multilanguage.component';
 import { BreadcrumbComponent } from './composants/breadcrumb/breadcrumb.component';
+import { AdvancedFiltersUsersComponent } from '../pages/dashboard/tabs-content/all-users/advanced-filters/advanced-filters.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    VerticalLaneComponent,
-    HorizontalLaneComponent,
-    ErrorPageComponent,
-    AlertComponent,
-    FontawesomeComponent,
-    LoadingComponent,
-    NotificationComponent,
-    CapitalizeFirstLetterPipe,
-    ModalComponent,
-    MultilanguageComponent,
-    BreadcrumbComponent
-  ],
   imports: [
     CommonModule,
     AntDesignComponentsModule,
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-  ],
-  entryComponents: [FaIconComponent, FaDuotoneIconComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [
     VerticalLaneComponent,
     HorizontalLaneComponent,
     ErrorPageComponent,
     AlertComponent,
     FontawesomeComponent,
-    FaIconComponent,
-    FaDuotoneIconComponent,
     LoadingComponent,
     NotificationComponent,
     CapitalizeFirstLetterPipe,
     ModalComponent,
     MultilanguageComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    AdvancedFiltersUsersComponent,
+    AngularEditorModule,
+    RouterModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports: [
+    CommonModule,
+    AntDesignComponentsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    VerticalLaneComponent,
+    HorizontalLaneComponent,
+    ErrorPageComponent,
+    AlertComponent,
+    FontawesomeComponent,
+    LoadingComponent,
+    NotificationComponent,
+    CapitalizeFirstLetterPipe,
+    ModalComponent,
+    MultilanguageComponent,
+    BreadcrumbComponent,
+    AdvancedFiltersUsersComponent,
+    AngularEditorModule,
+    RouterModule,
   ],
 })
 export class SharedModule {}

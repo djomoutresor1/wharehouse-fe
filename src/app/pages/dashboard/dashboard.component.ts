@@ -6,14 +6,18 @@ import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-ba
 import { AlertType } from 'src/app/shared/enums/alert-type-enums';
 import { Pages } from 'src/app/shared/enums/pages-enums';
 import { Utils } from 'src/app/shared/enums/utils-enums';
-import { getWarehouseUserLogged } from 'src/state/warehouse-user/warehouse-user.actions';
 import { selectWarehouseUserData } from 'src/state/warehouse-user/warehouse-user.selectors';
 import { ResponseLoginModel } from 'src/model/auth/response/response-login-model';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { DashboardHeaderComponent } from './utils/dashboard-header/dashboard-header.component';
+import { DashboardFooterComponent } from './utils/dashboard-footer/dashboard-footer.component';
 
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+  imports: [SharedModule,DashboardHeaderComponent,DashboardFooterComponent],
+  standalone: true
 })
 export class DashboardComponent extends WarehouseBaseComponent implements OnInit {
   warehouseUser: any;

@@ -5,6 +5,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
   selector: 'warehouse-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss'],
+  standalone: true,
 })
 export class NotificationComponent implements OnInit {
   @Input() typeNotification: any;

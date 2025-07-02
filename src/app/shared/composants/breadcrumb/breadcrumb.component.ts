@@ -3,11 +3,17 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 import { Pages } from '../../enums/pages-enums';
+import { SharedModule } from '../../shared.module';
 
 @Component({
   selector: 'warehouse-breadcrumb',
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss'],
+  imports: [SharedModule],
+  standalone: true
+  
+  
+
 })
 export class BreadcrumbComponent implements OnInit {
   constructor(private router: Router, private translate: TranslateService) {}

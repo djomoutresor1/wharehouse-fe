@@ -1,12 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faAppleWhole, faBowlFood, faBroom, faCarBattery, faCat, faChildDress, faGamepad, faGift, faHouse, faPerson,faPlateWheat, faPumpSoap, faShirt, faShoePrints, faWineGlass } from '@fortawesome/free-solid-svg-icons';
 import {faEnvira, faWindows } from '@fortawesome/free-brands-svg-icons';
+import { SharedModule } from '../../shared.module';
 
 
 @Component({
   selector: 'fontawesome',
   templateUrl: './fontawesome.component.html',
-  styleUrls: ['./fontawesome.component.scss']
+  styleUrls: ['./fontawesome.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class FontawesomeComponent implements OnInit {
   @Input() iconType:any;

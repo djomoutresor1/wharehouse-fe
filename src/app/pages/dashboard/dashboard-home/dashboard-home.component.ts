@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Injector, OnInit } from '@angular/core';
 import { WarehouseBaseComponent } from 'src/app/base/warehouse-base/warehouse-base.component';
 import { Pages } from 'src/app/shared/enums/pages-enums';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { LaneModel } from 'src/model/corsia/lane-model';
 import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
 
@@ -9,6 +10,8 @@ import { BreadcrumbItemsModel } from 'src/model/utils/breadcrumb-items-model';
   selector: 'app-dashboard-home',
   templateUrl: './dashboard-home.component.html',
   styleUrls: ['./dashboard-home.component.scss'],
+  imports: [SharedModule],
+  standalone: true
 })
 export class DashboardHomeComponent
   extends WarehouseBaseComponent

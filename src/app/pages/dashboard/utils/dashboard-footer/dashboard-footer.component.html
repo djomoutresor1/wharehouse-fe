@@ -2,7 +2,7 @@
     <div class="row">
         <div class="dashboard-footer-left col-md-3">
             <p nz-typography class="warehouse-not-margin warehouse-black">
-                ©<span *ngIf="currentYear > createdYear; else otherYear">{{createdYear}} - {{currentYear}}</span>
+                ©<span *ngIf="+currentYear > +createdYear; else otherYear">{{createdYear}} - {{currentYear}}</span>
                 <ng-template #otherYear>
                     {{createdYear}}
                 </ng-template>
